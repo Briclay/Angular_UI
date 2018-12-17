@@ -1,0 +1,28 @@
+.side-nav {
+   
+}
+.side-nav-list {
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+    color: #ffffff;
+    text-align: center;
+    margin-top: 10px;
+}
+.side-nav-list li {
+    padding: 10px 0px;
+}
+.side-nav-list li a {
+    font-size: 10px;
+    color: #ffffff;
+    text-decoration: none;
+    cursor: pointer;
+    &.active {
+        color: #3cc0f0;
+    }
+}
+
+.side-nav-list mat-icon {
+    font-size: 35px;
+    width: auto;
+}
