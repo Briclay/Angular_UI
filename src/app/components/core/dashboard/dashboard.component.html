@@ -7,8 +7,62 @@
       <app-side-nav></app-side-nav>
     </div>
     <div class="main-content" >
-      <app-breadcrumb></app-breadcrumb> 
-      <router-outlet></router-outlet>
+      <div  class="main-head">
+        <mat-tab-group>
+          <mat-tab label="Overview">
+            <div style="background-color: white; height: 400px; margin-top:1%;">
+               <div style="background-color: white;margin: 1%;
+                      box-shadow: 0 4px 8px 0 rgba(0,0,0,0.12),0 2px 4px 0 rgba(0,0,0,0.08);" fxFlex=60>
+                 <div class="row">
+                    <div style="display: block;height: 300px;width: 604px;">
+                        <canvas baseChart style="display: block;height: 300px;" 
+                          [datasets]="lineChartData"
+                          [labels]="lineChartLabels"
+                          [options]="lineChartOptions"
+                          [colors]="lineChartColors"
+                          [legend]="lineChartLegend"
+                          [chartType]="lineChartType"
+                          (chartHover)="chartHovered($event)"
+                          (chartClick)="chartClicked($event)">
+                        </canvas>
+                    </div>
+                  </div>
+                </div>
+                <div style="background-color: white; margin: 1%;height: 300px;        
+                 box-shadow: 0 4px 8px 0 rgba(0,0,0,0.12),0 2px 4px 0 rgba(0,0,0,0.08);" fxFlex=30>
+                   <div style="display: block">
+                    <canvas baseChart
+                      [data]="doughnutChartData"
+                      [labels]="doughnutChartLabels"
+                      [chartType]="doughnutChartType"
+                      (chartHover)="chartHovered($event)"
+                      (chartClick)="chartClicked($event)">
+                    </canvas>
+                  </div>
+                </div>
+            </div>
+            <div>
+              <router-outlet></router-outlet>
+            </div>
+          </mat-tab>
+          <mat-tab label="New">
+             <div id="charts" fxLayout="row" fxLayoutAlign="space-between center" class="crs-pointer">
+            </div>
+          </mat-tab>
+          <mat-tab label="Order">
+            Order 1
+          </mat-tab>
+          <mat-tab label="Positions">
+            Positions 2
+          </mat-tab>
+          <mat-tab label="Trades">
+            Trades 2
+          </mat-tab>
+        </mat-tab-group>
+      </div>
+      <!-- <div style="background-color: #eaf0e6;">
+        
+      </div> -->
     </div>
   </div>
 </div>

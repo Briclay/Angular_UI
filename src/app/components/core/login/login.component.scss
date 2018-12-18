@@ -1,56 +1,69 @@
 :host {
+  #login-head {
+    .main-head {
+        padding: 5px;
+        height : 45px;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.12),0 2px 4px 0 rgba(0,0,0,0.08);
+        .tittle{
+          position: relative;
+          top: 10%;
+          left: 50%;
+          transform: translateY(-50%);
+          font-size: 30px;
+          color : gray;
+        }
+      }
+      .title-div {
+        background-color :  #00aff0;
+        height : 45px;
+      }
+    }
   #login {
-    width: 100%;
+    flex-direction : row;
     overflow: auto;
     background-color : white!important;
-    background: url('/assets/images/backgrounds/Login_Background.png') no-repeat;
     width: 100%;
     background-size: cover;
     height:100vh;
-    #bg-image{
-      
-    }
+
     #login-form-wrapper {
       flex: 1 0 auto;
       padding: 32px;
       #login-form {
-        width: 384px;
-        max-width: 384px;
         padding: 32px;
         background-color : white;
         text-align: center;
-        box-shadow: none!important;
-        
-        .logo {
-          width: 128px;
-          margin: 32px auto; 
-          img {
-              width: 70%
-          }
+        .inputBoxShadow {
+          box-shadow: 0 4px 8px 0 rgba(0,0,0,0.12),0 2px 4px 0 rgba(0,0,0,0.08);
+          border-radius: 10px;
         }
-        .title {
-            font-size: 20px;
-            margin: 16px 0 32px 0;
+        .nameAndPwd {
+          padding: 4%;   
+          margin-right: 80px;
         }
         form {
             width: 100%;
             text-align: left;
             mat-form-field {
-              width: 100%;
+              width: 384px;
+              height: 45px;
+              padding : 5px;
             }
-            mat-checkbox {
-              margin: 0;
+            md-input-container label {
+              color: red;
+            }
+            md-input-container.md-input-focused label {
+              color: blue;
             }
             .remember-forgot-password {
               font-size: 13px;
               margin-top: 8px;
-              .remember-me {
-                margin-bottom: 16px
-              }
+              text-align: right;
               .forgot-password {
                 font-size: 13px;
                 font-weight: 500;
                 margin-bottom: 16px;
+                color: gray;
               }
             }
 
@@ -65,4 +78,5 @@
       }
     }
   }
+  
 }

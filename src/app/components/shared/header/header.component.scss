@@ -11,7 +11,7 @@
     color: rgb(212, 212, 212);
     box-shadow: rgba(0, 0, 0, 0.3) 0px 2px 5px 0px;
     align-items: center;
-    padding: 10px 0px;
+    padding: 1px 0px;
     position: fixed;
     top: 0px;
     left: 0px;
@@ -22,13 +22,20 @@
 }
 .user-list img {
     border-radius: 50%;
-    width: 32px;
-    height: 32px;
+    width: 41px;
+    height: 41px;
+    margin-right: 20px;
+    border: 3px solid #FFFFFF;
 }
 .user-list.mat-icon-button {
     width: auto;
     height: auto;
     color: #000000;
+    background-color :#00aff0;
+    border-radius: 21px 0px 0px 21px;
+}
+.color-white {
+    color : #FFFFFF;
 }
 mat-icon {
     color: #000000;
