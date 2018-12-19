@@ -1,17 +1,117 @@
 export interface BreadCrumb {
-    label: string;
-    url: string;
+  label: string;
+  url: string;
 };
 
 export interface User {
-  email:string;
+  email: string;
   uuid: string;
   homeProduct: string;
   profiles: string[];
+}
+
+export interface TableOptionHeader {
+  title: string;
+  type?: string;
+  target?: string;
+  disableSort?: boolean;
+  iconType?: string;
+  colorCode?: string;
+  tooltip?: string;
+}
+
+export interface TableOptions {
+  header: TableOptionHeader[];
+  content: Array<any>;
+  keys: string[];
 }
 
 export interface ChartData {
   name: string;
   color: string;
   values: { date: string, value: number }[];
+}
+
+export interface UserData {
+  result: string,
+  data: UserList[]
+}
+
+export interface UserList {
+  name: {
+    first: string,
+    last: string
+  },
+  address: {
+    flat: string,
+    street: string,
+    area: string,
+    city: string,
+    state: string,
+    pincode: number
+  },
+  userType: string,
+  profileImageUrl: string,
+  deleteFlag: boolean,
+  activeFlag: boolean,
+  _id: string,
+  _organisationId: {
+    address: {
+      area: string,
+      city: string,
+      state: string,
+      pincode: number
+    },
+    orgType: string,
+    plant: string[],
+    logoImageUrl: string,
+    description: string,
+    _users: string[],
+    _features: string[],
+    _departments: string[],
+    deleteFlag: boolean,
+    activeFlag: boolean,
+    _id: string,
+    orgCode: string,
+    name: string,
+    email: string,
+    phone: number,
+    imageUrls: string[],
+    _createdBy: string,
+    _updatedBy: string,
+    deleteNote: string,
+    createdAt: string,
+    updatedAt: string,
+    __v: number
+  },
+  email: string,
+  username: string,
+  password: string,
+  _roleId: {
+    _id: string,
+    name: string
+  },
+  phone: number,
+  _createdBy: {
+    profileImageUrl: string,
+    _id: string,
+    displayName: string,
+    email: string,
+    username: string
+  },
+  createdAt: string,
+  devices: string[],
+  imageUrls: string[],
+  salt: string,
+  displayName: string,
+  __v: number
+}
+
+export interface OrganizationList {
+  name: string,
+  type: string
+}
+
+export interface OrganizationData {
+  data: OrganizationList[]
 }

@@ -20,6 +20,7 @@ import { FiltersComponent } from './components/shared/filters/filters.component'
 import { BarChartComponent } from './components/shared/bar-chart/bar-chart.component';
 import { D3Service } from 'd3-ng2-service';
 import { DashboardService } from './services/dashboard/dashboard.service';
+import { UserService } from './services/user/user.service';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,7 @@ import { DashboardService } from './services/dashboard/dashboard.service';
     MaterialModule,
     BrowserAnimationsModule
   ],
-  providers: [D3Service, DashboardService],
+  providers: [D3Service, DashboardService, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

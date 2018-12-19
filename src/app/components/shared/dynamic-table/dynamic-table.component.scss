@@ -1,3 +1,101 @@
-table {
+/* Structure */
+.grid-container {
+  min-width: 100%;
+  margin-top: 10px;
+}
+
+.grid-header {
+  min-height: 64px;
+  padding: 8px 24px 0;
+  background: #f9f9f9;
+}
+
+.mat-form-field {
+  font-size: 14px;
   width: 100%;
+}
+
+.mat-table {
+  overflow: auto;
+}
+.table-filter {
+  width: 300px;
+  max-width: 300px;
+}
+
+mat-row.gray-row {
+  cursor: default;
+  background: #f1f1f1;
+  pointer-events: none;
+}
+
+:host >>> mat-row.gray-row .mat-cell {
+  color: #aaaaaa;
+}
+
+:host >>> .grid-container mat-header-row {
+  top: 0;
+  position: -webkit-sticky;
+  position: sticky;
+  z-index: 1;
+  background-color: inherit;
+}
+:host >>> .mat-simple-snackbar-action {
+  color: #fbbc04;
+}
+
+.hiddenElement {
+  opacity: 0;
+  width:10px;
+  pointer-events: none;
+  position: absolute;
+}
+.column-list {
+  margin: 0px;
+  padding: 0px;
+  list-style: none;
+}
+.column-list li {
+  padding-right: 10px;
+  padding-bottom: 5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pointer-events-none {
+  pointer-events: none;
+}
+
+.no-records-found {
+  margin-top: -20px;
+}
+:host >>> .mat-cell .status-error-label{
+  color: #000000de;
+  font-size: 13px;
+}
+:host >>> .mat-cell .status-action-label{
+  color: #d2142b;
+  font-size: 12px;
+}
+.hand-cursor:focus {
+  outline: none;
+}
+
+:host >>> .disable-archive-icon {
+  opacity: .3;
+  pointer-events: none;
+}
+
+.a-link {
+  color: inherit;
+}
+
+.a-link:hover {
+  color: #4285F4;
+  text-decoration: none;
+}
+
+.share-link-container {
+  position: relative;
 }
