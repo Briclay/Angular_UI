@@ -16,6 +16,10 @@ import { BreadcrumbComponent } from './components/shared/breadcrumb/breadcrumb.c
 import { ProjectsComponent } from './components/core/dashboard/projects/projects.component';
 import { SettingsComponent } from './components/core/dashboard/settings/settings.component';
 import { HomeComponent } from './components/core/dashboard/home/home.component';
+import { FiltersComponent } from './components/shared/filters/filters.component';
+import { BarChartComponent } from './components/shared/bar-chart/bar-chart.component';
+import { D3Service } from 'd3-ng2-service';
+import { DashboardService } from './services/dashboard/dashboard.service';
 
 @NgModule({
   declarations: [
@@ -29,7 +33,9 @@ import { HomeComponent } from './components/core/dashboard/home/home.component';
     BreadcrumbComponent,
     ProjectsComponent,
     SettingsComponent,
-    HomeComponent
+    HomeComponent,
+    FiltersComponent,
+    BarChartComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +43,7 @@ import { HomeComponent } from './components/core/dashboard/home/home.component';
     MaterialModule,
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [D3Service, DashboardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

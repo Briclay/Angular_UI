@@ -10,11 +10,8 @@ export interface User {
   profiles: string[];
 }
 
-export interface Product {
+export interface ChartData {
   name: string;
-}
-
-export interface Station {
-  name: string;
-  line: string;
+  color: string;
+  values: { date: string, value: number }[];
 }
