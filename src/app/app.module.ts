@@ -1,10 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 import { AppRoutingModule } from './app-routing.module';
-import { ChartsModule } from 'ng2-charts';
-
 import { AppComponent } from './app.component';
 import { DynamicTableComponent } from './components/shared/dynamic-table/dynamic-table.component';
 import { LoginComponent } from './components/core/login/login.component';
@@ -18,6 +15,10 @@ import { BreadcrumbComponent } from './components/shared/breadcrumb/breadcrumb.c
 import { ProjectsComponent } from './components/core/dashboard/projects/projects.component';
 import { SettingsComponent } from './components/core/dashboard/settings/settings.component';
 import { HomeComponent } from './components/core/dashboard/home/home.component';
+import { BarChartComponent } from './components/shared/bar-chart/bar-chart.component';
+import { D3Service } from 'd3-ng2-service';
+import { DashboardService } from './services/dashboard/dashboard.service';
+import { OrganisationComponent } from './components/core/dashboard/organisation/organisation.component';
 
 @NgModule({
   declarations: [
@@ -33,15 +34,16 @@ import { HomeComponent } from './components/core/dashboard/home/home.component';
     ProjectsComponent,
     SettingsComponent,
     HomeComponent,
+    BarChartComponent,
+    OrganisationComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     MaterialModule,
     BrowserAnimationsModule,
-    ChartsModule
   ],
-  providers: [],
+  providers: [D3Service, DashboardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

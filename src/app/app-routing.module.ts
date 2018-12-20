@@ -6,6 +6,7 @@ import { UserComponent } from './components/core/dashboard/user/user.component';
 import { ProjectsComponent } from './components/core/dashboard/projects/projects.component';
 import { SettingsComponent } from './components/core/dashboard/settings/settings.component';
 import { HomeComponent } from './components/core/dashboard/home/home.component';
+import { OrganisationComponent } from './components/core/dashboard/organisation/organisation.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -15,6 +16,11 @@ const routes: Routes = [
       {
         path: 'home', component: HomeComponent, data: {
           breadcrumb: 'Home'
+        }
+      },
+      {
+        path: 'organisation', component: OrganisationComponent, data: {
+          breadcrumb: 'Organisation'
         }
       },
       {

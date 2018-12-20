@@ -1,3 +1,56 @@
-<p>
-  home works!
-</p>
+<div class="chart-container">
+  <mat-card class="example-card">
+    <mat-card-header>
+      <mat-card-subtitle>Bar Chart</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <app-bar-chart [barChartData]="ChartData"></app-bar-chart>
+    </mat-card-content>
+  </mat-card>
+</div>
+  <div  class="main-head">
+    <mat-tab-group>
+      <mat-tab label="Overview">
+        <mat-card >
+          <div style="background-color: white; height: 300px; margin-top:1%;">
+            <div style="background-color: white;margin: 1%;
+              box-shadow: 0 4px 8px 0 rgba(0,0,0,0.12),0 2px 4px 0 rgba(0,0,0,0.08);" fxFlex=60>
+            </div>
+              <div style="background-color: white; margin: 1%;
+              box-shadow: 0 4px 8px 0 rgba(0,0,0,0.12),0 2px 4px 0 rgba(0,0,0,0.08);" fxFlex=30>
+              </div>
+          </div>
+        </mat-card>
+        <div>
+          <div style="background-color: white;margin: 1%;height: 300px;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.12),0 2px 4px 0 rgba(0,0,0,0.08);" fxFlex=90>
+            <div style="height: 70px;background-color: aliceblue;">
+              <span style="margin: 25px 0px 0px 13px;">Customers</span>
+              <div fxLayout=row style="margin: 25px 0px 0px 13px;">
+                <span style="margin-right:5%;">Name</span>
+                <span style="margin-right:5%;">Type</span>
+                <span style="margin-right:5%;">Plan</span>
+              </div>
+            </div>
+            <div fxLayout=row style="margin: 25px 0px 0px 13px;">
+                <span style="margin-right:5%;">Zsah</span>
+                <span style="margin-right:5%;">$14.5</span>
+                <span style="margin-right:5%;">$100470.5</span>
+              </div>
+          </div>
+        </div>
+      </mat-tab>
+      <mat-tab label="New">
+        New 1
+      </mat-tab>
+      <mat-tab label="Order">
+        Order 1
+      </mat-tab>
+      <mat-tab label="Positions">
+        Positions 2
+      </mat-tab>
+      <mat-tab label="Trades">
+        Trades 2
+      </mat-tab>
+    </mat-tab-group>
+  </div>

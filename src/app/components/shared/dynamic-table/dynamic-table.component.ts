@@ -19,7 +19,6 @@ const ELEMENT_DATA: PeriodicElement[] = [
   {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
   {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
 ];
-
 @Component({
   selector: 'app-dynamic-table',
   templateUrl: './dynamic-table.component.html',
