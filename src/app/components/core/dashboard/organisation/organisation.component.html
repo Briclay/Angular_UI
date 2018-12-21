@@ -1,43 +1,45 @@
 <div >
     <mat-tab-group>
        <mat-tab label="Overview" >
-       	<div  class="list-row" *ngFor="let data of orgData;">
-	        <mat-accordion>
-			  		<mat-expansion-panel>
-			    <mat-expansion-panel-header>
-			      	<mat-panel-title>
-			      		<div fxFlex=20 style="flex-direction: column;">
-					        <span class="color_dark_blue font-size-12 font-weight-700">{{data.orgName}}</span>
-					        <div class="color_light_blue font-size-12">{{data.orgAddress}}</div>
+       	<div  class="list-row" *ngFor="let data of orgData; let i = index;">
+       		<div>
+       		
+	        	<mat-accordion >
+				  		<mat-expansion-panel>
+				    		<mat-expansion-panel-header>
+				      	<mat-panel-title>
+				      		<div fxFlex=20 style="flex-direction: column;">
+						        <span class="color_dark_blue font-size-12 font-weight-700">{{data.orgName}}</span>
+						        <div class="color_light_blue font-size-12">{{data.orgAddress}}</div>
+						      	</div>
+					        <div class="line_small"></div>
+					      	<div fxFlex=20 fxLayoutAlign="space-between center">
+						        <div>
+						        	<span class="color_light_blue font-size-12">Plan</span>
+						        </div>
+						        <div>
+						        	<span class="color_dark_blue font-size-12 font-weight-700">{{data.subsciption.plan}}</span>
+						        </div>
 					      	</div>
-				        <div class="line_small"></div>
-				      	<div fxFlex=20 fxLayoutAlign="space-between center">
-					        <div>
-					        	<span class="color_light_blue font-size-12">Plan</span>
-					        </div>
-					        <div>
-					        	<span class="color_dark_blue font-size-12 font-weight-700">{{data.subsciption.plan}}</span>
-					        </div>
-				      	</div>
-				      	<div class="line_small"></div>
-				      	<div fxFlex=20 fxLayoutAlign="space-between center">
-					        <div>
-					        	<span class="color_light_blue font-size-12">Valid till</span>
-					        </div>
-					        <div>
-					        	<span class="color_dark_blue font-size-12 font-weight-700">{{data.entities.validtill}}</span>
-					        </div>
-				      	</div>
-				      	<div class="line_small"></div>
-				      	<div fxFlex=40 fxLayoutAlign="space-between center">
-					        <div>
-					        	<span class="color_light_blue font-size-12">Entities</span>
-					        </div>
-					        <div>
-					        	<span class="color_dark_blue font-size-12 font-weight-700">{{data.entities.count}}</span>
-					        </div>
-				      	</div>
-				    </mat-panel-title>
+					      	<div class="line_small"></div>
+					      	<div fxFlex=20 fxLayoutAlign="space-between center">
+						        <div>
+						        	<span class="color_light_blue font-size-12">Valid till</span>
+						        </div>
+						        <div>
+						        	<span class="color_dark_blue font-size-12 font-weight-700">{{data.entities.validtill}}</span>
+						        </div>
+					      	</div>
+					      	<div class="line_small"></div>
+					      	<div fxFlex=40 fxLayoutAlign="space-between center">
+						        <div>
+						        	<span class="color_light_blue font-size-12">Entities</span>
+						        </div>
+						        <div>
+						        	<span class="color_dark_blue font-size-12 font-weight-700">{{data.entities.count}}</span>
+						        </div>
+					      	</div>
+					    </mat-panel-title>
 							</mat-expansion-panel-header>
 						    <mat-card>
 						      	<div class="card_container">
@@ -67,7 +69,7 @@
 															  </select>
 															</mat-form-field>
 										        	<span *ngIf="!editPreminumFlag" class="color_dark_blue font-size-12 font-weight-700">{{data.subsciption.plan}}</span>
-										        	<mat-icon class="edit-icon" (click)="editPreminum()">edit</mat-icon>
+										        	<mat-icon class="edit-icon" (click)="editPreminum(i)">edit</mat-icon>
 									        </div>
 							      		</div>
 							      		<div fxLayout=row fxLayoutAlign="space-between center">
@@ -83,7 +85,7 @@
 									        </div>
 							      		</div>
 							      		<button class="margin-left-4" mat-raised-button class="feature_btn" 
-							      		(click)="getFeatureDropdown()">Features</button>
+							      		(click)="getFeatureDropdown(i)">Features</button>
 												  <mat-select *ngIf="getFeatures" class="btn_margin">
 												    <mat-option *ngFor="let f of features" >
 												      <mat-checkbox>{{f.viewValue}}</mat-checkbox>
@@ -104,7 +106,7 @@
 												    		<input matInput placeholder="" class="color_dark_blue font-size-12 font-weight-700" value="{{data.details.email}}">
 												  		</mat-form-field>
 										        	<span *ngIf="!editAdminFlag" class="color_dark_blue font-size-12 font-weight-700">{{data.details.email}}</span>
-										        	<mat-icon class="edit-icon" (click)="editAdmin()">edit</mat-icon>
+										        	<mat-icon class="edit-icon" (click)="editAdmin(i)">edit</mat-icon>
 									        </div>
 							      		</div>
 							      		<div style="margin-top: 16px;" fxLayout=row fxLayoutAlign="space-between center">
@@ -116,7 +118,7 @@
 												    		<textarea matInput placeholder="" class="color_dark_blue font-size-12 font-weight-700" value="{{data.orgAddress}}"></textarea>
 												  		</mat-form-field>
 										        	<span *ngIf="!editAddressFlag" class="color_dark_blue font-size-12 font-weight-700">{{data.orgAddress}}</span>
-										        	<mat-icon class="edit-icon" (click)="editAddress()">edit</mat-icon>
+										        	<mat-icon class="edit-icon" (click)="editAddress(i)">edit</mat-icon>
 									        </div>
 							      		</div>
 							      	</div>
@@ -144,8 +146,8 @@
 						      </div>
 					      	</mat-card>
 						  </mat-expansion-panel>
-						</mat-accordion>
-	       	</div>
+						</mat-accordion></div>
+	      </div>
       	</mat-tab>
        <mat-tab label="New">
         New
