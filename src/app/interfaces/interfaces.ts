@@ -92,19 +92,33 @@ export interface UserList {
     name: string
   },
   phone: number,
-  _createdBy: {
+  _createdBy?: {
     profileImageUrl: string,
     _id: string,
     displayName: string,
     email: string,
     username: string
   },
-  createdAt: string,
-  devices: string[],
-  imageUrls: string[],
-  salt: string,
-  displayName: string,
-  __v: number
+  createdAt?: string,
+  devices?: string[],
+  imageUrls?: string[],
+  salt?: string,
+  displayName?: string,
+  __v?: number,
+  lastLoginAt?: string,
+  reviewPoints?: number,
+  resetPasswordToken?: string,
+  resetPasswordExpires?: string,
+  activateToken?: string,
+  activateTokenExpires?: string,
+  createdBy?: string,
+  updatedBy?: string,
+  deletedBy?: string,
+  deleteNote?: string,
+  updatedAt?: string,
+  deletedAt?: string,
+  access?: string[],
+  roles?: string[]
 }
 
 export interface OrganizationList {
