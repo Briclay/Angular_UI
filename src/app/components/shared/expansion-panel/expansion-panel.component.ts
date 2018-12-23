@@ -8,6 +8,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class ExpansionPanelComponent implements OnInit {
   @Input() expansionPanelOptions: any;
   @Input() data: any; 
+  @Input() selectorComponent: any;
   constructor() { }
 
   ngOnInit() {

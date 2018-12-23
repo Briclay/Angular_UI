@@ -22,7 +22,6 @@ export class UserComponent implements OnInit {
   ngOnInit() {
     this.userService.getUser().pipe().subscribe(res => {
       this.users = res;
-      this.users.data.forEach((list) => list['selector'] = 'app-user-details' );
       this.userDataOptions = [
         {
           title: 'Image', key: 'profileImageUrl', hideTitle: true, type: 'image'

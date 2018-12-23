@@ -24,7 +24,8 @@
             </mat-card >
             <div fxLayout="row">
                 <app-expansion-panel 
-                    [expansionPanelOptions]="userDataOptions" 
+                    [expansionPanelOptions]="userDataOptions"
+                    selectorComponent="app-user-details" 
                     [data]="users.data"></app-expansion-panel>
             </div>
         </mat-tab>
