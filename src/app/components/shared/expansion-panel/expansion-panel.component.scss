@@ -2,6 +2,9 @@ mat-accordion {
     width: 100%;
 }
 .expansion-container {
+    mat-expansion-panel {
+        margin-top: 5px;
+    }
     mat-expansion-panel-header {
         mat-panel-title {
             flex: 1;

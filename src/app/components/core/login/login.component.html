@@ -1,39 +1,45 @@
-<div id="login" fxLayout="row" jspPerfectScrollbar>
-  <div id="bg-image" fxLayout="row" fxFlex="70">
-    
+
+<div id="login-head">
+  <div  class="main-head" fxFlex=88>
+    <div >    
+      <span class="tittle">Birclay</span>
+    </div>
   </div>
-  <div id="login-form-wrapper" fxFlex="30" fxLayout="row" fxLayoutAlign="center center">
+  <div fxFlex=12 class="title-div"></div>
+</div>
+
+<div id="login" fxLayoutAlign="center center">
+  <div id="login-form-wrapper"  fxLayout="row" fxLayoutAlign="center center">
 
     <div id="login-form">
 
-      <div class="logo">
-        <img src="assets/images/logos/jsp_logo.png">
-      </div>
+      <form name="loginForm" novalidate>
+        <div fxLayout="row" class="inputBoxShadow">
+          <span class="nameAndPwd">UserName</span>
+          <mat-form-field>
+            <input matInput placeholder="Enter username/email ID">
+          </mat-form-field>
+        </div>
 
-      <div class="title">LOGIN TO YOUR ACCOUNT</div>
+        <div fxLayout="row" class="inputBoxShadow" style="margin-top: 30px;">
+          <span class="nameAndPwd">Password</span>
+          <mat-form-field>
+            <input matInput type="password" placeholder="Enter password" >
+          </mat-form-field>
+        </div>
 
-
-        <mat-form-field>
-          <input matInput placeholder="UserName Or Email">
-        </mat-form-field>
-
-        <mat-form-field>
-          <input matInput type="password" placeholder="Password" >
-        </mat-form-field>
+        
 
         <div class="remember-forgot-password">
-          <mat-checkbox class="remember-me" aria-label="Remember Me">
-            Remember Me
-          </mat-checkbox>
-
           <a class="forgot-password">
             Forgot Password?
           </a>
         </div>
 
-        <button mat-raised-button color="accent" class="submit-button" [routerLink]="'/dashboard'" aria-label="LOG IN">LOGIN
+        <button mat-raised-button style="background-color: #2196F3; color: white;" class="submit-button" [routerLink]="'/dashboard'" aria-label="LOG IN">LOGIN
 <!--            <a style="color: white;" [routerLink]="'/dashboard/superadmin'">LOGIN</a>
  -->        </button>
+        </form>
 
       <!-- Material Design Spinner -->
       <div class="spinner-wrapper" *ngIf="loginFormSubmitted">

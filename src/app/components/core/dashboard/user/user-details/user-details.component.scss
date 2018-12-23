@@ -1,20 +1,26 @@
 .user-details-container {
-    padding: 10px;
     .user-details-form {
         display: flex;
-        .user-details-name {
-            flex: 0.2;
-            text-align: center;
-            img {
-                width: 100px;
-                border-radius: 5px;
-            }
-        }
+        
         .user-details-card {
             flex: 1;
             display: flex;
-            div {
+            .user-details-name {
+                flex: 0.2;
+                text-align: center;
+                img {
+                    width: 100px;
+                    border-radius: 5px;
+                }
+            }
+            .user-details-content {
                 flex: 1;
+                padding: 0px 10px;
+                .user-details-form-list {
+                    border-right: 1px solid #999999;
+                    min-height: 100px;
+                    padding: 10px;
+                }
             }
         }
     }
