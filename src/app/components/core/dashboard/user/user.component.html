@@ -1,50 +1,35 @@
 <div class="user-container">
-
     <mat-tab-group>
-        <mat-tab label="First"> Content 1 </mat-tab>
-        <mat-tab label="Second">
-            <mat-card class="create-user">
-                <mat-card-header>
-                    <mat-card-title>Create</mat-card-title>
-                </mat-card-header>
-                <mat-card-content>
-                    <div class="example-container">
-                        <mat-form-field>
-                            <input matInput placeholder="First Name">
-                        </mat-form-field>
-
-                        <mat-form-field>
-                            <input matInput placeholder="Last Name">
-                        </mat-form-field>
-
-                        <mat-form-field>
-                            <input matInput placeholder="Email ID">
-                        </mat-form-field>
-                    </div>
-
-                </mat-card-content>
-            </mat-card>
+        <mat-tab label="Overview">
+            <mat-card class="panel-header">
+                <div class="pull-left">
+                    <mat-form-field>
+                        <mat-select placeholder="Select Organization">
+                            <mat-option *ngFor="let organization of organizations" [value]="organization.value">
+                            {{organization.viewValue}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="pull-right">
+                    <mat-paginator [length]="100"
+                                [pageSize]="10"
+                                [pageSizeOptions]="[5, 10, 25, 100]">
+                    </mat-paginator>
+                    <mat-form-field class="example-full-width">
+                        <input matInput placeholder="Search">
+                    </mat-form-field>
+                </div>
+                <div class="clearfix"></div>
+            </mat-card >
+            <div fxLayout="row">
+                <app-expansion-panel 
+                    [expansionPanelOptions]="userDataOptions" 
+                    [data]="users.data"></app-expansion-panel>
+            </div>
+        </mat-tab>
+        <mat-tab label="New">
+            <app-user-details></app-user-details>
         </mat-tab>
     </mat-tab-group>
-    <div fxLayout="row">
-        <app-dynamic-table fxFlex="70" *ngIf="userDataOptions.content && userDataOptions.content.length; else noRecordTemplate" [(config)]="userDataOptions"
-            defaultSortColumn="createdAt" defaultSortOrder="desc" [pagination]="true" [pageSizeOptions]="[10, 100, 200]">
-        </app-dynamic-table>
-        <ng-template #noRecordTemplate>
-            <div class="no-data-label">
-                {{noDataMessage}}
-            </div>
-        </ng-template>
-        <!--<app-dynamic-table *ngIf="testRunsOptions.content && testRunsOptions.content.length; else noRecordTemplate"
-                             [(config)]="testRunsOptions"
-                             defaultSortColumn="TEST_DATE_TIME"
-                             defaultSortOrder="desc"
-                             (onDelete)="updateTestRun($event)"
-                             snackBarText="Test run removed"
-                             [pagination]="true"
-                             [pageSizeOptions]="[50, 100, 200]">-->
-        <mat-card fxFlex="30" class="user-details">
-            Details
-        </mat-card>
-    </div>
 </div>

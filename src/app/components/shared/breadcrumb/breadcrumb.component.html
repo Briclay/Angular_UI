@@ -2,7 +2,7 @@
   <li *ngFor="let breadcrumb of breadcrumbs; last as isLast;"
       class="breadcrumb-item"
       [ngClass]="{'active': isLast}" aria-current="page">
-    <a *ngIf="!isLast; else lastRoute"
+    <a class="filter" *ngIf="!isLast; else lastRoute"
        [routerLink]="[breadcrumb.url]"
        routerLinkActive="active">
       {{ breadcrumb.label }}

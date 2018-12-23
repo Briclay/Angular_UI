@@ -1,0 +1,31 @@
+<div class="expansion-container">
+  <mat-accordion>
+    <mat-expansion-panel *ngFor="let listData of data" [hideToggle]="true">
+      <mat-expansion-panel-header>
+        <mat-panel-title *ngFor="let option of expansionPanelOptions; let lastIndex = last; let firstIndex =  first" 
+          [ngClass]="!lastIndex ? (firstIndex && option.type === 'image' ? 'flex-image' : 'border-right-gray') : ''">
+          <div *ngIf="option.type === 'list'; else elseContent" style="width: 100%">
+            <div *ngFor="let optionList of option.list" class="panel-user">
+              <span class="">{{listData[optionList.key]}}</span>
+              <br/>
+            </div>
+          </div>
+          <ng-template #elseContent>
+            <span *ngIf="option.type === 'image'; else labelContent" class="">
+              <img [src]="listData[option.key]" />
+            </span>
+            <ng-template #labelContent> 
+              <div class="panel-conent">
+                <label class="label-title">{{option.title}}</label>
+                <label class="label-value">{{listData[option.key]}}</label>
+              </div>
+            </ng-template>
+          </ng-template>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <app-widget-container
+        [selector]="listData.selector">
+      </app-widget-container>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>

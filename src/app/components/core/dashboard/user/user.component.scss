@@ -2,6 +2,13 @@
     margin-bottom: 15px;
 }
 .user-container {
+    .panel-header {
+        padding: 3px 10px;
+        margin: 10px;
+    }
+    mat-paginator {
+        display: inline-block;
+    }
     .user-details {
         margin-left: 15px;
     }
@@ -17,4 +24,15 @@
 }
 mat-form-field {
     margin-right: 30px;
+}
+::ng-deep .expansion-container {
+    padding: 10px;
+    mat-expansion-panel-header {
+        mat-panel-title {
+            &.mat-expansion-panel-header-title:nth-child(2) {
+                flex: 0.5;
+            }
+        }
+        
+    }
 }

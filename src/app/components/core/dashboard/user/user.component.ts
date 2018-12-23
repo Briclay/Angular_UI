@@ -10,27 +10,32 @@ import { UserData, TableOptions } from '../../../../interfaces/interfaces';
 })
 export class UserComponent implements OnInit {
   users: UserData;
-  userDataOptions: TableOptions;
-  
+   organizations: any[] = [
+      {value: 'organizations-1', viewValue: 'Organizations-1'},
+      {value: 'organizations-2', viewValue: 'Organizations-2'},
+      {value: 'organizations-3', viewValue: 'Organizations-3'}
+    ];
+  userDataOptions = [];
+
   constructor(private userService: UserService) { }
 
   ngOnInit() {
-    this.userDataOptions = { header: [], keys: [], content: [] };
     this.userService.getUser().pipe().subscribe(res => {
       this.users = res;
-      this.userDataOptions = {
-          header: [
-            {title: 'User Name'}, 
-            {title: 'Role'},
-            {title: 'Department'},
-            {title: 'EmailId'}, 
-            {title: 'Mobile'}, 
-            {title: 'CreatedBy'}, 
-            {title: 'Created Date'}, 
-            {title: '', type: 'icon', iconType: 'remove'}],
-          keys: ['username', 'userType', 'department', 'email', 'phone', 'createdAt'],
-          content: res.data
-        };
+      this.users.data.forEach((list) => list['selector'] = 'app-user-details' );
+      this.userDataOptions = [
+        {
+          title: 'Image', key: 'profileImageUrl', hideTitle: true, type: 'image'
+        },
+        {
+          title: 'User Name', type: 'list', list: [
+            { title: 'UserName', key: 'username', hideTitle: true, type: 'label' },
+            { title: 'Address', key: 'username', hideTitle: true, type: 'label' }
+          ]
+        },
+        { title: 'Role', key: 'userType' },
+        { title: 'Department', key: 'department' },
+        { title: 'Email', key: 'email' }]
     });
   }
 
