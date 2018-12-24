@@ -6,18 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./organisation.component.scss']
 })
 export class OrganisationComponent implements OnInit {
-
-    editAdminFlag : false;
-    editAddressFlag : false;
-    editPreminumFlag  : false;
-    getFeatures : false;
     value: string;
   	viewValue: string;
+		organizationDataOptions: any;
     features: Featues[] = [
 	    {value: 'steak-0', viewValue: 'File'},
 	    {value: 'pizza-1', viewValue: 'Service Request'},
 	    {value: 'tacos-2', viewValue: 'Snag Master'}
 	  ];
+		
 
 	orgData : OrgData[]= [
 		  { "id" : "1",
@@ -70,20 +67,19 @@ export class OrganisationComponent implements OnInit {
   	constructor() { }
 
   	ngOnInit() {
-  		console.log(this.orgData,"**")
-  	}
-    
-  	editAdmin(){
-  		this.editAdminFlag = true;
-  	}
-  	editAddress(){
-  		this.editAddressFlag = true;
-  	}
-  	editPreminum(){
-  		this.editPreminumFlag = true;
-  	}
-  	getFeatureDropdown (){
-  		this.getFeatures = true;
+			this.organizationDataOptions = [
+        {
+          title: 'User Name', type: 'list', list: [
+            { title: 'UserName', key: 'orgName', hideTitle: true, type: 'label' },
+            { title: 'Address', key: 'orgAddress', hideTitle: true, type: 'label' }
+          ]
+        }, {
+					title: 'Plan', key: 'subsciption.plan',
+				}, {
+					title: 'Valid till', key: 'entities.validtill'
+				}, {
+					title: 'Entities', key: 'entities.count'
+				}]
   	}
    
 }

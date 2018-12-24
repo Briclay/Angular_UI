@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { WidgetService } from './../services/widget/widget.service';
 import { UserDetailsComponent } from '../components/core/dashboard/user/user-details/user-details.component';
+import { OrganisationDetailsComponent } from '../components/core/dashboard/organisation/organisation-details/organisation-details.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import {MaterialModule} from "./material.module";
 
@@ -13,11 +14,14 @@ import {MaterialModule} from "./material.module";
     FormsModule
   ],
   declarations: [
-    UserDetailsComponent
+    UserDetailsComponent,
+    OrganisationDetailsComponent
+
   ],
-  exports: [UserDetailsComponent],
+  exports: [UserDetailsComponent, OrganisationDetailsComponent],
   entryComponents: [
-    UserDetailsComponent
+    UserDetailsComponent,
+    OrganisationDetailsComponent,
   ],
   providers: [WidgetService]
 })

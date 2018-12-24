@@ -11,12 +11,28 @@
           <strong> Details</strong>
         </div>
         <div class="user-details-form-list">
-          <mat-form-field class="example-full-width">
-            <input matInput placeholder="First Name" value="First">
-          </mat-form-field>
-          <mat-form-field class="example-full-width">
-            <input matInput placeholder="First Name" value="Last">
-          </mat-form-field>
+          <div >
+            <mat-form-field class="margin_right_25" appearance="outline">
+              <mat-label>First Name</mat-label>
+              <input matInput value="First">
+            </mat-form-field>
+            <mat-form-field class="margin_right_25"  appearance="outline">
+              <mat-label>Last Name</mat-label>
+              <input matInput  value="Last">
+            </mat-form-field>
+          </div>
+          <div >
+            <mat-form-field  appearance="outline">
+              <mat-label>Email</mat-label>
+              <input matInput value="abc@g.com">
+            </mat-form-field>
+          </div>
+          <div  >
+            <mat-form-field appearance="outline">
+              <mat-label>Phone Number</mat-label>
+              <input matInput value="9876543212">
+            </mat-form-field>
+          </div>
         </div>
       </div>
       <div class="user-details-content">
@@ -24,12 +40,18 @@
           <strong>Office</strong>
         </div>
         <div class="user-details-form-list">
-          <mat-form-field class="example-full-width">
-            <input matInput placeholder="First Name" value="First">
-          </mat-form-field>
-          <mat-form-field class="example-full-width">
-            <input matInput placeholder="First Name" value="Last">
-          </mat-form-field>
+          <div  >
+            <mat-form-field  appearance="outline">
+              <mat-label>Location</mat-label>
+              <input matInput  value="Bangalore">
+            </mat-form-field>
+          </div>
+          <div  >
+            <mat-form-field appearance="outline">
+              <mat-label>Address</mat-label>
+              <textarea matInput></textarea>
+            </mat-form-field>
+          </div>
         </div>
       </div>
       <div class="user-details-content">
@@ -37,11 +59,17 @@
           <strong>Role</strong>
         </div>
         <div class="user-details-form-list">
-          <mat-form-field class="example-full-width">
-            <input matInput placeholder="Favorite food" value="Sushi">
+           <mat-form-field appearance="outline">
+            <mat-label>Address</mat-label>
+            <mat-select placeholder="Role">
+              <mat-option value="option">Option</mat-option>
+            </mat-select>
           </mat-form-field>
-          <mat-form-field class="example-full-width">
-            <input matInput placeholder="Favorite food" value="Sushi">
+          <mat-form-field appearance="outline">
+            <mat-label>Address</mat-label>
+            <mat-select placeholder="Role">
+              <mat-option value="option">Option</mat-option>
+            </mat-select>
           </mat-form-field>
         </div>
       </div>

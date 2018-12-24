@@ -13,5 +13,8 @@ export class ExpansionPanelComponent implements OnInit {
 
   ngOnInit() {
   }
+  parseKey(listData, key) {
+    return key.split('.').reduce((o,i)=>o[i], listData);
+  }
 
 }

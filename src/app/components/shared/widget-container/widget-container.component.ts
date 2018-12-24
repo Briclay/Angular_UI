@@ -23,6 +23,7 @@ export class WidgetContainerComponent implements OnInit, OnDestroy {
 
   @Input() selector: string;
   @Input() settings: any;
+  @Input() data: any; 
 
   private componentRef: ComponentRef<any>;
 
@@ -38,6 +39,8 @@ export class WidgetContainerComponent implements OnInit, OnDestroy {
 
       this.content.clear();
       this.componentRef = this.content.createComponent(factory, 0);
+      this.componentRef.instance.data = this.data;
+      console.log('his.componentRef', this.componentRef)
     }
   }
 

@@ -20,11 +20,13 @@ import { HomeComponent } from './components/core/dashboard/home/home.component';
 import { BarChartComponent } from './components/shared/bar-chart/bar-chart.component';
 import { D3Service } from 'd3-ng2-service';
 import { DashboardService } from './services/dashboard/dashboard.service';
+import { OrganizationService } from './services/organization/organization.service';
 import { UserService } from './services/user/user.service';
 import { ExpansionPanelComponent } from './components/shared/expansion-panel/expansion-panel.component';
 import { UserCreateComponent } from './components/core/dashboard/user/user-create/user-create.component';
 import { WidgetContainerComponent } from './components/shared/widget-container/widget-container.component';
 import { OrganisationComponent } from './components/core/dashboard/organisation/organisation.component';
+import { PanelHeaderFilterComponent } from './components/shared/panel-header-filter/panel-header-filter.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +46,8 @@ import { OrganisationComponent } from './components/core/dashboard/organisation/
     ExpansionPanelComponent,
     UserCreateComponent,
     WidgetContainerComponent,
-    OrganisationComponent
+    OrganisationComponent,
+    PanelHeaderFilterComponent
   ],
   imports: [
     BrowserModule,
@@ -55,7 +58,7 @@ import { OrganisationComponent } from './components/core/dashboard/organisation/
     ReactiveFormsModule,
     FormsModule
   ],
-  providers: [D3Service, DashboardService, UserService],
+  providers: [D3Service, DashboardService, UserService, OrganizationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

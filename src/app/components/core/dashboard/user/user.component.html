@@ -1,27 +1,7 @@
 <div class="user-container">
     <mat-tab-group>
         <mat-tab label="Overview">
-            <mat-card class="panel-header">
-                <div class="pull-left">
-                    <mat-form-field>
-                        <mat-select placeholder="Select Organization">
-                            <mat-option *ngFor="let organization of organizations" [value]="organization.value">
-                            {{organization.viewValue}}
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                </div>
-                <div class="pull-right">
-                    <mat-paginator [length]="100"
-                                [pageSize]="10"
-                                [pageSizeOptions]="[5, 10, 25, 100]">
-                    </mat-paginator>
-                    <mat-form-field class="example-full-width">
-                        <input matInput placeholder="Search">
-                    </mat-form-field>
-                </div>
-                <div class="clearfix"></div>
-            </mat-card >
+            <app-panel-header-filter></app-panel-header-filter>
             <div fxLayout="row">
                 <app-expansion-panel 
                     [expansionPanelOptions]="userDataOptions"
