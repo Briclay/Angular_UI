@@ -5,8 +5,8 @@
         <mat-panel-title *ngFor="let option of expansionPanelOptions; let lastIndex = last; let firstIndex =  first" 
           [ngClass]="!lastIndex ? (firstIndex && option.type === 'image' ? 'flex-image' : 'border-right-gray') : ''">
           <div *ngIf="option.type === 'list'; else elseContent" style="width: 100%">
-            <div *ngFor="let optionList of option.list" class="panel-user">
-              <span class="">{{listData[optionList.key]}}</span>
+            <div *ngFor="let optionList of option.list; let first = first" class="panel-user">
+              <span [ngClass]="first ? 'color_dark_blue font-size-12 font-weight-700':  'color_light_blue font-size-12 '">{{listData[optionList.key]}}</span>
               <br/>
             </div>
           </div>
