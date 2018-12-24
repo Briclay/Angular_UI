@@ -7,6 +7,7 @@ import { ProjectsComponent } from './components/core/dashboard/projects/projects
 import { SettingsComponent } from './components/core/dashboard/settings/settings.component';
 import { HomeComponent } from './components/core/dashboard/home/home.component';
 import { OrganisationComponent } from './components/core/dashboard/organisation/organisation.component';
+import { RoleComponent } from './components/core/dashboard/role/role.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -21,6 +22,11 @@ const routes: Routes = [
       {
         path: 'organisation', component: OrganisationComponent, data: {
           breadcrumb: 'Organisation'
+        }
+      },
+      {
+        path: 'role', component: RoleComponent, data: {
+          breadcrumb: 'Role'
         }
       },
       {

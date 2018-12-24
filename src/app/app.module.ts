@@ -19,6 +19,7 @@ import { BarChartComponent } from './components/shared/bar-chart/bar-chart.compo
 import { D3Service } from 'd3-ng2-service';
 import { DashboardService } from './services/dashboard/dashboard.service';
 import { OrganisationComponent } from './components/core/dashboard/organisation/organisation.component';
+import { RoleComponent } from './components/core/dashboard/role/role.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { OrganisationComponent } from './components/core/dashboard/organisation/
     SettingsComponent,
     HomeComponent,
     BarChartComponent,
-    OrganisationComponent
+    OrganisationComponent,
+    RoleComponent
   ],
   imports: [
     BrowserModule,

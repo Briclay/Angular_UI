@@ -7,19 +7,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OrganisationComponent implements OnInit {
 
-    editAdminFlag : false;
-    editAddressFlag : false;
-    editPreminumFlag  : false;
-    getFeatures : false;
+    editAdminFlag = false;
+    editAddressFlag = false;
+    editPreminumFlag  = false;
+    getFeatures = false;
     value: string;
   	viewValue: string;
-    features: Featues[] = [
+    features =  [
 	    {value: 'steak-0', viewValue: 'File'},
 	    {value: 'pizza-1', viewValue: 'Service Request'},
 	    {value: 'tacos-2', viewValue: 'Snag Master'}
 	  ];
 
-	orgData : OrgData[]= [
+	orgData = [
 		  { "id" : "1",
 		    "orgName": "Purvankara Limited",
 		    "orgAddress": "Ulsoor bangalore",
