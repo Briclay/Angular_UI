@@ -1,19 +1,19 @@
 .user-details-container {
+    padding: 10px;
     .user-details-form {
-        display: flex;
         
         .user-details-card {
             flex: 1;
             display: flex;
+            font: 400 13px/20px Roboto,"Helvetica Neue",sans-serif;
             .user-details-name {
                 flex: 0.6;
                 img {
                     width: 100px;
                     border-radius: 5px;
                 }
-                div {
-                    width: 100px;
-                    text-align: center;
+                .username-input {
+                    margin-top: 10px;
                 }
             }
             .user-details-content {

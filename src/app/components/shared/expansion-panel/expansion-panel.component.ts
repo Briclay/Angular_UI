@@ -9,6 +9,7 @@ export class ExpansionPanelComponent implements OnInit {
   @Input() expansionPanelOptions: any;
   @Input() data: any; 
   @Input() selectorComponent: any;
+  @Input() isHistory: boolean;
   constructor() { }
 
   ngOnInit() {

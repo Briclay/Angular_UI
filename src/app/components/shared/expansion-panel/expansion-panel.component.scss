@@ -30,6 +30,11 @@ mat-accordion {
                     margin-right: 30px;
                 }
             }
+            &.expansion-history{
+                position: absolute;
+                right: 25px;
+                padding-top: 5px ;
+            }
             
         }
         
@@ -38,4 +43,5 @@ mat-accordion {
         width: 32px;
         border-radius: 50%;
     }
+    
 }

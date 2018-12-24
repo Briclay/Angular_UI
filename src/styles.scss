@@ -16,6 +16,15 @@ body {
 .clearfix {
     clear: both;
 }
+.text-left {
+    text-align: left;
+}
+.text-right {
+    text-align: right;
+}
+.text-center {
+    text-align: center;
+}
 app-expansion-panel {
     width: 100%;
 }
@@ -75,4 +84,11 @@ app-expansion-panel {
 }
 .mat-form-field-appearance-outline .mat-form-field-infix {
     padding: 0.5em 0;
+    margin-top: -10px;
+    .mat-select-arrow {
+      margin-top: 12px;  
+    }
+}
+.mat-form-field  {
+    font: 400 13px/20px Roboto,"Helvetica Neue",sans-serif !important;
 }

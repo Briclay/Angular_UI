@@ -1,78 +1,97 @@
 <div class="user-details-container">
-  <form class="user-details-form">
-    <mat-card class="user-details-card">
-      <div class="user-details-name">
-        <img src="./assets/images/avatars/profile.jpg" />
-        <div>User Name</div>
-        <div>Admin</div>
-      </div>
-      <div class="user-details-content">
-        <div class="user-details-content-title">
-          <strong> Details</strong>
-        </div>
-        <div class="user-details-form-list">
-          <div >
-            <mat-form-field class="margin_right_25" appearance="outline">
-              <mat-label>First Name</mat-label>
-              <input matInput value="First">
+  <form [formGroup]="userDetailsForm" (ngSubmit)="onSubmit()" class="user-details-form">
+    <mat-card>
+      <div class="user-details-card">
+        <div class="user-details-name" >
+          <img src="./assets/images/avatars/profile.jpg" />
+          <div class="username-input"  >
+            <mat-form-field  appearance="outline" >
+              <mat-label>User Name</mat-label>
+              <input matInput formControlName="username">
             </mat-form-field>
-            <mat-form-field class="margin_right_25"  appearance="outline">
-              <mat-label>Last Name</mat-label>
-              <input matInput  value="Last">
-            </mat-form-field>
-          </div>
-          <div >
-            <mat-form-field  appearance="outline">
-              <mat-label>Email</mat-label>
-              <input matInput value="abc@g.com">
-            </mat-form-field>
-          </div>
-          <div  >
             <mat-form-field appearance="outline">
-              <mat-label>Phone Number</mat-label>
-              <input matInput value="9876543212">
+              <mat-label>User Type</mat-label>
+              <mat-select formControlName="userType">
+                <mat-option *ngFor="let user of userType" [value]="user">
+                  {{user}}
+                </mat-option>
+              </mat-select>
             </mat-form-field>
           </div>
+          
         </div>
-      </div>
-      <div class="user-details-content">
-        <div class="user-details-content-title">
-          <strong>Office</strong>
-        </div>
-        <div class="user-details-form-list">
-          <div  >
-            <mat-form-field  appearance="outline">
-              <mat-label>Location</mat-label>
-              <input matInput  value="Bangalore">
-            </mat-form-field>
+        <div class="user-details-content">
+          <div class="user-details-content-title">
+            <strong> Details</strong>
           </div>
-          <div  >
+          <div class="user-details-form-list">
+            <div formGroupName="name">
+              <mat-form-field class="margin_right_25" appearance="outline">
+                <mat-label>First Name</mat-label>
+                <input matInput formControlName="first">
+              </mat-form-field>
+              <mat-form-field class="margin_right_25"  appearance="outline">
+                <mat-label>Last Name</mat-label>
+                <input matInput  formControlName="last">
+              </mat-form-field>
+            </div>
+            <div >
+              <mat-form-field  appearance="outline">
+                <mat-label>Email</mat-label>
+                <input matInput formControlName="email">
+              </mat-form-field>
+            </div>
+            <div  >
+              <mat-form-field appearance="outline">
+                <mat-label>Phone Number</mat-label>
+                <input matInput formControlName="phone">
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div class="user-details-content">
+          <div class="user-details-content-title">
+            <strong>Office</strong>
+          </div>
+          <div class="user-details-form-list">
+            <div  formGroupName="address">
+              <mat-form-field  appearance="outline">
+                <mat-label>Location</mat-label>
+                <input matInput  formControlName="city">
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Address</mat-label>
+                <textarea matInput formControlName="area"></textarea>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div class="user-details-content">
+          <div class="user-details-content-title">
+            <strong>Role</strong>
+          </div>
+          <div class="user-details-form-list">
             <mat-form-field appearance="outline">
-              <mat-label>Address</mat-label>
-              <textarea matInput></textarea>
+              <mat-label>Role</mat-label>
+              <mat-select placeholder="Role">
+                <mat-option *ngFor="let role of _roleId" [value]="role">
+                  {{role}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Departments</mat-label>
+              <mat-select placeholder="Departments">
+                <mat-option *ngFor="let department of departments" [value]="department">
+                  {{department}}
+                </mat-option>
+              </mat-select>
             </mat-form-field>
           </div>
         </div>
       </div>
-      <div class="user-details-content">
-        <div class="user-details-content-title">
-          <strong>Role</strong>
-        </div>
-        <div class="user-details-form-list">
-           <mat-form-field appearance="outline">
-            <mat-label>Address</mat-label>
-            <mat-select placeholder="Role">
-              <mat-option value="option">Option</mat-option>
-            </mat-select>
-          </mat-form-field>
-          <mat-form-field appearance="outline">
-            <mat-label>Address</mat-label>
-            <mat-select placeholder="Role">
-              <mat-option value="option">Option</mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
-      </div>
+      <button mat-raised-button type="submit" class="pull-right">Submit</button>
+      <div class="clearfix"></div>
     </mat-card>
   </form>
 </div>
