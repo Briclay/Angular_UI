@@ -7,6 +7,9 @@ mat-accordion {
         margin-top: 5px;
     }
     mat-expansion-panel-header {
+        &.mat-expanded {
+            background: #FAFAFA;
+        }
         mat-panel-title {
             flex: 1;
             margin: 5px 0px;
