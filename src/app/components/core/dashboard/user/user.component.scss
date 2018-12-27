@@ -18,3 +18,14 @@
 mat-form-field {
     margin-right: 30px;
 }
+::ng-deep .user-container .expansion-container {
+    padding: 10px;
+    mat-expansion-panel-header {
+        mat-panel-title {
+            &.mat-expansion-panel-header-title:nth-child(2) {
+                flex: 0.5 !important;
+            }
+        }
+        
+    }
+}

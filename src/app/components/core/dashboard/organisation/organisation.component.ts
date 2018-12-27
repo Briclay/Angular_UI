@@ -13,11 +13,12 @@ export class OrganisationComponent implements OnInit {
     getFeatures = false;
     value: string;
   	viewValue: string;
-    features =  [
+	organizationDataOptions: any;
+    features = [
 	    {value: 'steak-0', viewValue: 'File'},
 	    {value: 'pizza-1', viewValue: 'Service Request'},
 	    {value: 'tacos-2', viewValue: 'Snag Master'}
-	  ];
+	];
 
 	orgData = [
 		  { "id" : "1",
@@ -70,9 +71,21 @@ export class OrganisationComponent implements OnInit {
   	constructor() { }
 
   	ngOnInit() {
-  		console.log(this.orgData,"**")
+			this.organizationDataOptions = [
+        {
+          title: 'User Name', type: 'list', list: [
+            { title: 'UserName', key: 'orgName', hideTitle: true, type: 'label' },
+            { title: 'Address', key: 'orgAddress', hideTitle: true, type: 'label' }
+          ]
+        }, {
+			title: 'Plan', key: 'subsciption.plan',
+		}, {
+			title: 'Valid till', key: 'entities.validtill'
+		}, {
+			title: 'Entities', key: 'entities.count'
+		}]
   	}
-    
+
   	editAdmin(){
   		this.editAdminFlag = true;
   	}
@@ -82,7 +95,7 @@ export class OrganisationComponent implements OnInit {
   	editPreminum(){
   		this.editPreminumFlag = true;
   	}
-  	getFeatureDropdown (){
+  	getFeatureDropdown(){
   		this.getFeatures = true;
   	}
    

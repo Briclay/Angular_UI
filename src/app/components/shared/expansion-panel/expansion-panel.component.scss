@@ -1,0 +1,41 @@
+mat-accordion {
+    width: 100%;
+}
+.expansion-container {
+    padding: 0px 10px 10px 10px;
+    mat-expansion-panel {
+        margin-top: 5px;
+    }
+    mat-expansion-panel-header {
+        mat-panel-title {
+            flex: 1;
+            margin: 5px 0px;
+            padding: 0px 5px;
+            align-items: center;
+            &.border-right-gray {
+                border-right: 2px solid #999999;
+            }
+            &.flex-image {
+                border-right: 0px;
+                flex: 0.1
+            }
+            .panel-conent {
+                text-align: left;
+                width: 100%;
+                color: #032A57;
+                .label-value {
+                    font-weight: bold;
+                }
+                .label-title {
+                    margin-right: 30px;
+                }
+            }
+            
+        }
+        
+    }
+    img {
+        width: 32px;
+        border-radius: 50%;
+    }
+}

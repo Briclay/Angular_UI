@@ -52,7 +52,7 @@ export class DashboardService {
     constructor(
     ) { }
 
-    public getData() {
+    public getData(): Observable<ChartData[]>  {
         return of(this.lineChartData);
     }
 }

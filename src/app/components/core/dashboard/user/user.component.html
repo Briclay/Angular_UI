@@ -1,29 +1,16 @@
 <div class="user-container">
-    <mat-card class="create-user">
-        <mat-card-header>
-            <mat-card-title>Create</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-            <div class="example-container">
-                <mat-form-field>
-                    <input matInput placeholder="First Name">
-                </mat-form-field>
-
-                <mat-form-field>
-                    <input matInput placeholder="Last Name">
-                </mat-form-field>
-
-                <mat-form-field>
-                    <input matInput placeholder="Email ID">
-                </mat-form-field>
+    <mat-tab-group>
+        <mat-tab label="Overview">
+            <app-panel-header-filter></app-panel-header-filter>
+            <div fxLayout="row">
+                <app-expansion-panel 
+                    [expansionPanelOptions]="userDataOptions"
+                    selectorComponent="app-user-details" 
+                    [data]="users.data"></app-expansion-panel>
             </div>
-
-        </mat-card-content>
-    </mat-card>
-    <div fxLayout="row">
-        <app-dynamic-table fxFlex="70"></app-dynamic-table>
-        <mat-card fxFlex="30" class="user-details">
-            Details
-        </mat-card>
-    </div>
+        </mat-tab>
+        <mat-tab label="New">
+            <app-user-details></app-user-details>
+        </mat-tab>
+    </mat-tab-group>
 </div>

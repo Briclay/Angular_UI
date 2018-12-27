@@ -10,12 +10,12 @@ import { jspAppGlobal } from '../app.globlal';
 export let API_BASE = "/";
 
 @Injectable()
-export class ApiService {
+  export class ApiService {
   // URLs to web api
 
   constructor(private http: HttpClient) { }
 
- public get(url: string, query?: {[id: string]: string}, responseType?): Observable<any> {
+  public get(url: string, query?: {[id: string]: string}, responseType?): Observable<any> {
     let reqUrl = `${API_BASE}${url}`;
     let httpParams: HttpParams = undefined;
 
