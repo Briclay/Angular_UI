@@ -22,6 +22,7 @@ import { D3Service } from 'd3-ng2-service';
 import { DashboardService } from './services/dashboard/dashboard.service';
 import { OrganizationService } from './services/organization/organization.service';
 import { UserService } from './services/user/user.service';
+import { RoleService } from './services/role/role.service';
 import { ExpansionPanelComponent } from './components/shared/expansion-panel/expansion-panel.component';
 import { UserCreateComponent } from './components/core/dashboard/user/user-create/user-create.component';
 import { WidgetContainerComponent } from './components/shared/widget-container/widget-container.component';
@@ -60,7 +61,7 @@ import { PanelHeaderFilterComponent } from './components/shared/panel-header-fil
     ReactiveFormsModule,
     FormsModule
   ],
-  providers: [D3Service, DashboardService, UserService, OrganizationService],
+  providers: [D3Service, DashboardService, UserService, , RoleService, OrganizationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

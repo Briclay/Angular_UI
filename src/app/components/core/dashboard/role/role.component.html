@@ -1,15 +1,19 @@
-<div>
-  <mat-tab-group>
-    <mat-tab label="Overview" >
-	   	<app-panel-header-filter></app-panel-header-filter>
-	   	<app-expansion-panel 
-        [expansionPanelOptions]="roleDataOptions"
-        selectorComponent="app-role-details" 
-        [data]="roleData">
-      </app-expansion-panel>
-    	</mat-tab>
-     <mat-tab label="New">
-      New
-    </mat-tab>
-  </mat-tab-group>
+<div class="user-container">
+    <mat-tab-group>
+        <mat-tab label="Overview">
+            <app-panel-header-filter></app-panel-header-filter>
+            <div fxLayout="row">
+                <app-expansion-panel 
+                    [expansionPanelOptions]="roleDataOptions"
+                    selectorComponent="app-role-details" 
+                    [data]="RoleData"
+                    [isHistory]="true">
+                </app-expansion-panel>
+            </div>
+        </mat-tab>
+        <mat-tab label="New">
+          New
+        </mat-tab>
+    </mat-tab-group>
 </div>
+

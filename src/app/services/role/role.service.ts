@@ -1,15 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
+import { constantService } from '../../constant/constant.serive';
+import { RoleData } from '../../interfaces/interfaces';
 
-// import { ApiService } from '../api.service';
-import { roleData } from '../../interfaces/interfaces'
-
-@Injectable({
-  providedIn: 'root',
-})
-
-export class RoleService {
-    data = [
+const data: RoleData = {
+    "result": "success",
+    "data": [
 		{ 
 			"id" : "1",
 		    "roleNane": "Admin",
@@ -19,7 +15,7 @@ export class RoleService {
 		      "subrole" : "Technician"
 		    },
 		    "features" : 0,
-		    "approvels" : 0
+		    "approvals" : 0
 		},
 		{ 
 			"id" : "2",
@@ -30,7 +26,7 @@ export class RoleService {
 		      "subrole" : "Technician"
 		    },
 		    "features" : 1,
-		    "approvels" : 1
+		    "approvals" : 1
 		},
 		{
 		  	"id" : "3",
@@ -41,12 +37,17 @@ export class RoleService {
 		      "subrole" : "Technician"
 		    },
 		    "features" : 2,
-		    "approvels" : 2
+		    "approvals" : 2
 		}
 	]
+}
 
-    public getData(): Observable<roleData> {
-        return of(this.data);
+@Injectable()
+export class RoleService {
+    constructor(
+    ) { }
+    // pass params data
+    public getData(): Observable<RoleData> {
+        return  of(data);;
     }
-
 }

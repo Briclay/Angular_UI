@@ -22,6 +22,9 @@
             </ng-template>
           </ng-template>
         </mat-panel-title>
+        <mat-panel-title *ngIf="isHistory" class="expansion-history">
+          <mat-icon>history</mat-icon>
+        </mat-panel-title>
       </mat-expansion-panel-header>
       <app-widget-container
         [selector]="selectorComponent" [data]="listData">

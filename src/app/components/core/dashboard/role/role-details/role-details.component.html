@@ -1,81 +1,58 @@
-<mat-card>
-  <div class="card_container">
-    <div class="card_container_inside" fxFlex=26>
-      <div class="color_dark_blue font-size-12 font-weight-700">
-        {{data.roleNane}}
-      </div>
-    </div>	
-    <div fxLayout=column class="subs-div" fxFlex=26>
-      <div fxLayout=row class="subs_margin">
-        <span class="color_head font-size-12 font-weight-700">Details</span>
-      </div>
-      <div fxLayout=coloumn style="display: block;" fxLayoutAlign="space-between center">
-        <div>
-          <span class="color_light_blue font-size-12">Department</span>
-        </div>
-        <div class="margin_right_25">
-          <mat-form-field style="width: 90px;" >
-              <input matInput placeholder="" class="color_dark_blue font-size-12 font-weight-700" value="{{data.details.department}}">
+<div class="user-details-container">
+  <form [formGroup]="roleDetailsForm" (ngSubmit)="onSubmit()" class="user-details-form">
+    <mat-card>
+      <div class="user-details-card">
+        <div class="user-details-name">
+          <div class="username-input">
+            <mat-form-field appearance="outline">
+              <mat-label>User Name</mat-label>
+              <input matInput formControlName="roleNane">
             </mat-form-field>
+          </div>
         </div>
-        <div>
-          <span class="color_light_blue font-size-12">Shift</span>
-        </div>
-        <div class="margin_right_25">
-          <mat-form-field style="width: 90px;" >
-              <input matInput placeholder="" class="color_dark_blue font-size-12 font-weight-700" value="{{data.details.shift}}">
-            </mat-form-field>
-        </div>
-        <div>
-          <span class="color_light_blue font-size-12">Sub-role</span>
-        </div>
-        <div class="margin_right_25">
-          <mat-form-field style="width: 90px;" >
-              <input matInput placeholder="" class="color_dark_blue font-size-12 font-weight-700" value="{{data.details.subrole}}">
-            </mat-form-field>
-        </div>
-      </div>
-    </div>  
-    <div fxLayout=column class="margin_top_25" fxFlex=26>
-      <div fxLayout=row class="details_margin">
-        <span class="color_head font-size-12 font-weight-700">Features</span>
-      </div>
-      <div fxLayout=row fxLayoutAlign="space-between center">
-        <div>
-          <span class="color_light_blue font-size-12">Total features</span>
-        </div>
-        <div class="margin_right_25">
-            <span class="color_dark_blue font-size-12 font-weight-700">{{data.features}}</span>
-        </div>
-        <button class="margin-left-4" mat-raised-button class="feature_btn" 
-        (click)="getFeatureDropdown(i)">Features</button>
-          <mat-select *ngIf="getFeatures" class="btn_margin">
-            <mat-option *ngFor="let f of features" >
-              <mat-checkbox>{{f.viewValue}}</mat-checkbox>
-            </mat-option>
-          </mat-select>
-      </div>
-    </div>
-    <div fxLayout=column style="margin-top: 25px;" fxFlex=26>
-      <div fxLayout=row class="entity_margin">
-        <span class="color_head font-size-12 font-weight-700">Approvals</span>
-      </div>
-      <div fxLayout=row fxLayoutAlign="space-between center">
-        <div>
-          <span class="color_light_blue font-size-12">Total approvals</span>
-        </div>
-        <div class="margin_right_25">
-          <span class="color_dark_blue font-size-12 font-weight-700">{{data.approvels}}</span>
-        </div>
+        <div class="user-details-content">
+          <div class="user-details-content-title">
+            <strong> Details</strong>
+          </div>
+          <div class="user-details-form-list">
+            <div>
+              <mat-form-field class="margin_right_25" appearance="outline">
+                <mat-label>Shift</mat-label>
+                <input matInput formControlName="shift">
+              </mat-form-field>
 
-        <button class="margin-left-4" mat-raised-button class="feature_btn" 
-        (click)="getFeatureDropdown(i)">Approvals</button>
-          <mat-select *ngIf="getFeatures" class="btn_margin">
-            <mat-option *ngFor="let f of features" >
-              <mat-checkbox>{{f.viewValue}}</mat-checkbox>
-            </mat-option>
-          </mat-select>
+              <mat-form-field class="margin_right_25" appearance="outline">
+                <mat-label>Shift</mat-label>
+                <input matInput formControlName="shift">
+              </mat-form-field>
+
+              <mat-form-field class="margin_right_25" appearance="outline">
+                <mat-label>Shift</mat-label>
+                <input matInput formControlName="shift">
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div class="user-details-content">
+          <div class="user-details-content-title">
+            <strong>Office</strong>
+          </div>
+          <div class="user-details-form-list">
+            <div formGroupName="address">
+              <mat-form-field class="margin_right_25" appearance="outline">
+                <mat-label>Shift</mat-label>
+                <input matInput formControlName="shift">
+              </mat-form-field>
+              <mat-form-field class="margin_right_25" appearance="outline">
+                <mat-label>Shift</mat-label>
+                <input matInput formControlName="shift">
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-</mat-card>
+      <button mat-raised-button type="submit" class="pull-right">Submit</button>
+      <div class="clearfix"></div>
+    </mat-card>
+  </form>
+</div>

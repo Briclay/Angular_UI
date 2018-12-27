@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-role-details',
@@ -6,25 +7,44 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./role-details.component.scss']
 })
 export class RoleDetailsComponent implements OnInit {
- @Input() data: any;
+  @Input() data: any;
+  @Input() formType: string;
 
-  editAdminFlag: boolean;
-  editAddressFlag: boolean;
-  editPreminumFlag: boolean;
-  getFeatures: boolean;
-  
-  features = [
-    {value: 'steak-0', viewValue: 'File'},
-    {value: 'pizza-1', viewValue: 'Service Request'},
-    {value: 'tacos-2', viewValue: 'Snag Master'}
-  ];
+  roleDetailsForm: FormGroup;
+  _roleId = ['Manager', 'Admin', 'User', 'Super Admin'];
+  departments = ['Finance', 'Construction'];
+  shifts = ['Regular' , 'Day' , 'Night']
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
+    this.roleDetailsForm = this.createFormGroup();
+    //this.assignValuesToForm();
   }
 
-  getFeatureDropdown() {
-    this.getFeatures = true;
+  createFormGroup() {
+    return new FormGroup({
+      roleNane: new FormControl('', [Validators.required]),
+      details: new FormGroup({
+        department: new FormControl('', [Validators.required]),
+        shift: new FormControl('', [Validators.required]),
+        subrole: new FormControl('', [Validators.required]),
+      }),
+      features: new FormControl('', [Validators.required]),
+      approvals: new FormControl('', [Validators.required])
+    });
   }
+
+  /*assignValuesToForm() {
+    if(this.formType !== 'create') {
+      this.roleDetailsForm.patchValue(this.data)
+    }
+  }*/
+
+  onSubmit() {
+    // Do useful stuff with the gathered data
+    console.log(this.roleDetailsForm.value);
+  }
+
 }

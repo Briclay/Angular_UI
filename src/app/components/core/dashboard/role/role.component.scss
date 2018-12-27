@@ -1,19 +1,31 @@
-
-.list-row {
-  padding: 3px;
+.create-user {
+    margin-bottom: 15px;
 }
-.mat-expansion-panel-header{
-	background-color : 'grey'
+.user-container {
+    .user-details {
+        margin-left: 15px;
+    }
 }
-.line_small {
-	margin: 0px 20px 0px 12px;
-	background-color: gray;
-  	height : 44px;
-  	width: 5px;
+::ng-deep .user-container .mat-card-header-text {
+    background-color: #ebf9fc;
+    margin: -16px 0px 10px -16px;
+    padding: 6px 25px;
+    .mat-card-title{
+        font-size: 15px;
+        margin-bottom: 0px;
+    }
 }
-
-/*make this as a common css*  end */
-
-
-.mat-expansion-panel-header {
+mat-form-field {
+    margin-right: 30px;
+}
+::ng-deep .user-container .expansion-container {
+    padding: 10px;
+    mat-expansion-panel-header {
+        mat-panel-title {
+            &.mat-expansion-panel-header-title:nth-child(2) {
+                flex: 0.5 !important;
+            }
+        }
+        
+    }
 }

@@ -143,17 +143,19 @@ export interface OrganizationData {
   data: OrganizationList[]
 }
 
-export interface roleList {
+export interface RoleData {
+  result: string,
+  data: RoleList[]
+}
+
+export interface RoleList {
+  id: string,
   roleNane: string,
   details : {
     department : string,
     shift : string,
     subrole : string,
   },
-  fetures : number,
-  approvels : number
-}
-
-export interface roleData {
-  data: roleList[]
+  features : number,
+  approvals : number
 }
