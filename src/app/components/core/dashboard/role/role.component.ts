@@ -16,7 +16,7 @@ export class RoleComponent implements OnInit {
     constructor(private roleService: RoleService) { }
 	  ngOnInit() {
 	    this.roleService.getData().pipe().subscribe(res => {
-	      this.roles = res;
+	    this.roles = res;
 			this.roleDataOptions = [
 		        {
 		        	title: 'roleNane', key: 'roleNane', hideTitle: true, type: 'label'

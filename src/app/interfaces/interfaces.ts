@@ -29,114 +29,113 @@ export interface TableOptions {
 export interface ChartData {
   name: string;
   color: string;
-  values: { date: string, value: number }[];
+  values: { date: string; value: number }[];
 }
 
 export interface UserData {
-  result: string,
+  result: string;
   data: UserList[]
 }
 
 export interface UserList {
   name: {
-    first: string,
+    first: string;
     last: string
-  },
+  };
   address: {
-    flat: string,
-    street: string,
-    area: string,
-    city: string,
-    state: string,
+    flat: string;
+    street: string;
+    area: string;
+    city: string;
+    state: string;
     pincode: number
-  },
-  userType: string,
-  profileImageUrl: string,
-  deleteFlag: boolean,
-  activeFlag: boolean,
-  _id: string,
+  };
+  userType: string;
+  profileImageUrl: string;
+  deleteFlag: boolean;
+  activeFlag: boolean;
+  _id: string;
   _organisationId: {
     address: {
-      area: string,
-      city: string,
-      state: string,
+      area: string;
+      city: string;
+      state: string;
       pincode: number
-    },
-    orgType: string,
-    plant: string[],
-    logoImageUrl: string,
-    description: string,
-    _users: string[],
-    _features: string[],
-    _departments: string[],
-    deleteFlag: boolean,
-    activeFlag: boolean,
-    _id: string,
-    orgCode: string,
-    name: string,
-    email: string,
-    phone: number,
-    imageUrls: string[],
-    _createdBy: string,
-    _updatedBy: string,
-    deleteNote: string,
-    createdAt: string,
-    updatedAt: string,
+    };
+    orgType: string;
+    plant: string[];
+    logoImageUrl: string;
+    description: string;
+    _users: string[];
+    _features: string[];
+    _departments: string[];
+    deleteFlag: boolean;
+    activeFlag: boolean;
+    _id: string;
+    orgCode: string;
+    name: string;
+    email: string;
+    phone: number;
+    imageUrls: string[];
+    _createdBy: string;
+    _updatedBy: string;
+    deleteNote: string;
+    createdAt: string;
+    updatedAt: string;
     __v: number
-  },
-  email: string,
-  username: string,
-  password: string,
+  };
+  email: string;
+  username: string;
+  password: string;
   _roleId: {
-    _id: string,
+    _id: string;
     name: string
-  },
-  phone: number,
+  };
+  phone: number;
   _createdBy?: {
-    profileImageUrl: string,
-    _id: string,
-    displayName: string,
-    email: string,
+    profileImageUrl: string;
+    _id: string;
+    displayName: string;
+    email: string;
     username: string
-  },
-  createdAt?: string,
-  devices?: string[],
-  imageUrls?: string[],
-  salt?: string,
-  displayName?: string,
-  __v?: number,
-  lastLoginAt?: string,
-  reviewPoints?: number,
-  resetPasswordToken?: string,
-  resetPasswordExpires?: string,
-  activateToken?: string,
-  activateTokenExpires?: string,
-  createdBy?: string,
-  updatedBy?: string,
-  deletedBy?: string,
-  deleteNote?: string,
-  updatedAt?: string,
-  deletedAt?: string,
-  access?: string[],
+  };
+  createdAt?: string;
+  devices?: string[];
+  imageUrls?: string[];
+  salt?: string;
+  displayName?: string;
+  __v?: number;
+  lastLoginAt?: string;
+  reviewPoints?: number;
+  resetPasswordToken?: string;
+  resetPasswordExpires?: string;
+  activateToken?: string;
+  activateTokenExpires?: string;
+  createdBy?: string;
+  updatedBy?: string;
+  deletedBy?: string;
+  deleteNote?: string;
+  updatedAt?: string;
+  deletedAt?: string;
+  access?: string[];
   roles?: string[]
 }
 
 export interface OrganizationList {
-  {
-  orgName: string,
-  orgAddress: string,
+  id: string;
+  orgName: string;
+  orgAddress: string;
     subsciption : {
-      plan : string[],
-    },
+      plan : string;
+    };
     details : {
-      email: string,
+      email: string;
       Address : string
-    },
+    };
     entities:{
-      count : number,
+      count : number | string;
       validtill : string
     }
-  }
 }
 
 export interface OrganizationData {
@@ -144,18 +143,18 @@ export interface OrganizationData {
 }
 
 export interface RoleData {
-  result: string,
+  result: string;
   data: RoleList[]
 }
 
 export interface RoleList {
-  id: string,
-  roleNane: string,
+  id: string;
+  roleNane: string;
   details : {
-    department : string,
-    shift : string,
-    subrole : string,
-  },
-  features : number,
+    department : string;
+    shift : string;
+    subrole : string;
+  };
+  features : number;
   approvals : number
 }

@@ -20,7 +20,7 @@ export class RoleDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.roleDetailsForm = this.createFormGroup();
-    //this.assignValuesToForm();
+    this.assignValuesToForm();
   }
 
   createFormGroup() {
@@ -36,11 +36,11 @@ export class RoleDetailsComponent implements OnInit {
     });
   }
 
-  /*assignValuesToForm() {
+  assignValuesToForm() {
     if(this.formType !== 'create') {
       this.roleDetailsForm.patchValue(this.data)
     }
-  }*/
+  }
 
   onSubmit() {
     // Do useful stuff with the gathered data
