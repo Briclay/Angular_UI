@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-organisation-details',
@@ -7,6 +8,9 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class OrganisationDetailsComponent implements OnInit {
   @Input() data: any;
+  @Input() formType: string;
+
+  organizationDetailsForm: FormGroup;
 
   editAdminFlag: boolean;
   editAddressFlag: boolean;
@@ -21,6 +25,30 @@ export class OrganisationDetailsComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+  }
+
+  createFormGroup() {
+    return new FormGroup({
+      name: new FormGroup({
+        first: new FormControl('', [Validators.required]),
+        last: new FormControl('', [Validators.required])
+      }),
+      address: new FormGroup({
+        city: new FormControl('', [Validators.required]),
+        area: new FormControl('', [Validators.required]),
+      }),
+      email: new FormControl('', [Validators.required]),
+      username: new FormControl('', [Validators.required]),
+      userType: new FormControl('', [Validators.required]),
+      phone: new FormControl('', [Validators.required])
+    });
+    
+  }
+
+  assignValuesToForm() {
+    if(this.formType !== 'create') {
+      this.organizationDetailsForm.patchValue(this.data)
+    }
   }
 
   editAdmin() {

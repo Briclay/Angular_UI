@@ -16,9 +16,13 @@
           </div>
           <div class="user-details-form-list" formGroupName="details">
             <div>
-              <mat-form-field class="margin_right_25" appearance="outline">
-                <mat-label>Department</mat-label>
-                <input matInput formControlName="department">
+              <mat-form-field appearance="outline" class="margin_right_25">
+                <mat-label>Departments</mat-label>
+                <mat-select placeholder="Departments" formControlName="department">
+                  <mat-option *ngFor="let department of departments" [value]="department">
+                    {{department}}
+                  </mat-option>
+                </mat-select>
               </mat-form-field>
 
               <mat-form-field class="margin_right_25" appearance="outline">

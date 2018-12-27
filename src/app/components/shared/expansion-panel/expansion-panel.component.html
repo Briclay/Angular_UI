@@ -16,7 +16,7 @@
             </span>
             <ng-template #labelContent> 
               <div class="panel-conent">
-                <label class="label-title">{{option.title}}</label>
+                <label class="label-title" *ngIf="!option.hideTitle">{{option.title}}</label>
                 <label class="label-value">{{parseKey(listData, option.key)}}</label>
               </div>
             </ng-template>

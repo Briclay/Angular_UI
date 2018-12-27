@@ -1,6 +1,7 @@
 <mat-card class="panel-header">
-  <div class="pull-left">
-    <mat-form-field>
+  <div class="pull-left panel-left">
+    <mat-form-field appearance="outline">
+      <mat-label>Organization</mat-label>
       <mat-select placeholder="Select Organization">
         <mat-option *ngFor="let organization of organizations" [value]="organization.value">
           {{organization.viewValue}}
@@ -11,7 +12,8 @@
   <div class="pull-right">
     <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]">
     </mat-paginator>
-    <mat-form-field class="example-full-width">
+    <mat-form-field class="example-full-width" appearance="outline">
+      <mat-label>Search</mat-label>
       <input matInput placeholder="Search">
     </mat-form-field>
   </div>

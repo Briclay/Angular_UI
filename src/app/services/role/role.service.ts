@@ -10,7 +10,7 @@ const data: RoleData = {
 			"id" : "1",
 		    "roleNane": "Admin",
 		    "details" : {
-		      "department" : "Finance",
+		      "department" : "Construction",
 		      "shift" : "Regular",
 		      "subrole" : "Technician"
 		    },

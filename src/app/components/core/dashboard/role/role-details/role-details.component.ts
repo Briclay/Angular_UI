@@ -12,7 +12,7 @@ export class RoleDetailsComponent implements OnInit {
 
   roleDetailsForm: FormGroup;
   _roleId = ['Manager', 'Admin', 'User', 'Super Admin'];
-  departments = ['Finance', 'Construction'];
+  departments: string[] = ['Finance', 'Construction'];
   shifts = ['Regular' , 'Day' , 'Night']
 
   constructor() {
