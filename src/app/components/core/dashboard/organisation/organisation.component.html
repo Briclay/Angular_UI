@@ -1,15 +1,19 @@
-<div class="organization-container">
+<div class="user-container">
     <mat-tab-group>
-       <mat-tab label="Overview" >
-		   <app-panel-header-filter></app-panel-header-filter>
-		   <app-expansion-panel 
-                    [expansionPanelOptions]="organizationDataOptions"
+        <mat-tab label="Overview">
+            <app-panel-header-filter></app-panel-header-filter>
+            <div fxLayout="row">
+                <app-expansion-panel 
+                    [expansionPanelOptions]="organisationDataOptions"
                     selectorComponent="app-organisation-details" 
-                    [data]="orgData"
-					[isHistory]="true"></app-expansion-panel>
-      	</mat-tab>
-       <mat-tab label="New">
-        New
-      </mat-tab>
+                    [data]="organisations.data"
+                    [isHistory]="true">
+                </app-expansion-panel>
+            </div>
+        </mat-tab>
+        <mat-tab label="New">
+            <app-organisation-details formType="create"></app-organisation-details>
+        </mat-tab>
     </mat-tab-group>
 </div>
+

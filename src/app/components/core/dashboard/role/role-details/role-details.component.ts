@@ -11,10 +11,11 @@ export class RoleDetailsComponent implements OnInit {
   @Input() formType: string;
 
   roleDetailsForm: FormGroup;
-  _roleId = ['Manager', 'Admin', 'User', 'Super Admin'];
+  _roleId = ['Manager', 'Admin', 'User', 'Design', 'Super Admin'];
   departments: string[] = ['Finance', 'Construction'];
   shifts = ['Regular' , 'Day' , 'Night']
-
+  subRoles = ['Technician', 'sub-Admin', 'User'];
+  getApprovals = ['Design' ]
   constructor() {
   }
 
