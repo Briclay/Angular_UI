@@ -23,12 +23,16 @@ import { DashboardService } from './services/dashboard/dashboard.service';
 import { OrganizationService } from './services/organization/organization.service';
 import { UserService } from './services/user/user.service';
 import { RoleService } from './services/role/role.service';
+import { DepartmentService } from './services/department/department.service';
 import { ExpansionPanelComponent } from './components/shared/expansion-panel/expansion-panel.component';
 import { UserCreateComponent } from './components/core/dashboard/user/user-create/user-create.component';
 import { WidgetContainerComponent } from './components/shared/widget-container/widget-container.component';
 import { OrganisationComponent } from './components/core/dashboard/organisation/organisation.component';
 import { RoleComponent } from './components/core/dashboard/role/role.component';
 import { PanelHeaderFilterComponent } from './components/shared/panel-header-filter/panel-header-filter.component';
+import { OrganisationCreateComponent } from './components/core/dashboard/organisation/organisation-create/organisation-create.component';
+import { RoleCreateComponent } from './components/core/dashboard/role/role-create/role-create.component';
+import { DepartmentComponent } from './components/core/dashboard/department/department.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +55,9 @@ import { PanelHeaderFilterComponent } from './components/shared/panel-header-fil
     UserCreateComponent,
     WidgetContainerComponent,
     PanelHeaderFilterComponent,
+    OrganisationCreateComponent,
+    RoleCreateComponent,
+    DepartmentComponent
   ],
   imports: [
     BrowserModule,
@@ -61,7 +68,7 @@ import { PanelHeaderFilterComponent } from './components/shared/panel-header-fil
     ReactiveFormsModule,
     FormsModule
   ],
-  providers: [D3Service, DashboardService, UserService, , RoleService, OrganizationService],
+  providers: [D3Service, DashboardService, UserService, DepartmentService, RoleService, OrganizationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

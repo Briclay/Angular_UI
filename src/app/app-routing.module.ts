@@ -8,6 +8,7 @@ import { SettingsComponent } from './components/core/dashboard/settings/settings
 import { HomeComponent } from './components/core/dashboard/home/home.component';
 import { OrganisationComponent } from './components/core/dashboard/organisation/organisation.component';
 import { RoleComponent } from './components/core/dashboard/role/role.component';
+import { DepartmentComponent } from './components/core/dashboard/department/department.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -27,6 +28,11 @@ const routes: Routes = [
       {
         path: 'role', component: RoleComponent, data: {
           breadcrumb: 'Role'
+        }
+      },
+      {
+        path: 'department', component: DepartmentComponent, data: {
+          breadcrumb: 'department'
         }
       },
       {

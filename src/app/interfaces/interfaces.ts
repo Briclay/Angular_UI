@@ -133,7 +133,7 @@ export interface OrganizationList {
       Address : string
     };
     entities:{
-      count : number | string;
+      count : number || string;
       validtill : string
     }
 }
@@ -156,5 +156,19 @@ export interface RoleList {
     subrole : string;
   };
   features : number;
-  approvals : number
+  approvals : number;
+}
+
+export interface DepartmentData {
+  result: string;
+  data: DepartmentList[]
+}
+
+export interface DepartmentList {
+  id: string;
+  departmentName : string;
+  details : {
+    description : string;
+  };
+  features : number;
 }
