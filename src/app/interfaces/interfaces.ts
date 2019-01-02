@@ -130,11 +130,11 @@ export interface OrganizationList {
     };
     details : {
       email: string;
-      Address : string
+      Address : string;
     };
     entities:{
       count : number || string;
-      validtill : string
+      validtill : string;
     }
 }
 
