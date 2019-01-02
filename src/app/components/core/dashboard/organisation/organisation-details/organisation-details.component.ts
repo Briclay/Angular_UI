@@ -17,7 +17,7 @@ export class OrganisationDetailsComponent implements OnInit {
   editPreminumFlag: boolean;
   getFeatures: boolean;
 
-  features: Featues[] = [
+  features: any[] = [
 	    {value: 'steak-0', viewValue: 'File'},
 	    {value: 'pizza-1', viewValue: 'Service Request'},
 	    {value: 'tacos-2', viewValue: 'Snag Master'}

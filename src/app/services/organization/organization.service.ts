@@ -58,7 +58,7 @@ export class OrganizationService {
 		  }
 		];
 
-    public getData(): Observable<OrganizationData> {
+    public getData(): Observable<any> {
         return of(this.data);
     }
 
