@@ -172,3 +172,24 @@ export interface DepartmentList {
   };
   features : number;
 }
+
+
+export interface UserDashboardData {
+  result: string;
+  data: UserDashboardList[]
+}
+
+export interface UserDashboardList {
+  workCategory: string;
+  supportRole : string;
+  assignee : string;
+  putintiateDate: string;
+  RFAPutDate : string;
+  WOPutDate : string;
+  approvalintiateDate : string;
+  RFAApprovalDate : string;
+  WOApprovalDate : string;
+  status: string;
+  documentStatus : string;
+  remarks :string;
+}

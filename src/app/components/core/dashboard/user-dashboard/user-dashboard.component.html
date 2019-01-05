@@ -1,0 +1,167 @@
+    <div class="main-content" >
+      <div  class="main-head">
+        <div fxLayout=column>
+          <div>
+            <div>
+              <div class="dottedBorder" >
+                <img class="userImage" src="/assets/images/backgrounds/autumn.jpg">
+                <div align="center" class="greenDot"></div>
+              </div>
+              <div fxLayout="column" style="text-align: center;">
+                <span class="text-color">Satesh</span>
+                <span class="text-color-light ">Contracts</span>
+              </div>
+            </div>
+          </div>
+          <mat-card class="report-card" fxLayout=column style="display: inline;flex :1;">
+            <div class="card-title">Quick Details</div>
+            <div fxLayout=row style="place-content: space-between;">
+              <div class="details-head">Projects</div>
+              <div class="details-head">Request</div>
+            </div>
+            <div fxLayout=row style="place-content: space-between; margin-top: 10px">
+              <div class="count">Palm Beach</div>
+              <div class="count">38</div>
+            </div>
+            <div fxLayout=row style="place-content: space-between; margin-top: 10px">
+              <div class="count">Palm Beach2</div>
+              <div class="count">48</div>
+            </div>
+          </mat-card>
+          <mat-card class="report-card" fxLayout=column style="display: inline;flex :1;">
+            <div class="card-title">NCM</div>
+            <div fxLayout=row style="place-content: space-between;">
+              <div class="details-head">RISK ID</div>
+              <div class="details-head">Status</div>
+            </div>
+            <div fxLayout=row style="place-content: space-between; margin-top: 10px">
+              <div class="count">Palm Beach</div>
+              <div class="count">38</div>
+            </div>
+            <div fxLayout=row style="place-content: space-between; margin-top: 10px">
+              <div class="count">Palm Beach2</div>
+              <div class="count">48</div>
+            </div>
+          </mat-card>
+        </div>
+        <div fxFlex=90 fxLayout="row" style="display: inline;flex :1;">
+          <mat-card style="display: inline;flex :1;    height: 15px;">
+            <div fxLayout=row style="place-content: space-around;">
+              <div class="tab-btn">Projects</div>
+              <div class="tab-btn">Work order</div>
+              <div class="tab-btn">Work Request</div>
+              <div class="tab-btn">File Manager</div>
+            </div>
+            <div class="content-head" fxLayout=column>
+              <div class="first-card">
+                <mat-card class="report-card" fxFlex=20 fxLayout=column>
+                  <div class="card-title">Total recieved documents</div>
+                  <div fxLayout=row style="place-content: space-between;">
+                    <div class="count">22</div>
+                    <div class="count">38</div>
+                  </div>
+                </mat-card>
+                <mat-card class="report-card" fxFlex=20 fxLayout=column>
+                  <div class="card-title">Total Completed</div>
+                  <div fxLayout=row style="place-content: space-between;">
+                    <div class="count">154</div>
+                    <div class="count">132</div>
+                  </div>
+                </mat-card>
+                <mat-card class="report-card" fxFlex=20 fxLayout=column>
+                  <div class="card-title">Pending Request</div>
+                  <div fxLayout=row style="place-content: space-between;">
+                    <div class="count">11</div>
+                    <div class="count">20</div>
+                  </div>
+                </mat-card>
+              </div>
+              <div class="first-card">
+                <mat-card class="report-card" fxFlex=20 fxLayout=column>
+                  <div class="card-title">Awating RFa approval</div>
+                  <div fxLayout=row style="place-content: space-between;">
+                    <div class="count">10</div>
+                    <div class="count">21</div>
+                  </div>
+                </mat-card>
+                <mat-card class="report-card" fxFlex=20 fxLayout=column>
+                  <div class="card-title">Awating WO approval</div>
+                  <div fxLayout=row style="place-content: space-between;">
+                    <div class="count">147</div>
+                    <div class="count">123</div>
+                  </div>
+                </mat-card>
+                <mat-card class="report-card" fxFlex=20 fxLayout=column>
+                  <div class="card-title">Task in due date</div>
+                  <div fxLayout=row style="place-content: space-between;">
+                    <div class="count">14</div>
+                    <div class="count">17</div>
+                  </div>
+                </mat-card>
+              </div>  
+            </div>
+            <div class="content-head">
+              <div class="user-details-container">
+                <form class="user-details-form" [formGroup]="userDashboardForm">
+                  <mat-card>
+                    <div class="user-details-card">
+                      <div class="user-details-name">
+                        <div class="username-input">
+                          <mat-form-field class="margin_right_25" appearance="outline">
+                            <mat-label>Work Category</mat-label>
+                            <input matInput formControlName="workCategory">
+                          </mat-form-field>
+                          <mat-form-field class="margin_right_25" appearance="outline">
+                            <mat-label>Support Role</mat-label>
+                            <input matInput formControlName="supportRole">
+                          </mat-form-field>
+                          <mat-form-field class="margin_right_25" appearance="outline">
+                            <mat-label>Assignee</mat-label>
+                            <input matInput formControlName="assignee">
+                          </mat-form-field>
+                        </div>
+                      </div>
+                      <div class="user-details-content">
+                        <div class="user-details-form-list">
+                         <div>
+                          <mat-form-field class="margin_right_25" appearance="outline">
+                            <mat-label>Intiate Date</mat-label>
+                            <input matInput formControlName="putintiateDate">
+                          </mat-form-field>
+                          <mat-form-field class="margin_right_25" appearance="outline">
+                            <mat-label>RFA Put-up Date</mat-label>
+                            <input matInput formControlName="RFAPutDate">
+                          </mat-form-field> 
+                          <mat-form-field class="margin_right_25" appearance="outline">
+                            <mat-label>WO Put-up Date</mat-label>
+                            <input matInput formControlName="WOPutDate">
+                          </mat-form-field>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="user-details-content">
+                      <div class="user-details-form-list">
+                        <mat-form-field class="margin_right_25" appearance="outline">
+                          <mat-label>Intiate Date</mat-label>
+                          <input matInput formControlName="approvalintiateDate">
+                        </mat-form-field>
+                        <mat-form-field class="margin_right_25" appearance="outline">
+                          <mat-label>RFA Approval Date</mat-label>
+                          <input matInput formControlName="RFAApprovalDate">
+                        </mat-form-field> 
+                        <mat-form-field class="margin_right_25" appearance="outline">
+                          <mat-label>WO Approval Date</mat-label>
+                          <input matInput formControlName="WOApprovalDate">
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="clearfix"></div>
+                </mat-card>
+              </form>
+            </div>
+          </div>
+        </mat-card>
+      </div>
+    </div>
+  </div>

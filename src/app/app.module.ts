@@ -23,6 +23,7 @@ import { DashboardService } from './services/dashboard/dashboard.service';
 import { OrganizationService } from './services/organization/organization.service';
 import { UserService } from './services/user/user.service';
 import { RoleService } from './services/role/role.service';
+import { UserDashboardService } from './services/user-dashboard/user-dashboard.service';
 import { DepartmentService } from './services/department/department.service';
 import { ExpansionPanelComponent } from './components/shared/expansion-panel/expansion-panel.component';
 import { UserCreateComponent } from './components/core/dashboard/user/user-create/user-create.component';
@@ -33,6 +34,8 @@ import { PanelHeaderFilterComponent } from './components/shared/panel-header-fil
 import { OrganisationCreateComponent } from './components/core/dashboard/organisation/organisation-create/organisation-create.component';
 import { RoleCreateComponent } from './components/core/dashboard/role/role-create/role-create.component';
 import { DepartmentComponent } from './components/core/dashboard/department/department.component';
+import { UserDashboardComponent } from './components/core/dashboard/user-dashboard/user-dashboard.component';
+import { NcmDashboardComponent } from './components/core/dashboard/ncm-dashboard/ncm-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +60,9 @@ import { DepartmentComponent } from './components/core/dashboard/department/depa
     PanelHeaderFilterComponent,
     OrganisationCreateComponent,
     RoleCreateComponent,
-    DepartmentComponent
+    DepartmentComponent,
+    UserDashboardComponent,
+    NcmDashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -68,7 +73,8 @@ import { DepartmentComponent } from './components/core/dashboard/department/depa
     ReactiveFormsModule,
     FormsModule
   ],
-  providers: [D3Service, DashboardService, UserService, DepartmentService, RoleService, OrganizationService],
+  providers: [D3Service, DashboardService, UserService, DepartmentService, RoleService, 
+  OrganizationService,UserDashboardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
