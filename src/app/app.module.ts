@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
@@ -27,7 +28,7 @@ import { UserCreateComponent } from './components/core/dashboard/user/user-creat
 import { WidgetContainerComponent } from './components/shared/widget-container/widget-container.component';
 import { OrganisationComponent } from './components/core/dashboard/organisation/organisation.component';
 import { PanelHeaderFilterComponent } from './components/shared/panel-header-filter/panel-header-filter.component';
-
+import {ProjectModule} from './components/core/dashboard/projects/projects.module'
 @NgModule({
   declarations: [
 
@@ -51,12 +52,14 @@ import { PanelHeaderFilterComponent } from './components/shared/panel-header-fil
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     MaterialModule,
     WidgetModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    ProjectModule
   ],
   providers: [D3Service, DashboardService, UserService, OrganizationService],
   bootstrap: [AppComponent]

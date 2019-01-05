@@ -7,9 +7,11 @@ import { HttpClient, HttpHeaders, HttpResponse, HttpErrorResponse, HttpParams } 
 import {constantService} from "../constant/constant.serive";
 import { jspAppGlobal } from '../app.globlal';
 
-export let API_BASE = "/";
+export let API_BASE = "http://localhost:4300/assets/data/";
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class ApiService {
   // URLs to web api
 

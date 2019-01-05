@@ -16,6 +16,8 @@ export class jspAppGlobal {
    * APP API BASE URL
    */
   APP_API_BASE_URL = 'http://localhost:4200';
+
+  APP_LOCAL = 'http://localhost:4300/assets/data'
 }
 
 /**

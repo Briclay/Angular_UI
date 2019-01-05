@@ -1,0 +1,3776 @@
+{
+	"status": "success",
+	"data": [{
+		"_id": "5b8689483b68600ec6337fed",
+		"_organisationId": {
+			"_id": "5a585371ed34a3331e9ae3b0",
+			"name": "Puravankara Limited",
+			"logoImageUrl": "storage/organisation/logo/default.png",
+			"orgType": "BUILDER"
+		},
+		"constructionType": "Pre-Cast",
+		"name": "Sunworth 2",
+		"projectCode": "S2-11",
+		"status": "INPROGRESS",
+		"beginDate": "2016-03-02T18:30:00.000Z",
+		"completionDate": "2019-07-05T18:30:00.000Z",
+		"possessionDate": "2019-06-13T18:30:00.000Z",
+		"type": "RESIDENTIAL",
+		"_createdBy": {
+			"_id": "5a585376ed34a3331e9ae3c4",
+			"displayName": "",
+			"email": "paruadmin@gmail.com",
+			"username": "purvaadmin",
+			"profileImageUrl": "storage/user/profile/default.png"
+		},
+		"createdAt": "2018-08-29T11:53:44.611Z",
+		"__v": 0,
+		"deleteFlag": false,
+		"unitTypes": [{
+			"name": "123",
+			"noOfFlats": 123,
+			"_id": "5b8689483b68600ec6338001"
+		}],
+		"description": "Sunworth 2",
+		"carParkingArea": {
+			"carParkingCount": 123,
+			"basementParkingCount": 123,
+			"coveredParkingCount": 123,
+			"surfaceParkingCount": 123
+		},
+		"projectDetails": {
+			"location": "Bengaluru",
+			"floorCount": 213,
+			"unitNumber": 123,
+			"towerCount": 123,
+			"landArea": "213213",
+			"carpetarea": "123213",
+			"saleArea": "",
+			"clubHouseCount": 123,
+			"projectStatus": "ON-GOING"
+		},
+		"milestones": [],
+		"milestonesList": [{
+			"slNo": 1,
+			"activities": "123",
+			"paymentPlan": "123123",
+			"_id": "5b8689483b68600ec6338000"
+		}],
+		"_snagsFlow": [],
+		"_coreTeam": [],
+		"_facilityTeam": [],
+		"_teamMembers": [{
+			"_userId": {
+				"_id": "5b86852a3b68600ec6337fea",
+				"displayName": "prabath prabath",
+				"email": "prabath@puravankara.com",
+				"username": "prabath",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": []
+			},
+			"_roleId": {
+				"_id": "5a712d599dc276402ad22fa8",
+				"name": "Technician"
+			},
+			"_id": "5b8689483b68600ec6337fff"
+		}, {
+			"_userId": {
+				"_id": "5b8684b356d0d10ecc313be9",
+				"displayName": "deepak deepak",
+				"email": "deepak@puravankara.com",
+				"username": "deepak",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": []
+			},
+			"_roleId": {
+				"_id": "5a712d599dc276402ad22fa8",
+				"name": "Technician"
+			},
+			"_id": "5b8689483b68600ec6337ffe"
+		}, {
+			"_userId": {
+				"_id": "5b86844756d0d10ecc313be6",
+				"displayName": "basudev basudev",
+				"email": "basudev@puravankara.com",
+				"username": "basudev",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": []
+			},
+			"_roleId": {
+				"_id": "5a712d599dc276402ad22fa8",
+				"name": "Technician"
+			},
+			"_id": "5b8689483b68600ec6337ffd"
+		}, {
+			"_userId": {
+				"_id": "5b86838c56d0d10ecc313be3",
+				"displayName": "lingaraju lingaraju",
+				"email": "lingaraju@puravankara.com",
+				"username": "lingaraju",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": []
+			},
+			"_roleId": {
+				"_id": "5a712d599dc276402ad22fa8",
+				"name": "Technician"
+			},
+			"_id": "5b8689483b68600ec6337ffc"
+		}, {
+			"_userId": {
+				"_id": "5b86831b3b68600ec6337fe7",
+				"displayName": "shivalinga shivalinga",
+				"email": "shivalinga@puravankara.com",
+				"username": "shivalinga",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": []
+			},
+			"_roleId": {
+				"_id": "5a712d599dc276402ad22fa8",
+				"name": "Technician"
+			},
+			"_id": "5b8689483b68600ec6337ffb"
+		}, {
+			"_userId": {
+				"_id": "5b8682a156d0d10ecc313be0",
+				"displayName": "shivu shivu",
+				"email": "shivu@puravankara.com",
+				"username": "shivu",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": []
+			},
+			"_roleId": {
+				"_id": "5a712d599dc276402ad22fa8",
+				"name": "Technician"
+			},
+			"_id": "5b8689483b68600ec6337ffa"
+		}, {
+			"_userId": {
+				"_id": "5b8682213b68600ec6337fe4",
+				"displayName": "atul chandra",
+				"email": "atul.chandra@puravankara.com",
+				"username": "atul.c",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": []
+			},
+			"_roleId": {
+				"_id": "5a712d599dc276402ad22fa8",
+				"name": "Technician"
+			},
+			"_id": "5b8689483b68600ec6337ff9"
+		}, {
+			"_userId": {
+				"_id": "5b8681a356d0d10ecc313bdd",
+				"displayName": "manoj",
+				"email": "manoj@puravankara.com",
+				"username": "manoj",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": []
+			},
+			"_roleId": {
+				"_id": "5a712d599dc276402ad22fa8",
+				"name": "Technician"
+			},
+			"_id": "5b8689483b68600ec6337ff8"
+		}, {
+			"_userId": {
+				"_id": "5b8680e33b68600ec6337fe1",
+				"displayName": "Bose utaiah-property",
+				"email": "fm.raysofdawn@gmail.com",
+				"username": "boseup",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": []
+			},
+			"_roleId": {
+				"_id": "5a712d939dc276402ad22fb4",
+				"name": "PATADMIN"
+			},
+			"_id": "5b8689483b68600ec6337ff7"
+		}, {
+			"_userId": {
+				"_id": "5b86801556d0d10ecc313bda",
+				"displayName": "chandan dm",
+				"email": "chandan.dm@puravankara.com",
+				"username": "chandan.dm",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": [{
+					"deviceType": "android",
+					"deviceId": "c1546d24-f85f-4fc3-8a63-bf13755f0ec4",
+					"_id": "5bb7413ef1d1870013027e4e"
+				}]
+			},
+			"_roleId": {
+				"_id": "5a712d939dc276402ad22fb4",
+				"name": "PATADMIN"
+			},
+			"_id": "5b8689483b68600ec6337ff6"
+		}, {
+			"_userId": {
+				"_id": "5b867f913b68600ec6337fde",
+				"displayName": "mohan s",
+				"email": "mohan.subbegowda@providenthousing.com",
+				"username": "mohan.s",
+				"profileImageUrl": "",
+				"devices": []
+			},
+			"_roleId": {
+				"_id": "5a7702569dc276402ad3c9df",
+				"name": "General Manager"
+			},
+			"_id": "5b8689483b68600ec6337ff5"
+		}, {
+			"_userId": {
+				"_id": "5aec12c2eae4cc5f02fd43ea",
+				"displayName": "Mohan Kumar",
+				"email": "mohankumar.jn@puravankara.com",
+				"username": "mohankjn",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": []
+			},
+			"_roleId": {
+				"_id": "5a7702569dc276402ad3c9df",
+				"name": "General Manager"
+			},
+			"_id": "5b8689483b68600ec6337ff4"
+		}, {
+			"_userId": {
+				"_id": "5a8a4465b9dbc653f2452a27",
+				"displayName": "Prasanna Kothandapani",
+				"username": "prasannak",
+				"email": "prasanna.kp@puravankara.com",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": []
+			},
+			"_roleId": {
+				"_id": "5a58565ded34a3331e9ae3d7",
+				"name": "Client Quality"
+			},
+			"_id": "5b8689483b68600ec6337ff3"
+		}, {
+			"_userId": {
+				"_id": "5a878a983425e144f451b02e",
+				"displayName": "Arra Rajeshwar",
+				"email": "arra.rajeshwar@puravankara.com",
+				"username": "arrar",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": [{
+					"deviceType": "android",
+					"deviceId": "da1b61cd-6813-455c-8a61-3c484ddd76e3",
+					"_id": "5a8a968ff6def753ecfcebe6"
+				}]
+			},
+			"_roleId": {
+				"_id": "5a5856dc86eca8331890c205",
+				"name": "Client Engineer"
+			},
+			"_id": "5b8689483b68600ec6337ff2"
+		}, {
+			"_userId": {
+				"_id": "5aec13408eb65e5efcfb9cf9",
+				"displayName": "Rajashekhara H S",
+				"email": "rajashekhara.hs@providenthousing.com",
+				"username": "rajashekharahs",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": []
+			},
+			"_roleId": {
+				"_id": "5a712d939dc276402ad22fb4",
+				"name": "PATADMIN"
+			},
+			"_id": "5b8689483b68600ec6337ff1"
+		}],
+		"_contractors": [],
+		"_consultants": null,
+		"imageUrls": ["assets/images/avatars/profile.jpg", "assets/images/avatars/profile.jpg"],
+		"logoImageUrl": "",
+		"phases": [{
+			"name": "Phase-1",
+			"_id": "5b8689483b68600ec6337fee",
+			"blocks": [{
+				"name": "Block-1",
+				"_id": "5b8689483b68600ec6337ff0",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}, {
+				"name": "Block-2",
+				"_id": "5b8689483b68600ec6337fef",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}]
+		}]
+	}, {
+		"_id": "5b0cdff231dcd910e8f9da1d",
+		"name": "PURVA SKYDALE",
+		"projectCode": "PS-11",
+		"type": "RESIDENTIAL",
+		"beginDate": "2017-07-31T18:30:00.000Z",
+		"completionDate": "2019-04-30T18:30:00.000Z",
+		"status": "INPROGRESS",
+		"_organisationId": {
+			"_id": "5a585371ed34a3331e9ae3b0",
+			"name": "Puravankara Limited",
+			"logoImageUrl": "storage/organisation/logo/default.png",
+			"orgType": "BUILDER"
+		},
+		"_createdBy": {
+			"_id": "5a585376ed34a3331e9ae3c4",
+			"displayName": "",
+			"email": "paruadmin@gmail.com",
+			"username": "purvaadmin",
+			"profileImageUrl": "storage/user/profile/default.png"
+		},
+		"createdAt": "2018-05-29T05:06:58.871Z",
+		"__v": 0,
+		"_updatedBy": {
+			"_id": "5a585376ed34a3331e9ae3c4",
+			"displayName": "",
+			"email": "paruadmin@gmail.com",
+			"username": "purvaadmin",
+			"profileImageUrl": "storage/user/profile/default.png"
+		},
+		"updatedAt": "2018-06-05T18:32:45.432Z",
+		"deleteFlag": false,
+		"unitTypes": [],
+		"description": "PURVA SKYDALE",
+		"projectDetails": {
+			"location": "Harlur",
+			"wings": "3",
+			"landArea": "100000",
+			"unitNumber": 314,
+			"floorCount": 18,
+			"projectStatus": "ON-GOING",
+			"crmTeam": "To Be Assigned"
+		},
+		"milestones": [],
+		"milestonesList": [],
+		"_snagsFlow": [],
+		"_coreTeam": [],
+		"_facilityTeam": [],
+		"_teamMembers": [{
+			"shift": "DAY",
+			"_userId": {
+				"_id": "5a58590086eca8331890c228",
+				"displayName": "Narun Srinivas",
+				"username": "naruns",
+				"email": "narunsrinivas@gmail.com",
+				"profileImageUrl": "https://5a585371ed34a3331e9ae3b0.s3.amazonaws.com/B9D08B11-48F0-4F70-81C9-6A383437907E.jpg",
+				"devices": [{
+					"deviceType": "android",
+					"deviceId": "4dcf9abf-187f-443a-adf1-02f64fb8d71d",
+					"_id": "5a785dc69dc276402ad3ced1"
+				}, {
+					"deviceType": "android",
+					"deviceId": "4dcf9abf-187f-443a-adf1-02f64fb8d71d",
+					"_id": "5a785dc69dc276402ad3ced1"
+				}, {
+					"deviceId": "c185e80d-12a7-499b-a1c8-7857ae39605e",
+					"_id": "5a99869a8de9dc365723c7a0"
+				}, {
+					"deviceType": "android",
+					"deviceId": "a83bbbec-ce99-429b-b662-5a4666921cb9",
+					"_id": "5a9bf8d0efc35148c8c4a0e7"
+				}, {
+					"deviceType": "android",
+					"deviceId": "4dcf9abf-187f-443a-adf1-02f64fb8d71d",
+					"_id": "5a785dc69dc276402ad3ced1"
+				}, {
+					"deviceType": "android",
+					"deviceId": "4dcf9abf-187f-443a-adf1-02f64fb8d71d",
+					"_id": "5a785dc69dc276402ad3ced1"
+				}, {
+					"deviceId": "c185e80d-12a7-499b-a1c8-7857ae39605e",
+					"_id": "5a99869a8de9dc365723c7a0"
+				}, {
+					"deviceType": "android",
+					"deviceId": "a83bbbec-ce99-429b-b662-5a4666921cb9",
+					"_id": "5a9bf8d0efc35148c8c4a0e7"
+				}, {
+					"deviceType": "ios",
+					"deviceId": "326e0314-d66b-4c78-8573-aaebd5d40965",
+					"_id": "5ad4889f301e677d498890ec"
+				}, {
+					"deviceType": "android",
+					"deviceId": "4a44e0da-8f8e-4f4b-9455-274771f6731a",
+					"_id": "5ad842eb301e677d49889104"
+				}, {
+					"deviceType": "ios",
+					"deviceId": "3f17ed95-763f-485c-b100-cb513574f3ae",
+					"_id": "5ae17b66301e677d49889105"
+				}, {
+					"deviceType": "ios",
+					"deviceId": "315e1564-d60b-4fc1-96e0-2a6c77e0660a",
+					"_id": "5ae6beb48eb65e5efcfb9cee"
+				}, {
+					"deviceType": "ios",
+					"deviceId": "683a459d-6b6f-4889-ac7f-94ba2642ef7b",
+					"_id": "5ae9623ceae4cc5f02fd43c8"
+				}, {
+					"deviceType": "ios",
+					"deviceId": "a2adc036-d5c6-4608-bc80-40e23c821af0",
+					"_id": "5ae96dc2eae4cc5f02fd43c9"
+				}, {
+					"deviceType": "ios",
+					"deviceId": "43edc159-d04f-4fcb-a829-805d83de8cae",
+					"_id": "5ae976718eb65e5efcfb9cf0"
+				}, {
+					"deviceType": "ios",
+					"deviceId": "09702f1e-2fd4-4ae5-bf96-d6709c575cf2",
+					"_id": "5ae9cd338eb65e5efcfb9cf4"
+				}, {
+					"deviceType": "android",
+					"deviceId": "987",
+					"_id": "5b17cfd831dcd910e8f9dd39"
+				}, {
+					"deviceType": "android",
+					"deviceId": "6877ad4d-72cc-4eb4-bba7-1f800a11c3e4",
+					"_id": "5b2a22225684280ede510ffe"
+				}, {
+					"deviceType": "ios",
+					"deviceId": "897a7127-a87f-400a-a2ee-45ec9480091e",
+					"_id": "5b30a4e35684280ede511000"
+				}, {
+					"deviceType": "ios",
+					"deviceId": "24c1600e-f198-4987-821c-2cd87062e7de",
+					"_id": "5b320b165684280ede51100e"
+				}, {
+					"deviceType": "ios",
+					"deviceId": "dba95480-154a-4757-a99a-95f51a2ebdfe",
+					"_id": "5b333232cf75230ee4ce4b67"
+				}, {
+					"deviceType": "ios",
+					"deviceId": "c4227875-b32d-4b1a-bed0-cac1b72a6094",
+					"_id": "5b334e46cf75230ee4ce4b69"
+				}, {
+					"deviceId": "6e4eaa9c-2173-4d15-b9d1-e718d143ccd6",
+					"_id": "5b335cda5684280ede51109e"
+				}, {
+					"deviceType": "ios",
+					"deviceId": "4d2f01b7-82c2-4bfd-9db8-e7dfac47f5a6",
+					"_id": "5b33b332cf75230ee4ce4b78"
+				}, {
+					"deviceType": "ios",
+					"deviceId": "0ad1a1a1-e827-4b79-85d0-157ed1362b29",
+					"_id": "5b33d4decf75230ee4ce4b7b"
+				}, {
+					"deviceType": "ios",
+					"deviceId": "a4c8683c-ee3d-483b-8f40-409682a1da2e",
+					"_id": "5b35e9d45684280ede5111aa"
+				}, {
+					"deviceType": "ios",
+					"deviceId": "e2b355cc-ebb9-4517-b1d7-30c472764ae8",
+					"_id": "5b370f4bcf75230ee4ce4e2e"
+				}, {
+					"deviceType": "ios",
+					"deviceId": "87bec68e-3c07-41bd-ac36-8b2ed77301d3",
+					"_id": "5b38475fcf75230ee4ce51eb"
+				}, {
+					"deviceType": "ios",
+					"deviceId": "f9f91200-d65e-4319-ba31-3dc5ca7e759f",
+					"_id": "5b38489b5684280ede5113a0"
+				}, {
+					"deviceType": "ios",
+					"deviceId": "54e56bde-406b-4632-9ad4-bc5cb4809a23",
+					"_id": "5b3a0c585684280ede511403"
+				}, {
+					"deviceType": "ios",
+					"deviceId": "d8057688-b159-4b41-8180-ecd99c43ac06",
+					"_id": "5b3b138a5684280ede511407"
+				}, {
+					"deviceType": "ios",
+					"deviceId": "ad520590-018f-45aa-b7b8-46120ab81064",
+					"_id": "5b408900cf75230ee4ce5495"
+				}, {
+					"deviceType": "android",
+					"deviceId": "3714a766-e087-4f0b-a81a-f4c33c1166c4",
+					"_id": "5b5f04e65684280ede511725"
+				}, {
+					"deviceType": "ios",
+					"deviceId": "64e4d3cc-da71-4412-a440-c14a18127fae",
+					"_id": "5b6bd35a5f1fec5dd240b18a"
+				}, {
+					"deviceType": "ios",
+					"deviceId": "f52b9087-891e-422b-9a14-1791b197039b",
+					"_id": "5bbd1644a1dc7e66f0fbc840"
+				}]
+			},
+			"_roleId": {
+				"_id": "5a5855e5ed34a3331e9ae3c6",
+				"name": "Contractor Engineer"
+			},
+			"_id": "5b16d74d06098610e22bea24"
+		}, {
+			"shift": "DAY",
+			"_userId": {
+				"_id": "5b0e6b6f06098610e22be97b",
+				"displayName": "Manjunath",
+				"username": "manjunath",
+				"email": "manjunath.p@puravankara.com",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": [{
+					"deviceId": "144d3905-2053-47ed-b62b-b405d84c404e",
+					"_id": "5b348ca95684280ede511171"
+				}, {
+					"deviceType": "ios",
+					"deviceId": "48e02eb7-3db2-4913-909f-56eb12013984",
+					"_id": "5b52f6e85684280ede511719"
+				}]
+			},
+			"_roleId": {
+				"_id": "5a58565ded34a3331e9ae3d7",
+				"name": "Client Quality"
+			},
+			"_id": "5b16d74d06098610e22bea23"
+		}, {
+			"shift": "DAY",
+			"_userId": {
+				"_id": "5b0e6b1731dcd910e8f9db81",
+				"displayName": "Amithes",
+				"username": "amithes",
+				"email": "amithesh.gowda@starworthinfra.com",
+				"profileImageUrl": "",
+				"devices": [{
+					"deviceType": "android",
+					"deviceId": "89339cf6-70cb-4e65-bfed-986726a1f18e",
+					"_id": "5b12278c06098610e22be9c9"
+				}, {
+					"deviceId": "90ad493b-b80a-435c-b772-e18c32dc4de4",
+					"_id": "5b33341bcf75230ee4ce4b68"
+				}]
+			},
+			"_roleId": {
+				"_id": "5a58565ded34a3331e9ae3d7",
+				"name": "Client Quality"
+			},
+			"_id": "5b16d74d06098610e22bea22"
+		}, {
+			"shift": "DAY",
+			"_userId": {
+				"_id": "5b0e6ab131dcd910e8f9db7e",
+				"displayName": "Santhosh",
+				"username": "santhosh",
+				"email": "santhosh.sn@starworthinfra.com",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": [{
+					"deviceType": "android",
+					"deviceId": "2e0910f4-f9dc-4522-a73c-6738402f0b31",
+					"_id": "5b3319f8cf75230ee4ce4b55"
+				}]
+			},
+			"_roleId": {
+				"_id": "5a58565ded34a3331e9ae3d7",
+				"name": "Client Quality"
+			},
+			"_id": "5b16d74d06098610e22bea21"
+		}, {
+			"shift": "DAY",
+			"_userId": {
+				"_id": "5b0e6a2a06098610e22be978",
+				"displayName": "Amarnath",
+				"username": "amarnath",
+				"email": "amarnath.ts@starworthinfra.com",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": []
+			},
+			"_roleId": {
+				"_id": "5a5856dc86eca8331890c205",
+				"name": "Client Engineer"
+			},
+			"_id": "5b16d74d06098610e22bea20"
+		}, {
+			"shift": "DAY",
+			"_userId": {
+				"_id": "5b0e69cd31dcd910e8f9db7b",
+				"displayName": "Subramanya",
+				"email": "subramanya.ja@starworthinfra.com",
+				"username": "subramanya",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": []
+			},
+			"_roleId": {
+				"_id": "5a5856dc86eca8331890c205",
+				"name": "Client Engineer"
+			},
+			"_id": "5b16d74d06098610e22bea1f"
+		}, {
+			"shift": "DAY",
+			"_userId": {
+				"_id": "5b0e696906098610e22be975",
+				"displayName": "Rajesh",
+				"username": "rajesh",
+				"email": "rajeshkumar.t@starworthinfra.com",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": []
+			},
+			"_roleId": {
+				"_id": "5a5856dc86eca8331890c205",
+				"name": "Client Engineer"
+			},
+			"_id": "5b16d74d06098610e22bea1e"
+		}, {
+			"shift": "DAY",
+			"_userId": {
+				"_id": "5b0e690e31dcd910e8f9db78",
+				"displayName": "Jeevan",
+				"username": "jeevan",
+				"email": "jeevan.bn@starworthinfra.com",
+				"profileImageUrl": "",
+				"devices": []
+			},
+			"_roleId": {
+				"_id": "5a5856dc86eca8331890c205",
+				"name": "Client Engineer"
+			},
+			"_id": "5b16d74d06098610e22bea1d"
+		}, {
+			"shift": "DAY",
+			"_userId": {
+				"_id": "5b0e689b06098610e22be972",
+				"displayName": "Lokesh",
+				"email": "lokesh.b@starworthinfra.com",
+				"username": "lokesh",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": [{
+					"deviceType": "android",
+					"deviceId": "54cc5aef-44d3-4d25-9229-3b9754acc1db",
+					"_id": "5b0e87cd06098610e22be980"
+				}]
+			},
+			"_roleId": {
+				"_id": "5a5856dc86eca8331890c205",
+				"name": "Client Engineer"
+			},
+			"_id": "5b16d74d06098610e22bea1c"
+		}, {
+			"shift": "DAY",
+			"_userId": {
+				"_id": "5b0e683131dcd910e8f9db75",
+				"displayName": "Ishwar Janamatti",
+				"username": "ishwarj",
+				"email": "ishwar@starworthinfra.com",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": []
+			},
+			"_roleId": {
+				"_id": "5a7882f19dc276402ad3ced4",
+				"name": "General Manager Operations"
+			},
+			"_id": "5b16d74d06098610e22bea1b"
+		}, {
+			"shift": "DAY",
+			"_userId": {
+				"_id": "5b0e670531dcd910e8f9db71",
+				"displayName": "Rajeev",
+				"username": "rajeev",
+				"email": "rajeev@starworthinfra.com",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": []
+			},
+			"_roleId": {
+				"_id": "5a7882f19dc276402ad3ced4",
+				"name": "General Manager Operations"
+			},
+			"_id": "5b16d74d06098610e22bea1a"
+		}, {
+			"shift": "DAY",
+			"_userId": {
+				"_id": "5b167dff06098610e22bea08",
+				"displayName": "Sonal Vishwakarma",
+				"email": "sona.karma21@gmail.com",
+				"username": "sonalvishwakarma",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": [{
+					"deviceType": "android",
+					"deviceId": "1e38b102-8af1-4b92-8151-cb5969f9d842",
+					"_id": "5b1816d431dcd910e8f9dde7"
+				}, {
+					"deviceType": "android",
+					"deviceId": "c0217eb6-8a37-43fe-9845-80d21c700345",
+					"_id": "5b83c288a44cd365995a30f0"
+				}, {
+					"deviceType": "android",
+					"deviceId": "6c5a961c-a06e-482b-87f4-af30a18a1fa9",
+					"_id": "5b8a941656d0d10ecc313c0f"
+				}, {
+					"deviceType": "android",
+					"deviceId": "6563d580-e70f-4124-afe6-98b254c8f773",
+					"_id": "5c0f9e4ce58ca600133a3fb5"
+				}]
+			},
+			"_roleId": {
+				"_id": "5a58565ded34a3331e9ae3d7",
+				"name": "Client Quality"
+			},
+			"_id": "5b16d74d06098610e22bea19"
+		}],
+		"_contractors": [],
+		"_consultants": [],
+		"imageUrls": [],
+		"logoImageUrl": "storage/organisation/logo/default.png",
+		"phases": [{
+			"name": "Phase I",
+			"_id": "5b0cdff231dcd910e8f9da1f",
+			"blocks": [{
+				"name": "Tower 1",
+				"_id": "5b0cdff231dcd910e8f9da22",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}, {
+				"name": "Tower 2",
+				"_id": "5b0cdff231dcd910e8f9da21",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}, {
+				"name": "Tower 3",
+				"_id": "5b0cdff231dcd910e8f9da20",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}]
+		}]
+	}, {
+		"_id": "5aec107deae4cc5f02fd43d9",
+		"_organisationId": {
+			"_id": "5a585371ed34a3331e9ae3b0",
+			"name": "Puravankara Limited",
+			"logoImageUrl": "storage/organisation/logo/default.png",
+			"orgType": "BUILDER"
+		},
+		"name": "Purva Seasons",
+		"projectCode": "PL - SEASONS",
+		"type": "RESIDENTIAL",
+		"beginDate": "2012-03-01T12:07:55.798Z",
+		"completionDate": "2018-08-01T12:07:55.798Z",
+		"status": "COMPLETE",
+		"_createdBy": {
+			"_id": "5a585376ed34a3331e9ae3c4",
+			"displayName": "",
+			"email": "paruadmin@gmail.com",
+			"username": "purvaadmin",
+			"profileImageUrl": "storage/user/profile/default.png"
+		},
+		"createdAt": "2018-05-04T07:49:16.877Z",
+		"__v": 0,
+		"_updatedBy": {
+			"_id": "5a585376ed34a3331e9ae3c4",
+			"displayName": "",
+			"email": "paruadmin@gmail.com",
+			"username": "purvaadmin",
+			"profileImageUrl": "storage/user/profile/default.png"
+		},
+		"updatedAt": "2018-06-02T03:54:31.176Z",
+		"deleteFlag": false,
+		"unitTypes": [],
+		"description": "Purva Seasons C V Raman Nagar",
+		"projectDetails": {
+			"location": "C V Raman Nagar",
+			"blocks": "8",
+			"wings": "8",
+			"landArea": "100000",
+			"unitNumber": 660,
+			"floorCount": 15,
+			"projectStatus": "COMPLETED",
+			"crmTeam": "To Be Assigned"
+		},
+		"milestones": [],
+		"milestonesList": [],
+		"_snagsFlow": [],
+		"_coreTeam": [],
+		"_facilityTeam": [],
+		"_teamMembers": [{
+			"_userId": {
+				"_id": "5aab3bb50231d529bdad91ad",
+				"displayName": "Client Engineer",
+				"username": "clientengg",
+				"email": "clientengg@matkraft.com",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": []
+			},
+			"_roleId": {
+				"_id": "5a5856dc86eca8331890c205",
+				"name": "Client Engineer"
+			},
+			"_id": "5b67edc9cf75230ee4ce56b1"
+		}, {
+			"_userId": {
+				"_id": "5aab3b760231d529bdad91aa",
+				"displayName": "contract Engg",
+				"username": "contractengg",
+				"email": "contractengg@matkraft.com",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": []
+			},
+			"_roleId": {
+				"_id": "5a5855e5ed34a3331e9ae3c6",
+				"name": "Contractor Engineer"
+			},
+			"_id": "5b67edc9cf75230ee4ce56b0"
+		}, {
+			"_userId": {
+				"_id": "5b3cd8315684280ede51148a",
+				"displayName": "IOS user",
+				"email": "iosplumber@gmail.com",
+				"username": "iosuser",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": [{
+					"deviceType": "ios",
+					"deviceId": "823d36f8-de26-478d-81ef-0ff9d888d213",
+					"_id": "5b40f72fcf75230ee4ce5496"
+				}]
+			},
+			"_roleId": {
+				"_id": "5a58565ded34a3331e9ae3d7",
+				"name": "Client Quality"
+			},
+			"_id": "5b67edc9cf75230ee4ce56af"
+		}, {
+			"_userId": {
+				"_id": "5aec12c2eae4cc5f02fd43ea",
+				"displayName": "Mohan Kumar",
+				"email": "mohankumar.jn@puravankara.com",
+				"username": "mohankjn",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": []
+			},
+			"_roleId": {
+				"_id": "5a7702569dc276402ad3c9df",
+				"name": "General Manager"
+			},
+			"_id": "5b67edc9cf75230ee4ce56ae"
+		}, {
+			"_userId": {
+				"_id": "5a77eb7e9dc276402ad3cd2a",
+				"displayName": "sakthivelu S",
+				"username": "sakthivelus",
+				"email": "sakthivelu@puravankara.com",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": [{
+					"deviceType": "android",
+					"deviceId": "6bc9bdb7-87e9-42e4-bc4e-88339fe9d9d3",
+					"_id": "5a783b9472114d4030d31b2b"
+				}, {
+					"deviceType": "android",
+					"deviceId": "9e310be4-a32a-4599-a37e-1b3a892b58af",
+					"_id": "5a78431472114d4030d31b2e"
+				}, {
+					"deviceType": "android",
+					"deviceId": "6bc9bdb7-87e9-42e4-bc4e-88339fe9d9d3",
+					"_id": "5a783b9472114d4030d31b2b"
+				}, {
+					"deviceType": "android",
+					"deviceId": "9e310be4-a32a-4599-a37e-1b3a892b58af",
+					"_id": "5a78431472114d4030d31b2e"
+				}, {
+					"deviceType": "android",
+					"deviceId": "6bc9bdb7-87e9-42e4-bc4e-88339fe9d9d3",
+					"_id": "5a783b9472114d4030d31b2b"
+				}, {
+					"deviceType": "android",
+					"deviceId": "9e310be4-a32a-4599-a37e-1b3a892b58af",
+					"_id": "5a78431472114d4030d31b2e"
+				}, {
+					"deviceType": "android",
+					"deviceId": "6bc9bdb7-87e9-42e4-bc4e-88339fe9d9d3",
+					"_id": "5a783b9472114d4030d31b2b"
+				}, {
+					"deviceType": "android",
+					"deviceId": "9e310be4-a32a-4599-a37e-1b3a892b58af",
+					"_id": "5a78431472114d4030d31b2e"
+				}, {
+					"deviceType": "android",
+					"deviceId": "6bc9bdb7-87e9-42e4-bc4e-88339fe9d9d3",
+					"_id": "5a783b9472114d4030d31b2b"
+				}, {
+					"deviceType": "android",
+					"deviceId": "9e310be4-a32a-4599-a37e-1b3a892b58af",
+					"_id": "5a78431472114d4030d31b2e"
+				}, {
+					"deviceType": "android",
+					"deviceId": "6bc9bdb7-87e9-42e4-bc4e-88339fe9d9d3",
+					"_id": "5a783b9472114d4030d31b2b"
+				}, {
+					"deviceType": "android",
+					"deviceId": "9e310be4-a32a-4599-a37e-1b3a892b58af",
+					"_id": "5a78431472114d4030d31b2e"
+				}, {
+					"deviceType": "android",
+					"deviceId": "6bc9bdb7-87e9-42e4-bc4e-88339fe9d9d3",
+					"_id": "5a783b9472114d4030d31b2b"
+				}, {
+					"deviceType": "android",
+					"deviceId": "9e310be4-a32a-4599-a37e-1b3a892b58af",
+					"_id": "5a78431472114d4030d31b2e"
+				}, {
+					"deviceType": "android",
+					"deviceId": "6bc9bdb7-87e9-42e4-bc4e-88339fe9d9d3",
+					"_id": "5a783b9472114d4030d31b2b"
+				}, {
+					"deviceType": "android",
+					"deviceId": "9e310be4-a32a-4599-a37e-1b3a892b58af",
+					"_id": "5a78431472114d4030d31b2e"
+				}, {
+					"deviceType": "ios",
+					"deviceId": "90afbcb9-b7e0-4c6e-bed5-d9965c0cbae5",
+					"_id": "5a819a483425e144f451af48"
+				}, {
+					"deviceType": "ios",
+					"deviceId": "d7925ad7-ff23-48e5-a1b6-4ce43ad34ce3",
+					"_id": "5a81d4cf3425e144f451af51"
+				}]
+			},
+			"_roleId": {
+				"_id": "5a7882f19dc276402ad3ced4",
+				"name": "General Manager Operations"
+			},
+			"_id": "5b67edc9cf75230ee4ce56ad"
+		}, {
+			"_userId": {
+				"_id": "5b47095dcf75230ee4ce54ec",
+				"displayName": "Satyabarat",
+				"username": "satyabarat",
+				"email": "satyabarat@matkraft.com",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": []
+			},
+			"_roleId": {
+				"_id": "5a712d599dc276402ad22fa8",
+				"name": "Technician"
+			},
+			"_id": "5b67edc9cf75230ee4ce56ac"
+		}, {
+			"_userId": {
+				"_id": "5b470929cf75230ee4ce54e9",
+				"displayName": "Dipak Kumar",
+				"username": "dipakk",
+				"email": "dipakk@matkraft.com",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": []
+			},
+			"_roleId": {
+				"_id": "5a712d599dc276402ad22fa8",
+				"name": "Technician"
+			},
+			"_id": "5b67edc9cf75230ee4ce56ab"
+		}, {
+			"_userId": {
+				"_id": "5b4708ebcf75230ee4ce54e6",
+				"displayName": "Abhinash",
+				"username": "abhinash",
+				"email": "abhinash@matkrft.com",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": [{
+					"deviceType": "android",
+					"deviceId": "4c22ed7c-0e03-49fd-acac-a305115ac714",
+					"_id": "5b8fc759a94ce97a515f9ce8"
+				}]
+			},
+			"_roleId": {
+				"_id": "5a712d599dc276402ad22fa8",
+				"name": "Technician"
+			},
+			"_id": "5b67edc9cf75230ee4ce56aa"
+		}, {
+			"_userId": {
+				"_id": "5b4708b3cf75230ee4ce54e3",
+				"displayName": "saroj naik",
+				"username": "sarojn",
+				"email": "sarojn@matkraft.com",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": [{
+					"deviceType": "android",
+					"deviceId": "7a985f81-c9a8-43d4-9360-985967828ebf",
+					"_id": "5b8fc7077f65d37a4bad68cf"
+				}]
+			},
+			"_roleId": {
+				"_id": "5a712d599dc276402ad22fa8",
+				"name": "Technician"
+			},
+			"_id": "5b67edc9cf75230ee4ce56a9"
+		}, {
+			"_userId": {
+				"_id": "5b470888cf75230ee4ce54e0",
+				"displayName": "rajesh samal",
+				"username": "rajeshs",
+				"email": "rajeshs@matkraft.com",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": []
+			},
+			"_roleId": {
+				"_id": "5a712d599dc276402ad22fa8",
+				"name": "Technician"
+			},
+			"_id": "5b67edc9cf75230ee4ce56a8"
+		}, {
+			"_userId": {
+				"_id": "5b470856cf75230ee4ce54dd",
+				"displayName": "Prabtha",
+				"username": "prabtha",
+				"email": "prabtha@matkraft.com",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": []
+			},
+			"_roleId": {
+				"_id": "5a712d599dc276402ad22fa8",
+				"name": "Technician"
+			},
+			"_id": "5b67edc9cf75230ee4ce56a7"
+		}, {
+			"_userId": {
+				"_id": "5b470825cf75230ee4ce54da",
+				"displayName": "Haradhan",
+				"username": "haradhan",
+				"email": "haradhan@matkraft.com",
+				"profileImageUrl": "https://5a585371ed34a3331e9ae3b0.s3.amazonaws.com/1533199823694.JPEG",
+				"devices": [{
+					"deviceType": "android",
+					"deviceId": "24242e75-a9cb-4dd1-8190-ab2ffce9bf23",
+					"_id": "5b62b182cf75230ee4ce560d"
+				}]
+			},
+			"_roleId": {
+				"_id": "5a712d599dc276402ad22fa8",
+				"name": "Technician"
+			},
+			"_id": "5b67edc9cf75230ee4ce56a6"
+		}, {
+			"_userId": {
+				"_id": "5b4707f2cf75230ee4ce54d7",
+				"displayName": "saumyaran jan",
+				"username": "saumyaranj",
+				"email": "saumyaranj@matkraft.com",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": [{
+					"deviceType": "android",
+					"deviceId": "014d4906-fbe9-4952-b53b-0bcd1f83a285",
+					"_id": "5b67f1de5684280ede511953"
+				}, {
+					"deviceType": "android",
+					"deviceId": "014d4906-fbe9-4952-b53b-0bcd1f83a285",
+					"_id": "5b67f1de5684280ede511953"
+				}]
+			},
+			"_roleId": {
+				"_id": "5a712d599dc276402ad22fa8",
+				"name": "Technician"
+			},
+			"_id": "5b67edc9cf75230ee4ce56a5"
+		}, {
+			"_userId": {
+				"_id": "5b4707becf75230ee4ce54d4",
+				"displayName": "sangran mandal",
+				"username": "sangranm",
+				"email": "sangranm@matkraft.com",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": [{
+					"deviceType": "android",
+					"deviceId": "48738bac-558d-4469-9523-90745f7b86af",
+					"_id": "5b62b0365684280ede511853"
+				}]
+			},
+			"_roleId": {
+				"_id": "5a712d599dc276402ad22fa8",
+				"name": "Technician"
+			},
+			"_id": "5b67edc9cf75230ee4ce56a4"
+		}, {
+			"_userId": {
+				"_id": "5b47078ecf75230ee4ce54d1",
+				"displayName": "magendhiran",
+				"username": "magendhiran",
+				"email": "magendhiran@matkraft.com",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": []
+			},
+			"_roleId": {
+				"_id": "5a712d599dc276402ad22fa8",
+				"name": "Technician"
+			},
+			"_id": "5b67edc9cf75230ee4ce56a3"
+		}, {
+			"_userId": {
+				"_id": "5b470751cf75230ee4ce54ce",
+				"displayName": "subudhroy",
+				"username": "subudhroy",
+				"email": "subudhroy@matkraft.com",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": [{
+					"deviceType": "android",
+					"deviceId": "519f4f7e-3495-41fe-bb71-ea2987af0a49",
+					"_id": "5b72b60a5f1fec5dd240b1ae"
+				}]
+			},
+			"_roleId": {
+				"_id": "5a712d599dc276402ad22fa8",
+				"name": "Technician"
+			},
+			"_id": "5b67edc9cf75230ee4ce56a2"
+		}, {
+			"_userId": {
+				"_id": "5b518023cf75230ee4ce54f0",
+				"displayName": "Mr. Aravindan Kumaravelu",
+				"email": "aravindan.k@puravankara.com",
+				"username": "aravindan.k",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": [{
+					"deviceType": "ios",
+					"deviceId": "dd6a7851-0302-4666-ad0e-8a1e2199f5c2",
+					"_id": "5b57f7b15684280ede51171d"
+				}]
+			},
+			"_roleId": {
+				"_id": "5a712d939dc276402ad22fb4",
+				"name": "PATADMIN"
+			},
+			"_id": "5b67edc9cf75230ee4ce56a1"
+		}, {
+			"_userId": {
+				"_id": "5b517fcf5684280ede511714",
+				"displayName": "Mr. Dhanseelan Dhanseelan",
+				"email": "pmseasons270@gmail.com",
+				"username": "dhanseelan",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": [{
+					"deviceType": "android",
+					"deviceId": "6c9a92ca-41d3-4ee4-bac4-f268e12f12dd",
+					"_id": "5b8785e23b68600ec6338009"
+				}]
+			},
+			"_roleId": {
+				"_id": "5a712d939dc276402ad22fb4",
+				"name": "PATADMIN"
+			},
+			"_id": "5b67edc9cf75230ee4ce56a0"
+		}, {
+			"_userId": {
+				"_id": "5b628ee75684280ede511814",
+				"displayName": "Helpdesk Season",
+				"username": "helpdesk",
+				"email": "helpdesk.seasons270@gmail.com",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": [{
+					"deviceType": "android",
+					"deviceId": "57a882ec-60d6-4528-9ca7-5196a575f0ff",
+					"_id": "5b629ce85684280ede511821"
+				}, {
+					"deviceType": "android",
+					"deviceId": "57a882ec-60d6-4528-9ca7-5196a575f0ff",
+					"_id": "5b629ce85684280ede511821"
+				}, {
+					"deviceType": "android",
+					"deviceId": "57a882ec-60d6-4528-9ca7-5196a575f0ff",
+					"_id": "5b629ce85684280ede511821"
+				}, {
+					"deviceType": "android",
+					"deviceId": "57a882ec-60d6-4528-9ca7-5196a575f0ff",
+					"_id": "5b629ce85684280ede511821"
+				}, {
+					"deviceType": "android",
+					"deviceId": "57a882ec-60d6-4528-9ca7-5196a575f0ff",
+					"_id": "5b629ce85684280ede511821"
+				}, {
+					"deviceType": "android",
+					"deviceId": "57a882ec-60d6-4528-9ca7-5196a575f0ff",
+					"_id": "5b629ce85684280ede511821"
+				}, {
+					"deviceType": "android",
+					"deviceId": "57a882ec-60d6-4528-9ca7-5196a575f0ff",
+					"_id": "5b629ce85684280ede511821"
+				}, {
+					"deviceType": "android",
+					"deviceId": "57a882ec-60d6-4528-9ca7-5196a575f0ff",
+					"_id": "5b629ce85684280ede511821"
+				}, {
+					"deviceType": "android",
+					"deviceId": "af60b39f-cd2c-4f51-8def-cc6b4d53ac00",
+					"_id": "5b76234a5f1fec5dd240b254"
+				}, {
+					"deviceType": "ios",
+					"deviceId": "002cb3d2-f6b3-4b8a-aa66-574275557be8",
+					"_id": "5b8d5a02a94ce97a515f9ce1"
+				}, {
+					"deviceType": "android",
+					"deviceId": "85d40532-1b6e-4678-944f-972f65152ade",
+					"_id": "5b9131277f65d37a4bad695f"
+				}]
+			},
+			"_roleId": {
+				"_id": "5a7702569dc276402ad3c9df",
+				"name": "General Manager"
+			},
+			"_id": "5b67edc9cf75230ee4ce569f"
+		}, {
+			"_userId": {
+				"_id": "5b628e7f5684280ede511811",
+				"displayName": "Raju Dr",
+				"username": "rajudr",
+				"email": "raju.dr@puravankara.com",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": []
+			},
+			"_roleId": {
+				"_id": "5a712d939dc276402ad22fb4",
+				"name": "PATADMIN"
+			},
+			"_id": "5b67edc9cf75230ee4ce569e"
+		}, {
+			"_userId": {
+				"_id": "5b67e68b5684280ede5118fa",
+				"displayName": "Rithesh Ghosh",
+				"username": "ritheshg",
+				"email": "ritheshg@matkraft.com",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": [{
+					"deviceType": "android",
+					"deviceId": "958c910b-4ef8-4c66-a941-bdb88d0749ef",
+					"_id": "5b90f8557f65d37a4bad6959"
+				}]
+			},
+			"_roleId": {
+				"_id": "5a712d599dc276402ad22fa8",
+				"name": "Technician"
+			},
+			"_id": "5b67edc9cf75230ee4ce569d"
+		}, {
+			"_userId": {
+				"_id": "5aec14beeae4cc5f02fd43fa",
+				"displayName": "Pradeep Dubay",
+				"email": "pradeep.dubay@puravankara.com",
+				"username": "pradeepd",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": [{
+					"deviceType": "android",
+					"deviceId": "fed896e7-e8c3-42d5-9553-dd5dc5ad16d1",
+					"_id": "5b67eca65684280ede51192e"
+				}, {
+					"deviceType": "android",
+					"deviceId": "fed896e7-e8c3-42d5-9553-dd5dc5ad16d1",
+					"_id": "5b67eca65684280ede51192e"
+				}, {
+					"deviceType": "android",
+					"deviceId": "fed896e7-e8c3-42d5-9553-dd5dc5ad16d1",
+					"_id": "5b67eca65684280ede51192e"
+				}, {
+					"deviceType": "android",
+					"deviceId": "fed896e7-e8c3-42d5-9553-dd5dc5ad16d1",
+					"_id": "5b67eca65684280ede51192e"
+				}, {
+					"deviceType": "android",
+					"deviceId": "fed896e7-e8c3-42d5-9553-dd5dc5ad16d1",
+					"_id": "5b67eca65684280ede51192e"
+				}, {
+					"deviceType": "android",
+					"deviceId": "fed896e7-e8c3-42d5-9553-dd5dc5ad16d1",
+					"_id": "5b67eca65684280ede51192e"
+				}, {
+					"deviceType": "android",
+					"deviceId": "fed896e7-e8c3-42d5-9553-dd5dc5ad16d1",
+					"_id": "5b67eca65684280ede51192e"
+				}, {
+					"deviceType": "android",
+					"deviceId": "fed896e7-e8c3-42d5-9553-dd5dc5ad16d1",
+					"_id": "5b67eca65684280ede51192e"
+				}]
+			},
+			"_roleId": {
+				"_id": "5a712d939dc276402ad22fb4",
+				"name": "PATADMIN"
+			},
+			"_id": "5b67edc9cf75230ee4ce569c"
+		}, {
+			"_userId": {
+				"_id": "5aec13a78eb65e5efcfb9cfc",
+				"displayName": "Veera Kumar",
+				"email": "veerakumar.r@puravankara.com",
+				"username": "veerakumar",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": [{
+					"deviceType": "android",
+					"deviceId": "77f142e5-7b7a-429b-98ca-ff2a9c90415a",
+					"_id": "5aedbd69b29595653fb67df7"
+				}, {
+					"deviceType": "android",
+					"deviceId": "77f142e5-7b7a-429b-98ca-ff2a9c90415a",
+					"_id": "5aedbd69b29595653fb67df7"
+				}]
+			},
+			"_roleId": {
+				"_id": "5a712d939dc276402ad22fb4",
+				"name": "PATADMIN"
+			},
+			"_id": "5b67edc9cf75230ee4ce569b"
+		}, {
+			"_userId": {
+				"_id": "5aec14f7eae4cc5f02fd43fd",
+				"displayName": "Vinod Kumar",
+				"email": "vinodkumar.pr@puravankara.com",
+				"username": "vinodk",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": [{
+					"deviceId": "c58a5181-d9ad-4859-9d10-7b41e4abb010",
+					"_id": "5b67eaef5684280ede51192c"
+				}, {
+					"deviceType": "android",
+					"deviceId": "fef4c6bd-8877-40f4-8293-27582eae52ca",
+					"_id": "5b7672409244605dd83a9413"
+				}]
+			},
+			"_roleId": {
+				"_id": "5b67d73f5684280ede5118e4",
+				"name": "CRM"
+			},
+			"_id": "5b67edc9cf75230ee4ce569b"
+		}, {
+			"_userId": {
+				"_id": "5b90ee2e7f65d37a4bad694e",
+				"displayName": "ranjendra ranjendra",
+				"username": "ranjendra",
+				"email": "ranjendra@puravankara.com",
+				"profileImageUrl": "",
+				"devices": []
+			},
+			"_roleId": {
+				"_id": "5a712d599dc276402ad22fa8",
+				"name": "Technician"
+			}
+		}, {
+			"_userId": {
+				"_id": "5b90ee89a94ce97a515f9d82",
+				"displayName": "Suresh pani",
+				"username": "sureshpani",
+				"email": "sureshpani@puravankara.com",
+				"profileImageUrl": "",
+				"devices": [{
+					"deviceType": "android",
+					"deviceId": "3ec8c87f-6a8b-43d1-8690-045fbab09080",
+					"_id": "5b90f974a94ce97a515f9d8f"
+				}]
+			},
+			"_roleId": {
+				"_id": "5a712d599dc276402ad22fa8",
+				"name": "Technician"
+			}
+		}],
+		"_contractors": [],
+		"_consultants": ["5a585371ed34a3331e9ae3b0"],
+		"imageUrls": [],
+		"logoImageUrl": "storage/organisation/logo/default.png",
+		"phases": [{
+			"name": "Phase 1",
+			"_id": "5aec107deae4cc5f02fd43db",
+			"blocks": [{
+				"name": "A",
+				"_id": "5aec107deae4cc5f02fd43e3",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}, {
+				"name": "B",
+				"_id": "5aec107deae4cc5f02fd43e2",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}, {
+				"name": "C",
+				"_id": "5aec107deae4cc5f02fd43e1",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}, {
+				"name": "D",
+				"_id": "5aec107deae4cc5f02fd43e0",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}, {
+				"name": "E",
+				"_id": "5aec107deae4cc5f02fd43df",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}, {
+				"name": "F",
+				"_id": "5aec107deae4cc5f02fd43de",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}, {
+				"name": "G",
+				"_id": "5aec107deae4cc5f02fd43dd",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}, {
+				"name": "H",
+				"_id": "5aec107deae4cc5f02fd43dc",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}]
+		}]
+	}, {
+		"_id": "5aab3ddd0231d529bdad91cc",
+		"name": "Milestone",
+		"projectCode": "M-9",
+		"type": "RESIDENTIAL",
+		"beginDate": "2018-03-11T18:30:00.000Z",
+		"completionDate": "2021-04-29T18:30:00.000Z",
+		"status": "COMPLETE",
+		"_organisationId": {
+			"_id": "5a585371ed34a3331e9ae3b0",
+			"name": "Puravankara Limited",
+			"logoImageUrl": "storage/organisation/logo/default.png",
+			"orgType": "BUILDER"
+		},
+		"_createdBy": {
+			"_id": "5a585376ed34a3331e9ae3c4",
+			"displayName": "",
+			"email": "paruadmin@gmail.com",
+			"username": "purvaadmin",
+			"profileImageUrl": "storage/user/profile/default.png"
+		},
+		"createdAt": "2018-03-16T03:45:33.751Z",
+		"__v": 0,
+		"_updatedBy": {
+			"_id": "5a585376ed34a3331e9ae3c4",
+			"displayName": "",
+			"email": "paruadmin@gmail.com",
+			"username": "purvaadmin",
+			"profileImageUrl": "storage/user/profile/default.png"
+		},
+		"updatedAt": "2018-08-06T06:42:17.645Z",
+		"deleteFlag": false,
+		"unitTypes": [],
+		"description": "milestone - Testing of Snag Master",
+		"projectDetails": {
+			"crmTeam": "Team",
+			"projectStatus": "COMPLETED",
+			"floorCount": 10,
+			"unitNumber": 10,
+			"landArea": "1000000",
+			"wings": "10",
+			"location": "Bangalore"
+		},
+		"milestones": [],
+		"milestonesList": [],
+		"_snagsFlow": [],
+		"_coreTeam": [],
+		"_facilityTeam": [],
+		"_teamMembers": [],
+		"_contractors": [],
+		"_consultants": [],
+		"imageUrls": [],
+		"logoImageUrl": "storage/organisation/logo/default.png",
+		"phases": [{
+			"name": "Phase I",
+			"_id": "5aab3ddd0231d529bdad91d2",
+			"blocks": [{
+				"name": "Block A",
+				"_id": "5aab3ddd0231d529bdad91d4",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}, {
+				"name": "Block B",
+				"_id": "5aab3ddd0231d529bdad91d3",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}]
+		}, {
+			"name": "Phase II",
+			"_id": "5aab3ddd0231d529bdad91d0",
+			"blocks": [{
+				"name": "Block C",
+				"_id": "5aab3ddd0231d529bdad91d1",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}]
+		}]
+	}, {
+		"_id": "5a8cd0da69f8ae43ec13ae2a",
+		"name": "Purva Amaiti",
+		"projectCode": "PA-8",
+		"type": "RESIDENTIAL",
+		"beginDate": "2018-02-20T18:30:00.000Z",
+		"completionDate": "2018-02-20T18:30:00.000Z",
+		"status": "INPROGRESS",
+		"_organisationId": {
+			"_id": "5a585371ed34a3331e9ae3b0",
+			"name": "Puravankara Limited",
+			"logoImageUrl": "storage/organisation/logo/default.png",
+			"orgType": "BUILDER"
+		},
+		"_createdBy": {
+			"_id": "5a585376ed34a3331e9ae3c4",
+			"displayName": "",
+			"email": "paruadmin@gmail.com",
+			"username": "purvaadmin",
+			"profileImageUrl": "storage/user/profile/default.png"
+		},
+		"createdAt": "2018-02-21T01:52:26.924Z",
+		"__v": 0,
+		"_updatedBy": {
+			"_id": "5a585376ed34a3331e9ae3c4",
+			"displayName": "",
+			"email": "paruadmin@gmail.com",
+			"username": "purvaadmin",
+			"profileImageUrl": "storage/user/profile/default.png"
+		},
+		"updatedAt": "2018-07-09T18:13:13.530Z",
+		"deleteFlag": false,
+		"unitTypes": [],
+		"description": "Purva Amaiti Coimbatore",
+		"projectDetails": {
+			"crmTeam": "CRM Team",
+			"projectStatus": "ON-GOING",
+			"floorCount": 9,
+			"unitNumber": 560,
+			"landArea": "500000",
+			"wings": "11",
+			"location": "Coimbatore"
+		},
+		"milestones": [],
+		"milestonesList": [],
+		"_snagsFlow": [],
+		"_coreTeam": [],
+		"_facilityTeam": [],
+		"_teamMembers": [{
+			"_userId": {
+				"_id": "5a8cfe6f9fdd60051914e790",
+				"displayName": "UnniKrishnan jmc",
+				"email": "pamtqc@jmcprojects.com",
+				"username": "unnikrishnan",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": []
+			},
+			"_roleId": {
+				"_id": "5a7882f19dc276402ad3ced4",
+				"name": "General Manager Operations"
+			},
+			"_id": "5b43a5b95684280ede5116af"
+		}, {
+			"_userId": {
+				"_id": "5a8cfe349fdd60051914e78d",
+				"displayName": "Thangaraj Karthikeyan",
+				"email": "thangaraj.karthikeyan@jmcprojects.com",
+				"username": "thangarajk",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": []
+			},
+			"_roleId": {
+				"_id": "5a7882f19dc276402ad3ced4",
+				"name": "General Manager Operations"
+			},
+			"_id": "5b43a5b95684280ede5116ae"
+		}, {
+			"_userId": {
+				"_id": "5a8cfdb99fdd60051914e78a",
+				"displayName": "Kathirvel G",
+				"email": "kathirvel.g@puravankara.com",
+				"username": "kathirvelg",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": []
+			},
+			"_roleId": {
+				"_id": "5a5856dc86eca8331890c205",
+				"name": "Client Engineer"
+			},
+			"_id": "5b43a5b95684280ede5116ad"
+		}, {
+			"_userId": {
+				"_id": "5a8cfd4d9fdd60051914e787",
+				"displayName": "Pradeep Vijaya Kumar",
+				"email": "pradeep.vijayakumar@providenthousing.com",
+				"username": "pradeepv",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": [{
+					"deviceType": "android",
+					"deviceId": "7ed7bb96-2c71-4be8-9f4a-1042610715ed",
+					"_id": "5a8d1c2469f8ae43ec14211e"
+				}]
+			},
+			"_roleId": {
+				"_id": "5a5856dc86eca8331890c205",
+				"name": "Client Engineer"
+			},
+			"_id": "5b43a5b95684280ede5116ac"
+		}, {
+			"_userId": {
+				"_id": "5a8cfce59fdd60051914e784",
+				"displayName": "Lokesh Kumar P",
+				"email": "lokesh.kumar@puravankara.com",
+				"username": "lokeshk",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": []
+			},
+			"_roleId": {
+				"_id": "5a5856dc86eca8331890c205",
+				"name": "Client Engineer"
+			},
+			"_id": "5b43a5b95684280ede5116ab"
+		}, {
+			"_userId": {
+				"_id": "5a8cfc869fdd60051914e781",
+				"displayName": "Muthukumar A",
+				"email": "muthukumar.a@puravankara.com",
+				"username": "muthukumara",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": [{
+					"deviceType": "android",
+					"deviceId": "82d3b44c-f9d0-4177-a91d-689271c6de8b",
+					"_id": "5a8d02d29fdd600519151e36"
+				}]
+			},
+			"_roleId": {
+				"_id": "5a58565ded34a3331e9ae3d7",
+				"name": "Client Quality"
+			},
+			"_id": "5b43a5b95684280ede5116aa"
+		}, {
+			"_userId": {
+				"_id": "5a8cfc149fdd60051914e77e",
+				"displayName": "Prabhu Venkat",
+				"email": "prabhuvenkat@puravankara.com",
+				"username": "prabhuv",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": []
+			},
+			"_roleId": {
+				"_id": "5a5856dc86eca8331890c205",
+				"name": "Client Engineer"
+			},
+			"_id": "5b43a5b95684280ede5116a9"
+		}, {
+			"_userId": {
+				"_id": "5aab3bb50231d529bdad91ad",
+				"displayName": "Client Engineer",
+				"username": "clientengg",
+				"email": "clientengg@matkraft.com",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": []
+			},
+			"_roleId": {
+				"_id": "5a5856dc86eca8331890c205",
+				"name": "Client Engineer"
+			},
+			"_id": "5b43a5b95684280ede5116a8"
+		}, {
+			"_userId": {
+				"_id": "5aab3b760231d529bdad91aa",
+				"displayName": "contract Engg",
+				"username": "contractengg",
+				"email": "contractengg@matkraft.com",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": []
+			},
+			"_roleId": {
+				"_id": "5a5855e5ed34a3331e9ae3c6",
+				"name": "Contractor Engineer"
+			},
+			"_id": "5b43a5b95684280ede5116a7"
+		}],
+		"_contractors": [],
+		"_consultants": [],
+		"imageUrls": [],
+		"logoImageUrl": "storage/organisation/logo/default.png",
+		"phases": [{
+			"name": "Phase 1",
+			"_id": "5a8cd0da69f8ae43ec13ae2c",
+			"blocks": [{
+				"name": "BLOCK- F",
+				"_id": "5a8cd0da69f8ae43ec13ae31",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}, {
+				"name": "BLOCK-G",
+				"_id": "5a8cd0da69f8ae43ec13ae30",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}, {
+				"name": "BLOCK- H",
+				"_id": "5a8cd0da69f8ae43ec13ae2f",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}, {
+				"name": "BLOCK- J",
+				"_id": "5a8cd0da69f8ae43ec13ae2e",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}, {
+				"name": "BLOCK- K",
+				"_id": "5a8cd0da69f8ae43ec13ae2d",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}]
+		}]
+	}, {
+		"_id": "5a863f5a41e4c744faf0ee6e",
+		"name": "Purva Windermere Phase-II",
+		"projectCode": "PWP-7",
+		"type": "RESIDENTIAL",
+		"beginDate": "2018-02-13T18:30:00.000Z",
+		"completionDate": "2018-02-13T18:30:00.000Z",
+		"status": "INPROGRESS",
+		"_organisationId": {
+			"_id": "5a585371ed34a3331e9ae3b0",
+			"name": "Puravankara Limited",
+			"logoImageUrl": "storage/organisation/logo/default.png",
+			"orgType": "BUILDER"
+		},
+		"_createdBy": {
+			"_id": "5a585376ed34a3331e9ae3c4",
+			"displayName": "",
+			"email": "paruadmin@gmail.com",
+			"username": "purvaadmin",
+			"profileImageUrl": "storage/user/profile/default.png"
+		},
+		"createdAt": "2018-02-16T02:18:02.573Z",
+		"__v": 0,
+		"_updatedBy": {
+			"_id": "5a585376ed34a3331e9ae3c4",
+			"displayName": "",
+			"email": "paruadmin@gmail.com",
+			"username": "purvaadmin",
+			"profileImageUrl": "storage/user/profile/default.png"
+		},
+		"updatedAt": "2018-06-02T03:55:12.139Z",
+		"deleteFlag": false,
+		"unitTypes": [],
+		"description": "Purva Windermere Phase-II",
+		"projectDetails": {
+			"crmTeam": "CRM Team",
+			"projectStatus": "ON-GOING",
+			"floorCount": 7,
+			"unitNumber": 728,
+			"landArea": "150000",
+			"wings": "16",
+			"location": "Chennai"
+		},
+		"milestones": [],
+		"milestonesList": [],
+		"_snagsFlow": [],
+		"_coreTeam": [],
+		"_facilityTeam": [],
+		"_teamMembers": [{
+			"shift": "DAY",
+			"_userId": {
+				"_id": "5a8a457cf6def753ecfbe628",
+				"displayName": "Gurusamy M",
+				"email": "gurusamy.m@puravankara.com",
+				"username": "gurusamym",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": []
+			},
+			"_roleId": {
+				"_id": "5a5856dc86eca8331890c205",
+				"name": "Client Engineer"
+			},
+			"_id": "5b12152006098610e22be9c5"
+		}, {
+			"shift": "DAY",
+			"_userId": {
+				"_id": "5a8a4550f6def753ecfbe625",
+				"displayName": "Alagumalai P",
+				"email": "alagumalai.p@puravankara.com",
+				"username": "alagumalaip",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": []
+			},
+			"_roleId": {
+				"_id": "5a5856dc86eca8331890c205",
+				"name": "Client Engineer"
+			},
+			"_id": "5b12152006098610e22be9c4"
+		}, {
+			"shift": "DAY",
+			"_userId": {
+				"_id": "5a8a4520f6def753ecfbe622",
+				"displayName": "Sundarapandian G",
+				"username": "sundarapandiang",
+				"email": "sundarapandian.g@puravankara.com",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": [{
+					"deviceType": "android",
+					"deviceId": "5e3e2f28-f0ba-443c-aa8d-43a813563039",
+					"_id": "5a8ead5ef58fd42af35f0a0e"
+				}]
+			},
+			"_roleId": {
+				"_id": "5a5856dc86eca8331890c205",
+				"name": "Client Engineer"
+			},
+			"_id": "5b12152006098610e22be9c3"
+		}, {
+			"shift": "DAY",
+			"_userId": {
+				"_id": "5a8a44d8f6def753ecfbe61f",
+				"displayName": "Saravanan C",
+				"username": "saravananc",
+				"email": "saravanan.c@puravankara.com",
+				"profileImageUrl": "",
+				"devices": [{
+					"deviceType": "android",
+					"deviceId": "699a9945-76d6-444b-af94-bd408e699a5b",
+					"_id": "5aa7fa360231d529bdad8a8c"
+				}]
+			},
+			"_roleId": {
+				"_id": "5a5856dc86eca8331890c205",
+				"name": "Client Engineer"
+			},
+			"_id": "5b12152006098610e22be9c2"
+		}, {
+			"shift": "DAY",
+			"_userId": {
+				"_id": "5a8a44a0f6def753ecfbe61c",
+				"displayName": "Muthuraj Murugan",
+				"username": "muthurajm",
+				"email": "muthuraj.murugan@puravankara.com",
+				"profileImageUrl": "https://5a585371ed34a3331e9ae3b0.s3.amazonaws.com/1519137246757.JPEG",
+				"devices": [{
+					"deviceType": "android",
+					"deviceId": "bf34e6e0-3da3-46eb-9d43-e5c8489f6e67",
+					"_id": "5a8c316369f8ae43ec13ae24"
+				}]
+			},
+			"_roleId": {
+				"_id": "5a58565ded34a3331e9ae3d7",
+				"name": "Client Quality"
+			},
+			"_id": "5b12152006098610e22be9c1"
+		}, {
+			"shift": "DAY",
+			"_userId": {
+				"_id": "5a8a4465b9dbc653f2452a27",
+				"displayName": "Prasanna Kothandapani",
+				"username": "prasannak",
+				"email": "prasanna.kp@puravankara.com",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": []
+			},
+			"_roleId": {
+				"_id": "5a58565ded34a3331e9ae3d7",
+				"name": "Client Quality"
+			},
+			"_id": "5b12152006098610e22be9c0"
+		}, {
+			"shift": "DAY",
+			"_userId": {
+				"_id": "5a8a43ffb9dbc653f2452a24",
+				"displayName": "Vinoth Kumar M",
+				"username": "vinothkm",
+				"email": "vinothkumar.m@puravankara.com",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": []
+			},
+			"_roleId": {
+				"_id": "5a58565ded34a3331e9ae3d7",
+				"name": "Client Quality"
+			},
+			"_id": "5b12152006098610e22be9bf"
+		}, {
+			"shift": "DAY",
+			"_userId": {
+				"_id": "5a8a43b0b9dbc653f2452a21",
+				"displayName": "Vijayakumar R",
+				"username": "vijayakumarr",
+				"email": "vijaya.kumar@puravankara.com",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": [{
+					"deviceType": "android",
+					"deviceId": "d5f5c2c0-cdf8-4784-8be5-997767e3e445",
+					"_id": "5b0e89aa06098610e22be981"
+				}]
+			},
+			"_roleId": {
+				"_id": "5a7882f19dc276402ad3ced4",
+				"name": "General Manager Operations"
+			},
+			"_id": "5b12152006098610e22be9be"
+		}, {
+			"shift": "DAY",
+			"_userId": {
+				"_id": "5a8a4374b9dbc653f2452a1e",
+				"displayName": "Bhaskaran G",
+				"username": "bhaskarang",
+				"email": "bhaskaran@puravankara.com",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": []
+			},
+			"_roleId": {
+				"_id": "5a7882f19dc276402ad3ced4",
+				"name": "General Manager Operations"
+			},
+			"_id": "5b12152006098610e22be9bd"
+		}, {
+			"shift": "DAY",
+			"_userId": {
+				"_id": "5a8a432bb9dbc653f2452a1b",
+				"displayName": "Mathana Kumar R",
+				"username": "mathanakr",
+				"email": "mathanakumar.r@puravankara.com",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": []
+			},
+			"_roleId": {
+				"_id": "5a7882f19dc276402ad3ced4",
+				"name": "General Manager Operations"
+			},
+			"_id": "5b12152006098610e22be9bc"
+		}, {
+			"shift": "DAY",
+			"_userId": {
+				"_id": "5a77eb7e9dc276402ad3cd2a",
+				"displayName": "sakthivelu S",
+				"username": "sakthivelus",
+				"email": "sakthivelu@puravankara.com",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": [{
+					"deviceType": "android",
+					"deviceId": "6bc9bdb7-87e9-42e4-bc4e-88339fe9d9d3",
+					"_id": "5a783b9472114d4030d31b2b"
+				}, {
+					"deviceType": "android",
+					"deviceId": "9e310be4-a32a-4599-a37e-1b3a892b58af",
+					"_id": "5a78431472114d4030d31b2e"
+				}, {
+					"deviceType": "android",
+					"deviceId": "6bc9bdb7-87e9-42e4-bc4e-88339fe9d9d3",
+					"_id": "5a783b9472114d4030d31b2b"
+				}, {
+					"deviceType": "android",
+					"deviceId": "9e310be4-a32a-4599-a37e-1b3a892b58af",
+					"_id": "5a78431472114d4030d31b2e"
+				}, {
+					"deviceType": "android",
+					"deviceId": "6bc9bdb7-87e9-42e4-bc4e-88339fe9d9d3",
+					"_id": "5a783b9472114d4030d31b2b"
+				}, {
+					"deviceType": "android",
+					"deviceId": "9e310be4-a32a-4599-a37e-1b3a892b58af",
+					"_id": "5a78431472114d4030d31b2e"
+				}, {
+					"deviceType": "android",
+					"deviceId": "6bc9bdb7-87e9-42e4-bc4e-88339fe9d9d3",
+					"_id": "5a783b9472114d4030d31b2b"
+				}, {
+					"deviceType": "android",
+					"deviceId": "9e310be4-a32a-4599-a37e-1b3a892b58af",
+					"_id": "5a78431472114d4030d31b2e"
+				}, {
+					"deviceType": "android",
+					"deviceId": "6bc9bdb7-87e9-42e4-bc4e-88339fe9d9d3",
+					"_id": "5a783b9472114d4030d31b2b"
+				}, {
+					"deviceType": "android",
+					"deviceId": "9e310be4-a32a-4599-a37e-1b3a892b58af",
+					"_id": "5a78431472114d4030d31b2e"
+				}, {
+					"deviceType": "android",
+					"deviceId": "6bc9bdb7-87e9-42e4-bc4e-88339fe9d9d3",
+					"_id": "5a783b9472114d4030d31b2b"
+				}, {
+					"deviceType": "android",
+					"deviceId": "9e310be4-a32a-4599-a37e-1b3a892b58af",
+					"_id": "5a78431472114d4030d31b2e"
+				}, {
+					"deviceType": "android",
+					"deviceId": "6bc9bdb7-87e9-42e4-bc4e-88339fe9d9d3",
+					"_id": "5a783b9472114d4030d31b2b"
+				}, {
+					"deviceType": "android",
+					"deviceId": "9e310be4-a32a-4599-a37e-1b3a892b58af",
+					"_id": "5a78431472114d4030d31b2e"
+				}, {
+					"deviceType": "android",
+					"deviceId": "6bc9bdb7-87e9-42e4-bc4e-88339fe9d9d3",
+					"_id": "5a783b9472114d4030d31b2b"
+				}, {
+					"deviceType": "android",
+					"deviceId": "9e310be4-a32a-4599-a37e-1b3a892b58af",
+					"_id": "5a78431472114d4030d31b2e"
+				}, {
+					"deviceType": "ios",
+					"deviceId": "90afbcb9-b7e0-4c6e-bed5-d9965c0cbae5",
+					"_id": "5a819a483425e144f451af48"
+				}, {
+					"deviceType": "ios",
+					"deviceId": "d7925ad7-ff23-48e5-a1b6-4ce43ad34ce3",
+					"_id": "5a81d4cf3425e144f451af51"
+				}]
+			},
+			"_roleId": {
+				"_id": "5a7882f19dc276402ad3ced4",
+				"name": "General Manager Operations"
+			},
+			"_id": "5b12152006098610e22be9bb"
+		}],
+		"_contractors": [],
+		"_consultants": [],
+		"imageUrls": [],
+		"logoImageUrl": "storage/organisation/logo/default.png",
+		"phases": [{
+			"name": "Building 1",
+			"_id": "5a863f5a41e4c744faf0ee70",
+			"blocks": [{
+				"name": "C18",
+				"_id": "5a863f5a41e4c744faf0ee80",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}, {
+				"name": "C19",
+				"_id": "5a863f5a41e4c744faf0ee7f",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}, {
+				"name": "C20",
+				"_id": "5a863f5a41e4c744faf0ee7e",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}, {
+				"name": "C21",
+				"_id": "5a863f5a41e4c744faf0ee7d",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}, {
+				"name": "C22",
+				"_id": "5a863f5a41e4c744faf0ee7c",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}, {
+				"name": "C23",
+				"_id": "5a863f5a41e4c744faf0ee7b",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}, {
+				"name": "D10",
+				"_id": "5a863f5a41e4c744faf0ee7a",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}, {
+				"name": "D11",
+				"_id": "5a863f5a41e4c744faf0ee79",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}, {
+				"name": "D16",
+				"_id": "5a863f5a41e4c744faf0ee78",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}, {
+				"name": "D17",
+				"_id": "5a863f5a41e4c744faf0ee77",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}, {
+				"name": "D18",
+				"_id": "5a863f5a41e4c744faf0ee76",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}, {
+				"name": "D19",
+				"_id": "5a863f5a41e4c744faf0ee75",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}, {
+				"name": "E5",
+				"_id": "5a863f5a41e4c744faf0ee74",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}, {
+				"name": "E6",
+				"_id": "5a863f5a41e4c744faf0ee73",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}, {
+				"name": "E7",
+				"_id": "5a863f5a41e4c744faf0ee72",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}, {
+				"name": "E13",
+				"_id": "5a863f5a41e4c744faf0ee71",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}]
+		}]
+	}, {
+		"_id": "5a863ccb41e4c744faf0ee58",
+		"name": "Puravankara Kenworth",
+		"projectCode": "PK-6",
+		"type": "RESIDENTIAL",
+		"beginDate": "2018-02-15T18:30:00.000Z",
+		"completionDate": "2018-02-15T18:30:00.000Z",
+		"status": "INPROGRESS",
+		"_organisationId": {
+			"_id": "5a585371ed34a3331e9ae3b0",
+			"name": "Puravankara Limited",
+			"logoImageUrl": "storage/organisation/logo/default.png",
+			"orgType": "BUILDER"
+		},
+		"_createdBy": {
+			"_id": "5a585376ed34a3331e9ae3c4",
+			"displayName": "",
+			"email": "paruadmin@gmail.com",
+			"username": "purvaadmin",
+			"profileImageUrl": "storage/user/profile/default.png"
+		},
+		"createdAt": "2018-02-16T02:07:07.035Z",
+		"__v": 0,
+		"_updatedBy": {
+			"_id": "5a585376ed34a3331e9ae3c4",
+			"displayName": "",
+			"email": "paruadmin@gmail.com",
+			"username": "purvaadmin",
+			"profileImageUrl": "storage/user/profile/default.png"
+		},
+		"updatedAt": "2018-06-02T03:56:44.999Z",
+		"deleteFlag": false,
+		"unitTypes": [],
+		"description": "Puravankara Kenworth - Hyderabad",
+		"projectDetails": {
+			"location": "Hyderabad",
+			"wings": "17",
+			"landArea": "150000",
+			"unitNumber": 2310,
+			"floorCount": 10,
+			"projectStatus": "ON-GOING",
+			"crmTeam": "CRM Team"
+		},
+		"milestones": [],
+		"milestonesList": [],
+		"_snagsFlow": [],
+		"_coreTeam": [],
+		"_facilityTeam": [],
+		"_teamMembers": [{
+			"shift": "DAY",
+			"_userId": {
+				"_id": "5a878a983425e144f451b02e",
+				"displayName": "Arra Rajeshwar",
+				"email": "arra.rajeshwar@puravankara.com",
+				"username": "arrar",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": [{
+					"deviceType": "android",
+					"deviceId": "da1b61cd-6813-455c-8a61-3c484ddd76e3",
+					"_id": "5a8a968ff6def753ecfcebe6"
+				}]
+			},
+			"_roleId": {
+				"_id": "5a5856dc86eca8331890c205",
+				"name": "Client Engineer"
+			},
+			"_id": "5b12157d31dcd910e8f9dc07"
+		}, {
+			"shift": "DAY",
+			"_userId": {
+				"_id": "5a878a1a3425e144f451b02b",
+				"displayName": "Thanjaraja M",
+				"email": "thangaraj@fabs.co.in",
+				"username": "thangarajm",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": [{
+					"deviceType": "android",
+					"deviceId": "4ab58975-acb3-4cdb-8275-edd1c88d3418",
+					"_id": "5a8a9727f6def753ecfcebe7"
+				}]
+			},
+			"_roleId": {
+				"_id": "5a8789cd3425e144f451b012",
+				"name": "Contractor Manager"
+			},
+			"_id": "5b12157d31dcd910e8f9dc06"
+		}, {
+			"shift": "DAY",
+			"_userId": {
+				"_id": "5a8789003425e144f451b00f",
+				"displayName": "Ganesh KW",
+				"username": "ganeshkw",
+				"email": "kwhyd_planning@fabs.co.in",
+				"profileImageUrl": "",
+				"devices": [{
+					"deviceType": "android",
+					"deviceId": "35057a92-06eb-49af-b2a3-81f47475b1e7",
+					"_id": "5a87b10741e4c744faf0ee90"
+				}]
+			},
+			"_roleId": {
+				"_id": "5a5855e5ed34a3331e9ae3c6",
+				"name": "Contractor Engineer"
+			},
+			"_id": "5b12157d31dcd910e8f9dc05"
+		}, {
+			"shift": "DAY",
+			"_userId": {
+				"_id": "5a58584586eca8331890c21f",
+				"displayName": "Raghavendra Sudhakar",
+				"username": "raghavendras",
+				"email": "raghavendra.sudhakar@puravankara.com",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": [{
+					"deviceType": "android",
+					"deviceId": "1b9c31c3-a34f-4383-a67d-8b78f3f16f1c",
+					"_id": "5a8aab64f6def753ecfcebf6"
+				}]
+			},
+			"_roleId": {
+				"_id": "5a58565ded34a3331e9ae3d7",
+				"name": "Client Quality"
+			},
+			"_id": "5b12157d31dcd910e8f9dc04"
+		}],
+		"_contractors": [],
+		"_consultants": [],
+		"imageUrls": [],
+		"logoImageUrl": "storage/organisation/logo/default.png",
+		"phases": [{
+			"name": "Phase 1",
+			"_id": "5a863ccb41e4c744faf0ee5a",
+			"blocks": [{
+				"name": "Tower 01",
+				"_id": "5a863ccb41e4c744faf0ee6b",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}, {
+				"name": "Tower 02",
+				"_id": "5a863ccb41e4c744faf0ee6a",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}, {
+				"name": "Tower 03",
+				"_id": "5a863ccb41e4c744faf0ee69",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}, {
+				"name": "Tower 04",
+				"_id": "5a863ccb41e4c744faf0ee68",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}, {
+				"name": "Tower 05",
+				"_id": "5a863ccb41e4c744faf0ee67",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}, {
+				"name": "Tower 06",
+				"_id": "5a863ccb41e4c744faf0ee66",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}, {
+				"name": "Tower 07",
+				"_id": "5a863ccb41e4c744faf0ee65",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}, {
+				"name": "Tower 08",
+				"_id": "5a863ccb41e4c744faf0ee64",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}, {
+				"name": "Tower 09",
+				"_id": "5a863ccb41e4c744faf0ee63",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}, {
+				"name": "Tower 10",
+				"_id": "5a863ccb41e4c744faf0ee62",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}, {
+				"name": "Tower 11",
+				"_id": "5a863ccb41e4c744faf0ee61",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}, {
+				"name": "Tower 12",
+				"_id": "5a863ccb41e4c744faf0ee60",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}, {
+				"name": "Tower 13",
+				"_id": "5a863ccb41e4c744faf0ee5f",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}, {
+				"name": "Tower 14",
+				"_id": "5a863ccb41e4c744faf0ee5e",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}, {
+				"name": "Tower 15",
+				"_id": "5a863ccb41e4c744faf0ee5d",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}, {
+				"name": "Tower 16",
+				"_id": "5a863ccb41e4c744faf0ee5c",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}, {
+				"name": "Tower 17",
+				"_id": "5a863ccb41e4c744faf0ee5b",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}]
+		}]
+	}, {
+		"_id": "5a7c84008e64e99e4748d61b",
+		"name": "PROVIDENT THE TREE",
+		"projectCode": "PTT-1",
+		"type": "RESIDENTIAL",
+		"beginDate": "2016-08-31T18:30:00.000Z",
+		"completionDate": "2018-09-29T18:30:00.000Z",
+		"status": "INPROGRESS",
+		"_organisationId": {
+			"_id": "5a585371ed34a3331e9ae3b0",
+			"name": "Puravankara Limited",
+			"logoImageUrl": "storage/organisation/logo/default.png",
+			"orgType": "BUILDER"
+		},
+		"_createdBy": {
+			"_id": "5a585376ed34a3331e9ae3c4",
+			"displayName": "",
+			"email": "paruadmin@gmail.com",
+			"username": "purvaadmin",
+			"profileImageUrl": "storage/user/profile/default.png"
+		},
+		"createdAt": "2018-02-08T06:47:57.281Z",
+		"__v": 0,
+		"_updatedBy": {
+			"_id": "5a585376ed34a3331e9ae3c4",
+			"displayName": "",
+			"email": "paruadmin@gmail.com",
+			"username": "purvaadmin",
+			"profileImageUrl": "storage/user/profile/default.png"
+		},
+		"updatedAt": "2018-06-02T03:33:52.593Z",
+		"deleteFlag": false,
+		"unitTypes": [],
+		"description": "PROVIDENT THE TREE",
+		"projectDetails": {
+			"location": "Bangalore",
+			"wings": "7",
+			"landArea": "571480",
+			"unitNumber": 560,
+			"floorCount": 10,
+			"projectStatus": "ON-GOING",
+			"crmTeam": "CRM TEAM"
+		},
+		"milestones": [],
+		"milestonesList": [],
+		"_snagsFlow": [],
+		"_coreTeam": [],
+		"_facilityTeam": [],
+		"_teamMembers": [{
+			"shift": "DAY",
+			"_userId": {
+				"_id": "5a58588486eca8331890c222",
+				"displayName": "prabhakaran kpr",
+				"username": "prabhakarankpr",
+				"email": "prabhakaran.kpr@gmail.com",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": []
+			},
+			"_roleId": {
+				"_id": "5a5855e5ed34a3331e9ae3c6",
+				"name": "Contractor Engineer"
+			},
+			"_id": "5b12102031dcd910e8f9dbd0"
+		}, {
+			"shift": "DAY",
+			"_userId": {
+				"_id": "5a58584586eca8331890c21f",
+				"displayName": "Raghavendra Sudhakar",
+				"username": "raghavendras",
+				"email": "raghavendra.sudhakar@puravankara.com",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": [{
+					"deviceType": "android",
+					"deviceId": "1b9c31c3-a34f-4383-a67d-8b78f3f16f1c",
+					"_id": "5a8aab64f6def753ecfcebf6"
+				}]
+			},
+			"_roleId": {
+				"_id": "5a58565ded34a3331e9ae3d7",
+				"name": "Client Quality"
+			},
+			"_id": "5b12102031dcd910e8f9dbcf"
+		}, {
+			"shift": "DAY",
+			"_userId": {
+				"_id": "5a58580586eca8331890c21c",
+				"displayName": "Rajani Kantd",
+				"username": "rajanik",
+				"email": "rajanikantd6@gmail.com",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": [{
+					"deviceType": "ios",
+					"deviceId": "bace2d54-88e2-4b71-94aa-e16b7aac3276",
+					"_id": "5a6185ae81f76f77e5343190"
+				}, {
+					"deviceType": "ios",
+					"deviceId": "e1e3d550-a02b-4a7a-a5e2-0362509faf9a",
+					"_id": "5a72f5b39dc276402ad22fcd"
+				}, {
+					"deviceType": "android",
+					"deviceId": "f7ea2154-876c-40f2-96e3-fae0416238e8",
+					"_id": "5a82e9193425e144f451af5a"
+				}, {
+					"deviceType": "ios",
+					"deviceId": "c01e1a28-6447-47a5-b259-af55c449e9e2",
+					"_id": "5a82ffbb3425e144f451af5b"
+				}, {
+					"deviceType": "ios",
+					"deviceId": "03c6d3ef-ed03-47eb-9b19-5429932e2dbd",
+					"_id": "5a832dfc41e4c744faf0ee2f"
+				}, {
+					"deviceType": "ios",
+					"deviceId": "c78c04bf-3562-4f75-9edb-beb804ec30a2",
+					"_id": "5a94f7312273d02af9a406c1"
+				}, {
+					"deviceType": "android",
+					"deviceId": "a174fee8-ed27-49bb-8907-0150ce575375",
+					"_id": "5a952a6af58fd42af35f0ad5"
+				}, {
+					"deviceType": "ios",
+					"deviceId": "0c40eb0d-5d0d-4c43-9585-922d701f0161",
+					"_id": "5a967281f58fd42af35f0af8"
+				}, {
+					"deviceType": "ios",
+					"deviceId": "3ff3b7ec-afd0-485c-9371-d019fa01b878",
+					"_id": "5a9792e4f58fd42af35f0dff"
+				}, {
+					"deviceId": "7612ef00-1c9c-4263-859b-2534717b0597",
+					"_id": "5ab9d4643890c829b7f4a151"
+				}]
+			},
+			"_roleId": {
+				"_id": "5a5855e5ed34a3331e9ae3c6",
+				"name": "Contractor Engineer"
+			},
+			"_id": "5b12102031dcd910e8f9dbce"
+		}, {
+			"shift": "DAY",
+			"_userId": {
+				"_id": "5a58579a86eca8331890c219",
+				"displayName": "SathishKumar m",
+				"email": "sathishkumar.m@puravankara.com",
+				"username": "sathishkumarm",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": [{
+					"deviceType": "ios",
+					"deviceId": "e5042f54-043c-4828-bccc-33da03dca4ea",
+					"_id": "5acda381750fed1e059ed5ff"
+				}, {
+					"deviceType": "ios",
+					"deviceId": "b27fd86d-d5a5-4116-8fd1-70a143ba8e06",
+					"_id": "5acda579750fed1e059ed601"
+				}, {
+					"deviceType": "android",
+					"deviceId": "7fe6e87d-7fdb-4c93-a0c6-ca96ffbf37ae",
+					"_id": "5aceef8a750fed1e059ed608"
+				}, {
+					"deviceType": "android",
+					"deviceId": "a5c99994-8844-48fe-bd60-316dde3d0bbb",
+					"_id": "5acef0792993531dff7c713a"
+				}, {
+					"deviceType": "android",
+					"deviceId": "a1a6537e-6a15-4f2f-aea9-7472d6bc2024",
+					"_id": "5acef2e12993531dff7c713b"
+				}, {
+					"deviceType": "ios",
+					"deviceId": "e7826b89-7164-463b-9fc4-0b1a567ce83a",
+					"_id": "5acf395b750fed1e059ed60e"
+				}, {
+					"deviceType": "android",
+					"deviceId": "450022fc-f175-4b66-8a88-b8c8e5a8d5bd",
+					"_id": "5acf489e2993531dff7c713f"
+				}, {
+					"deviceType": "android",
+					"deviceId": "92935871-2108-4c77-87d5-9493bf0ce894",
+					"_id": "5acfc8ca750fed1e059ed616"
+				}, {
+					"deviceType": "android",
+					"deviceId": "c1ac9869-ce9c-4129-860f-83e030bd81a3",
+					"_id": "5ad0ccc0750fed1e059ed61a"
+				}, {
+					"deviceType": "ios",
+					"deviceId": "e5042f54-043c-4828-bccc-33da03dca4ea",
+					"_id": "5acda381750fed1e059ed5ff"
+				}, {
+					"deviceType": "ios",
+					"deviceId": "b27fd86d-d5a5-4116-8fd1-70a143ba8e06",
+					"_id": "5acda579750fed1e059ed601"
+				}, {
+					"deviceType": "android",
+					"deviceId": "7fe6e87d-7fdb-4c93-a0c6-ca96ffbf37ae",
+					"_id": "5aceef8a750fed1e059ed608"
+				}, {
+					"deviceType": "android",
+					"deviceId": "a5c99994-8844-48fe-bd60-316dde3d0bbb",
+					"_id": "5acef0792993531dff7c713a"
+				}, {
+					"deviceType": "android",
+					"deviceId": "a1a6537e-6a15-4f2f-aea9-7472d6bc2024",
+					"_id": "5acef2e12993531dff7c713b"
+				}, {
+					"deviceType": "ios",
+					"deviceId": "e7826b89-7164-463b-9fc4-0b1a567ce83a",
+					"_id": "5acf395b750fed1e059ed60e"
+				}, {
+					"deviceType": "android",
+					"deviceId": "450022fc-f175-4b66-8a88-b8c8e5a8d5bd",
+					"_id": "5acf489e2993531dff7c713f"
+				}, {
+					"deviceType": "android",
+					"deviceId": "92935871-2108-4c77-87d5-9493bf0ce894",
+					"_id": "5acfc8ca750fed1e059ed616"
+				}, {
+					"deviceType": "android",
+					"deviceId": "c1ac9869-ce9c-4129-860f-83e030bd81a3",
+					"_id": "5ad0ccc0750fed1e059ed61a"
+				}]
+			},
+			"_roleId": {
+				"_id": "5a58565ded34a3331e9ae3d7",
+				"name": "Client Quality"
+			},
+			"_id": "5b12102031dcd910e8f9dbcd"
+		}, {
+			"shift": "DAY",
+			"_userId": {
+				"_id": "5a58574b86eca8331890c216",
+				"displayName": "Siva kumar",
+				"email": "sivakumar.kalimuth@puravankara.com",
+				"username": "sivakumar",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": [{
+					"deviceId": "3b9e9190-cb92-483b-aa05-d8d3bd730293",
+					"_id": "5a5df25bfdb8153157ccbecb"
+				}]
+			},
+			"_roleId": {
+				"_id": "5a58565ded34a3331e9ae3d7",
+				"name": "Client Quality"
+			},
+			"_id": "5b12102031dcd910e8f9dbcc"
+		}, {
+			"shift": "DAY",
+			"_userId": {
+				"_id": "5a590e2b353c6e6b19553ca2",
+				"displayName": "manju nath",
+				"username": "manjunatha",
+				"email": "natha.manju@gmail.com",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": [{
+					"deviceType": "android",
+					"deviceId": "6f170ca8-787b-4849-950d-3b89a1440e6f",
+					"_id": "5ab5d1f00231d529bdad94aa"
+				}, {
+					"deviceType": "ios",
+					"deviceId": "6790428e-dcf5-4890-b9c1-0fe2b91e0c47",
+					"_id": "5af14fd8b29595653fb67dfb"
+				}, {
+					"deviceType": "android",
+					"deviceId": "fb8693f1-b460-40a4-8404-b75776e72a71",
+					"_id": "5af173881fd8a96545115526"
+				}, {
+					"deviceType": "ios",
+					"deviceId": "fec31229-d57a-47e0-ab9d-b1339457d3cd",
+					"_id": "5af18354b29595653fb67dff"
+				}]
+			},
+			"_roleId": {
+				"_id": "5a58565ded34a3331e9ae3d7",
+				"name": "Client Quality"
+			},
+			"_id": "5b12102031dcd910e8f9dbcb"
+		}, {
+			"shift": "DAY",
+			"_userId": {
+				"_id": "5a591805fdb8153157ccbab6",
+				"displayName": "Srinivas Narun",
+				"username": "srinivasn",
+				"email": "sreenivasn@matkraft.com",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": [{
+					"deviceType": "android",
+					"deviceId": "741a8c14-8518-4877-8544-6b11b3dbaef2",
+					"_id": "5ac6053c03b88a001340ed13"
+				}, {
+					"deviceType": "android",
+					"deviceId": "ec23df42-5df5-4040-b7c7-0d52cac95945",
+					"_id": "5ac777e944543d00136bb897"
+				}, {
+					"deviceType": "ios",
+					"deviceId": "1d472646-2ba3-4cf6-a951-ebe648c9377a",
+					"_id": "5acf43732993531dff7c713d"
+				}]
+			},
+			"_roleId": {
+				"_id": "5a5856dc86eca8331890c205",
+				"name": "Client Engineer"
+			},
+			"_id": "5b12102031dcd910e8f9dbca"
+		}, {
+			"shift": "DAY",
+			"_userId": {
+				"_id": "5a5858ce86eca8331890c225",
+				"displayName": "Prabakara Paramasivam",
+				"username": "prabakarap",
+				"email": "prabakara.p@puravankara.com",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": [{
+					"deviceId": "69672ae0-1333-4f3e-9cb9-a2a5ef166459",
+					"_id": "5a5da5cfc73b4c315d2928b5"
+				}, {
+					"deviceType": "android",
+					"deviceId": "69672ae0-1333-4f3e-9cb9-a2a5ef166459",
+					"_id": "5a7eb4fd41e4c744faf0ee07"
+				}]
+			},
+			"_roleId": {
+				"_id": "5a58565ded34a3331e9ae3d7",
+				"name": "Client Quality"
+			},
+			"_id": "5b12102031dcd910e8f9dbc9"
+		}, {
+			"shift": "DAY",
+			"_userId": {
+				"_id": "5a83a42441e4c744faf0ee3b",
+				"displayName": "Jayasimha Krishnachar",
+				"username": "jayasimha",
+				"email": "jayasimha@puravankara.com",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": []
+			},
+			"_roleId": {
+				"_id": "5a7882f19dc276402ad3ced4",
+				"name": "General Manager Operations"
+			},
+			"_id": "5b12102031dcd910e8f9dbc8"
+		}, {
+			"shift": "DAY",
+			"_userId": {
+				"_id": "5a591805fdb8153157ccbab6",
+				"displayName": "Srinivas Narun",
+				"username": "srinivasn",
+				"email": "sreenivasn@matkraft.com",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": [{
+					"deviceType": "android",
+					"deviceId": "741a8c14-8518-4877-8544-6b11b3dbaef2",
+					"_id": "5ac6053c03b88a001340ed13"
+				}, {
+					"deviceType": "android",
+					"deviceId": "ec23df42-5df5-4040-b7c7-0d52cac95945",
+					"_id": "5ac777e944543d00136bb897"
+				}, {
+					"deviceType": "ios",
+					"deviceId": "1d472646-2ba3-4cf6-a951-ebe648c9377a",
+					"_id": "5acf43732993531dff7c713d"
+				}]
+			},
+			"_roleId": {
+				"_id": "5a5856dc86eca8331890c205",
+				"name": "Client Engineer"
+			},
+			"_id": "5b12102031dcd910e8f9dbc7"
+		}, {
+			"shift": "DAY",
+			"_userId": {
+				"_id": "5aca1b2eb9f96c04ebe11535",
+				"displayName": "VP Operation",
+				"username": "vpo",
+				"email": "vpo@matkraft.com",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": []
+			},
+			"_roleId": {
+				"_id": "5aab3c460231d529bdad91b0",
+				"name": "VP Operation"
+			},
+			"_id": "5b12102031dcd910e8f9dbc6"
+		}],
+		"_contractors": [],
+		"_consultants": [],
+		"imageUrls": [],
+		"logoImageUrl": "storage/organisation/logo/default.png",
+		"phases": [{
+			"name": "Building 1",
+			"_id": "5a585a1ded34a3331e9ae3f5",
+			"blocks": [{
+				"name": "1A",
+				"_id": "5a585a1ded34a3331e9ae3f8",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}, {
+				"name": "1B",
+				"_id": "5a585a1ded34a3331e9ae3f7",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}, {
+				"name": "1C",
+				"_id": "5a585a1ded34a3331e9ae3f6",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}]
+		}, {
+			"name": "Building 2",
+			"_id": "5a585a1ded34a3331e9ae3f0",
+			"blocks": [{
+				"name": "2A",
+				"_id": "5a585a1ded34a3331e9ae3f4",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}, {
+				"name": "2B",
+				"_id": "5a585a1ded34a3331e9ae3f3",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}, {
+				"name": "2C",
+				"_id": "5a585a1ded34a3331e9ae3f2",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}, {
+				"name": "2D",
+				"_id": "5a585a1ded34a3331e9ae3f1",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}]
+		}]
+	}, {
+		"_id": "5a789ee64f199964d58d315d",
+		"name": "PURVA WESTEND",
+		"projectCode": "PW-4",
+		"type": "RESIDENTIAL",
+		"beginDate": "2018-02-04T18:30:00.000Z",
+		"completionDate": "2018-02-04T18:30:00.000Z",
+		"status": "INPROGRESS",
+		"_organisationId": {
+			"_id": "5a585371ed34a3331e9ae3b0",
+			"name": "Puravankara Limited",
+			"logoImageUrl": "storage/organisation/logo/default.png",
+			"orgType": "BUILDER"
+		},
+		"_createdBy": {
+			"_id": "5a585376ed34a3331e9ae3c4",
+			"displayName": "",
+			"email": "paruadmin@gmail.com",
+			"username": "purvaadmin",
+			"profileImageUrl": "storage/user/profile/default.png"
+		},
+		"createdAt": "2018-02-05T18:13:58.615Z",
+		"__v": 0,
+		"_updatedBy": {
+			"_id": "5a585376ed34a3331e9ae3c4",
+			"displayName": "",
+			"email": "paruadmin@gmail.com",
+			"username": "purvaadmin",
+			"profileImageUrl": "storage/user/profile/default.png"
+		},
+		"updatedAt": "2018-04-10T14:53:34.585Z",
+		"deleteFlag": false,
+		"unitTypes": [],
+		"description": "PURVA WESTEND",
+		"projectDetails": {
+			"location": "Bangalore",
+			"wings": "5",
+			"landArea": "1000000",
+			"unitNumber": 735,
+			"floorCount": 20,
+			"projectStatus": "ON-GOING",
+			"crmTeam": "CRM Team"
+		},
+		"milestones": [],
+		"milestonesList": [],
+		"_snagsFlow": [],
+		"_coreTeam": [],
+		"_facilityTeam": [],
+		"_teamMembers": [{
+			"_userId": {
+				"_id": "5a58579a86eca8331890c219",
+				"displayName": "SathishKumar m",
+				"email": "sathishkumar.m@puravankara.com",
+				"username": "sathishkumarm",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": [{
+					"deviceType": "ios",
+					"deviceId": "e5042f54-043c-4828-bccc-33da03dca4ea",
+					"_id": "5acda381750fed1e059ed5ff"
+				}, {
+					"deviceType": "ios",
+					"deviceId": "b27fd86d-d5a5-4116-8fd1-70a143ba8e06",
+					"_id": "5acda579750fed1e059ed601"
+				}, {
+					"deviceType": "android",
+					"deviceId": "7fe6e87d-7fdb-4c93-a0c6-ca96ffbf37ae",
+					"_id": "5aceef8a750fed1e059ed608"
+				}, {
+					"deviceType": "android",
+					"deviceId": "a5c99994-8844-48fe-bd60-316dde3d0bbb",
+					"_id": "5acef0792993531dff7c713a"
+				}, {
+					"deviceType": "android",
+					"deviceId": "a1a6537e-6a15-4f2f-aea9-7472d6bc2024",
+					"_id": "5acef2e12993531dff7c713b"
+				}, {
+					"deviceType": "ios",
+					"deviceId": "e7826b89-7164-463b-9fc4-0b1a567ce83a",
+					"_id": "5acf395b750fed1e059ed60e"
+				}, {
+					"deviceType": "android",
+					"deviceId": "450022fc-f175-4b66-8a88-b8c8e5a8d5bd",
+					"_id": "5acf489e2993531dff7c713f"
+				}, {
+					"deviceType": "android",
+					"deviceId": "92935871-2108-4c77-87d5-9493bf0ce894",
+					"_id": "5acfc8ca750fed1e059ed616"
+				}, {
+					"deviceType": "android",
+					"deviceId": "c1ac9869-ce9c-4129-860f-83e030bd81a3",
+					"_id": "5ad0ccc0750fed1e059ed61a"
+				}, {
+					"deviceType": "ios",
+					"deviceId": "e5042f54-043c-4828-bccc-33da03dca4ea",
+					"_id": "5acda381750fed1e059ed5ff"
+				}, {
+					"deviceType": "ios",
+					"deviceId": "b27fd86d-d5a5-4116-8fd1-70a143ba8e06",
+					"_id": "5acda579750fed1e059ed601"
+				}, {
+					"deviceType": "android",
+					"deviceId": "7fe6e87d-7fdb-4c93-a0c6-ca96ffbf37ae",
+					"_id": "5aceef8a750fed1e059ed608"
+				}, {
+					"deviceType": "android",
+					"deviceId": "a5c99994-8844-48fe-bd60-316dde3d0bbb",
+					"_id": "5acef0792993531dff7c713a"
+				}, {
+					"deviceType": "android",
+					"deviceId": "a1a6537e-6a15-4f2f-aea9-7472d6bc2024",
+					"_id": "5acef2e12993531dff7c713b"
+				}, {
+					"deviceType": "ios",
+					"deviceId": "e7826b89-7164-463b-9fc4-0b1a567ce83a",
+					"_id": "5acf395b750fed1e059ed60e"
+				}, {
+					"deviceType": "android",
+					"deviceId": "450022fc-f175-4b66-8a88-b8c8e5a8d5bd",
+					"_id": "5acf489e2993531dff7c713f"
+				}, {
+					"deviceType": "android",
+					"deviceId": "92935871-2108-4c77-87d5-9493bf0ce894",
+					"_id": "5acfc8ca750fed1e059ed616"
+				}, {
+					"deviceType": "android",
+					"deviceId": "c1ac9869-ce9c-4129-860f-83e030bd81a3",
+					"_id": "5ad0ccc0750fed1e059ed61a"
+				}]
+			},
+			"_roleId": {
+				"_id": "5a58565ded34a3331e9ae3d7",
+				"name": "Client Quality"
+			},
+			"_id": "5acccfee2993531dff7c711e"
+		}, {
+			"_userId": {
+				"_id": "5a7911bec3cd8264db614792",
+				"displayName": "Naveen n",
+				"username": "naveenn",
+				"email": "naveen.n@starworthinfra.com",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": [{
+					"deviceType": "android",
+					"deviceId": "0525c347-542d-4bd4-8fb8-5650cbfedc28",
+					"_id": "5a9d3d7d0231d529bdad7ef7"
+				}]
+			},
+			"_roleId": {
+				"_id": "5a5856dc86eca8331890c205",
+				"name": "Client Engineer"
+			},
+			"_id": "5acccfee2993531dff7c711d"
+		}, {
+			"_userId": {
+				"_id": "5a7911654f199964d58d3169",
+				"displayName": "Satheesan A.M",
+				"username": "satheesanam",
+				"email": "satheesan.am@providenthousing.com",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": []
+			},
+			"_roleId": {
+				"_id": "5a5856dc86eca8331890c205",
+				"name": "Client Engineer"
+			},
+			"_id": "5acccfee2993531dff7c711c"
+		}, {
+			"_userId": {
+				"_id": "5a9f6e660231d529bdad7efa",
+				"displayName": "Sridharan Shivaji",
+				"email": "sridharan.shivaji@puravankara.com",
+				"username": "sridharans",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": [{
+					"deviceType": "android",
+					"deviceId": "c0632705-89a0-4b98-8aa5-525cbf5488e1",
+					"_id": "5a9f738d3890c829b7f48f03"
+				}]
+			},
+			"_roleId": {
+				"_id": "5a5856dc86eca8331890c205",
+				"name": "Client Engineer"
+			},
+			"_id": "5acccfee2993531dff7c711b"
+		}, {
+			"_userId": {
+				"_id": "5a9f6e1f3890c829b7f48eff",
+				"displayName": "Sivakumar S",
+				"email": "sivakumar.s@puravankara.com",
+				"username": "sivakumars",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": [{
+					"deviceType": "android",
+					"deviceId": "e47492f3-6e6f-47b1-b0f2-7216d5f63870",
+					"_id": "5a9f7d9a3890c829b7f48f06"
+				}]
+			},
+			"_roleId": {
+				"_id": "5a5856dc86eca8331890c205",
+				"name": "Client Engineer"
+			},
+			"_id": "5acccfee2993531dff7c711a"
+		}, {
+			"_userId": {
+				"_id": "5a9f6d6e3890c829b7f48efc",
+				"displayName": "Subhasish Das",
+				"email": "subhasish.das@starworthinfra.com",
+				"username": "subhasishd",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": []
+			},
+			"_roleId": {
+				"_id": "5a5855e5ed34a3331e9ae3c6",
+				"name": "Contractor Engineer"
+			},
+			"_id": "5acccfee2993531dff7c7119"
+		}],
+		"_contractors": [],
+		"_consultants": [],
+		"imageUrls": [],
+		"logoImageUrl": "storage/organisation/logo/default.png",
+		"phases": [{
+			"name": "Phase I",
+			"_id": "5a789ee64f199964d58d315f",
+			"blocks": [{
+				"name": "A",
+				"_id": "5a789ee64f199964d58d3164",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}, {
+				"name": "B",
+				"_id": "5a789ee64f199964d58d3163",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}, {
+				"name": "C",
+				"_id": "5a789ee64f199964d58d3162",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}, {
+				"name": "D",
+				"_id": "5a789ee64f199964d58d3161",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}, {
+				"name": "E",
+				"_id": "5a789ee64f199964d58d3160",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}]
+		}]
+	}, {
+		"_id": "5a714beb72114d4030d0e4eb",
+		"name": "PROVIDENT SUNWORTH",
+		"projectCode": "PS-4",
+		"type": "RESIDENTIAL",
+		"beginDate": "2017-12-31T18:30:00.000Z",
+		"completionDate": "2018-01-31T18:30:00.000Z",
+		"status": "COMPLETE",
+		"_organisationId": {
+			"_id": "5a585371ed34a3331e9ae3b0",
+			"name": "Puravankara Limited",
+			"logoImageUrl": "storage/organisation/logo/default.png",
+			"orgType": "BUILDER"
+		},
+		"_createdBy": {
+			"_id": "5a585376ed34a3331e9ae3c4",
+			"displayName": "",
+			"email": "paruadmin@gmail.com",
+			"username": "purvaadmin",
+			"profileImageUrl": "storage/user/profile/default.png"
+		},
+		"createdAt": "2018-01-31T04:54:03.136Z",
+		"__v": 0,
+		"_updatedBy": {
+			"_id": "5a585376ed34a3331e9ae3c4",
+			"displayName": "",
+			"email": "paruadmin@gmail.com",
+			"username": "purvaadmin",
+			"profileImageUrl": "storage/user/profile/default.png"
+		},
+		"updatedAt": "2018-06-02T03:33:38.760Z",
+		"deleteFlag": false,
+		"unitTypes": [],
+		"description": "PROVIDENT SUNWORTH",
+		"projectDetails": {
+			"location": "Bangalore",
+			"wings": "14",
+			"landArea": "1000000",
+			"unitNumber": 1344,
+			"floorCount": 12,
+			"projectStatus": "COMPLETED",
+			"crmTeam": "CRM Team"
+		},
+		"milestones": [],
+		"milestonesList": [],
+		"_snagsFlow": [],
+		"_coreTeam": [],
+		"_facilityTeam": [],
+		"_teamMembers": [{
+			"shift": "DAY",
+			"_userId": {
+				"_id": "5a7133af9dc276402ad22fc0",
+				"displayName": "Vignesh Koundappan",
+				"username": "vigneshk",
+				"email": "vignesh.koundappan@providenthousing.com",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": []
+			},
+			"_roleId": {
+				"_id": "5a712d599dc276402ad22fa8",
+				"name": "Technician"
+			},
+			"_id": "5b12101231dcd910e8f9dbb8"
+		}, {
+			"shift": "DAY",
+			"_userId": {
+				"_id": "5a712f3472114d4030d0e4e7",
+				"displayName": "Rakshe Shivanand",
+				"username": "rakshes",
+				"email": "rakshe.shivanand@providenthousing.com",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": [{
+					"deviceType": "android",
+					"deviceId": "e1fbb8c9-bb7d-4b57-aba6-fcfc9e82e4c0",
+					"_id": "5a7dd6e23425e144f451af0d"
+				}]
+			},
+			"_roleId": {
+				"_id": "5a712d599dc276402ad22fa8",
+				"name": "Technician"
+			},
+			"_id": "5b12101231dcd910e8f9dbb7"
+		}, {
+			"shift": "DAY",
+			"_userId": {
+				"_id": "5a712ee372114d4030d0e4e4",
+				"displayName": "Yuvaraj s",
+				"username": "yuvarajs",
+				"email": "yuvaraj.s@providenthousing.com",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": [{
+					"deviceType": "android",
+					"deviceId": "7de88bab-cf7a-4423-9c1e-51fd19cb7914",
+					"_id": "5a713a5c72114d4030d0e4ea"
+				}]
+			},
+			"_roleId": {
+				"_id": "5a712d599dc276402ad22fa8",
+				"name": "Technician"
+			},
+			"_id": "5b12101231dcd910e8f9dbb6"
+		}, {
+			"shift": "DAY",
+			"_userId": {
+				"_id": "5a712e8972114d4030d0e4e1",
+				"displayName": "Chandrashekara S",
+				"username": "chandras",
+				"email": "chandrashekara.s@providenthousing.com",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": []
+			},
+			"_roleId": {
+				"_id": "5a712d939dc276402ad22fb4",
+				"name": "PATADMIN"
+			},
+			"_id": "5b12101231dcd910e8f9dbb5"
+		}, {
+			"shift": "DAY",
+			"_userId": {
+				"_id": "5a712e1872114d4030d0e4de",
+				"displayName": "Vamsee Krishna",
+				"username": "vamseek",
+				"email": "vamsee.krishna@providenthousing.com",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": [{
+					"deviceType": "android",
+					"deviceId": "e3d0af6e-a765-4621-ad61-011e05cf8723",
+					"_id": "5a73d6ce72114d4030d2b207"
+				}, {
+					"deviceType": "android",
+					"deviceId": "e3d0af6e-a765-4621-ad61-011e05cf8723",
+					"_id": "5a73d6ce72114d4030d2b207"
+				}, {
+					"deviceType": "android",
+					"deviceId": "554da5dc-3bd0-4b2a-b7fa-9db273de1dd2",
+					"_id": "5b67ed655684280ede511931"
+				}]
+			},
+			"_roleId": {
+				"_id": "5a712d599dc276402ad22fa8",
+				"name": "Technician"
+			},
+			"_id": "5b12101231dcd910e8f9dbb4"
+		}, {
+			"shift": "DAY",
+			"_userId": {
+				"_id": "5a712ddb72114d4030d0e4db",
+				"displayName": "Karpachev P",
+				"username": "karpachevp",
+				"email": "karpachev88@gmail.com",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": []
+			},
+			"_roleId": {
+				"_id": "5a712d939dc276402ad22fb4",
+				"name": "PATADMIN"
+			},
+			"_id": "5b12101231dcd910e8f9dbb3"
+		}],
+		"_contractors": [],
+		"_consultants": [],
+		"imageUrls": [],
+		"logoImageUrl": "storage/organisation/logo/default.png",
+		"phases": [{
+			"name": "Phase 02",
+			"_id": "5a714beb72114d4030d0e4f2",
+			"blocks": [{
+				"name": "5A",
+				"_id": "5a714beb72114d4030d0e500",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}, {
+				"name": "5B",
+				"_id": "5a714beb72114d4030d0e4ff",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}, {
+				"name": "5C",
+				"_id": "5a714beb72114d4030d0e4fe",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}, {
+				"name": "5D",
+				"_id": "5a714beb72114d4030d0e4fd",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}, {
+				"name": "5E",
+				"_id": "5a714beb72114d4030d0e4fc",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}, {
+				"name": "5F",
+				"_id": "5a714beb72114d4030d0e4fb",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}, {
+				"name": "5G",
+				"_id": "5a714beb72114d4030d0e4fa",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}, {
+				"name": "5H",
+				"_id": "5a714beb72114d4030d0e4f9",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}, {
+				"name": "5J",
+				"_id": "5a714beb72114d4030d0e4f8",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}, {
+				"name": "5K",
+				"_id": "5a714beb72114d4030d0e4f7",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}, {
+				"name": "5L",
+				"_id": "5a714beb72114d4030d0e4f6",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}, {
+				"name": "5M",
+				"_id": "5a714beb72114d4030d0e4f5",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}, {
+				"name": "5N",
+				"_id": "5a714beb72114d4030d0e4f4",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}, {
+				"name": "5P",
+				"_id": "5a714beb72114d4030d0e4f3",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}]
+		}]
+	}, {
+		"_id": "5a633c0281f76f77e53431f3",
+		"name": "Purva Palm Beach",
+		"projectCode": "PPB-3",
+		"type": "RESIDENTIAL",
+		"beginDate": "2018-01-19T18:30:00.000Z",
+		"completionDate": "2018-01-19T18:30:00.000Z",
+		"status": "INPROGRESS",
+		"_organisationId": {
+			"_id": "5a585371ed34a3331e9ae3b0",
+			"name": "Puravankara Limited",
+			"logoImageUrl": "storage/organisation/logo/default.png",
+			"orgType": "BUILDER"
+		},
+		"_createdBy": {
+			"_id": "5a585376ed34a3331e9ae3c4",
+			"displayName": "",
+			"email": "paruadmin@gmail.com",
+			"username": "purvaadmin",
+			"profileImageUrl": "storage/user/profile/default.png"
+		},
+		"createdAt": "2018-01-20T12:54:26.485Z",
+		"__v": 0,
+		"_updatedBy": {
+			"_id": "5a585376ed34a3331e9ae3c4",
+			"displayName": "",
+			"email": "paruadmin@gmail.com",
+			"username": "purvaadmin",
+			"profileImageUrl": "storage/user/profile/default.png"
+		},
+		"updatedAt": "2018-07-09T18:13:31.728Z",
+		"deleteFlag": false,
+		"unitTypes": [],
+		"description": "Purva Palm Beach",
+		"projectDetails": {
+			"crmTeam": "CRM Team",
+			"projectStatus": "ON-GOING",
+			"floorCount": 21,
+			"unitNumber": 1323,
+			"landArea": "1000000",
+			"wings": "19",
+			"location": "Bangalore"
+		},
+		"milestones": [],
+		"milestonesList": [],
+		"_snagsFlow": [],
+		"_coreTeam": [],
+		"_facilityTeam": [],
+		"_teamMembers": [{
+			"_userId": {
+				"_id": "5a633b2081f76f77e53431f0",
+				"displayName": "Mr. Jagadeesh M N",
+				"email": "jagadeeshan.mn@puravankara.com",
+				"username": "jagadeeshmn",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": [{
+					"deviceType": "android",
+					"deviceId": "834a7d08-7ffa-4352-b155-b3f754fdb03c",
+					"_id": "5a6ff0369dc276402ad22f7a"
+				}]
+			},
+			"_roleId": {
+				"_id": "5a58565ded34a3331e9ae3d7",
+				"name": "Client Quality"
+			},
+			"_id": "5b43a5cb5684280ede5116d9"
+		}, {
+			"_userId": {
+				"_id": "5a633ae581f76f77e53431ed",
+				"displayName": "Mr. Elaiyarajan K",
+				"email": "elaiyarajan.k@puravankara.com",
+				"username": "elaiyarajank",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": [{
+					"deviceType": "android",
+					"deviceId": "f2f1a42a-114c-4b67-aef4-bd6f0d7e3e8d",
+					"_id": "5a7012979dc276402ad22f91"
+				}]
+			},
+			"_roleId": {
+				"_id": "5a58565ded34a3331e9ae3d7",
+				"name": "Client Quality"
+			},
+			"_id": "5b43a5cb5684280ede5116d8"
+		}, {
+			"_userId": {
+				"_id": "5a633ab91e59fc77df778a49",
+				"displayName": "Mr. Parikshith Murthy",
+				"email": "parikshith.murthy@puravankara.com",
+				"username": "parikshithm",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": []
+			},
+			"_roleId": {
+				"_id": "5a5856dc86eca8331890c205",
+				"name": "Client Engineer"
+			},
+			"_id": "5b43a5cb5684280ede5116d7"
+		}, {
+			"_userId": {
+				"_id": "5a633a7f1e59fc77df778a46",
+				"displayName": "Mr. Gurudutt",
+				"username": "gurudutt",
+				"email": "gurudutt.rao@providenthousing.com",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": []
+			},
+			"_roleId": {
+				"_id": "5a5856dc86eca8331890c205",
+				"name": "Client Engineer"
+			},
+			"_id": "5b43a5cb5684280ede5116d6"
+		}, {
+			"_userId": {
+				"_id": "5a633a481e59fc77df778a43",
+				"displayName": "Mr. Vijay",
+				"username": "vijay",
+				"email": "palmbeachcivilv@fabs.co.in",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": []
+			},
+			"_roleId": {
+				"_id": "5a63348e81f76f77e53431b5",
+				"name": "PMC Engineer"
+			},
+			"_id": "5b43a5cb5684280ede5116d5"
+		}, {
+			"_userId": {
+				"_id": "5a633a161e59fc77df778a40",
+				"displayName": "Mr.Andrew Jagadish",
+				"username": "andrewj",
+				"email": "palmbeachcivilj@fabs.co.in",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": []
+			},
+			"_roleId": {
+				"_id": "5a63348e81f76f77e53431b5",
+				"name": "PMC Engineer"
+			},
+			"_id": "5b43a5cb5684280ede5116d4"
+		}, {
+			"_userId": {
+				"_id": "5a6339e381f76f77e53431ea",
+				"displayName": "Mr. Sunil",
+				"username": "sunil",
+				"email": "palmqca@jmcprojects.com",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": []
+			},
+			"_roleId": {
+				"_id": "5a6335c481f76f77e53431c6",
+				"name": "Contractor Quality"
+			},
+			"_id": "5b43a5cb5684280ede5116d3"
+		}, {
+			"_userId": {
+				"_id": "5a63394f1e59fc77df778a3b",
+				"displayName": "Mr. Rajendran",
+				"username": "rajendran",
+				"email": "palmr@jmcprojects.com",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": []
+			},
+			"_roleId": {
+				"_id": "5a5855e5ed34a3331e9ae3c6",
+				"name": "Contractor Engineer"
+			},
+			"_id": "5b43a5cb5684280ede5116d2"
+		}, {
+			"_userId": {
+				"_id": "5a63390681f76f77e53431e7",
+				"displayName": "Mr. Manigandan",
+				"username": "manigandan",
+				"email": "palmbeachcivilc@fabs.co.in",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": []
+			},
+			"_roleId": {
+				"_id": "5a63348e81f76f77e53431b5",
+				"name": "PMC Engineer"
+			},
+			"_id": "5b43a5cb5684280ede5116d1"
+		}, {
+			"_userId": {
+				"_id": "5a6338c081f76f77e53431e4",
+				"displayName": "Mr. Nandhakumar",
+				"username": "nandhakumar",
+				"email": "palmbeachcivils@fabs.co.in",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": []
+			},
+			"_roleId": {
+				"_id": "5a63348e81f76f77e53431b5",
+				"name": "PMC Engineer"
+			},
+			"_id": "5b43a5cb5684280ede5116d0"
+		}, {
+			"_userId": {
+				"_id": "5a63387481f76f77e53431e1",
+				"displayName": "Mr. Irshad",
+				"username": "irshad",
+				"email": "palmqcs@jmcprojects.com",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": []
+			},
+			"_roleId": {
+				"_id": "5a6335c481f76f77e53431c6",
+				"name": "Contractor Quality"
+			},
+			"_id": "5b43a5cb5684280ede5116cf"
+		}, {
+			"_userId": {
+				"_id": "5a6337d01e59fc77df778a38",
+				"displayName": "Mr. Pandiarajan",
+				"username": "pandiarajan",
+				"email": "palmb@jmcprojects.com",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": []
+			},
+			"_roleId": {
+				"_id": "5a5855e5ed34a3331e9ae3c6",
+				"name": "Contractor Engineer"
+			},
+			"_id": "5b43a5cb5684280ede5116ce"
+		}, {
+			"_userId": {
+				"_id": "5a63374381f76f77e53431dd",
+				"displayName": "Mr.Sreenivas Reddy",
+				"username": "sreenivasr",
+				"email": "palmbeachquality@fabs.co.in",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": []
+			},
+			"_roleId": {
+				"_id": "5a63348e81f76f77e53431b5",
+				"name": "PMC Engineer"
+			},
+			"_id": "5b43a5cb5684280ede5116cd"
+		}, {
+			"_userId": {
+				"_id": "5a63370c81f76f77e53431da",
+				"displayName": "Mr. Sathish",
+				"username": "sathish",
+				"email": "purvamep@fabs.co.in",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": []
+			},
+			"_roleId": {
+				"_id": "5a63348e81f76f77e53431b5",
+				"name": "PMC Engineer"
+			},
+			"_id": "5b43a5cb5684280ede5116cc"
+		}, {
+			"_userId": {
+				"_id": "5a6336d981f76f77e53431d7",
+				"displayName": "Mr. Dharmendra",
+				"username": "dharmendra",
+				"email": "dharmendra@fabs.co.in",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": []
+			},
+			"_roleId": {
+				"_id": "5a63348e81f76f77e53431b5",
+				"name": "PMC Engineer"
+			},
+			"_id": "5b43a5cb5684280ede5116cb"
+		}, {
+			"_userId": {
+				"_id": "5a63369d1e59fc77df778a35",
+				"displayName": "Mr Sivaprakasham",
+				"username": "palmbeachcivil",
+				"email": "palmbeachcivil@fabs.co.in",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": []
+			},
+			"_roleId": {
+				"_id": "5a63348e81f76f77e53431b5",
+				"name": "PMC Engineer"
+			},
+			"_id": "5b43a5cb5684280ede5116ca"
+		}, {
+			"_userId": {
+				"_id": "5a6336111e59fc77df778a32",
+				"displayName": "Mr. Kabil",
+				"username": "kabil",
+				"email": "palmqc@jmcprojects.com",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": []
+			},
+			"_roleId": {
+				"_id": "5a6335c481f76f77e53431c6",
+				"name": "Contractor Quality"
+			},
+			"_id": "5b43a5cb5684280ede5116c9"
+		}, {
+			"_userId": {
+				"_id": "5a6335331e59fc77df778a2f",
+				"displayName": "Mr. Venkat",
+				"username": "venkat",
+				"email": "palmmep@jmcprojects.com",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": []
+			},
+			"_roleId": {
+				"_id": "5a5855e5ed34a3331e9ae3c6",
+				"name": "Contractor Engineer"
+			},
+			"_id": "5b43a5cb5684280ede5116c8"
+		}, {
+			"_userId": {
+				"_id": "5a6334d21e59fc77df778a2c",
+				"displayName": "Vairamani",
+				"username": "vairamani",
+				"email": "palm@jmcprojects.com",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": []
+			},
+			"_roleId": {
+				"_id": "5a5855e5ed34a3331e9ae3c6",
+				"name": "Contractor Engineer"
+			},
+			"_id": "5b43a5cb5684280ede5116c7"
+		}, {
+			"_userId": {
+				"_id": "5a83a42441e4c744faf0ee3b",
+				"displayName": "Jayasimha Krishnachar",
+				"username": "jayasimha",
+				"email": "jayasimha@puravankara.com",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": []
+			},
+			"_roleId": {
+				"_id": "5a7882f19dc276402ad3ced4",
+				"name": "General Manager Operations"
+			},
+			"_id": "5b43a5cb5684280ede5116c6"
+		}],
+		"_contractors": [],
+		"_consultants": [],
+		"imageUrls": [],
+		"logoImageUrl": "storage/organisation/logo/default.png",
+		"phases": [{
+			"name": "Block 1",
+			"_id": "5a633c0281f76f77e534320e",
+			"blocks": [{
+				"name": "A",
+				"_id": "5a633c0281f76f77e5343211",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}, {
+				"name": "B",
+				"_id": "5a633c0281f76f77e5343210",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}, {
+				"name": "C",
+				"_id": "5a633c0281f76f77e534320f",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}]
+		}, {
+			"name": "Block 2",
+			"_id": "5a633c0281f76f77e5343207",
+			"blocks": [{
+				"name": "D",
+				"_id": "5a633c0281f76f77e534320d",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}, {
+				"name": "E",
+				"_id": "5a633c0281f76f77e534320c",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}, {
+				"name": "F",
+				"_id": "5a633c0281f76f77e534320b",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}, {
+				"name": "G",
+				"_id": "5a633c0281f76f77e534320a",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}, {
+				"name": "H",
+				"_id": "5a633c0281f76f77e5343209",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}, {
+				"name": "J",
+				"_id": "5a633c0281f76f77e5343208",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}]
+		}]
+	}, {
+		"_id": "5a589fe186eca833189188a4",
+		"name": "Provident Skyworth",
+		"projectCode": "PS-2",
+		"type": "RESIDENTIAL",
+		"status": "INPROGRESS",
+		"_organisationId": {
+			"_id": "5a585371ed34a3331e9ae3b0",
+			"name": "Puravankara Limited",
+			"logoImageUrl": "storage/organisation/logo/default.png",
+			"orgType": "BUILDER"
+		},
+		"_createdBy": {
+			"_id": "5a585376ed34a3331e9ae3c4",
+			"displayName": "",
+			"email": "paruadmin@gmail.com",
+			"username": "purvaadmin",
+			"profileImageUrl": "storage/user/profile/default.png"
+		},
+		"createdAt": "2018-01-12T11:45:37.204Z",
+		"__v": 0,
+		"beginDate": "1880-01-06T18:30:00.000Z",
+		"completionDate": "1880-01-11T18:30:00.000Z",
+		"_updatedBy": {
+			"_id": "5a585376ed34a3331e9ae3c4",
+			"displayName": "",
+			"email": "paruadmin@gmail.com",
+			"username": "purvaadmin",
+			"profileImageUrl": "storage/user/profile/default.png"
+		},
+		"updatedAt": "2018-07-09T18:12:31.995Z",
+		"deleteFlag": false,
+		"unitTypes": [],
+		"description": "Provident Skyworth",
+		"projectDetails": {
+			"crmTeam": "CRM Team",
+			"projectStatus": "UP-COMING",
+			"floorCount": 12,
+			"unitNumber": 356,
+			"landArea": "421416",
+			"wings": "6",
+			"location": "Mangalore"
+		},
+		"milestones": [],
+		"milestonesList": [],
+		"_snagsFlow": [],
+		"_coreTeam": [],
+		"_facilityTeam": [],
+		"_teamMembers": [{
+			"_userId": {
+				"_id": "5a589b1bed34a3331e9babeb",
+				"displayName": "Thontaradhya G V",
+				"email": "thontaradhya@puravankara.com",
+				"username": "thontaradhyagv",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": [{
+					"deviceType": "android",
+					"deviceId": "f06330e4-82a7-4537-9e3d-1e1a08dd1ddf",
+					"_id": "5a8131e83425e144f451af45"
+				}]
+			},
+			"_roleId": {
+				"_id": "5a7d3747c3cd8264db6170ec",
+				"name": "Engineer"
+			},
+			"_id": "5b43a58fcf75230ee4ce54c5"
+		}, {
+			"_userId": {
+				"_id": "5a589adfed34a3331e9babe8",
+				"displayName": "Vivekanandan",
+				"email": "vivekanandan@puravankara.com",
+				"username": "vivekanandan",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": []
+			},
+			"_roleId": {
+				"_id": "5a7d3747c3cd8264db6170ec",
+				"name": "Engineer"
+			},
+			"_id": "5b43a58fcf75230ee4ce54c4"
+		}, {
+			"_userId": {
+				"_id": "5a589aa9ed34a3331e9babe5",
+				"displayName": "Jyoti Dsouza",
+				"email": "jyoti.dsouza@providenthousing.com",
+				"username": "jyothid",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": []
+			},
+			"_roleId": {
+				"_id": "5a7d3747c3cd8264db6170ec",
+				"name": "Engineer"
+			},
+			"_id": "5b43a58fcf75230ee4ce54c3"
+		}, {
+			"_userId": {
+				"_id": "5a589a6eed34a3331e9babe2",
+				"displayName": "Sujith Bairapur",
+				"email": "sujith.bairapur@providenthousing.com",
+				"username": "sujithb",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": []
+			},
+			"_roleId": {
+				"_id": "5a7d3747c3cd8264db6170ec",
+				"name": "Engineer"
+			},
+			"_id": "5b43a58fcf75230ee4ce54c2"
+		}, {
+			"_userId": {
+				"_id": "5a589a24ed34a3331e9babdf",
+				"displayName": "Ganesh S Baindur",
+				"username": "ganeshsb",
+				"email": "ganesh.s@providenthousing.com",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": [{
+					"deviceId": "85762214-736c-42a9-942f-97b7e5d002b3",
+					"_id": "5ab3623c0231d529bdad94a7"
+				}]
+			},
+			"_roleId": {
+				"_id": "5a7d3747c3cd8264db6170ec",
+				"name": "Engineer"
+			},
+			"_id": "5b43a58fcf75230ee4ce54c1"
+		}, {
+			"_userId": {
+				"_id": "5a5899a3ed34a3331e9babd8",
+				"displayName": "Abhishek Shetty",
+				"username": "abhisheks",
+				"email": "abhishek.shetty@providenthousing.com",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": [{
+					"deviceId": "7c01a038-19bc-4c39-9ed4-60894dffc29c",
+					"_id": "5a59567fc73b4c315d2926fb"
+				}, {
+					"deviceId": "84e0bbbd-c2c9-42b8-b7ed-30aa600ceacd",
+					"_id": "5a59813dc73b4c315d2926fd"
+				}, {
+					"deviceId": "7c01a038-19bc-4c39-9ed4-60894dffc29c",
+					"_id": "5a59567fc73b4c315d2926fb"
+				}, {
+					"deviceId": "84e0bbbd-c2c9-42b8-b7ed-30aa600ceacd",
+					"_id": "5a59813dc73b4c315d2926fd"
+				}, {
+					"deviceType": "android",
+					"deviceId": "84e0bbbd-c2c9-42b8-b7ed-30aa600ceacd",
+					"_id": "5a7d22c24f199964d58d343c"
+				}]
+			},
+			"_roleId": {
+				"_id": "5a5855e5ed34a3331e9ae3c6",
+				"name": "Contractor Engineer"
+			},
+			"_id": "5b43a58fcf75230ee4ce54c0"
+		}, {
+			"_userId": {
+				"_id": "5a59a8ccfdb8153157ccbd29",
+				"displayName": "Amrathakara Bhat",
+				"email": "amrathakara.bhat@providenthousing.com",
+				"username": "amrathakarab",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": [{
+					"deviceId": "c2798163-6806-4915-9275-fec15cc4bf4a",
+					"_id": "5a59b132c73b4c315d29287e"
+				}, {
+					"deviceType": "android",
+					"deviceId": "c2798163-6806-4915-9275-fec15cc4bf4a",
+					"_id": "5a7d230ac3cd8264db614828"
+				}, {
+					"deviceId": "c2798163-6806-4915-9275-fec15cc4bf4a",
+					"_id": "5a59b132c73b4c315d29287e"
+				}, {
+					"deviceType": "android",
+					"deviceId": "c2798163-6806-4915-9275-fec15cc4bf4a",
+					"_id": "5a7d230ac3cd8264db614828"
+				}]
+			},
+			"_roleId": {
+				"_id": "5a7d3747c3cd8264db6170ec",
+				"name": "Engineer"
+			},
+			"_id": "5b43a58fcf75230ee4ce54bf"
+		}, {
+			"_userId": {
+				"_id": "5a83a42441e4c744faf0ee3b",
+				"displayName": "Jayasimha Krishnachar",
+				"username": "jayasimha",
+				"email": "jayasimha@puravankara.com",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": []
+			},
+			"_roleId": {
+				"_id": "5a7882f19dc276402ad3ced4",
+				"name": "General Manager Operations"
+			},
+			"_id": "5b43a58fcf75230ee4ce54be"
+		}, {
+			"_userId": {
+				"_id": "5a58584586eca8331890c21f",
+				"displayName": "Raghavendra Sudhakar",
+				"username": "raghavendras",
+				"email": "raghavendra.sudhakar@puravankara.com",
+				"profileImageUrl": "storage/user/profile/default.png",
+				"devices": [{
+					"deviceType": "android",
+					"deviceId": "1b9c31c3-a34f-4383-a67d-8b78f3f16f1c",
+					"_id": "5a8aab64f6def753ecfcebf6"
+				}]
+			},
+			"_roleId": {
+				"_id": "5a58565ded34a3331e9ae3d7",
+				"name": "Client Quality"
+			},
+			"_id": "5b43a58fcf75230ee4ce54bd"
+		}],
+		"_contractors": [],
+		"_consultants": [],
+		"imageUrls": [],
+		"logoImageUrl": "storage/organisation/logo/default.png",
+		"phases": [{
+			"name": "Phase I",
+			"_id": "5a589fe186eca833189188ac",
+			"blocks": [{
+				"name": "B -BLOCK",
+				"_id": "5a589fe186eca833189188b2",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}, {
+				"name": "C-BLOCK",
+				"_id": "5a589fe186eca833189188b1",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}, {
+				"name": "D-BLOCK",
+				"_id": "5a589fe186eca833189188b0",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}, {
+				"name": "E-BLOCK",
+				"_id": "5a589fe186eca833189188af",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}, {
+				"name": "F-BLOCK",
+				"_id": "5a589fe186eca833189188ae",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}, {
+				"name": "G-BLOCK",
+				"_id": "5a589fe186eca833189188ad",
+				"imgUrl": "assets/images/dashboard/Tower.png"
+			}]
+		}]
+	}]
+}

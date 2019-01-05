@@ -17,9 +17,9 @@
 }
 .side-nav-list li a {
     font-size: 10px;
-    color: #ffffff;
     text-decoration: none;
     cursor: pointer;
+    color: gray;
     &.active {
         color: #3cc0f0;
     }
