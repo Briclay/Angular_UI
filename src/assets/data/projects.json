@@ -2,6 +2,7 @@
 	"status": "success",
 	"data": [{
 		"_id": "5b8689483b68600ec6337fed",
+		"logoImageUrl": "assets/images/avatars/profile.jpg",
 		"_organisationId": {
 			"_id": "5a585371ed34a3331e9ae3b0",
 			"name": "Puravankara Limited",
@@ -281,7 +282,6 @@
 		"_contractors": [],
 		"_consultants": null,
 		"imageUrls": ["assets/images/avatars/profile.jpg", "assets/images/avatars/profile.jpg"],
-		"logoImageUrl": "",
 		"phases": [{
 			"name": "Phase-1",
 			"_id": "5b8689483b68600ec6337fee",
@@ -297,6 +297,7 @@
 		}]
 	}, {
 		"_id": "5b0cdff231dcd910e8f9da1d",
+		"logoImageUrl": "assets/images/avatars/profile.jpg",
 		"name": "PURVA SKYDALE",
 		"projectCode": "PS-11",
 		"type": "RESIDENTIAL",
@@ -702,7 +703,6 @@
 		"_contractors": [],
 		"_consultants": [],
 		"imageUrls": [],
-		"logoImageUrl": "storage/organisation/logo/default.png",
 		"phases": [{
 			"name": "Phase I",
 			"_id": "5b0cdff231dcd910e8f9da1f",
@@ -722,6 +722,7 @@
 		}]
 	}, {
 		"_id": "5aec107deae4cc5f02fd43d9",
+		"logoImageUrl": "assets/images/avatars/profile.jpg",
 		"_organisationId": {
 			"_id": "5a585371ed34a3331e9ae3b0",
 			"name": "Puravankara Limited",
@@ -1346,7 +1347,6 @@
 		"_contractors": [],
 		"_consultants": ["5a585371ed34a3331e9ae3b0"],
 		"imageUrls": [],
-		"logoImageUrl": "storage/organisation/logo/default.png",
 		"phases": [{
 			"name": "Phase 1",
 			"_id": "5aec107deae4cc5f02fd43db",
@@ -1386,6 +1386,7 @@
 		}]
 	}, {
 		"_id": "5aab3ddd0231d529bdad91cc",
+		"logoImageUrl": "assets/images/avatars/profile.jpg",
 		"name": "Milestone",
 		"projectCode": "M-9",
 		"type": "RESIDENTIAL",
@@ -1436,7 +1437,6 @@
 		"_contractors": [],
 		"_consultants": [],
 		"imageUrls": [],
-		"logoImageUrl": "storage/organisation/logo/default.png",
 		"phases": [{
 			"name": "Phase I",
 			"_id": "5aab3ddd0231d529bdad91d2",
@@ -1460,6 +1460,7 @@
 		}]
 	}, {
 		"_id": "5a8cd0da69f8ae43ec13ae2a",
+		"logoImageUrl": "assets/images/avatars/profile.jpg",
 		"name": "Purva Amaiti",
 		"projectCode": "PA-8",
 		"type": "RESIDENTIAL",
@@ -1644,7 +1645,6 @@
 		"_contractors": [],
 		"_consultants": [],
 		"imageUrls": [],
-		"logoImageUrl": "storage/organisation/logo/default.png",
 		"phases": [{
 			"name": "Phase 1",
 			"_id": "5a8cd0da69f8ae43ec13ae2c",
@@ -1672,6 +1672,7 @@
 		}]
 	}, {
 		"_id": "5a863f5a41e4c744faf0ee6e",
+		"logoImageUrl": "assets/images/avatars/profile.jpg",
 		"name": "Purva Windermere Phase-II",
 		"projectCode": "PWP-7",
 		"type": "RESIDENTIAL",
@@ -1975,7 +1976,6 @@
 		"_contractors": [],
 		"_consultants": [],
 		"imageUrls": [],
-		"logoImageUrl": "storage/organisation/logo/default.png",
 		"phases": [{
 			"name": "Building 1",
 			"_id": "5a863f5a41e4c744faf0ee70",
@@ -2047,6 +2047,7 @@
 		}]
 	}, {
 		"_id": "5a863ccb41e4c744faf0ee58",
+		"logoImageUrl": "assets/images/avatars/profile.jpg",
 		"name": "Puravankara Kenworth",
 		"projectCode": "PK-6",
 		"type": "RESIDENTIAL",
@@ -2173,7 +2174,6 @@
 		"_contractors": [],
 		"_consultants": [],
 		"imageUrls": [],
-		"logoImageUrl": "storage/organisation/logo/default.png",
 		"phases": [{
 			"name": "Phase 1",
 			"_id": "5a863ccb41e4c744faf0ee5a",
@@ -2249,6 +2249,7 @@
 		}]
 	}, {
 		"_id": "5a7c84008e64e99e4748d61b",
+		"logoImageUrl": "assets/images/avatars/profile.jpg",
 		"name": "PROVIDENT THE TREE",
 		"projectCode": "PTT-1",
 		"type": "RESIDENTIAL",
@@ -2629,7 +2630,6 @@
 		"_contractors": [],
 		"_consultants": [],
 		"imageUrls": [],
-		"logoImageUrl": "storage/organisation/logo/default.png",
 		"phases": [{
 			"name": "Building 1",
 			"_id": "5a585a1ded34a3331e9ae3f5",
@@ -2669,6 +2669,7 @@
 		}]
 	}, {
 		"_id": "5a789ee64f199964d58d315d",
+		"logoImageUrl": "assets/images/avatars/profile.jpg",
 		"name": "PURVA WESTEND",
 		"projectCode": "PW-4",
 		"type": "RESIDENTIAL",
@@ -2887,7 +2888,6 @@
 		"_contractors": [],
 		"_consultants": [],
 		"imageUrls": [],
-		"logoImageUrl": "storage/organisation/logo/default.png",
 		"phases": [{
 			"name": "Phase I",
 			"_id": "5a789ee64f199964d58d315f",
@@ -2915,6 +2915,7 @@
 		}]
 	}, {
 		"_id": "5a714beb72114d4030d0e4eb",
+		"logoImageUrl": "assets/images/avatars/profile.jpg",
 		"name": "PROVIDENT SUNWORTH",
 		"projectCode": "PS-4",
 		"type": "RESIDENTIAL",
@@ -3075,7 +3076,6 @@
 		"_contractors": [],
 		"_consultants": [],
 		"imageUrls": [],
-		"logoImageUrl": "storage/organisation/logo/default.png",
 		"phases": [{
 			"name": "Phase 02",
 			"_id": "5a714beb72114d4030d0e4f2",
@@ -3139,6 +3139,7 @@
 		}]
 	}, {
 		"_id": "5a633c0281f76f77e53431f3",
+		"logoImageUrl": "assets/images/avatars/profile.jpg",
 		"name": "Purva Palm Beach",
 		"projectCode": "PPB-3",
 		"type": "RESIDENTIAL",
@@ -3477,7 +3478,6 @@
 		"_contractors": [],
 		"_consultants": [],
 		"imageUrls": [],
-		"logoImageUrl": "storage/organisation/logo/default.png",
 		"phases": [{
 			"name": "Block 1",
 			"_id": "5a633c0281f76f77e534320e",
@@ -3525,6 +3525,7 @@
 		}]
 	}, {
 		"_id": "5a589fe186eca833189188a4",
+		"logoImageUrl": "assets/images/avatars/profile.jpg",
 		"name": "Provident Skyworth",
 		"projectCode": "PS-2",
 		"type": "RESIDENTIAL",
@@ -3742,7 +3743,6 @@
 		"_contractors": [],
 		"_consultants": [],
 		"imageUrls": [],
-		"logoImageUrl": "storage/organisation/logo/default.png",
 		"phases": [{
 			"name": "Phase I",
 			"_id": "5a589fe186eca833189188ac",

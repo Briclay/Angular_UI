@@ -6,12 +6,14 @@ import { ProjectTeamsComponent } from './project-teams/project-teams.component';
 import { ProjectDatesComponent } from './project-dates/project-dates.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import {ProjectService} from './project.service';
+import {MaterialModule} from '../../../../modules/material.module'
 
 @NgModule({
   imports: [
     CommonModule,
     ReactiveFormsModule, 
-    FormsModule
+    FormsModule,
+    MaterialModule
   ],
   declarations: [
     ProjectDetailsComponent,

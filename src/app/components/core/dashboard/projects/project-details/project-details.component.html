@@ -1,97 +1,70 @@
-<div class="user-details-container">
-  <form [formGroup]="userDetailsForm" (ngSubmit)="onSubmit()" class="user-details-form">
-    <mat-card>
-      <div class="user-details-card">
-        <div class="user-details-name">
-          <img src="./assets/images/avatars/profile.jpg" />
-          <div class="username-input">
-            <mat-form-field appearance="outline">
-              <mat-label>User Name</mat-label>
-              <input matInput formControlName="username">
-            </mat-form-field>
-            <mat-form-field appearance="outline">
-              <mat-label>User Type</mat-label>
-              <mat-select formControlName="userType">
-                <mat-option *ngFor="let user of userType" [value]="user">
-                  {{user}}
-                </mat-option>
+<div id="project-forms" class="page-layout simple fullwidth" fxLayout="column" matkraftPerfectScrollbar>
+  <!-- CONTENT -->
+  <div id="whole-form-screen">
+    <div  id="nw-proj">
+      <span class="new-project">New Project</span>
+    </div>
+    <div id="proj-nm-des-id">
+      <form  [formGroup]="projectForm" novalidate>
+        <mat-card>
+        <!-- first row -->
+        <div id="name-des" fxLayout="row">
+          <mat-form-field fxFlex="30" class="project-name-field" *ngIf="projectStatus ==='UP-COMING' && progressChecked ==='OPEN';">
+            <input matInput placeholder="Project Name" formControlName="name" required (keyup)="generateOrgCode()" [disabled]="disableFlag">
+          </mat-form-field>
+          <mat-form-field fxFlex="30" class="project-name-field" *ngIf="showReadOnly">
+            <input matInput placeholder="Project Name" formControlName="name" required (keyup)="generateOrgCode()" readonly>
+          </mat-form-field>
+          <mat-form-field fxFlex="70" class="project-description-field">
+            <input matInput placeholder="Description" formControlName="description" required>
+          </mat-form-field>
+        </div>
+        <!-- end first row -->
+        <!-- start second row -->
+        <div fxLayout="row">
+          <mat-form-field fxFlex="30" class="project-project-id-field">
+            <input matInput placeholder="Project Code" type ="text" formControlName="projectCode" [(ngModel)]="projectCode" required readonly>
+          </mat-form-field>
+          <div fxLayout="row" class="mt-sel-proj-progrs" fxFlex="70" fxLayoutAlign="space-around center">
+            <mat-form-field fxFlex="30">
+              <mat-select required placeholder="Construction Type" class="prog-status-proje" formControlName="constructionType">
+                <mat-option *ngFor="let constType of constructionType" [value]="constType">{{constType}}</mat-option>
               </mat-select>
             </mat-form-field>
-          </div>
-
-        </div>
-        <div class="user-details-content">
-          <div class="user-details-content-title">
-            <strong> Details</strong>
-          </div>
-          <div class="user-details-form-list">
-            <div formGroupName="name">
-              <mat-form-field class="margin_right_25" appearance="outline">
-                <mat-label>First Name</mat-label>
-                <input matInput formControlName="first">
-              </mat-form-field>
-              <mat-form-field class="margin_right_25" appearance="outline">
-                <mat-label>Last Name</mat-label>
-                <input matInput formControlName="last">
-              </mat-form-field>
-            </div>
-            <div>
-              <mat-form-field appearance="outline">
-                <mat-label>Email</mat-label>
-                <input matInput formControlName="email">
-              </mat-form-field>
-            </div>
-            <div>
-              <mat-form-field appearance="outline">
-                <mat-label>Phone Number</mat-label>
-                <input matInput formControlName="phone">
-              </mat-form-field>
-            </div>
-          </div>
-        </div>
-        <div class="user-details-content">
-          <div class="user-details-content-title">
-            <strong>Office</strong>
-          </div>
-          <div class="user-details-form-list">
-            <div formGroupName="address">
-              <mat-form-field appearance="outline">
-                <mat-label>Location</mat-label>
-                <input matInput formControlName="city">
-              </mat-form-field>
-              <mat-form-field appearance="outline">
-                <mat-label>Address</mat-label>
-                <textarea matInput formControlName="area"></textarea>
-              </mat-form-field>
-            </div>
-          </div>
-        </div>
-        <div class="user-details-content">
-          <div class="user-details-content-title">
-            <strong>Role</strong>
-          </div>
-          <div class="user-details-form-list">
-            <mat-form-field appearance="outline">
-              <mat-label>Role</mat-label>
-              <mat-select placeholder="Role">
-                <mat-option *ngFor="let role of _roleId" [value]="role">
-                  {{role}}
-                </mat-option>
+            <!-- project status -->
+            <mat-form-field fxFlex="30">
+              <mat-select required placeholder="Project Status" class="prog-status-proje" formControlName="projectStatus" (change)="projectStatusSelected()">
+                <mat-option *ngFor="let projStatus of status" [value]="projStatus" > {{projStatus.projectStatus}}</mat-option>
               </mat-select>
             </mat-form-field>
-            <mat-form-field appearance="outline">
-              <mat-label>Departments</mat-label>
-              <mat-select placeholder="Departments">
-                <mat-option *ngFor="let department of departments" [value]="department">
-                  {{department}}
-                </mat-option>
+              <!--end project status -->
+            <!-- progress status -->
+            <mat-form-field fxFlex="30">
+              <mat-select required placeholder="Progress Status" class="prog-status-proje" formControlName="status" (change)="projectProgressSelected()">
+                <mat-option *ngFor="let progStatus of progressStatus" [value]="progStatus">{{progStatus}}</mat-option>
               </mat-select>
             </mat-form-field>
+            <!-- en dprogress status -->
           </div>
         </div>
-      </div>
-      <button mat-raised-button type="submit" class="pull-right">Submit</button>
-      <div class="clearfix"></div>
-    </mat-card>
-  </form>
+        </mat-card>
+        <!-- end second row -->
+        <div fxLayout="row" id="sv-n-cncl-box">
+          <div fxFlex="73"></div>
+          <div fxFlex="27" fxLayout="row" fxLayoutAlign="end center">
+            <!-- <span class="edit"><button mat-button [style.display]="editFlag === true? 'block':'none'">Edit</button></span> -->
+            <div class="cancel">
+              <button mat-button (click)="onCloseCancel()">Cancel</button>
+            </div>
+            <div id="empty-div"></div>
+            <div class="save">
+              <button type="submit" mat-button (click)="onProjectFormSubmit()">Save</button>
+            </div>
+          </div>
+        </div>
+        <!-- end button area -->
+      </form>
+    </div>
+  </div>
+  <!-- / CONTENT -->
 </div>

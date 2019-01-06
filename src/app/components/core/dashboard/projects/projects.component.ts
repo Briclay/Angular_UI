@@ -8,24 +8,29 @@ import {ProjectService} from './project.service'
 })
 export class ProjectsComponent implements OnInit {
   projectDataOptions = [];
+  projects: any = {
+    data: []
+  };
   constructor(private projectService: ProjectService) { }
 
   ngOnInit() {
     this.projectService.getProjects().pipe().subscribe(res => {
       console.log('res',res)
+      this.projects = res;
       this.projectDataOptions = [
         {
-          title: 'Image', key: 'profileImageUrl', hideTitle: true, type: 'image'
+          title: 'Image', key: 'logoImageUrl', hideTitle: true, type: 'image'
         },
         {
           title: 'User Name', type: 'list', list: [
-            { title: 'UserName', key: 'username', hideTitle: true, type: 'label' },
-            { title: 'Address', key: 'address.city', hideTitle: true, type: 'label' }
+            { title: 'UserName', key: 'name', hideTitle: true, type: 'label' },
+            { title: 'Address', key: 'projectDetails.location', hideTitle: true, type: 'label' },
+            { title: 'Address', key: 'projectDetails.projectStatus', hideTitle: true, type: 'label' }
           ]
         },
-        { title: 'Role', key: 'userType' },
-        { title: 'Department', key: 'department' },
-        { title: 'Email', key: 'email' }]
+        { title: 'Project Code', key: 'projectCode' },
+        { title: 'Total Units', key: 'projectDetails.unitNumber' },
+        { title: 'Budget', key: 'projectDetails.unitNumber' }]
     });
   }
 
