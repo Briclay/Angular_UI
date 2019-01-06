@@ -7,6 +7,7 @@ import { ProjectsComponent } from './components/core/dashboard/projects/projects
 import { SettingsComponent } from './components/core/dashboard/settings/settings.component';
 import { HomeComponent } from './components/core/dashboard/home/home.component';
 import { OrganisationComponent } from './components/core/dashboard/organisation/organisation.component';
+import {WorkRequestComponent} from './components/core/dashboard/work-request/work-request.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -31,6 +32,11 @@ const routes: Routes = [
       {
         path: 'projects', component: ProjectsComponent, data: {
           breadcrumb: 'Projects'
+        }
+      },
+      {
+        path: 'work-request', component: WorkRequestComponent, data: {
+          breadcrumb: 'WorkRequest'
         }
       },
       {

@@ -1,0 +1,20 @@
+<div class="project-container">
+  <mat-tab-group>
+      <mat-tab label="Overview">
+          <app-panel-header-filter></app-panel-header-filter>
+          <div fxLayout="row">
+              <mat-spinner *ngIf="isLoading; else dataLoaded"></mat-spinner>
+              <ng-template #dataLoaded>
+                <app-expansion-panel 
+                    [expansionPanelOptions]="workRequestDataOption"
+                    selectorComponent="app-project-details" 
+                    [data]="workRequest.data"
+                    [isHistory]="true"></app-expansion-panel>
+              </ng-template>
+          </div>
+      </mat-tab>
+      <mat-tab label="New">
+          <app-project-details formType="create"></app-project-details>
+      </mat-tab>
+  </mat-tab-group>
+</div>

@@ -28,10 +28,12 @@ import { UserCreateComponent } from './components/core/dashboard/user/user-creat
 import { WidgetContainerComponent } from './components/shared/widget-container/widget-container.component';
 import { OrganisationComponent } from './components/core/dashboard/organisation/organisation.component';
 import { PanelHeaderFilterComponent } from './components/shared/panel-header-filter/panel-header-filter.component';
-import {ProjectModule} from './components/core/dashboard/projects/projects.module'
+import {ProjectModule} from './components/core/dashboard/projects/projects.module';
+import {WorkRequestModule} from './components/core/dashboard/work-request/work-request.module';
+import {WorkRequestComponent} from './components/core/dashboard/work-request/work-request.component';
+
 @NgModule({
   declarations: [
-
     AppComponent,
     DynamicTableComponent,
     LoginComponent,
@@ -48,7 +50,8 @@ import {ProjectModule} from './components/core/dashboard/projects/projects.modul
     UserCreateComponent,
     WidgetContainerComponent,
     OrganisationComponent,
-    PanelHeaderFilterComponent
+    PanelHeaderFilterComponent,
+    WorkRequestComponent
   ],
   imports: [
     BrowserModule,
@@ -59,7 +62,8 @@ import {ProjectModule} from './components/core/dashboard/projects/projects.modul
     BrowserAnimationsModule,
     ReactiveFormsModule,
     FormsModule,
-    ProjectModule
+    ProjectModule,
+    WorkRequestModule
   ],
   providers: [D3Service, DashboardService, UserService, OrganizationService],
   bootstrap: [AppComponent]

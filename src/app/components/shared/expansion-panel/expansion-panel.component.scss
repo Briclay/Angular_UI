@@ -13,19 +13,27 @@ mat-accordion {
         mat-panel-title {
             flex: 1;
             margin: 5px 0px;
-            padding: 0px 5px;
+            padding: 5px 5px;
             align-items: center;
             &.border-right-gray {
                 border-right: 2px solid #999999;
+                margin-bottom: 5px;
             }
             &.flex-image {
                 border-right: 0px;
                 flex: 0.1
             }
+            .staus-check {
+                padding: 2px;
+                background-color: gray;
+                border-radius: 6px;
+                color: #ffffff;
+            }
             .panel-conent {
                 text-align: left;
                 width: 100%;
                 color: #032A57;
+                
                 .label-value {
                     font-weight: bold;
                 }
