@@ -36,6 +36,7 @@ import { RoleCreateComponent } from './components/core/dashboard/role/role-creat
 import { DepartmentComponent } from './components/core/dashboard/department/department.component';
 import { UserDashboardComponent } from './components/core/dashboard/user-dashboard/user-dashboard.component';
 import { NcmDashboardComponent } from './components/core/dashboard/ncm-dashboard/ncm-dashboard.component';
+import { UserDashDetailsComponent } from './components/core/dashboard/user-dashboard/user-dash-details/user-dash-details/user-dash-details.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,8 @@ import { NcmDashboardComponent } from './components/core/dashboard/ncm-dashboard
     RoleCreateComponent,
     DepartmentComponent,
     UserDashboardComponent,
-    NcmDashboardComponent
+    NcmDashboardComponent,
+    UserDashDetailsComponent
   ],
   imports: [
     BrowserModule,

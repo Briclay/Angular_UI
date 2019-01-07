@@ -133,7 +133,7 @@ export interface OrganizationList {
       Address : string;
     };
     entities:{
-      count : number || string;
+      count : (number || string);
       validtill : string;
     }
 }
@@ -173,13 +173,19 @@ export interface DepartmentList {
   features : number;
 }
 
-
 export interface UserDashboardData {
   result: string;
   data: UserDashboardList[]
 }
 
 export interface UserDashboardList {
+
+  workRequestID :string;
+  workOrderID :string;
+  typeOfWork :string;
+  project :string;
+  package :string;
+  needByDate :string;
   workCategory: string;
   supportRole : string;
   assignee : string;

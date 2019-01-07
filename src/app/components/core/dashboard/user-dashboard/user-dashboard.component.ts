@@ -27,7 +27,7 @@ export class UserDashboardComponent implements OnInit {
       WOPutDate: new FormControl('', [Validators.required]),
       approvalintiateDate: new FormControl('', [Validators.required]),
       RFAApprovalDate: new FormControl('', [Validators.required]),
-      WOApprovalDate: new FormControl('', [Validators.required])
+      WOApprovalDate: new FormControl('', [Validators.required]),
       status: new FormControl('', [Validators.required]),
       documentStatus: new FormControl('', [Validators.required]),
       remarks: new FormControl('', [Validators.required])

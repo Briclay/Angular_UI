@@ -6,7 +6,13 @@ import { UserDashboardData } from '../../interfaces/interfaces';
 const data: UserDashboardData = {
     "result": "success",
     "data": [
-		{ 
+		{    
+			"workRequestID" : "R001",
+			"workOrderID" : "A001",
+			"typeOfWork" : "contractual",
+			"project" :"Sound of water",
+			"package" : "pillars",
+			"needByDate" : "30/01/2019",
 		    "workCategory": "electric",
 	      	"supportRole" : "enginneer",
 	      	"assignee" : "technicain",
