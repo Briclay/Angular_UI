@@ -5,6 +5,8 @@ import { UserDetailsComponent } from '../components/core/dashboard/user/user-det
 import { OrganisationDetailsComponent } from '../components/core/dashboard/organisation/organisation-details/organisation-details.component';
 import { RoleDetailsComponent } from '../components/core/dashboard/role/role-details/role-details.component';
 import { DepartmentDetailsComponent } from '../components/core/dashboard/department/department-details/department-details.component';
+import { UserDashDetailsComponent } from '../components/core/dashboard/user-dashboard/user-dash-details/user-dash-details.component';
+
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import {MaterialModule} from "./material.module";
 
@@ -19,14 +21,16 @@ import {MaterialModule} from "./material.module";
     UserDetailsComponent,
     OrganisationDetailsComponent,
     RoleDetailsComponent,
-    DepartmentDetailsComponent
+    DepartmentDetailsComponent,
+    UserDashDetailsComponent
   ],
-  exports: [UserDetailsComponent, OrganisationDetailsComponent, RoleDetailsComponent,DepartmentDetailsComponent],
+  exports: [UserDetailsComponent,UserDashDetailsComponent, OrganisationDetailsComponent, RoleDetailsComponent,DepartmentDetailsComponent],
   entryComponents: [
     UserDetailsComponent,
     OrganisationDetailsComponent,
     RoleDetailsComponent,
-    DepartmentDetailsComponent
+    DepartmentDetailsComponent,
+    UserDashDetailsComponent
   ],
   providers: [WidgetService]
 })

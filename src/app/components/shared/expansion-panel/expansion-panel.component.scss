@@ -29,9 +29,11 @@ mat-accordion {
                 color: #032A57;
                 .label-value {
                     font-weight: bold;
+                    font-size: 12px;
                 }
                 .label-title {
                     margin-right: 30px;
+                    font-size: 12px;
                 }
             }
             &.expansion-history{

@@ -32,13 +32,12 @@ import { WidgetContainerComponent } from './components/shared/widget-container/w
 import { OrganisationComponent } from './components/core/dashboard/organisation/organisation.component';
 import { RoleComponent } from './components/core/dashboard/role/role.component';
 import { PanelHeaderFilterComponent } from './components/shared/panel-header-filter/panel-header-filter.component';
-import {ProjectModule} from './components/core/dashboard/projects/projects.module'
+import { ProjectModule} from './components/core/dashboard/projects/projects.module'
 import { OrganisationCreateComponent } from './components/core/dashboard/organisation/organisation-create/organisation-create.component';
 import { RoleCreateComponent } from './components/core/dashboard/role/role-create/role-create.component';
 import { DepartmentComponent } from './components/core/dashboard/department/department.component';
 import { UserDashboardComponent } from './components/core/dashboard/user-dashboard/user-dashboard.component';
 import { NcmDashboardComponent } from './components/core/dashboard/ncm-dashboard/ncm-dashboard.component';
-import { UserDashDetailsComponent } from './components/core/dashboard/user-dashboard/user-dash-details/user-dash-details/user-dash-details.component';
 
 @NgModule({
   declarations: [
@@ -64,8 +63,7 @@ import { UserDashDetailsComponent } from './components/core/dashboard/user-dashb
     RoleCreateComponent,
     DepartmentComponent,
     UserDashboardComponent,
-    NcmDashboardComponent,
-    UserDashDetailsComponent
+    NcmDashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -79,7 +77,7 @@ import { UserDashDetailsComponent } from './components/core/dashboard/user-dashb
     ProjectModule
   ],
   providers: [D3Service, DashboardService, UserService, DepartmentService, RoleService, 
-  OrganizationService,UserDashboardService],
+  OrganizationService,UserDashboardService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

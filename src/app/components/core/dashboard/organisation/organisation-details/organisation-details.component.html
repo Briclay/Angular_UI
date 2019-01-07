@@ -30,6 +30,10 @@
                 </mat-select>
               </mat-form-field>
             </div>
+            <div>
+              <button class="margin-left-4" mat-raised-button class="feature_btn" 
+              >Features</button>
+            </div>
           </div>
         </div>
         <div class="user-details-content">
@@ -39,7 +43,7 @@
           <div class="user-details-form-list">
             <div formGroupName="details">
               <mat-form-field appearance="outline">
-                <mat-label>Email</mat-label>
+                <mat-label>Admin</mat-label>
                 <input matInput formControlName="email">
               </mat-form-field>
               <mat-form-field appearance="outline">
@@ -54,11 +58,8 @@
             <strong>Entities</strong>
           </div>
           <div class="user-details-form-list">
-            <div formGroupName="entities">
-              <mat-form-field appearance="outline">
-                <mat-label>Count</mat-label>
-                <input matInput formControlName="count">
-              </mat-form-field>
+            <div formGroupName="entities" fxLayout=row>
+              <img style="height: 50px;width: 100px;" src="./assets/images/backgrounds/autumn.jpg" />
               <mat-form-field appearance="outline">
                 <mat-label>Valid till</mat-label>
                 <input matInput [matDatepicker]="picker" placeholder="" formControlName="validtill">

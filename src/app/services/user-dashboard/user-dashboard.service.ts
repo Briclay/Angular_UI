@@ -26,6 +26,46 @@ const data: UserDashboardData = {
 	      	"documentStatus" : "Pending",
 	      	"remarks" : "Good",
 		}
+		{    
+			"workRequestID" : "R002",
+			"workOrderID" : "A002",
+			"typeOfWork" : "contractual",
+			"project" :"Sound of water",
+			"package" : "pillars",
+			"needByDate" : "30/01/2019",
+		    "workCategory": "electric",
+	      	"supportRole" : "enginneer",
+	      	"assignee" : "technicain",
+	      	"putintiateDate" : "10/10/2017",
+		    "RFAPutDate" : "10/10/2017",
+		    "WOPutDate" : "10/10/2017",
+		    "approvalintiateDate" : "20/10/2017",
+		    "RFAApprovalDate" : "16/10/2017",
+		    "WOApprovalDate" : "26/10/2017",
+		    "status": "Pending",
+	      	"documentStatus" : "Pending",
+	      	"remarks" : "Good",
+		}
+		{    
+			"workRequestID" : "R003",
+			"workOrderID" : "A003",
+			"typeOfWork" : "contractual",
+			"project" :"Sound of water",
+			"package" : "pillars",
+			"needByDate" : "30/01/2019",
+		    "workCategory": "electric",
+	      	"supportRole" : "enginneer",
+	      	"assignee" : "technicain",
+	      	"putintiateDate" : "10/10/2017",
+		    "RFAPutDate" : "10/10/2017",
+		    "WOPutDate" : "10/10/2017",
+		    "approvalintiateDate" : "20/10/2017",
+		    "RFAApprovalDate" : "16/10/2017",
+		    "WOApprovalDate" : "26/10/2017",
+		    "status": "Pending",
+	      	"documentStatus" : "Pending",
+	      	"remarks" : "Good",
+		}
 	]
 }
 
