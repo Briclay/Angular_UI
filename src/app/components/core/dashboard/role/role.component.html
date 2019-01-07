@@ -4,15 +4,15 @@
             <app-panel-header-filter></app-panel-header-filter>
             <div fxLayout="row">
                 <app-expansion-panel 
-                    [expansionPanelOptions]="organisationDataOptions"
-                    selectorComponent="app-organisation-details" 
-                    [data]="organisations.data"
+                    [expansionPanelOptions]="roleDataOptions"
+                    selectorComponent="app-role-details" 
+                    [data]="roles.data"
                     [isHistory]="true">
                 </app-expansion-panel>
             </div>
         </mat-tab>
         <mat-tab label="New">
-            <app-organisation-details formType="create"></app-organisation-details>
+            <app-role-details formType="create"></app-role-details>
         </mat-tab>
     </mat-tab-group>
 </div>

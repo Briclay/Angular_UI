@@ -15,6 +15,7 @@ mat-accordion {
             margin: 5px 0px;
             padding: 0px 5px;
             align-items: center;
+            min-height: 36px;
             &.border-right-gray {
                 border-right: 2px solid #999999;
             }

@@ -1,0 +1,114 @@
+	.main-content {
+		flex : 1;
+	}
+	.main-head {
+		display : flex;
+	}
+
+	.content-head {
+		margin-top : 2%;
+	}
+	 .dottedBorder{
+	       border-style: dashed;
+	    border-radius: 50%;
+	    height: 125px;
+	    width: 125px;
+	    border-width: 1px;
+	    position: relative;
+    }
+	.userImage {
+	 	height: 120px;
+	    width: 120px;
+	    position: absolute;
+	    border-radius: 50%;
+	    top: 2px;
+	    left: 2px;
+	}
+    .greenDot{
+        position: absolute;
+        right: 9px;
+        bottom: 5px;
+        height: 5px;
+        width: 5px;
+        background: #00FF7F;
+        border-radius: 50%;
+    }
+    .text-color {
+        font: 400 13px/20px Roboto,"Helvetica Neue",sans-serif;
+        color :#032A57;
+    }
+    .text-color-light {
+        font: 13px Roboto,"Helvetica Neue",sans-serif;
+        color : #032A57;
+    }
+    .tab-btn {
+        font: 500 13px Roboto,"Helvetica Neue",sans-serif;
+        color :#032A57;
+    }
+	.report-text {
+		font: 400 18px Roboto,"Helvetica Neue",sans-serif;
+        color :#032A57;
+        margin-left: 37px;
+	}
+    .first-card {
+		flex : 1;
+	}
+    .report-card {
+       display: flex;
+       margin : 3px 0px 0px 6px
+    }
+    .card-title {
+    	display: block;
+    	font: 400 13px Roboto,"Helvetica Neue",sans-serif;
+        color :grey;
+        margin-bottom : 35px;
+
+    }
+    .details-head {
+        font: 400 10px Roboto,"Helvetica Neue",sans-serif;
+        color :#032A57;
+    }
+ 	.count {
+        font: 300 10px Roboto,"Helvetica Neue",sans-serif;
+        color :#696969;
+    }
+
+.user-details-container {
+    padding: 10px;
+    .user-details-form {
+        
+        .user-details-card {
+            flex: 1;
+            display: flex;
+            font: 400 13px/20px Roboto,"Helvetica Neue",sans-serif;
+            .user-details-name {
+                flex: 0.6;
+                img {
+                    width: 100px;
+                    border-radius: 5px;
+                }
+                .username-input {
+                    margin-top: 10px;
+                }
+            }
+            .user-details-content {
+                flex: 1;
+                .user-details-content-title {
+                    margin-left: 10px;
+                }
+                .user-details-form-list {
+                    border-left: 2px solid #999999;
+                    min-height: 200px;
+                    padding: 10px;
+                }
+                .feature_btn {
+                    border-radius: 17px;
+                    background-color: #2196F3; 
+                    color: white;
+                }
+            }
+        }
+    }
+    
+}
+

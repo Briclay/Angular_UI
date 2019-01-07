@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { WidgetService } from './../services/widget/widget.service';
 import { UserDetailsComponent } from '../components/core/dashboard/user/user-details/user-details.component';
 import { OrganisationDetailsComponent } from '../components/core/dashboard/organisation/organisation-details/organisation-details.component';
+import { RoleDetailsComponent } from '../components/core/dashboard/role/role-details/role-details.component';
+import { DepartmentDetailsComponent } from '../components/core/dashboard/department/department-details/department-details.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import {MaterialModule} from "./material.module";
 
@@ -15,13 +17,16 @@ import {MaterialModule} from "./material.module";
   ],
   declarations: [
     UserDetailsComponent,
-    OrganisationDetailsComponent
-
+    OrganisationDetailsComponent,
+    RoleDetailsComponent,
+    DepartmentDetailsComponent
   ],
-  exports: [UserDetailsComponent, OrganisationDetailsComponent],
+  exports: [UserDetailsComponent, OrganisationDetailsComponent, RoleDetailsComponent,DepartmentDetailsComponent],
   entryComponents: [
     UserDetailsComponent,
     OrganisationDetailsComponent,
+    RoleDetailsComponent,
+    DepartmentDetailsComponent
   ],
   providers: [WidgetService]
 })
