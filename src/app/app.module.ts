@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -39,6 +40,8 @@ import { DepartmentComponent } from './components/core/dashboard/department/depa
 import { UserDashboardComponent } from './components/core/dashboard/user-dashboard/user-dashboard.component';
 import { NcmDashboardComponent } from './components/core/dashboard/ncm-dashboard/ncm-dashboard.component';
 import { UserDashDetailsComponent } from './components/core/dashboard/user-dashboard/user-dash-details/user-dash-details/user-dash-details.component';
+import { FileManagerModule } from 'file-manager';
+import { FileManagerComponent } from './components/core/dashboard/file-manager/file-manager.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +68,8 @@ import { UserDashDetailsComponent } from './components/core/dashboard/user-dashb
     DepartmentComponent,
     UserDashboardComponent,
     NcmDashboardComponent,
-    UserDashDetailsComponent
+    UserDashDetailsComponent,
+    FileManagerComponent
   ],
   imports: [
     BrowserModule,
@@ -76,7 +80,9 @@ import { UserDashDetailsComponent } from './components/core/dashboard/user-dashb
     BrowserAnimationsModule,
     ReactiveFormsModule,
     FormsModule,
-    ProjectModule
+    ProjectModule,
+    FileManagerModule,
+    NgbModule.forRoot()
   ],
   providers: [D3Service, DashboardService, UserService, DepartmentService, RoleService, 
   OrganizationService,UserDashboardService],

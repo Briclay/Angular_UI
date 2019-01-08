@@ -11,6 +11,7 @@ import { RoleComponent } from './components/core/dashboard/role/role.component';
 import { DepartmentComponent } from './components/core/dashboard/department/department.component';
 import { UserDashboardComponent } from './components/core/dashboard/user-dashboard/user-dashboard.component';
 import { NcmDashboardComponent } from './components/core/dashboard/ncm-dashboard/ncm-dashboard.component';
+import {FileManagerComponent} from './components/core/dashboard/file-manager/file-manager.component'
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -59,6 +60,10 @@ const routes: Routes = [
       },
       {
         path: 'ncm-dashboard', component: NcmDashboardComponent, data: {
+          breadcrumb: 'Users'
+        },
+        {
+          path: 'file-manager', component: FileManagerComponent, data: {
           breadcrumb: 'Users'
         }
       },
