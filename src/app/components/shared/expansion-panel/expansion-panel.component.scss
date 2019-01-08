@@ -7,6 +7,7 @@ mat-accordion {
         margin-top: 5px;
     }
     mat-expansion-panel-header {
+        position: relative;
         &.mat-expanded {
             background: #FAFAFA;
         }
@@ -16,6 +17,7 @@ mat-accordion {
             padding: 0px 5px;
             align-items: center;
             min-height: 36px;
+            font-size: 14px;
             &.border-right-gray {
                 border-right: 2px solid #999999;
             }
@@ -37,7 +39,7 @@ mat-accordion {
             &.expansion-history{
                 position: absolute;
                 right: 25px;
-                padding-top: 5px ;
+                top: 15%;
             }
             
         }
