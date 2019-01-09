@@ -49,7 +49,7 @@ mat-icon {
   width: 35px;
 }
 
-::ng-deep .mat-menu-panel {
+::ng-deep .mat-menu-panel.panel {
   max-width:300px!important;
   min-width: 400px!important;
   width: 100vw; 
@@ -59,7 +59,7 @@ mat-icon {
   min-height : 580px!important;
   margin-right: -145px;
 }
-::ng-deep .mat-card {
+::ng-deep .mat-card.card {
   padding: 4px!important;
 }
 

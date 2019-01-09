@@ -57,10 +57,19 @@
           <div class="user-details-content-title">
             <strong>Entities</strong>
           </div>
-          <div class="user-details-form-list">
-            <div formGroupName="entities" fxLayout=row>
-              <img style="height: 50px;width: 100px;" src="./assets/images/backgrounds/autumn.jpg" />
+          <div class="user-details-form-list" fxLayout=column>
+            <div formGroupName="entities" >
+              <div fxLayout=row style="margin-bottom: 10px;">
+                <img style="height: 50px;width: 100px;" src="./assets/images/backgrounds/autumn.jpg" />
+                <mat-form-field appearance="outline">
+                  <input matInput formControlName="subOrgName">
+                </mat-form-field>
+              </div>
               <mat-form-field appearance="outline">
+                <mat-label>Add Entity</mat-label>
+                <input matInput formControlName="subOrgcount">
+              </mat-form-field>
+              <mat-form-field appearance="outline" style="width: 200px;">
                 <mat-label>Valid till</mat-label>
                 <input matInput [matDatepicker]="picker" placeholder="" formControlName="validtill">
                   <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>

@@ -18,7 +18,8 @@ const data: OrganizationData = {
 				"Address": "Ulsoor bangalore"
 			},
 			"entities": {
-				"count": "1",
+				"subOrgName" : "Sunworth",
+				"subOrgcount": "1",
 				"validtill": "15/06/2018"
 			}
 		},
@@ -34,7 +35,8 @@ const data: OrganizationData = {
 				"Address": "JP nagar bangalore"
 			},
 			"entities": {
-				"count": "2",
+				"subOrgName" : "Sunworth-1",
+				"subOrgcount": "1",
 				"validtill": "10/10/2018"
 			}
 		},
@@ -50,7 +52,8 @@ const data: OrganizationData = {
 				"Address": "ITPL bangalore"
 			},
 			"entities": {
-				"count": "3",
+				"subOrgName" : "Sunworth-2",
+				"subOrgcount": "1",
 				"validtill": "25/11/2018"
 			}
 		}

@@ -132,10 +132,11 @@ export interface OrganizationList {
       email: string;
       Address : string;
     };
-    entities:{
-      count : number | string;
+    entities: {
+      subOrgName : string;
+      subOrgCount : string;
       validtill : string;
-    }
+    };
 }
 
 export interface OrganizationData {

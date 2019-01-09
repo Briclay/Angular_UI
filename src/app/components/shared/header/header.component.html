@@ -31,7 +31,7 @@
         <span>Logout</span>
       </button>
     </mat-menu>
-    <mat-menu #notificationMenu="matMenu"  class="mat-menu-panel">
+    <mat-menu #notificationMenu="matMenu"  class="panel">
       <div class="notification_container " >
         <div class="title">Notifications</div>
         <div fxLayout=row style="place-content: flex-end;">
@@ -39,11 +39,11 @@
           <div class="content_text">Clear All</div>
         </div>
         <div style="margin-top: 6%;" >
-          <mat-card class="mat-card" style="background-color: #8080801c;position: relative;" 
+          <mat-card class="card" style="background-color: #8080801c;position: relative;" 
           *ngFor="let notification of notifications">
             <div fxLayout=row style="place-content: space-around;">
               <div >
-                <img style="height: 15px; width: 15px;margin: 0px 0px -14px 0px;" src="assets/images/icons/Warning.png" >
+                <img style="height: 15px; width: 15px;margin: 0px 0px -14px 0px;" src="assets/images/icons/Warning_Red.png" >
                 <p class="message">{{notification.time}}</p>
               </div>
               <p class="message">{{notification.message}}</p>
