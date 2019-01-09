@@ -57,6 +57,27 @@ const data: OrganizationData = {
 	]
 }
 
+const history = {
+	"result": "success",
+    "data": [
+		{
+			username: 'username1',
+			changedBy: 'Admin',
+			changedDate: '01/12/2017'
+		},
+		{
+			username: 'username1',
+			changedBy: 'Admin',
+			changedDate: '01/12/2017'
+		},
+		{
+			username: 'username1',
+			changedBy: 'Admin',
+			changedDate: '01/12/2017'
+		}
+	]
+}
+
 @Injectable()
 export class OrganizationService {
     constructor(
@@ -65,5 +86,9 @@ export class OrganizationService {
     public getData(): Observable<OrganizationData> {
         return  of(data);;
     }
+
+	public getHistory(): Observable<any> {
+		return of(history)
+	}
 }
 
