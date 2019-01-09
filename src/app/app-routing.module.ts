@@ -8,6 +8,7 @@ import { SettingsComponent } from './components/core/dashboard/settings/settings
 import { HomeComponent } from './components/core/dashboard/home/home.component';
 import { OrganisationComponent } from './components/core/dashboard/organisation/organisation.component';
 import {WorkRequestComponent} from './components/core/dashboard/work-request/work-request.component';
+import {WorkOrderComponent} from './components/core/dashboard/work-order/work-order.component';
 import { RoleComponent } from './components/core/dashboard/role/role.component';
 import { DepartmentComponent } from './components/core/dashboard/department/department.component';
 import { UserDashboardComponent } from './components/core/dashboard/user-dashboard/user-dashboard.component';
@@ -53,6 +54,13 @@ const routes: Routes = [
           breadcrumb: 'WorkRequest'
         }
       },
+
+      {
+        path: 'work-order', component: WorkOrderComponent, data: {
+          breadcrumb: 'WorkOrder'
+        }
+      },
+      
       {
         path: 'user', component: UserComponent, data: {
           breadcrumb: 'Users'

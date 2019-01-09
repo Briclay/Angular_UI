@@ -9,6 +9,6 @@ import { ApiService } from "../../../../services/api.service";
 export class ProjectService {
     constructor(private apiService: ApiService) { }
     public getProjects(): Observable<any> {
-        return this.apiService.get('projects.json').pipe(map(res => res));
+        return this.apiService.get('./assets/data/projects.json').pipe(map(res => res));
     }
 }

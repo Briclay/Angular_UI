@@ -1,0 +1,218 @@
+<div id="reqest-tracker-create" class="page-layout simple fullwidth request-tracker-container" >
+  <div class="request-tracker-content">
+    <mat-card>
+      <form name="workTrackerForm" [formGroup]="workTrackerForm" novalidate>
+        <div class="card-header">
+          <span id="hdr-inpt">
+              <input class="form-hdr-wrk-req-id" matInput placeholder="Work Request Id" formControlName="requestNumber" readonly>
+            </span>
+            <div fxLayout="row">
+              <mat-form-field appearance="outline" floatLabel="never" color="primary" fxFlex="16">
+                <mat-label>Assingee</mat-label>
+                <mat-select placeholder="Assingee" formControlName="_assignedId" class="form-hdr-assignee">
+                  <mat-option *ngFor="let users of userList" [value]="users._id">
+                    {{ users.name.first }} {{ users.name.last }}
+                  </mat-option>
+                </mat-select>
+                <!-- <mat-error *ngIf="workTrackerFormErrors._assignedId.required">
+                  Assigned user is required!
+                </mat-error> -->
+              </mat-form-field>
+              <mat-form-field appearance="outline" floatLabel="never" color="primary" class="margin-left50" fxFlex="16">
+                <mat-label>Support Role</mat-label>
+                <mat-select placeholder="Support Role" formControlName="supportRole" class="form-hdr-assignee">
+                  <mat-option [value]="null">No User</mat-option>
+                  <mat-option *ngFor="let users of userList" [value]="users._id">
+                    {{ users.name.first }} {{ users.name.last }}
+                  </mat-option>
+                </mat-select>
+                <!-- <mat-error *ngIf="workTrackerFormErrors.supportRole.required">
+                  Assigned user is required!
+                </mat-error> -->
+              </mat-form-field>
+            </div>
+        </div>
+        <!-- card content starts-->
+        <div class="card-content">
+          <!-- card row starts-->
+          <div fxLayout="row">
+            <div  fxFlex="20">
+              <mat-form-field appearance="outline">
+                <mat-label>Projects</mat-label>
+                <mat-select placeholder="Projects" formControlName="_projectId" class="pro-id" required>
+                  <mat-option *ngFor="let projects of projectsList" [value]="projects._id">
+                    {{ projects.name }}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="workTrackerFormErrors._projectId.required">
+                  Project is required!
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div  fxFlex="20">
+              <mat-form-field appearance="outline">
+                <mat-label>Type of Work</mat-label>
+                <mat-select class="wrk-catgry" placeholder="Type Of Work" formControlName="typeOfWork" required>
+                  <mat-option *ngFor="let work of typeOfWork" [value]="work">
+                    {{ work }}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="workTrackerFormErrors.typeOfWork.required">
+                  Type Of Work is required!
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div  fxFlex="20">
+              <mat-form-field appearance="outline">
+                <mat-label>Work Category</mat-label>
+                <mat-select class="wrk-catgry" placeholder="Work Category" formControlName="workCategory" (change)="noOfDays()" required>
+                  <mat-option *ngFor="let workCat of workCategory" [value]="workCat">
+                    {{ workCat.name }}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="workTrackerFormErrors.workCategory.required">
+                  Work category is required!
+                </mat-error>
+              </mat-form-field>
+              <mat-icon class="icon-small-text curs-pointer" (click)="openWorkCatDailog()">info</mat-icon>
+            </div>
+            <div  fxFlex="40">
+              <mat-form-field appearance="outline">
+                <mat-label>Package/Description</mat-label>
+                <input matInput placeholder="Package/Description" formControlName="workDescription" required>
+                <mat-error *ngIf="workTrackerFormErrors.workDescription.required">
+                  Work Description is required!
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <!-- card row ends-->
+          <!-- card row starts-->
+          <div fxLayout="row margin-top15" class="margin-top15">
+            <div  fxFlex="20">
+              <mat-form-field appearance="outline">
+                <mat-label>Need By Date</mat-label>
+                <input matInput [matDatepicker]="needByDate" placeholder="Need by Date" formControlName="needByDate" required (dateChange)="calLeadDaysToComplete()" [min]="todayDate">
+                <mat-datepicker-toggle matSuffix [for]="needByDate"></mat-datepicker-toggle>
+                <mat-datepicker #needByDate></mat-datepicker>
+                <mat-error *ngIf="workTrackerFormErrors.needByDate.required">
+                  Need by date is required!
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div  fxFlex="20">
+              <mat-form-field appearance="outline">
+                <mat-label>Initiated Date</mat-label>
+                <input matInput [matDatepicker]="initiatedDate" placeholder="Initiated Date" [min]="todayDate" formControlName="initiatedDate" (dateChange)="calTimeToComplete()">
+                <mat-datepicker-toggle matSuffix [for]="initiatedDate"></mat-datepicker-toggle>
+                <mat-datepicker #initiatedDate></mat-datepicker>
+                <mat-error *ngIf="workTrackerFormErrors.initiatedDate.required">
+                  Initiated date is required!
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div  fxFlex="20">
+              <mat-form-field appearance="outline">
+                <mat-label>RFAPutUpDate</mat-label>
+                <input matInput [matDatepicker]="RFAPutUpDate" placeholder="RFA Put Up Date" formControlName="RFAPutUpDate" (dateChange)="changeStatus('RFA Put Up')" [min]="todayDate">
+                <mat-datepicker-toggle matSuffix [for]="RFAPutUpDate"></mat-datepicker-toggle>
+                <mat-datepicker #RFAPutUpDate></mat-datepicker>
+                <mat-error *ngIf="workTrackerFormErrors.RFAPutUpDate.required">
+                  RFA Put Date is required!
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div  fxFlex="20">
+              <mat-form-field appearance="outline">
+                <mat-label>RFA Approval Date</mat-label>
+                <input matInput [matDatepicker]="RFAapprovalDate" placeholder="RFA Approval Date" [max]="initiatedDate" formControlName="RFAapprovalDate" (dateChange)="calTimeToComplete()" [min]="todayDate">
+                <mat-datepicker-toggle matSuffix [for]="RFAapprovalDate"></mat-datepicker-toggle>
+                <mat-datepicker #RFAapprovalDate></mat-datepicker>
+                <mat-error *ngIf="workTrackerFormErrors.RFAapprovalDate.required">
+                  RFAapproval date is required!
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div  fxFlex="20">
+              <mat-form-field appearance="outline" >
+                <mat-label>Status</mat-label>
+                <input matInput placeholder="Status" formControlName="status" readonly>
+              </mat-form-field>
+            </div>
+          </div>
+          <!-- card row ends-->
+          <!-- card row starts-->
+          <div fxLayout="row" class="margin-top15">
+            <div fxFlex="20">
+              <mat-form-field appearance="outline">
+              <mat-label>Work Order Put Up Date</mat-label>
+                
+              <input matInput [matDatepicker]="workOrderPutDate" placeholder="Work Order Put Up Date" formControlName="workOrderPutDate" (dateChange)="mappingAwaredDate()" [min]="todayDate">
+              <mat-datepicker-toggle matSuffix [for]="workOrderPutDate"></mat-datepicker-toggle>
+              <mat-datepicker #workOrderPutDate></mat-datepicker>
+              <mat-error *ngIf="workTrackerFormErrors.workOrderPutDate.required">
+                Work Order Put Date is required!
+              </mat-error>
+              </mat-form-field>
+            </div>
+            <div  fxFlex="20">
+              <mat-form-field appearance="outline">
+                <mat-label>Work Order Approval Date</mat-label>
+                <input matInput [matDatepicker]="workOrderApprovalDate" placeholder="Work Order Put Up Date" formControlName="workOrderApprovalDate" (dateChange)="changeStatus('Completed')" [min]="todayDate">
+                <mat-datepicker-toggle matSuffix [for]="workOrderApprovalDate"></mat-datepicker-toggle>
+                <mat-datepicker #workOrderApprovalDate></mat-datepicker>
+                <mat-error *ngIf="workTrackerFormErrors.workOrderApprovalDate.required">
+                  Work Order Approval Date is required!
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div  fxFlex="20">
+              <mat-form-field appearance="outline">
+                <mat-label>Award Date</mat-label>
+                <input matInput [matDatepicker]="awardDate" placeholder="Award Date" formControlName="awardedDate" [min]="todayDate">
+                <mat-datepicker-toggle matSuffix [for]="awardDate"></mat-datepicker-toggle>
+                <mat-datepicker #awardDate></mat-datepicker>
+              </mat-form-field>
+            </div>
+            <div  fxFlex="40">
+              <section class="check-status">
+                <span>Document Approval Status </span>
+                <mat-checkbox disabled="true">RFA</mat-checkbox>
+                <mat-checkbox disabled="true">Work Order</mat-checkbox>
+              </section>
+            </div>
+          </div>
+          <!-- card row ends-->
+        </div>
+        <!-- card Footer starts ends-->
+        <div fxLayout="row" fxLayoutAlign="start center" class="card-footer">
+          <div fxFlex="20">
+            <span class="time-label">Lead Time Require</span>
+            <span class="time-value">{{workTrackerForm.value.leadDuration}}</span>
+            <span class="time-status green" [ngClass]="{'red': time.leadDuration < 10}" ></span>
+          </div>
+          <div fxFlex="20">
+            <div>
+              <span class="time-label">Time to Complete</span>
+              <span class="time-value">{{time.timeToComplete}}</span>
+              <span class="time-status green" [ngClass]="{'red': time.timeToComplete < 10}"></span>
+            </div>
+          </div>
+          <div fxFlex="20">
+            <span class="time-label">Number Of Days</span>
+            <span class="time-value">{{time.leadDaysToComplete}}</span>
+            <span class="time-status green" [ngClass]="{'red': time.leadDaysToComplete < 10}" ></span>
+          </div>
+          <div fxFlex="40">
+            <!-- button -->
+            <div class="button-row" fxLayoutAlign="end center">
+              <button mat-raised-button class="cancel-button" color="white-bg" (click)="cancel()">Cancel</button>
+              <button type="submit" mat-raised-button class="save-button" color="white-bg" (click)="workTrackerFormSubmit()">Save</button>
+            </div>
+          </div>
+        </div>
+        <!-- card footer ends here -->
+      </form>
+    </mat-card>
+  </div>
+</div>

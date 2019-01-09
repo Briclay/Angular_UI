@@ -11,3 +11,32 @@
 .main-content {
     margin: 80px 15px 15px 75px;
 }
+
+.main-content .top-menu ul {
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+    color: #ffffff;
+    text-align: right;
+    align-items: center;
+}
+.main-content .top-menu li {
+    display: inline-block;
+    padding: 0px 10px;
+}
+.main-content .top-menu li a {
+    font-size: 10px;
+    text-decoration: none;
+    cursor: pointer;
+    color: gray;
+    display: inline-block;
+    text-align: center;
+    &.active {
+        color: #3cc0f0;
+    }
+}
+
+.main-content .top-menu mat-icon {
+    font-size: 24px;
+    width: auto;
+}

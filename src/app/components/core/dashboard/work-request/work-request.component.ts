@@ -17,6 +17,7 @@ export class WorkRequestComponent implements OnInit {
   ngOnInit() {
     this.isLoading = true;
     this.workRequestService.getWorkRequest().pipe().subscribe(res => {
+      console.log('res', res)
       this.workRequest = res;
       this.isLoading = false;
       this.workRequestDataOption = [
@@ -26,7 +27,6 @@ export class WorkRequestComponent implements OnInit {
         {
           title: 'User Name', type: 'list', list: [
             { title: 'requestNumber', key: 'requestNumber', hideTitle: true, type: 'label' },
-            { title: 'Address', key: '_createdBy.username', hideTitle: true, type: 'label' },
             { title: 'status', key: 'status', hideTitle: true, type: 'label', isStatus: true }
           ]
         },

@@ -7,7 +7,7 @@ import { HttpClient, HttpHeaders, HttpResponse, HttpErrorResponse, HttpParams } 
 import {constantService} from "../constant/constant.serive";
 import { jspAppGlobal } from '../app.globlal';
 
-export let API_BASE = "./assets/data/";
+export let API_BASE = "";
 
 @Injectable({
   providedIn: 'root',

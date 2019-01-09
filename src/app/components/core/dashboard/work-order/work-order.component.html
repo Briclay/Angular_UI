@@ -1,4 +1,4 @@
-<div class="work-request-container">
+<div class="work-order-container">
   <mat-tab-group>
       <mat-tab label="Overview">
           <app-panel-header-filter></app-panel-header-filter>
@@ -6,15 +6,15 @@
               <spinner *ngIf="isLoading; else dataLoaded" class="align-center-block"></spinner>
               <ng-template #dataLoaded>
                 <app-expansion-panel 
-                    [expansionPanelOptions]="workRequestDataOption"
-                    selectorComponent="app-work-request-details" 
-                    [data]="workRequest"
+                    [expansionPanelOptions]="workOrderDataOption"
+                    selectorComponent="app-work-order-details" 
+                    [data]="workOrder"
                     [isHistory]="true"></app-expansion-panel>
               </ng-template>
           </div>
       </mat-tab>
       <mat-tab label="New">
-          <app-work-request-details formType="create"></app-work-request-details>
+          <app-work-order-details formType="create"></app-work-order-details>
       </mat-tab>
   </mat-tab-group>
 </div>

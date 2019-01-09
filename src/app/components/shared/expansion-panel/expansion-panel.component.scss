@@ -27,10 +27,11 @@ mat-accordion {
                 flex: 0.1
             }
             .staus-check {
-                padding: 2px;
+                padding: 0px 2px;
                 background-color: gray;
                 border-radius: 6px;
                 color: #ffffff;
+                font-size: 12px;
             }
             .panel-conent {
                 text-align: left;
@@ -42,6 +43,7 @@ mat-accordion {
                 }
                 .label-title {
                     margin-right: 30px;
+                    font-size: 12px;
                 }
             }
             &.expansion-history{
