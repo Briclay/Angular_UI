@@ -1,0 +1,19 @@
+<div class="user-container">
+    <mat-tab-group>
+        <mat-tab label="Overview">
+            <app-panel-header-filter></app-panel-header-filter>
+            <div fxLayout="row">
+                <app-expansion-panel 
+                    [expansionPanelOptions]="departmentDataOptions"
+                    selectorComponent="app-department-details" 
+                    [data]="departments.data"
+                    [isHistory]="true">
+                </app-expansion-panel>
+            </div>
+        </mat-tab>
+        <mat-tab label="New">
+            <app-department-details formType="create"></app-department-details>
+        </mat-tab>
+    </mat-tab-group>
+</div>
+

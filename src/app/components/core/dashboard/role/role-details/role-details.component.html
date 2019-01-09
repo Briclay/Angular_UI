@@ -1,0 +1,92 @@
+<div class="user-details-container">
+  <form [formGroup]="roleDetailsForm" (ngSubmit)="onSubmit()" class="user-details-form">
+    <mat-card>
+      <div class="user-details-card">
+        <div class="user-details-name">
+          <div class="username-input">
+            <mat-form-field appearance="outline" class="margin_right_25">
+              <mat-label>Role Name</mat-label>
+              <mat-select placeholder="Departments" formControlName="roleNane">
+                <mat-option *ngFor="let roleNane of _roleId" [value]="roleNane">
+                  {{roleNane}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="user-details-content">
+          <div class="user-details-content-title">
+            <strong> Details</strong>
+          </div>
+          <div class="user-details-form-list" formGroupName="details">
+            <div>
+              <mat-form-field appearance="outline" class="margin_right_25">
+                <mat-label>Departments</mat-label>
+                <mat-select placeholder="Departments" formControlName="department">
+                  <mat-option *ngFor="let department of departments" [value]="department">
+                    {{department}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              
+              <mat-form-field appearance="outline" class="margin_right_25">
+                <mat-label>Shift</mat-label>
+                <mat-select placeholder="Shift" formControlName="shift">
+                  <mat-option *ngFor="let shift of shifts" [value]="shift">
+                    {{shift}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" class="margin_right_25">
+                <mat-label>Sub-role</mat-label>
+                <mat-select placeholder="Sub-role" formControlName="subrole">
+                  <mat-option *ngFor="let subrole of subRoles" [value]="subrole">
+                    {{subrole}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+            </div>
+          </div>
+        </div>
+        <div class="user-details-content">
+          <div class="user-details-content-title">
+            <strong>Features</strong>
+          </div>
+          <div class="user-details-form-list">
+            <div>
+              <mat-form-field class="margin_right_25" appearance="outline">
+                <mat-label>Features</mat-label>
+                <input matInput formControlName="features">
+              </mat-form-field>
+            </div>
+            <div>
+              <button class="margin-left-4" mat-raised-button class="feature_btn" 
+              >Features</button>
+            </div>
+          </div>
+        </div>
+        <div class="user-details-content">
+          <div class="user-details-content-title">
+            <strong>Approval</strong>
+          </div>
+          <div class="user-details-form-list">
+            <div>
+              <mat-form-field class="margin_right_25" appearance="outline">
+                <mat-label>Approval</mat-label>
+                <input matInput formControlName="approvals">
+              </mat-form-field>
+            </div>
+            <div>
+              <button class="margin-left-4" mat-raised-button class="feature_btn" 
+              >Approvals</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button mat-raised-button type="submit" class="pull-right">Submit</button>
+      <div class="clearfix"></div>
+    </mat-card>
+  </form>
+</div>

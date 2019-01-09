@@ -1,3 +1,130 @@
-<p>
-  project-teams works!
-</p>
+<div class="project-div" class="page-layout simple fullwidth" matkraftPerfectScrollbar>
+  <div class="projec-team-form">
+    <!-- strat form -->
+    <!-- project team memebr -->
+    <mat-card class="card-form">
+      <!-- header -->
+      <div class="proj-tm-lbl">
+        <span>Project Team</span>
+      </div>
+      <!-- end header -->
+      <!-- project team header -->
+      <div fxLayout="row" class="prj-tm-frm-lbl" fxLayoutAlign="space-between center">
+        <span fxFlex="20" class="labal-name">User Name</span>
+        <span fxFlex="25" class="labal-name">Email ID</span>
+        <span fxFlex="25" class="labal-name">Role</span>
+        <span fxFlex="4"></span>
+      </div>
+      <!-- end project team header -->
+      <div>
+        <form [formGroup]="projectTeamForm" novalidate>
+          <div class="project-team-form-feilds" fxLayout="row" fxLayoutAlign="space-between center">
+            <div fxFlex="20" class="prog-status-proje">
+              <mat-form-field fxFlex="95">
+                <mat-select required placeholder="User name" (change)="projectUserSelected()" formControlName="users">
+                  <mat-option *ngFor="let user of userList" [value]="user">{{user.username}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div fxFlex="25" class="prog-status-proje">
+              <mat-form-field fxFlex="95">
+                <input matInput required formControlName="email" readonly>
+              </mat-form-field>
+            </div>
+            <div fxFlex="25" class="prog-status-proje">
+              <mat-form-field fxFlex="95">
+                <input matInput required formControlName="role" readonly>
+              </mat-form-field>
+            </div>
+            <mat-icon class="mt-icn-plus" (click)="addPorjectMember()">add</mat-icon>
+          </div>
+          <!-- for diaply -->
+          <div class="project-team-form-feilds" fxLayout="row" fxLayoutAlign="space-between center" *ngFor="let projectTeam of porjectTeamArray;let i = index">
+            <div fxFlex="20" class="prog-status-proje">
+              <mat-form-field fxFlex="95">
+                <input matInput readonly value="{{projectTeam.name}}">
+              </mat-form-field>
+            </div>
+            <div fxFlex="25" class="prog-status-proje">
+              <mat-form-field fxFlex="95">
+                <input matInput readonly value="{{projectTeam.email}}">
+              </mat-form-field>
+            </div>
+            <div fxFlex="25" class="prog-status-proje">
+              <mat-form-field fxFlex="95">
+                <input matInput readonly value="{{projectTeam.role}}">
+              </mat-form-field>
+            </div>
+            <mat-icon class="mt-icn" (click)="deleteProjctTeamMember(i)">delete_outline</mat-icon>
+          </div>
+        </form>
+      </div>
+    </mat-card>
+    <!-- end project team memebr -->
+    <!-- consulatant div -->
+    <mat-card class="card-form">
+      <div>
+        <!-- header -->
+        <div class="proj-tm-lbl">
+          <span>Contractors and Consultants</span>
+        </div>
+        <!-- end header -->
+        <div fxLayout="row" class="prj-tm-frm-lbl" fxLayoutAlign="space-between center">
+          <span fxFlex="20" class="labal-name">User Name</span>
+          <span fxFlex="25" class="labal-name">Email ID</span>
+          <span fxFlex="25" class="labal-name">Role</span>
+          <span fxFlex="4"></span>
+        </div>
+      </div>
+      <div>
+        <form [formGroup]="contractorsForm" novalidate>
+          <div class="project-team-form-feilds" fxLayout="row" fxLayoutAlign="space-between center">
+            <div fxFlex="20" class="prog-status-proje">
+              <mat-form-field fxFlex="95">
+                <mat-select required placeholder="User name" (change)="contractUserSelected()" formControlName="users">
+                  <mat-option *ngFor="let user of usercontractList" [value]="user">{{user.username}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div fxFlex="25" class="prog-status-proje">
+              <mat-form-field fxFlex="95">
+                <input matInput required formControlName="email" readonly>
+              </mat-form-field>
+            </div>
+            <div fxFlex="25" class="prog-status-proje">
+              <mat-form-field fxFlex="95">
+                <input matInput required formControlName="role" readonly>
+              </mat-form-field>
+            </div>
+            <mat-icon class="mt-icn-plus" (click)="addContractMember()">add</mat-icon>
+          </div>
+          <!-- for display -->
+          <div class="project-team-form-feilds" fxLayout="row" fxLayoutAlign="space-between center" *ngFor="let contract of contractorArray;let i = index">
+            <div fxFlex="20" class="prog-status-proje">
+              <mat-form-field fxFlex="95">
+                <input matInput readonly value="{{contract.name}}">
+              </mat-form-field>
+            </div>
+            <div fxFlex="25" class="prog-status-proje">
+              <mat-form-field fxFlex="95">
+                <input matInput readonly value="{{contract.email}}">
+              </mat-form-field>
+            </div>
+            <div fxFlex="25" class="prog-status-proje">
+              <mat-form-field fxFlex="95">
+                <input matInput readonly value="{{contract.role}}">
+              </mat-form-field>
+            </div>
+            <mat-icon class="mt-icn" (click)="deleteContractTeamMember(i)">delete_outline</mat-icon>
+          </div>
+          <!-- end display -->
+        </form>
+      </div>
+    </mat-card>
+    <!-- end consultant div -->
+    <!-- end form -->
+    <!-- button -->
+    <!-- <button mat-button (click)="onNextClick()">Next</button> -->
+    <!--  button-->
+  </div>
+</div>

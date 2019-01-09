@@ -8,6 +8,10 @@ import { SettingsComponent } from './components/core/dashboard/settings/settings
 import { HomeComponent } from './components/core/dashboard/home/home.component';
 import { OrganisationComponent } from './components/core/dashboard/organisation/organisation.component';
 import {WorkRequestComponent} from './components/core/dashboard/work-request/work-request.component';
+import { RoleComponent } from './components/core/dashboard/role/role.component';
+import { DepartmentComponent } from './components/core/dashboard/department/department.component';
+import { UserDashboardComponent } from './components/core/dashboard/user-dashboard/user-dashboard.component';
+import { NcmDashboardComponent } from './components/core/dashboard/ncm-dashboard/ncm-dashboard.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -22,6 +26,16 @@ const routes: Routes = [
       {
         path: 'organisation', component: OrganisationComponent, data: {
           breadcrumb: 'Organisation'
+        }
+      },
+      {
+        path: 'role', component: RoleComponent, data: {
+          breadcrumb: 'Role'
+        }
+      },
+      {
+        path: 'department', component: DepartmentComponent, data: {
+          breadcrumb: 'department'
         }
       },
       {
@@ -41,6 +55,16 @@ const routes: Routes = [
       },
       {
         path: 'user', component: UserComponent, data: {
+          breadcrumb: 'Users'
+        }
+      },
+      {
+        path: 'user-dashboard', component: UserDashboardComponent, data: {
+          breadcrumb: 'Users'
+        }
+      },
+      {
+        path: 'ncm-dashboard', component: NcmDashboardComponent, data: {
           breadcrumb: 'Users'
         }
       },
