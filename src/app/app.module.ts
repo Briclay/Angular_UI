@@ -38,6 +38,7 @@ import { RoleCreateComponent } from './components/core/dashboard/role/role-creat
 import { DepartmentComponent } from './components/core/dashboard/department/department.component';
 import { UserDashboardComponent } from './components/core/dashboard/user-dashboard/user-dashboard.component';
 import { NcmDashboardComponent } from './components/core/dashboard/ncm-dashboard/ncm-dashboard.component';
+import { HistoryPopupComponent } from './components/shared/history-popup/history-popup/history-popup.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import { NcmDashboardComponent } from './components/core/dashboard/ncm-dashboard
     RoleCreateComponent,
     DepartmentComponent,
     UserDashboardComponent,
-    NcmDashboardComponent
+    NcmDashboardComponent,
+    HistoryPopupComponent
   ],
   imports: [
     BrowserModule,
