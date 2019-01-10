@@ -42,6 +42,27 @@ const data: RoleData = {
 	]
 }
 
+const history = {
+	"result": "success",
+    "data": [
+		{
+			username: 'username1',
+			changedBy: 'Admin',
+			changedDate: '01/12/2017'
+		},
+		{
+			username: 'username1',
+			changedBy: 'Admin',
+			changedDate: '01/12/2017'
+		},
+		{
+			username: 'username1',
+			changedBy: 'Admin',
+			changedDate: '01/12/2017'
+		}
+	]
+}
+
 @Injectable()
 export class RoleService {
     constructor(
@@ -50,4 +71,8 @@ export class RoleService {
     public getData(): Observable<RoleData> {
         return  of(data);;
     }
+
+    public getHistory(): Observable<any> {
+		return of(history)
+	}
 }

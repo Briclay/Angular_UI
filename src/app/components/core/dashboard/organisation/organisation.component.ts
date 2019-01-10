@@ -31,7 +31,7 @@ export class OrganisationComponent implements OnInit {
       }, {
         title: 'Valid till', key: 'entities.validtill'
       }, {
-        title: 'Entities', key: 'entities.count'
+        title: 'Entities', key: 'entities.subOrgcount'
       }]
     });
   }
@@ -40,7 +40,7 @@ export class OrganisationComponent implements OnInit {
     this.organisationService.getHistory().pipe().subscribe(res => {
       this.historyData = {
         header: [
-        { title: 'Username ' },
+        { title: 'Name ' },
         { title: 'Changed By' },
         { title: 'Changed Date' }],
         keys: ['username', 'changedBy', 'changedDate'],

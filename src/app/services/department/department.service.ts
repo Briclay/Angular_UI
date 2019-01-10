@@ -33,6 +33,27 @@ const data: DepartmentData = {
 	]
 }
 
+const history = {
+	"result": "success",
+    "data": [
+		{
+			username: 'username1',
+			changedBy: 'Admin',
+			changedDate: '01/12/2017'
+		},
+		{
+			username: 'username1',
+			changedBy: 'Admin',
+			changedDate: '01/12/2017'
+		},
+		{
+			username: 'username1',
+			changedBy: 'Admin',
+			changedDate: '01/12/2017'
+		}
+	]
+}
+
 @Injectable()
 export class DepartmentService {
     constructor(
@@ -41,4 +62,8 @@ export class DepartmentService {
     public getData(): Observable<DepartmentData> {
         return  of(data);;
     }
+
+    public getHistory(): Observable<any> {
+		return of(history)
+	}
 }
