@@ -31,7 +31,7 @@
               </mat-form-field>
             </div>
             <div>
-              <button class="margin-left-4" mat-raised-button class="feature_btn" 
+              <button [matMenuTriggerFor]="menu" class="margin-left-4" mat-raised-button class="feature_btn" 
               >Features</button>
             </div>
           </div>
@@ -79,8 +79,26 @@
           </div>
         </div>
       </div>
-      <button mat-raised-button type="submit" class="pull-right">Submit</button>
+
+      <button mat-raised-button type="submit"  class="pull-right">Submit</button>
+
       <div class="clearfix"></div>
     </mat-card>
   </form>
 </div>
+<mat-menu #menu="matMenu">
+  <div class="feature_container">
+    <div class="title">Feature</div>
+    <div>
+      <div style="margin-top: 6%;" >
+          <div *ngFor="let feature of allFeatures">
+            <div fxLayout=row >
+              <div style=" border-bottom: black 1px solid;">
+                <mat-checkbox ><span class="message">{{feature}}</span></mat-checkbox>
+              </div>
+            </div>
+           </div>
+        </div>
+    </div>
+  </div>
+</mat-menu>

@@ -34,5 +34,26 @@
             }
         }
     }
-    
+}
+::ng-deep .mat-menu-panel.featurePanel {
+  max-width:300px!important;
+  min-width: 380px!important;
+  width: 100vw; 
+  margin-left: -8px;
+  margin-top: 5px;
+  overflow: auto!important;
+  min-height : auto;
+}
+.feature_container{
+    padding : 5%;
+    .title {
+        font: 400 12px Roboto,"Helvetica Neue",sans-serif;
+        color :#032a57cf;
+        border-bottom: #4cacda 1px solid;
+        padding : 2%;
+    }
+    .message {
+        font: 400 11px Roboto,"Helvetica Neue",sans-serif;
+        color :#032a57cf; 
+    }
 }

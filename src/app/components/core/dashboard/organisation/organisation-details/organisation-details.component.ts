@@ -13,6 +13,7 @@ export class OrganisationDetailsComponent implements OnInit {
   organizationDetailsForm: FormGroup;
   getApprovals = ['File' ,'Service Request' ,'Snag Master']
   plans = [ 'Premium' , 'Trial']
+  allFeatures = ['File' ,'Folder Manager' ,'Service Request','Snag Master']
   constructor() {
   }
 

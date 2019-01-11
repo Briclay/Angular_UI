@@ -1,0 +1,205 @@
+.main-content {
+    flex : 1;
+}
+.main-head {
+    display : inline;
+}
+.header-shadow {
+    box-shadow: 0px 25px 33px -7px #00000038!important;
+}
+.content-head {
+    margin-top : 2%;
+}
+.dottedBorder{
+    border-style: dashed;
+    border-radius: 50%;
+    height: 125px;
+    width: 125px;
+    border-width: 1px;
+    position: relative;
+}
+.userImage {
+    height: 120px;
+    width: 120px;
+    position: absolute;
+    border-radius: 50%;
+    top: 2px;
+    left: 2px;
+}
+.greenDot{
+    position: absolute;
+    right: 9px;
+    bottom: 5px;
+    height: 7px;
+    width: 7px;
+    background: #00FF7F;
+    border-radius: 50%;
+}
+.text-color {
+    font: 400 13px/20px Roboto,"Helvetica Neue",sans-serif;
+    color :#032A57;
+}
+.text-color-light {
+    font: 13px Roboto,"Helvetica Neue",sans-serif;
+    color : #032a57a1;
+}
+.font_12_light {
+    font: 700 12px Roboto,"Helvetica Neue",sans-serif;
+    color :#032a57a1;
+    padding: 6px;
+}
+.tab-btn {
+    font: 500 13px Roboto,"Helvetica Neue",sans-serif;
+    color :#032A57;
+}
+.report-text {
+    font: 400 18px Roboto,"Helvetica Neue",sans-serif;
+    color :#032A57;
+    margin-left: 37px;
+}
+.first-card {
+    flex : 1;
+}
+.report-card {
+   display: flex;
+   margin : 3px 0px 0px 6px
+}
+.card-title {
+    display: block;
+    font: 400 13px Roboto,"Helvetica Neue",sans-serif;
+    color :grey;
+    margin-bottom : 25px;
+}
+.details-head {
+    font: 600 10px Roboto,"Helvetica Neue",sans-serif;
+    color :#9e9e9e;
+}
+.count {
+    font: 300 10px Roboto,"Helvetica Neue",sans-serif;
+    color :#696969;
+    padding: 5px;
+}
+.font_17{
+    font: 700 17px Roboto,"Helvetica Neue",sans-serif;
+    color :#032A57;
+    padding: 6px;
+}
+.font_12{
+    font: 700 12px Roboto,"Helvetica Neue",sans-serif;
+    color :#032A57;
+    padding: 6px;
+}
+.font_10{
+    font: 700 10px Roboto,"Helvetica Neue",sans-serif;
+    color :#032a57a1;
+    padding: 6px;
+}
+.font_10_PT{
+    font: 700 10px Roboto,"Helvetica Neue",sans-serif;
+    color :#032a57a1;
+    margin-left: 8px;
+}
+
+.user-details-container {
+    padding: 10px;
+    .user-details-form {
+        
+        .user-details-card {
+            flex: 1;
+            display: flex;
+            font: 400 13px/20px Roboto,"Helvetica Neue",sans-serif;
+            .user-details-name {
+                flex: 0.6;
+                img {
+                    width: 100px;
+                    border-radius: 5px;
+                }
+                .username-input {
+                    margin-top: 10px;
+                }
+            }
+            .user-details-content {
+                flex: 1;
+                .user-details-content-title {
+                    margin-left: 10px;
+                }
+                .user-details-form-list {
+                    border-left: 2px solid #999999;
+                    min-height: 200px;
+                    padding: 10px;
+                }
+                .feature_btn {
+                    border-radius: 17px;
+                    background-color: #2196F3; 
+                    color: white;
+                }
+            }
+        }
+    }
+    
+}
+::ng-deep .mat-card.matCard {
+    padding: 8px;
+    margin: 0px 8px;
+}
+
+::ng-deep .mat-card.matCard1 {
+    padding: 2px;
+    margin: 1px 1px 6px 0px;
+}
+
+::ng-deep .mat-card.matCardPI {
+    padding: 12px;
+    margin: 10px 5px;
+}
+
+.panel-left {
+    margin-top: 10px;
+}
+.donut_image {
+    flex-wrap: wrap;
+}    
+.p_status_text {
+    position: absolute;
+    background-color: #69af68;
+    padding: 3px;
+    top: 3px;
+    right: 13px;
+    font: 600 11px Roboto,"Helvetica Neue",sans-serif;
+    color: white;
+    border-radius: 35%;
+}
+.p_icon {
+    position:relative;
+     height: 180px;
+     width: 225px;
+     border-radius: 26px 0px 4px 0px;
+}
+.p_caption {
+    position: absolute;
+    background-color: #ffffff57;
+    height: 38px;
+    width: 225px;
+    bottom: 0px;
+    font: 600 12px Roboto,"Helvetica Neue",sans-serif;
+    color: black;
+    text-align : center;
+}
+
+::ng-deep .mat-form-field.fisrtFrom {
+    display: inline-block;
+    position: relative;
+    text-align: left;
+    padding: 5px;
+    font: 400 13px Roboto,"Helvetica Neue",sans-serif;
+    width: 125px;
+}
+::ng-deep .mat-form-field.fisrtFromMaxWidth {
+    width: 255px;
+}
+
+.clearFix {
+    width: 2px;
+    background-color: lightgray;
+    margin: 50px;
+}

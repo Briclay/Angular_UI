@@ -39,6 +39,7 @@ import { DepartmentComponent } from './components/core/dashboard/department/depa
 import { UserDashboardComponent } from './components/core/dashboard/user-dashboard/user-dashboard.component';
 import { NcmDashboardComponent } from './components/core/dashboard/ncm-dashboard/ncm-dashboard.component';
 import { HistoryPopupComponent } from './components/shared/history-popup/history-popup.component';
+import { DesignDashboardComponent } from './components/core/dashboard/design-dashboard/design-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import { HistoryPopupComponent } from './components/shared/history-popup/history
     DepartmentComponent,
     UserDashboardComponent,
     NcmDashboardComponent,
-    HistoryPopupComponent
+    HistoryPopupComponent,
+    DesignDashboardComponent
   ],
   entryComponents: [
     HistoryPopupComponent

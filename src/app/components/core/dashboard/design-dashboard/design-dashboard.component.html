@@ -1,0 +1,192 @@
+<div class="main-content" >
+  <div  class="main-head">
+    <div fxLayout=row >
+      <div fxFlex=12 fxLayout="row" >
+        <div>
+          <div class="dottedBorder" >
+            <img class="userImage" src="/assets/images/backgrounds/autumn.jpg">
+            <div align="center" class="greenDot"></div>
+          </div>
+          <div fxLayout="column" style="text-align: center;">
+            <span class="text-color">Vinay R</span>
+            <span class="text-color-light ">QMS</span>
+          </div>
+        </div>
+      </div>
+      <div fxFlex=88 fxLayout=column>
+        <div fxLayout="row" >
+          <mat-card class="header-shadow" style="display: inline;flex :1;height: 15px;">
+            <div class="pull-left panel-left" style="margin-top: -14px;">
+              <mat-form-field appearance="outline" class="fisrtFrom">
+                <mat-label>Organization</mat-label>
+                <mat-select placeholder="Select Organization">
+                  <mat-option *ngFor="let organization of organizations" [value]="organization.value">
+                    {{organization.viewValue}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="pull-right" fxLayout=row style="place-content: space-around;">
+              <div fxLayout=row style="place-content: space-around;">
+                <img style="height: 20px;width: 20px;" src="/assets/images/icons/projects_Active.png">
+                <div class="tab-btn" style="margin-left:10px;" > Projects</div>
+              </div>
+              <div fxLayout=row style="place-content: space-around;">
+               <img style="height: 30px;width: 30px;margin-top: -5px;" src="/assets/images/icons/File_Manager_Active.png">
+               <div class="tab-btn" >File Manager</div>
+             </div>
+             <div fxLayout=row style="place-content: space-around;">
+              <img style="height: 20px;width: 20px;" src="/assets/images/icons/Work_Request _active.png">
+              <div class="tab-btn" style="margin-left:10px;">Document Checklist</div>
+            </div>
+          </div>
+        </mat-card> 
+      </div>
+      <div fxLayout=row>
+        <div class="content-head" fxLayout=column style="min-width: -webkit-fill-available;">
+          <div class="first-card">
+            <mat-card class="matCard" fxFlex=20 fxLayout=column *ngFor="let project of projects">
+              <div fxLayout=row style="place-content: space-between;">
+                <div fxLayout=row>
+                  <img style="height: 70px;width: 115px;border-radius: 10%;" src="/assets/images/backgrounds/winter.jpg">
+                </div>
+                <div fxLayout=column>
+                  <div class="font_12">{{project.name}}</div>
+                  <div class="font_10">{{project.address}}</div>
+                </div>
+              </div>
+            </mat-card>
+          </div> 
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div fxLayout=row>
+    <mat-card>
+      <div fxLayout=row >
+        <div fxFlex=20 style="position:relative; ">
+          <img class="p_icon" src="/assets/images/backgrounds/winter.jpg">
+          <div class="p_caption">Purva Beach</div>
+          <div class="p_status_text">Launched</div>
+        </div>
+        <div fxFlex=80 fxLayout=row class="donut_image">
+          <div *ngFor="let ptype of projectTypes" fxLayout=column>
+            <img style="height: 65px;width: 65px;margin-right: 50px;" src="/assets/images/icons/donut.png">
+            <div class="font_10_PT">{{ptype.name}}</div>
+          </div>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+  <div fxLayout=row>
+    <mat-card fxFlex=60 class="matCardPI">
+      <div class="font_17" style="text-align: center">Project Details</div>
+      <div fxLayout=row style="margin-top: 7%;">
+        <div fxLayout=column >
+          <div fxLayout=row >
+            <mat-form-field appearance="outline" class="fisrtFrom">
+              <mat-label>Built Up Area </mat-label>
+              <input matInput placeholder="">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="fisrtFrom">
+              <mat-label>No Of Towers</mat-label>
+              <input matInput placeholder="">
+            </mat-form-field>
+          </div>
+          <div fxLayout=row >
+            <mat-form-field appearance="outline" class="fisrtFrom">
+              <mat-label>Saleable Area</mat-label>
+              <input matInput placeholder="">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="fisrtFrom">
+                <mat-label>No Of Units</mat-label>
+                <input matInput placeholder="">
+              </mat-form-field>
+          </div>
+          <div fxLayout=row style="margin-top: 30%;">
+            <mat-form-field appearance="outline" class="fisrtFrom fisrtFromMaxWidth">
+              <mat-label>Configuration</mat-label>
+              <input matInput placeholder="">
+            </mat-form-field>
+          </div>
+          <div fxLayout=row >
+            <mat-form-field appearance="outline" class="fisrtFrom fisrtFromMaxWidth">
+              <mat-label>Planning Authority</mat-label>
+              <input matInput placeholder="">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="clearFix"></div>
+        <div fxLayout=column style="margin-top: -4%;">
+          <div class="font_12" style="text-align: center">Car Parking</div>
+            <div fxLayout=row >
+              <mat-form-field appearance="outline" class="fisrtFrom">
+                <mat-label>Total</mat-label>
+                <input matInput placeholder="">
+              </mat-form-field>
+              <mat-form-field appearance="outline" class="fisrtFrom">
+                <mat-label>Basement</mat-label>
+                <input matInput placeholder="">
+              </mat-form-field>
+            </div>
+          <div fxLayout=row >
+            <mat-form-field appearance="outline" class="fisrtFrom">
+              <mat-label>Covered</mat-label>
+              <input matInput placeholder="">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="fisrtFrom">
+                <mat-label>Surface</mat-label>
+                <input matInput placeholder="">
+              </mat-form-field>
+          </div>
+          <div fxLayout=row >
+            <mat-form-field appearance="outline" class="fisrtFrom">
+              <mat-label>Stack</mat-label>
+              <input matInput placeholder="">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="fisrtFrom">
+              <mat-label>Puzzle</mat-label>
+              <input matInput placeholder="">
+            </mat-form-field>
+          </div>
+          <div fxLayout=column >
+            <div class="font_12" style="text-align: center">Product</div>
+              <div fxLayout=row style="place-content: space-around;"> 
+                <div class="font_12" >BHK</div>
+                <div class="font_12" style="margin-left: 5px;" >No</div>
+                <div class="font_12" >Area (SFT)</div>
+              </div>
+              <div *ngFor="let p of products">
+                <mat-card fxLayout=row class="matCard1" style="place-content: space-around;">
+                  <div class="font_12_light" >{{p.bhk}}</div>
+                  <div class="font_12_light" >{{p.no}}</div>
+                  <div class="font_12_light" >{{p.area}}</div>
+                </mat-card>
+              </div>
+          </div>
+        </div>
+      </div>
+    </mat-card>
+  <mat-card fxFlex=40 class="matCardPI">
+    <div class="font_17" style="text-align: center">Project Consultants</div>
+    <div fxLayout=row >
+      <div fxLayout=column style="flex: 1;">
+          <div fxLayout=row style="place-content: space-around;"> 
+            <div class="font_12" ></div>
+            <div class="font_12" style="margin-left: 5px;" >Internal</div>
+            <div class="font_12" >External</div>
+          </div>
+          <div *ngFor="let pc of projectConsultances">
+            <mat-card fxLayout=row class="matCard1" style="place-content: space-around;">
+              <div class="font_12_light" >{{pc.name}}</div>
+              <div class="font_12_light" >{{pc.internaluser}}</div>
+              <div class="font_12_light" >{{pc.externaluser}}</div>
+            </mat-card>
+          </div>
+      </div>
+    </div>
+  </mat-card>
+</div>
+</div>
+</div>

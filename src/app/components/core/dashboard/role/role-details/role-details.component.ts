@@ -16,6 +16,7 @@ export class RoleDetailsComponent implements OnInit {
   shifts = ['Regular' , 'Day' , 'Night']
   subRoles = ['Technician', 'sub-Admin', 'User'];
   getApprovals = ['Design' ]
+  allFeatures = ['File' ,'Folder Manager' ,'Service Request','Snag Master']
   constructor() {
   }
 
