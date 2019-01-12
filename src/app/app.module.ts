@@ -43,7 +43,7 @@ import { NcmDashboardComponent } from './components/core/dashboard/ncm-dashboard
 import { UserDashDetailsComponent } from './components/core/dashboard/user-dashboard/user-dash-details/user-dash-details/user-dash-details.component';
 import { WorkOrderComponent } from './components/core/dashboard/work-order/work-order.component';
 import { WorkOrderModule } from './components/core/dashboard/work-order/work-order.module';
-import { SpinnerComponent } from './components/shared/spinner/spinner.component';
+import { SpinnerModule } from './components/shared/spinner/spinner.module';
 
 @NgModule({
   declarations: [
@@ -72,8 +72,7 @@ import { SpinnerComponent } from './components/shared/spinner/spinner.component'
     UserDashboardComponent,
     NcmDashboardComponent,
     UserDashDetailsComponent,
-    WorkOrderComponent,
-    SpinnerComponent
+    WorkOrderComponent
   ],
   imports: [
     BrowserModule,
@@ -86,7 +85,8 @@ import { SpinnerComponent } from './components/shared/spinner/spinner.component'
     FormsModule,
     ProjectModule,
     WorkRequestModule,
-    WorkOrderModule
+    WorkOrderModule,
+    SpinnerModule
   ],
   providers: [D3Service, DashboardService, UserService, DepartmentService, RoleService, 
   OrganizationService,UserDashboardService],

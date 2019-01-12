@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {WorkRequestService} from './work-request.service';
 import {RequestTrackerData} from './interface';
 
@@ -8,6 +8,8 @@ import {RequestTrackerData} from './interface';
   styleUrls: ['./work-request.component.scss']
 })
 export class WorkRequestComponent implements OnInit {
+  @ViewChild('tabGroup') tabGroup;
+  
   isLoading: boolean;
   workRequest: RequestTrackerData;
   workRequestDataOption: any;
@@ -15,9 +17,12 @@ export class WorkRequestComponent implements OnInit {
   constructor(private workRequestService : WorkRequestService ) { }
 
   ngOnInit() {
+    this.getWorkRequest();
+  }
+
+  getWorkRequest() {
     this.isLoading = true;
-    this.workRequestService.getWorkRequest().pipe().subscribe(res => {
-      console.log('res', res)
+    this.workRequestService.getWorkRequest(`filter[_organisationId]=5a5844cd734d1d61613f7066`).pipe().subscribe(res => {
       this.workRequest = res;
       this.isLoading = false;
       this.workRequestDataOption = [
@@ -31,13 +36,18 @@ export class WorkRequestComponent implements OnInit {
           ]
         },
         { title: 'Need By Date', key: 'needByDate', display: 'block' },
-        { title: 'Assignee', key: '_assignedId', display: 'block' },
+        { title: 'Assignee', key: '', display: 'block' },
         { title: 'Type of Work ', key: 'typeOfWork', display: 'block' },
         { title: 'Order Description ', key: 'workDescription', display: 'block' },
         { title: 'Initiated Date', key: 'initiatedDate', display: 'block' },
         { title: 'Work Category ', key: 'workCategory', display: 'block' },
       ]
     });
+  }
+
+  tabSwitch(index) {
+    this.tabGroup.selectedIndex = index;
+    this.getWorkRequest();
   }
 
 }

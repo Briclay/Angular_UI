@@ -15,9 +15,12 @@ export class WorkOrderComponent implements OnInit {
   constructor(private workOrderService: WorkOrderService) { }
 
   ngOnInit() {
+    this.getWorkOrder();
+  }
+
+  getWorkOrder() {
     this.isLoading = true;
-    this.workOrderService.getWorkOrder().pipe().subscribe(res => {
-      console.log('res', res)
+    this.workOrderService.getWorkOrder('filter[_organisationId]=5a5844cd734d1d61613f7066').pipe().subscribe(res => {
       this.workOrder = res;
       this.isLoading = false;
       this.workOrderDataOption = [
@@ -26,7 +29,7 @@ export class WorkOrderComponent implements OnInit {
         },
         {
           title: 'User Name', type: 'list', list: [
-            { title: 'requestNumber', key: '_workRequestId.requestNumber', hideTitle: true, type: 'label' },
+            { title: 'Order Number', key: 'orderNumber', hideTitle: true, type: 'label' },
             { title: 'status', key: '_workRequestId.status', hideTitle: true, type: 'label', isStatus: true }
           ]
         },

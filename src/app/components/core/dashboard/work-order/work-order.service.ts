@@ -8,8 +8,8 @@ import { ApiService } from "../../../../services/api.service";
 })
 export class WorkOrderService {
     constructor(private apiService: ApiService) { }
-    public getWorkOrder(): Observable<any> {
-        let url = `https://briclay-work-tracker.herokuapp.com/work-order?filter[_organisationId]=5a5844cd734d1d61613f7066&order=createdAt&sort=desc`
+    public getWorkOrder(orgId): Observable<any> {
+        let url = `https://briclay-work-tracker.herokuapp.com/work-order?${orgId}&order=createdAt&sort=desc`
         return this.apiService.get(url).pipe(map(res => res));
     }
 }

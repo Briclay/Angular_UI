@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import * as _ from 'lodash';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
+import {WorkOrderService} from '../work-order.service';
+import {WorkRequestService} from '../../work-request/work-request.service'
 
 @Component({
   selector: 'app-work-order-details',
@@ -10,6 +12,8 @@ import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
   styleUrls: ['./work-order-details.component.scss']
 })
 export class WorkOrderDetailsComponent implements OnInit {
+  @Input() formType: string;
+  @Input() data: any;
   form: FormGroup;
   formErrors: any;
   userAuth: any;
@@ -17,13 +21,16 @@ export class WorkOrderDetailsComponent implements OnInit {
   orderTrackerFormErrors: any;
   orderTrackerForm: FormGroup;
   status: any;
-  requestTrcakerList: any;
+  requestTrackerList: any;
   projectName: string;
   orgCode: string;
   projectCode: string;
   orderList: any;
   workList: any;
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder,
+    private workOrderService: WorkOrderService,
+    private workRequestService: WorkRequestService
+  ) {
     this.initiatedDate = (new Date());
     this.getAllWorkRequest();
     this.orderTrackerFormErrors = {
@@ -68,6 +75,12 @@ export class WorkOrderDetailsComponent implements OnInit {
       date: new FormControl((new Date()))
     });
   }
+
+
+  ngOnInit() {
+    this.assignValuesToForm();
+   }
+
   selectWorkRequest() {
     this.genrateFullRefNumber();
     if (this.orderTrackerForm.value.workRequestList) {
@@ -115,36 +128,36 @@ export class WorkOrderDetailsComponent implements OnInit {
     }
   }
   getAllWorkOrder() {
-    // this.orderTrackerService.getAll('filter[_organisationId]=' + this.userAuth.organisation._id)
-    //   .then((response: any) => {
-    //     this.orderList = response.data;
-    //     this.orderTrackerForm.controls['_workOrderId'].setValue("A" + this.createOrderId(response.data.length + 1));
-    //     this.workList = [];
-    //     var countCheck = 0;
-    //     // this.workList = _.differenceWith(this.requestTrcakerList, this.orderList, _.isEqual);
-    //     //_.forEach(this.requestTrcakerList,function(value){
+    this.workOrderService.getWorkOrder('filter[_organisationId]=5a5844cd734d1d61613f7066')
+      .pipe().subscribe(res => {
+        this.orderList = res;
+        this.orderTrackerForm.controls['_workOrderId'].setValue("A" + this.createOrderId(res.length + 1));
+        this.workList = [];
+        var countCheck = 0;
+        // this.workList = _.differenceWith(this.requestTrackerList, this.orderList, _.isEqual);
+        //_.forEach(this.requestTrackerList,function(value){
 
-    //     // this is not valid solution please check valid solution fot that (to do task)
-    //     // to task for future
-    //     console.log('requestTrcakerList' + JSON.stringify(this.requestTrcakerList));
-    //     console.log('orderList' + JSON.stringify(this.orderList));
-    //     for (var i = 0; i < this.requestTrcakerList.length; i++) {
-    //       countCheck = 0;
-    //       for (var j = 0; j < this.orderList.length; j++) {
-    //         if (_.isEqual(this.requestTrcakerList[i].requestNumber, this.orderList[j]._workRequest.requestNumber)) {
-    //           countCheck = 1;
-    //           break;
-    //         }
-    //       }
-    //       if (countCheck == 0) {
-    //         this.workList.push(this.requestTrcakerList[i]);
-    //       }
-    //     }
-    //     console.log('workList' + JSON.stringify(this.workList));
-    //     // });
-    //   }, (error: any) => {
-    //     throw new MatkraftError(error.error.error.message);
-    //   });
+        // this is not valid solution please check valid solution fot that (to do task)
+        // to task for future
+        for (var i = 0; i < this.requestTrackerList.length; i++) {
+          countCheck = 0;
+          
+          for (var j = 0; j < this.orderList.length; j++) {
+            if (_.isEqual(this.requestTrackerList[i].requestNumber, this.orderList[j]._workRequestId.requestNumber)) {
+              countCheck = 1;
+              break;
+            }
+          }
+          if (countCheck == 0) {
+            this.workList.push(this.requestTrackerList[i]);
+          }
+        }
+        console.log('workList' + JSON.stringify(this.workList));
+        // });
+      }, (error: any) => {
+        //TODO add error component
+        console.error('error', error);
+      });
   }
   getOrgCode() {
     // this.organisationService.getOne(this.userAuth.organisation._id)
@@ -157,8 +170,8 @@ export class WorkOrderDetailsComponent implements OnInit {
   }
   getProjectCode(orgCode, date) {
     var reuquetNumber;
-    if (!_.isUndefined(this.requestTrcakerList) && !_.isEmpty(this.requestTrcakerList)) {
-      reuquetNumber = this.requestTrcakerList[0].requestNumber;
+    if (!_.isUndefined(this.requestTrackerList) && !_.isEmpty(this.requestTrackerList)) {
+      reuquetNumber = this.requestTrackerList[0].requestNumber;
     }
     // this.projectsService.getOne(this.orderTrackerForm.value.workRequestList._projectId._id)
     //   .then((response: any) => {
@@ -186,16 +199,25 @@ export class WorkOrderDetailsComponent implements OnInit {
   getSubString(str, pos1, pos2) {
     return str.toString().substring(pos1, pos2);
   }
-  getAllWorkRequest() {
-    // this.requestTrackerService.getAll('filter[_organisationId]=' + this.userAuth.organisation._id + '&filter[status]=OrderTracker')
-    //   .then((response: any) => {
-    //     this.requestTrcakerList = response.data;
-    //     /*call work order tracker*/
-    //     this.getAllWorkOrder();
-    //   }, (error: any) => {
-    //     throw new MatkraftError(error.error.error.message);
-    //   });
+  assignValuesToForm() {
+    console.log('this.data', this.data)
+    console.log('this.formType', this.formType)
+    if(this.formType !== 'create') {
+      this.orderTrackerForm.patchValue(this.data)
+    }
   }
+  getAllWorkRequest() {
+    //get all work request for calculting request number
+    this.workRequestService.getWorkRequest(`filter[_organisationId]=5a5844cd734d1d61613f7066`)
+      .pipe().subscribe(res => {
+        this.requestTrackerList = res;
+        this.getAllWorkOrder();
+      }, (error: any) => {
+        //TODO add error component
+        console.error('error', error)
+      });
+  }
+
   onOrderFormSubmit() {
     // if (this.orderTrackerForm.valid) {
     //   this.orderTrackerService.save(this.orderTrackerForm.value)
@@ -219,6 +241,8 @@ export class WorkOrderDetailsComponent implements OnInit {
   cancel() {
     const path = '/work-order-tracker';
   }
-  ngOnInit() { }
+
+
+  
 
 }

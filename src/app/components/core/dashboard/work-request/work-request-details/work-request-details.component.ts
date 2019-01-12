@@ -1,8 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import * as _ from 'lodash';
 import { MatDialog } from '@angular/material';
+import {WorkRequestService} from '../work-request.service';
+import {UserService} from '../../../../../services/user/user.service';
+import {ProjectService} from '../../../dashboard/projects/project.service';
+import {DateUtils} from '../../../../../utils/date-uitls';
 
 @Component({
   selector: 'app-work-request-details',
@@ -10,6 +14,9 @@ import { MatDialog } from '@angular/material';
   styleUrls: ['./work-request-details.component.scss']
 })
 export class WorkRequestDetailsComponent implements OnInit {
+  @Input() formType: string;
+  @Input() data: any;
+  @Output() public tabSwitch: EventEmitter<any> = new EventEmitter<any>();
   form: FormGroup;
   formErrors: any;
   workTrackerFormErrors: any;
@@ -31,7 +38,14 @@ export class WorkRequestDetailsComponent implements OnInit {
     leadDuration: null
   }
   orgId: string;
-  constructor(private formBuilder: FormBuilder, private router: Router,  private route: ActivatedRoute, public dialog: MatDialog) {
+  isLoading: boolean;
+  constructor(private formBuilder: FormBuilder, 
+    private router: Router,  
+    private route: ActivatedRoute, 
+    public dialog: MatDialog,
+    private projectService: ProjectService,
+    private workRequestService: WorkRequestService,
+    private userService: UserService) {
     //get org id for superadmin
     this.route.queryParams.subscribe(params => {
       this.orgId = params['orgId']
@@ -97,10 +111,51 @@ export class WorkRequestDetailsComponent implements OnInit {
   }
   
   ngOnInit() {
+    this.assignValuesToForm()
+    this.getAllProjectsList();
+    this.getAllWorkRequestTracker();
+    this.getUsers();
+    this.getWorkCategory(`filter[_organisationId]=5a5844cd734d1d61613f7066`);
+  }
 
+  assignValuesToForm() {
+    if(this.formType !== 'create') {
+      this.workTrackerForm.patchValue(this.data)
+    }
+  }
+
+  getAllProjectsList() {
+    //get all project
+    this.projectService.getProjects(`filter[_organisationId]=5a5844cd734d1d61613f7066`)
+      .pipe().subscribe(res => {
+        this.projectsList = res.data;
+          if (this.projectsList.length <= 0) {
+            //TODO add error component
+            console.error('No projects found')
+          }
+      }, (error: any) => {
+        //TODO add error component
+        console.error('error', error)
+      });
+  }
+
+  getAllWorkRequestTracker() {
+    //get all work request for calculting request number
+    this.workRequestService.getWorkRequest(`filter[_organisationId]=5a5844cd734d1d61613f7066`)
+      .pipe().subscribe(res => {
+        this.requestTrcakerList = res;
+        if( this.formType !== 'create' ) {
+          this.reuqestNumber = this.data.requestNumber;
+        } else {
+          this.reuqestNumber =  `R${this.createRequestNumber(this.requestTrcakerList.length + 1)}`;
+        }
+        this.workTrackerForm.controls['requestNumber'].setValue(this.reuqestNumber);
+      }, (error: any) => {
+        //TODO add error component
+        console.error('error', error)
+      });
   }
   workTrackerFormSubmit() {
-    //this.workTrackerForm.controls['workCategory'].setValue(this.workTrackerForm.value.workCategory.name);
     if (this.workTrackerForm.valid) {
       if (this.workTrackerForm.value.initiatedDate && this.workTrackerForm.value.RFAapprovalDate) {
         if (this.workTrackerForm.value.initiatedDate < this.workTrackerForm.value.RFAapprovalDate) {
@@ -113,21 +168,53 @@ export class WorkRequestDetailsComponent implements OnInit {
     } else {
     }
   }
+
+  getUsers() {
+    this.userService.getUser()
+      .pipe().subscribe(res => {
+        this.userList = res.data;
+      }, (error: any) => {
+        //TODO add error component
+        console.error('error', error)
+      });
+  }
+
+  saveWorkRequest(requestData) {
+    this.isLoading = true;
+    this.workRequestService.saveWorkRequest(requestData)
+      .pipe().subscribe(res => {
+        this.isLoading = false;
+        this.tabSwitch.emit(0);
+        this.workTrackerForm.reset()
+      }, (error: any) => {
+        //TODO add error component
+        console.error('error', error);
+        this.isLoading = false;
+      });
+  }
+
+  updateWorkRequest(requestData) {
+    requestData = {...requestData, needByDate: this.data.needByDate}
+    this.isLoading = true;
+    this.workRequestService.updateWorkRequest(requestData, this.data._id)
+      .pipe().subscribe(res => {
+        console.log('updateWorkRequest saved', res);
+        this.isLoading = false;
+        
+      }, (error: any) => {
+        //TODO add error component
+        console.error('error', error);
+        this.isLoading = false;
+      });
+  }
+
   onSave() {
-    const requestData = { ...this.workTrackerForm.value, workCategory: this.workTrackerForm.value.workCategory.name }
-    // this.requestTrackerService.save(requestData)
-    //   .then((response: any) => {
-    //     // toasty message
-    //     const toastOptions: ToastOptions = {
-    //       title: 'Success',
-    //       msg: response.message
-    //     };
-    //     this.toastyService.success(toastOptions);
-    //     const path = '/work-request-tracker'
-    //     // route to work request list
-    //     this.router.navigate([path]);
-    //   }, (error: any) => {
-    //   });
+    const requestData = { ...this.workTrackerForm.value, 
+      workCategory: this.workTrackerForm.value.workCategory.name,
+      leadTimeRequire: this.workTrackerForm.value.leadDuration }
+      console.log('requestData', requestData)
+      this.formType !== 'create' ? this.updateWorkRequest(requestData) : this.saveWorkRequest(requestData)
+    
   }
   /* Open dailog for reason */
 
@@ -227,13 +314,15 @@ export class WorkRequestDetailsComponent implements OnInit {
     }
   }
 
-  openWorkCatDailog() {
-    // let dialogRef = this.dialog.open(WorkCategoryDailog, {
-    //   width: '600px',
-    // });
-    // dialogRef.afterClosed().subscribe(result => {
+  getWorkCategory(orgId) {
+    this.workRequestService.getWorkCategory(orgId)
+      .pipe().subscribe(res => {
+        this.workCategory = res[0].configValues
+      }, (error: any) => {
+        //TODO add error component
+        console.error('error', error)
+      });
 
-    // });
   }
-
+ 
 }

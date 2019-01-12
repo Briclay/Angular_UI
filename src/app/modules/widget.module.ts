@@ -7,26 +7,41 @@ import { RoleDetailsComponent } from '../components/core/dashboard/role/role-det
 import { DepartmentDetailsComponent } from '../components/core/dashboard/department/department-details/department-details.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import {MaterialModule} from "./material.module";
+import {SpinnerModule} from "../components/shared/spinner/spinner.module";
+import {WorkRequestDetailsComponent} from '../components/core/dashboard/work-request/work-request-details/work-request-details.component';
+import {WorkOrderDetailsComponent} from '../components/core/dashboard/work-order/work-order-details/work-order-details.component';
 
 @NgModule({
   imports: [
     CommonModule, 
     MaterialModule, 
     ReactiveFormsModule, 
-    FormsModule
+    FormsModule,
+    SpinnerModule
   ],
   declarations: [
     UserDetailsComponent,
     OrganisationDetailsComponent,
     RoleDetailsComponent,
-    DepartmentDetailsComponent
+    DepartmentDetailsComponent,
+    WorkRequestDetailsComponent,
+    WorkOrderDetailsComponent
   ],
-  exports: [UserDetailsComponent, OrganisationDetailsComponent, RoleDetailsComponent,DepartmentDetailsComponent],
+  exports: [
+    UserDetailsComponent, 
+    OrganisationDetailsComponent, 
+    RoleDetailsComponent,
+    DepartmentDetailsComponent, 
+    WorkRequestDetailsComponent,
+    WorkOrderDetailsComponent
+  ],
   entryComponents: [
     UserDetailsComponent,
     OrganisationDetailsComponent,
     RoleDetailsComponent,
-    DepartmentDetailsComponent
+    DepartmentDetailsComponent,
+    WorkRequestDetailsComponent,
+    WorkOrderDetailsComponent
   ],
   providers: [WidgetService]
 })

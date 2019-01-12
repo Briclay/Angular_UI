@@ -4,9 +4,9 @@
       <form name="workTrackerForm" [formGroup]="workTrackerForm" novalidate>
         <div class="card-header">
           <span id="hdr-inpt">
-              <input class="form-hdr-wrk-req-id" matInput placeholder="Work Request Id" formControlName="requestNumber" readonly>
+              <input class="font-weight-bold" matInput placeholder="Work Request Id" formControlName="requestNumber" readonly>
             </span>
-            <div fxLayout="row">
+            <div fxLayout="row" class="margin-top15">
               <mat-form-field appearance="outline" floatLabel="never" color="primary" fxFlex="16">
                 <mat-label>Assingee</mat-label>
                 <mat-select placeholder="Assingee" formControlName="_assignedId" class="form-hdr-assignee">
@@ -65,7 +65,7 @@
             <div  fxFlex="20">
               <mat-form-field appearance="outline">
                 <mat-label>Work Category</mat-label>
-                <mat-select class="wrk-catgry" placeholder="Work Category" formControlName="workCategory" (change)="noOfDays()" required>
+                <mat-select class="wrk-catgry" placeholder="Work Category" formControlName="workCategory" (selectionChange)="noOfDays()" required>
                   <mat-option *ngFor="let workCat of workCategory" [value]="workCat">
                     {{ workCat.name }}
                   </mat-option>
@@ -91,23 +91,31 @@
           <div fxLayout="row margin-top15" class="margin-top15">
             <div  fxFlex="20">
               <mat-form-field appearance="outline">
-                <mat-label>Need By Date</mat-label>
-                <input matInput [matDatepicker]="needByDate" placeholder="Need by Date" formControlName="needByDate" required (dateChange)="calLeadDaysToComplete()" [min]="todayDate">
-                <mat-datepicker-toggle matSuffix [for]="needByDate"></mat-datepicker-toggle>
-                <mat-datepicker #needByDate></mat-datepicker>
-                <mat-error *ngIf="workTrackerFormErrors.needByDate.required">
-                  Need by date is required!
+                <mat-label>Initiated Date</mat-label>
+                <input matInput [matDatepicker]="initiatedDate" 
+                  placeholder="Initiated Date" 
+                  [min]="todayDate" 
+                  formControlName="initiatedDate" 
+                  (dateChange)="calTimeToComplete()">
+                <mat-datepicker-toggle matSuffix [for]="initiatedDate"></mat-datepicker-toggle>
+                <mat-datepicker #initiatedDate></mat-datepicker>
+                <mat-error *ngIf="workTrackerFormErrors.initiatedDate.required">
+                  Initiated date is required!
                 </mat-error>
               </mat-form-field>
             </div>
             <div  fxFlex="20">
               <mat-form-field appearance="outline">
-                <mat-label>Initiated Date</mat-label>
-                <input matInput [matDatepicker]="initiatedDate" placeholder="Initiated Date" [min]="todayDate" formControlName="initiatedDate" (dateChange)="calTimeToComplete()">
-                <mat-datepicker-toggle matSuffix [for]="initiatedDate"></mat-datepicker-toggle>
-                <mat-datepicker #initiatedDate></mat-datepicker>
-                <mat-error *ngIf="workTrackerFormErrors.initiatedDate.required">
-                  Initiated date is required!
+                <mat-label>Need By Date</mat-label>
+                <input matInput [matDatepicker]="needByDate" placeholder="Need by Date" formControlName="needByDate" 
+                  required (dateChange)="calLeadDaysToComplete()" 
+                  [disabled]="formType !== 'create'"
+                  [min]="todayDate">
+                <mat-datepicker-toggle matSuffix [for]="needByDate" 
+                  [disabled]="formType !== 'create'"></mat-datepicker-toggle>
+                <mat-datepicker #needByDate></mat-datepicker>
+                <mat-error *ngIf="workTrackerFormErrors.needByDate.required">
+                  Need by date is required!
                 </mat-error>
               </mat-form-field>
             </div>
@@ -206,8 +214,10 @@
           <div fxFlex="40">
             <!-- button -->
             <div class="button-row" fxLayoutAlign="end center">
-              <button mat-raised-button class="cancel-button" color="white-bg" (click)="cancel()">Cancel</button>
-              <button type="submit" mat-raised-button class="save-button" color="white-bg" (click)="workTrackerFormSubmit()">Save</button>
+              <button [disabled]="isLoading || !workTrackerForm.valid" type="submit" mat-raised-button class="save-button" color="white-bg" (click)="workTrackerFormSubmit()">
+                <span>Save</span>
+                <spinner diameter="40" class="pull-left" *ngIf="isLoading"></spinner>
+              </button>
             </div>
           </div>
         </div>
