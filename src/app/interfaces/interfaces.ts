@@ -134,7 +134,7 @@ export interface OrganizationList {
     };
     entities: {
       subOrgName : string;
-      subOrgCount : string;
+      subOrgcount : string;
       validtill : string;
     };
 }

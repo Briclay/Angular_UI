@@ -35,9 +35,10 @@
         }
     }
 }
+
 ::ng-deep .mat-menu-panel.featurePanel {
-  max-width:300px!important;
-  min-width: 380px!important;
+  max-width:400px!important;
+  min-width: 450px!important;
   width: 100vw; 
   margin-left: -8px;
   margin-top: 5px;
@@ -45,15 +46,17 @@
   min-height : auto;
 }
 .feature_container{
-    padding : 5%;
+    padding : 4%;
     .title {
-        font: 400 12px Roboto,"Helvetica Neue",sans-serif;
+        font: 700 12px Roboto,"Helvetica Neue",sans-serif;
         color :#032a57cf;
-        border-bottom: #4cacda 1px solid;
-        padding : 2%;
+        padding : 1%;
+        border-left: #8c8686 2px solid;
     }
     .message {
         font: 400 11px Roboto,"Helvetica Neue",sans-serif;
         color :#032a57cf; 
+        padding : 1%;
+        border-left: #8c8686 2px solid;
     }
 }

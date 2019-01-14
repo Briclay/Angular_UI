@@ -144,7 +144,7 @@ export class DesignDashboardComponent implements OnInit {
   projects : any[] = [
     {
       "_id": "1",
-      "name": "Sunworth 2",
+      "name": "Sunworth ",
       "address" : "Ulsoor Bangalore"
     },
     {

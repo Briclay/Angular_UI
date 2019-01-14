@@ -79,7 +79,7 @@
               </mat-form-field>
             </div>
             <div>
-              <button class="margin-left-4" mat-raised-button class="feature_btn" 
+              <button    [matMenuTriggerFor]="approvalMenu"  class="margin-left-4" mat-raised-button class="feature_btn" 
               >Approvals</button>
             </div>
           </div>
@@ -90,19 +90,59 @@
     </mat-card>
   </form>
 </div>
-<mat-menu #featureMenu="matMenu">
-  <div class="feature_container">
-    <div class="title">Feature</div>
+<mat-menu #featureMenu="matMenu" class="featurePanel">
+  <div class="feature_container" >
+    <div fxLayout=row  style="place-content:space-between;border-bottom: #8c8686 2px solid;">
+      <div class="title">Feature</div>
+      <div class="title">Create</div>
+      <div class="title">Display</div>
+      <div class="title">Edit</div>
+      <div class="title">Delete</div>
+    </div>
     <div>
-      <div style="margin-top: 6%;" >
-          <div *ngFor="let feature of allFeatures">
-            <div fxLayout=row >
-              <div style=" border-bottom: black 1px solid;">
-                <mat-checkbox ><span class="message">{{feature}}</span></mat-checkbox>
-              </div>
-            </div>
-           </div>
+      <div>
+        <div *ngFor="let feature of allFeatures">
+          <div fxLayout=row style="place-content:space-between;border-bottom: #8c8686 2px solid;">
+            <div class="message" >{{feature}}</div>
+            <div class="message" ><mat-checkbox></mat-checkbox></div>
+            <div class="message" ><mat-checkbox></mat-checkbox></div>
+            <div class="message" ><mat-checkbox></mat-checkbox></div>
+            <div class="message" ><mat-checkbox></mat-checkbox></div>
+          </div>
         </div>
+        <div style="margin-top: 1%;">
+          <button mat-raised-button type="submit" class="pull-right">Cancel</button>
+          <button mat-raised-button type="submit" class="pull-right">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</mat-menu>
+<mat-menu #approvalMenu="matMenu" class="featurePanel">
+  <div class="feature_container" >
+    <div fxLayout=row  style="place-content:space-between;border-bottom: #8c8686 2px solid;">
+      <div class="title">Feature</div>
+      <div class="title">Create</div>
+      <div class="title">Display</div>
+      <div class="title">Edit</div>
+      <div class="title">Delete</div>
+    </div>
+    <div>
+      <div>
+        <div *ngFor="let feature of allApprovals">
+          <div fxLayout=row style="place-content:space-between;border-bottom: #8c8686 2px solid;">
+            <div class="message" >{{feature}}</div>
+            <div class="message" ><mat-checkbox></mat-checkbox></div>
+            <div class="message" ><mat-checkbox></mat-checkbox></div>
+            <div class="message" ><mat-checkbox></mat-checkbox></div>
+            <div class="message" ><mat-checkbox></mat-checkbox></div>
+          </div>
+        </div>
+        <div style="margin-top: 1%;">
+          <button mat-raised-button type="submit" class="pull-right">Cancel</button>
+          <button mat-raised-button type="submit" class="pull-right">Save</button>
+        </div>
+      </div>
     </div>
   </div>
 </mat-menu>

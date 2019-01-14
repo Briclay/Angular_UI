@@ -15,8 +15,8 @@ export class RoleDetailsComponent implements OnInit {
   departments: string[] = ['Finance', 'Construction'];
   shifts = ['Regular' , 'Day' , 'Night']
   subRoles = ['Technician', 'sub-Admin', 'User'];
-  getApprovals = ['Design' ]
-  allFeatures = ['File' ,'Folder Manager' ,'Service Request','Snag Master']
+  allApprovals = ['Project' ,'Invoice' ]
+  allFeatures = ['Project' ,'Invoice' ,'Billing', 'Dashbaord']
   constructor() {
   }
 
