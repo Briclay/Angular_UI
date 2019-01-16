@@ -84,7 +84,7 @@ import { DesignDashboardComponent } from './components/core/dashboard/design-das
     ProjectModule
   ],
   providers: [D3Service, DashboardService, UserService, DepartmentService, RoleService, 
-  OrganizationService,UserDashboardService ],
+  OrganizationService, UserDashboardService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

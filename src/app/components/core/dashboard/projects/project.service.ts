@@ -12,3 +12,4 @@ export class ProjectService {
         return this.apiService.get('projects.json').pipe(map(res => res));
     }
 }
+

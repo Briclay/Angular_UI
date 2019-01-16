@@ -6,7 +6,6 @@ import { OrganisationDetailsComponent } from '../components/core/dashboard/organ
 import { RoleDetailsComponent } from '../components/core/dashboard/role/role-details/role-details.component';
 import { DepartmentDetailsComponent } from '../components/core/dashboard/department/department-details/department-details.component';
 import { UserDashDetailsComponent } from '../components/core/dashboard/user-dashboard/user-dash-details/user-dash-details.component';
-
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import {MaterialModule} from "./material.module";
 
