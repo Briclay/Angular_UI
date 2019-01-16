@@ -194,7 +194,8 @@ export class WorkRequestDetailsComponent implements OnInit {
   }
 
   updateWorkRequest(requestData) {
-    requestData = {...requestData, needByDate: this.data.needByDate}
+    requestData = {...requestData}
+    delete requestData.needByDate;
     this.isLoading = true;
     this.workRequestService.updateWorkRequest(requestData, this.data._id)
       .pipe().subscribe(res => {
