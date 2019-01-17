@@ -1,8 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FolderCreateDialogComponent } from './folder-create-dialog/folder-create-dialog.component';
 
 @NgModule({
-  declarations: [],
+  declarations: [FolderCreateDialogComponent],
+  exports: [
+  ],
   imports: [
     CommonModule
   ]

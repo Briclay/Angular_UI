@@ -33,6 +33,7 @@ export class WidgetContainerComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
+    console.log('widgetService data', this.data)
     const type = this.widgetService.widgets[this.selector];
     if (type) {
       const factory = this.cfr.resolveComponentFactory(type);

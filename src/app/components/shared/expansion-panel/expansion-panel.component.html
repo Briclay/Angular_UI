@@ -6,7 +6,9 @@
           [ngClass]="!lastIndex ? (firstIndex && option.type === 'image' ? 'flex-image' : 'border-right-gray') : ''">
           <div *ngIf="option.type === 'list'; else elseContent" style="width: 100%">
             <div *ngFor="let optionList of option.list; let first = first" class="panel-user">
-              <span [ngClass]="first ? 'color_dark_blue font-size-12 font-weight-700':  'color_light_blue font-size-12 '">{{parseKey(listData, optionList.key)}}</span>
+              <span [ngClass]="first ? 'color_dark_blue font-size-12 font-weight-700':  'color_light_blue font-size-12 '">
+                <span [ngClass]="optionList.isStatus ? 'staus-check' : ''">{{parseKey(listData, optionList.key)}}</span>
+              </span>
               <br/>
             </div>
           </div>
@@ -17,6 +19,8 @@
             <ng-template #labelContent> 
               <div class="panel-conent">
                 <label class="label-title" *ngIf="!option.hideTitle">{{option.title}}</label>
+                <br *ngIf="option.display === 'block'" />
+                
                 <label class="label-value">{{parseKey(listData, option.key)}}</label>
               </div>
             </ng-template>

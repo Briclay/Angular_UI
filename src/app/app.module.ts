@@ -32,6 +32,8 @@ import { WidgetContainerComponent } from './components/shared/widget-container/w
 import { OrganisationComponent } from './components/core/dashboard/organisation/organisation.component';
 import { RoleComponent } from './components/core/dashboard/role/role.component';
 import { PanelHeaderFilterComponent } from './components/shared/panel-header-filter/panel-header-filter.component';
+import {WorkRequestModule} from './components/core/dashboard/work-request/work-request.module';
+import {WorkRequestComponent} from './components/core/dashboard/work-request/work-request.component';
 import {ProjectModule} from './components/core/dashboard/projects/projects.module'
 import { OrganisationCreateComponent } from './components/core/dashboard/organisation/organisation-create/organisation-create.component';
 import { RoleCreateComponent } from './components/core/dashboard/role/role-create/role-create.component';
@@ -41,6 +43,10 @@ import { NcmDashboardComponent } from './components/core/dashboard/ncm-dashboard
 import { UserDashDetailsComponent } from './components/core/dashboard/user-dashboard/user-dash-details/user-dash-details/user-dash-details.component';
 import { FileManagerComponent } from './components/core/dashboard/file-manager/file-manager.component';
 import { FileManagerConfigComponent } from './components/core/dashboard/file-manager/file-manager-config/file-manager-config.component';
+import { FolderCreateDialogComponent } from './components/core/dashboard/file-manager/folder-create-dialog/folder-create-dialog.component';
+import { WorkOrderComponent } from './components/core/dashboard/work-order/work-order.component';
+import { WorkOrderModule } from './components/core/dashboard/work-order/work-order.module';
+import { SpinnerModule } from './components/shared/spinner/spinner.module';
 
 @NgModule({
   declarations: [
@@ -61,6 +67,7 @@ import { FileManagerConfigComponent } from './components/core/dashboard/file-man
     ExpansionPanelComponent,
     UserCreateComponent,
     WidgetContainerComponent,
+    WorkRequestComponent,
     PanelHeaderFilterComponent,
     OrganisationCreateComponent,
     RoleCreateComponent,
@@ -69,7 +76,9 @@ import { FileManagerConfigComponent } from './components/core/dashboard/file-man
     NcmDashboardComponent,
     UserDashDetailsComponent,
     FileManagerComponent,
-    FileManagerConfigComponent
+    FileManagerConfigComponent,
+    WorkOrderComponent,
+    FolderCreateDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -80,7 +89,13 @@ import { FileManagerConfigComponent } from './components/core/dashboard/file-man
     BrowserAnimationsModule,
     ReactiveFormsModule,
     FormsModule,
-    ProjectModule
+    ProjectModule,
+    WorkRequestModule,
+    WorkOrderModule,
+    SpinnerModule
+  ],
+  entryComponents: [
+    FolderCreateDialogComponent
   ],
   providers: [D3Service, DashboardService, UserService, DepartmentService, RoleService, 
   OrganizationService,UserDashboardService],

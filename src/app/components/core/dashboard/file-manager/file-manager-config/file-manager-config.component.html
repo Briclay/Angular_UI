@@ -132,28 +132,135 @@
       </li>
     </ul>
     <div class="file-list">
-      <mat-card class="margin-btm-10">
+      <mat-card class="margin-btm-10 list-header">
         <div fxLayout="row align-item-center" class="file-list-header">
           <div class="flex-grow ">
             Land Details
           </div>
-          <div class="flex-grow no-border" style="flex: 1.2">
+          <div class="flex-grow no-border">
             <div fxLayout="row">
-              <mat-icon>create_new_folder</mat-icon>
-              <span>Create Folder</span>
-              <mat-icon class="margin-left-4">create_new_folder</mat-icon>
-              <span>File Upload</span>
+              <button mat-raised-button (click)="openFolderDialog()">
+                <mat-icon class="hand-cursor" >create_new_folder</mat-icon> 
+                Create Folder
+              </button>
+              <button mat-raised-button class="margin-left-4">
+                <mat-icon class="hand-cursor">cloud_upload</mat-icon> 
+                Upload
+              </button>
             </div>
           </div>
-          <div class="flex-grow no-border" style="flex: 2">
-            <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]">
-            </mat-paginator>
+          <div class="flex-grow no-border">
+
           </div>
         </div>
       </mat-card>
-      <mat-card>
-        list
-      </mat-card>
+      <div class="expansion-container">
+        <spinner diameter="80" *ngIf="folderListLoading; else folderList"></spinner>
+        <ng-template #folderList>
+          <mat-accordion>
+            <mat-expansion-panel *ngFor="let listData of folderData" 
+              [hideToggle]="true"
+              (opened)="getSubFolder(listData)">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  <img src="assets/images/folder.png" width="10%"> {{listData.name}}
+                </mat-panel-title>
+                <mat-panel-title>
+                  <label class="label-title">Created On</label>
+                  <br/>
+                  <br/>
+                  <label class="label-value">{{listData.createdAt | date:'dd/MM/yyyy'}}</label>
+                </mat-panel-title>
+                <mat-panel-title>
+                  <label class="label-title">Created By</label> {{listData.accessFlag}}
+                </mat-panel-title>
+                <mat-panel-title>
+                  <label class="label-title">Version</label> V {{listData.__v}}
+                </mat-panel-title>
+                <mat-panel-title (click)="$event.stopPropagation();">
+                  <button mat-raised-button class="pull-right" (click)="openFolderDialog(listData)">
+                    <mat-icon class="hand-cursor">create_new_folder</mat-icon> 
+                    Create Folder
+                  </button>
+                  <button mat-raised-button class="margin-left-4">
+                    <mat-icon class="hand-cursor">cloud_upload</mat-icon> 
+                    Upload
+                  </button>
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <div class="file-sub-folder">
+                <spinner diameter="40" *ngIf="subFolderListLoading; else subFolderList"></spinner>
+                <ng-template #subFolderList>
+                  <mat-accordion>
+                    <mat-expansion-panel *ngFor="let subListData of subFolderData" 
+                      [hideToggle]="true"
+                      (opened)="getFiles(subListData)">
+                      <mat-expansion-panel-header>
+                        <mat-panel-title>
+                          <img src="assets/images/folder.png" width="10%"> {{subListData.name}}
+                        </mat-panel-title>
+                        <mat-panel-title>
+                          <label class="label-title">Created On</label>
+                          <br/>
+                          <br/>
+                          <label class="label-value">{{subListData.createdAt | date:'dd/MM/yyyy'}}</label>
+                        </mat-panel-title>
+                        <mat-panel-title>
+                          <label class="label-title">Created By</label> {{subListData.accessFlag}}
+                        </mat-panel-title>
+                        <mat-panel-title>
+                          <label class="label-title">Version</label> V {{subListData.__v}}
+                        </mat-panel-title>
+                        <mat-panel-title (click)="$event.stopPropagation();">
+                          <button mat-raised-button class="margin-left-4">
+                            <mat-icon class="hand-cursor">cloud_upload</mat-icon> 
+                            Upload
+                          </button>
+                        </mat-panel-title>
+                      </mat-expansion-panel-header>
+                      <div class="file-sub-folder">
+                        <spinner diameter="40" *ngIf="fileListLoading; else fileListData"></spinner>
+                        <ng-template #fileListData>
+                          <mat-card  *ngFor="let fileList of filesData" 
+                          fxLayout="row" 
+                          class="margin-btm-5 file-list-card"
+                          (click)="getFileDetails(fileList)">
+                            <div class="flex-grow">
+                              <img src="{{getIcon(fileList.type,fileList.fileExt)}}" width="30%"/>
+                              {{fileList.name}}
+                            </div>
+                            <div class="flex-grow no-border">
+                              <label class="label-title">Created On</label>
+                              <label class="label-value">{{fileList.createdAt | date:'dd/MM/yyyy'}}</label>
+                            </div>
+                            <div class="flex-grow no-border">
+                              <label class="label-title">Created By</label>
+                              <label class="label-value">{{fileList.createdAt | date:'dd/MM/yyyy'}}</label>
+                            </div>
+                            <div class="flex-grow no-border">
+                              <label class="label-title">Version</label>
+                              <label class="label-value">{{fileList.__v}}</label>
+                            </div>
+                            <div class="flex-grow no-border">
+                              <button mat-raised-button class="margin-left-4">
+                                Share
+                              </button>
+                              <button mat-raised-button class="margin-left-4">
+                                Email
+                              </button>
+                            </div>
+                          </mat-card>
+                        </ng-template>
+                        
+                      </div>
+                    </mat-expansion-panel>
+                  </mat-accordion>
+                </ng-template>
+              </div>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </ng-template>
+      </div>
     </div>
     <div class="file-sub-details">
       <mat-card>
