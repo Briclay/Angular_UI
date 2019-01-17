@@ -7,8 +7,13 @@ import { ApiService } from "../../../../services/api.service";
   providedIn: 'root',
 })
 export class ProjectService {
+    
     constructor(private apiService: ApiService) { }
-    public getProjects(): Observable<any> {
-        return this.apiService.get('projects.json').pipe(map(res => res));
+    public getProjects(orgID): Observable<any> {
+        return this.apiService.get('./assets/data/projects.json').pipe(map(res => res));
+    }
+    public getSingleProjects(projID): Observable<any> {
+        let url = `./assets/data/singleProject.json`
+        return this.apiService.get(url).pipe(map(res => res));
     }
 }

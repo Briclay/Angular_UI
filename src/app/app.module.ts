@@ -39,6 +39,8 @@ import { DepartmentComponent } from './components/core/dashboard/department/depa
 import { UserDashboardComponent } from './components/core/dashboard/user-dashboard/user-dashboard.component';
 import { NcmDashboardComponent } from './components/core/dashboard/ncm-dashboard/ncm-dashboard.component';
 import { UserDashDetailsComponent } from './components/core/dashboard/user-dashboard/user-dash-details/user-dash-details/user-dash-details.component';
+import { FileManagerComponent } from './components/core/dashboard/file-manager/file-manager.component';
+import { FileManagerConfigComponent } from './components/core/dashboard/file-manager/file-manager-config/file-manager-config.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +67,9 @@ import { UserDashDetailsComponent } from './components/core/dashboard/user-dashb
     DepartmentComponent,
     UserDashboardComponent,
     NcmDashboardComponent,
-    UserDashDetailsComponent
+    UserDashDetailsComponent,
+    FileManagerComponent,
+    FileManagerConfigComponent
   ],
   imports: [
     BrowserModule,

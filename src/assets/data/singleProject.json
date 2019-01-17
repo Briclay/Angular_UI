@@ -1,0 +1,381 @@
+{
+    "result": "success",
+    "data": {
+        "_id": "5c4098c1f2a85000153226f9",
+        "_organisationId": {
+            "_id": "5a585371ed34a3331e9ae3b0",
+            "name": "Puravankara Limited",
+            "logoImageUrl": "storage/organisation/logo/default.png",
+            "orgType": "BUILDER"
+        },
+        "name": "Palm Beach",
+        "constructionType": "Pre-Cast",
+        "projectCode": "PB-14",
+        "type": "RESIDENTIAL",
+        "beginDate": "2016-03-11T18:30:00.000Z",
+        "completionDate": "2019-03-11T18:30:00.000Z",
+        "possessionDate": "2019-09-11T18:30:00.000Z",
+        "status": "INPROGRESS",
+        "_createdBy": {
+            "_id": "5a585376ed34a3331e9ae3c4",
+            "displayName": "",
+            "email": "paruadmin@gmail.com",
+            "username": "purvaadmin",
+            "profileImageUrl": "storage/user/profile/default.png"
+        },
+        "createdAt": "2019-01-17T15:01:21.305Z",
+        "__v": 0,
+        "deleteFlag": false,
+        "unitTypes": [],
+        "description": "Palm Beach",
+        "product": [{
+            "bhk": "2 BHK",
+            "count": 100,
+            "area": 1250
+        }, {
+            "bhk": "2 BHK",
+            "count": 100,
+            "area": 1250
+        }, {
+            "bhk": "2 BHK",
+            "count": 100,
+            "area": 1250
+        }],
+        "carParkingArea": {
+            "carParkingCount": 12,
+            "basementParkingCount": 333,
+            "coveredParkingCount": 333,
+            "surfaceParkingCount": 444
+        },
+        "projectDetails": {
+            "location": "bangalore",
+            "blocks": "123",
+            "wings": "333",
+            "landArea": "333",
+            "unitNumber": 444,
+            "floorCount": 444,
+            "projectStatus": "ON-GOING",
+            "crmTeam": ""
+        },
+        "milestones": [],
+        "milestonesList": [],
+        "_snagsFlow": [],
+        "_coreTeam": [],
+        "_facilityTeam": [],
+        "_teamMembers": [
+            {
+                "_userId": null,
+                "_roleId": {
+                    "_id": "5a58565ded34a3331e9ae3d7",
+                    "name": "Client Quality"
+                },
+                "_id": "5c4098c1f2a85000153226fb"
+            },
+            {
+                "_userId": {
+                    "_id": "5a58590086eca8331890c228",
+                    "displayName": "Narun Srinivas",
+                    "username": "naruns",
+                    "email": "narunsrinivas@gmail.com",
+                    "profileImageUrl": "https://5a585371ed34a3331e9ae3b0.s3.amazonaws.com/B9D08B11-48F0-4F70-81C9-6A383437907E.jpg",
+                    "devices": [
+                        {
+                            "deviceType": "android",
+                            "deviceId": "4dcf9abf-187f-443a-adf1-02f64fb8d71d",
+                            "_id": "5a785dc69dc276402ad3ced1"
+                        },
+                        {
+                            "deviceType": "android",
+                            "deviceId": "4dcf9abf-187f-443a-adf1-02f64fb8d71d",
+                            "_id": "5a785dc69dc276402ad3ced1"
+                        },
+                        {
+                            "deviceId": "c185e80d-12a7-499b-a1c8-7857ae39605e",
+                            "_id": "5a99869a8de9dc365723c7a0"
+                        },
+                        {
+                            "deviceType": "android",
+                            "deviceId": "a83bbbec-ce99-429b-b662-5a4666921cb9",
+                            "_id": "5a9bf8d0efc35148c8c4a0e7"
+                        },
+                        {
+                            "deviceType": "android",
+                            "deviceId": "4dcf9abf-187f-443a-adf1-02f64fb8d71d",
+                            "_id": "5a785dc69dc276402ad3ced1"
+                        },
+                        {
+                            "deviceType": "android",
+                            "deviceId": "4dcf9abf-187f-443a-adf1-02f64fb8d71d",
+                            "_id": "5a785dc69dc276402ad3ced1"
+                        },
+                        {
+                            "deviceId": "c185e80d-12a7-499b-a1c8-7857ae39605e",
+                            "_id": "5a99869a8de9dc365723c7a0"
+                        },
+                        {
+                            "deviceType": "android",
+                            "deviceId": "a83bbbec-ce99-429b-b662-5a4666921cb9",
+                            "_id": "5a9bf8d0efc35148c8c4a0e7"
+                        },
+                        {
+                            "deviceType": "ios",
+                            "deviceId": "326e0314-d66b-4c78-8573-aaebd5d40965",
+                            "_id": "5ad4889f301e677d498890ec"
+                        },
+                        {
+                            "deviceType": "android",
+                            "deviceId": "4a44e0da-8f8e-4f4b-9455-274771f6731a",
+                            "_id": "5ad842eb301e677d49889104"
+                        },
+                        {
+                            "deviceType": "ios",
+                            "deviceId": "3f17ed95-763f-485c-b100-cb513574f3ae",
+                            "_id": "5ae17b66301e677d49889105"
+                        },
+                        {
+                            "deviceType": "ios",
+                            "deviceId": "315e1564-d60b-4fc1-96e0-2a6c77e0660a",
+                            "_id": "5ae6beb48eb65e5efcfb9cee"
+                        },
+                        {
+                            "deviceType": "ios",
+                            "deviceId": "683a459d-6b6f-4889-ac7f-94ba2642ef7b",
+                            "_id": "5ae9623ceae4cc5f02fd43c8"
+                        },
+                        {
+                            "deviceType": "ios",
+                            "deviceId": "a2adc036-d5c6-4608-bc80-40e23c821af0",
+                            "_id": "5ae96dc2eae4cc5f02fd43c9"
+                        },
+                        {
+                            "deviceType": "ios",
+                            "deviceId": "43edc159-d04f-4fcb-a829-805d83de8cae",
+                            "_id": "5ae976718eb65e5efcfb9cf0"
+                        },
+                        {
+                            "deviceType": "ios",
+                            "deviceId": "09702f1e-2fd4-4ae5-bf96-d6709c575cf2",
+                            "_id": "5ae9cd338eb65e5efcfb9cf4"
+                        },
+                        {
+                            "deviceType": "android",
+                            "deviceId": "987",
+                            "_id": "5b17cfd831dcd910e8f9dd39"
+                        },
+                        {
+                            "deviceType": "android",
+                            "deviceId": "6877ad4d-72cc-4eb4-bba7-1f800a11c3e4",
+                            "_id": "5b2a22225684280ede510ffe"
+                        },
+                        {
+                            "deviceType": "ios",
+                            "deviceId": "897a7127-a87f-400a-a2ee-45ec9480091e",
+                            "_id": "5b30a4e35684280ede511000"
+                        },
+                        {
+                            "deviceType": "ios",
+                            "deviceId": "24c1600e-f198-4987-821c-2cd87062e7de",
+                            "_id": "5b320b165684280ede51100e"
+                        },
+                        {
+                            "deviceType": "ios",
+                            "deviceId": "dba95480-154a-4757-a99a-95f51a2ebdfe",
+                            "_id": "5b333232cf75230ee4ce4b67"
+                        },
+                        {
+                            "deviceType": "ios",
+                            "deviceId": "c4227875-b32d-4b1a-bed0-cac1b72a6094",
+                            "_id": "5b334e46cf75230ee4ce4b69"
+                        },
+                        {
+                            "deviceId": "6e4eaa9c-2173-4d15-b9d1-e718d143ccd6",
+                            "_id": "5b335cda5684280ede51109e"
+                        },
+                        {
+                            "deviceType": "ios",
+                            "deviceId": "4d2f01b7-82c2-4bfd-9db8-e7dfac47f5a6",
+                            "_id": "5b33b332cf75230ee4ce4b78"
+                        },
+                        {
+                            "deviceType": "ios",
+                            "deviceId": "0ad1a1a1-e827-4b79-85d0-157ed1362b29",
+                            "_id": "5b33d4decf75230ee4ce4b7b"
+                        },
+                        {
+                            "deviceType": "ios",
+                            "deviceId": "a4c8683c-ee3d-483b-8f40-409682a1da2e",
+                            "_id": "5b35e9d45684280ede5111aa"
+                        },
+                        {
+                            "deviceType": "ios",
+                            "deviceId": "e2b355cc-ebb9-4517-b1d7-30c472764ae8",
+                            "_id": "5b370f4bcf75230ee4ce4e2e"
+                        },
+                        {
+                            "deviceType": "ios",
+                            "deviceId": "87bec68e-3c07-41bd-ac36-8b2ed77301d3",
+                            "_id": "5b38475fcf75230ee4ce51eb"
+                        },
+                        {
+                            "deviceType": "ios",
+                            "deviceId": "f9f91200-d65e-4319-ba31-3dc5ca7e759f",
+                            "_id": "5b38489b5684280ede5113a0"
+                        },
+                        {
+                            "deviceType": "ios",
+                            "deviceId": "54e56bde-406b-4632-9ad4-bc5cb4809a23",
+                            "_id": "5b3a0c585684280ede511403"
+                        },
+                        {
+                            "deviceType": "ios",
+                            "deviceId": "d8057688-b159-4b41-8180-ecd99c43ac06",
+                            "_id": "5b3b138a5684280ede511407"
+                        },
+                        {
+                            "deviceType": "ios",
+                            "deviceId": "ad520590-018f-45aa-b7b8-46120ab81064",
+                            "_id": "5b408900cf75230ee4ce5495"
+                        },
+                        {
+                            "deviceType": "android",
+                            "deviceId": "3714a766-e087-4f0b-a81a-f4c33c1166c4",
+                            "_id": "5b5f04e65684280ede511725"
+                        },
+                        {
+                            "deviceType": "ios",
+                            "deviceId": "64e4d3cc-da71-4412-a440-c14a18127fae",
+                            "_id": "5b6bd35a5f1fec5dd240b18a"
+                        },
+                        {
+                            "deviceType": "ios",
+                            "deviceId": "f52b9087-891e-422b-9a14-1791b197039b",
+                            "_id": "5bbd1644a1dc7e66f0fbc840"
+                        }
+                    ]
+                },
+                "_roleId": {
+                    "_id": "5a58565ded34a3331e9ae3d7",
+                    "name": "Client Quality"
+                },
+                "_id": "5c4098c1f2a85000153226fa"
+            }
+        ],
+        "_contractors": [],
+        "_consultants": [],
+        "imageUrls": [],
+        "logoImageUrl": "",
+        "phases": [
+            {
+                "name": "phase 1",
+                "_id": "5c4098c1f2a85000153226fc",
+                "blocks": [
+                    {
+                        "name": "Wing A",
+                        "_id": "5c4098c1f2a8500015322711",
+                        "imgUrl": "assets/images/dashboard/Tower.png"
+                    },
+                    {
+                        "name": "Wing B",
+                        "_id": "5c4098c1f2a8500015322710",
+                        "imgUrl": "assets/images/dashboard/Tower.png"
+                    },
+                    {
+                        "name": "Wing C",
+                        "_id": "5c4098c1f2a850001532270f",
+                        "imgUrl": "assets/images/dashboard/Tower.png"
+                    },
+                    {
+                        "name": "Wing D",
+                        "_id": "5c4098c1f2a850001532270e",
+                        "imgUrl": "assets/images/dashboard/Tower.png"
+                    },
+                    {
+                        "name": "Wing E",
+                        "_id": "5c4098c1f2a850001532270d",
+                        "imgUrl": "assets/images/dashboard/Tower.png"
+                    },
+                    {
+                        "name": "Wing F",
+                        "_id": "5c4098c1f2a850001532270c",
+                        "imgUrl": "assets/images/dashboard/Tower.png"
+                    },
+                    {
+                        "name": "Wing G",
+                        "_id": "5c4098c1f2a850001532270b",
+                        "imgUrl": "assets/images/dashboard/Tower.png"
+                    },
+                    {
+                        "name": "Wing H",
+                        "_id": "5c4098c1f2a850001532270a",
+                        "imgUrl": "assets/images/dashboard/Tower.png"
+                    },
+                    {
+                        "name": "Wing I",
+                        "_id": "5c4098c1f2a8500015322709",
+                        "imgUrl": "assets/images/dashboard/Tower.png"
+                    },
+                    {
+                        "name": "Wing J",
+                        "_id": "5c4098c1f2a8500015322708",
+                        "imgUrl": "assets/images/dashboard/Tower.png"
+                    },
+                    {
+                        "name": "Wing K",
+                        "_id": "5c4098c1f2a8500015322707",
+                        "imgUrl": "assets/images/dashboard/Tower.png"
+                    },
+                    {
+                        "name": "Wing L",
+                        "_id": "5c4098c1f2a8500015322706",
+                        "imgUrl": "assets/images/dashboard/Tower.png"
+                    },
+                    {
+                        "name": "Wing M",
+                        "_id": "5c4098c1f2a8500015322705",
+                        "imgUrl": "assets/images/dashboard/Tower.png"
+                    },
+                    {
+                        "name": "Wing N",
+                        "_id": "5c4098c1f2a8500015322704",
+                        "imgUrl": "assets/images/dashboard/Tower.png"
+                    },
+                    {
+                        "name": "Wing O",
+                        "_id": "5c4098c1f2a8500015322703",
+                        "imgUrl": "assets/images/dashboard/Tower.png"
+                    },
+                    {
+                        "name": "Wing P",
+                        "_id": "5c4098c1f2a8500015322702",
+                        "imgUrl": "assets/images/dashboard/Tower.png"
+                    },
+                    {
+                        "name": "Wing Q",
+                        "_id": "5c4098c1f2a8500015322701",
+                        "imgUrl": "assets/images/dashboard/Tower.png"
+                    },
+                    {
+                        "name": "Wing R",
+                        "_id": "5c4098c1f2a8500015322700",
+                        "imgUrl": "assets/images/dashboard/Tower.png"
+                    },
+                    {
+                        "name": "Wing S",
+                        "_id": "5c4098c1f2a85000153226ff",
+                        "imgUrl": "assets/images/dashboard/Tower.png"
+                    },
+                    {
+                        "name": "Wing T",
+                        "_id": "5c4098c1f2a85000153226fe",
+                        "imgUrl": "assets/images/dashboard/Tower.png"
+                    },
+                    {
+                        "name": "Wing U",
+                        "_id": "5c4098c1f2a85000153226fd",
+                        "imgUrl": "assets/images/dashboard/Tower.png"
+                    }
+                ]
+            }
+        ]
+    }
+}

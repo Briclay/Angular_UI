@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 })
 export class ProjectDetailsComponent implements OnInit {
 
-   detailsComponentData: any;
+  detailsComponentData: any;
   facilityCompoennetData: any;
   phasesComponenetData: any;
   snagsComponenetData: any;
@@ -60,8 +60,9 @@ export class ProjectDetailsComponent implements OnInit {
    *means we dailog are open for create mode 
    */
   projectCreate() {
+    console.log('data: ', 'projectCreate');
     this.projectForm = this.formBuilder.group({
-      _organisationId: this.userAuth.organisation._id,
+      _organisationId: '5a5844cd734d1d61613f7066',
       constructionType: ['', Validators.required],
       name: ['', Validators.required],
       projectCode: ['', Validators.required],
@@ -95,10 +96,10 @@ export class ProjectDetailsComponent implements OnInit {
     console.log('data: ', data);
 
     this.projectCode = data.project.projectCode
-this.projectStatus = data.project.projectDetails.projectStatus;
+    this.projectStatus = data.project.projectDetails.projectStatus;
 
     this.projectForm = this.formBuilder.group({
-      _organisationId: this.userAuth.organisation._id,
+      _organisationId: '5a5844cd734d1d61613f7066',
       constructionType: [data.project.constructionType, Validators.required],
       name: [data.project.name, Validators.required],
       projectCode: [data.project.projectCode, Validators.required],
@@ -150,6 +151,7 @@ this.projectStatus = data.project.projectDetails.projectStatus;
 
   /*for init funcation*/
   ngOnInit() {
+    this.projectCreate();
     this.projectForm.valueChanges.subscribe(changes => {});
   }
 

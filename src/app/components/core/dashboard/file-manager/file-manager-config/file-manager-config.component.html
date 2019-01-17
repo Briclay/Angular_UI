@@ -1,0 +1,166 @@
+<div class="file-manager-config-container">
+  <mat-form-field appearance="outline">
+    <mat-label>Organization</mat-label>
+    <mat-select placeholder="Select Organization">
+      <mat-option *ngFor="let organization of organizations" [value]="organization.value">
+        {{organization.viewValue}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-card>
+    <mat-form-field appearance="outline">
+      <mat-label>Select Project</mat-label>
+      <mat-select placeholder="Select Organization" (selectionChange)="getSingleProject($event)">
+        <mat-option *ngFor="let p of projectlist" [value]="p._id">
+          {{p.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div fxLayout="row" *ngIf="selectedProjectData">
+      <div class="flex-grow text-center">
+        Details
+      </div>
+      <div class="flex-grow no-border text-center">
+        Car Parking
+      </div>
+      <div class="flex-grow text-center">
+        Product
+      </div>
+    </div>
+    <div fxLayout="row" *ngIf="selectedProjectData; else selectProject">
+
+      <div class="flex-grow">
+        <div class="project-content">
+          <div class="project-details-header">
+            <img src="{{selectedProjectStatus.logoImageUrl}}" width="100%" (click)="openImageSlider(selectedProjectStatus.logoImageUrl)"
+            />
+            <div class="project-name">
+              {{selectedProjectStatus.name}}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="flex-grow">
+
+        <mat-form-field appearance="outline">
+          <mat-label>Build Up Area</mat-label>
+          <input matInput readonly [value]="selectedProjectData.projectDetails.unitNumber">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Saleable Area</mat-label>
+          <input matInput placeholder="Saleable Area" readonly [value]="selectedProjectData.projectDetails.unitNumber">
+        </mat-form-field>
+      </div>
+      <div class="flex-grow">
+        <mat-form-field appearance="outline">
+          <mat-label>No. of Towers</mat-label>
+          <input matInput readonly [value]="selectedProjectData.projectDetails.unitNumber">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>No. of Units</mat-label>
+          <input matInput readonly [value]="selectedProjectData.projectDetails.unitNumber">
+        </mat-form-field>
+      </div>
+      <div class="flex-grow no-border">
+        <mat-form-field appearance="outline">
+          <mat-label>Total</mat-label>
+          <input matInput readonly [value]="selectedProjectData.carParkingArea.carParkingCount">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Covered</mat-label>
+          <input matInput readonly [value]="selectedProjectData.carParkingArea.coveredParkingCount">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Stack</mat-label>
+          <input matInput readonly [value]="selectedProjectData.carParkingArea.coveredParkingCount">
+        </mat-form-field>
+      </div>
+      <div class="flex-grow ">
+        <mat-form-field appearance="outline">
+          <mat-label>Basement</mat-label>
+          <input matInput readonly [value]="selectedProjectData.carParkingArea.basementParkingCount">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Surface</mat-label>
+          <input matInput readonly [value]="selectedProjectData.carParkingArea.surfaceParkingCount">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Puzzle</mat-label>
+          <input matInput readonly [value]="selectedProjectData.carParkingArea.surfaceParkingCount">
+        </mat-form-field>
+      </div>
+      <div class="flex-grow no-border">
+        <app-dynamic-table *ngIf="productOption.content 
+          && productOption.content.length; else noRecordTemplate" [(config)]="productOption">
+        </app-dynamic-table>
+        <ng-template #noRecordTemplate>
+          * No Product found
+        </ng-template>
+
+      </div>
+      <ng-template #selectProject>
+        * Select Project
+      </ng-template>
+    </div>
+  </mat-card>
+  <div fxLayout="row" class="file-details">
+    <ul class="side-nav-list file-icons">
+      <li>
+        <a>
+          <mat-icon>view_comfy</mat-icon><br/>Land Details
+        </a>
+      </li>
+      <li>
+        <a>
+          <mat-icon>view_comfy</mat-icon><br/>Architecture
+        </a>
+      </li>
+      <li>
+        <a>
+          <mat-icon>view_comfy</mat-icon><br/>Structural
+        </a>
+      </li>
+      <li>
+        <a>
+          <mat-icon>view_comfy</mat-icon><br/>PHE
+        </a>
+      </li>
+      <li>
+        <a>
+          <mat-icon>view_comfy</mat-icon><br/>Electrical
+        </a>
+      </li>
+    </ul>
+    <div class="file-list">
+      <mat-card class="margin-btm-10">
+        <div fxLayout="row align-item-center" class="file-list-header">
+          <div class="flex-grow ">
+            Land Details
+          </div>
+          <div class="flex-grow no-border" style="flex: 1.2">
+            <div fxLayout="row">
+              <mat-icon>create_new_folder</mat-icon>
+              <span>Create Folder</span>
+              <mat-icon class="margin-left-4">create_new_folder</mat-icon>
+              <span>File Upload</span>
+            </div>
+          </div>
+          <div class="flex-grow no-border" style="flex: 2">
+            <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]">
+            </mat-paginator>
+          </div>
+        </div>
+      </mat-card>
+      <mat-card>
+        list
+      </mat-card>
+    </div>
+    <div class="file-sub-details">
+      <mat-card>
+        Details
+      </mat-card>
+
+    </div>
+  </div>
+
+</div>

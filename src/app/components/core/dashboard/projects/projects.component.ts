@@ -14,7 +14,7 @@ export class ProjectsComponent implements OnInit {
   constructor(private projectService: ProjectService) { }
 
   ngOnInit() {
-    this.projectService.getProjects().pipe().subscribe(res => {
+    this.projectService.getProjects('filter[_organisationId]=' + '5a5844cd734d1d61613f7066').pipe().subscribe(res => {
       console.log('res',res)
       this.projects = res;
       this.projectDataOptions = [

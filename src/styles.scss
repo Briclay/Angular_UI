@@ -25,6 +25,9 @@ body {
 .text-center {
     text-align: center;
 }
+.align-item-center {
+    align-items: center
+}
 app-expansion-panel {
     width: 100%;
 }
@@ -79,6 +82,9 @@ app-expansion-panel {
 .margin-10px-round {
     margin: 10px;
 }
+.margin-btm-10 {
+    margin-bottom: 10px;
+}
 .mat-checkbox-label {
     color: #00aff0;
 }
@@ -95,3 +101,13 @@ app-expansion-panel {
 .mat-expansion-panel-header, .mat-tab-group {
   font-family: 'Montserrat', sans-serif !important;  
 }
+.border-right-gray {
+    border-right: 1px solid #ccc;
+}
+.margin-10 {
+    margin: 10px;
+}
+.no-border {
+    border: 0px !important;
+}
+

@@ -1,70 +1,72 @@
-<div id="project-forms" class="page-layout simple fullwidth" fxLayout="column" matkraftPerfectScrollbar>
-  <!-- CONTENT -->
-  <div id="whole-form-screen">
-    <div  id="nw-proj">
-      <span class="new-project">New Project</span>
-    </div>
-    <div id="proj-nm-des-id">
-      <form  [formGroup]="projectForm" novalidate>
-        <mat-card>
-        <!-- first row -->
-        <div id="name-des" fxLayout="row">
-          <mat-form-field fxFlex="30" class="project-name-field" *ngIf="projectStatus ==='UP-COMING' && progressChecked ==='OPEN';">
-            <input matInput placeholder="Project Name" formControlName="name" required (keyup)="generateOrgCode()" [disabled]="disableFlag">
-          </mat-form-field>
-          <mat-form-field fxFlex="30" class="project-name-field" *ngIf="showReadOnly">
-            <input matInput placeholder="Project Name" formControlName="name" required (keyup)="generateOrgCode()" readonly>
-          </mat-form-field>
-          <mat-form-field fxFlex="70" class="project-description-field">
-            <input matInput placeholder="Description" formControlName="description" required>
-          </mat-form-field>
-        </div>
-        <!-- end first row -->
-        <!-- start second row -->
-        <div fxLayout="row">
-          <mat-form-field fxFlex="30" class="project-project-id-field">
-            <input matInput placeholder="Project Code" type ="text" formControlName="projectCode" [(ngModel)]="projectCode" required readonly>
-          </mat-form-field>
-          <div fxLayout="row" class="mt-sel-proj-progrs" fxFlex="70" fxLayoutAlign="space-around center">
-            <mat-form-field fxFlex="30">
-              <mat-select required placeholder="Construction Type" class="prog-status-proje" formControlName="constructionType">
-                <mat-option *ngFor="let constType of constructionType" [value]="constType">{{constType}}</mat-option>
-              </mat-select>
-            </mat-form-field>
-            <!-- project status -->
-            <mat-form-field fxFlex="30">
-              <mat-select required placeholder="Project Status" class="prog-status-proje" formControlName="projectStatus" (change)="projectStatusSelected()">
-                <mat-option *ngFor="let projStatus of status" [value]="projStatus" > {{projStatus.projectStatus}}</mat-option>
-              </mat-select>
-            </mat-form-field>
-              <!--end project status -->
-            <!-- progress status -->
-            <mat-form-field fxFlex="30">
-              <mat-select required placeholder="Progress Status" class="prog-status-proje" formControlName="status" (change)="projectProgressSelected()">
-                <mat-option *ngFor="let progStatus of progressStatus" [value]="progStatus">{{progStatus}}</mat-option>
-              </mat-select>
-            </mat-form-field>
-            <!-- en dprogress status -->
-          </div>
-        </div>
-        </mat-card>
-        <!-- end second row -->
-        <div fxLayout="row" id="sv-n-cncl-box">
-          <div fxFlex="73"></div>
-          <div fxFlex="27" fxLayout="row" fxLayoutAlign="end center">
-            <!-- <span class="edit"><button mat-button [style.display]="editFlag === true? 'block':'none'">Edit</button></span> -->
-            <div class="cancel">
-              <button mat-button (click)="onCloseCancel()">Cancel</button>
-            </div>
-            <div id="empty-div"></div>
-            <div class="save">
-              <button type="submit" mat-button (click)="onProjectFormSubmit()">Save</button>
+<div class="project-details-container">
+  <mat-card >
+    <div class="project-content">
+      <div fxLayout="row">
+        <div fxFlex="20" class="border-right-gray">
+          New Project
+          <div (click)="fileInput.click()" class="upload-photo">
+            <div class="list">
+              Add Images
+              <img src="{{filePath}}" class="img-upload">
+              <!-- <span>File Upload</span> -->
+              <input #fileInput type="file" (change)="onPhotoUpload($event)" style="display:none;" accept="image/x-png,image/gif,image/jpeg" />
             </div>
           </div>
         </div>
-        <!-- end button area -->
-      </form>
+        <div fxFlex="50" class="border-right-gray">
+          <div fxLayout="row" class="margin-10">
+            <div fxFlex="50">
+              <mat-form-field appearance="outline" fxFlex="90">
+                <mat-label>Project Name</mat-label>
+                  <input matInput placeholder="Project Name" formControlName="name" required (keyup)="generateOrgCode()" [disabled]="disableFlag">
+              </mat-form-field>
+            </div>
+            <div fxFlex="50">
+              <mat-form-field appearance="outline" fxFlex="90">
+                <mat-label>Project Code</mat-label>
+                <input matInput placeholder="Project Code" type ="text" formControlName="projectCode" [(ngModel)]="projectCode" required readonly>
+              </mat-form-field>
+            </div>
+          </div>
+          <div fxLayouy="row" class="margin-10">
+            <mat-form-field appearance="outline" fxFlex="100">
+              <mat-label>Description</mat-label>
+              <textarea matInput placeholder="Description" formControlName="description" required></textarea>
+            </mat-form-field>
+          </div>
+        </div>
+        <div fxFlex="30">
+          <div fxLayouy="row" class="margin-10">
+            <div fxFlex="60" class="margin-10">
+                <mat-form-field appearance="outline" fxLayouy="row">
+                  <mat-label>Total Units</mat-label>
+                  <input type="number" [max]="5000000" (keypress)="numberFieldValidation(totalUnits.value)" name="totalUnits" #totalUnits matInput placeholder="Total Units" formControlName="unitNumber" min=0 (change)="onNextClick()">
+                </mat-form-field>
+                <br/>
+                <mat-form-field appearance="outline" fxLayouy="row">
+                  <mat-label>Location</mat-label>
+                  <input type="text"  (keypress)="numberFieldValidation(totalUnits.value)" name="totalUnits" #totalUnits matInput formControlName="unitNumber" min=0 (change)="onNextClick()">
+                </mat-form-field>
+                <br/>
+                <mat-form-field appearance="outline" fxLayouy="row">
+                  <mat-label>Location</mat-label>
+                  <input type="text"  (keypress)="numberFieldValidation(totalUnits.value)" name="totalUnits" #totalUnits matInput formControlName="unitNumber" min=0 (change)="onNextClick()">
+                </mat-form-field>
+            </div>
+            <div fxFlex="40" class="margin-10">
+              <button mat-raised-button class="popup-btn">Details</button>
+              <br/>
+              <button mat-raised-button class="popup-btn">Phases</button>
+              <br/>
+              <button mat-raised-button class="popup-btn">Team</button>
+              <br/>
+              <button mat-raised-button class="popup-btn">Dates</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
     </div>
-  </div>
-  <!-- / CONTENT -->
+
+  </mat-card>
 </div>

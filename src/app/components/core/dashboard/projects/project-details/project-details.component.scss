@@ -1,0 +1,30 @@
+.project-details-container {
+    .upload-photo {
+        border: 1px solid #999;
+        border-radius: 3px;
+        height: 100px;
+        margin: 15px;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        img {
+            max-width: 82%;
+            height: auto;
+            vertical-align: top;
+            border: none;
+        }
+        .list{
+            flex: 1;
+        }
+    }
+    .img-upload {
+        width: 100%;
+    }
+    mat-card {
+        margin: 15px;
+    }
+    .popup-btn {
+        width: 100px;
+        margin-bottom: 10px;
+    }
+}
