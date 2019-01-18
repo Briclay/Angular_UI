@@ -29,11 +29,13 @@ export class FileManagerConfigComponent implements OnInit {
   selectedProjectData: any;
   filesData: any;
   filesDetailsData: any;
+  folderDetailsData: any;
   productOption: any;
   folderListLoading: boolean;
   subFolderListLoading: boolean;
   fileListLoading: boolean;
   fileListDetialsLoading: boolean;
+  fileDetialsLoading: boolean;
   constructor(
     private projectService: ProjectService,
     private fileManagerService: FileManagerService,
@@ -105,6 +107,10 @@ export class FileManagerConfigComponent implements OnInit {
       });
   }
 
+  openShareDialog(fileList?) {
+
+  }
+
   getSubFolder(list) {
     this.subFolderListLoading = true;
     this.fileManagerService.getAllFolders(list._id)
@@ -152,15 +158,7 @@ export class FileManagerConfigComponent implements OnInit {
   }
 
   getFileDetails(fileList) {
-    this.fileListDetialsLoading = true;
-    this.fileManagerService.getFiles(fileList._id)
-      .pipe().subscribe(res => {
-        this.filesDetailsData = res;
-        this.fileListDetialsLoading = false;
-
-      }, (error: any) => {
-        console.error('error', error);
-        this.fileListDetialsLoading = false;
-      })
+    this.fileDetialsLoading = true;
+    this.folderDetailsData = fileList;
   }
 }

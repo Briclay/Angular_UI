@@ -1,0 +1,29 @@
+<div class="dialog-container">
+  <h1 mat-dialog-title>Share</h1>
+  <div mat-dialog-content>
+    <div>
+      <form [formGroup]="dailogForm" class="">
+        <mat-form-field appearance="outline">
+          <mat-label>Select Users</mat-label>
+          <mat-select placeholder="Departments">
+            <mat-option *ngFor="let user of users" [value]="department">
+              {{user.username}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Departments</mat-label>
+          <mat-select placeholder="Departments">
+            <mat-option *ngFor="let department of departments" [value]="department">
+              {{department}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </form>
+    </div>
+    <div class="">
+      <button mat-button class="margin-10px-round" (click)="onSave()">Save</button>
+      <button mat-button class="btn" (click)="onCloseCancel()">Cancel</button>
+    </div>
+  </div>
+</div>

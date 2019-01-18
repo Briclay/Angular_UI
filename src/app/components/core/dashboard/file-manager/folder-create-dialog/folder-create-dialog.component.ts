@@ -34,7 +34,6 @@ export class FolderCreateDialogComponent implements OnInit {
     this.dailogForm.value._departmentId = '5a5844cd734d1d61613f7066';
     this.fileManagerService.saveFolder(this.dailogForm.value)
       .pipe().subscribe((response: any) => {
-        // toasty message
         this.dialogRef.close('success');
       }, (error: any) => {
         console.error(error)
