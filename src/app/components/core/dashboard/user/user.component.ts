@@ -23,8 +23,7 @@ export class UserComponent implements OnInit {
         },
         {
           title: 'User Name', type: 'list', list: [
-            { title: 'UserName', key: 'username', hideTitle: true, type: 'label' },
-            { title: 'Address', key: 'address.city', hideTitle: true, type: 'label' }
+            { title: 'UserName', key: 'username', hideTitle: true, type: 'label' }
           ]
         },
         { title: 'Role', key: 'userType' },

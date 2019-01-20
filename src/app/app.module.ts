@@ -47,6 +47,9 @@ import { FolderCreateDialogComponent } from './components/core/dashboard/file-ma
 import { WorkOrderComponent } from './components/core/dashboard/work-order/work-order.component';
 import { WorkOrderModule } from './components/core/dashboard/work-order/work-order.module';
 import { SpinnerModule } from './components/shared/spinner/spinner.module';
+import {FileManagerModule} from  './components/core/dashboard/file-manager/file-manager.module';
+import {FileShareDialogComponent} from './components/core/dashboard/file-manager/file-share-dialog/file-share-dialog.component'
+import {FileMailDialogComponent} from './components/core/dashboard/file-manager/file-mail-dialog/file-mail-dialog.component'
 
 @NgModule({
   declarations: [
@@ -78,7 +81,6 @@ import { SpinnerModule } from './components/shared/spinner/spinner.module';
     FileManagerComponent,
     FileManagerConfigComponent,
     WorkOrderComponent,
-    FolderCreateDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -92,10 +94,13 @@ import { SpinnerModule } from './components/shared/spinner/spinner.module';
     ProjectModule,
     WorkRequestModule,
     WorkOrderModule,
-    SpinnerModule
+    SpinnerModule,
+    FileManagerModule
   ],
   entryComponents: [
-    FolderCreateDialogComponent
+    FolderCreateDialogComponent,
+    FileShareDialogComponent,
+    FileMailDialogComponent
   ],
   providers: [D3Service, DashboardService, UserService, DepartmentService, RoleService, 
   OrganizationService,UserDashboardService],

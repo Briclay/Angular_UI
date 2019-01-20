@@ -2,15 +2,15 @@
   <mat-form-field appearance="outline">
     <mat-label>Organization</mat-label>
     <mat-select placeholder="Select Organization">
-      <mat-option *ngFor="let organization of organizations" [value]="organization.value">
-        {{organization.viewValue}}
+      <mat-option *ngFor="let organization of organizations" [value]="selectedOrg" [(ngModel)]="selectedOrg">
+        {{organization.name}}
       </mat-option>
     </mat-select>
   </mat-form-field>
   <mat-card>
     <mat-form-field appearance="outline">
       <mat-label>Select Project</mat-label>
-      <mat-select placeholder="Select Organization" (selectionChange)="getSingleProject($event)">
+      <mat-select placeholder="Select Project" (selectionChange)="getSingleProject($event)">
         <mat-option *ngFor="let p of projectlist" [value]="p._id">
           {{p.name}}
         </mat-option>
@@ -19,6 +19,8 @@
     <div fxLayout="row" *ngIf="selectedProjectData">
       <div class="flex-grow text-center">
         Details
+      </div>
+      <div class="flex-grow no-border">
       </div>
       <div class="flex-grow no-border text-center">
         Car Parking
@@ -61,32 +63,10 @@
           <input matInput readonly [value]="selectedProjectData.projectDetails.unitNumber">
         </mat-form-field>
       </div>
-      <div class="flex-grow no-border">
-        <mat-form-field appearance="outline">
-          <mat-label>Total</mat-label>
-          <input matInput readonly [value]="selectedProjectData.carParkingArea.carParkingCount">
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-          <mat-label>Covered</mat-label>
-          <input matInput readonly [value]="selectedProjectData.carParkingArea.coveredParkingCount">
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-          <mat-label>Stack</mat-label>
-          <input matInput readonly [value]="selectedProjectData.carParkingArea.coveredParkingCount">
-        </mat-form-field>
-      </div>
       <div class="flex-grow ">
-        <mat-form-field appearance="outline">
-          <mat-label>Basement</mat-label>
-          <input matInput readonly [value]="selectedProjectData.carParkingArea.basementParkingCount">
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-          <mat-label>Surface</mat-label>
-          <input matInput readonly [value]="selectedProjectData.carParkingArea.surfaceParkingCount">
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-          <mat-label>Puzzle</mat-label>
-          <input matInput readonly [value]="selectedProjectData.carParkingArea.surfaceParkingCount">
+        <mat-form-field appearance="outline" *ngFor="let carParking of selectedProjectData.carParkingArea">
+          <mat-label>{{carParking.area}}</mat-label>
+          <input matInput readonly [value]="carParking.count">
         </mat-form-field>
       </div>
       <div class="flex-grow no-border">
@@ -104,199 +84,185 @@
     </div>
   </mat-card>
   <div fxLayout="row" class="file-details">
-    <ul class="side-nav-list file-icons">
-      <li>
-        <a>
-          <mat-icon>view_comfy</mat-icon><br/>Land Details
-        </a>
-      </li>
-      <li>
-        <a>
-          <mat-icon>view_comfy</mat-icon><br/>Architecture
-        </a>
-      </li>
-      <li>
-        <a>
-          <mat-icon>view_comfy</mat-icon><br/>Structural
-        </a>
-      </li>
-      <li>
-        <a>
-          <mat-icon>view_comfy</mat-icon><br/>PHE
-        </a>
-      </li>
-      <li>
-        <a>
-          <mat-icon>view_comfy</mat-icon><br/>Electrical
-        </a>
-      </li>
-    </ul>
-    <div class="file-list">
-      <mat-card class="margin-btm-10 list-header">
-        <div fxLayout="row align-item-center" class="file-list-header">
-          <div class="flex-grow ">
-            Land Details
+    <mat-card *ngIf="!selectedProjectData;else selectedProjectTemplate" 
+      class="width-100 marginTop30 text-danger text-center">
+      * Select Project
+    </mat-card>
+    <ng-template #selectedProjectTemplate> 
+      <ul class="side-nav-list file-icons">
+        <li>
+          <a>
+          <img class="icons" src="assets/images/icons/Land_Details.png"/><br/>Land Details
+          </a>
+        </li>
+        <li>
+          <a>
+            <img class="icons" src="assets/images/icons/Architecture.png"/><br/>Architecture
+          </a>
+        </li>
+        <li>
+          <a>
+            <img class="icons" src="assets/images/icons/Structure.png"/><br/>Structural
+          </a>
+        </li>
+        <li>
+          <a>
+            <img class="icons" src="assets/images/icons/PHE.png"/><br/>PHE
+          </a>
+        </li>
+        <li>
+          <a>
+            <img class="icons" src="assets/images/icons/Electrical.png"/><br/>Electrical
+          </a>
+        </li>
+      </ul>
+      <div class="file-list">
+        <mat-card class="margin-btm-10 list-header">
+          <div fxLayout="row align-item-center" class="file-list-header">
+            <div class="flex-grow ">
+              Land Details
+            </div>
+            <div class="flex-grow no-border">
+            </div>
+            <div class="flex-grow no-border">
+            </div>
+            <div class="flex-grow no-border">
+            </div>
+            <div class="flex-grow no-border">
+            </div>
+            <div class="flex-grow no-border justify-content-center">
+              <mat-icon matTooltip="Create Folder"  (click)="openFolderDialog()"class="hand-cursor margin-left-4">create_new_folder</mat-icon> 
+              <span (click)="fileInput.click()">
+                <mat-icon matTooltip="Upload" class="hand-cursor margin-left-4">cloud_upload</mat-icon>
+                <input #fileInput type="file" (change)="onFileInput($event)" style="display:none;" />
+              </span>
+            </div>
           </div>
-          <div class="flex-grow no-border">
-          </div>
-          <div class="flex-grow no-border">
-          </div>
-          <div class="flex-grow no-border">
-          </div>
-          <div class="flex-grow no-border">
-          </div>
-          <div class="flex-grow no-border justify-content-center">
-            <mat-icon matTooltip="Create Folder"  (click)="openFolderDialog()"class="hand-cursor margin-left-4">create_new_folder</mat-icon> 
-            <mat-icon matTooltip="Upload" class="hand-cursor margin-left-4">cloud_upload</mat-icon>
-          </div>
+        </mat-card>
+        <div class="expansion-container">
+          <spinner diameter="80" *ngIf="folderListLoading; else folderList"></spinner>
+          <ng-template #folderList>
+            <mat-accordion>
+              <mat-expansion-panel *ngFor="let listData of folderData" 
+                [hideToggle]="true"
+                (opened)="getSubFolder(listData)">
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    <img src="assets/images/folder.png" width="10%"> {{listData.name}}
+                  </mat-panel-title>
+                  <mat-panel-title>
+                    <label class="label-title">Created On</label>
+                    <br/>
+                    <br/>
+                    <label class="label-value">{{listData.createdAt | date:'dd/MM/yyyy'}}</label>
+                  </mat-panel-title>
+                  <mat-panel-title>
+                    <label class="label-title">Created By</label> {{listData.accessFlag}}
+                  </mat-panel-title>
+                  <mat-panel-title>
+                    <label class="label-title">Version</label> V {{listData.version}}
+                  </mat-panel-title>
+                  <mat-panel-title (click)="$event.stopPropagation();">
+                    <img matTooltip="Details" (click)="getFileDetails(listData)"  class="margin-left-4" src="assets/images/icons/Details.png" />
+                    <mat-icon matTooltip="Create Folder"  (click)="openFolderDialog(listData)"class="hand-cursor margin-left-4">create_new_folder</mat-icon> 
+                    <span (click)="fileInput.click()">
+                      <mat-icon matTooltip="Upload" class="hand-cursor margin-left-4">cloud_upload</mat-icon>
+                      <input #fileInput type="file" (change)="onFileInput($event, listData)" style="display:none;" />
+                    </span>
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div class="file-sub-folder">
+                  <spinner diameter="40" *ngIf="subFolderListLoading; else subFolderList"></spinner>
+                  <ng-template #subFolderList>
+                    <mat-accordion>
+                      <mat-expansion-panel *ngFor="let subListData of subFolderData" 
+                        [hideToggle]="true"
+                        (opened)="getFiles(subListData)">
+                        <mat-expansion-panel-header>
+                          <mat-panel-title>
+                            <img src="assets/images/folder.png" width="10%"> {{subListData.name}}
+                          </mat-panel-title>
+                          <mat-panel-title>
+                            <label class="label-title">Created On</label>
+                            <br/>
+                            <br/>
+                            <label class="label-value">{{subListData.createdAt | date:'dd/MM/yyyy'}}</label>
+                          </mat-panel-title>
+                          <mat-panel-title>
+                            <label class="label-title">Created By</label> {{subListData.accessFlag}}
+                          </mat-panel-title>
+                          <mat-panel-title>
+                            <label class="label-title">Version</label> V {{subListData.version}}
+                          </mat-panel-title>
+                          <mat-panel-title (click)="$event.stopPropagation();">
+                            <img matTooltip="Details" (click)="getFileDetails(subListData)"  class="margin-left-4" src="assets/images/icons/Details.png"/>
+                            <mat-icon matTooltip="Upload" class="hand-cursor margin-left-4">cloud_upload</mat-icon>
+                          </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <div class="file-sub-folder">
+                          <spinner diameter="40" *ngIf="fileListLoading; else fileListData"></spinner>
+                          <ng-template #fileListData>
+                            <mat-card  *ngFor="let fileList of filesData" 
+                            fxLayout="row" 
+                            class="margin-btm-5 file-list-card"
+                            (click)="getFileDetails(fileList)">
+                              <div class="flex-grow flex-box">
+                                <img src="{{getIcon(fileList.type,fileList.fileExt)}}" width="35" height="35"/>
+                                <label class="margin-5">{{fileList.name}}</label>
+                              </div>
+                              <div class="flex-grow no-border">
+                                <label class="label-title">Created On</label>
+                                <br/>
+                                <label class="label-value">{{fileList.createdAt | date:'dd/MM/yyyy'}}</label>
+                              </div>
+                              <div class="flex-grow no-border">
+                                <label class="label-title">Created By</label>
+                                <br/>
+                                <label class="label-value">{{fileList.createdAt | date:'dd/MM/yyyy'}}</label>
+                              </div>
+                              <div class="flex-grow no-border">
+                                <label class="label-title">Version</label>
+                                <br/>
+                                <label class="label-value">V {{fileList.version}}</label>
+                              </div>
+                              <div class="flex-grow no-border">
+                                <img matTooltip="Details" (click)="getFileDetails(fileList)"  class="margin-left-4" src="assets/images/icons/Details.png"/>
+                                <img matTooltip="Share" (click)="openShareDialog(fileList)"  class="margin-left-4" src="assets/images/icons/File_Share.png"/>
+                                <img matTooltip="Email" (click)="openMailDialog(fileList)"  class="margin-left-4" src="assets/images/icons/Email.png"/>
+                                <img matTooltip="Print"  class="margin-left-4" src="assets/images/icons/Print.png" />
+                              </div>
+                            </mat-card>
+                          </ng-template>
+                          
+                        </div>
+                      </mat-expansion-panel>
+                    </mat-accordion>
+                  </ng-template>
+                </div>
+              </mat-expansion-panel>
+            </mat-accordion>
+          </ng-template>
         </div>
-      </mat-card>
-      <div class="expansion-container">
-        <spinner diameter="80" *ngIf="folderListLoading; else folderList"></spinner>
-        <ng-template #folderList>
-          <mat-accordion>
-            <mat-expansion-panel *ngFor="let listData of folderData" 
-              [hideToggle]="true"
-              (opened)="getSubFolder(listData)">
-              <mat-expansion-panel-header>
-                <mat-panel-title>
-                  <img src="assets/images/folder.png" width="10%"> {{listData.name}}
-                </mat-panel-title>
-                <mat-panel-title>
-                  <label class="label-title">Created On</label>
-                  <br/>
-                  <br/>
-                  <label class="label-value">{{listData.createdAt | date:'dd/MM/yyyy'}}</label>
-                </mat-panel-title>
-                <mat-panel-title>
-                  <label class="label-title">Created By</label> {{listData.accessFlag}}
-                </mat-panel-title>
-                <mat-panel-title>
-                  <label class="label-title">Version</label> V {{listData.__v}}
-                </mat-panel-title>
-                <mat-panel-title (click)="$event.stopPropagation();">
-                  <mat-icon matTooltip="Details" (click)="getFileDetails(listData)"  class="margin-left-4">filter_none</mat-icon>
-                  <mat-icon matTooltip="Create Folder"  (click)="openFolderDialog(listData)"class="hand-cursor margin-left-4">create_new_folder</mat-icon> 
-                  <mat-icon matTooltip="Upload" class="hand-cursor margin-left-4">cloud_upload</mat-icon> 
-                </mat-panel-title>
-              </mat-expansion-panel-header>
-              <div class="file-sub-folder">
-                <spinner diameter="40" *ngIf="subFolderListLoading; else subFolderList"></spinner>
-                <ng-template #subFolderList>
-                  <mat-accordion>
-                    <mat-expansion-panel *ngFor="let subListData of subFolderData" 
-                      [hideToggle]="true"
-                      (opened)="getFiles(subListData)">
-                      <mat-expansion-panel-header>
-                        <mat-panel-title>
-                          <img src="assets/images/folder.png" width="10%"> {{subListData.name}}
-                        </mat-panel-title>
-                        <mat-panel-title>
-                          <label class="label-title">Created On</label>
-                          <br/>
-                          <br/>
-                          <label class="label-value">{{subListData.createdAt | date:'dd/MM/yyyy'}}</label>
-                        </mat-panel-title>
-                        <mat-panel-title>
-                          <label class="label-title">Created By</label> {{subListData.accessFlag}}
-                        </mat-panel-title>
-                        <mat-panel-title>
-                          <label class="label-title">Version</label> V {{subListData.__v}}
-                        </mat-panel-title>
-                        <mat-panel-title (click)="$event.stopPropagation();">
-                          <mat-icon matTooltip="Details" (click)="getFileDetails(subListData)"  class="margin-left-4">filter_none</mat-icon>
-                          <mat-icon matTooltip="Upload" class="hand-cursor margin-left-4">cloud_upload</mat-icon>
-                        </mat-panel-title>
-                      </mat-expansion-panel-header>
-                      <div class="file-sub-folder">
-                        <spinner diameter="40" *ngIf="fileListLoading; else fileListData"></spinner>
-                        <ng-template #fileListData>
-                          <mat-card  *ngFor="let fileList of filesData" 
-                          fxLayout="row" 
-                          class="margin-btm-5 file-list-card"
-                          (click)="getFileDetails(fileList)">
-                            <div class="flex-grow">
-                              <img src="{{getIcon(fileList.type,fileList.fileExt)}}" width="30%"/>
-                              {{fileList.name}}
-                            </div>
-                            <div class="flex-grow no-border">
-                              <label class="label-title">Created On</label>
-                              <label class="label-value">{{fileList.createdAt | date:'dd/MM/yyyy'}}</label>
-                            </div>
-                            <div class="flex-grow no-border">
-                              <label class="label-title">Created By</label>
-                              <label class="label-value">{{fileList.createdAt | date:'dd/MM/yyyy'}}</label>
-                            </div>
-                            <div class="flex-grow no-border">
-                              <label class="label-title">Version</label>
-                              <label class="label-value">{{fileList.__v}}</label>
-                            </div>
-                            <div class="flex-grow no-border">
-                              <mat-icon matTooltip="Details" (click)="getFileDetails(fileList)"  class="margin-left-4">filter_none</mat-icon>
-                              <mat-icon matTooltip="Share" (click)="openShareDialog(fileList)"  class="margin-left-4">share</mat-icon>
-                              <mat-icon matTooltip="Email"  class="margin-left-4">email</mat-icon>
-                              <mat-icon matTooltip="Print"  class="margin-left-4">print</mat-icon>
-                            </div>
-                          </mat-card>
-                        </ng-template>
-                        
-                      </div>
-                    </mat-expansion-panel>
-                  </mat-accordion>
-                </ng-template>
-              </div>
-            </mat-expansion-panel>
-          </mat-accordion>
-        </ng-template>
       </div>
-    </div>
-    <div class="file-sub-details">
-      
-      <mat-card class="margin-btm-10">
-        <div *ngIf="folderDetailsData">
-          <img src="{{getIcon(folderDetailsData.type,folderDetailsData.fileExt)}}" width="35"/>{{folderDetailsData.name}}
-        </div>
-      </mat-card>
-
-      <mat-card class="margin-btm-10">
-        <div *ngIf="folderDetailsData">
-          <div fxLayout="row">
-            <div class="flex-grow no-border">
-              Type:
-              <br/>
-              Size:
-              <br/>
-              Project:
-              <br/>
-              Created By:
-              <br/>
-              Created On:
-              <br/>
-              Modified by:
-              <br/>
-              Modified On:
-            </div>
-            <div class="flex-grow no-border">
-              {{folderDetailsData.type}}
-              <br/>
-              {{folderDetailsData.type}}
-              <br/>
-              {{folderDetailsData.type}}
-              <br/>
-              {{folderDetailsData.type}}
-              <br/>
-              {{folderDetailsData.createdAt | date:'dd/MM/yyyy'}}
-              <br/>
-              {{folderDetailsData.type}}
-              <br/>
-              {{folderDetailsData.createdAt | date:'dd/MM/yyyy'}}
-            </div>
-
+      <div class="file-sub-details">
+        
+        <mat-card class="margin-btm-10">
+          <div *ngIf="folderDetailsDataOption" class="flex-box">
+            <img src="{{getIcon(folderDetailsDataOption.type,folderDetailsDataOption.fileExt)}}" width="35" height="35"/>
+            <label class="margin-5">{{folderDetailsDataOption.name}}</label>
           </div>
-        </div>
-      </mat-card>
+        </mat-card>
 
-    </div>
+        <mat-card class="margin-btm-10">
+          <div *ngIf="folderDetailsDataOption">
+            <app-file-config-details 
+              [folderDetailsDataOption]="folderDetailsDataOption">
+            </app-file-config-details>
+          </div>
+        </mat-card>
+
+      </div>
+    </ng-template>
   </div>
 
 </div>

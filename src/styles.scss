@@ -47,8 +47,17 @@ app-expansion-panel {
 .mat-tab-nav-bar.mat-primary .mat-tab-label-container .mat-ink-bar {
     background-color: inherit;
 }
+.width-100  {
+    width: 100%;
+}
 .marginTop30 {
 	margin-top: 30px;
+}
+.margin-5 {
+    margin: 5px;
+}
+.margin-10 {
+    margin: 10px;
 }
 .bg-color-primary {
 	background-color :#00aff0;
@@ -135,5 +144,40 @@ app-expansion-panel {
 }
 .hand-cursor {
     cursor: pointer
+}
+
+/* text color sytles*/
+.text-primary {
+    color: #007bff!important;
+}
+.text-muted {
+    color: #6c757d!important;
+}
+.text-success {
+    color: #28a745!important;
+}
+.text-info {
+    color: #17a2b8!important;
+}
+.text-warning {
+    color: #ffc107!important;
+}
+.text-danger {
+    color: #dc3545!important;
+}
+.text-secondary {
+    color: #6c757d!important;
+}
+.text-dark {
+    color: #343a40!important;
+}
+.text-light {
+    color: #f8f9fa!important;
+}
+.text-white {
+    color: #fff!important;
+}
+.flex-box {
+    display: flex;
 }
 

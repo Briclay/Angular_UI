@@ -10,10 +10,11 @@ export class ProjectService {
     
     constructor(private apiService: ApiService) { }
     public getProjects(orgID): Observable<any> {
-        return this.apiService.get('./assets/data/projects.json').pipe(map(res => res));
+        let url = `https://briclay-core.herokuapp.com/projects?select=name&filter[_organisationId]=${orgID}`
+        return this.apiService.get(url).pipe(map(res => res));
     }
     public getSingleProjects(projID): Observable<any> {
-        let url = `./assets/data/singleProject.json`
-        return this.apiService.get(url).pipe(map(res => res));
+        let url = `https://briclay-core.herokuapp.com/projects/${projID}`
+        return this.apiService.get(url).pipe(map(res     => res));
     }
 }

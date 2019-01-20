@@ -5,17 +5,18 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import {FileManagerService} from '../file-manager.service'
 
 @Component({
-  selector: 'app-file-share-dialog',
-  templateUrl: './file-share-dialog.component.html',
-  styleUrls: ['./file-share-dialog.component.scss']
+  selector: 'app-file-mail-dialog',
+  templateUrl: './file-mail-dialog.component.html',
+  styleUrls: ['./file-mail-dialog.component.scss']
 })
-export class FileShareDialogComponent implements OnInit {
+export class FileMailDialogComponent implements OnInit {
+
   users: any;
   selectedUser: any;
   userLoading: boolean;
   sharedFileError: any;
   constructor(private userService: UserService,
-    public dialogRef: MatDialogRef<FileShareDialogComponent>, 
+    public dialogRef: MatDialogRef<FileMailDialogComponent>, 
     @Inject(MAT_DIALOG_DATA) public data: any, 
     private formBuilder: FormBuilder,
      private fileManagerService: FileManagerService) { }
@@ -29,7 +30,6 @@ export class FileShareDialogComponent implements OnInit {
   }
 
   userChanged(user) {
-    console.log('user', user);
     this.selectedUser =  user.value;
   }
 
@@ -44,9 +44,9 @@ export class FileShareDialogComponent implements OnInit {
       })
   }
 
-  shareFile() {
+  shareMail() {
     this.sharedFileError = '';
-    this.fileManagerService.shareFile(this.selectedUser._id, this.data._parentId)
+    this.fileManagerService.shareMail(this.selectedUser.email, this.data._parentId)
       .pipe().subscribe((response: any) => {
         this.dialogRef.close('success');
       }, (error: any) => {
@@ -54,6 +54,5 @@ export class FileShareDialogComponent implements OnInit {
         this.sharedFileError = error;
       });
   }
-  
 
 }

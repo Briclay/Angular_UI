@@ -4,6 +4,7 @@ import { Observable, of } from 'rxjs';
 
 import { constantService } from '../../constant/constant.serive';
 import { UserData } from '../../interfaces/interfaces';
+import {ApiService} from  '../api.service';
 
 const data: UserData = {
     "result": "success",
@@ -420,9 +421,13 @@ const data: UserData = {
 @Injectable()
 export class UserService {
     constructor(
+        private apiService: ApiService
     ) { }
     // pass params data
     public getUser(): Observable<UserData> {
-        return  of(data);;
+        let url = `https://briclay-core.herokuapp.com/users?select=all`
+        return this.apiService.get(url).pipe(map(res     => res));
     }
+
+
 }
