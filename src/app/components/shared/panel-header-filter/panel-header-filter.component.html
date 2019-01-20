@@ -2,9 +2,9 @@
   <div class="pull-left panel-left">
     <mat-form-field appearance="outline">
       <mat-label>Organization</mat-label>
-      <mat-select placeholder="Select Organization">
-        <mat-option *ngFor="let organization of organizations" [value]="organization.value">
-          {{organization.viewValue}}
+      <mat-select placeholder="Select Organization"  (selectionChange)="organizationChanged($event)">
+        <mat-option *ngFor="let organization of organizations" [value]="selectedOrg" [(ngModel)]="selectedOrg">
+          {{organization.name}}
         </mat-option>
       </mat-select>
     </mat-form-field>

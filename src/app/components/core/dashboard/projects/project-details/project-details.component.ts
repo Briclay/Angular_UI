@@ -11,6 +11,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./project-details.component.scss']
 })
 export class ProjectDetailsComponent implements OnInit {
+  @Input() data: any;
+  @Input() formType: string;
+  @Input() projectListData: any;
 
   detailsComponentData: any;
   facilityCompoennetData: any;
@@ -184,13 +187,14 @@ export class ProjectDetailsComponent implements OnInit {
 
   generateOrgCode() {
     let name = this.projectForm.value.name;
+    console.log('name', name)
     if (name) {
       this.arrName = name.split(' ');
       this.sortName = '';
       this.arrName.forEach((value: any) => {
         this.sortName += value.slice(0, 1);
       })
-      let str = this.sortName.toUpperCase() + '-' + this.projectsCount;
+      let str = this.sortName.toUpperCase() + '-' + this.projectListData.length;
       this.projectForm.controls['projectCode'].setValue(str);
       //  this.projectId = str;
     }

@@ -11,11 +11,19 @@ export class ProjectsComponent implements OnInit {
   projects: any = {
     data: []
   };
+  projectLoading: boolean;
   constructor(private projectService: ProjectService) { }
 
   ngOnInit() {
-    this.projectService.getProjects('filter[_organisationId]=' + '5a5844cd734d1d61613f7066').pipe().subscribe(res => {
-      console.log('res',res)
+    this.getProjects();
+  }
+
+  getProjects(org?) {
+    console.log('getProjects', org)
+    let orgID = org ? org.value._id : '5a5844cd734d1d61613f7066';
+    this.projectLoading = true;
+    this.projectService.getProjects('filter[_organisationId]=' + orgID).pipe().subscribe(res => {
+      this.projectLoading = false;
       this.projects = res;
       this.projectDataOptions = [
         {
@@ -31,7 +39,10 @@ export class ProjectsComponent implements OnInit {
         { title: 'Project Code', key: 'projectCode' },
         { title: 'Total Units', key: 'projectDetails.unitNumber' },
         { title: 'Budget', key: 'projectDetails.unitNumber' }]
-    });
+    }, (error: any) => {
+        console.error('error', error);
+        this.projectLoading = false;
+      });
   }
 
 }
