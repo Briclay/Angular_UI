@@ -6,9 +6,9 @@
           <div class="username-input">
             <mat-form-field appearance="outline" class="margin_right_25">
               <mat-label>Department Name</mat-label>
-              <mat-select placeholder="Departments" formControlName="departmentName">
-                <mat-option *ngFor="let departmentName of departments" [value]="departmentName">
-                  {{departmentName}}
+              <mat-select placeholder="Departments" formControlName="name">
+                <mat-option *ngFor="let name of departments" [value]="name">
+                  {{name}}
                 </mat-option>
               </mat-select>
             </mat-form-field>
@@ -18,7 +18,7 @@
           <div class="user-details-content-title">
             <strong> Details</strong>
           </div>
-          <div class="user-details-form-list" formGroupName="details">
+          <div class="user-details-form-list" >
             <div>
               <mat-form-field class="margin_right_25" appearance="outline">
                 <mat-label>Description</mat-label>
@@ -35,7 +35,7 @@
             <div>
               <mat-form-field class="margin_right_25" appearance="outline">
                 <mat-label>Features</mat-label>
-                <input matInput formControlName="features">
+                <input matInput formControlName="_features">
               </mat-form-field>
             </div>
             <div>

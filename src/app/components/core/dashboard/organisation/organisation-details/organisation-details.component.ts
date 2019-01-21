@@ -1,5 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router'
+import * as _ from 'lodash';
+
 
 @Component({
   selector: 'app-organisation-details',
@@ -9,12 +12,17 @@ import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms'
 export class OrganisationDetailsComponent implements OnInit {
   @Input() data: any;
   @Input() formType: string;
-
+  
+  organisationsList: any;
+  userAuth: any;
+  temp = [];
   organizationDetailsForm: FormGroup;
   getApprovals = ['File' ,'Service Request' ,'Snag Master']
   plans = [ 'Premium' , 'Trial']
   allFeatures = ['File' ,'Folder Manager' ,'Service Request','Snag Master']
-  constructor() {
+  constructor(    
+    private router :Router
+    ) {
   }
 
   ngOnInit() {

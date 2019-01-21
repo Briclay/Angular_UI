@@ -149,7 +149,7 @@ export interface RoleData {
   data: RoleList[]
 }
 
-export interface RoleList {
+/*export interface RoleList {
   id: string;
   roleNane: string;
   details : {
@@ -159,6 +159,25 @@ export interface RoleList {
   };
   features : number;
   approvals : number;
+}*/
+
+export interface RoleList {
+  _organisationId: string;
+  _departmentId : string;
+  name: string;
+  parentRole? : string;
+  description : string;
+  features : string;
+  approvals : string;
+  approvalProcess?: string[];
+  access ?: string[];
+  sharedResource? : string[];
+  _createdBy?: string;
+  _updatedBy?: string;
+  _deletedBy?: string;
+  deleteNote?: string;
+  deleteFlag?: string;
+  activeFlag?: string;
 }
 
 export interface DepartmentData {
@@ -168,11 +187,10 @@ export interface DepartmentData {
 
 export interface DepartmentList {
   id: string;
-  departmentName : string;
-  details : {
-    description : string;
-  };
-  features : number;
+  name : string;
+  description : string;
+  features? : string[];
+  _roles? : string[];
 }
 
 export interface UserDashboardData {

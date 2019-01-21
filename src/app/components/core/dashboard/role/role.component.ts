@@ -23,7 +23,7 @@ export class RoleComponent implements OnInit {
 	    this.roles = res;
 			this.roleDataOptions = [
 		        {
-		        	title: 'roleNane', key: 'roleNane', hideTitle: true, type: 'label'
+		        	title: 'name', key: 'name', hideTitle: true, type: 'label'
 		        }, 
 		        {
 					title: 'Features', key: 'features'

@@ -12,7 +12,7 @@ export class LoginComponent implements OnInit {
 	loginForm: FormGroup;
 	loginFormErrors: any;
 	loginFormSubmitted = false;
-	  isLoading: boolean;
+	isLoading: boolean;
 
 	constructor(
 	    private formBuilder: FormBuilder,
@@ -37,9 +37,9 @@ export class LoginComponent implements OnInit {
 
 	onLoginFormValuesChanged() {
 		for (const field in this.loginFormErrors) {
-			if (!this.loginFormErrors.hasOwnProperty(field)) {
-				continue;
-			}
+		if (!this.loginFormErrors.hasOwnProperty(field)) {
+			continue;
+		}
 	    // Clear previous errors
 	    this.loginFormErrors[field] = {};
 	    // Get the control
@@ -52,19 +52,23 @@ export class LoginComponent implements OnInit {
 
 
 	onLoginFormSubmit() {
+		this.onLoginFormValuesChanged()
 		this.isLoading = true;
 		if (this.loginForm.valid) {
 			this.authenticationService.login(this.loginForm.value)
 			.pipe().subscribe(response =>  {
 				this.isLoading = false;
+                //this.auth.set(response);
+            	window.localStorage.setItem('userAuth', JSON.stringify(response.data));
+            	window.localStorage.setItem('userAuthToken', JSON.stringify(response.token));
 				console.log(response, "loginResponse")
 				this.loginForm.reset();
 				this.loginForm['_touched'] = false;
 				const path = '/dashboard';
 				this.router.navigateByUrl(path);
-
 			}, (error: any) => {
 				this.isLoading = false;
+				alert(error.error.message)
 				console.log(error , 'err')
 			});
 		}

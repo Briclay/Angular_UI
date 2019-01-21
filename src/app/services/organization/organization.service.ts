@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { constantService } from '../../constant/constant.serive';
 import { OrganizationData } from '../../interfaces/interfaces';
+import { ApiService } from "./../api.service";
+import { map } from 'rxjs/operators';
 
 const data: OrganizationData = {
     "result": "success",
@@ -84,14 +86,45 @@ const history = {
 @Injectable()
 export class OrganizationService {
     constructor(
+	    private apiService: ApiService,
     ) { }
     // pass params data
     public getData(): Observable<OrganizationData> {
-        return  of(data);;
+        return  of(data);
     }
 
 	public getHistory(): Observable<any> {
 		return of(history)
 	}
+
+	public getFeature (): Observable<any> {
+        let url = "https://matkraft-api.herokuapp.com/api/v1/features";
+        return this.apiService.get(url).pipe(map(res => res));
+    }
+
+	public getAll (): Observable<any> {
+        let url = "https://matkraft-api.herokuapp.com/api/v1/organisations";
+        return this.apiService.get(url).pipe(map(res => res));
+    }
+    
+    public getOne(): Observable<any> {
+        let url = "https://matkraft-api.herokuapp.com/api/v1/organisations/5a58438f734d1d61613f6ed9";
+        return this.apiService.get(url).pipe(map(res => res));
+    }
+   
+    public createOrganisation (request): Observable<any> {
+        let url = "https://matkraft-api.herokuapp.com/api/v1/organisations";
+        return this.apiService.get(url, request).pipe(map(res => res));
+    }
+
+    public update (request): Observable<any> {
+        let url = "https://matkraft-api.herokuapp.com/api/v1/organisations/5a58438f734d1d61613f6ed9";
+        return this.apiService.get(url, request).pipe(map(res => res));
+    }
+
+    public deleteOrg (request): Observable<any> {
+        let url = "https://matkraft-api.herokuapp.com/api/v1/organisations/5a58438f734d1d61613f6ed9";
+        return this.apiService.get(url, request).pipe(map(res => res));
+    }
 }
 

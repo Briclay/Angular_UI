@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,ViewChild} from '@angular/core';
 import { DepartmentService } from '../../../../services/department/department.service';
 import { DepartmentData, TableOptions } from '../../../../interfaces/interfaces';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material';
@@ -17,12 +17,14 @@ export class DepartmentComponent implements OnInit {
 
 	constructor(private departmentService: DepartmentService,
     public dialog: MatDialog) { }
+
+
 	ngOnInit() {
 		this.departmentService.getData().pipe().subscribe(res => {
 			this.departments = res;
 			this.departmentDataOptions = [
 			{
-				title: 'DepartmenName', key: 'departmentName', hideTitle: true, type: 'label'
+				title: 'name', key: 'name', hideTitle: true, type: 'label'
 			}, 
 			{
 				title: 'Features', key: 'features'
