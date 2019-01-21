@@ -55,12 +55,16 @@ export class DynamicTableComponent implements OnInit, OnChanges, AfterViewInit {
   ) { }
 
   ngOnInit() {
-    
     observableMerge(this.route.queryParams).subscribe(params => this.queryParams = params);
   }
 
   ngAfterViewInit() {
     this.sortDataInit();
+  }
+
+  handleRowClick(data) {
+    console.log(data, "************")
+    this.rowClick.emit(data);
   }
 
   ngOnChanges() {

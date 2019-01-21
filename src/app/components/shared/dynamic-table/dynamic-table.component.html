@@ -21,9 +21,7 @@
             <span [innerHTML]="element[item]"></span>
           </div>
           <ng-template #typeItems>
-
             <div *ngIf="config.header[i].type === 'icon'">
-
               <div *ngIf="config.header[i].iconType === 'remove'" class="text-center">
                 <mat-icon class="hand-cursor" (click)="deleteItem(element, j)">clear</mat-icon>
               </div>
@@ -33,7 +31,7 @@
         </mat-cell>
       </ng-container>
       <mat-header-row *matHeaderRowDef="config.keys"></mat-header-row>
-      <mat-row [ngClass]="{'hand-cursor': isRowClickable, 'gray-row': statusOptions && row[statusOptions.name] && row[statusOptions.name] < 0}"
+      <mat-row class="hand-cursor"
         *matRowDef="let row; columns: config.keys;" (click)="handleRowClick(row)">
       </mat-row>
     </mat-table>
