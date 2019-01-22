@@ -63,7 +63,6 @@ export class DynamicTableComponent implements OnInit, OnChanges, AfterViewInit {
   }
 
   handleRowClick(data) {
-    console.log(data, "************")
     this.rowClick.emit(data);
   }
 

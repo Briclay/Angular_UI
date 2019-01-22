@@ -96,10 +96,10 @@ export class FileManagerConfigComponent implements OnInit {
     this.folderListLoading = true;
     this.fileManagerService.getAllFolders()
       .pipe().subscribe(res => {
-        //this.folderData = res;
+        this.folderData = res;
         console.log(res, "folderData")
-/*        this.dataSource = new MatTableDataSource(this.folderData);*/        
-        this.folderData = {
+        /*  this.dataSource = new MatTableDataSource(this.folderData);*/        
+        /*this.folderData = {
           header: [
             { title: 'Name.' },
             { title: 'Created ' },
@@ -108,9 +108,8 @@ export class FileManagerConfigComponent implements OnInit {
             { title: '.' }],
           keys: ['name', 'createdAt', 'accessFlag','version'],
           content: res
-        };
+        };*/
         this.folderListLoading = false;
-
       }, (error: any) => {
         console.error('error', error);
         this.folderListLoading = false;
@@ -170,9 +169,9 @@ export class FileManagerConfigComponent implements OnInit {
     this.subFolderListLoading = true;
     this.fileManagerService.getAllFolders(list._id)
       .pipe().subscribe(res => {
-        //this.subFolderData = res;
+        this.subFolderData = res;
         console.log(res, 'subFolderData')
-        this.subFolderData = {
+       /* this.subFolderData = {
           header: [
             { title: 'Name.' },
             { title: 'Created ' },
@@ -181,7 +180,7 @@ export class FileManagerConfigComponent implements OnInit {
             { title: '.' }],
           keys: ['name', 'createdAt', 'accessFlag','version'],
           content: res
-        };
+        };*/
 
         this.subFolderListLoading = false;
 
@@ -195,8 +194,8 @@ export class FileManagerConfigComponent implements OnInit {
     this.fileListLoading = true;
     this.fileManagerService.getFiles(folder._id)
       .pipe().subscribe(res => {
-        //this.filesData = res;
-        this.filesData = {
+        this.filesData = res;
+        /*this.filesData = {
           header: [
             { title: 'Name.' },
             { title: 'Created ' },
@@ -205,8 +204,7 @@ export class FileManagerConfigComponent implements OnInit {
             { title: '.' }],
           keys: ['name', 'createdAt', 'accessFlag','version'],
           content: res
-        };
-
+        };*/
         this.fileListLoading = false;
 
       }, (error: any) => {

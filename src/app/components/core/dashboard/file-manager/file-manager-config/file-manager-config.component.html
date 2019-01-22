@@ -142,7 +142,7 @@
         <div class="expansion-container">
           <spinner diameter="80" *ngIf="folderListLoading; else folderList"></spinner>
           <ng-template #folderList>
-          <app-dynamic-table *ngIf="folderData.content 
+         <!--  <app-dynamic-table *ngIf="folderData.content 
             && folderData.content.length; else noRecordTemplate" 
             [(config)]="folderData" (Click)="getSubFolder(data)" >
           </app-dynamic-table>
@@ -152,11 +152,11 @@
             <ng-template #subFolderList>
               <app-dynamic-table *ngIf="subFolderData.content 
                   && subFolderData.content.length; else noRecordTemplate" 
-                [(config)]="subFolderData" (Click)="getFiles(data)" >
+                [(config)]="subFolderData" >
               </app-dynamic-table>
             </ng-template>
-          </div>
-<!-- 
+          </div> -->
+
             <mat-accordion>
               <mat-expansion-panel *ngFor="let listData of folderData" 
                 [hideToggle]="true"
@@ -189,11 +189,7 @@
                 <div class="file-sub-folder">
                   <spinner diameter="40" *ngIf="subFolderListLoading; else subFolderList"></spinner>
                   <ng-template #subFolderList>
-                    <app-dynamic-table *ngIf="subFolderData.content 
-                        && subFolderData.content.length; else noRecordTemplate" 
-                      [(config)]="subFolderData"  (handleRowClick)="getFiles(data)" >
-                    </app-dynamic-table>
-
+                    
                     <mat-accordion>
                       <mat-expansion-panel *ngFor="let subListData of subFolderData" 
                         [hideToggle]="true"
@@ -260,7 +256,7 @@
                   </ng-template>
                 </div>
               </mat-expansion-panel>
-            </mat-accordion> -->
+            </mat-accordion>
           </ng-template>
         </div>
       </div>
