@@ -6,7 +6,8 @@ import {
   MatDialog,
   MatDialogRef,
   MAT_DIALOG_DATA,
-  MatDialogConfig
+  MatDialogConfig,
+  MatTableDataSource
 } from '@angular/material';
 import { FolderCreateDialogComponent } from '../folder-create-dialog/folder-create-dialog.component';
 import { FileShareDialogComponent } from '../file-share-dialog/file-share-dialog.component';
@@ -26,6 +27,7 @@ export class FileManagerConfigComponent implements OnInit {
   };
   selectedOrg: any;
   selectedProjectID: string;
+  public dataSource: any;
   folderData: any;
   subFolderData: any;
   selectedProjectData: any;
@@ -38,6 +40,7 @@ export class FileManagerConfigComponent implements OnInit {
   fileListLoading: boolean;
   fileListDetialsLoading: boolean;
   fileDetialsLoading: boolean;
+
   constructor(
     private projectService: ProjectService,
     private fileManagerService: FileManagerService,
@@ -94,8 +97,19 @@ export class FileManagerConfigComponent implements OnInit {
     this.fileManagerService.getAllFolders()
       .pipe().subscribe(res => {
         this.folderData = res;
+        console.log(res, "folderData")
+        /*  this.dataSource = new MatTableDataSource(this.folderData);*/        
+        /*this.folderData = {
+          header: [
+            { title: 'Name.' },
+            { title: 'Created ' },
+            { title: 'Created By ' },
+            { title: 'Version.' },
+            { title: '.' }],
+          keys: ['name', 'createdAt', 'accessFlag','version'],
+          content: res
+        };*/
         this.folderListLoading = false;
-
       }, (error: any) => {
         console.error('error', error);
         this.folderListLoading = false;
@@ -156,6 +170,18 @@ export class FileManagerConfigComponent implements OnInit {
     this.fileManagerService.getAllFolders(list._id)
       .pipe().subscribe(res => {
         this.subFolderData = res;
+        console.log(res, 'subFolderData')
+       /* this.subFolderData = {
+          header: [
+            { title: 'Name.' },
+            { title: 'Created ' },
+            { title: 'Created By ' },
+            { title: 'Version.' },
+            { title: '.' }],
+          keys: ['name', 'createdAt', 'accessFlag','version'],
+          content: res
+        };*/
+
         this.subFolderListLoading = false;
 
       }, (error: any) => {
@@ -169,6 +195,16 @@ export class FileManagerConfigComponent implements OnInit {
     this.fileManagerService.getFiles(folder._id)
       .pipe().subscribe(res => {
         this.filesData = res;
+        /*this.filesData = {
+          header: [
+            { title: 'Name.' },
+            { title: 'Created ' },
+            { title: 'Created By ' },
+            { title: 'Version.' },
+            { title: '.' }],
+          keys: ['name', 'createdAt', 'accessFlag','version'],
+          content: res
+        };*/
         this.fileListLoading = false;
 
       }, (error: any) => {

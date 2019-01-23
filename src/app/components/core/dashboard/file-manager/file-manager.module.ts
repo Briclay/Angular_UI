@@ -10,7 +10,8 @@ import { FileUploadDialogComponent } from './file-upload-dialog/file-upload-dial
 
 
 @NgModule({
-  declarations: [FolderCreateDialogComponent, FileShareDialogComponent, FileConfigDetailsComponent, FileMailDialogComponent, FileUploadDialogComponent],
+  declarations: [FolderCreateDialogComponent, FileShareDialogComponent, FileConfigDetailsComponent,
+   FileMailDialogComponent, FileUploadDialogComponent],
   exports: [
     FileConfigDetailsComponent
   ],
