@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { RoleService } from '../../../../services/role/role.service';
-import { RoleData, TableOptions } from '../../../../interfaces/interfaces';
+import { RoleService } from './/role.service';
+import { RoleData } from './interfaces';
 
 @Component({
   selector: 'app-role',
@@ -12,14 +12,21 @@ export class RoleComponent implements OnInit {
 		
   	roles: RoleData;
   	roleDataOptions = [];
+		roleListSpinner: boolean;
 
     constructor(private roleService: RoleService) { }
 	  ngOnInit() {
-	    this.roleService.getData().pipe().subscribe(res => {
+	    
+  	}
+
+		organizationChanged(org) {
+			this.roleListSpinner = true;
+			this.roleService.getData(org._id).pipe().subscribe(res => {
 	    this.roles = res;
+			this.roleListSpinner = false;
 			this.roleDataOptions = [
 		        {
-		        	title: 'roleNane', key: 'roleNane', hideTitle: true, type: 'label'
+		        	title: 'roleNane', key: 'name', hideTitle: true, type: 'label'
 		        }, 
 		        {
 					title: 'Features', key: 'features'
@@ -28,7 +35,10 @@ export class RoleComponent implements OnInit {
 					title: 'Approvals', key: 'approvals'
 				}
 			]
-	    });
-  	}
+			}, (error: any) => {
+        console.error('error', error);
+        this.roleListSpinner = false;
+      });
+		}
 }
   		

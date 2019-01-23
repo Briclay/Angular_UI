@@ -9,8 +9,6 @@ import { DynamicTableComponent } from './components/shared/dynamic-table/dynamic
 import { LoginComponent } from './components/core/login/login.component';
 import { DashboardComponent } from './components/core/dashboard/dashboard.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import {MaterialModule} from "./modules/material.module";
-import {WidgetModule} from "./modules/widget.module";
 import { UserComponent } from './components/core/dashboard/user/user.component';
 import { SideNavComponent } from './components/shared/side-nav/side-nav.component';
 import { HeaderComponent } from './components/shared/header/header.component';
@@ -23,7 +21,6 @@ import { D3Service } from 'd3-ng2-service';
 import { DashboardService } from './services/dashboard/dashboard.service';
 import { OrganizationService } from './services/organization/organization.service';
 import { UserService } from './services/user/user.service';
-import { RoleService } from './services/role/role.service';
 import { UserDashboardService } from './services/user-dashboard/user-dashboard.service';
 import { DepartmentService } from './services/department/department.service';
 import { ExpansionPanelComponent } from './components/shared/expansion-panel/expansion-panel.component';
@@ -32,9 +29,7 @@ import { WidgetContainerComponent } from './components/shared/widget-container/w
 import { OrganisationComponent } from './components/core/dashboard/organisation/organisation.component';
 import { RoleComponent } from './components/core/dashboard/role/role.component';
 import { PanelHeaderFilterComponent } from './components/shared/panel-header-filter/panel-header-filter.component';
-import {WorkRequestModule} from './components/core/dashboard/work-request/work-request.module';
 import {WorkRequestComponent} from './components/core/dashboard/work-request/work-request.component';
-import {ProjectModule} from './components/core/dashboard/projects/projects.module'
 import { OrganisationCreateComponent } from './components/core/dashboard/organisation/organisation-create/organisation-create.component';
 import { RoleCreateComponent } from './components/core/dashboard/role/role-create/role-create.component';
 import { DepartmentComponent } from './components/core/dashboard/department/department.component';
@@ -45,11 +40,20 @@ import { FileManagerComponent } from './components/core/dashboard/file-manager/f
 import { FileManagerConfigComponent } from './components/core/dashboard/file-manager/file-manager-config/file-manager-config.component';
 import { FolderCreateDialogComponent } from './components/core/dashboard/file-manager/folder-create-dialog/folder-create-dialog.component';
 import { WorkOrderComponent } from './components/core/dashboard/work-order/work-order.component';
-import { WorkOrderModule } from './components/core/dashboard/work-order/work-order.module';
-import { SpinnerModule } from './components/shared/spinner/spinner.module';
-import {FileManagerModule} from  './components/core/dashboard/file-manager/file-manager.module';
 import {FileShareDialogComponent} from './components/core/dashboard/file-manager/file-share-dialog/file-share-dialog.component'
 import {FileMailDialogComponent} from './components/core/dashboard/file-manager/file-mail-dialog/file-mail-dialog.component'
+
+
+//  all Briclay project Modules imports below
+import { WorkOrderModule } from './components/core/dashboard/work-order/work-order.module';
+import {RoleModule} from './components/core/dashboard/role/role.module';
+import { SpinnerModule } from './components/shared/spinner/spinner.module';
+import {MaterialModule} from "./modules/material.module";
+import {WidgetModule} from "./modules/widget.module";
+import {FileManagerModule} from  './components/core/dashboard/file-manager/file-manager.module';
+import {ProjectModule} from './components/core/dashboard/projects/projects.module'
+import {WorkRequestModule} from './components/core/dashboard/work-request/work-request.module';
+
 
 @NgModule({
   declarations: [
@@ -102,7 +106,7 @@ import {FileMailDialogComponent} from './components/core/dashboard/file-manager/
     FileShareDialogComponent,
     FileMailDialogComponent
   ],
-  providers: [D3Service, DashboardService, UserService, DepartmentService, RoleService, 
+  providers: [D3Service, DashboardService, UserService, DepartmentService, 
   OrganizationService,UserDashboardService],
   bootstrap: [AppComponent]
 })

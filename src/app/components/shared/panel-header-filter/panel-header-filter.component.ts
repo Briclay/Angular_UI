@@ -22,16 +22,18 @@ export class PanelHeaderFilterComponent implements OnInit {
   getOrganiztions() {
     this.organisationService.getOrganization()
       .pipe().subscribe(res => {
-        this.selectedOrg = res[0]
+        this.selectedOrg = res[0];
         this.organizations = res;
+        this.selectOrganizaion.emit(this.selectedOrg)
       }, (error: any) => {
         console.error('error', error);
       })
   }
 
   organizationChanged(org) {
-    console.log('org', org)
-    this.selectOrganizaion.emit(org)
+    if(org) {
+     this.selectOrganizaion.emit(org)
+    }
   }
 
 }

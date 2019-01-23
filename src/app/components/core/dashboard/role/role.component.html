@@ -1,14 +1,20 @@
 <div class="user-container">
     <mat-tab-group>
         <mat-tab label="Overview">
-            <app-panel-header-filter></app-panel-header-filter>
+            <app-panel-header-filter (selectOrganizaion)="organizationChanged($event)"></app-panel-header-filter>
             <div fxLayout="row">
-                <app-expansion-panel 
-                    [expansionPanelOptions]="roleDataOptions"
-                    selectorComponent="app-role-details" 
-                    [data]="roles.data"
-                    [isHistory]="true">
-                </app-expansion-panel>
+                
+                <mat-card>
+                    <spinner diameter="80" class="text-center"  *ngIf="roleListSpinner; else panelContent"></spinner>
+                </mat-card>
+                <ng-template #panelContent>
+                    <app-expansion-panel 
+                        [expansionPanelOptions]="roleDataOptions"
+                        selectorComponent="app-role-details" 
+                        [data]="roles"
+                        [isHistory]="true">
+                    </app-expansion-panel>
+                </ng-template>
             </div>
         </mat-tab>
         <mat-tab label="New">
