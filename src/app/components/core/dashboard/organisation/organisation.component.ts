@@ -20,18 +20,19 @@ export class OrganisationComponent implements OnInit {
     private organisationService: OrganizationService,
     public dialog: MatDialog) { }
   ngOnInit() {
-    this.organisationService.getData().pipe().subscribe(res => {
+    this.organisationService.getAll()
+      .pipe().subscribe(res => {
       this.organisations = res;
       this.organisationDataOptions = [
       {
-        title: 'orgName', key: 'orgName', hideTitle: true, type: 'label'
+        title: 'name', key: 'name', hideTitle: true, type: 'label'
       },
       {
-        title: 'Plan', key: 'subsciption.plan',
+        title: 'Plan', key: 'subscription.plan',
       }, {
-        title: 'Valid till', key: 'entities.validtill'
+        title: 'Valid till', key: 'subscription.validTill'
       }, {
-        title: 'Entities', key: 'entities.subOrgcount'
+        title: 'Entities', key: '0'
       }]
     });
   }

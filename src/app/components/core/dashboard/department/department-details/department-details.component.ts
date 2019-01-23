@@ -20,19 +20,20 @@ export class DepartmentDetailsComponent implements OnInit {
   departments: string[] = ['Finance', 'Construction'];
   _organisationId :any;
   temp : any;
-   DeptList: any;
+  sF : any;
+  DeptList: any;
   form: FormGroup;
   formErrors: any;
   features = [];
   featuresArray = [];
   indexOfItem;
   departmentsvalue: any;
-  deptId: any;
   deptFormErrors: any;
   deptFormSubmitted = false;
   selectedAll = false;
   editFlag = false;
-
+  allFeatures = ['File' ,'Folder Manager' ,'Service Request','Snag Master']
+  allFeatureCount = 0;
   constructor(
     private DeptService: DepartmentService,
     private formBuilder : FormBuilder,
@@ -44,94 +45,45 @@ export class DepartmentDetailsComponent implements OnInit {
           
     //this.userAuth = this.auth.get();
     this.userAuth = JSON.parse(window.localStorage.getItem("userAuth"));
-
     this._organisationId = this.userAuth._organisationId._id;
-    this.getAllDept(this._organisationId);
     this.deptFormErrors = {
       name: {},
       description: {},
       _features: [],
       _organisationId: {},
-      selectedAll: {},
-      access: {}
+      _roles: [],
+      specialFolder: {}
     };
 
     this.departmentDetailsForm = this.formBuilder.group({
+      _id: ['', Validators.required],
       name: ['', Validators.required],
       description: ['', Validators.required],
       _features: this.formBuilder.array([]),
-      _organisationId: this._organisationId,
-      selectedAll: false,
-      access: false
+      _roles : this.formBuilder.array([]),
+      _organisationId: ['', Validators.required],
+      sharedResource: this.formBuilder.array([]),
+      specialFolder: [true, Validators.required],
     });
     this.departmentDetailsForm.valueChanges.subscribe(() => {
       this.onOrgFormValuesChanged();
     })
 
     //get single or list
-    this.getFeatureByOrg(this._organisationId);
+    //this.getFeatureByOrg(this._organisationId);
   }
 
   ngOnInit() {
-    this.departmentDetailsForm = this.createFormGroup();
     this.assignValuesToForm();
   }
-
-  getAllDept(id) {
-    this.DeptService.getAll('filter[_organisationId] =' + id)
-      .pipe().subscribe(response => {
-      this.DeptList = response;
-      this.temp = this.DeptList;
-    }, (error: any) => {
-        console.log(error.error.message)
-    });
-  }
-
-  createFormGroup() {
-    return new FormGroup({
-  		name: new FormControl('', [Validators.required]),
-  		description: new FormControl('', [Validators.required]),
-  		_features: new FormControl('', [Validators.required]),
-      roles : new FormControl('')
-    });
-  }
-
+  
   assignValuesToForm() {
     if(this.formType !== 'create') {
       this.departmentDetailsForm.patchValue(this.data)
-      this.deptId = '5a5848c98e64e99e47f98a8d';
-      this.gtDepartmentForEdit(this.deptId);
     }
   }
-
-  gtDepartmentForEdit(id) {
-    this.DeptService.getOne(id)
-        .pipe().subscribe(response => {
-        if ((!_.isUndefined(response) && !_.isEmpty(response))) {
-          this.ediMapping(response);
-        } else {
-          console.log('No request found for that department');
-        }
-      }, (error: any) => {
-        console.log(error.error.message)
-      });
-  }
-
-   //for edit mapping
-  ediMapping(response) {
-    //set name
-    this.departmentDetailsForm.controls['name'].setValue(response.name);
-    //set description
-    this.departmentDetailsForm.controls['description'].setValue(response.description);
-    //maping array
-    //this.features = response._features
-    response._features.forEach((num: any) => {
-      this.featuresArray.push(num._id);
-    });
-    if( _.isEqual(this.features.length, this.featuresArray.length) )
-    {
-      this.selectedAll = true;
-    }
+  changeEvent(event) {
+    this.sF = event.source.value;
   }
 
   onOrgFormValuesChanged() {
@@ -150,60 +102,41 @@ export class DepartmentDetailsComponent implements OnInit {
     }
   }
 
-  getFeatureByOrg(id) {
-    this.OrgService.getOne(id)
-        .pipe().subscribe(response => {
-        this.features = response.data._features;
-      }, (error: any) => {
-        console.log(error.error.message)
-      });
-  }
-
   onDeptFormSubmit() {
     console.log(this.departmentDetailsForm.value);
     this.deptFormSubmitted = true;
     this.departmentDetailsForm.value._features = this.featuresArray;
-      if (this.featuresArray.length > 0) {
       /*check if id is not epmty then save otherwise update*/
-      if ((!_.isUndefined(this.deptId) && !_.isEmpty(this.deptId))) {
-        this.DeptService.update(this.deptId, this.departmentDetailsForm.value)
+      if ((!_.isUndefined(this.departmentDetailsForm.value._id) 
+        && !_.isEmpty(this.departmentDetailsForm.value._id))) {
+        this.DeptService.update(this.departmentDetailsForm.value._id, this.departmentDetailsForm.value)
           .pipe().subscribe(response => {
           this.deptFormSubmitted = false;
-            // toasty message
-            console.log(response.message);
-            const path = '/departments'
-            // route to department list
-            this.router.navigate([path]);
           }, (error: any) => {
             this.deptFormSubmitted = false;
-            console.log(error.error.message)
+            console.log(error.message)
           });
-      } else {
+      } 
+      else {
+        delete this.departmentDetailsForm.value._id;
         this.DeptService.save(this.departmentDetailsForm.value)
           .pipe().subscribe(response => {
           this.deptFormSubmitted = false;
-            // toasty message
-            console.log(response.message);
-            const path = '/departments'
-            // route to department list
-            this.router.navigate([path]);
+            console.log(response, 'response');
           }, (error: any) => {
             this.deptFormSubmitted = false;
-            console.log(error.error.message)
+            console.log(error.message)
           });
-      }
-      } else {
-      console.log('At least select one feature');
+      } 
     }
-  }
 
   //checked if feature is already selected or not
-  isChecked() {
+  /*isChecked() {
     return _.isEqual(this.features.length, this.featuresArray.length);
-  }
+  }*/
 
   //slected all feature
-  selectAll() {
+  /*selectAll() {
     if (this.features.length === this.featuresArray.length) {
       this.featuresArray = [];
       this.selectedAll = false;
@@ -214,31 +147,25 @@ export class DepartmentDetailsComponent implements OnInit {
       });
       this.selectedAll = true;
     }
-  }
+  }*/
 
   //check item is exit of array or not
-  exists(item) {
+  /*exists(item) {
     return this.featuresArray.indexOf(item._id) > -1;
   }
 
   //select one feature form list
   select(item) {
-  /*this.deptForm.value._features.forEach((num: any) => {
-      this.featuresArray.push(num._id);
-    });*/
+    //this.deptForm.value._features.forEach((num: any) => {
+    //  this.featuresArray.push(num._id);
+    //});
     this.indexOfItem = this.featuresArray.indexOf(item._id);
     if (this.indexOfItem > -1) {
       this.featuresArray.splice(this.indexOfItem, 1);
     } else {
       this.featuresArray.push(item._id);
     }
-  }
-
-  onSubmit() {
-    // Do useful stuff with the gathered data
-    console.log(this.departmentDetailsForm.value);
-  }
-
+  }*/
   /* 
    deleteRequest(id) {
     if (id) {

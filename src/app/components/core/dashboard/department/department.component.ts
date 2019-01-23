@@ -20,14 +20,14 @@ export class DepartmentComponent implements OnInit {
 
 
 	ngOnInit() {
-		this.departmentService.getData().pipe().subscribe(res => {
+		this.departmentService.getAll().pipe().subscribe(res => {
 			this.departments = res;
 			this.departmentDataOptions = [
 			{
 				title: 'name', key: 'name', hideTitle: true, type: 'label'
 			}, 
 			{
-				title: 'Features', key: 'features'
+				title: 'Features', key: 'aaa'
 			}
 			]
 		});

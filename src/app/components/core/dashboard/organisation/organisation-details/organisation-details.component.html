@@ -7,11 +7,7 @@
           <div class="username-input" >
             <mat-form-field appearance="outline">
               <mat-label>Orgnisation Name</mat-label>
-              <input matInput formControlName="orgName">
-            </mat-form-field>
-            <mat-form-field appearance="outline">
-              <mat-label>Orgnisation Address</mat-label>
-              <input matInput formControlName="orgAddress">
+              <input matInput formControlName="name" (keyup)="generateOrgCode()">
             </mat-form-field>
           </div>
         </div>
@@ -20,7 +16,7 @@
             <strong> Subsciption</strong>
           </div>
           <div class="user-details-form-list">
-            <div formGroupName="subsciption">
+            <div formGroupName="subscription">
               <mat-form-field appearance="outline">
                 <mat-label>Plan</mat-label>
                 <mat-select placeholder="Plan">
@@ -29,6 +25,15 @@
                   </mat-option>
                 </mat-select>
               </mat-form-field>
+
+              <mat-form-field appearance="outline" style="width: 200px;">
+                <mat-label>Valid till</mat-label>
+                <input matInput formControlName="validTill">
+               <!--  <input matInput [matDatepicker]="picker1" placeholder="" formControlName="validTill">
+                  <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                  <mat-datepicker #picker1></mat-datepicker> -->
+              </mat-form-field>
+
             </div>
             <div>
               <button [matMenuTriggerFor]="menu" class="margin-left-4" mat-raised-button class="feature_btn" 
@@ -41,15 +46,18 @@
             <strong>Details</strong>
           </div>
           <div class="user-details-form-list">
-            <div formGroupName="details">
+            <div >
               <mat-form-field appearance="outline">
                 <mat-label>Admin</mat-label>
                 <input matInput formControlName="email">
               </mat-form-field>
-              <mat-form-field appearance="outline">
-                <mat-label>Address</mat-label>
-                <textarea matInput formControlName="Address"></textarea>
-              </mat-form-field>
+
+              <div formGroupName="address">
+                <mat-form-field appearance="outline">
+                  <mat-label>Address</mat-label>
+                  <input matInput formControlName="city">
+                </mat-form-field>
+              </div>
             </div>
           </div>
         </div>
@@ -58,29 +66,25 @@
             <strong>Entities</strong>
           </div>
           <div class="user-details-form-list" fxLayout=column>
-            <div formGroupName="entities" >
+            <!-- <div >
               <div fxLayout=row style="margin-bottom: 10px;">
                 <img style="height: 50px;width: 100px;" src="./assets/images/backgrounds/autumn.jpg" />
                 <mat-form-field appearance="outline">
-                  <input matInput formControlName="subOrgName">
+                  <input matInput formControlName="orgType">
                 </mat-form-field>
               </div>
-              <mat-form-field appearance="outline">
-                <mat-label>Add Entity</mat-label>
-                <input matInput formControlName="subOrgcount">
-              </mat-form-field>
               <mat-form-field appearance="outline" style="width: 200px;">
                 <mat-label>Valid till</mat-label>
-                <input matInput [matDatepicker]="picker" placeholder="" formControlName="validtill">
+                <input matInput [matDatepicker]="picker" placeholder="" formControlName="orgCode">
                   <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                   <mat-datepicker #picker></mat-datepicker>
               </mat-form-field>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
 
-      <button mat-raised-button type="submit"  class="pull-right">Submit</button>
+      <button mat-raised-button type="submit"  (click)="onOrgFormSubmit()" class="pull-right">Submit</button>
 
       <div class="clearfix"></div>
     </mat-card>
@@ -91,14 +95,18 @@
     <div class="title">Feature</div>
     <div>
       <div style="margin-top: 6%;" >
-          <div *ngFor="let feature of allFeatures">
-            <div fxLayout=row >
-              <div style=" border-bottom: black 1px solid;">
-                <mat-checkbox ><span class="message">{{feature}}</span></mat-checkbox>
-              </div>
+        <div *ngFor="let feature of allFeatures">
+          <div fxLayout=row >
+            <div style=" border-bottom: black 1px solid;">
+              <mat-checkbox (change)="changeEvent($event)" ><span class="message" >{{feature}}</span></mat-checkbox>
             </div>
-           </div>
-        </div>
+          </div>
+         </div>
+      </div>
+      <div style="padding-top: 10%;" fxLayout=row>
+        <button mat-raised-button type="submit" class="pull-right">Cancel</button>
+        <button mat-raised-button type="submit" class="pull-right"(click)="addOrg()" >Save</button>
+      </div>
     </div>
   </div>
 </mat-menu>

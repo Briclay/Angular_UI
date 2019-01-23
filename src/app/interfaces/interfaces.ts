@@ -122,21 +122,29 @@ export interface UserList {
 }
 
 export interface OrganizationList {
-  id: string;
-  orgName: string;
-  orgAddress: string;
-    subsciption : {
-      plan : string;
-    };
-    details : {
-      email: string;
-      Address : string;
-    };
-    entities: {
-      subOrgName : string;
-      subOrgcount : string;
-      validtill : string;
-    };
+  _id: string;
+  name: string;
+  orgType: string;
+  orgCode: string;
+  subscription : {
+    plan : string;
+    validTill : string;
+    registrationDate: string;
+  };
+  email: string;
+  phone : string;
+  address : {
+    flat?: string;
+    street?: string;
+    area?: string;
+    city?: string;
+    state?: string;
+    pincode?: number;
+  }
+  _users ?: string[];
+  imageUrls ?: string[];
+  _childOrganisationsId?: string[];
+  _features :  string[];
 }
 
 export interface OrganizationData {
@@ -172,7 +180,7 @@ export interface RoleList {
   approvalProcess?: string[];
   access ?: string[];
   sharedResource? : string[];
-  _createdBy?: string;
+   _createdBy?: string;
   _updatedBy?: string;
   _deletedBy?: string;
   deleteNote?: string;
@@ -186,10 +194,13 @@ export interface DepartmentData {
 }
 
 export interface DepartmentList {
-  id: string;
+  _id: string;
+  _organisationId: string;
   name : string;
-  description : string;
-  features? : string[];
+  sharedResource? : string[];
+  specialFolder? : boolean;
+  description? : string;
+  _features? : string[];
   _roles? : string[];
 }
 
