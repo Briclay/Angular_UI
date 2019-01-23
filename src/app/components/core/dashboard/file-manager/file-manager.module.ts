@@ -5,13 +5,12 @@ import { FileShareDialogComponent } from './file-share-dialog/file-share-dialog.
 import { FileConfigDetailsComponent } from './file-manager-config/file-config-details/file-config-details.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import {MaterialModule} from '../../../../modules/material.module';
-import { FilMailDialogComponent } from './fil-mail-dialog/fil-mail-dialog.component';
 import { FileMailDialogComponent } from './file-mail-dialog/file-mail-dialog.component';
 import { FileUploadDialogComponent } from './file-upload-dialog/file-upload-dialog.component';
 
 
 @NgModule({
-  declarations: [FolderCreateDialogComponent, FileShareDialogComponent, FileConfigDetailsComponent, FilMailDialogComponent, FileMailDialogComponent, FileUploadDialogComponent],
+  declarations: [FolderCreateDialogComponent, FileShareDialogComponent, FileConfigDetailsComponent, FileMailDialogComponent, FileUploadDialogComponent],
   exports: [
     FileConfigDetailsComponent
   ],
