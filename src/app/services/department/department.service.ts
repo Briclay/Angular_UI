@@ -65,6 +65,11 @@ export class DepartmentService {
         return this.apiService.get(url).pipe(map(res => res));
     }
 
+	public getDepartmentByOrg(OrgId): Observable<any> {
+        let url = `https://briclay-core.herokuapp.com/departments?select=*&${OrgId}`;
+        return this.apiService.get(url).pipe(map(res => res));
+    }
+
     public getOne(id): Observable<any> {
         let url = `https://briclay-core.herokuapp.com/departments/${id}`;
         return this.apiService.get(url, id).pipe(map(res => res));

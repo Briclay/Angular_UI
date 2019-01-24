@@ -1,54 +1,58 @@
 <div class="user-details-container">
   <div [formGroup]="roleDetailsForm"  class="user-details-form">
-    <mat-card>
       <div class="user-details-card">
         <div class="user-details-name">
           <div class="username-input">
             <mat-form-field appearance="outline" class="margin_right_25">
               <mat-label>Role Name</mat-label>
-              <mat-select placeholder="Departments" formControlName="name">
-                <mat-option *ngFor="let name of _roleId" [value]="name">
-                  {{name}}
-                </mat-option>
-              </mat-select>
+              <input matInput formControlName="name">
             </mat-form-field>
           </div>
         </div>
-        <div class="user-details-content">
-          <div class="user-details-content-title">
-            <strong> Details</strong>
-          </div>
-          <div class="user-details-form-list" >
-            <div>
-              <mat-form-field appearance="outline" class="margin_right_25">
-                <mat-label>Departments</mat-label>
-                <mat-select placeholder="Departments" formControlName="_departmentId">
-                  <mat-option *ngFor="let _departmentId of departments" [value]="_departmentId">
-                    {{_departmentId.name}}
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
+        <mat-card class="user-details-content">
+          <div class="flex-box">
+            <div class="user-details-content">
+              <div class="user-details-content-title">
+                <strong> Details</strong>
+              </div>
+              <div class="user-details-form-list" >
+                <div>
+                  <mat-form-field appearance="outline" class="margin_right_25">
+                    <mat-label>Departments</mat-label>
+                    <mat-select placeholder="Departments" formControlName="_departmentId">
+                      <mat-option *ngFor="let _departmentId of departments" [value]="_departmentId">
+                        {{_departmentId.name}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+            <div class="user-details-content">
+              <div class="user-details-content-title">
+                <strong>Features</strong>
+              </div>
+              <div class="user-details-form-list">
+                <div>
+                  <mat-form-field class="margin_right_25" appearance="outline">
+                    <mat-label>Features</mat-label>
+                    <input matInput formControlName="features">
+                  </mat-form-field>
+                </div>
+                <div>
+                  
+                </div>
+              </div>
+              <button [matMenuTriggerFor]="featureMenu" class="margin-left-4" 
+                mat-raised-button class="feature_btn" >
+                Features</button>
+              <button mat-raised-button type="submit" class="pull-right">Submit</button>
+              <div class="clearfix"></div>
             </div>
           </div>
-        </div>
-        <div class="user-details-content">
-          <div class="user-details-content-title">
-            <strong>Features</strong>
-          </div>
-          <div class="user-details-form-list">
-            <div>
-              <mat-form-field class="margin_right_25" appearance="outline">
-                <mat-label>Features</mat-label>
-                <input matInput formControlName="features">
-              </mat-form-field>
-            </div>
-            <div>
-              <button [matMenuTriggerFor]="featureMenu" class="margin-left-4" mat-raised-button class="feature_btn" 
-              >Features</button>
-            </div>
-          </div>
-        </div>
-        <div class="user-details-content">
+          
+        </mat-card>
+        <!--<div class="user-details-content">
           <div class="user-details-content-title">
             <strong>Approval</strong>
           </div>
@@ -64,11 +68,9 @@
               >Approvals</button>
             </div>
           </div>
-        </div>
+        </div>-->
       </div>
-      <button mat-raised-button type="submit" class="pull-right">Submit</button>
-      <div class="clearfix"></div>
-    </mat-card>
+      
   </div>
 </div>
 <mat-menu #featureMenu="matMenu" class="featurePanel">

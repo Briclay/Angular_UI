@@ -10,6 +10,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class RoleDetailsComponent implements OnInit {
   @Input() data: any;
   @Input() formType: string;
+  @Input() orgID: string;
 
   userAuth: any;
   roleDetailsForm: FormGroup;
@@ -228,6 +229,7 @@ export class RoleDetailsComponent implements OnInit {
   createFormGroup() {
     return new FormGroup({
       name: new FormControl('', [Validators.required]),
+      _organisationId: new FormControl(this.orgID ? this.orgID : this.data._organisationId),
       _departmentId: new FormControl('', [Validators.required]),
       parentRole: new FormControl('', [Validators.required]),
       features: new FormControl('', [Validators.required]),

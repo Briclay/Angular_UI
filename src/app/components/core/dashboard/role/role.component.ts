@@ -3,6 +3,7 @@ import { RoleService } from './/role.service';
 import { RoleData } from './interfaces';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material';
 import { HistoryPopupComponent } from '../../../../components/shared/history-popup/history-popup.component'
+import { DepartmentService } from '../../../../services/department/department.service';
 
 @Component({
 	selector: 'app-role',
@@ -16,10 +17,13 @@ export class RoleComponent implements OnInit {
 	roleDataOptions = [];
 	roleListSpinner: boolean;
 	historyData: any;
+	selectedOrgId: string;
 
 	constructor(
 		private roleService: RoleService,
-		public dialog: MatDialog
+		public dialog: MatDialog,
+		private departmentService: DepartmentService,
+
 	) { }
 
 	ngOnInit() {
@@ -27,6 +31,8 @@ export class RoleComponent implements OnInit {
 	}
 
 	organizationChanged(org) {
+		this.selectedOrgId = org._id;
+		this.getDepartments();
 		this.roleListSpinner = true;
 		this.roleService.getData(org._id).pipe().subscribe(res => {
 			this.roles = res;
@@ -38,6 +44,9 @@ export class RoleComponent implements OnInit {
 				},
 				{
 					title: 'Features', key: 'features'
+				},
+				{
+					title: 'Description', key: 'description'
 				}
 			]
 		}, (error: any) => {
@@ -66,5 +75,14 @@ export class RoleComponent implements OnInit {
 				// TODO closed event
 			});
 		});
+	}
+
+	getDepartments() {
+		this.departmentService.getDepartmentByOrg(`filter[_organisationId]=${this.selectedOrgId}` )
+		.pipe().subscribe(res => {
+				console.log('res', res)
+			}, (error: any) => {
+				console.error('error', error);
+			});
 	}
 }
