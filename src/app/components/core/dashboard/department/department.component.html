@@ -6,8 +6,9 @@
                 <app-expansion-panel 
                     [expansionPanelOptions]="departmentDataOptions"
                     selectorComponent="app-department-details" 
-                    [data]="departments.data"
-                    [isHistory]="true">
+                    [data]="departments"
+                    [isHistory]="true"
+                    (openHistort)="openDialog(data)">
                 </app-expansion-panel>
             </div>
         </mat-tab>

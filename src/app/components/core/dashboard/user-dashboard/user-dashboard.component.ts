@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { UserDashboardService } from '../../../../services/user-dashboard/user-dashboard.service';
+import { UserDashboardData, TableOptions } from '../../../../interfaces/interfaces';
 
 @Component({
   selector: 'app-user-dashboard',
@@ -7,30 +8,35 @@ import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms'
   styleUrls: ['./user-dashboard.component.scss']
 })
 export class UserDashboardComponent implements OnInit {
- 	@Input() data: any;
-  	@Input() formType: string;
+    userWorkOrderData: UserDashboardData;
+    userWorkOrderDataOptions = [];
 
-	userDashboardForm: FormGroup;
-	constructor() { }
+    constructor(private userDashboardService: UserDashboardService) { }
+    ngOnInit() {
+      this.userDashboardService.getData().pipe().subscribe(res => {
+      this.userWorkOrderData = res;
+      this.userWorkOrderDataOptions = [
+        {
+          title: 'workRequestID', key: 'workRequestID', hideTitle: true, type: 'label'
+        }, 
+        {
+          title: 'workOrderID', key: 'workOrderID', hideTitle: true, type: 'label'
+        },
+        {
+          title: 'typeOfWork', key: 'typeOfWork', hideTitle: true, type: 'label'
+        },
+        {
+          title: 'project', key: 'project', hideTitle: true, type: 'label'
+        },
+        {
+          title: 'package', key: 'package', hideTitle: true, type: 'label'
+        },
+        {
+          title: 'needByDate', key: 'needByDate', hideTitle: true, type: 'label'
+        }
+      ]
+      });
+    }
 
-	ngOnInit() {
-	    this.userDashboardForm = this.createFormGroup();
-	}
-
-	createFormGroup() {
-    return new FormGroup({
-      workCategory: new FormControl('', [Validators.required]),
-      supportRole: new FormControl('', [Validators.required]),
-      assignee: new FormControl('', [Validators.required]),
-      putintiateDate: new FormControl('', [Validators.required]),
-      RFAPutDate: new FormControl('', [Validators.required]),
-      WOPutDate: new FormControl('', [Validators.required]),
-      approvalintiateDate: new FormControl('', [Validators.required]),
-      RFAApprovalDate: new FormControl('', [Validators.required]),
-      WOApprovalDate: new FormControl('', [Validators.required]),
-      status: new FormControl('', [Validators.required]),
-      documentStatus: new FormControl('', [Validators.required]),
-      remarks: new FormControl('', [Validators.required])
-    });
-  }
 }
+

@@ -5,12 +5,12 @@ import { UserDetailsComponent } from '../components/core/dashboard/user/user-det
 import { OrganisationDetailsComponent } from '../components/core/dashboard/organisation/organisation-details/organisation-details.component';
 import { RoleDetailsComponent } from '../components/core/dashboard/role/role-details/role-details.component';
 import { DepartmentDetailsComponent } from '../components/core/dashboard/department/department-details/department-details.component';
+import { UserDashDetailsComponent } from '../components/core/dashboard/user-dashboard/user-dash-details/user-dash-details.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import {MaterialModule} from "./material.module";
 import {SpinnerModule} from "../components/shared/spinner/spinner.module";
 import {WorkRequestDetailsComponent} from '../components/core/dashboard/work-request/work-request-details/work-request-details.component';
 import {WorkOrderDetailsComponent} from '../components/core/dashboard/work-order/work-order-details/work-order-details.component';
-
 
 @NgModule({
   imports: [
@@ -26,7 +26,8 @@ import {WorkOrderDetailsComponent} from '../components/core/dashboard/work-order
     RoleDetailsComponent,
     DepartmentDetailsComponent,
     WorkRequestDetailsComponent,
-    WorkOrderDetailsComponent
+    WorkOrderDetailsComponent,
+    UserDashDetailsComponent
   ],
   exports: [
     UserDetailsComponent, 
@@ -34,7 +35,8 @@ import {WorkOrderDetailsComponent} from '../components/core/dashboard/work-order
     RoleDetailsComponent,
     DepartmentDetailsComponent, 
     WorkRequestDetailsComponent,
-    WorkOrderDetailsComponent
+    WorkOrderDetailsComponent,
+    UserDashDetailsComponent
   ],
   entryComponents: [
     UserDetailsComponent,
@@ -42,7 +44,8 @@ import {WorkOrderDetailsComponent} from '../components/core/dashboard/work-order
     RoleDetailsComponent,
     DepartmentDetailsComponent,
     WorkRequestDetailsComponent,
-    WorkOrderDetailsComponent
+    WorkOrderDetailsComponent,
+    UserDashDetailsComponent
   ],
   providers: [WidgetService]
 })

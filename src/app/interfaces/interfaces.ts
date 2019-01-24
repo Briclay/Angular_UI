@@ -122,25 +122,70 @@ export interface UserList {
 }
 
 export interface OrganizationList {
-  id: string;
-  orgName: string;
-  orgAddress: string;
-    subsciption : {
-      plan : string;
-    };
-    details : {
-      email: string;
-      Address : string;
-    };
-    entities:{
-      count : number | string;
-      validtill : string;
-    }
+  _id: string;
+  name: string;
+  orgType: string;
+  orgCode: string;
+  subscription : {
+    plan : string;
+    validTill : string;
+    registrationDate: string;
+  };
+  email: string;
+  phone : string;
+  address : {
+    flat?: string;
+    street?: string;
+    area?: string;
+    city?: string;
+    state?: string;
+    pincode?: number;
+  }
+  _users ?: string[];
+  imageUrls ?: string[];
+  _childOrganisationsId?: string[];
+  _features :  string[];
 }
 
 export interface OrganizationData {
   result: string;
   data: OrganizationList[]
+}
+
+export interface RoleData {
+  result: string;
+  data: RoleList[]
+}
+
+/*export interface RoleList {
+  id: string;
+  roleNane: string;
+  details : {
+    department : string;
+    shift : string;
+    subrole : string;
+  };
+  features : number;
+  approvals : number;
+}*/
+
+export interface RoleList {
+  _organisationId: string;
+  _departmentId : string;
+  name: string;
+  parentRole? : string;
+  description : string;
+  features : string;
+  approvals : string;
+  approvalProcess?: string[];
+  access ?: string[];
+  sharedResource? : string[];
+   _createdBy?: string;
+  _updatedBy?: string;
+  _deletedBy?: string;
+  deleteNote?: string;
+  deleteFlag?: string;
+  activeFlag?: string;
 }
 
 export interface DepartmentData {
@@ -149,12 +194,14 @@ export interface DepartmentData {
 }
 
 export interface DepartmentList {
-  id: string;
-  departmentName : string;
-  details : {
-    description : string;
-  };
-  features : number;
+  _id: string;
+  _organisationId: string;
+  name : string;
+  sharedResource? : string[];
+  specialFolder? : boolean;
+  description? : string;
+  _features? : string[];
+  _roles? : string[];
 }
 
 export interface UserDashboardData {

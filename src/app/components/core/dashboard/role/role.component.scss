@@ -6,13 +6,11 @@
         margin-left: 15px;
     }
 }
-::ng-deep .user-container .mat-card-header-text {
-    background-color: #ebf9fc;
-    margin: -16px 0px 10px -16px;
-    padding: 6px 25px;
-    .mat-card-title{
-        font-size: 15px;
-        margin-bottom: 0px;
+::ng-deep .role-container .expansion-container  {
+    mat-expansion-panel-header {
+        mat-panel-title.expansion-history{
+            top: 0 !important;
+        }
     }
 }
 mat-form-field {
