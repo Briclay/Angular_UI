@@ -30,12 +30,13 @@ import { OrganisationComponent } from './components/core/dashboard/organisation/
 import { RoleComponent } from './components/core/dashboard/role/role.component';
 import { PanelHeaderFilterComponent } from './components/shared/panel-header-filter/panel-header-filter.component';
 import {WorkRequestComponent} from './components/core/dashboard/work-request/work-request.component';
+import { ProjectModule} from './components/core/dashboard/projects/projects.module'
 import { OrganisationCreateComponent } from './components/core/dashboard/organisation/organisation-create/organisation-create.component';
 import { RoleCreateComponent } from './components/core/dashboard/role/role-create/role-create.component';
 import { DepartmentComponent } from './components/core/dashboard/department/department.component';
 import { UserDashboardComponent } from './components/core/dashboard/user-dashboard/user-dashboard.component';
 import { NcmDashboardComponent } from './components/core/dashboard/ncm-dashboard/ncm-dashboard.component';
-import { UserDashDetailsComponent } from './components/core/dashboard/user-dashboard/user-dash-details/user-dash-details/user-dash-details.component';
+import { UserDashDetailsComponent } from './components/core/dashboard/user-dashboard/user-dash-details/user-dash-details.component';
 import { FileManagerComponent } from './components/core/dashboard/file-manager/file-manager.component';
 import { FileManagerConfigComponent } from './components/core/dashboard/file-manager/file-manager-config/file-manager-config.component';
 import { FolderCreateDialogComponent } from './components/core/dashboard/file-manager/folder-create-dialog/folder-create-dialog.component';
@@ -51,9 +52,10 @@ import { SpinnerModule } from './components/shared/spinner/spinner.module';
 import {MaterialModule} from "./modules/material.module";
 import {WidgetModule} from "./modules/widget.module";
 import {FileManagerModule} from  './components/core/dashboard/file-manager/file-manager.module';
-import {ProjectModule} from './components/core/dashboard/projects/projects.module'
 import {WorkRequestModule} from './components/core/dashboard/work-request/work-request.module';
 
+import { HistoryPopupComponent } from './components/shared/history-popup/history-popup.component';
+import { DesignDashboardComponent } from './components/core/dashboard/design-dashboard/design-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -81,10 +83,11 @@ import {WorkRequestModule} from './components/core/dashboard/work-request/work-r
     DepartmentComponent,
     UserDashboardComponent,
     NcmDashboardComponent,
-    UserDashDetailsComponent,
     FileManagerComponent,
     FileManagerConfigComponent,
     WorkOrderComponent,
+    HistoryPopupComponent,
+    DesignDashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -104,10 +107,11 @@ import {WorkRequestModule} from './components/core/dashboard/work-request/work-r
   entryComponents: [
     FolderCreateDialogComponent,
     FileShareDialogComponent,
-    FileMailDialogComponent
+    FileMailDialogComponent,
+    HistoryPopupComponent
   ],
   providers: [D3Service, DashboardService, UserService, DepartmentService, 
-  OrganizationService,UserDashboardService],
+  OrganizationService, UserDashboardService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

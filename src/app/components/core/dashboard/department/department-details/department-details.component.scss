@@ -36,3 +36,17 @@
     }
     
 }
+
+.feature_container{
+    padding : 10%;
+    .title {
+        font: 400 13px/20px Roboto,"Helvetica Neue",sans-serif;
+        color :#032a57cf;
+        border-bottom: #4cacda 1px solid;
+        padding : 2%;
+    }
+    .message {
+        font: 400 12px Roboto,"Helvetica Neue",sans-serif;
+        color :#032a57cf; 
+    }
+}

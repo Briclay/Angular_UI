@@ -1,24 +1,28 @@
 <div class="user-details-container">
-  <form [formGroup]="departmentDetailsForm" (ngSubmit)="onSubmit()" class="user-details-form">
+  <form [formGroup]="departmentDetailsForm" class="user-details-form">
     <mat-card>
       <div class="user-details-card">
         <div class="user-details-name">
           <div class="username-input">
-            <mat-form-field appearance="outline" class="margin_right_25">
+            <!-- <mat-form-field appearance="outline" class="margin_right_25">
               <mat-label>Department Name</mat-label>
-              <mat-select placeholder="Departments" formControlName="departmentName">
-                <mat-option *ngFor="let departmentName of departments" [value]="departmentName">
-                  {{departmentName}}
+              <mat-select placeholder="Departments" formControlName="name">
+                <mat-option *ngFor="let name of departments" [value]="name">
+                  {{name}}
                 </mat-option>
               </mat-select>
-            </mat-form-field>
+            </mat-form-field> -->
+              <mat-form-field class="margin_right_25" appearance="outline">
+                <mat-label>Department Name</mat-label>
+                  <input matInput formControlName="name">
+              </mat-form-field>
           </div>
         </div>
         <div class="user-details-content">
           <div class="user-details-content-title">
             <strong> Details</strong>
           </div>
-          <div class="user-details-form-list" formGroupName="details">
+          <div class="user-details-form-list" >
             <div>
               <mat-form-field class="margin_right_25" appearance="outline">
                 <mat-label>Description</mat-label>
@@ -32,21 +36,40 @@
             <strong>Features</strong>
           </div>
           <div class="user-details-form-list">
-            <div>
-              <mat-form-field class="margin_right_25" appearance="outline">
-                <mat-label>Features</mat-label>
-                <input matInput formControlName="features">
-              </mat-form-field>
+            <div fxLayout=row>
+              <div style="margin-left: 30px;margin-bottom: 50px;">Total Features</div>
+              <div style="margin-left: 30px;margin-bottom: 50px;">{{allFeatureCount}}</div>
             </div>
             <div>
-              <button class="margin-left-4" mat-raised-button class="feature_btn" 
+              <button [matMenuTriggerFor]="menu" class="margin-left-4" mat-raised-button class="feature_btn" 
               >Features</button>
             </div>
           </div>
         </div>
       </div>
-      <button mat-raised-button type="submit" class="pull-right">Submit</button>
+      <button mat-raised-button type="submit" (click)="onDeptFormSubmit()" class="pull-right">Submit</button>
       <div class="clearfix"></div>
     </mat-card>
   </form>
 </div>
+
+<mat-menu #menu="matMenu">
+  <div class="feature_container">
+    <div class="title">Feature</div>
+    <div>
+      <div style="margin-top: 6%;" >
+        <div *ngFor="let feature of allFeatures">
+          <div fxLayout=row >
+            <div style=" border-bottom: black 1px solid;">
+              <mat-checkbox (change)="changeEvent($event)" ><span class="message" >{{feature}}</span></mat-checkbox>
+            </div>
+          </div>
+         </div>
+      </div>
+      <div style="padding-top: 10%;" fxLayout=row>
+        <button mat-raised-button type="submit" class="pull-right">Cancel</button>
+        <button mat-raised-button type="submit" class="pull-right"(click)="addOrg()" >Save</button>
+      </div>
+    </div>
+  </div>
+</mat-menu>

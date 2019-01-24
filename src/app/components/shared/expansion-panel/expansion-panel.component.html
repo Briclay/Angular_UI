@@ -26,8 +26,8 @@
             </ng-template>
           </ng-template>
         </mat-panel-title>
-        <mat-panel-title *ngIf="isHistory" class="expansion-history">
-          <mat-icon>history</mat-icon>
+        <mat-panel-title *ngIf="isHistory" class="expansion-history" (click)="$event.stopPropagation()">
+          <mat-icon (click)="historyClick(listData)">history</mat-icon>
         </mat-panel-title>
       </mat-expansion-panel-header>
       <app-widget-container

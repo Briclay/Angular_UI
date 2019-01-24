@@ -1,165 +1,228 @@
-    <div class="main-content" >
-      <div  class="main-head">
-        <div fxLayout=column>
-          <div>
-            <div>
-              <div class="dottedBorder" >
-                <img class="userImage" src="/assets/images/backgrounds/autumn.jpg">
-                <div align="center" class="greenDot"></div>
+<div class="main-content" >
+  <div  class="main-head">
+    <div fxLayout=column >
+      <div>
+        <div>
+          <div class="dottedBorder" >
+            <img class="userImage" src="/assets/images/backgrounds/autumn.jpg">
+            <div align="center" class="greenDot"></div>
+          </div>
+          <div fxLayout="column" style="text-align: center;padding: 17%;">
+            <span class="text-color">Santhosh K</span>
+            <span class="text-color-light ">Contracts</span>
+          </div>
+        </div>
+      </div>
+      <mat-card class="report-card" fxLayout=column style="display: inline;flex :1;">
+        <div class="card-title">Quick Details</div>
+        <div fxLayout=row style="place-content: space-between;border-bottom: 1px solid #ece8e8;">
+          <div style="height: 20px;width: 20px;background: transparent;border-radius: 50%;"></div>
+           <div class="details-head">Projects</div>
+          <div class="details-head">Request</div>
+        </div>
+        <div fxLayout=row style="place-content: space-between; margin-top: 10px;border-bottom: 1px solid #ece8e8;">
+          <div fxLayout=row >
+            <div style="height: 20px;width: 20px;background: #bbdef3;border-radius: 50%;    margin-right: 6px;margin-top: -4px;"></div>
+            <div class="count">Palm Beach</div>
+          </div>
+          <div class="count">15</div>
+        </div>
+        <div fxLayout=row style="place-content: space-between; margin-top: 10px;border-bottom: 1px solid #ece8e8;">
+          <div fxLayout=row >
+            <div style="height: 20px;width: 20px;background: #bbdef3;border-radius: 50%;    margin-right: 6px;margin-top: -4px;"></div>
+            <div class="count">Skyworth</div>
+          </div>  
+          <div class="count">20</div>
+        </div>
+      </mat-card>
+       <mat-card class="report-card" fxLayout=column style="display: inline;flex :1;">
+        <div class="card-title">NCM</div>
+        <div fxLayout=row style="place-content: space-between;border-bottom: 1px solid #ece8e8;">
+          <div style="height: 20px;width: 20px;background: transparent;border-radius: 50%;"></div>
+           <div class="details-head">Risk ID</div>
+          <div class="details-head">Status</div>
+        </div>
+        <div fxLayout=row style="place-content: space-between; margin-top: 10px;border-bottom: 1px solid #ece8e8;">
+          <div fxLayout=row >
+            <div style="height: 20px;width: 20px;background: transparent;border-radius: 50%;    margin-right: 6px;margin-top: -4px;"></div>
+            <div class="count">R001</div>
+          </div>
+          <div class="count">Pending</div>
+        </div>
+        <div fxLayout=row style="place-content: space-between; margin-top: 10px;border-bottom: 1px solid #ece8e8;">
+          <div fxLayout=row >
+            <div style="height: 20px;width: 20px;background: transparent;border-radius: 50%;    margin-right: 6px;margin-top: -4px;"></div>
+            <div class="count">R002</div>
+          </div>  
+          <div class="count">Completed</div>
+        </div>
+      </mat-card>
+    </div>
+    
+    <div fxFlex=80 fxLayout="row" style="display: inline;flex :1;">
+      <mat-card class="header-shadow" style="display: inline;flex :1;    height: 15px;">
+        <div fxLayout=row style="place-content: space-around;">
+          <div fxLayout=row style="place-content: space-around;">
+            <img style="height: 20px;width: 20px;" src="/assets/images/icons/projects_Active.png">
+            <div class="tab-btn" style="margin-left:10px;" > Projects</div>
+          </div>
+          <div fxLayout=row style="place-content: space-around;">
+            <img style="height: 20px;width: 20px;" src="/assets/images/icons/Work_Request _active.png">  
+            <div class="tab-btn" style="margin-left:10px;">Work order</div>
+          </div>
+          <div fxLayout=row style="place-content: space-around;">
+            <img style="height: 20px;width: 20px;" src="/assets/images/icons/work-order-Active.png">
+            <div class="tab-btn" style="margin-left:10px;">Work Request</div>
+          </div>
+          <div fxLayout=row style="place-content: space-around;">
+            <img style="height: 30px;width: 30px;margin-top: -5px;" src="/assets/images/icons/File_Manager_Active.png">
+            <div class="tab-btn" >File Manager</div>
+          </div>
+        </div>  
+        <div class="content-head" fxLayout=column>
+          <div class="first-card">
+            <mat-card class="report-card" fxFlex=20 fxLayout=column>
+              <div class="card-title">Total recieved documents</div>
+              <div fxLayout=row style="place-content: space-between;">
+                <div>
+                  <div class="font_12">22</div>
+                  <div fxLayout=row>
+                    <img style="height: 10px;width: 10px;" src="/assets/images/icons/dn-arrow.png">
+                    <div style="color:red; font-size: 8px;">23%</div>
+                  </div>
+                </div>
+                <div>
+                  <div class="font_12">38</div>
+                  <div fxLayout=row>
+                    <img style="height: 10px;width: 14px;" src="/assets/images/icons/arrow-up.jpeg">
+                    <div style="color:#11542f; font-size: 8px;">13%</div>
+                  </div>
+                </div>
               </div>
-              <div fxLayout="column" style="text-align: center;">
-                <span class="text-color">Satesh</span>
-                <span class="text-color-light ">Contracts</span>
+            </mat-card>
+            <mat-card class="report-card" fxFlex=20 fxLayout=column>
+              <div class="card-title">Total Completed</div>
+              <div fxLayout=row style="place-content: space-between;">
+                <div>
+                  <div class="font_12">154</div>
+                  <div fxLayout=row>
+                    <img style="height: 10px;width: 10px;" src="/assets/images/icons/dn-arrow.png">
+                    <div style="color:red; font-size: 8px;">23%</div>
+                  </div>
+                </div>
+                <div>
+                  <div class="font_12">132</div>
+                  <div fxLayout=row>
+                    <img style="height: 10px;width: 14px;" src="/assets/images/icons/arrow-up.jpeg">
+                    <div style="color:#11542f; font-size: 8px;">13%</div>
+                  </div>
+                </div>
               </div>
+            </mat-card>
+            <mat-card class="report-card" fxFlex=20 fxLayout=column>
+              <div class="card-title">Pending Request</div>
+             <div fxLayout=row style="place-content: space-between;">
+                <div>
+                  <div class="font_12">11</div>
+                  <div fxLayout=row>
+                    <img style="height: 10px;width: 10px;" src="/assets/images/icons/dn-arrow.png">
+                    <div style="color:red; font-size: 8px;">23%</div>
+                  </div>
+                </div>
+                <div>
+                  <div class="font_12">20</div>
+                  <div fxLayout=row>
+                    <img style="height: 10px;width: 14px;" src="/assets/images/icons/arrow-up.jpeg">
+                    <div style="color:#11542f; font-size: 8px;">13%</div>
+                  </div>
+                </div>
+              </div>
+            </mat-card>
+          </div>
+          <div class="first-card">
+            <mat-card class="report-card" fxFlex=20 fxLayout=column>
+              <div class="card-title">Awating RFa approval</div>
+              <div fxLayout=row style="place-content: space-between;">
+                <div>
+                  <div class="font_12">11</div>
+                  <div fxLayout=row>
+                    <img style="height: 10px;width: 10px;" src="/assets/images/icons/dn-arrow.png">
+                    <div style="color:red; font-size: 8px;">23%</div>
+                  </div>
+                </div>
+                <div>
+                  <div class="font_12">21</div>
+                  <div fxLayout=row>
+                    <img style="height: 10px;width: 14px;" src="/assets/images/icons/arrow-up.jpeg">
+                    <div style="color:#11542f; font-size: 8px;">13%</div>
+                  </div>
+                </div>
+              </div>
+            </mat-card>
+            <mat-card class="report-card" fxFlex=20 fxLayout=column>
+              <div class="card-title">Awating WO approval</div>
+              <div fxLayout=row style="place-content: space-between;">
+                <div>
+                  <div class="font_12">147</div>
+                  <div fxLayout=row>
+                    <img style="height: 10px;width: 10px;" src="/assets/images/icons/dn-arrow.png">
+                    <div style="color:red; font-size: 8px;">23%</div>
+                  </div>
+                </div>
+                <div>
+                  <div class="font_12">123</div>
+                  <div fxLayout=row>
+                    <img style="height: 10px;width: 14px;" src="/assets/images/icons/arrow-up.jpeg">
+                    <div style="color:#11542f; font-size: 8px;">13%</div>
+                  </div>
+                </div>
+              </div>
+            </mat-card>
+            <mat-card class="report-card" fxFlex=20 fxLayout=column>
+              <div class="card-title">Task in due date</div>
+              <div fxLayout=row style="place-content: space-between;">
+                <div>
+                  <div class="font_12">14</div>
+                  <div fxLayout=row>
+                    <img style="height: 10px;width: 10px;" src="/assets/images/icons/dn-arrow.png">
+                    <div style="color:red; font-size: 8px;">23%</div>
+                  </div>
+                </div>
+                <div>
+                  <div class="font_12">17</div>
+                  <div fxLayout=row>
+                    <img style="height: 10px;width: 14px;" src="/assets/images/icons/arrow-up.jpeg">
+                    <div style="color:#11542f; font-size: 8px;">13%</div>
+                  </div>
+                </div>
+              </div>
+            </mat-card>
+          </div>  
+        </div>
+        <div class="work_order_able">
+          <div class="user-container" >
+            <mat-card >
+              <div fxLayout=row style="place-content: space-between;">
+                <div class="table_header_text" >Work Request ID</div>
+                <div class="table_header_text" >Work Order ID</div>
+                <div class="table_header_text" >Type of work</div>
+                <div class="table_header_text" >Project</div>
+                <div class="table_header_text" >Package/Description</div>
+                <div class="table_header_text" >Need By date</div>
+                <div class="table_header_text">History</div>
+              </div>
+            </mat-card>
+            <div fxLayout="row">
+              <app-expansion-panel 
+                [expansionPanelOptions]="userWorkOrderDataOptions"
+                selectorComponent="app-user-dash-details" 
+                [data]="userWorkOrderData.data"
+                [isHistory]="true">
+              </app-expansion-panel>
             </div>
           </div>
-          <mat-card class="report-card" fxLayout=column style="display: inline;flex :1;">
-            <div class="card-title">Quick Details</div>
-            <div fxLayout=row style="place-content: space-between;">
-              <div class="details-head">Projects</div>
-              <div class="details-head">Request</div>
-            </div>
-            <div fxLayout=row style="place-content: space-between; margin-top: 10px">
-              <div class="count">Palm Beach</div>
-              <div class="count">38</div>
-            </div>
-            <div fxLayout=row style="place-content: space-between; margin-top: 10px">
-              <div class="count">Palm Beach2</div>
-              <div class="count">48</div>
-            </div>
-          </mat-card>
-          <mat-card class="report-card" fxLayout=column style="display: inline;flex :1;">
-            <div class="card-title">NCM</div>
-            <div fxLayout=row style="place-content: space-between;">
-              <div class="details-head">RISK ID</div>
-              <div class="details-head">Status</div>
-            </div>
-            <div fxLayout=row style="place-content: space-between; margin-top: 10px">
-              <div class="count">Palm Beach</div>
-              <div class="count">38</div>
-            </div>
-            <div fxLayout=row style="place-content: space-between; margin-top: 10px">
-              <div class="count">Palm Beach2</div>
-              <div class="count">48</div>
-            </div>
-          </mat-card>
         </div>
-        <div fxFlex=90 fxLayout="row" style="display: inline;flex :1;">
-          <mat-card style="display: inline;flex :1;    height: 15px;">
-            <div fxLayout=row style="place-content: space-around;">
-              <div class="tab-btn">Projects</div>
-              <div class="tab-btn">Work order</div>
-              <div class="tab-btn">Work Request</div>
-              <div class="tab-btn">File Manager</div>
-            </div>
-            <div class="content-head" fxLayout=column>
-              <div class="first-card">
-                <mat-card class="report-card" fxFlex=20 fxLayout=column>
-                  <div class="card-title">Total recieved documents</div>
-                  <div fxLayout=row style="place-content: space-between;">
-                    <div class="count">22</div>
-                    <div class="count">38</div>
-                  </div>
-                </mat-card>
-                <mat-card class="report-card" fxFlex=20 fxLayout=column>
-                  <div class="card-title">Total Completed</div>
-                  <div fxLayout=row style="place-content: space-between;">
-                    <div class="count">154</div>
-                    <div class="count">132</div>
-                  </div>
-                </mat-card>
-                <mat-card class="report-card" fxFlex=20 fxLayout=column>
-                  <div class="card-title">Pending Request</div>
-                  <div fxLayout=row style="place-content: space-between;">
-                    <div class="count">11</div>
-                    <div class="count">20</div>
-                  </div>
-                </mat-card>
-              </div>
-              <div class="first-card">
-                <mat-card class="report-card" fxFlex=20 fxLayout=column>
-                  <div class="card-title">Awating RFa approval</div>
-                  <div fxLayout=row style="place-content: space-between;">
-                    <div class="count">10</div>
-                    <div class="count">21</div>
-                  </div>
-                </mat-card>
-                <mat-card class="report-card" fxFlex=20 fxLayout=column>
-                  <div class="card-title">Awating WO approval</div>
-                  <div fxLayout=row style="place-content: space-between;">
-                    <div class="count">147</div>
-                    <div class="count">123</div>
-                  </div>
-                </mat-card>
-                <mat-card class="report-card" fxFlex=20 fxLayout=column>
-                  <div class="card-title">Task in due date</div>
-                  <div fxLayout=row style="place-content: space-between;">
-                    <div class="count">14</div>
-                    <div class="count">17</div>
-                  </div>
-                </mat-card>
-              </div>  
-            </div>
-            <div class="content-head">
-              <div class="user-details-container">
-                <form class="user-details-form" [formGroup]="userDashboardForm">
-                  <mat-card>
-                    <div class="user-details-card">
-                      <div class="user-details-name">
-                        <div class="username-input">
-                          <mat-form-field class="margin_right_25" appearance="outline">
-                            <mat-label>Work Category</mat-label>
-                            <input matInput formControlName="workCategory">
-                          </mat-form-field>
-                          <mat-form-field class="margin_right_25" appearance="outline">
-                            <mat-label>Support Role</mat-label>
-                            <input matInput formControlName="supportRole">
-                          </mat-form-field>
-                          <mat-form-field class="margin_right_25" appearance="outline">
-                            <mat-label>Assignee</mat-label>
-                            <input matInput formControlName="assignee">
-                          </mat-form-field>
-                        </div>
-                      </div>
-                      <div class="user-details-content">
-                        <div class="user-details-form-list">
-                          <mat-form-field class="margin_right_25" appearance="outline">
-                            <mat-label>Intiate Date</mat-label>
-                            <input matInput formControlName="putintiateDate">
-                          </mat-form-field>
-                          <mat-form-field class="margin_right_25" appearance="outline">
-                            <mat-label>RFA Put-up Date</mat-label>
-                            <input matInput formControlName="RFAPutDate">
-                          </mat-form-field> 
-                          <mat-form-field class="margin_right_25" appearance="outline">
-                            <mat-label>WO Put-up Date</mat-label>
-                            <input matInput formControlName="WOPutDate">
-                          </mat-form-field>
-                        </div>
-                      </div>
-                      <div class="user-details-content">
-                        <div class="user-details-form-list">
-                          <mat-form-field class="margin_right_25" appearance="outline">
-                            <mat-label>Intiate Date</mat-label>
-                            <input matInput formControlName="approvalintiateDate">
-                          </mat-form-field>
-                          <mat-form-field class="margin_right_25" appearance="outline">
-                            <mat-label>RFA Approval Date</mat-label>
-                            <input matInput formControlName="RFAApprovalDate">
-                          </mat-form-field> 
-                          <mat-form-field class="margin_right_25" appearance="outline">
-                            <mat-label>WO Approval Date</mat-label>
-                            <input matInput formControlName="WOApprovalDate">
-                          </mat-form-field>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="clearfix"></div>
-                  </mat-card>
-                </form>
-              </div>
-            </div>
-          </mat-card>
-        </div>
+      </mat-card>
     </div>
   </div>
+</div>

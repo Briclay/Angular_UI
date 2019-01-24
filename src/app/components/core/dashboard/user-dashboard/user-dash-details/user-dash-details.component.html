@@ -1,0 +1,88 @@
+<div class="user-details-container">
+	<form class="user-details-form" [formGroup]="userDashboardForm">
+		<mat-card>
+			<div class="user-details-card">
+				<div class="user-details-name">
+					<div class="username-input">
+						<mat-form-field class="margin_right_25" appearance="outline">
+							<mat-label>Work Category</mat-label>
+							<input matInput formControlName="workCategory">
+						</mat-form-field>
+						<mat-form-field class="margin_right_25" appearance="outline">
+							<mat-label>Support Role</mat-label>
+							<input matInput formControlName="supportRole">
+						</mat-form-field>
+						<mat-form-field class="margin_right_25" appearance="outline">
+							<mat-label>Assignee</mat-label>
+							<input matInput formControlName="assignee">
+						</mat-form-field>
+					</div>
+				</div>
+				<div class="user-details-content">
+					<div class="user-details-form-list">
+						<mat-form-field appearance="outline">
+							<mat-label>Intiate Date</mat-label>
+							<input matInput [matDatepicker]="picker" placeholder="" formControlName="putintiateDate">
+							<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+							<mat-datepicker #picker></mat-datepicker>
+						</mat-form-field>
+						<mat-form-field appearance="outline">
+							<mat-label>RFA Put-up Date</mat-label>
+							<input matInput [matDatepicker]="picker1" placeholder="" formControlName="RFAPutDate">
+							<mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+							<mat-datepicker #picker1></mat-datepicker>
+						</mat-form-field>
+						<mat-form-field appearance="outline">
+							<mat-label>WO Put-up Date</mat-label>
+							<input matInput [matDatepicker]="picker2" placeholder="" formControlName="WOPutDate">
+							<mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+							<mat-datepicker #picker2></mat-datepicker>
+						</mat-form-field>
+					</div>
+				</div>
+
+				<div class="user-details-content">
+					<div class="user-details-form-list">
+						<mat-form-field appearance="outline">
+							<mat-label>Intiate Date</mat-label>
+							<input matInput [matDatepicker]="picker4" placeholder="" formControlName="approvalintiateDate">
+							<mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
+							<mat-datepicker #picker4></mat-datepicker>
+						</mat-form-field>
+						<mat-form-field appearance="outline">
+							<mat-label>RFA Approval Date</mat-label>
+							<input matInput [matDatepicker]="picker5" placeholder="" formControlName="RFAApprovalDate">
+							<mat-datepicker-toggle matSuffix [for]="picker5"></mat-datepicker-toggle>
+							<mat-datepicker #picker5></mat-datepicker>
+						</mat-form-field>
+						<mat-form-field appearance="outline">
+							<mat-label>WO Approval Date</mat-label>
+							<input matInput [matDatepicker]="picker6" placeholder="" formControlName="WOApprovalDate">
+							<mat-datepicker-toggle matSuffix [for]="picker6"></mat-datepicker-toggle>
+							<mat-datepicker #picker6></mat-datepicker>
+						</mat-form-field>
+					</div>
+				</div>
+
+				<div class="user-details-content">
+					<div class="user-details-form-list">
+						<mat-form-field class="margin_right_25" appearance="outline">
+							<mat-label>Status</mat-label>
+							<input matInput formControlName="status">
+						</mat-form-field>
+						<mat-form-field class="margin_right_25" appearance="outline">
+							<mat-label>Document Status</mat-label>
+							<input matInput formControlName="documentStatus">
+						</mat-form-field> 
+						<mat-form-field class="margin_right_25" appearance="outline">
+							<mat-label>Remarks</mat-label>
+							<input matInput formControlName="remarks">
+						</mat-form-field>
+					</div>
+				</div>
+
+			</div>
+			<div class="clearfix"></div>
+		</mat-card>
+	</form>
+</div>

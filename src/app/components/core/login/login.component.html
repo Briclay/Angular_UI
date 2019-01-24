@@ -10,39 +10,29 @@
 
 <div id="login" fxLayoutAlign="center center">
   <div id="login-form-wrapper"  fxLayout="row" fxLayoutAlign="center center">
-
-    <div id="login-form">
-
-      <form name="loginForm" novalidate>
+    <div id="login-form" >
+      <form  name="loginForm"  [formGroup]="loginForm" novalidate>
         <div fxLayout="row" class="inputBoxShadow">
           <span class="nameAndPwd">UserName</span>
           <mat-form-field>
-            <input matInput placeholder="Enter username/email ID">
+            <input matInput formControlName="usernameOrEmail" type="email" placeholder="Enter username/email ID">
           </mat-form-field>
         </div>
-
         <div fxLayout="row" class="inputBoxShadow" style="margin-top: 30px;">
           <span class="nameAndPwd">Password</span>
           <mat-form-field>
-            <input matInput type="password" placeholder="Enter password" >
+            <input matInput formControlName="password" type="password" placeholder="Enter password" >
           </mat-form-field>
         </div>
-
-        
-
         <div class="remember-forgot-password">
           <a class="forgot-password">
             Forgot Password?
           </a>
         </div>
-
-        <button mat-raised-button style="background-color: #2196F3; color: white;" class="submit-button" [routerLink]="'/dashboard'" aria-label="LOG IN">LOGIN
-<!--            <a style="color: white;" [routerLink]="'/dashboard/superadmin'">LOGIN</a>
- -->        </button>
-        </form>
-
+        <button mat-raised-button style="background-color: #2196F3; color: white;" type="submit" 
+            class="submit-button"  [disabled]="isLoading || !loginForm.valid" aria-label="LOG IN" (click)="onLoginFormSubmit()">LOGIN
       <!-- Material Design Spinner -->
-      <div class="spinner-wrapper" *ngIf="loginFormSubmitted">
+      <div class="spinner-wrapper" *ngIf="isLoading">
         <div class="spinner">
           <div class="inner">
             <div class="gap"></div>
@@ -56,8 +46,9 @@
         </div>
       </div>
       <!-- / Material Design Spinner -->
+      
+        </button>
+      </form>
     </div>
-
   </div>
-
 </div>

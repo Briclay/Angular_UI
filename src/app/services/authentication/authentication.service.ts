@@ -1,0 +1,18 @@
+import { map } from 'rxjs/operators';
+import { Injectable } from '@angular/core';
+import { Observable, of } from 'rxjs';
+import { ApiService } from "./../api.service";
+
+@Injectable({
+ providedIn: 'root',
+})
+
+export class AuthenticationService {
+    constructor(private apiService: ApiService) { }
+    // pass params data
+
+    public login(request): Observable<any> {
+        let url = "https://matkraft-api.herokuapp.com/api/v1/auth/signin";
+        return this.apiService.post(url, request).pipe(map(res => res));
+    }
+}

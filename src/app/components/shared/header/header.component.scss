@@ -1,42 +1,86 @@
 .logo img {
-    width: 50px;
+  width: 50px;
 }
 .header {
-    z-index: 100;
-    height: 45px;
-    line-height: 45px;
-    flex-shrink: 0;
-    background-color: #ffffff;
-    user-select: none;
-    color: rgb(212, 212, 212);
-    box-shadow: rgba(0, 0, 0, 0.3) 0px 2px 5px 0px;
-    align-items: center;
-    padding: 1px 0px;
-    position: fixed;
-    top: 0px;
-    left: 0px;
-    width: 100%
+  z-index: 100;
+  height: 45px;
+  line-height: 45px;
+  flex-shrink: 0;
+  background-color: #ffffff;
+  user-select: none;
+  color: rgb(212, 212, 212);
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 2px 5px 0px;
+  align-items: center;
+  padding: 1px 0px;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%
 }
 .user {
-    margin-right: 10px;
+  margin-right: 10px;
 }
 .user-list img {
-    border-radius: 50%;
-    width: 41px;
-    height: 41px;
-    margin-right: 20px;
-    border: 3px solid #FFFFFF;
+  border-radius: 50%;
+  width: 41px;
+  height: 41px;
+  margin-right: 20px;
+  border: 3px solid #FFFFFF;
 }
 .user-list.mat-icon-button {
-    width: auto;
-    height: auto;
-    color: #000000;
-    background-color :#00aff0;
-    border-radius: 21px 0px 0px 21px;
+  width: auto;
+  height: auto;
+  color: #000000;
+  background-color :#00aff0;
+  border-radius: 25px 0px 0px 25px;
 }
 .color-white {
-    color : #FFFFFF;
+  color : #FFFFFF;
 }
 mat-icon {
-    color: #000000;
+  color: #000000;
+}
+.alert_icon{
+  height: 25px;
+  width: 25px;
+}
+.notification_icon{
+  height: 35px;
+  width: 35px;
+}
+
+::ng-deep .mat-menu-panel.panel {
+  max-width:300px!important;
+  min-width: 400px!important;
+  width: 100vw; 
+  margin-left: -8px;
+  margin-top: 5px;
+  overflow: auto!important;
+  min-height : 580px!important;
+  margin-right: -145px;
+}
+::ng-deep .mat-card.card {
+  padding: 4px!important;
+}
+
+.notification_container{
+  padding : 5%;
+  .title {
+    font: 400 13px/20px Roboto,"Helvetica Neue",sans-serif;
+    color :#032a57cf;
+    border-bottom: black 1px solid;
+    padding : 2%;
+  }
+  .content_text {
+    font: 400 13px/20px Roboto,"Helvetica Neue",sans-serif;
+    color :#032a57cf;
+  }
+  .close {
+    height: 18px;
+    width: 18px;
+  }
+  .message {
+    font: 400 12px Roboto,"Helvetica Neue",sans-serif;
+    color :#032a57cf; 
+  }
 }

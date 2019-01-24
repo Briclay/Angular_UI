@@ -1,0 +1,4 @@
+<h3>History</h3>
+<app-dynamic-table *ngIf="historyDataOptions.content 
+  && historyDataOptions.content.length; else noRecordTemplate" 
+  [(config)]="historyDataOptions">

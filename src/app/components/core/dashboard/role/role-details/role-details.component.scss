@@ -7,24 +7,22 @@
             display: flex;
             font: 400 13px/20px Roboto,"Helvetica Neue",sans-serif;
             .user-details-name {
-                flex: 0.6;
+                flex: 0.1;
                 img {
                     width: 100px;
                     border-radius: 5px;
                 }
                 .username-input {
-                    margin-top: 10px;
+                    margin-top: 45px;
                 }
             }
             .user-details-content {
                 flex: 1;
                 .user-details-content-title {
                     margin-left: 10px;
+                    margin-bottom: 10px;
                 }
                 .user-details-form-list {
-                    border-left: 2px solid #999999;
-                    min-height: 200px;
-                    padding: 10px;
                 }
                 .feature_btn {
                     border-radius: 17px;
@@ -34,5 +32,29 @@
             }
         }
     }
-    
+}
+
+::ng-deep .mat-menu-panel.featurePanel {
+  max-width:400px!important;
+  min-width: 450px!important;
+  width: 100vw; 
+  margin-left: -8px;
+  margin-top: 5px;
+  overflow: auto!important;
+  min-height : auto;
+}
+.feature_container{
+    padding : 4%;
+    .title {
+        font: 700 12px Roboto,"Helvetica Neue",sans-serif;
+        color :#032a57cf;
+        padding : 1%;
+        border-left: #8c8686 2px solid;
+    }
+    .message {
+        font: 400 11px Roboto,"Helvetica Neue",sans-serif;
+        color :#032a57cf; 
+        padding : 1%;
+        border-left: #8c8686 2px solid;
+    }
 }
