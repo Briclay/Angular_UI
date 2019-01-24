@@ -1,17 +1,24 @@
 import { Component, OnInit } from '@angular/core';
+import { PlatformLocation } from '@angular/common'
 import { ProjectService } from '../../projects/project.service';
 import { OrganisationService } from '../../organisation/organisation.service';
 import { FileManagerService } from "../file-manager.service";
-import {
-  MatDialog,
-  MatDialogRef,
-  MAT_DIALOG_DATA,
-  MatDialogConfig,
-  MatTableDataSource
-} from '@angular/material';
+import { ActivatedRoute, Router } from '@angular/router';
+
+import * as _ from 'lodash';
+
+import { MatDialog, MatTableDataSource } from '@angular/material';
 import { FolderCreateDialogComponent } from '../folder-create-dialog/folder-create-dialog.component';
 import { FileShareDialogComponent } from '../file-share-dialog/file-share-dialog.component';
 import { FileMailDialogComponent } from '../file-mail-dialog/file-mail-dialog.component';
+
+
+export interface PeriodicElement {
+  name: string;
+  position: number;
+  weight: number;
+  symbol: string;
+}
 
 @Component({
   selector: 'app-file-manager-config',
@@ -40,16 +47,40 @@ export class FileManagerConfigComponent implements OnInit {
   fileListLoading: boolean;
   fileListDetialsLoading: boolean;
   fileDetialsLoading: boolean;
-
+  orgId: string;
+  deptId: string;
+  fileId: string;
+  currentUrl: string;
+  localStack: any;
+  displayedColumns: string[] = ['type', 'name', 'createdAt', 'version'];
   constructor(
     private projectService: ProjectService,
     private fileManagerService: FileManagerService,
     private dialog: MatDialog,
-    private organisationService: OrganisationService) { }
+    private organisationService: OrganisationService,
+    private route: ActivatedRoute,
+    private router: Router,
+    private location: PlatformLocation
+  ) {
+    this.route.params.subscribe(params => {
+      this.orgId = params['orgId'];
+      this.deptId = params['deptId'];
+      this.fileId = params['fileId'];
+    });
+    //restric browser back button
+    location.onPopState(() => {
+      window.history.forward();
+    });
+  }
 
   ngOnInit() {
+    //get current url
+    this.currentUrl = this.router.url;
     this.getOrganiztions();
-    this.getAllFolders();
+    this.getSingleFolder();
+    this.localStack = JSON.parse(window.localStorage.getItem('stack'));
+    console.log('local' + JSON.stringify(this.localStack));
+
   }
 
   getOrganiztions() {
@@ -98,17 +129,6 @@ export class FileManagerConfigComponent implements OnInit {
       .pipe().subscribe(res => {
         this.folderData = res;
         console.log(res, "folderData")
-        /*  this.dataSource = new MatTableDataSource(this.folderData);*/        
-        /*this.folderData = {
-          header: [
-            { title: 'Name.' },
-            { title: 'Created ' },
-            { title: 'Created By ' },
-            { title: 'Version.' },
-            { title: '.' }],
-          keys: ['name', 'createdAt', 'accessFlag','version'],
-          content: res
-        };*/
         this.folderListLoading = false;
       }, (error: any) => {
         console.error('error', error);
@@ -121,14 +141,14 @@ export class FileManagerConfigComponent implements OnInit {
     let dialogRef = this.dialog.open(FolderCreateDialogComponent, {
       width: '600px',
       data: {
-        '_parentId': list ? list._id : '',
-        'orgId': '5a5844cd734d1d61613f7066',
-        'deptId': '5a5844cd734d1d61613f7066'
+        '_parentId': this.fileId,
+        'orgId': this.orgId,
+        'deptId': this.deptId
       }
     }).afterClosed()
       .subscribe(response => {
         if (response === 'success') {
-          this.getAllFolders();
+          this.getSingleFolder();
         }
       });
   }
@@ -171,16 +191,16 @@ export class FileManagerConfigComponent implements OnInit {
       .pipe().subscribe(res => {
         this.subFolderData = res;
         console.log(res, 'subFolderData')
-       /* this.subFolderData = {
-          header: [
-            { title: 'Name.' },
-            { title: 'Created ' },
-            { title: 'Created By ' },
-            { title: 'Version.' },
-            { title: '.' }],
-          keys: ['name', 'createdAt', 'accessFlag','version'],
-          content: res
-        };*/
+        /* this.subFolderData = {
+           header: [
+             { title: 'Name.' },
+             { title: 'Created ' },
+             { title: 'Created By ' },
+             { title: 'Version.' },
+             { title: '.' }],
+           keys: ['name', 'createdAt', 'accessFlag','version'],
+           content: res
+         };*/
 
         this.subFolderListLoading = false;
 
@@ -189,22 +209,19 @@ export class FileManagerConfigComponent implements OnInit {
         this.subFolderListLoading = false;
       })
   }
-
+  getSingleFolder() {
+    this.fileManagerService.getSingleFile(this.fileId)
+      .pipe().subscribe(res => {
+        this.dataSource = new MatTableDataSource(res);
+      }, (error: any) => {
+        console.error('error', error);
+      })
+  }
   getFiles(folder) {
     this.fileListLoading = true;
     this.fileManagerService.getFiles(folder._id)
       .pipe().subscribe(res => {
         this.filesData = res;
-        /*this.filesData = {
-          header: [
-            { title: 'Name.' },
-            { title: 'Created ' },
-            { title: 'Created By ' },
-            { title: 'Version.' },
-            { title: '.' }],
-          keys: ['name', 'createdAt', 'accessFlag','version'],
-          content: res
-        };*/
         this.fileListLoading = false;
 
       }, (error: any) => {
@@ -214,25 +231,63 @@ export class FileManagerConfigComponent implements OnInit {
   }
 
   //this method for get iocn in html passing file extension
-  getIcon(name, type) {
-    if (name.toLowerCase() == 'folder')
-      return "assets/images/6.png"
+  getIcon(name: string, type: string) {
+    if (type.toLowerCase() == 'folder')
+      return "assets/fileManager/folder.png"
     else {
       if (type.toLowerCase() == 'doc' || type.toLowerCase() == 'docx')
-        return "assets/images/1.png"
+        return "assets/fileManager/doc.png"
       else
         if (type.toLowerCase() == 'xls' || type.toLowerCase() == "xlsx")
-          return "assets/images/7.png"
+          return "assets/fileManager/7.png"
       if (type.toLowerCase() == 'pdf')
-        return "assets/images/2.png"
+        return "assets/fileManager/xls.png"
       else
         if (type.toLowerCase() == "png" || "jpg" == type.toLowerCase() || type.toLowerCase() == "gif" || type.toLowerCase() == "pgm")
-          return "assets/images/imge.png"
+          return "assets/fileManager/img.png"
         else
-          return "assets/images/file.png"
+          return "assets/fileManager/file.png"
     }
   }
+  recursiveCall(data) {
+    console.log('data' + JSON.stringify(data));
+    if (data.type === 'folder') {
+      const path = '/dashboard/file-manager/' + this.orgId + "/" + this.deptId + "/" + data._id;
+      let top = 0;
+      let stack = JSON.parse(window.localStorage.getItem('stack'));
+      if (stack.length == 0) {
+        top = 0
+      } else {
+        top = parseInt(stack[stack.length - 1].top)
+      }
+      let json = {
+        name: data.name,
+        path: this.currentUrl,
+        top: top + 1,
+      };
+      stack.push(json);
+      window.localStorage.stack = JSON.stringify(stack);
+      // route to dept folder list
+      this.router.navigate([path]).then(() => {
+        this.ngOnInit();
+      });
+    }
+  }
+  goBackButton() {
+    // let len = this.localStack.length - 1;
+    //  let path = this.localStack[len].path;
+    //console.log(' this.localStack'+JSON.stringify( this.localStack));
+    if (!_.isEmpty(this.localStack)) {
+      let temp = this.localStack.pop();
+      const path = temp.path;
+      console.log('path' + JSON.stringify(path));
+      window.localStorage.stack = JSON.stringify(this.localStack);
+      this.router.navigate([path]).then(() => {
+        this.ngOnInit();
+      });
+    }
 
+  }
   getFileDetails(fileList) {
     this.fileDetialsLoading = true;
     this.folderDetailsDataOption = fileList;
@@ -245,14 +300,16 @@ export class FileManagerConfigComponent implements OnInit {
       reader.readAsDataURL(file);
       let fileExt = file.name.split(".");
       let fileName = (new Date().getTime()) + "." + fileExt[fileExt.length - 1];
+      console.log('file' + file);
+      console.log('fileName' + fileName);
 
-      this.fileManagerService.getS3Url('file-name=' + fileName + '&file-type=' + file.type + '&_organisationId=' + this.selectedOrg._id)
+      this.fileManagerService.getS3Url('file-name=' + fileName + '&file-type=' + file.type + '&_organisationId=' + this.orgId)
         .pipe().subscribe(res => {
+          console.log('res' + JSON.stringify(res));
           let json = {
-            _organisationId: this.selectedOrg._id,
-            _departmentId: '5a5844cd734d1d61613f7066', 
-            _folderId: fileList ? fileList._id : '',
-            _projectId: this.selectedProjectID,
+            _organisationId: this.orgId,
+            _departmentId: this.deptId,
+            _folderId: this.fileId,
             name: file.name,
             type: 'file',
             fileExt: fileExt[fileExt.length - 1],
@@ -263,13 +320,30 @@ export class FileManagerConfigComponent implements OnInit {
           };
           this.fileManagerService.saveFile(json)
             .pipe().subscribe(res => {
-              this.getAllFolders();
+              console.log('res'+JSON.stringify(res));
+              // this.getAllFolders();
             }, (error: any) => {
             });
         }, (error: any) => {
         });
     } else {
       console.log('false');
+    }
+  }
+
+  getFileSize(value) {
+    if (value) {
+      if (value < 1024) {
+        return (value).toFixed(2) + ' B';
+      } else if (value >= 1024 && value < 1048576) {
+        return (value / 1024).toFixed(2) + ' Kb';
+      } else if (value >= 1048576 && value < 1073741824) {
+        return (value / (1024 * 1024)).toFixed(2) + ' Mb';
+      } else {
+        return (value / (1024 * 1024 * 1024)).toFixed(2) + ' Gb';
+      }
+    } else {
+      return value;
     }
   }
 }

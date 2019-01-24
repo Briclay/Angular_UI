@@ -21,17 +21,17 @@ export class FileManagerService {
   }
 
   public saveFolder(requestObj): Observable<any> {
-    let url = "https://briclay-file-manager.herokuapp.com/folder"
+    let url = "http://localhost:9091/folder"
     return this.apiService.post(url, requestObj).pipe(map(res => res));
   }
 
-  public getSingleFile(requestObj): Observable<any> {
-    let url = `https://briclay-file-manager.herokuapp.com/${requestObj.type}/${requestObj._id}`
+  public getSingleFile(fileId): Observable<any> {
+    let url = `http://localhost:9091/folder/${fileId}`
     return this.apiService.get(url).pipe(map(res => res));
   }
 
   public shareFile(userID, fileID): Observable<any> {
-    let url = `https://briclay-file-manager.herokuapp.com/file/share/${fileID}`;
+    let url = `http://localhost:9091/file/share/${fileID}`;
     let requestObj = {
       "activeFlag": false,
       "sharedByUserId": userID
@@ -49,12 +49,12 @@ export class FileManagerService {
   }
 
   getS3Url(query: string): Observable<any> {
-    let url = `https://briclay-file-manager.herokuapp.com/file/sign-s3?${query}`
+    let url = `http://localhost:9091/file/sign-s3?${query}`
     return this.apiService.get(url).pipe(map(res => res));
   }
 
-  saveFile(query: any): Observable<any>  {
-    let url = `https://briclay-file-manager.herokuapp.com/file`
+  saveFile(query: any): Observable<any> {
+    let url = `http://localhost:9091/file`
     return this.apiService.post(url, query).pipe(map(res => res));
   }
 }

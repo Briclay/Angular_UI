@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import {FileManagerService} from '../file-manager.service'
+import { FileManagerService } from '../file-manager.service'
 
 @Component({
   selector: 'app-folder-create-dialog',
@@ -10,15 +10,15 @@ import {FileManagerService} from '../file-manager.service'
 })
 export class FolderCreateDialogComponent implements OnInit {
   dailogForm: FormGroup;
-  constructor(public dialogRef: MatDialogRef<FolderCreateDialogComponent>, 
-    @Inject(MAT_DIALOG_DATA) public data: any, 
+  constructor(public dialogRef: MatDialogRef<FolderCreateDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
     private formBuilder: FormBuilder, private fileManagerService: FileManagerService) { }
 
   ngOnInit() {
     this.dailogForm = this.formBuilder.group({
-      _organisationId: ['', Validators.required],
+      _organisationId: this.data.orgId,
       name: ['', Validators.required],
-      _departmentId: ['', Validators.required],
+      _departmentId: this.data.deptId,
       _parentId: this.data._parentId,
       shared: [],
       details: "This folder is created by SUPERADMIN",
@@ -30,8 +30,7 @@ export class FolderCreateDialogComponent implements OnInit {
     this.dialogRef.close('cancel');
   }
   onSave() {
-    this.dailogForm.value._organisationId = '5a5844cd734d1d61613f7066';
-    this.dailogForm.value._departmentId = '5a5844cd734d1d61613f7066';
+    console.log('this.dailogForm.value' + JSON.stringify(this.dailogForm.value));
     this.fileManagerService.saveFolder(this.dailogForm.value)
       .pipe().subscribe((response: any) => {
         this.dialogRef.close('success');
