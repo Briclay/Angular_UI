@@ -65,7 +65,7 @@ export class OrganizationService {
     getS3Url(query: string): Observable<any> {
 	    let url = `https://briclay-core.herokuapp.com/file/sign-s3?${query}`
 	    return this.apiService.get(url).pipe(map(res => res));
-	  }
+    }
 
    /* public deleteOrg (request): Observable<any> {
         let url = "https://briclay-core.herokuapp.com/organisations/5a58438f734d1d61613f6ed9";

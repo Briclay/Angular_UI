@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from './../../../services/authentication/authentication.service';
 import { Router } from '@angular/router';
+import {MatSnackBar} from '@angular/material';
 
 @Component({
 	selector: 'app-login',
@@ -17,7 +18,8 @@ export class LoginComponent implements OnInit {
 	constructor(
 	    private formBuilder: FormBuilder,
 	    private router: Router,
-	    private authenticationService: AuthenticationService) 
+	    private authenticationService: AuthenticationService,
+	    private snackBar: MatSnackBar) 
 		{
 			this.loginFormErrors = {
 				usernameOrEmail: {},
@@ -33,6 +35,12 @@ export class LoginComponent implements OnInit {
 		this.loginForm.valueChanges.subscribe(() => {
 			this.onLoginFormValuesChanged();
 		});
+	}
+
+	openSnackBar() {
+	    this.snackBar.openFromComponent("PizzaPartyComponent", {
+	      duration: 500,
+	    });
 	}
 
 	onLoginFormValuesChanged() {
@@ -68,9 +76,12 @@ export class LoginComponent implements OnInit {
 				this.router.navigateByUrl(path);
 			}, (error: any) => {
 				this.isLoading = false;
-				alert(error.error.message)
+				this.snackBar.open("Invalid username or password", {
+				  action : 'Oops'		
+			      duration: 500,
+			    });
 				console.log(error , 'err')
 			});
 		}
-  }
+  	}
 }

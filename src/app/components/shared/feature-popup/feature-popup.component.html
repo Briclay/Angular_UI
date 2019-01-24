@@ -1,0 +1,24 @@
+  <div class="feature_container">
+    <div class="title">Features</div>
+    <div>
+      <div style="margin-top: 6%;" >
+        <div *ngFor="let feature of allFeatures">
+          <div fxLayout=row >
+            <div>
+              <mat-checkbox 
+                [checked]="feature.flag"
+                (change)="changeEvent($event,x)">
+              </mat-checkbox>
+            </div>
+            <div style=" border-bottom: black 1px solid;margin-left: 20px;">
+              <span class="message" >{{feature.resources}}</span>
+            </div>
+          </div>
+         </div>
+      </div>
+      <div style="padding-top: 10%;" fxLayout=row>
+        <button mat-raised-button type="submit" class="pull-right">Cancel</button>
+        <button mat-raised-button type="submit" class="pull-right" >Save</button>
+      </div>
+    </div>
+  </div>

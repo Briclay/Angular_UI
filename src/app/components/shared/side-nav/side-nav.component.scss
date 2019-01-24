@@ -1,5 +1,5 @@
 .side-nav {
-   
+   padding : 2%;
 }
 .side-nav-list {
     margin: 0px;
@@ -8,9 +8,12 @@
     color: #ffffff;
     text-align: center;
 }
+.side-nav-list li.side-nav-div {
+   padding : 6px 3px;
+ }
 .side-nav-icon-size {
-    height: 45px;
-    width: 45px;
+    height: 30px;
+    width: 30px;
 }
 .side-nav-list li {
     padding: 10px 0px;
@@ -28,4 +31,12 @@
 .side-nav-list mat-icon {
     font-size: 35px;
     width: auto;
+}
+.logo_div {
+    position: fixed;
+    bottom: 0;
+}
+.logo {
+    height: 20px;
+    width: 20px;
 }
