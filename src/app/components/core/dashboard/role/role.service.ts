@@ -3,6 +3,7 @@ import { map } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 import { RoleData } from './interfaces';
 import { ApiService } from "../../../../services/api.service";
+import { environmentService } from "../../../../constant/environment";
 
 const history = {
 	"result": "success",
@@ -34,7 +35,7 @@ export class RoleService {
     ) { }
     // pass params data
     public getData(ordID): Observable<RoleData> {
-        let url = `https://briclay-core.herokuapp.com/roles?select=all&filter[_organisationId]=${ordID}`
+        let url = `${environmentService.briclayCore}/roles?select=all&filter[_organisationId]=${ordID}`
         return this.apiService.get(url).pipe(map(res     => res));
     }
 

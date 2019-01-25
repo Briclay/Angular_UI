@@ -5,6 +5,8 @@ import { AuthenticationService } from '../../../../../services/authentication/au
 import { Router , ActivatedRoute} from '@angular/router';
 import { OrganizationService } from '../../../../../services/organization/organization.service';
 import * as _ from 'lodash';
+import { FeaturePopupComponent } from '../../../../../components/shared/feature-popup/feature-popup.component'
+import { MatDialog,  MatSnackBar ,MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
   selector: 'app-department-details',
@@ -32,7 +34,90 @@ export class DepartmentDetailsComponent implements OnInit {
   deptFormSubmitted = false;
   selectedAll = false;
   editFlag = false;
-  allFeatures = ['File' ,'Folder Manager' ,'Service Request','Snag Master']
+  allFeatures = [
+  {
+    "_featureId": "f1",
+    "resources": "Projects",
+    "flag" : true,
+    "permissions": [
+    {
+      "userKey": "List",
+      "reqKey": "GET",
+      "accessFlag": true
+    },
+    {
+      "userKey": "Save",
+      "reqKey": "POST",
+      "accessFlag": false
+    },
+    {
+      "userKey": "Update",
+      "reqKey": "PUT",
+      "accessFlag": true
+    },
+    {
+      "userKey": "Delete",
+      "reqKey": "DELETE",
+      "accessFlag": false
+    }
+    ]
+  },
+  {
+    "_featureId": "f2",
+    "resources": "Snagmaster",
+    "flag" : true,
+    "permissions": [
+    {
+      "userKey": "List",
+      "reqKey": "GET",
+      "accessFlag": true
+    },
+    {
+      "userKey": "Save",
+      "reqKey": "POST",
+      "accessFlag": false
+    },
+    {
+      "userKey": "Update",
+      "reqKey": "PUT",
+      "accessFlag": true
+    },
+    {
+      "userKey": "Delete",
+      "reqKey": "DELETE",
+      "accessFlag": false
+    }
+    ]
+  },
+  {
+    "_featureId": "f3",
+    "resources": "Services",
+    "flag" : false,
+    "permissions": [
+    {
+      "userKey": "List",
+      "reqKey": "GET",
+      "accessFlag": true
+    },
+    {
+      "userKey": "Save",
+      "reqKey": "POST",
+      "accessFlag": false
+    },
+    {
+      "userKey": "Update",
+      "reqKey": "PUT",
+      "accessFlag": true
+    },
+    {
+      "userKey": "Delete",
+      "reqKey": "DELETE",
+      "accessFlag": false
+    }
+    ]
+  }
+  ]  
+  featureData : any;
   allFeatureCount = 0;
   constructor(
     private DeptService: DepartmentService,
@@ -40,9 +125,11 @@ export class DepartmentDetailsComponent implements OnInit {
     private authenticationService: AuthenticationService,
     private OrgService: OrganizationService,
     private route: ActivatedRoute, 
-    private router: Router) 
+    private router: Router,
+    private dialog : MatDialog,
+      private snackBar: MatSnackBar) 
   {
-          
+
     //this.userAuth = this.auth.get();
     this.userAuth = JSON.parse(window.localStorage.getItem("userAuth"));
     this._organisationId = this.userAuth._organisationId._id;
@@ -82,6 +169,17 @@ export class DepartmentDetailsComponent implements OnInit {
       this.departmentDetailsForm.patchValue(this.data)
     }
   }
+
+  openDialogFeature() {
+    this.featureData = this.allFeatures;
+    const dialogRef = this.dialog.open(FeaturePopupComponent, {
+      width: '450px',
+      data: this.allFeatures ? this.allFeatures : {}
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      // TODO closed event
+    });
+  }
   changeEvent(event) {
     this.sF = event.source.value;
   }
@@ -106,98 +204,27 @@ export class DepartmentDetailsComponent implements OnInit {
     console.log(this.departmentDetailsForm.value);
     this.deptFormSubmitted = true;
     this.departmentDetailsForm.value._features = this.featuresArray;
-      /*check if id is not epmty then save otherwise update*/
-      if ((!_.isUndefined(this.departmentDetailsForm.value._id) 
-        && !_.isEmpty(this.departmentDetailsForm.value._id))) {
-        this.DeptService.update(this.departmentDetailsForm.value._id, this.departmentDetailsForm.value)
-          .pipe().subscribe(response => {
-          this.deptFormSubmitted = false;
-          }, (error: any) => {
-            this.deptFormSubmitted = false;
-            console.log(error.message)
-          });
-      } 
-      else {
-        delete this.departmentDetailsForm.value._id;
-        this.DeptService.save(this.departmentDetailsForm.value)
-          .pipe().subscribe(response => {
-          this.deptFormSubmitted = false;
-            console.log(response, 'response');
-          }, (error: any) => {
-            this.deptFormSubmitted = false;
-            console.log(error.message)
-          });
-      } 
-    }
-
-  //checked if feature is already selected or not
-  /*isChecked() {
-    return _.isEqual(this.features.length, this.featuresArray.length);
-  }*/
-
-  //slected all feature
-  /*selectAll() {
-    if (this.features.length === this.featuresArray.length) {
-      this.featuresArray = [];
-      this.selectedAll = false;
-    } else {
-      this.featuresArray = [];
-      this.features.forEach((num: any) => {
-        this.featuresArray.push(num._id);
-      });
-      this.selectedAll = true;
-    }
-  }*/
-
-  //check item is exit of array or not
-  /*exists(item) {
-    return this.featuresArray.indexOf(item._id) > -1;
-  }
-
-  //select one feature form list
-  select(item) {
-    //this.deptForm.value._features.forEach((num: any) => {
-    //  this.featuresArray.push(num._id);
-    //});
-    this.indexOfItem = this.featuresArray.indexOf(item._id);
-    if (this.indexOfItem > -1) {
-      this.featuresArray.splice(this.indexOfItem, 1);
-    } else {
-      this.featuresArray.push(item._id);
-    }
-  }*/
-  /* 
-   deleteRequest(id) {
-    if (id) {
-      let dialogRef = this.dialog.open(DeleteDialogComponent, {
-          width: '600px',
-          data: {
-            'title': 'Delete Request',
-            'approvalFlag': false,
-            'approvalList': []
-          }
-        }).afterClosed()
-        .subscribe(response => {
-          if (!_.isUndefined(response) && response !== 'cancel') {
-            this.deleteDept(id, response);
-          }
-        });
-    }
-  }
-
-  deleteDept(id, body) {
-    this.DeptService.deleteDept(id, body)
-            .pipe().subscribe(response => {
-
-        const toastOptions: ToastOptions = {
-          title: 'Success',
-          msg: response.message
-        };
-        this.toastyService.success(toastOptions);
-        this.getAllDept(id);
-      }, (error: any) => {
-        console.log(error.error.error.message);
-      });
-  }*/
-
+    /*check if id is not epmty then save otherwise update*/
+    if ((!_.isUndefined(this.departmentDetailsForm.value._id) 
+      && !_.isEmpty(this.departmentDetailsForm.value._id))) {
+      this.DeptService.update(this.departmentDetailsForm.value._id, this.departmentDetailsForm.value)
+    .pipe().subscribe(response => {
+      this.deptFormSubmitted = false;
+    }, (error: any) => {
+      this.deptFormSubmitted = false;
+      console.log(error.message)
+    });
+  } 
+  else {
+    delete this.departmentDetailsForm.value._id;
+    this.DeptService.save(this.departmentDetailsForm.value)
+    .pipe().subscribe(response => {
+      this.deptFormSubmitted = false;
+      console.log(response, 'response');
+    }, (error: any) => {
+      this.deptFormSubmitted = false;
+      console.log(error.message)
+    });
+  } 
+}
 }

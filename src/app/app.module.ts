@@ -56,6 +56,7 @@ import {WorkRequestModule} from './components/core/dashboard/work-request/work-r
 
 import { HistoryPopupComponent } from './components/shared/history-popup/history-popup.component';
 import { DesignDashboardComponent } from './components/core/dashboard/design-dashboard/design-dashboard.component';
+import { FeaturePopupComponent } from './components/shared/feature-popup/feature-popup.component';
 
 @NgModule({
   declarations: [
@@ -87,7 +88,8 @@ import { DesignDashboardComponent } from './components/core/dashboard/design-das
     FileManagerConfigComponent,
     WorkOrderComponent,
     HistoryPopupComponent,
-    DesignDashboardComponent
+    DesignDashboardComponent,
+    FeaturePopupComponent
   ],
   imports: [
     BrowserModule,
@@ -108,7 +110,8 @@ import { DesignDashboardComponent } from './components/core/dashboard/design-das
     FolderCreateDialogComponent,
     FileShareDialogComponent,
     FileMailDialogComponent,
-    HistoryPopupComponent
+    HistoryPopupComponent,
+    FeaturePopupComponent
   ],
   providers: [D3Service, DashboardService, UserService, DepartmentService, 
   OrganizationService, UserDashboardService ],

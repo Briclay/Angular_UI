@@ -5,6 +5,8 @@ import * as _ from 'lodash';
 import { OrganizationService } from '../../../../../services/organization/organization.service';
 import { AuthenticationService } from '../../../../../services/authentication/authentication.service';
 import { DepartmentService } from '../../../../../services/department/department.service';
+import { FeaturePopupComponent } from '../../../../../components/shared/feature-popup/feature-popup.component'
+import { MatDialog, MatSnackBar, MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
   selector: 'app-organisation-details',
@@ -21,8 +23,89 @@ export class OrganisationDetailsComponent implements OnInit {
   organizationDetailsForm: FormGroup;
   getApprovals = ['File' ,'Service Request' ,'Snag Master']
   plans = [ 'Premium' , 'Trial']
-  allFeatures = ['File' ,'Folder Manager' ,'Service Request','Snag Master']
-
+  allFeatures = [
+  {
+    "_featureId": "f1",
+    "resources": "Projects",
+    "flag" : true,
+    "permissions": [
+      {
+        "userKey": "List",
+        "reqKey": "GET",
+        "accessFlag": true
+      },
+      {
+        "userKey": "Save",
+        "reqKey": "POST",
+        "accessFlag": false
+      },
+      {
+        "userKey": "Update",
+        "reqKey": "PUT",
+        "accessFlag": true
+      },
+      {
+        "userKey": "Delete",
+        "reqKey": "DELETE",
+        "accessFlag": false
+      }
+    ]
+  },
+  {
+    "_featureId": "f2",
+    "resources": "Snagmaster",
+    "flag" : true,
+    "permissions": [
+      {
+        "userKey": "List",
+        "reqKey": "GET",
+        "accessFlag": true
+      },
+      {
+        "userKey": "Save",
+        "reqKey": "POST",
+        "accessFlag": false
+      },
+      {
+        "userKey": "Update",
+        "reqKey": "PUT",
+        "accessFlag": true
+      },
+      {
+        "userKey": "Delete",
+        "reqKey": "DELETE",
+        "accessFlag": false
+      }
+    ]
+  },
+  {
+    "_featureId": "f3",
+    "resources": "Services",
+    "flag" : false,
+    "permissions": [
+    {
+      "userKey": "List",
+      "reqKey": "GET",
+      "accessFlag": true
+    },
+    {
+      "userKey": "Save",
+      "reqKey": "POST",
+      "accessFlag": false
+    },
+    {
+      "userKey": "Update",
+      "reqKey": "PUT",
+      "accessFlag": true
+    },
+    {
+      "userKey": "Delete",
+      "reqKey": "DELETE",
+      "accessFlag": false
+    }
+    ]
+  }
+  ]
   orgType = ['ADMINISTRATOR', 'BUILDER', 'CONTRACTOR'];
   parantselect = ['Parent Organisation', 'Child Organisation'];
   parorg: boolean = false;
@@ -45,21 +128,23 @@ export class OrganisationDetailsComponent implements OnInit {
   orgId: any;
   editFlag: boolean = false;
   orgValue: any;
-  filePath = 'assets/images/camera_blue.png';
   _features = [];
   sF: any;
+  filePath = 'assets/images/avatars/camera_blue.png';
+  featureData : any;
 
   selectedAll = false;
 
   constructor(private formBuilder: FormBuilder,    
     private organizationService: OrganizationService,
     private router :Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private dialog : MatDialog,
+    private snackBar : MatSnackBar
     ) {
     this.organisationsList = this.organizationService.organisations;
     //this.userAuth = this.auth.get();
     this.userAuth = JSON.parse(window.localStorage.getItem("userAuth"));
-    
     // this.onGetFeature();
     //this.getparentOrganisations();
     this.orgFormErrors = {
@@ -98,8 +183,7 @@ export class OrganisationDetailsComponent implements OnInit {
       orgCode: ['', Validators.required],
       orgType: ['', Validators.required],
       logoImageUrl: this.formBuilder.array([]),
-/*      _parentOrganisationId: this.formBuilder.array([]),
-*//*    _childOrganisationsId : [''],*/
+      /*      _parentOrganisationId: this.formBuilder.array([]),*/
       _childOrganisationsId: this.formBuilder.array([]),
       _features: this.formBuilder.array([]),
       sharedFeature : this.formBuilder.array([]),
@@ -126,45 +210,11 @@ export class OrganisationDetailsComponent implements OnInit {
         pincode: ['', [Validators.required, Validators.minLength(6)]]
       }),
     });
-    /*this.organizationDetailsForm.valueChanges.subscribe(() => {
-      this.onOrgFormValuesChanged();
-    });*/
-
   }
 
   ngOnInit() {
     this.assignValuesToForm();
   }
-/*
-  createFormGroup() {
-    return new FormGroup({
-      _id : new FormControl('', [Validators.required]),
-      name: new FormControl('', [Validators.required]),
-      orgCode: new FormControl('', [Validators.required]),
-      orgType: new FormControl('', [Validators.required]),
-      plant: new FormControl('', [Validators.required]),
-      email: new FormControl('', [Validators.required]),
-      subscription: new FormGroup({
-        plan: new FormControl('', [Validators.required]),
-        validTill : new FormControl('', [Validators.required]),
-        registrationDate: new FormControl('', [Validators.required]),
-      }),
-       logoImageUrl: this.formBuilder.array([]),
-      _parentOrganisationId: [''],
-      _childOrganisationsId : this.formBuilder.array([]),
-      /*_childOrganisationsId: this.formBuilder.array([]),
-      _features: new FormControl('', [Validators.required]),
-      sharedFeature : this.formBuilder.array([]),
-      address: new FormGroup({
-        flat: new FormControl(['', Validators.required]),
-        street: new FormControl(['', Validators.required]),
-        area: new FormControl(['', Validators.required]),
-        city: new FormControl(['', Validators.required]),
-        state: new FormControl(['', Validators.required]),
-        pincode: new FormControl(['',Validators.required, Validators.minLength(6)])
-      })
-    });
-  }*/
 
   assignValuesToForm() {
     if(this.formType !== 'create') {
@@ -173,17 +223,41 @@ export class OrganisationDetailsComponent implements OnInit {
   }
   
 
-  /*updateFilter(event) {
-    const val = event.target.value.toLowerCase();
-    // filter our data
-    const temp = this.temp.filter(function (d) {
-      return d.name.toLowerCase().indexOf(val) !== -1 || !val;
+  openDialogFeature() {
+    this.featureData = this.allFeatures;
+    const dialogRef = this.dialog.open(FeaturePopupComponent, {
+      width: '450px',
+      data: this.allFeatures ? this.allFeatures : {}
     });
+    dialogRef.afterClosed().subscribe(result => {
+      // TODO closed event
+    });
+  }
 
-    // update the rows
-    this.organisationsList = temp;
-    // Whenever the filter changes, always go back to the first page
-  }*/
+  onPhotoUpload(event) {
+    /*let reader = new FileReader();
+    if (event.target.files && event.target.files.length > 0) {
+      let file = event.target.files[0];
+      reader.readAsDataURL(file);
+      let fileExt = file.name.split(".");
+      let fileName = (new Date().getTime()) + "." + fileExt[fileExt.length - 1];
+      this.organizationService.getS3Url('file-name=' + fileName + '&file-type=' + file.type +
+        '&_organisationId=' + this.userAuth.organisation._id)
+      .then((response: any) => {
+        this.http.put(response.signedRequest, file, {
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+        }).subscribe((awsRes: any) => {
+          this.filePath = 'https://s3.ap-south-1.amazonaws.com/' + this.userAuth.organisation._id + '/' + fileName;
+          this.organizationDetailsForm.controls['logoImageUrl'].setValue(this.filePath);
+        }, (error: any) => {
+          this.snackBar.open(error.message);
+
+        });
+      }, (error: any) => {
+          this.snackBar.open(error.message);
+      });
+    }*/
+  }
 
   changeEvent(event) {
     this.sF = event.source.value;
@@ -206,6 +280,10 @@ export class OrganisationDetailsComponent implements OnInit {
     }
   }
 
+  preventDefault ($event) {
+    $event.preventDefault();
+  }
+
   generateOrgCode() {
     let name = this.organizationDetailsForm.value.name;
     if (name) {
@@ -223,8 +301,8 @@ export class OrganisationDetailsComponent implements OnInit {
   onOrgFormSubmit() {
     this.organizationDetailsForm.value._features = this._features;
     if (this.organizationDetailsForm.value._id == (undefined || "")) {
-        this.orgFormSubmitted = true;
-        this.saveApiCall(this.organizationDetailsForm.value);
+      this.orgFormSubmitted = true;
+      this.saveApiCall(this.organizationDetailsForm.value);
     } else {
       this.orgFormSubmitted = true;
       this.updateApi(this.organizationDetailsForm.value._id, this.organizationDetailsForm.value);
@@ -243,9 +321,9 @@ export class OrganisationDetailsComponent implements OnInit {
     }
     formData.users = newData.users;
     this.organizationService.organisations(formData)
-      .pipe().subscribe(response => {
+    .pipe().subscribe(response => {
       this.orgFormSubmitted = false;
-     console.log(response, 'response.message')
+      console.log(response, 'response.message')
       this.organizationDetailsForm['_touched'] = false;
       const path = '/dashboard/organisation'
       this.router.navigate([path]);
@@ -257,9 +335,9 @@ export class OrganisationDetailsComponent implements OnInit {
 
   updateApi(id, formData) {
     this.organizationService.update(id, formData)
-      .pipe().subscribe(response => {
+    .pipe().subscribe(response => {
       this.orgFormSubmitted = false;
-     console.log(response.message,'response.message')
+      console.log(response.message,'response.message')
       this.organizationDetailsForm['_touched'] = false;
       const path = '/dashboard/organisation'
       this.router.navigate([path]);
@@ -269,65 +347,5 @@ export class OrganisationDetailsComponent implements OnInit {
     });
   }
   
-
-/*  ediMapping(response) {
-    this._features = [];
-    this.organizationDetailsForm.patchValue(response.data);
-    this.filePath = response.data.logoImageUrl;
-    this.selectedFeatureValue = response.data._features;
-    for (let i = 0; i < response.data._features.length; i++) {
-      this._features.push(response.data._features[i]._id);
-      var index = this.features.findIndex(function(value) {
-        return value._id == response.data._features[i]._id;
-      });
-      if (index > -1) {
-        this.features.splice(index, 1);
-      }
-    }
-  }
-*/
-/*  onOrgFormValuesChanged() {
-    for (const field in this.formErrors) {
-      if (!this.formErrors.hasOwnProperty(field)) {
-        continue;
-      }
-      // Clear previous errors
-      this.formErrors[field] = {};
-      // Get the control
-      const control = this.form.get(field);
-      if (control && control.dirty && !control.valid) {
-        this.formErrors[field] = control.errors;
-      }
-    }
-  }*/
-
- /* deleteFeature(id) {
-    //alert(this.sF.name);
-    this.features.push(this.selectedFeatureValue[id]);
-    this.selectedFeatureValue.splice(id, 1);
-    this._features.splice(id, 1);
-  }*/
-
- /* getparentOrganisations() {
-    this.organizationService.getAll(this.orgID)
-      .pipe().subscribe(response => {
-      this.parentOrganisations = response;
-        this.parentOrganisations.push({
-          name: "Parent Organisation",
-          _id: ''
-        })
-        this.organisationCount = response.length;
-      });
-  }
-*/
- /* onGetFeature() {
-    this.organizationService.getFeature()
-      .pipe().subscribe(response => {
-      this.features = response;
-    }, (error: any) => {
-        // console.log(error , "error")
-      });
-  }*/
-
-
 }
+  

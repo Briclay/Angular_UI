@@ -29,9 +29,12 @@
         <mat-panel-title *ngIf="isHistory" class="expansion-history" (click)="$event.stopPropagation()">
           <mat-icon (click)="historyClick(listData)">history</mat-icon>
         </mat-panel-title>
+        <mat-panel-title *ngIf="isFeature" class="expansion-history" style="margin-right: 20px;">
+          <mat-icon (click)="feature(listData)">home</mat-icon>
+        </mat-panel-title>
       </mat-expansion-panel-header>
       <app-widget-container
-        [selector]="selectorComponent" [data]="listData">
+        [selector]="selectorComponent" [data]="listData" >
       </app-widget-container>
     </mat-expansion-panel>
   </mat-accordion>

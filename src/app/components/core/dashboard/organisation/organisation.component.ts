@@ -37,11 +37,13 @@ export class OrganisationComponent implements OnInit {
     });
   }
 
+
+
   openDialog(data) {
     this.organisationService.getHistory().pipe().subscribe(res => {
       this.historyData = {
         header: [
-        { title: 'Name ' },
+        { title: 'Name' },
         { title: 'Changed By' },
         { title: 'Changed Date' }],
         keys: ['username', 'changedBy', 'changedDate'],

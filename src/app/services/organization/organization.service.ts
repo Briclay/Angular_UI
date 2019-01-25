@@ -3,6 +3,7 @@ import { Observable, of } from 'rxjs';
 import { constantService } from '../../constant/constant.serive';
 import { OrganizationData } from '../../interfaces/interfaces';
 import { ApiService } from "./../api.service";
+import { environmentService } from "./../../constant/environment";
 import { map } from 'rxjs/operators';
 
 const history = {
@@ -38,34 +39,34 @@ export class OrganizationService {
 	}
 
 	public getFeature (): Observable<any> {
-        let url = "https://briclay-core.herokuapp.com/features?select=*";
+        let url = `${environmentService.briclayCore}/features?select=*`;
         return this.apiService.get(url).pipe(map(res => res));
     }
 
 	public getAll(): Observable<any> {
-        let url = "https://briclay-core.herokuapp.com/organisations?select=*";
+        let url = `${environmentService.briclayCore}/organisations?select=*`;
         return this.apiService.get(url).pipe(map(res => res));
     }
     
     public getOne(id): Observable<any> {
-        let url =  `https://briclay-core.herokuapp.com/organisations/${id}`;
+        let url =  `${environmentService.briclayCore}/organisations/${id}`;
         return this.apiService.get(url, id).pipe(map(res => res));
     }
    
     public organisations (request): Observable<any> {
-        let url = "https://briclay-core.herokuapp.com/organisations";
+        let url = `${environmentService.briclayCore}/organisations`;
         return this.apiService.post(url, request).pipe(map(res => res));
     }
 
     public update (id, request): Observable<any> {
-        let url = `https://briclay-core.herokuapp.com/organisations/${id}`;
+        let url = `${environmentService.briclayCore}/organisations/${id}`;
         return this.apiService.put(url, request).pipe(map(res => res));
     }
 
     getS3Url(query: string): Observable<any> {
-	    let url = `https://briclay-core.herokuapp.com/file/sign-s3?${query}`
+	    let url = `${environmentService.briclayCore}/file/sign-s3?${query}`
 	    return this.apiService.get(url).pipe(map(res => res));
-	  }
+    }
 
    /* public deleteOrg (request): Observable<any> {
         let url = "https://briclay-core.herokuapp.com/organisations/5a58438f734d1d61613f6ed9";

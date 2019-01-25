@@ -1,9 +1,14 @@
 <div class="user-details-container">
-  <form [formGroup]="organizationDetailsForm" (ngSubmit)="onSubmit()" class="user-details-form">
+  <div [formGroup]="organizationDetailsForm" class="user-details-form">
     <mat-card>
       <div class="user-details-card">
         <div class="user-details-name">
-          <img src="./assets/images/backgrounds/autumn.jpg" />
+          <div >
+            <a (click)="fileInput.click()" fxLayout="column">
+              <img src="{{filePath}}" class="img-upload" width="59%">
+              <input #fileInput type="file" (change)="onPhotoUpload($event)"  style="display:none;" />
+            </a>
+          </div>
           <div class="username-input" >
             <mat-form-field appearance="outline">
               <mat-label>Orgnisation Name</mat-label>
@@ -33,10 +38,9 @@
                   <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                   <mat-datepicker #picker1></mat-datepicker> -->
               </mat-form-field>
-
             </div>
             <div>
-              <button [matMenuTriggerFor]="menu" class="margin-left-4" mat-raised-button class="feature_btn" 
+              <button (click)="openDialogFeature()" class="margin-left-4" mat-raised-button class="feature_btn" 
               >Features</button>
             </div>
           </div>
@@ -88,25 +92,5 @@
 
       <div class="clearfix"></div>
     </mat-card>
-  </form>
-</div>
-<mat-menu #menu="matMenu">
-  <div class="feature_container">
-    <div class="title">Feature</div>
-    <div>
-      <div style="margin-top: 6%;" >
-        <div *ngFor="let feature of allFeatures">
-          <div fxLayout=row >
-            <div style=" border-bottom: black 1px solid;">
-              <mat-checkbox (change)="changeEvent($event)" ><span class="message" >{{feature}}</span></mat-checkbox>
-            </div>
-          </div>
-         </div>
-      </div>
-      <div style="padding-top: 10%;" fxLayout=row>
-        <button mat-raised-button type="submit" class="pull-right">Cancel</button>
-        <button mat-raised-button type="submit" class="pull-right"(click)="addOrg()" >Save</button>
-      </div>
-    </div>
   </div>
-</mat-menu>
+</div>

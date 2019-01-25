@@ -3,6 +3,7 @@ import { Observable, of } from 'rxjs';
 import { constantService } from '../../constant/constant.serive';
 import { DepartmentData } from '../../interfaces/interfaces';
 import { ApiService } from "./../api.service";
+import { environmentService } from "./../../constant/environment";
 import { map } from 'rxjs/operators';
 
 /*const data: DepartmentData = {
@@ -61,27 +62,27 @@ export class DepartmentService {
 	}
 
 	public getAll(): Observable<any> {
-        let url = "https://briclay-core.herokuapp.com/departments?select=*";
+        let url = `${environmentService.briclayCore}/departments?select=*`;
         return this.apiService.get(url).pipe(map(res => res));
     }
 
 	public getDepartmentByOrg(OrgId): Observable<any> {
-        let url = `https://briclay-core.herokuapp.com/departments?select=*&${OrgId}`;
+        let url = `${environmentService.briclayCore}/departments?select=*&${OrgId}`;
         return this.apiService.get(url).pipe(map(res => res));
     }
 
     public getOne(id): Observable<any> {
-        let url = `https://briclay-core.herokuapp.com/departments/${id}`;
+        let url = `${environmentService.briclayCore}/departments/${id}`;
         return this.apiService.get(url, id).pipe(map(res => res));
     }
 
     public update(id , request): Observable<any> {
-        let url = `https://briclay-core.herokuapp.com/departments/${id}`;
+        let url = `${environmentService.briclayCore}/departments/${id}`;
         return this.apiService.put(url, request).pipe(map(res => res));
     }
 
     public save(request): Observable<any> {
-        let url = "https://briclay-core.herokuapp.com/departments";
+        let url = `${environmentService.briclayCore}/departments`;
         return this.apiService.post(url, request).pipe(map(res => res));
     }
 

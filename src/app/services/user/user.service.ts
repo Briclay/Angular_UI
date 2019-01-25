@@ -5,6 +5,7 @@ import { Observable, of } from 'rxjs';
 import { constantService } from '../../constant/constant.serive';
 import { UserData } from '../../interfaces/interfaces';
 import {ApiService} from  '../api.service';
+import {environmentService} from '../../constant/environment'
 
 const data: UserData = {
     "result": "success",
@@ -425,7 +426,7 @@ export class UserService {
     ) { }
     // pass params data
     public getUser(): Observable<UserData> {
-        let url = `https://briclay-core.herokuapp.com/users?select=all`
+        let url = `${environmentService.briclayCore}/users?select=all`
         return this.apiService.get(url).pipe(map(res     => res));
     }
 
