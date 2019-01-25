@@ -12,7 +12,7 @@ export class AuthenticationService {
     // pass params data
 
     public login(request): Observable<any> {
-        let url = "https://matkraft-api.herokuapp.com/api/v1/auth/signin";
+        let url = "/auth/signin";
         return this.apiService.post(url, request).pipe(map(res => res));
     }
 }

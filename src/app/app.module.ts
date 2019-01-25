@@ -41,6 +41,7 @@ import { NcmDashboardComponent } from './components/core/dashboard/ncm-dashboard
 import { HistoryPopupComponent } from './components/shared/history-popup/history-popup.component';
 import { DesignDashboardComponent } from './components/core/dashboard/design-dashboard/design-dashboard.component';
 import { FeaturePopupComponent } from './components/shared/feature-popup/feature-popup.component';
+import { ForgotPasswordComponent } from './components/core/forgot-password/forgot-password.component';
 
 @NgModule({
   declarations: [
@@ -69,11 +70,13 @@ import { FeaturePopupComponent } from './components/shared/feature-popup/feature
     NcmDashboardComponent,
     HistoryPopupComponent,
     DesignDashboardComponent,
-    FeaturePopupComponent
+    FeaturePopupComponent,
+    ForgotPasswordComponent
   ],
   entryComponents: [
     HistoryPopupComponent,
-    FeaturePopupComponent
+    FeaturePopupComponent,
+    ForgotPasswordComponent
   ],
   imports: [
     BrowserModule,

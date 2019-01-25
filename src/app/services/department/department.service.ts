@@ -61,27 +61,27 @@ export class DepartmentService {
 	}
 
 	public getAll(): Observable<any> {
-        let url = "https://briclay-core.herokuapp.com/departments?select=*";
+        let url = "/departments?select=*";
         return this.apiService.get(url).pipe(map(res => res));
     }
 
     public getOne(id): Observable<any> {
-        let url = `https://briclay-core.herokuapp.com/departments/${id}`;
+        let url = `/departments/${id}`;
         return this.apiService.get(url, id).pipe(map(res => res));
     }
 
     public update(id , request): Observable<any> {
-        let url = `https://briclay-core.herokuapp.com/departments/${id}`;
+        let url = `/departments/${id}`;
         return this.apiService.put(url, request).pipe(map(res => res));
     }
 
     public save(request): Observable<any> {
-        let url = "https://briclay-core.herokuapp.com/departments";
+        let url = "/departments";
         return this.apiService.post(url, request).pipe(map(res => res));
     }
 
     /*public deleteDept(request): Observable<any> {
-        let url = "https://briclay-core.herokuapp.com/departments?select=*";
+        let url = "/departments?select=*";
         return this.apiService.post(url, request).pipe(map(res => res));
     }*/
 }

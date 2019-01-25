@@ -127,12 +127,12 @@ export class DepartmentDetailsComponent implements OnInit {
     private route: ActivatedRoute, 
     private router: Router,
     private dialog : MatDialog,
-      private snackBar: MatSnackBar) 
+    private snackBar: MatSnackBar) 
   {
 
     //this.userAuth = this.auth.get();
     this.userAuth = JSON.parse(window.localStorage.getItem("userAuth"));
-    this._organisationId = this.userAuth._organisationId._id;
+    this._organisationId = this.userAuth._organisationId;
     this.deptFormErrors = {
       name: {},
       description: {},
@@ -210,19 +210,32 @@ export class DepartmentDetailsComponent implements OnInit {
       this.DeptService.update(this.departmentDetailsForm.value._id, this.departmentDetailsForm.value)
     .pipe().subscribe(response => {
       this.deptFormSubmitted = false;
+      this.snackBar.open("Department updated successfully", 'Department', {
+        duration: 2000,
+      });
     }, (error: any) => {
       this.deptFormSubmitted = false;
+      this.snackBar.open(error.message, 'Department', {
+        duration: 2000,
+      });
       console.log(error.message)
     });
   } 
   else {
     delete this.departmentDetailsForm.value._id;
+    this.departmentDetailsForm.value._organisationId  = this._organisationId;
     this.DeptService.save(this.departmentDetailsForm.value)
     .pipe().subscribe(response => {
       this.deptFormSubmitted = false;
       console.log(response, 'response');
+      this.snackBar.open("Department created successfully", 'Department', {
+        duration: 2000,
+      });
     }, (error: any) => {
       this.deptFormSubmitted = false;
+      this.snackBar.open(error.message, 'Department', {
+        duration: 2000,
+      });
       console.log(error.message)
     });
   } 
