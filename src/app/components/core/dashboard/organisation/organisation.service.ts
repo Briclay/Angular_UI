@@ -16,4 +16,9 @@ export class OrganisationService {
         return this.apiService.get(url).pipe(map(res => res));
     }
 
+    public getOneOrg(fileId: string): Observable<any> {
+      let url = `${environmentService.briclayCore}/organisations/${fileId}`
+      return this.apiService.get(url).pipe(map(res => res));
+  }
+
 }

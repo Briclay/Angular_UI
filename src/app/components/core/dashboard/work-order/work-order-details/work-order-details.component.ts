@@ -3,8 +3,10 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { Router } from '@angular/router';
 import * as _ from 'lodash';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
-import {WorkOrderService} from '../work-order.service';
-import {WorkRequestService} from '../../work-request/work-request.service'
+import { WorkOrderService } from '../work-order.service';
+import { WorkRequestService } from '../../work-request/work-request.service'
+import { OrganisationService } from '../../organisation/organisation.service';
+import { ProjectService } from '../../projects/project.service'
 
 @Component({
   selector: 'app-work-order-details',
@@ -27,10 +29,14 @@ export class WorkOrderDetailsComponent implements OnInit {
   projectCode: string;
   orderList: any;
   workList: any;
+  orgId: string;
   constructor(private formBuilder: FormBuilder,
     private workOrderService: WorkOrderService,
-    private workRequestService: WorkRequestService
+    private workRequestService: WorkRequestService,
+    private organisationService: OrganisationService,
+    private projectService: ProjectService
   ) {
+    this.orgId = '5c42f0f5d88e0000043ba69f';
     this.initiatedDate = (new Date());
     this.getAllWorkRequest();
     this.orderTrackerFormErrors = {
@@ -52,8 +58,8 @@ export class WorkOrderDetailsComponent implements OnInit {
       totalValue: {}
     }
     this.orderTrackerForm = this.formBuilder.group({
-      _organisationId: '5a5844cd734d1d61613f7066',
-      _projectId: ['5a5844cd734d1d61613f7066', Validators.required],
+      _organisationId: this.orgId,
+      _projectId: [Validators.required],
       _workRequest: ['', Validators.required],
       _workOrderId: [''],
       workOrderNumber: [''],
@@ -79,7 +85,7 @@ export class WorkOrderDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.assignValuesToForm();
-   }
+  }
 
   selectWorkRequest() {
     this.genrateFullRefNumber();
@@ -128,20 +134,16 @@ export class WorkOrderDetailsComponent implements OnInit {
     }
   }
   getAllWorkOrder() {
-    this.workOrderService.getWorkOrder('filter[_organisationId]=5a5844cd734d1d61613f7066')
+    this.workOrderService.getWorkOrder('filter[_organisationId]=' + this.orgId)
       .pipe().subscribe(res => {
         this.orderList = res;
         this.orderTrackerForm.controls['_workOrderId'].setValue("A" + this.createOrderId(res.length + 1));
         this.workList = [];
         var countCheck = 0;
-        // this.workList = _.differenceWith(this.requestTrackerList, this.orderList, _.isEqual);
-        //_.forEach(this.requestTrackerList,function(value){
-
-        // this is not valid solution please check valid solution fot that (to do task)
         // to task for future
         for (var i = 0; i < this.requestTrackerList.length; i++) {
           countCheck = 0;
-          
+
           for (var j = 0; j < this.orderList.length; j++) {
             if (_.isEqual(this.requestTrackerList[i].requestNumber, this.orderList[j]._workRequestId.requestNumber)) {
               countCheck = 1;
@@ -152,7 +154,6 @@ export class WorkOrderDetailsComponent implements OnInit {
             this.workList.push(this.requestTrackerList[i]);
           }
         }
-        console.log('workList' + JSON.stringify(this.workList));
         // });
       }, (error: any) => {
         //TODO add error component
@@ -160,25 +161,33 @@ export class WorkOrderDetailsComponent implements OnInit {
       });
   }
   getOrgCode() {
-    // this.organisationService.getOne(this.userAuth.organisation._id)
-    //   .then((response: any) => {
-    //     this.orgCode = response.data.orgCode;
-    //     this.getDate(this.orgCode);
-    //   }, (error: any) => {
-    //     throw new MatkraftError(error.error.error.message);
-    //   });
+    this.organisationService.getOneOrg(this.orgId)
+      .pipe().subscribe(res => {
+        console.log('res' + JSON.stringify(res));
+        this.orgCode = res.orgCode;
+        this.getDate(this.orgCode);
+      }, (error: any) => {
+        console.error('error', error);
+      })
   }
   getProjectCode(orgCode, date) {
     var reuquetNumber;
     if (!_.isUndefined(this.requestTrackerList) && !_.isEmpty(this.requestTrackerList)) {
       reuquetNumber = this.requestTrackerList[0].requestNumber;
     }
-    // this.projectsService.getOne(this.orderTrackerForm.value.workRequestList._projectId._id)
-    //   .then((response: any) => {
-    //     this.orderTrackerForm.controls['workOrderFullRefNumber'].setValue(orgCode + "/" + date + "/" + reuquetNumber + "/" + response.projectCode + "-" + this.createOrderId(this.orderList.length) + "/" + this.orderTrackerForm.value._workOrderId);
-    //   }, (error: any) => {
-    //     throw new MatkraftError(error.error.error.message);
-    //   });
+    console.log('orgCode' + orgCode);
+    console.log('date' + date);
+    console.log('reuquetNumber' + reuquetNumber);
+    console.log('reuquetNumber' + reuquetNumber);
+    var refNumber = orgCode + "/" + date + "/" + reuquetNumber + "/";
+    this.projectService.getSingleProjects(this.orderTrackerForm.value.workRequestList._projectId._id)
+      .pipe().subscribe(res => {
+        console.log('res.projectCode' + res.projectCode);
+        this.orderTrackerForm.controls['workOrderFullRefNumber'].setValue(refNumber = refNumber + res.projectCode + "-" + this.createOrderId(this.orderList.length) + "/" + this.orderTrackerForm.value._workOrderId);
+      }, (error: any) => {
+        console.log('error', error)
+        this.orderTrackerForm.controls['workOrderFullRefNumber'].setValue(refNumber);
+      });
   }
   getDate(orgCode) {
     var cuurentYear, preYear;
@@ -200,15 +209,13 @@ export class WorkOrderDetailsComponent implements OnInit {
     return str.toString().substring(pos1, pos2);
   }
   assignValuesToForm() {
-    console.log('this.data', this.data)
-    console.log('this.formType', this.formType)
-    if(this.formType !== 'create') {
+    if (this.formType !== 'create') {
       this.orderTrackerForm.patchValue(this.data)
     }
   }
   getAllWorkRequest() {
     //get all work request for calculting request number
-    this.workRequestService.getWorkRequest(`filter[_organisationId]=5a5844cd734d1d61613f7066`)
+    this.workRequestService.getWorkRequest(`filter[_organisationId]=` + this.orgId)
       .pipe().subscribe(res => {
         this.requestTrackerList = res;
         this.getAllWorkOrder();
@@ -219,30 +226,19 @@ export class WorkOrderDetailsComponent implements OnInit {
   }
 
   onOrderFormSubmit() {
-    // if (this.orderTrackerForm.valid) {
-    //   this.orderTrackerService.save(this.orderTrackerForm.value)
-    //     .then((response: any) => {
-    //       // toasty message
-    //       const toastOptions: ToastOptions = {
-    //         title: 'Success',
-    //         msg: response.message
-    //       };
-    //       this.toastyService.success(toastOptions);
-    //       const path = '/work-order-tracker'
-    //       // route to work request list
-    //       this.router.navigate([path]);
-    //     }, (error: any) => {
-    //       throw new MatkraftError(error.error.error.message);
-    //     });
-    // } else {
-    //   throw new MatkraftError('Fill Mandatory Field');
-    // }
+    console.log('this.orderTrackerForm.value' + JSON.stringify(this.orderTrackerForm.value));
+    if (this.orderTrackerForm.valid) {
+      this.workOrderService.save(this.orderTrackerForm.value)
+        .pipe().subscribe(res => {
+          console.log('res', res)
+        }, (error: any) => {
+          console.log('error', error)
+        });
+    } else {
+      console.log('invliad form')
+    }
   }
   cancel() {
     const path = '/work-order-tracker';
   }
-
-
-  
-
 }
