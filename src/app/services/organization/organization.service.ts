@@ -63,10 +63,16 @@ export class OrganizationService {
         return this.apiService.put(url, request).pipe(map(res => res));
     }
 
-    getS3Url(query: string): Observable<any> {
+    getS3Url(query: string, request?): Observable<any> {
 	    let url = `${environmentService.briclayCore}/file/sign-s3?${query}`
-	    return this.apiService.get(url).pipe(map(res => res));
+        return this.apiService.put(url, request).pipe(map(res => res));
     }
+
+   /* getS3Url(query: string): Observable<any> {
+	    let url = `/file/sign-s3?${query}`
+>>>>>>> origin/Sonal_Changes
+	    return this.apiService.get(url).pipe(map(res => res));
+    }*/
 
    /* public deleteOrg (request): Observable<any> {
         let url = "https://briclay-core.herokuapp.com/organisations/5a58438f734d1d61613f6ed9";

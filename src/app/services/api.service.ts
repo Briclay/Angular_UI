@@ -4,7 +4,6 @@ import {throwError as observableThrowError, Observable} from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders, HttpResponse, HttpErrorResponse, HttpParams } from "@angular/common/http";
-import {constantService} from "../constant/constant.serive";
 import { jspAppGlobal } from '../app.globlal';
 
 export let API_BASE = "";
@@ -14,10 +13,10 @@ export let API_BASE = "";
 })
 export class ApiService {
   // URLs to web api
-
+  
   constructor(private http: HttpClient) { }
 
- public get(url: string, query?: {[id: string]: string}, responseType?): Observable<any> {
+  public get(url: string, query?: {[id: string]: string}, responseType?): Observable<any> {
     let reqUrl = `${API_BASE}${url}`;
     let httpParams: HttpParams = undefined;
 
@@ -28,8 +27,14 @@ export class ApiService {
       }
     }
 
+    const headersOptions = {
+      headers: new HttpHeaders({ 
+        "Authorization" : "7L9AEbso7rb0HwV5GwYtMu8clzAbXT8vzuDFsTJ3lnc4txvIOaK9wFqZjrbw65id"
+      })
+    };
+
     let runRequest = (retries: number): Observable <any> => {
-      return this.http.get(reqUrl, {params: httpParams, responseType: responseType}).pipe(
+      return this.http.get(reqUrl, headersOptions , {params: httpParams, responseType: responseType}).pipe(
         map(response => response),
         catchError((error) => {
           if (retries > 0) {
@@ -48,7 +53,10 @@ export class ApiService {
     let body = JSON.stringify(bodyObj);
 
     const headersOptions = {
-      headers: new HttpHeaders({ "Content-Type": "application/json" })
+      headers: new HttpHeaders({ 
+        "Content-Type": "application/json" ,
+        "Authorization" : "7L9AEbso7rb0HwV5GwYtMu8clzAbXT8vzuDFsTJ3lnc4txvIOaK9wFqZjrbw65id"
+      })
     };
 
     return this.http
@@ -64,7 +72,10 @@ export class ApiService {
     let body = JSON.stringify(bodyObj);
 
     const headersOptions = {
-      headers: new HttpHeaders({ "Content-Type": "application/json" })
+      headers: new HttpHeaders({ 
+        "Content-Type": "application/json" ,
+        "Authorization" : "7L9AEbso7rb0HwV5GwYtMu8clzAbXT8vzuDFsTJ3lnc4txvIOaK9wFqZjrbw65id"
+      })
     };
 
     return this.http
@@ -86,4 +97,6 @@ export class ApiService {
 
     return observableThrowError(new Error(errorResp));
   }
+
+
 }

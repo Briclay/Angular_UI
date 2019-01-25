@@ -52,24 +52,3 @@
     </mat-card>
   </form>
 </div>
-
-<mat-menu #menu="matMenu">
-  <div class="feature_container">
-    <div class="title">Feature</div>
-    <div>
-      <div style="margin-top: 6%;" >
-        <div *ngFor="let feature of allFeatures">
-          <div fxLayout=row >
-            <div style=" border-bottom: black 1px solid;">
-              <mat-checkbox (change)="changeEvent($event)" ><span class="message" >{{feature}}</span></mat-checkbox>
-            </div>
-          </div>
-         </div>
-      </div>
-      <div style="padding-top: 10%;" fxLayout=row>
-        <button mat-raised-button type="submit" class="pull-right">Cancel</button>
-        <button mat-raised-button type="submit" class="pull-right"(click)="addOrg()" >Save</button>
-      </div>
-    </div>
-  </div>
-</mat-menu>

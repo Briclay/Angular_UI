@@ -13,19 +13,21 @@
     <div id="login-form" >
       <form  name="loginForm"  [formGroup]="loginForm" novalidate>
         <div fxLayout="row" class="inputBoxShadow">
-          <span class="nameAndPwd">UserName</span>
-          <mat-form-field>
-            <input matInput formControlName="usernameOrEmail" type="email" placeholder="Enter username/email ID">
-          </mat-form-field>
+          <div class="nameAndPwd" >Email</div>
+          <div>
+            <mat-form-field>
+              <input matInput formControlName="email" type="email" placeholder="Enter email">
+            </mat-form-field>
+          </div>
         </div>
         <div fxLayout="row" class="inputBoxShadow" style="margin-top: 30px;">
-          <span class="nameAndPwd">Password</span>
+          <div class="nameAndPwd">Password</div>
           <mat-form-field>
             <input matInput formControlName="password" type="password" placeholder="Enter password" >
           </mat-form-field>
         </div>
         <div class="remember-forgot-password">
-          <a class="forgot-password">
+          <a class="forgot-password"   (click)="openForgotPwdPopup()">
             Forgot Password?
           </a>
         </div>

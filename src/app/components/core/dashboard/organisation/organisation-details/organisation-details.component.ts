@@ -22,7 +22,7 @@ export class OrganisationDetailsComponent implements OnInit {
   temp = [];
   organizationDetailsForm: FormGroup;
   getApprovals = ['File' ,'Service Request' ,'Snag Master']
-  plans = [ 'Premium' , 'Trial']
+  plans = [ 'Basic', 'Standard', 'Premium', 'Enterprise']
   allFeatures = [
   {
     "_featureId": "f1",
@@ -132,7 +132,6 @@ export class OrganisationDetailsComponent implements OnInit {
   sF: any;
   filePath = 'assets/images/avatars/camera_blue.png';
   featureData : any;
-
   selectedAll = false;
 
   constructor(private formBuilder: FormBuilder,    
@@ -167,7 +166,7 @@ export class OrganisationDetailsComponent implements OnInit {
         validTill : {},
         registrationDate: {},
       },
-      users: {
+      adminUser: {
         email: {},
         username: {}
       },
@@ -196,7 +195,7 @@ export class OrganisationDetailsComponent implements OnInit {
       description: ['', Validators.required],
       plant: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      users: this.formBuilder.group({
+      adminUser: this.formBuilder.group({
         email: ['', [Validators.required, Validators.email]],
         password: ['Welcome@1234'],
         username: ['', Validators.required]
@@ -313,22 +312,28 @@ export class OrganisationDetailsComponent implements OnInit {
     delete formData._id;
     formData.orgType = "BUILDER";
     const newData = {
-      users: {
+      adminUser: {
         email: formData.email,
         username: formData.email,                                                                                       
         password: "Welcome@1234"
       }
     }
-    formData.users = newData.users;
+    formData.adminUser = newData.adminUser;
     this.organizationService.organisations(formData)
     .pipe().subscribe(response => {
       this.orgFormSubmitted = false;
       console.log(response, 'response.message')
+      this.snackBar.open("Organisation created successfully", 'Organisation', {
+        duration: 2000,
+      });
       this.organizationDetailsForm['_touched'] = false;
       const path = '/dashboard/organisation'
       this.router.navigate([path]);
     }, (error: any) => {
       this.orgFormSubmitted = false;
+      this.snackBar.open(error.message, 'Organisation', {
+        duration: 2000,
+      });
       console.log(error , "error")
     });
   }
@@ -338,11 +343,17 @@ export class OrganisationDetailsComponent implements OnInit {
     .pipe().subscribe(response => {
       this.orgFormSubmitted = false;
       console.log(response.message,'response.message')
+      this.snackBar.open("Organisation updated successfully", 'Organisation', {
+        duration: 2000,
+      });
       this.organizationDetailsForm['_touched'] = false;
       const path = '/dashboard/organisation'
       this.router.navigate([path]);
     }, (error: any) => {
       this.orgFormSubmitted = false;
+      this.snackBar.open(error.message, 'Organisation', {
+        duration: 2000,
+      });
       console.log(error.message)
     });
   }

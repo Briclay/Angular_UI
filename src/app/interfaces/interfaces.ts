@@ -141,6 +141,11 @@ export interface OrganizationList {
     state?: string;
     pincode?: number;
   }
+  adminUser : {
+    username : string;
+    email : string;
+    password : string;
+  }
   _users ?: string[];
   imageUrls ?: string[];
   _childOrganisationsId?: string[];

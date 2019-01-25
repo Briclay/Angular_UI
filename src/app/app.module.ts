@@ -57,6 +57,7 @@ import {WorkRequestModule} from './components/core/dashboard/work-request/work-r
 import { HistoryPopupComponent } from './components/shared/history-popup/history-popup.component';
 import { DesignDashboardComponent } from './components/core/dashboard/design-dashboard/design-dashboard.component';
 import { FeaturePopupComponent } from './components/shared/feature-popup/feature-popup.component';
+import { ForgotPasswordComponent } from './components/core/forgot-password/forgot-password.component';
 
 @NgModule({
   declarations: [
@@ -89,7 +90,8 @@ import { FeaturePopupComponent } from './components/shared/feature-popup/feature
     WorkOrderComponent,
     HistoryPopupComponent,
     DesignDashboardComponent,
-    FeaturePopupComponent
+    FeaturePopupComponent,
+    ForgotPasswordComponent
   ],
   imports: [
     BrowserModule,
@@ -111,7 +113,8 @@ import { FeaturePopupComponent } from './components/shared/feature-popup/feature
     FileShareDialogComponent,
     FileMailDialogComponent,
     HistoryPopupComponent,
-    FeaturePopupComponent
+    FeaturePopupComponent,
+    ForgotPasswordComponent
   ],
   providers: [D3Service, DashboardService, UserService, DepartmentService, 
   OrganizationService, UserDashboardService ],

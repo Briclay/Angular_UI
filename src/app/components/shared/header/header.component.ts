@@ -6,6 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+
+	userAuth : any;
+	userName : any;
 	notifications = [
 	  { 
 	  	"id" : "1" ,
@@ -33,8 +36,11 @@ export class HeaderComponent implements OnInit {
 	  }
 	]
 
-  constructor() { }
+  	constructor() { }
 
-  ngOnInit() {
-  }
+  	ngOnInit() {
+  		this.userAuth = JSON.parse(window.localStorage.getItem("userAuth"));
+  		this.userName = this.userAuth.displayName;
+
+  	}
 }

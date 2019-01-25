@@ -2,6 +2,7 @@ import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { ApiService } from "./../api.service";
+import {environmentService} from "./../../constant/environment"
 
 @Injectable({
  providedIn: 'root',
@@ -12,7 +13,7 @@ export class AuthenticationService {
     // pass params data
 
     public login(request): Observable<any> {
-        let url = "https://matkraft-api.herokuapp.com/api/v1/auth/signin";
+        let url = `${environmentService.briclayCore}/auth/signin`;
         return this.apiService.post(url, request).pipe(map(res => res));
     }
 }

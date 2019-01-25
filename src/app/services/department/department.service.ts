@@ -87,7 +87,7 @@ export class DepartmentService {
     }
 
     /*public deleteDept(request): Observable<any> {
-        let url = "https://briclay-core.herokuapp.com/departments?select=*";
+        let url = "/departments?select=*";
         return this.apiService.post(url, request).pipe(map(res => res));
     }*/
 }

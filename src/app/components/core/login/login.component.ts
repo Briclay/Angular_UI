@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from './../../../services/authentication/authentication.service';
 import { Router } from '@angular/router';
-import {MatSnackBar} from '@angular/material';
+import { MatDialog,  MatSnackBar ,MAT_DIALOG_DATA } from '@angular/material';
+import { ForgotPasswordComponent } from '../forgot-password/forgot-password.component'
 
 @Component({
 	selector: 'app-login',
@@ -19,23 +20,36 @@ export class LoginComponent implements OnInit {
 	    private formBuilder: FormBuilder,
 	    private router: Router,
 	    private authenticationService: AuthenticationService,
-	    private snackBar: MatSnackBar) 
+	    private snackBar: MatSnackBar, 
+       	private dialog : MatDialog) 
 		{
 			this.loginFormErrors = {
-				usernameOrEmail: {},
-				password: {}
+				email: {},
+				password: {},
+			    ipAddress: "203.192.251.76"
 			}
 		}
 
 	ngOnInit() {
 		this.loginForm = this.formBuilder.group({
-			usernameOrEmail: ['', Validators.required],
-			password: ['', Validators.required]
+			email: ['', Validators.required],
+			password: ['', Validators.required],
+			ipAddress: ['203.192.251.76', Validators.required]
 		});
 		this.loginForm.valueChanges.subscribe(() => {
 			this.onLoginFormValuesChanged();
 		});
 	}
+
+	openForgotPwdPopup() {
+	    const dialogRef = this.dialog.open(ForgotPasswordComponent, {
+	      width: '700px',
+	      height : 'auto'
+	    });
+	    dialogRef.afterClosed().subscribe(result => {
+	      // TODO closed event
+	    });
+  	}
 
 	onLoginFormValuesChanged() {
 		for (const field in this.loginFormErrors) {
@@ -52,7 +66,6 @@ export class LoginComponent implements OnInit {
 	  }
 	}
 
-
 	onLoginFormSubmit() {
 		this.onLoginFormValuesChanged()
 		this.isLoading = true;
@@ -61,7 +74,7 @@ export class LoginComponent implements OnInit {
 			.pipe().subscribe(response =>  {
 				this.isLoading = false;
                 //this.auth.set(response);
-            	window.localStorage.setItem('userAuth', JSON.stringify(response.data));
+            	window.localStorage.setItem('userAuth', JSON.stringify(response.user));
             	window.localStorage.setItem('userAuthToken', JSON.stringify(response.token));
 				console.log(response, "loginResponse")
 				this.loginForm.reset();
@@ -70,7 +83,9 @@ export class LoginComponent implements OnInit {
 				this.router.navigateByUrl(path);
 			}, (error: any) => {
 				this.isLoading = false;
-				this.snackBar.open("Invalid username or password");
+				this.snackBar.open("Invalid username or password", 'login', {
+			      duration: 2000,
+			    });
 				console.log(error , 'err')
 			});
 		}
