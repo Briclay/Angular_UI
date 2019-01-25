@@ -58,6 +58,7 @@ import { HistoryPopupComponent } from './components/shared/history-popup/history
 import { DesignDashboardComponent } from './components/core/dashboard/design-dashboard/design-dashboard.component';
 import { FeaturePopupComponent } from './components/shared/feature-popup/feature-popup.component';
 import { ForgotPasswordComponent } from './components/core/forgot-password/forgot-password.component';
+import { ConfirmDialogComponent } from './components/shared/confirm-dialog/confirm-dialog.component';
 
 @NgModule({
   declarations: [
@@ -91,7 +92,8 @@ import { ForgotPasswordComponent } from './components/core/forgot-password/forgo
     HistoryPopupComponent,
     DesignDashboardComponent,
     FeaturePopupComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    ConfirmDialogComponent
   ],
   imports: [
     BrowserModule,

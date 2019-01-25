@@ -1,8 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import {UserService} from '../../../../../services/user/user.service';
+import { UserService } from '../../../../../services/user/user.service';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import {FileManagerService} from '../file-manager.service'
+import { FileManagerService } from '../file-manager.service'
 
 @Component({
   selector: 'app-file-share-dialog',
@@ -15,13 +15,12 @@ export class FileShareDialogComponent implements OnInit {
   userLoading: boolean;
   sharedFileError: any;
   constructor(private userService: UserService,
-    public dialogRef: MatDialogRef<FileShareDialogComponent>, 
-    @Inject(MAT_DIALOG_DATA) public data: any, 
+    public dialogRef: MatDialogRef<FileShareDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
     private formBuilder: FormBuilder,
-     private fileManagerService: FileManagerService) { }
+    private fileManagerService: FileManagerService) { }
   ngOnInit() {
     this.getUsers();
-    console.log('this.data', this.data);
   }
 
   onCloseCancel() {
@@ -29,8 +28,7 @@ export class FileShareDialogComponent implements OnInit {
   }
 
   userChanged(user) {
-    console.log('user', user);
-    this.selectedUser =  user.value;
+    this.selectedUser = user.value;
   }
 
   getUsers() {
@@ -39,21 +37,26 @@ export class FileShareDialogComponent implements OnInit {
       this.users = res;
       this.userLoading = false;
     }, (error: any) => {
-        console.error('error', error);
-        this.userLoading = false;
-      })
+      console.error('error', error);
+      this.userLoading = false;
+    })
   }
 
   shareFile() {
     this.sharedFileError = '';
-    this.fileManagerService.shareFile(this.selectedUser._id, this.data._parentId)
+    var body = {
+      activeFlag: true,
+      sharedByUserId: this.selectedUser._id
+    };
+    this.fileManagerService.shareFile(this.data.fileId, body)
       .pipe().subscribe((response: any) => {
         this.dialogRef.close('success');
       }, (error: any) => {
         console.error(error)
         this.sharedFileError = error;
+        this.dialogRef.close('error');
       });
   }
-  
+
 
 }
