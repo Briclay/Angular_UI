@@ -30,7 +30,6 @@ export class FolderCreateDialogComponent implements OnInit {
     this.dialogRef.close('cancel');
   }
   onSave() {
-    console.log('this.dailogForm.value' + JSON.stringify(this.dailogForm.value));
     this.fileManagerService.saveFolder(this.dailogForm.value)
       .pipe().subscribe((response: any) => {
         this.dialogRef.close('success');

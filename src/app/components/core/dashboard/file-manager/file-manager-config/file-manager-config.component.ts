@@ -231,19 +231,19 @@ export class FileManagerConfigComponent implements OnInit {
   }
 
   //this method for get iocn in html passing file extension
-  getIcon(name: string, type: string) {
+  getIcon(fileExt: string, type: string) {
     if (type.toLowerCase() == 'folder')
       return "assets/fileManager/folder.png"
     else {
-      if (type.toLowerCase() == 'doc' || type.toLowerCase() == 'docx')
+      if (fileExt.toLowerCase() == 'doc' || fileExt.toLowerCase() == 'docx')
         return "assets/fileManager/doc.png"
       else
-        if (type.toLowerCase() == 'xls' || type.toLowerCase() == "xlsx")
+        if (fileExt.toLowerCase() == 'xls' || fileExt.toLowerCase() == "xlsx")
           return "assets/fileManager/7.png"
-      if (type.toLowerCase() == 'pdf')
-        return "assets/fileManager/xls.png"
+      if (fileExt.toLowerCase() == 'pdf')
+        return "assets/fileManager/pdf.png"
       else
-        if (type.toLowerCase() == "png" || "jpg" == type.toLowerCase() || type.toLowerCase() == "gif" || type.toLowerCase() == "pgm")
+        if (fileExt.toLowerCase() == "png" || "jpg" == fileExt.toLowerCase() || fileExt.toLowerCase() == "gif" || fileExt.toLowerCase() == "pgm")
           return "assets/fileManager/img.png"
         else
           return "assets/fileManager/file.png"
