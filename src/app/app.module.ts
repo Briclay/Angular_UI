@@ -41,7 +41,6 @@ import { NcmDashboardComponent } from './components/core/dashboard/ncm-dashboard
 import { HistoryPopupComponent } from './components/shared/history-popup/history-popup.component';
 import { DesignDashboardComponent } from './components/core/dashboard/design-dashboard/design-dashboard.component';
 import { FeaturePopupComponent } from './components/shared/feature-popup/feature-popup.component';
-import { SnackBarComponent } from './components/shared/snack-bar/snack-bar.component';
 
 @NgModule({
   declarations: [
@@ -70,8 +69,7 @@ import { SnackBarComponent } from './components/shared/snack-bar/snack-bar.compo
     NcmDashboardComponent,
     HistoryPopupComponent,
     DesignDashboardComponent,
-    FeaturePopupComponent,
-    SnackBarComponent
+    FeaturePopupComponent
   ],
   entryComponents: [
     HistoryPopupComponent,

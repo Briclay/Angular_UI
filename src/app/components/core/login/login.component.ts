@@ -37,12 +37,6 @@ export class LoginComponent implements OnInit {
 		});
 	}
 
-	openSnackBar() {
-	    this.snackBar.openFromComponent("PizzaPartyComponent", {
-	      duration: 500,
-	    });
-	}
-
 	onLoginFormValuesChanged() {
 		for (const field in this.loginFormErrors) {
 		if (!this.loginFormErrors.hasOwnProperty(field)) {
@@ -76,10 +70,7 @@ export class LoginComponent implements OnInit {
 				this.router.navigateByUrl(path);
 			}, (error: any) => {
 				this.isLoading = false;
-				this.snackBar.open("Invalid username or password", {
-				  action : 'Oops'		
-			      duration: 500,
-			    });
+				this.snackBar.open("Invalid username or password");
 				console.log(error , 'err')
 			});
 		}

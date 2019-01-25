@@ -6,7 +6,7 @@ import { OrganizationService } from '../../../../../services/organization/organi
 import { AuthenticationService } from '../../../../../services/authentication/authentication.service';
 import { DepartmentService } from '../../../../../services/department/department.service';
 import { FeaturePopupComponent } from '../../../../../components/shared/feature-popup/feature-popup.component'
-import { MatDialog, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
+import { MatDialog, MatSnackBar, MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
   selector: 'app-organisation-details',
@@ -140,7 +140,7 @@ export class OrganisationDetailsComponent implements OnInit {
     private router :Router,
     private route: ActivatedRoute,
     private dialog : MatDialog,
-    private snackBar : MatSnackBar,
+    private snackBar : MatSnackBar
     ) {
     this.organisationsList = this.organizationService.organisations;
     //this.userAuth = this.auth.get();
@@ -234,34 +234,28 @@ export class OrganisationDetailsComponent implements OnInit {
   }
 
   onPhotoUpload(event) {
-    let reader = new FileReader();
+    /*let reader = new FileReader();
     if (event.target.files && event.target.files.length > 0) {
       let file = event.target.files[0];
       reader.readAsDataURL(file);
       let fileExt = file.name.split(".");
       let fileName = (new Date().getTime()) + "." + fileExt[fileExt.length - 1];
-      this.organisationService.getS3Url('file-name=' + fileName + '&file-type=' + file.type +
+      this.organizationService.getS3Url('file-name=' + fileName + '&file-type=' + file.type +
         '&_organisationId=' + this.userAuth.organisation._id)
       .then((response: any) => {
         this.http.put(response.signedRequest, file, {
           headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
         }).subscribe((awsRes: any) => {
           this.filePath = 'https://s3.ap-south-1.amazonaws.com/' + this.userAuth.organisation._id + '/' + fileName;
-          this.orgForm.controls['logoImageUrl'].setValue(this.filePath);
+          this.organizationDetailsForm.controls['logoImageUrl'].setValue(this.filePath);
         }, (error: any) => {
-          this.snackBar.open("Invalid username or password", {
-          action : 'Oops'   
-            duration: 500,
-          });
+          this.snackBar.open(error.message);
 
         });
       }, (error: any) => {
-          this.snackBar.open(error.message, {
-            action : 'Oops'   
-            duration: 500,
-          });
+          this.snackBar.open(error.message);
       });
-    }
+    }*/
   }
 
   changeEvent(event) {

@@ -6,7 +6,7 @@ import { Router , ActivatedRoute} from '@angular/router';
 import { OrganizationService } from '../../../../../services/organization/organization.service';
 import * as _ from 'lodash';
 import { FeaturePopupComponent } from '../../../../../components/shared/feature-popup/feature-popup.component'
-import { MatDialog, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialog,  MatSnackBar ,MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
   selector: 'app-department-details',
@@ -38,7 +38,7 @@ export class DepartmentDetailsComponent implements OnInit {
   {
     "_featureId": "f1",
     "resources": "Projects",
-    "flag" : true;
+    "flag" : true,
     "permissions": [
     {
       "userKey": "List",
@@ -65,7 +65,7 @@ export class DepartmentDetailsComponent implements OnInit {
   {
     "_featureId": "f2",
     "resources": "Snagmaster",
-    "flag" : true;
+    "flag" : true,
     "permissions": [
     {
       "userKey": "List",
@@ -92,7 +92,7 @@ export class DepartmentDetailsComponent implements OnInit {
   {
     "_featureId": "f3",
     "resources": "Services",
-    "flag" : false;
+    "flag" : false,
     "permissions": [
     {
       "userKey": "List",
@@ -126,7 +126,8 @@ export class DepartmentDetailsComponent implements OnInit {
     private OrgService: OrganizationService,
     private route: ActivatedRoute, 
     private router: Router,
-    private dialog : MatDialog) 
+    private dialog : MatDialog,
+      private snackBar: MatSnackBar) 
   {
 
     //this.userAuth = this.auth.get();
@@ -226,19 +227,4 @@ export class DepartmentDetailsComponent implements OnInit {
     });
   } 
 }
-
-  /*deleteDept(id, body) {
-    this.DeptService.deleteDept(id, body)
-            .pipe().subscribe(response => {
-
-        const toastOptions: ToastOptions = {
-          title: 'Success',
-          msg: response.message
-        };
-        this.toastyService.success(toastOptions);
-        this.getAllDept(id);
-      }, (error: any) => {
-        console.log(error.error.error.message);
-      });
-    }*/
-
+}
