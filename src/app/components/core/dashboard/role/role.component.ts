@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { RoleService } from './/role.service';
 import { RoleData } from './interfaces';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material';
@@ -12,6 +12,7 @@ import { DepartmentService } from '../../../../services/department/department.se
 })
 
 export class RoleComponent implements OnInit {
+	@ViewChild('tabGroup') tabGroup;
 
 	roles: any;
 	roleDataOptions = [];
@@ -31,10 +32,13 @@ export class RoleComponent implements OnInit {
 	}
 
 	organizationChanged(org) {
-		this.selectedOrgId = org._id;
-		this.getDepartments();
+		this.getRolesData(org.value ? org.value._id : org._id)
+	}
+
+	getRolesData(orgId) {
+		this.selectedOrgId = orgId;
 		this.roleListSpinner = true;
-		this.roleService.getData(org._id).pipe().subscribe(res => {
+		this.roleService.getData(orgId).pipe().subscribe(res => {
 			this.roles = res;
 			this.roleListSpinner = false;
 			this.roles.forEach((list) => list.features = list.access.length);
@@ -46,7 +50,7 @@ export class RoleComponent implements OnInit {
 					title: 'Features', key: 'features'
 				},
 				{
-					title: 'Description', key: 'description'
+					title: 'User Type', key: 'userType'
 				}
 			]
 		}, (error: any) => {
@@ -84,5 +88,10 @@ export class RoleComponent implements OnInit {
 			}, (error: any) => {
 				console.error('error', error);
 			});
+	}
+
+	tabSwitch(tabReq) {
+		this.tabGroup.selectedIndex = tabReq.index;
+		this.getRolesData(tabReq.orgId)
 	}
 }

@@ -159,7 +159,7 @@ export class FileManagerConfigComponent implements OnInit {
   }
 
   getProjectListinIt(orgId?) {
-    this.projectService.getProjects('filter[_organisationId]=' + this.orgId)
+    this.projectService.getProjects(this.orgId)
       .pipe().subscribe(res => {
         this.projectlist = res;
       }, (error: any) => {

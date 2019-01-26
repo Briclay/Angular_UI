@@ -57,7 +57,7 @@ app-expansion-panel {
     margin: 5px;
 }
 .margin-10 {
-    margin: 10px;
+    margin: 10px !important;
 }
 .bg-color-primary {
 	background-color :#00aff0;
@@ -179,5 +179,8 @@ app-expansion-panel {
 }
 .flex-box {
     display: flex;
+}
+.flex-1 {
+    flex: 1;
 }
 

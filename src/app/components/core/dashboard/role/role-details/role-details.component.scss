@@ -29,6 +29,9 @@
                     background-color: #2196F3; 
                     color: white;
                 }
+                .feature_btn[disabled] {
+                    background-color: rgba(0,0,0,.12);
+                }
             }
         }
     }

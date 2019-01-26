@@ -43,8 +43,18 @@ export class RoleService {
 		return of(history)
 	}
 
-	/*public createRole(request): Observable<any> {
-        let url = "https://matkraft-api.herokuapp.com/api/v1/roles?filter[_organisationId]=5a58438f734d1d61613f6ed9";
+	public getFeatures(userType, departID): Observable<any> {
+		let url = `${environmentService.briclayCore}/rolefeatures?userType=${userType}&departmentId=${departID}`
+        return this.apiService.get(url).pipe(map(res => res));
+	}
+
+	public createRole(request): Observable<any> {
+        let url = `${environmentService.briclayCore}/roles?filter[_organisationId]=${request._organisationId}`;
         return this.apiService.post(url, request).pipe(map(res => res));
-    }*/
+    }
+
+	public updateRole(roleId, request): Observable<any> {
+        let url = `${environmentService.briclayCore}/roles/${roleId}`;
+        return this.apiService.put(url, request).pipe(map(res => res));
+    }
 }

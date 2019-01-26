@@ -44,7 +44,7 @@ export class OrganizationService {
     }
 
 	public getAll(id): Observable<any> {
-        let url = `${environmentService.briclayCore}/organisations?select=*&filter[_organisationId]=${id}`;
+        let url = `${environmentService.briclayCore}/organisations?select=*`;
         return this.apiService.get(url).pipe(map(res => res));
     }
     

@@ -6,7 +6,7 @@
           <div >
             <a (click)="fileInput.click()" fxLayout="column">
               <img src="{{filePath}}" class="img-upload" width="59%">
-              <input #fileInput type="file" (change)="onPhotoUpload($event)"  style="display:none;" />
+              <input #fileInput type="file" (change)="onFileInput($event)"  style="display:none;" />
             </a>
           </div>
           <div class="username-input" >
