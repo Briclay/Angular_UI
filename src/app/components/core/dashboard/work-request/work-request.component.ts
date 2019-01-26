@@ -13,16 +13,17 @@ export class WorkRequestComponent implements OnInit {
   isLoading: boolean;
   workRequest: RequestTrackerData;
   workRequestDataOption: any;
-
+  orgId: string;
   constructor(private workRequestService : WorkRequestService ) { }
 
   ngOnInit() {
+    this.orgId="5a5844cd734d1d61613f7066";
     this.getWorkRequest();
   }
 
   getWorkRequest() {
     this.isLoading = true;
-    this.workRequestService.getWorkRequest(`filter[_organisationId]=5a5844cd734d1d61613f7066`).pipe().subscribe(res => {
+    this.workRequestService.getWorkRequest(`filter[_organisationId]=${this.orgId}`).pipe().subscribe(res => {
       this.workRequest = res;
       this.isLoading = false;
       this.workRequestDataOption = [

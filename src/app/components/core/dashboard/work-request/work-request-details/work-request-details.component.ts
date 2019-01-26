@@ -3,10 +3,10 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { Router, ActivatedRoute } from '@angular/router';
 import * as _ from 'lodash';
 import { MatDialog } from '@angular/material';
-import {WorkRequestService} from '../work-request.service';
-import {UserService} from '../../../../../services/user/user.service';
-import {ProjectService} from '../../../dashboard/projects/project.service';
-import {DateUtils} from '../../../../../utils/date-uitls';
+import { WorkRequestService } from '../work-request.service';
+import { UserService } from '../../../dashboard/user/user.service';
+import { ProjectService } from '../../../dashboard/projects/project.service';
+import { DateUtils } from '../../../../../utils/date-uitls';
 
 @Component({
   selector: 'app-work-request-details',
@@ -30,28 +30,29 @@ export class WorkRequestDetailsComponent implements OnInit {
   userList: any;
   todayDate: String;
   status: any;
+
   leadDateTime = (new Date());
   needByDate = (new Date());
   time = {
     timeToComplete: null,
     leadDaysToComplete: null,
-    leadDuration: null
+    leadTimeRequire: null
   }
   orgId: string;
   isLoading: boolean;
-  constructor(private formBuilder: FormBuilder, 
-    private router: Router,  
-    private route: ActivatedRoute, 
+  constructor(private formBuilder: FormBuilder,
+    private router: Router,
+    private route: ActivatedRoute,
     public dialog: MatDialog,
     private projectService: ProjectService,
     private workRequestService: WorkRequestService,
     private userService: UserService) {
     //get org id for superadmin
-    this.route.queryParams.subscribe(params => {
-      this.orgId = params['orgId']
-    });
+    // this.route.queryParams.subscribe(params => {
+    //   this.orgId = params['orgId']
+    // });
     this.todayDate = (new Date()).toISOString();
-    
+    this.orgId = '5a5844cd734d1d61613f7066';
     //list of typ of work
     this.typeOfWork = ["Contractor Appointement", "Termination order"];
 
@@ -66,7 +67,7 @@ export class WorkRequestDetailsComponent implements OnInit {
       workDescription: {},
       typeOfWork: {},
       workCategory: {},
-      leadDuration: {},
+      leadTimeRequire: {},
       needByDate: {},
       leadDaysToComplete: {},
       initiatedDate: {},
@@ -82,8 +83,8 @@ export class WorkRequestDetailsComponent implements OnInit {
 
 
     this.workTrackerForm = this.formBuilder.group({
-      _organisationId: '5a5844cd734d1d61613f7066',
-      _projectId: ['5a5844cd734d1d61613f7066', Validators.required],
+      _organisationId: this.orgId,
+      _projectId: [Validators.required],
       requestNumber: this.reuqestNumber,
       status: 'Open',
       date: new FormControl((new Date())),
@@ -91,7 +92,7 @@ export class WorkRequestDetailsComponent implements OnInit {
       workDescription: ['', Validators.required],
       typeOfWork: ['', Validators.required],
       workCategory: ['', Validators.required],
-      leadDuration: ['', Validators.required],
+      leadTimeRequire: ['', Validators.required],
       needByDate: ['', Validators.required],
       leadDaysToComplete: ['', Validators.required],
       needByStatusReason: [''],
@@ -107,32 +108,32 @@ export class WorkRequestDetailsComponent implements OnInit {
     });
   }
   noOfDays() {
-    this.workTrackerForm.controls['leadDuration'].setValue(this.workTrackerForm.value.workCategory.noOfDays);
+    this.workTrackerForm.controls['leadTimeRequire'].setValue(this.workTrackerForm.value.workCategory.noOfDays);
   }
-  
+
   ngOnInit() {
     this.assignValuesToForm()
     this.getAllProjectsList();
     this.getAllWorkRequestTracker();
     this.getUsers();
-    this.getWorkCategory(`filter[_organisationId]=5a5844cd734d1d61613f7066`);
+    this.getWorkCategory(`filter[_organisationId]=${this.orgId}`);
   }
 
   assignValuesToForm() {
-    if(this.formType !== 'create') {
+    if (this.formType !== 'create') {
       this.workTrackerForm.patchValue(this.data)
     }
   }
 
   getAllProjectsList() {
     //get all project
-    this.projectService.getProjects(`filter[_organisationId]=5a5844cd734d1d61613f7066`)
+    this.projectService.getProjects(`filter[_organisationId]=${this.orgId}`)
       .pipe().subscribe(res => {
-        this.projectsList = res.data;
-          if (this.projectsList.length <= 0) {
-            //TODO add error component
-            console.error('No projects found')
-          }
+        this.projectsList = res;
+        if (this.projectsList.length <= 0) {
+          //TODO add error component
+          console.error('No projects found')
+        }
       }, (error: any) => {
         //TODO add error component
         console.error('error', error)
@@ -141,13 +142,13 @@ export class WorkRequestDetailsComponent implements OnInit {
 
   getAllWorkRequestTracker() {
     //get all work request for calculting request number
-    this.workRequestService.getWorkRequest(`filter[_organisationId]=5a5844cd734d1d61613f7066`)
+    this.workRequestService.getWorkRequest(`filter[_organisationId]=${this.orgId}`)
       .pipe().subscribe(res => {
         this.requestTrcakerList = res;
-        if( this.formType !== 'create' ) {
+        if (this.formType !== 'create') {
           this.reuqestNumber = this.data.requestNumber;
         } else {
-          this.reuqestNumber =  `R${this.createRequestNumber(this.requestTrcakerList.length + 1)}`;
+          this.reuqestNumber = `R${this.createRequestNumber(this.requestTrcakerList.length + 1)}`;
         }
         this.workTrackerForm.controls['requestNumber'].setValue(this.reuqestNumber);
       }, (error: any) => {
@@ -156,7 +157,9 @@ export class WorkRequestDetailsComponent implements OnInit {
       });
   }
   workTrackerFormSubmit() {
+    console.log('(this.workTrackerForm'+JSON.stringify(this.workTrackerForm.value));
     if (this.workTrackerForm.valid) {
+      console.log('(this.workTrackerForm  inside'+JSON.stringify(this.workTrackerForm.value));
       if (this.workTrackerForm.value.initiatedDate && this.workTrackerForm.value.RFAapprovalDate) {
         if (this.workTrackerForm.value.initiatedDate < this.workTrackerForm.value.RFAapprovalDate) {
           this.onSave();
@@ -170,9 +173,9 @@ export class WorkRequestDetailsComponent implements OnInit {
   }
 
   getUsers() {
-    this.userService.getUser()
+    this.userService.getUser(`filter[_organisationId]=${this.orgId}`)
       .pipe().subscribe(res => {
-        this.userList = res.data;
+        this.userList = res;
       }, (error: any) => {
         //TODO add error component
         console.error('error', error)
@@ -180,6 +183,7 @@ export class WorkRequestDetailsComponent implements OnInit {
   }
 
   saveWorkRequest(requestData) {
+    console.log('requestData'+JSON.stringify(requestData));
     this.isLoading = true;
     this.workRequestService.saveWorkRequest(requestData)
       .pipe().subscribe(res => {
@@ -194,14 +198,15 @@ export class WorkRequestDetailsComponent implements OnInit {
   }
 
   updateWorkRequest(requestData) {
-    requestData = {...requestData}
+    console.log('requestData'+JSON.stringify(requestData));
+    requestData = { ...requestData }
     delete requestData.needByDate;
     this.isLoading = true;
     this.workRequestService.updateWorkRequest(requestData, this.data._id)
       .pipe().subscribe(res => {
         console.log('updateWorkRequest saved', res);
         this.isLoading = false;
-        
+
       }, (error: any) => {
         //TODO add error component
         console.error('error', error);
@@ -210,23 +215,28 @@ export class WorkRequestDetailsComponent implements OnInit {
   }
 
   onSave() {
-    const requestData = { ...this.workTrackerForm.value, 
+    console.log('this.formType'+this.formType);
+    const requestData = {
+      ...this.workTrackerForm.value,
       workCategory: this.workTrackerForm.value.workCategory.name,
-      leadTimeRequire: this.workTrackerForm.value.leadDuration }
-      console.log('requestData', requestData)
-      this.formType !== 'create' ? this.updateWorkRequest(requestData) : this.saveWorkRequest(requestData)
-    
+      leadTimeRequire: this.workTrackerForm.value.leadTimeRequire
+    }
+    this.formType !== 'create' ? this.updateWorkRequest(requestData) : this.saveWorkRequest(requestData)
   }
   /* Open dailog for reason */
 
   calLeadDaysToComplete() {
+    console.log('date');
+    console.log(this.workTrackerForm.value.leadTimeRequire);
+    console.log(_.isNumber(this.workTrackerForm.value.leadTimeRequire));
     // if (this.workTrackerForm.value.date <= this.workTrackerForm.value.needByDate) {
-    if (this.workTrackerForm.value.leadDuration) {
-      let dateOffset = (24 * 60 * 60 * 1000) * this.workTrackerForm.value.leadDuration;
+    if (_.isNumber(this.workTrackerForm.value.leadTimeRequire)) {
+      let dateOffset = (24 * 60 * 60 * 1000) * this.workTrackerForm.value.leadTimeRequire;
       let need_date = this.workTrackerForm.value.needByDate.getTime() - dateOffset;
       this.workTrackerForm.value.needByDate.setTime(need_date);
       var timeDiff = this.workTrackerForm.value.needByDate.getTime() - this.workTrackerForm.value.date.getTime();
       var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+      console.log('diffDays'+ typeof diffDays);
       this.workTrackerForm.controls['leadDaysToComplete'].setValue(diffDays);
       this.time.leadDaysToComplete = diffDays;
     } else {
@@ -255,9 +265,9 @@ export class WorkRequestDetailsComponent implements OnInit {
     }
   }
   calLeadTimeComplete() {
-    if (this.workTrackerForm.value.date && this.workTrackerForm.value.needByDate && this.workTrackerForm.value.leadDuration) {
-      this.leadDateTime.setDate(this.workTrackerForm.value.date.getDate() + this.workTrackerForm.value.leadDuration);
-      this.needByDate.setDate(this.workTrackerForm.value.needByDate.getDate() - this.workTrackerForm.value.leadDuration);
+    if (this.workTrackerForm.value.date && this.workTrackerForm.value.needByDate && this.workTrackerForm.value.leadTimeRequire) {
+      this.leadDateTime.setDate(this.workTrackerForm.value.date.getDate() + this.workTrackerForm.value.leadTimeRequire);
+      this.needByDate.setDate(this.workTrackerForm.value.needByDate.getDate() - this.workTrackerForm.value.leadTimeRequire);
       if (this.leadDateTime > this.needByDate) {
         this.workTrackerForm.controls['leadDaysToComplete'].setValue(this.leadDateTime);
       } else {
@@ -325,5 +335,5 @@ export class WorkRequestDetailsComponent implements OnInit {
       });
 
   }
- 
+
 }

@@ -15,7 +15,7 @@ export class WorkRequestService {
     }
 
     public saveWorkRequest(request): Observable<any> {
-        let url = `${environmentService.briclayWorkRequest}/work-request?filter[_organisationId]=5a5844cd734d1d61613f7066&order=createdAt&sort=desc`;
+        let url = `${environmentService.briclayWorkRequest}/work-request`;
         return this.apiService.post(url, request).pipe(map(res => res));
     }
 

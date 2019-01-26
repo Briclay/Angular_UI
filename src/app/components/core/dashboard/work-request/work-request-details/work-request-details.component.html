@@ -11,7 +11,7 @@
                 <mat-label>Assingee</mat-label>
                 <mat-select placeholder="Assingee" formControlName="_assignedId" class="form-hdr-assignee">
                   <mat-option *ngFor="let users of userList" [value]="users._id">
-                    {{ users.name.first }} {{ users.name.last }}
+                    {{ users.username }}
                   </mat-option>
                 </mat-select>
                 <!-- <mat-error *ngIf="workTrackerFormErrors._assignedId.required">
@@ -23,7 +23,7 @@
                 <mat-select placeholder="Support Role" formControlName="supportRole" class="form-hdr-assignee">
                   <mat-option [value]="null">No User</mat-option>
                   <mat-option *ngFor="let users of userList" [value]="users._id">
-                    {{ users.name.first }} {{ users.name.last }}
+                    {{ users.username }}
                   </mat-option>
                 </mat-select>
                 <!-- <mat-error *ngIf="workTrackerFormErrors.supportRole.required">
@@ -196,8 +196,8 @@
         <div fxLayout="row" fxLayoutAlign="start center" class="card-footer">
           <div fxFlex="20">
             <span class="time-label">Lead Time Require</span>
-            <span class="time-value">{{workTrackerForm.value.leadDuration}}</span>
-            <span class="time-status green" [ngClass]="{'red': time.leadDuration < 10}" ></span>
+            <span class="time-value">{{workTrackerForm.value.leadTimeRequire}}</span>
+            <span class="time-status green" [ngClass]="{'red': time.leadTimeRequire < 10}" ></span>
           </div>
           <div fxFlex="20">
             <div>
@@ -214,7 +214,7 @@
           <div fxFlex="40">
             <!-- button -->
             <div class="button-row" fxLayoutAlign="end center">
-              <button [disabled]="isLoading || !workTrackerForm.valid" type="submit" mat-raised-button class="save-button" color="white-bg" (click)="workTrackerFormSubmit()">
+              <button type="submit" mat-raised-button class="save-button" color="white-bg" [disabled]="isLoading || !workTrackerForm.valid"  (click)="workTrackerFormSubmit()">
                 <span>Save</span>
                 <spinner diameter="40" class="pull-left" *ngIf="isLoading"></spinner>
               </button>
