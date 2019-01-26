@@ -4,6 +4,7 @@ import { AuthenticationService } from './../../../services/authentication/authen
 import { Router } from '@angular/router';
 import { MatDialog,  MatSnackBar ,MAT_DIALOG_DATA } from '@angular/material';
 import { ForgotPasswordComponent } from '../forgot-password/forgot-password.component'
+import { AuthService } from './../../../services/auth.service';
 
 @Component({
 	selector: 'app-login',
@@ -21,7 +22,8 @@ export class LoginComponent implements OnInit {
 	    private router: Router,
 	    private authenticationService: AuthenticationService,
 	    private snackBar: MatSnackBar, 
-       	private dialog : MatDialog) 
+       	private dialog : MatDialog,
+       	private auth: AuthService) 
 		{
 			this.loginFormErrors = {
 				email: {},
@@ -73,9 +75,7 @@ export class LoginComponent implements OnInit {
 			this.authenticationService.login(this.loginForm.value)
 			.pipe().subscribe(response =>  {
 				this.isLoading = false;
-                //this.auth.set(response);
-            	window.localStorage.setItem('userAuth', JSON.stringify(response.user));
-            	window.localStorage.setItem('userAuthToken', JSON.stringify(response.token));
+                this.auth.set(response);
 				console.log(response, "loginResponse")
 				this.loginForm.reset();
 				this.loginForm['_touched'] = false;

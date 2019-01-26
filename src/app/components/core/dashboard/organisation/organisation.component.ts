@@ -12,32 +12,41 @@ import { HistoryPopupComponent } from '../../../../components/shared/history-pop
 
 export class OrganisationComponent implements OnInit {
 
-  organisations: OrganizationData;
+  organisations: any;
   organisationDataOptions = [];
   historyData: any;
+  selectedOrgId: string;
+  orgListSpinner: boolean;
 
   constructor(
     private organisationService: OrganizationService,
     public dialog: MatDialog) { }
   ngOnInit() {
-    this.organisationService.getAll()
-      .pipe().subscribe(res => {
-      this.organisations = res;
-      this.organisationDataOptions = [
-      {
-        title: 'name', key: 'name', hideTitle: true, type: 'label'
-      },
-      {
-        title: 'Plan', key: 'subscription.plan',
-      }, {
-        title: 'Valid till', key: 'subscription.validTill'
-      }, {
-        title: 'Entities', key: '0'
-      }]
-    });
   }
 
-
+  organizationChanged(org) {
+    this.selectedOrgId = org._id;
+    this.orgListSpinner = true;
+    this.organisationService.getAll(org._id).pipe().subscribe(res => {
+      this.organisations = res;
+      this.orgListSpinner = false;
+      this.organisations.forEach((list) => list.features = (list.access && list.access.length));
+      this.organisationDataOptions = [
+        {
+          title: 'name', key: 'name', hideTitle: true, type: 'label'
+        },
+        {
+          title: 'Plan', key: 'subscription.plan',
+        }, {
+          title: 'Valid till', key: 'subscription.validTill'
+        }, {
+        title: 'Entities', key: '0'
+      }]
+    }, (error: any) => {
+      console.error('error', error);
+      this.orgListSpinner = false;
+    });
+  }
 
   openDialog(data) {
     this.organisationService.getHistory().pipe().subscribe(res => {

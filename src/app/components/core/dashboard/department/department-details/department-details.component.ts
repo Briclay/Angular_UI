@@ -7,6 +7,7 @@ import { OrganizationService } from '../../../../../services/organization/organi
 import * as _ from 'lodash';
 import { FeaturePopupComponent } from '../../../../../components/shared/feature-popup/feature-popup.component'
 import { MatDialog,  MatSnackBar ,MAT_DIALOG_DATA } from '@angular/material';
+import { AuthService } from '../../../../../services/auth.service';
 
 @Component({
   selector: 'app-department-details',
@@ -127,12 +128,13 @@ export class DepartmentDetailsComponent implements OnInit {
     private route: ActivatedRoute, 
     private router: Router,
     private dialog : MatDialog,
-    private snackBar: MatSnackBar) 
+    private snackBar: MatSnackBar,
+    private auth: AuthService) 
   {
 
     //this.userAuth = this.auth.get();
-    this.userAuth = JSON.parse(window.localStorage.getItem("userAuth"));
-    this._organisationId = this.userAuth._organisationId;
+    this.userAuth = JSON.parse(window.localStorage.getItem('authUserOrganisation'));
+    this._organisationId = this.userAuth._id;
     this.deptFormErrors = {
       name: {},
       description: {},

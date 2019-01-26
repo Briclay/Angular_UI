@@ -7,6 +7,7 @@ import { AuthenticationService } from '../../../../../services/authentication/au
 import { DepartmentService } from '../../../../../services/department/department.service';
 import { FeaturePopupComponent } from '../../../../../components/shared/feature-popup/feature-popup.component'
 import { MatDialog, MatSnackBar, MAT_DIALOG_DATA } from '@angular/material';
+import { AuthService } from '../../../../../services/auth.service';
 
 @Component({
   selector: 'app-organisation-details',
@@ -139,11 +140,11 @@ export class OrganisationDetailsComponent implements OnInit {
     private router :Router,
     private route: ActivatedRoute,
     private dialog : MatDialog,
-    private snackBar : MatSnackBar
+    private snackBar : MatSnackBar,
+    private auth: AuthService,
     ) {
     this.organisationsList = this.organizationService.organisations;
-    //this.userAuth = this.auth.get();
-    this.userAuth = JSON.parse(window.localStorage.getItem("userAuth"));
+    this.userAuth = JSON.parse(window.localStorage.getItem('authUser'));
     // this.onGetFeature();
     //this.getparentOrganisations();
     this.orgFormErrors = {

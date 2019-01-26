@@ -59,6 +59,9 @@ import { DesignDashboardComponent } from './components/core/dashboard/design-das
 import { FeaturePopupComponent } from './components/shared/feature-popup/feature-popup.component';
 import { ForgotPasswordComponent } from './components/core/forgot-password/forgot-password.component';
 
+import { LocalStorageSchema } from './schemas/local-storage.schema';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -117,7 +120,8 @@ import { ForgotPasswordComponent } from './components/core/forgot-password/forgo
     ForgotPasswordComponent
   ],
   providers: [D3Service, DashboardService, UserService, DepartmentService, 
-  OrganizationService, UserDashboardService ],
+  OrganizationService, UserDashboardService,
+    LocalStorageSchema ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -9,6 +10,7 @@ export class HeaderComponent implements OnInit {
 
 	userAuth : any;
 	userName : any;
+
 	notifications = [
 	  { 
 	  	"id" : "1" ,
@@ -36,11 +38,11 @@ export class HeaderComponent implements OnInit {
 	  }
 	]
 
-  	constructor() { }
+  	constructor(private auth: AuthService){}
 
   	ngOnInit() {
-  		this.userAuth = JSON.parse(window.localStorage.getItem("userAuth"));
-  		this.userName = this.userAuth.displayName;
+    	this.userAuth = JSON.parse(window.localStorage.getItem('authUser'));
+  		this.userName = this.userAuth.displayName ? this.userAuth.displayName : "";
 
   	}
 }
