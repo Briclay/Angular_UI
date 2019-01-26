@@ -1,6 +1,6 @@
 <div class="file-manager-config-container">
   <!-- show path -->
-  <div >
+  <div>
     <span *ngFor="let pathName of fullPathDisplay">
       <a (click)="onSelectPath(pathName.path, pathName.top)">{{ pathName.name }} / </a>
     </span>
@@ -23,7 +23,7 @@
       </mat-select>
     </mat-form-field>
     <!-- start project details -->
-    <div fxLayout="row" *ngIf="selectedProjectData">
+    <div fxLayout="row" *ngIf="projectFlag && selectedProjectData">
       <div class="flex-grow text-center">
         Details
       </div>
@@ -36,7 +36,7 @@
         Car Parking
       </div>
     </div>
-    <div fxLayout="row" *ngIf="selectedProjectData; else selectProject">
+    <div fxLayout="row" *ngIf="projectFlag && selectedProjectData; else selectProject">
 
       <div class="flex-grow">
         <div class="project-content">
@@ -87,19 +87,19 @@
     <!-- <mat-card *ngIf="!selectedProjectData;else selectedProjectTemplate" class="width-100 marginTop30 text-danger text-center">
       * Select Project
     </mat-card> -->
-    <ul class="side-nav-list file-icons" *ngIf="designDeptFlag">
-      <li>
+    <ul class="side-nav-list file-icons" *ngIf="designDeptFlag" >
+      <li *ngFor="let folder of iconArray" (click)="getClickedByIcon(folder)">
         <a>
-          <img class="icons" src="assets/images/icons/Land_Details.png" /><br />Land Details
+          <img class="icons" src="{{ folder.iconPath }}" /><br />{{ folder.name }}"
         </a>
       </li>
     </ul>
     <!-- icon for fil upload nad folder create -->
-    <div class="file-list" *ngIf="!projectFlag">
+    <div class="file-list" *ngIf="tableFlag">
       <mat-card class="margin-btm-10 list-header">
         <div fxLayout="row align-item-center" class="file-list-header">
           <div class="flex-grow ">
-            Land Details
+           
           </div>
           <div class="flex-grow no-border">
           </div>

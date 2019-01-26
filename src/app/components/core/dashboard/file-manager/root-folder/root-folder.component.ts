@@ -21,10 +21,11 @@ export class RootFolderComponent implements OnInit {
   }
 
   ngOnInit() {
+  
     this.getSubFolder();
   }
   getSubFolder() {
-    this.fileManagerService.getAllFolders()
+    this.fileManagerService.getAllFolders('')
       .pipe().subscribe(res => {
         this.dataSource = new MatTableDataSource(res);
         if (res.length > 0) {
@@ -63,7 +64,7 @@ export class RootFolderComponent implements OnInit {
   routeFielManger(data) {
     if (data.type === 'folder') {
       const path = '/dashboard/file-manager/' + data._organisationId + "/" + data._departmentId + "/" + data._id;
-      let top = 0;
+      let top = 1;
       let stack = []
       let json = {
         name: data.name,
@@ -72,6 +73,7 @@ export class RootFolderComponent implements OnInit {
       };
       stack.push(json);
       window.localStorage.stack = JSON.stringify(stack);
+      window.localStorage.FOLDER_CONFIG_DETAILS= JSON.stringify('');
       // route to dept folder list
       this.router.navigate([path]).then(() => {
         this.ngOnInit();

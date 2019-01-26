@@ -57,6 +57,10 @@ export class FileManagerConfigComponent implements OnInit {
   currentLevel: number;
   previousFolderName: any;
   fullPathDisplay: any;
+  specDeptDetails: any;
+  deptConfigData: any;
+  iconArray = [];
+  tableFlag = false;
   displayedColumns: string[] = ['type', 'name', 'createdAt', 'version', 'logs', 'email', 'share'];
   constructor(
     private projectService: ProjectService,
@@ -80,12 +84,61 @@ export class FileManagerConfigComponent implements OnInit {
   }
 
   folderConfigData() {
-      var tempValue =this.localStack.pop();
-      console.log('tempValue'+JSON.stringify(tempValue));
-       if(tempValue){
-        this.currentLevel = tempValue.top;
-        this.previousFolderName = tempValue.name;
-       }
+    var tempValue = this.localStack.pop();
+    console.log('tempValue' + JSON.stringify(tempValue));
+    if (tempValue) {
+      this.currentLevel = tempValue.top;
+      this.previousFolderName = tempValue.name;
+      var tempData = JSON.parse(window.localStorage.getItem('FOLDER_PROCESS_FLOW')).configValues;
+      if (tempData.length > 0) {
+        this.deptConfigData = JSON.parse(window.localStorage.getItem('FOLDER_CONFIG_DETAILS'));
+        if (this.deptConfigData) {
+          this.populateConfigData(this.deptConfigData);
+        } else {
+          var name = this.previousFolderName;
+          var pos = _.findIndex(tempData, function (o) { return o.deptName == name; });
+          if (pos != -1) {
+            window.localStorage.FOLDER_CONFIG_DETAILS = JSON.stringify(tempData[pos]);
+            this.deptConfigData = tempData[pos];
+            console.log('this.deptConfigData' + JSON.stringify(this.deptConfigData));
+            this.populateConfigData(tempData[pos]);
+          }
+
+        }
+      }
+    }
+  }
+  //check cuurent level and config levl
+  populateConfigData(tempData: any) {
+    var level = this.currentLevel;
+    if (tempData.details.length > 0) {
+      //fetch project key and display project drop down
+      var pPos = _.findIndex(tempData.details, function (o) { return o.level == level + 1; });
+      if (pPos != -1) {
+        var details = tempData.details[pPos];
+        if ('project' === details.name) {
+          if (_.isArray(details.folderName) && details.folderName.length > 0) {
+            var getPreFolderPos = _.indexOf(details.folderName, this.previousFolderName);
+            if (getPreFolderPos != -1) {
+              this.tableFlag = false
+              this.projectFlag = true;
+            } else {
+              this.tableFlag = true
+              this.projectFlag = false;
+            }
+          } else {
+            this.tableFlag = false
+            this.projectFlag = true;
+          }
+        } else {
+          this.tableFlag = true
+          this.projectFlag = false;
+        }
+      } else {
+        this.tableFlag = true;
+        this.projectFlag = false;
+      }
+    }
   }
   ngOnInit() {
     this.currentUrl = this.router.url;
@@ -99,7 +152,7 @@ export class FileManagerConfigComponent implements OnInit {
   getOrganiztions() {
     this.organisationService.getOrganization()
       .pipe().subscribe(res => {
-      
+
       }, (error: any) => {
         console.error('error', error);
       })
@@ -113,26 +166,83 @@ export class FileManagerConfigComponent implements OnInit {
         console.error('error', error);
       })
   }
-
+  /*
+    * on Select project 
+    * check for deparment config 
+    * after select project create folder with project id
+    * if exist show table or shoe icons  
+  */
   getSingleProject(list) {
-    console.log('list.value' + JSON.stringify(list.value))
-    this.selectedProjectData = list.value;;
+    this.selectedProjectData = list.value;
+    var body = {
+      name: this.selectedProjectData.name,
+      _organisationId: this.orgId,
+      _departmentId: this.deptId,
+      _parentId: this.fileId,
+      owner: '',
+      _projectId: this.selectedProjectData._id,
+      shared: [],
+      details: "This folder is created by ",
+      accessFlag: "Private"
+    }
+    //logic for only contrcat departemt to add fodler name with id
+    if (this.deptConfigData.deptName == 'Contracts') {
+      this.fileManagerService.getSingleFile(this.fileId)
+        .pipe().subscribe(res => {
+          body.name = this.createProjectNumber(res.length + 1) + "-" + this.selectedProjectData.name;
+          this.createProjectFolder(body, this.selectedProjectData);
+        });
+    } else {
+      //else normal folder creation
+      this.createProjectFolder(body, this.selectedProjectData);
+    }
   }
 
-  getAllFolders() {
-    this.folderListLoading = true;
-    this.fileManagerService.getAllFolders()
+  createProjectFolder(body, row) {
+    if (this.deptConfigData.iconFlag) {
+      this.designDeptFlag = true;
+    } else {
+      this.designDeptFlag = false;
+    }
+    this.fileManagerService.saveFolder(body)
       .pipe().subscribe(res => {
-        this.folderData = res;
-        this.folderListLoading = false;
+        if (this.designDeptFlag) {
+          this.getIconFoldersByApi(row);
+        } else {
+          this.tableFlag = true;
+          this.getSingleFolder();
+        }
+      }, (error: any) => {
+        //if exist then show tbales otherwise show erro
+        if ('Folder exist' === error.message) {
+          if (this.designDeptFlag) {
+            this.getIconFoldersByApi(row);
+          } else {
+            this.tableFlag = false;
+            this.getSingleFolder();
+          }
+        } else {
+          console.log('error', error);
+        }
+      });
+  }
+  getIconFoldersByApi(row) {
+    this.folderListLoading = true;
+    this.fileManagerService.getAllFolders('filter[_projectId]=' + row._id + '&filter[name]=' + row.name + '&filter[_departmentId]=' + this.deptId)
+      .pipe().subscribe(res => {
+        this.getIconsFolder(res[0]._id)
+      }, (error: any) => {
+      })
+  }
+  getIconsFolder(id) {
+    this.fileManagerService.getSingleFile(id)
+      .pipe().subscribe(res => {
+        this.iconArray = res;
       }, (error: any) => {
         console.error('error', error);
-        this.folderListLoading = false;
       })
-
   }
-
-  openFolderDialog(list?) {
+  openFolderDialog() {
     let dialogRef = this.dialog.open(FolderCreateDialogComponent, {
       width: '600px',
       data: {
@@ -245,6 +355,28 @@ export class FileManagerConfigComponent implements OnInit {
       });
     }
   }
+
+  //click on icon
+  getClickedByIcon(value) {
+    if (this.orgId && this.deptId && value) {
+      if (value.type === 'folder') {
+        this.projectFlag = false;
+        let stack = JSON.parse(window.localStorage.getItem('stack'));
+        let json = {
+          name: value.name,
+          path: this.currentUrl,
+          top: parseInt(stack[stack.length - 1].top) + 1
+        };
+        stack.push(json);
+        window.localStorage.stack = JSON.stringify(stack);
+        const path = '/dashboard/file-manager/' + this.orgId + "/" + this.deptId + "/" + value._id;
+        // route to dept folder list
+        this.router.navigate([path]).then(() => {
+          this.ngOnInit();
+        });
+      }
+    }
+  }
   goBackButton() {
     if (!_.isEmpty(this.fullPathDisplay)) {
       let temp = this.fullPathDisplay.pop();
@@ -318,7 +450,7 @@ export class FileManagerConfigComponent implements OnInit {
       .pipe().subscribe(res => {
         this.getSingleFolder();
       }, (error: any) => {
-        if ('File exist !' === error.message) {
+        if ('Folder exist' === error.message) {
           this.onFileReplcaeDailog(body);
         } else {
           console.log('error', error);
@@ -342,7 +474,6 @@ export class FileManagerConfigComponent implements OnInit {
     if (body) {
       this.fileManagerService.updateFile(body._id, body)
         .pipe().subscribe(res => {
-          console.log('res' + JSON.stringify(res));
           this.getSingleFolder();
         }, (error: any) => {
           console.log('error', error);
@@ -352,6 +483,19 @@ export class FileManagerConfigComponent implements OnInit {
   getLogs(data: any) {
     if (data.type == 'file') {
       this.fileDetails = data;
+    }
+  }
+  //contract departmetn project increament
+  createProjectNumber(number) {
+    var str = '' + number;
+    var count = 0;
+    var padArray = [{ len: 1, size: 2 }, { len: 2, size: 1 }, { len: 3, size: 0 }]
+    var findSize = _.find(padArray, function (item) {
+      return item.len === str.length;
+    });
+    while (count < findSize.size) {
+      str = '0' + str;
+      count++;
     }
   }
 

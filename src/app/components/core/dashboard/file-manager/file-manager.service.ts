@@ -11,8 +11,8 @@ export class FileManagerService {
 
   constructor(private apiService: ApiService) { }
 
-  public getAllFolders(): Observable<any> {
-    let url = `${environmentService.briclayFileManager}/folder`
+  public getAllFolders(query: any): Observable<any> {
+    let url = `${environmentService.briclayFileManager}/folder?${query}`
     return this.apiService.get(url).pipe(map(res => res));
   }
 
