@@ -7,11 +7,12 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import {MaterialModule} from '../../../../modules/material.module';
 import { FileMailDialogComponent } from './file-mail-dialog/file-mail-dialog.component';
 import { FileUploadDialogComponent } from './file-upload-dialog/file-upload-dialog.component';
+import { RootFolderComponent } from './root-folder/root-folder.component';
 
 
 @NgModule({
   declarations: [FolderCreateDialogComponent, FileShareDialogComponent, FileConfigDetailsComponent,
-   FileMailDialogComponent, FileUploadDialogComponent],
+   FileMailDialogComponent, FileUploadDialogComponent, RootFolderComponent],
   exports: [
     FileConfigDetailsComponent
   ],

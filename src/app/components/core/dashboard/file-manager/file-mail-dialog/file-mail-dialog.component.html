@@ -1,17 +1,23 @@
 <div class="dialog-container">
-  <h1 mat-dialog-title>Share Mail</h1>
+  <h1 mat-dialog-title>Share via Mail</h1>
   <div mat-dialog-content>
     <div>
       <span *ngIf="userLoading; else userTemplate"></span>
       <ng-template #userTemplate>
-        <mat-form-field appearance="outline">
-          <mat-label>Select Users</mat-label>
-          <mat-select placeholder="Departments" (selectionChange)="userChanged($event)">
-            <mat-option *ngFor="let user of users" [value]="user">
-              {{user.username}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
+        <form [formGroup]="dailogForm">
+          <mat-form-field appearance="outline">
+            <mat-label>Select Users</mat-label>
+            <mat-select placeholder="Departments" (selectionChange)="userChanged($event)">
+              <mat-option *ngFor="let user of users" [value]="user">
+                {{user.username}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <!-- for message -->
+          <mat-form-field class="example-full-width">
+            <textarea matInput placeholder="Message" formControlName="message"></textarea>
+          </mat-form-field>
+        </form>
       </ng-template>
     </div>
     <div class="">

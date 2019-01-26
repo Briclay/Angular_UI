@@ -13,4 +13,8 @@ export class WorkOrderService {
         let url = `${environmentService.briclayWorkRequest}/work-order?${orgId}&order=createdAt&sort=desc`
         return this.apiService.get(url).pipe(map(res => res));
     }
+    public save(requestObj): Observable<any> {
+        let url = `${environmentService.briclayFileManager}/work-order`
+        return this.apiService.post(url, requestObj).pipe(map(res => res));
+    }
 }

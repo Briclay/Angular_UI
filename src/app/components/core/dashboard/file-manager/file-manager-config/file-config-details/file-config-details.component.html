@@ -1,22 +1,45 @@
 <div class="file-config-detail-container">
-  <div class="detail-header">
+  <!-- <div class="detail-header">
     <span>N</span>
     <span>G</span>
     <span>P</span>
     <span>D</span>
     <img matTooltip="Share" (click)="openShareDialog(fileList)" width="25" height="25" class="margin-left-4" src="assets/images/icons/File_Share.png"/>
+  </div> -->
+  <!-- File Iocn -->
+  <b>Logs Details</b>
+  <div fxLayout="row" fxLayoutAlign="space-between center">
+    <img src="{{getIcon(logsData.fileExt, logsData.type)}}" width="32%">
+    <span fxFlex="87">{{logsData.name}}</span>
   </div>
+  <!-- end file icon -->
   <div fxLayout="row">
     <div class="flex-grow no-border margin-10">
-      <div *ngFor="let option of folderListOption" class="margin-10">{{option.label}}<br/></div>
-    </div>
-    <div class="flex-grow no-border margin-10">
-      <div *ngFor="let option of folderListOption" class="margin-10">
-        <span *ngIf="option.type === 'date'; else stringTemplate"> {{folderDetailsData[option.key] | date:'dd/MM/yyyy'}} </span>
-        <ng-template #stringTemplate>
-          {{folderDetailsData[option.key]}}
-        </ng-template>
-        <br/>
+      <div class="details" *ngFor="let logs of logsData.draftVersion" class="margin-10">
+        <div fxLayout="row">
+          <div fxFlex="50">size</div>
+          <div fxFlex="50">{{ getFileSize(logs.size) }}</div>
+        </div>
+        <div fxLayout="row">
+          <div fxFlex="50">Modified Date</div>
+          <div fxFlex="50">{{logs.updatedAt | date:'MM/dd/yyyy'}}</div>
+        </div>
+        <!-- <div fxLayout="row" class="space-in-row">
+            <div fxFlex="50">Modified By</div>
+            <div fxFlex="50">{{logs.owner.username}}</div>
+          </div> -->
+        <div fxLayout="row" class="space-in-row">
+          <div fxFlex="50">version</div>
+          <div fxFlex="50">V {{logs.version}}</div>
+        </div>
+        <!-- <div fxLayout="row" class="space-in-row">
+            <div fxFlex="50">Status</div>
+            <div fxFlex="50">{{logs.approvalStatus}}</div>
+          </div> -->
+        <div fxLayout="row" class="space-in-row">
+          <div fxFlex="50">Comments</div>
+          <div fxFlex="50">{{logs.message}}</div>
+        </div>
       </div>
     </div>
   </div>

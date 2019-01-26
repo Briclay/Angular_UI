@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { ApiService } from "../../../../services/api.service";
 import { map } from 'rxjs/operators';
+import { environmentService } from "../../../../constant/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -10,51 +11,52 @@ export class FileManagerService {
 
   constructor(private apiService: ApiService) { }
 
-  public getAllFolders(fileId?): Observable<any> {
-    let url = `https://briclay-file-manager.herokuapp.com/folder${fileId ? '/' + fileId : ''}`
+  public getAllFolders(query: any): Observable<any> {
+    let url = `${environmentService.briclayFileManager}/folder?${query}`
     return this.apiService.get(url).pipe(map(res => res));
   }
 
   public getFiles(fileId?): Observable<any> {
-    let url = `https://briclay-file-manager.herokuapp.com/file`
+    let url = `${environmentService.briclayFileManager}/file`
     return this.apiService.get(url).pipe(map(res => res));
   }
 
   public saveFolder(requestObj): Observable<any> {
-    let url = "http://localhost:9091/folder"
+    let url = `${environmentService.briclayFileManager}/folder`
     return this.apiService.post(url, requestObj).pipe(map(res => res));
   }
 
-  public getSingleFile(fileId): Observable<any> {
-    let url = `http://localhost:9091/folder/${fileId}`
+  getSingleFile(fileId): Observable<any> {
+    let url = `${environmentService.briclayFileManager}/folder/${fileId}`
     return this.apiService.get(url).pipe(map(res => res));
   }
 
-  public shareFile(userID, fileID): Observable<any> {
-    let url = `http://localhost:9091/file/share/${fileID}`;
-    let requestObj = {
-      "activeFlag": false,
-      "sharedByUserId": userID
-    }
-    return this.apiService.put(url, requestObj).pipe(map(res => res));
+  shareFile(fileID: string, body: any): Observable<any> {
+    let url = `${environmentService.briclayFileManager}/file/share/${fileID}`;
+    return this.apiService.put(url, body).pipe(map(res => res));
   }
 
-  public shareMail(userMail, fileID): Observable<any> {
-    let url = `https://briclay-file-manager.herokuapp.com/file/send/${fileID}`;
-    let requestObj = {
-      "toMail": userMail,
-      "message": "text file "
-    }
-    return this.apiService.put(url, requestObj).pipe(map(res => res));
+  shareMail(fileID: string, body: any): Observable<any> {
+    let url = `${environmentService.briclayFileManager}/file/send/${fileID}`;
+    return this.apiService.put(url, body).pipe(map(res => res));
   }
 
   getS3Url(query: string): Observable<any> {
-    let url = `http://localhost:9091/file/sign-s3?${query}`
+    let url = `${environmentService.briclayFileManager}/file/sign-s3?${query}`
     return this.apiService.get(url).pipe(map(res => res));
   }
 
   saveFile(query: any): Observable<any> {
-    let url = `http://localhost:9091/file`
+    let url = `${environmentService.briclayFileManager}/file`
     return this.apiService.post(url, query).pipe(map(res => res));
   }
+  updateFile(fileId: string, body: any): Observable<any> {
+    let url = `${environmentService.briclayFileManager}/file/${fileId}`;
+    return this.apiService.put(url, body).pipe(map(res => res));
+  }
+  getConfig(query: string): Observable<any> {
+    let url = `${environmentService.briclayFileManager}/file-config?${query}`
+    return this.apiService.get(url).pipe(map(res => res));
+  }
+
 }

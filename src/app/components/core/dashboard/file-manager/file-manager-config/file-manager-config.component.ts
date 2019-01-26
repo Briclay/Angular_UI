@@ -4,6 +4,7 @@ import { ProjectService } from '../../projects/project.service';
 import { OrganisationService } from '../../organisation/organisation.service';
 import { FileManagerService } from "../file-manager.service";
 import { ActivatedRoute, Router } from '@angular/router';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import * as _ from 'lodash';
 
@@ -11,7 +12,7 @@ import { MatDialog, MatTableDataSource } from '@angular/material';
 import { FolderCreateDialogComponent } from '../folder-create-dialog/folder-create-dialog.component';
 import { FileShareDialogComponent } from '../file-share-dialog/file-share-dialog.component';
 import { FileMailDialogComponent } from '../file-mail-dialog/file-mail-dialog.component';
-
+import { ConfirmDialogComponent } from '../../../../shared/confirm-dialog/confirm-dialog.component';
 
 export interface PeriodicElement {
   name: string;
@@ -32,8 +33,6 @@ export class FileManagerConfigComponent implements OnInit {
     logoImageUrl: "assets/images/building-2.jpg",
     name: 'list'
   };
-  selectedOrg: any;
-  selectedProjectID: string;
   public dataSource: any;
   folderData: any;
   subFolderData: any;
@@ -41,6 +40,7 @@ export class FileManagerConfigComponent implements OnInit {
   filesData: any;
   filesDetailsData: any;
   folderDetailsDataOption: any;
+  fileDetails: any;
   productOption: any;
   folderListLoading: boolean;
   subFolderListLoading: boolean;
@@ -52,7 +52,16 @@ export class FileManagerConfigComponent implements OnInit {
   fileId: string;
   currentUrl: string;
   localStack: any;
-  displayedColumns: string[] = ['type', 'name', 'createdAt', 'version'];
+  designDeptFlag = false;
+  projectFlag = false;
+  currentLevel: number;
+  previousFolderName: any;
+  fullPathDisplay: any;
+  specDeptDetails: any;
+  deptConfigData: any;
+  iconArray = [];
+  tableFlag = false;
+  displayedColumns: string[] = ['type', 'name', 'createdAt', 'version', 'logs', 'email', 'share'];
   constructor(
     private projectService: ProjectService,
     private fileManagerService: FileManagerService,
@@ -60,7 +69,8 @@ export class FileManagerConfigComponent implements OnInit {
     private organisationService: OrganisationService,
     private route: ActivatedRoute,
     private router: Router,
-    private location: PlatformLocation
+    private location: PlatformLocation,
+    private http: HttpClient
   ) {
     this.route.params.subscribe(params => {
       this.orgId = params['orgId'];
@@ -73,22 +83,75 @@ export class FileManagerConfigComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-    //get current url
-    this.currentUrl = this.router.url;
-    this.getOrganiztions();
-    this.getSingleFolder();
-    this.localStack = JSON.parse(window.localStorage.getItem('stack'));
-    console.log('local' + JSON.stringify(this.localStack));
+  folderConfigData() {
+    var tempValue = this.localStack.pop();
+    console.log('tempValue' + JSON.stringify(tempValue));
+    if (tempValue) {
+      this.currentLevel = tempValue.top;
+      this.previousFolderName = tempValue.name;
+      var tempData = JSON.parse(window.localStorage.getItem('FOLDER_PROCESS_FLOW')).configValues;
+      if (tempData.length > 0) {
+        this.deptConfigData = JSON.parse(window.localStorage.getItem('FOLDER_CONFIG_DETAILS'));
+        if (this.deptConfigData) {
+          this.populateConfigData(this.deptConfigData);
+        } else {
+          var name = this.previousFolderName;
+          var pos = _.findIndex(tempData, function (o) { return o.deptName == name; });
+          if (pos != -1) {
+            window.localStorage.FOLDER_CONFIG_DETAILS = JSON.stringify(tempData[pos]);
+            this.deptConfigData = tempData[pos];
+            console.log('this.deptConfigData' + JSON.stringify(this.deptConfigData));
+            this.populateConfigData(tempData[pos]);
+          }
 
+        }
+      }
+    }
+  }
+  //check cuurent level and config levl
+  populateConfigData(tempData: any) {
+    var level = this.currentLevel;
+    if (tempData.details.length > 0) {
+      //fetch project key and display project drop down
+      var pPos = _.findIndex(tempData.details, function (o) { return o.level == level + 1; });
+      if (pPos != -1) {
+        var details = tempData.details[pPos];
+        if ('project' === details.name) {
+          if (_.isArray(details.folderName) && details.folderName.length > 0) {
+            var getPreFolderPos = _.indexOf(details.folderName, this.previousFolderName);
+            if (getPreFolderPos != -1) {
+              this.tableFlag = false
+              this.projectFlag = true;
+            } else {
+              this.tableFlag = true
+              this.projectFlag = false;
+            }
+          } else {
+            this.tableFlag = false
+            this.projectFlag = true;
+          }
+        } else {
+          this.tableFlag = true
+          this.projectFlag = false;
+        }
+      } else {
+        this.tableFlag = true;
+        this.projectFlag = false;
+      }
+    }
+  }
+  ngOnInit() {
+    this.currentUrl = this.router.url;
+    this.localStack = JSON.parse(window.localStorage.getItem('stack'));
+    this.fullPathDisplay = JSON.parse(window.localStorage.getItem('stack'));
+    this.folderConfigData();
+    this.getProjectListinIt();
+    this.getSingleFolder();
   }
 
   getOrganiztions() {
     this.organisationService.getOrganization()
       .pipe().subscribe(res => {
-        this.selectedOrg = res[0];
-        this.organizations = res;
-        this.getProjectListinIt();
 
       }, (error: any) => {
         console.error('error', error);
@@ -96,48 +159,90 @@ export class FileManagerConfigComponent implements OnInit {
   }
 
   getProjectListinIt(orgId?) {
-    this.projectService.getProjects('filter[_organisationId]=' + this.selectedOrg._id)
+    this.projectService.getProjects('filter[_organisationId]=' + this.orgId)
       .pipe().subscribe(res => {
         this.projectlist = res;
       }, (error: any) => {
         console.error('error', error);
       })
   }
-
+  /*
+    * on Select project 
+    * check for deparment config 
+    * after select project create folder with project id
+    * if exist show table or shoe icons  
+  */
   getSingleProject(list) {
-    this.selectedProjectID = list.value;
-    this.projectService.getSingleProjects(list.value)
-      .pipe().subscribe(res => {
-        this.selectedProjectData = res;
-        this.productOption = {
-          header: [
-            { title: 'BHK ' },
-            { title: 'No.' },
-            { title: 'Area (SFT)' }],
-          keys: ['bhk', 'count', 'area'],
-          content: res.units
-        };
-
-      }, (error: any) => {
-        console.error('error', error);
-      })
+    this.selectedProjectData = list.value;
+    var body = {
+      name: this.selectedProjectData.name,
+      _organisationId: this.orgId,
+      _departmentId: this.deptId,
+      _parentId: this.fileId,
+      owner: '',
+      _projectId: this.selectedProjectData._id,
+      shared: [],
+      details: "This folder is created by ",
+      accessFlag: "Private"
+    }
+    //logic for only contrcat departemt to add fodler name with id
+    if (this.deptConfigData.deptName == 'Contracts') {
+      this.fileManagerService.getSingleFile(this.fileId)
+        .pipe().subscribe(res => {
+          body.name = this.createProjectNumber(res.length + 1) + "-" + this.selectedProjectData.name;
+          this.createProjectFolder(body, this.selectedProjectData);
+        });
+    } else {
+      //else normal folder creation
+      this.createProjectFolder(body, this.selectedProjectData);
+    }
   }
 
-  getAllFolders() {
+  createProjectFolder(body, row) {
+    if (this.deptConfigData.iconFlag) {
+      this.designDeptFlag = true;
+    } else {
+      this.designDeptFlag = false;
+    }
+    this.fileManagerService.saveFolder(body)
+      .pipe().subscribe(res => {
+        if (this.designDeptFlag) {
+          this.getIconFoldersByApi(row);
+        } else {
+          this.tableFlag = true;
+          this.getSingleFolder();
+        }
+      }, (error: any) => {
+        //if exist then show tbales otherwise show erro
+        if ('Folder exist' === error.message) {
+          if (this.designDeptFlag) {
+            this.getIconFoldersByApi(row);
+          } else {
+            this.tableFlag = false;
+            this.getSingleFolder();
+          }
+        } else {
+          console.log('error', error);
+        }
+      });
+  }
+  getIconFoldersByApi(row) {
     this.folderListLoading = true;
-    this.fileManagerService.getAllFolders()
+    this.fileManagerService.getAllFolders('filter[_projectId]=' + row._id + '&filter[name]=' + row.name + '&filter[_departmentId]=' + this.deptId)
       .pipe().subscribe(res => {
-        this.folderData = res;
-        console.log(res, "folderData")
-        this.folderListLoading = false;
+        this.getIconsFolder(res[0]._id)
+      }, (error: any) => {
+      })
+  }
+  getIconsFolder(id) {
+    this.fileManagerService.getSingleFile(id)
+      .pipe().subscribe(res => {
+        this.iconArray = res;
       }, (error: any) => {
         console.error('error', error);
-        this.folderListLoading = false;
       })
-
   }
-
-  openFolderDialog(list?) {
+  openFolderDialog() {
     let dialogRef = this.dialog.open(FolderCreateDialogComponent, {
       width: '600px',
       data: {
@@ -153,62 +258,40 @@ export class FileManagerConfigComponent implements OnInit {
       });
   }
 
-  openShareDialog(fileList?) {
-    let dialogRef = this.dialog.open(FileShareDialogComponent, {
-      width: '600px',
-      data: {
-        '_parentId': fileList ? fileList._id : '',
-        'orgId': '5a5844cd734d1d61613f7066',
-        'deptId': '5a5844cd734d1d61613f7066'
-      }
-    }).afterClosed()
-      .subscribe(response => {
-        if (response === 'success') {
-          this.getAllFolders();
+  openShareDialog(element?) {
+    if (element.type == 'file') {
+      let dialogRef = this.dialog.open(FileShareDialogComponent, {
+        width: '600px',
+        data: {
+          'fileId': element._id
         }
-      });
+      }).afterClosed()
+        .subscribe(response => {
+          if (response === 'success') {
+            this.getSingleFolder();
+          }
+        });
+    }
+
   }
 
-  openMailDialog(fileList?) {
-    let dialogRef = this.dialog.open(FileMailDialogComponent, {
-      width: '600px',
-      data: {
-        '_parentId': fileList ? fileList._id : '',
-        'orgId': '5a5844cd734d1d61613f7066',
-        'deptId': '5a5844cd734d1d61613f7066'
-      }
-    }).afterClosed()
-      .subscribe(response => {
-        if (response === 'success') {
-          this.getAllFolders();
+  openMailDialog(element) {
+    if (element.type == 'file') {
+      let dialogRef = this.dialog.open(FileMailDialogComponent, {
+        width: '600px',
+        data: {
+          'fileId': element._id
         }
-      });
+      }).afterClosed()
+        .subscribe(response => {
+          if (response === 'success') {
+            this.getSingleFolder();
+          }
+        });
+    }
   }
 
-  getSubFolder(list) {
-    this.subFolderListLoading = true;
-    this.fileManagerService.getAllFolders(list._id)
-      .pipe().subscribe(res => {
-        this.subFolderData = res;
-        console.log(res, 'subFolderData')
-        /* this.subFolderData = {
-           header: [
-             { title: 'Name.' },
-             { title: 'Created ' },
-             { title: 'Created By ' },
-             { title: 'Version.' },
-             { title: '.' }],
-           keys: ['name', 'createdAt', 'accessFlag','version'],
-           content: res
-         };*/
 
-        this.subFolderListLoading = false;
-
-      }, (error: any) => {
-        console.error('error', error);
-        this.subFolderListLoading = false;
-      })
-  }
   getSingleFolder() {
     this.fileManagerService.getSingleFile(this.fileId)
       .pipe().subscribe(res => {
@@ -250,7 +333,6 @@ export class FileManagerConfigComponent implements OnInit {
     }
   }
   recursiveCall(data) {
-    console.log('data' + JSON.stringify(data));
     if (data.type === 'folder') {
       const path = '/dashboard/file-manager/' + this.orgId + "/" + this.deptId + "/" + data._id;
       let top = 0;
@@ -273,20 +355,49 @@ export class FileManagerConfigComponent implements OnInit {
       });
     }
   }
+
+  //click on icon
+  getClickedByIcon(value) {
+    if (this.orgId && this.deptId && value) {
+      if (value.type === 'folder') {
+        this.projectFlag = false;
+        let stack = JSON.parse(window.localStorage.getItem('stack'));
+        let json = {
+          name: value.name,
+          path: this.currentUrl,
+          top: parseInt(stack[stack.length - 1].top) + 1
+        };
+        stack.push(json);
+        window.localStorage.stack = JSON.stringify(stack);
+        const path = '/dashboard/file-manager/' + this.orgId + "/" + this.deptId + "/" + value._id;
+        // route to dept folder list
+        this.router.navigate([path]).then(() => {
+          this.ngOnInit();
+        });
+      }
+    }
+  }
   goBackButton() {
-    // let len = this.localStack.length - 1;
-    //  let path = this.localStack[len].path;
-    //console.log(' this.localStack'+JSON.stringify( this.localStack));
-    if (!_.isEmpty(this.localStack)) {
-      let temp = this.localStack.pop();
+    if (!_.isEmpty(this.fullPathDisplay)) {
+      let temp = this.fullPathDisplay.pop();
       const path = temp.path;
-      console.log('path' + JSON.stringify(path));
-      window.localStorage.stack = JSON.stringify(this.localStack);
+      window.localStorage.stack = JSON.stringify(this.fullPathDisplay);
       this.router.navigate([path]).then(() => {
         this.ngOnInit();
       });
     }
-
+  }
+  //this method for route navigation 
+  onSelectPath(path, top) {
+    let tempArray = [];
+    let tempStack = JSON.parse(window.localStorage.getItem('stack'));
+    for (var i = 0; i < top; i++) {
+      tempArray.push(tempStack[i])
+    }
+    window.localStorage.stack = JSON.stringify(tempArray);
+    this.router.navigate([path]).then(() => {
+      this.ngOnInit();
+    });
   }
   getFileDetails(fileList) {
     this.fileDetialsLoading = true;
@@ -300,13 +411,11 @@ export class FileManagerConfigComponent implements OnInit {
       reader.readAsDataURL(file);
       let fileExt = file.name.split(".");
       let fileName = (new Date().getTime()) + "." + fileExt[fileExt.length - 1];
-      console.log('file' + file);
-      console.log('fileName' + fileName);
 
       this.fileManagerService.getS3Url('file-name=' + fileName + '&file-type=' + file.type + '&_organisationId=' + this.orgId)
         .pipe().subscribe(res => {
-          console.log('res' + JSON.stringify(res));
           let json = {
+            savedFileName: fileName,
             _organisationId: this.orgId,
             _departmentId: this.deptId,
             _folderId: this.fileId,
@@ -315,35 +424,79 @@ export class FileManagerConfigComponent implements OnInit {
             fileExt: fileExt[fileExt.length - 1],
             path: res.url,
             size: file.size,
-            message: "File uploaded by " + this.selectedOrg._id,
+            message: "File uploaded by ",
             details: "file original name is " + file.name
           };
-          this.fileManagerService.saveFile(json)
-            .pipe().subscribe(res => {
-              console.log('res'+JSON.stringify(res));
-              // this.getAllFolders();
-            }, (error: any) => {
-            });
+          this.saveOnS3(res, file, json);
         }, (error: any) => {
         });
     } else {
       console.log('false');
     }
   }
-
-  getFileSize(value) {
-    if (value) {
-      if (value < 1024) {
-        return (value).toFixed(2) + ' B';
-      } else if (value >= 1024 && value < 1048576) {
-        return (value / 1024).toFixed(2) + ' Kb';
-      } else if (value >= 1048576 && value < 1073741824) {
-        return (value / (1024 * 1024)).toFixed(2) + ' Mb';
-      } else {
-        return (value / (1024 * 1024 * 1024)).toFixed(2) + ' Gb';
+  saveOnS3(response: any, file, body: any) {
+    this.http.put(response.signedRequest, file, {
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+    }).subscribe((awsRes: any) => {
+      body.path = 'https://s3.ap-south-1.amazonaws.com/' + this.orgId + '/' + response.savedFileName;
+      //this.getAssingedUser(json);
+      this.onSaveFile(body)
+    }, (error: any) => {
+      console.log('erro' + JSON.stringify(error));
+    });
+  }
+  onSaveFile(body: any) {
+    this.fileManagerService.saveFile(body)
+      .pipe().subscribe(res => {
+        this.getSingleFolder();
+      }, (error: any) => {
+        if ('Folder exist' === error.message) {
+          this.onFileReplcaeDailog(body);
+        } else {
+          console.log('error', error);
+        }
+      });
+  }
+  onFileReplcaeDailog(body) {
+    let dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '600px',
+      data: {
+        'message': 'Do want to replace file ?'
       }
-    } else {
-      return value;
+    }).afterClosed()
+      .subscribe(response => {
+        if (response) {
+          this.onFileReplcaeSave(body);
+        }
+      });
+  }
+  onFileReplcaeSave(body) {
+    if (body) {
+      this.fileManagerService.updateFile(body._id, body)
+        .pipe().subscribe(res => {
+          this.getSingleFolder();
+        }, (error: any) => {
+          console.log('error', error);
+        });
     }
   }
+  getLogs(data: any) {
+    if (data.type == 'file') {
+      this.fileDetails = data;
+    }
+  }
+  //contract departmetn project increament
+  createProjectNumber(number) {
+    var str = '' + number;
+    var count = 0;
+    var padArray = [{ len: 1, size: 2 }, { len: 2, size: 1 }, { len: 3, size: 0 }]
+    var findSize = _.find(padArray, function (item) {
+      return item.len === str.length;
+    });
+    while (count < findSize.size) {
+      str = '0' + str;
+      count++;
+    }
+  }
+
 }

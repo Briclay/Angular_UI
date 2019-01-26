@@ -6,7 +6,7 @@
           <div fxFlex="20" fxLayout="row" fxLayoutAlign="start center">
             <mat-form-field appearance="outline" floatLabel="never" color="primary">
               <mat-label>Work Request</mat-label>
-              <mat-select placeholder="Work Request" formControlName="workRequestList" class="fo-p3-likhud" (change)="selectWorkRequest()">
+              <mat-select placeholder="Work Request" formControlName="workRequestList" class="fo-p3-likhud" (selectionChange)="selectWorkRequest()">
                 <mat-option *ngFor="let requestList of workList" [value]="requestList">
                   {{ requestList.requestNumber }}
                 </mat-option>
