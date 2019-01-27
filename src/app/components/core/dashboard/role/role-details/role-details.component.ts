@@ -62,7 +62,7 @@ export class RoleDetailsComponent implements OnInit {
       _organisationId: new FormControl(this.orgID),
       _departmentId: new FormControl('', [Validators.required]),
       userType: new FormControl('', [Validators.required]),
-      features: new FormControl('', [Validators.required]),
+      features: new FormControl(0, [Validators.required]),
       approvals: new FormControl(''),
       approvalProcess: new FormControl([]),
       description: new FormControl(''),
@@ -112,7 +112,8 @@ export class RoleDetailsComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       if(result) {
-          result.forEach((list) => {
+        this.roleDetailsForm.controls['features'].setValue(result.length)
+        result.forEach((list) => {
           list._featureId = list._id
           list.rules.forEach((rule) => {
             rule.permissions.forEach((permission) => {
