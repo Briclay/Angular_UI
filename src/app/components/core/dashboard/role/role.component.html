@@ -15,7 +15,7 @@
             </div>
         </mat-tab>
         <mat-tab label="New">
-            <app-role-details formType="create" [orgID]="selectedOrgId" (tabSwitch)="tabSwitch($event)" *ngIf="selectedOrgId"></app-role-details>
+            <app-role-details formType="create" (tabSwitch)="tabSwitch($event)" *ngIf="selectedOrgId"></app-role-details>
         </mat-tab>
     </mat-tab-group>
 </div>

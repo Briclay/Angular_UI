@@ -4,6 +4,9 @@ import { RoleData } from './interfaces';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material';
 import { HistoryPopupComponent } from '../../../../components/shared/history-popup/history-popup.component'
 import { DepartmentService } from '../../../../services/department/department.service';
+import {merge as observableMerge, Subject} from 'rxjs';
+import { Router, ActivatedRoute } from '@angular/router';
+import {takeUntil} from 'rxjs/operators';
 
 @Component({
 	selector: 'app-role',
@@ -20,7 +23,11 @@ export class RoleComponent implements OnInit {
 	historyData: any;
 	selectedOrgId: string;
 
+	private unsubscribe: Subject<any> = new Subject();
+
 	constructor(
+		private router: Router,
+    	private route: ActivatedRoute,
 		private roleService: RoleService,
 		public dialog: MatDialog,
 		private departmentService: DepartmentService,
@@ -28,17 +35,31 @@ export class RoleComponent implements OnInit {
 	) { }
 
 	ngOnInit() {
+		observableMerge(this.route.params, this.route.queryParams).pipe(
+      	takeUntil(this.unsubscribe))
+      	.subscribe((params) => this.loadRoute(params));
 
+	}
+
+	public ngOnDestroy(): void {
+		this.unsubscribe.next();
+		this.unsubscribe.complete();
+	}
+
+	loadRoute(params: any) {
+		if('orgID' in params) {
+			this.selectedOrgId = params['orgID'];
+			this.getRolesData();
+		}
 	}
 
 	organizationChanged(org) {
-		this.getRolesData(org.value ? org.value._id : org._id)
+		this.router.navigate([], {queryParams: {orgID: org.value ? org.value._id : org._id} , queryParamsHandling: 'merge'});
 	}
 
-	getRolesData(orgId) {
-		this.selectedOrgId = orgId;
+	getRolesData() {
 		this.roleListSpinner = true;
-		this.roleService.getData(orgId).pipe().subscribe(res => {
+		this.roleService.getData(this.selectedOrgId).pipe().subscribe(res => {
 			this.roles = res;
 			this.roleListSpinner = false;
 			this.roles.forEach((list) => list.features = list.access.length);
@@ -92,6 +113,6 @@ export class RoleComponent implements OnInit {
 
 	tabSwitch(tabReq) {
 		this.tabGroup.selectedIndex = tabReq.index;
-		this.getRolesData(tabReq.orgId)
+		this.getRolesData()
 	}
 }

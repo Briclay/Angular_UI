@@ -1,10 +1,12 @@
 import { Component, OnInit, Input, Output, EventEmitter  } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl, FormArray } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
 import { DepartmentService } from '../../../../../services/department/department.service';
 import {RoleService} from '../role.service';
 import { MatDialog, MatSnackBar, MAT_DIALOG_DATA } from '@angular/material';
 import { FeaturePopupComponent } from '../../../../../components/shared/feature-popup/feature-popup.component'
+import {merge as observableMerge, Subject} from 'rxjs';
+import { Router, ActivatedRoute } from '@angular/router';
+import {takeUntil} from 'rxjs/operators';
 
 @Component({
   selector: 'app-role-details',
@@ -22,10 +24,12 @@ export class RoleDetailsComponent implements OnInit {
   _roleId = ['ADMIN', 'USER', 'MANAGEMENT'];
   departments: any;
   isLoading: boolean;
+  private unsubscribe: Subject<any> = new Subject();
   
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
+    private route: ActivatedRoute,
     private snackBar: MatSnackBar,
     private roleService: RoleService,
     private departmentService: DepartmentService,
@@ -33,16 +37,29 @@ export class RoleDetailsComponent implements OnInit {
   }
 
   ngOnInit() {
+    observableMerge(this.route.params, this.route.queryParams).pipe(
+      	takeUntil(this.unsubscribe))
+      	.subscribe((params) => this.loadRoute(params));
     this.roleDetailsForm = this.createFormGroup();
     this.assignValuesToForm();
-    this.orgID = this.orgID ? this.orgID : (this.data ? this.data._organisationId : "");
     this.getDepartments();
   }
+
+  public ngOnDestroy(): void {
+		this.unsubscribe.next();
+		this.unsubscribe.complete();
+	}
+
+  loadRoute(params: any) {
+		if('orgID' in params) {
+			this.orgID = params['orgID']
+		}
+	}
 
   createFormGroup() {
     return new FormGroup({
       name: new FormControl('', [Validators.required]),
-      _organisationId: new FormControl(this.orgID ? this.orgID : (this.data ? this.data._organisationId : "")),
+      _organisationId: new FormControl(this.orgID),
       _departmentId: new FormControl('', [Validators.required]),
       userType: new FormControl('', [Validators.required]),
       features: new FormControl('', [Validators.required]),
@@ -60,7 +77,6 @@ export class RoleDetailsComponent implements OnInit {
   }
 
   getDepartments() {
-    console.log('this.orgID', this.orgID);
     if(this.orgID) {
       this.departmentService.getDepartmentByOrg(`filter[_organisationId]=${this.orgID}` )
       .pipe().subscribe(res => {
@@ -113,6 +129,7 @@ export class RoleDetailsComponent implements OnInit {
 
   onSubmit() {
     // Do useful stuff with the gathered data
+    this.roleDetailsForm.value._organisationId = this.orgID;
     if(this.formType !== 'create') {
       this.roleService.updateRole(this.data._id, this.roleDetailsForm.value )
       .pipe().subscribe(res => {
