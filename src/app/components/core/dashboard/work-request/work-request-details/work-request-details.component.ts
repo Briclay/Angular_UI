@@ -48,9 +48,6 @@ export class WorkRequestDetailsComponent implements OnInit {
     private workRequestService: WorkRequestService,
     private userService: UserService) {
     //get org id for superadmin
-    // this.route.queryParams.subscribe(params => {
-    //   this.orgId = params['orgId']
-    // });
     this.todayDate = (new Date()).toISOString();
     this.orgId = '5a5844cd734d1d61613f7066';
     //list of typ of work
@@ -84,7 +81,7 @@ export class WorkRequestDetailsComponent implements OnInit {
 
     this.workTrackerForm = this.formBuilder.group({
       _organisationId: this.orgId,
-      _projectId: [Validators.required],
+      _projectId: ['', Validators.required],
       requestNumber: this.reuqestNumber,
       status: 'Open',
       date: new FormControl((new Date())),
@@ -112,11 +109,15 @@ export class WorkRequestDetailsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.assignValuesToForm()
-    this.getAllProjectsList();
-    this.getAllWorkRequestTracker();
-    this.getUsers();
-    this.getWorkCategory(`filter[_organisationId]=${this.orgId}`);
+    this.route.queryParams.subscribe(params => {
+      this.orgId = params['orgID'];
+      this.assignValuesToForm()
+      this.getAllProjectsList();
+      this.getAllWorkRequestTracker();
+      this.getUsers();
+      this.getWorkCategory();
+    });
+    
   }
 
   assignValuesToForm() {
@@ -127,13 +128,13 @@ export class WorkRequestDetailsComponent implements OnInit {
 
   getAllProjectsList() {
     //get all project
-    this.projectService.getProjects(`filter[_organisationId]=${this.orgId}`)
+    this.projectService.getProjects(`${this.orgId}`)
       .pipe().subscribe(res => {
         this.projectsList = res;
-        if (this.projectsList.length <= 0) {
-          //TODO add error component
-          console.error('No projects found')
-        }
+          if (this.projectsList.length <= 0) {
+            //TODO add error component
+            console.error('No projects found')
+          }
       }, (error: any) => {
         //TODO add error component
         console.error('error', error)
@@ -159,7 +160,7 @@ export class WorkRequestDetailsComponent implements OnInit {
   workTrackerFormSubmit() {
     console.log('(this.workTrackerForm'+JSON.stringify(this.workTrackerForm.value));
     if (this.workTrackerForm.valid) {
-      console.log('(this.workTrackerForm  inside'+JSON.stringify(this.workTrackerForm.value));
+      this.workTrackerForm.value._organisationId = this.orgId;
       if (this.workTrackerForm.value.initiatedDate && this.workTrackerForm.value.RFAapprovalDate) {
         if (this.workTrackerForm.value.initiatedDate < this.workTrackerForm.value.RFAapprovalDate) {
           this.onSave();
@@ -230,9 +231,9 @@ export class WorkRequestDetailsComponent implements OnInit {
     console.log(this.workTrackerForm.value.leadTimeRequire);
     console.log(_.isNumber(this.workTrackerForm.value.leadTimeRequire));
     // if (this.workTrackerForm.value.date <= this.workTrackerForm.value.needByDate) {
-    if (_.isNumber(this.workTrackerForm.value.leadTimeRequire)) {
-      let dateOffset = (24 * 60 * 60 * 1000) * this.workTrackerForm.value.leadTimeRequire;
-      let need_date = this.workTrackerForm.value.needByDate.getTime() - dateOffset;
+    if (this.workTrackerForm.value.leadDuration) {
+      let dateOffset = (24 * 60 * 60 * 1000) * this.workTrackerForm.value.leadDuration;
+      let need_date = this.workTrackerForm.value.needByDate.getTime();
       this.workTrackerForm.value.needByDate.setTime(need_date);
       var timeDiff = this.workTrackerForm.value.needByDate.getTime() - this.workTrackerForm.value.date.getTime();
       var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
@@ -325,10 +326,12 @@ export class WorkRequestDetailsComponent implements OnInit {
     }
   }
 
-  getWorkCategory(orgId) {
-    this.workRequestService.getWorkCategory(orgId)
+  getWorkCategory(orgId?) {
+    this.workRequestService.getWorkCategory(`filter[_organisationId]=${this.orgId}`)
       .pipe().subscribe(res => {
-        this.workCategory = res[0].configValues
+        if(res.length) {
+          this.workCategory = res[0].configValues
+        }
       }, (error: any) => {
         //TODO add error component
         console.error('error', error)

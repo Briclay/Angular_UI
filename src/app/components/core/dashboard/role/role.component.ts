@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { RoleService } from './/role.service';
 import { RoleData } from './interfaces';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material';
 import { HistoryPopupComponent } from '../../../../components/shared/history-popup/history-popup.component'
 import { DepartmentService } from '../../../../services/department/department.service';
+import {merge as observableMerge, Subject} from 'rxjs';
+import { Router, ActivatedRoute } from '@angular/router';
+import {takeUntil} from 'rxjs/operators';
 
 @Component({
 	selector: 'app-role',
@@ -12,6 +15,7 @@ import { DepartmentService } from '../../../../services/department/department.se
 })
 
 export class RoleComponent implements OnInit {
+	@ViewChild('tabGroup') tabGroup;
 
 	roles: any;
 	roleDataOptions = [];
@@ -19,7 +23,11 @@ export class RoleComponent implements OnInit {
 	historyData: any;
 	selectedOrgId: string;
 
+	private unsubscribe: Subject<any> = new Subject();
+
 	constructor(
+		private router: Router,
+    	private route: ActivatedRoute,
 		private roleService: RoleService,
 		public dialog: MatDialog,
 		private departmentService: DepartmentService,
@@ -27,14 +35,31 @@ export class RoleComponent implements OnInit {
 	) { }
 
 	ngOnInit() {
+		observableMerge(this.route.params, this.route.queryParams).pipe(
+      	takeUntil(this.unsubscribe))
+      	.subscribe((params) => this.loadRoute(params));
 
 	}
 
+	public ngOnDestroy(): void {
+		this.unsubscribe.next();
+		this.unsubscribe.complete();
+	}
+
+	loadRoute(params: any) {
+		if('orgID' in params) {
+			this.selectedOrgId = params['orgID'];
+			this.getRolesData();
+		}
+	}
+
 	organizationChanged(org) {
-		this.selectedOrgId = org._id;
-		this.getDepartments();
+		this.router.navigate([], {queryParams: {orgID: org.value ? org.value._id : org._id} , queryParamsHandling: 'merge'});
+	}
+
+	getRolesData() {
 		this.roleListSpinner = true;
-		this.roleService.getData(org._id).pipe().subscribe(res => {
+		this.roleService.getData(this.selectedOrgId).pipe().subscribe(res => {
 			this.roles = res;
 			this.roleListSpinner = false;
 			this.roles.forEach((list) => list.features = list.access.length);
@@ -46,7 +71,7 @@ export class RoleComponent implements OnInit {
 					title: 'Features', key: 'features'
 				},
 				{
-					title: 'Description', key: 'description'
+					title: 'User Type', key: 'userType'
 				}
 			]
 		}, (error: any) => {
@@ -84,5 +109,10 @@ export class RoleComponent implements OnInit {
 			}, (error: any) => {
 				console.error('error', error);
 			});
+	}
+
+	tabSwitch(tabReq) {
+		this.tabGroup.selectedIndex = tabReq.index;
+		this.getRolesData()
 	}
 }

@@ -1,7 +1,8 @@
 <div class="user-container">
     <mat-tab-group>
         <mat-tab label="Overview">
-            <app-panel-header-filter></app-panel-header-filter>
+            <app-panel-header-filter (selectOrganizaion)="organizationChanged($event)"></app-panel-header-filter>
+            <spinner diameter="80" class="text-center" *ngIf="depListSpinner; else panelContent"></spinner>
             <div fxLayout="row">
                 <app-expansion-panel 
                     [expansionPanelOptions]="departmentDataOptions"

@@ -1,12 +1,14 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { Router } from '@angular/router';
 import * as _ from 'lodash';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { WorkOrderService } from '../work-order.service';
 import { WorkRequestService } from '../../work-request/work-request.service'
 import { OrganisationService } from '../../organisation/organisation.service';
-import { ProjectService } from '../../projects/project.service'
+import { ProjectService } from '../../projects/project.service';
+import {merge as observableMerge, Subject} from 'rxjs';
+import { Router, ActivatedRoute } from '@angular/router';
+import {takeUntil} from 'rxjs/operators';
 
 @Component({
   selector: 'app-work-order-details',
@@ -30,15 +32,17 @@ export class WorkOrderDetailsComponent implements OnInit {
   orderList: any;
   workList: any;
   orgId: string;
+
+  private unsubscribe: Subject<any> = new Subject();
   constructor(private formBuilder: FormBuilder,
     private workOrderService: WorkOrderService,
     private workRequestService: WorkRequestService,
     private organisationService: OrganisationService,
-    private projectService: ProjectService
+    private projectService: ProjectService,
+    private router: Router,
+    private route: ActivatedRoute
   ) {
-    this.orgId = '5c42f0f5d88e0000043ba69f';
     this.initiatedDate = (new Date());
-    this.getAllWorkRequest();
     this.orderTrackerFormErrors = {
       _workOrderId: {},
       _organisationId: {},
@@ -82,10 +86,25 @@ export class WorkOrderDetailsComponent implements OnInit {
     });
   }
 
-
   ngOnInit() {
-    this.assignValuesToForm();
+    observableMerge(this.route.params, this.route.queryParams).pipe(
+      takeUntil(this.unsubscribe))
+      .subscribe((params) => this.loadRoute(params));
   }
+
+  public ngOnDestroy(): void {
+    this.unsubscribe.next();
+    this.unsubscribe.complete();
+  }
+
+  loadRoute(params: any) {
+    if ('orgID' in params) {
+      this.orgId = params['orgID'];
+      this.assignValuesToForm();
+      this.getAllWorkRequest();
+    }
+  }
+
 
   selectWorkRequest() {
     this.genrateFullRefNumber();

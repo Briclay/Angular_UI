@@ -14,7 +14,10 @@ export let API_BASE = "";
 export class ApiService {
   // URLs to web api
   
-  constructor(private http: HttpClient) { }
+  token : any;
+
+  constructor(private http: HttpClient) { 
+  }
 
   public get(url: string, query?: {[id: string]: string}, responseType?): Observable<any> {
     let reqUrl = `${API_BASE}${url}`;
@@ -27,14 +30,15 @@ export class ApiService {
       }
     }
 
-    const headersOptions = {
-      headers: new HttpHeaders({ 
-        "Authorization" : "7L9AEbso7rb0HwV5GwYtMu8clzAbXT8vzuDFsTJ3lnc4txvIOaK9wFqZjrbw65id"
-      })
-    };
+    const headersOptions = new HttpHeaders({ 
+      "Authorization" : JSON.parse(window.localStorage.getItem('authToken')),
+      "Content-Type": "application/json"
+    })
 
     let runRequest = (retries: number): Observable <any> => {
-      return this.http.get(reqUrl, headersOptions , {params: httpParams, responseType: responseType}).pipe(
+      return this.http.get(reqUrl, {params: httpParams, responseType: responseType, 
+        headers: headersOptions
+    }).pipe(
         map(response => response),
         catchError((error) => {
           if (retries > 0) {
@@ -54,8 +58,8 @@ export class ApiService {
 
     const headersOptions = {
       headers: new HttpHeaders({ 
-        "Content-Type": "application/json" ,
-        "Authorization" : "7L9AEbso7rb0HwV5GwYtMu8clzAbXT8vzuDFsTJ3lnc4txvIOaK9wFqZjrbw65id"
+        "Content-Type": "application/json",
+        "Authorization" : JSON.parse(window.localStorage.getItem('authToken')) ? JSON.parse(window.localStorage.getItem('authToken')) : ""
       })
     };
 
@@ -74,7 +78,7 @@ export class ApiService {
     const headersOptions = {
       headers: new HttpHeaders({ 
         "Content-Type": "application/json" ,
-        "Authorization" : "7L9AEbso7rb0HwV5GwYtMu8clzAbXT8vzuDFsTJ3lnc4txvIOaK9wFqZjrbw65id"
+        "Authorization" : JSON.parse(window.localStorage.getItem('authToken'))
       })
     };
 

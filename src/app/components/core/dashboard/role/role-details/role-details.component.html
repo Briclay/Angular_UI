@@ -1,58 +1,79 @@
 <div class="user-details-container">
-  <div [formGroup]="roleDetailsForm"  class="user-details-form">
-      <div class="user-details-card">
-        <div class="user-details-name">
-          <div class="username-input">
-            <mat-form-field appearance="outline" class="margin_right_25">
-              <mat-label>Role Name</mat-label>
-              <input matInput formControlName="name">
-            </mat-form-field>
+  <div [formGroup]="roleDetailsForm" class="user-details-form">
+    <div class="user-details-card">
+      <div class="user-details-name">
+        <div class="username-input">
+          <mat-form-field appearance="outline" class="margin_right_25">
+            <mat-label>Role Name</mat-label>
+            <input matInput formControlName="name">
+          </mat-form-field>
+          <br/>
+           <mat-form-field appearance="outline">
+             <mat-label>Description</mat-label>
+            <textarea matInput placeholder="Textarea" formControlName="description"></textarea>
+          </mat-form-field>
+        </div>
+        
+      </div>
+      <mat-card class="user-details-content">
+        <div class="flex-box">
+          <div class="user-details-content">
+            <div class="user-details-content-title">
+              <strong> Details</strong>
+            </div>
+            <div class="user-details-form-list">
+              <div>
+                <mat-form-field appearance="outline" class="margin_right_25">
+                  <mat-label>User Type</mat-label>
+                  <mat-select formControlName="userType">
+                    <mat-option *ngFor="let user of _roleId" [value]="user">
+                      {{user}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div>
+                <mat-form-field appearance="outline" class="margin_right_25">
+                  <mat-label>Departments</mat-label>
+                  <mat-select placeholder="Departments" formControlName="_departmentId">
+                    <mat-option *ngFor="let department of departments" [value]="department._id">
+                      {{department.name}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+
+              </div>
+            </div>
+          </div>
+          <div class="user-details-content">
+            <div class="user-details-content-title">
+              <strong>Features</strong>
+            </div>
+            <div class="user-details-form-list">
+              <div>
+                <mat-form-field class="margin_right_25" appearance="outline">
+                  <mat-label>Features</mat-label>
+                  <input matInput formControlName="features" readonly>
+                </mat-form-field>
+              </div>
+              <div>
+
+              </div>
+            </div>
+            <button [disabled]="(!roleDetailsForm.value.userType && !roleDetailsForm.value._departmentId)"  
+              (click)="getFeatures()" 
+              class="margin-left-4" mat-raised-button class="feature_btn">
+                Features</button>
+            <button [disabled]="isLoading"  (click)="onSubmit()" mat-raised-button type="submit" class="pull-right">
+              Submit
+              <spinner diameter="40" class="pull-left" *ngIf="isLoading"></spinner>
+            </button>
+            <div class="clearfix"></div>
           </div>
         </div>
-        <mat-card class="user-details-content">
-          <div class="flex-box">
-            <div class="user-details-content">
-              <div class="user-details-content-title">
-                <strong> Details</strong>
-              </div>
-              <div class="user-details-form-list" >
-                <div>
-                  <mat-form-field appearance="outline" class="margin_right_25">
-                    <mat-label>Departments</mat-label>
-                    <mat-select placeholder="Departments" formControlName="_departmentId">
-                      <mat-option *ngFor="let _departmentId of departments" [value]="_departmentId">
-                        {{_departmentId.name}}
-                      </mat-option>
-                    </mat-select>
-                  </mat-form-field>
-                </div>
-              </div>
-            </div>
-            <div class="user-details-content">
-              <div class="user-details-content-title">
-                <strong>Features</strong>
-              </div>
-              <div class="user-details-form-list">
-                <div>
-                  <mat-form-field class="margin_right_25" appearance="outline">
-                    <mat-label>Features</mat-label>
-                    <input matInput formControlName="features">
-                  </mat-form-field>
-                </div>
-                <div>
-                  
-                </div>
-              </div>
-              <button [matMenuTriggerFor]="featureMenu" class="margin-left-4" 
-                mat-raised-button class="feature_btn" >
-                Features</button>
-              <button mat-raised-button type="submit" class="pull-right">Submit</button>
-              <div class="clearfix"></div>
-            </div>
-          </div>
-          
-        </mat-card>
-        <!--<div class="user-details-content">
+
+      </mat-card>
+      <!--<div class="user-details-content">
           <div class="user-details-content-title">
             <strong>Approval</strong>
           </div>
@@ -69,67 +90,63 @@
             </div>
           </div>
         </div>-->
-      </div>
-      
+    </div>
+
   </div>
 </div>
 <mat-menu #featureMenu="matMenu" class="featurePanel">
-  <div class="feature_container" >
-    <div fxLayout=row  style="place-content:space-between;border-bottom: #8c8686 2px solid;">
-      <div class="title">Feature</div>
-      <div class="title">Create</div>
-      <div class="title">Display</div>
-      <div class="title">Edit</div>
-      <div class="title">Delete</div>
-    </div>
-    <div>
-      <div *ngFor="let feature of allFeatures">
-        <div fxLayout=row style="place-content:space-between;border-bottom: #8c8686 2px solid;">
-          <div class="message" >{{feature.resources}}</div>
-          <div class="message" style="display: contents;">
-            <div fxLayout=row *ngFor="let x of feature.permissions; let i = index">
-              <mat-checkbox 
-                [checked]="x.accessFlag"
-                (change)="selectFeature($event,x,feature,selectedFeature)">
-              </mat-checkbox>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div style="margin-top: 1%;">
-        <button mat-raised-button type="submit" class="pull-right">Cancel</button>
-        <button mat-raised-button type="submit" class="pull-right">Save</button>
-      </div>
-    </div>
-  </div>
+  <div class="feature_container">
+    <div fxLayout=row style="place-content:space-between;border-bottom: #8c8686 2px solid;">
+<div class="title">Feature</div>
+<div class="title">Create</div>
+<div class="title">Display</div>
+<div class="title">Edit</div>
+<div class="title">Delete</div>
+</div>
+<div>
+  <div *ngFor="let feature of allFeatures">
+    <div fxLayout=row style="place-content:space-between;border-bottom: #8c8686 2px solid;">
+<div class="message">{{feature.resources}}</div>
+<div class="message" style="display: contents;">
+<div fxLayout=row *ngFor="let x of feature.permissions; let i = index">
+  <mat-checkbox [checked]="x.accessFlag" (change)="selectFeature($event,x,feature,selectedFeature)">
+  </mat-checkbox>
+</div>
+</div>
+</div>
+</div>
+<div style="margin-top: 1%;">
+<button mat-raised-button type="submit" class="pull-right">Cancel</button>
+<button mat-raised-button type="submit" class="pull-right">Save</button>
+</div>
+</div>
+</div>
 </mat-menu>
 <mat-menu #approvalMenu="matMenu" class="featurePanel">
-  <div class="feature_container" >
-    <div fxLayout=row  style="place-content:space-between;border-bottom: #8c8686 2px solid;">
-      <div class="title">Feature</div>
-      <div class="title">Create</div>
-      <div class="title">Display</div>
-      <div class="title">Edit</div>
-      <div class="title">Delete</div>
-    </div>
-    <div>
-      <div *ngFor="let feature of allApprovals">
-        <div fxLayout=row style="place-content:space-between;border-bottom: #8c8686 2px solid;">
-          <div class="message" >{{feature.resources}}</div>
-          <div class="message" style="display: contents;">
-            <div fxLayout=row *ngFor="let x of feature.permissions; let i = index">
-              <mat-checkbox 
-                [checked]="x.accessFlag"
-                (change)="selectFeature($event,x,feature,selectedApproval)">
-              </mat-checkbox>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div style="margin-top: 1%;">
-        <button mat-raised-button type="submit" class="pull-right">Cancel</button>
-        <button mat-raised-button type="submit" class="pull-right">Save</button>
-      </div>
-    </div>
-  </div>
+  <div class="feature_container">
+    <div fxLayout=row style="place-content:space-between;border-bottom: #8c8686 2px solid;">
+<div class="title">Feature</div>
+<div class="title">Create</div>
+<div class="title">Display</div>
+<div class="title">Edit</div>
+<div class="title">Delete</div>
+</div>
+<div>
+  <div *ngFor="let feature of allApprovals">
+    <div fxLayout=row style="place-content:space-between;border-bottom: #8c8686 2px solid;">
+<div class="message">{{feature.resources}}</div>
+<div class="message" style="display: contents;">
+<div fxLayout=row *ngFor="let x of feature.permissions; let i = index">
+  <mat-checkbox [checked]="x.accessFlag" (change)="selectFeature($event,x,feature,selectedApproval)">
+  </mat-checkbox>
+</div>
+</div>
+</div>
+</div>
+<div style="margin-top: 1%;">
+<button mat-raised-button type="submit" class="pull-right">Cancel</button>
+<button mat-raised-button type="submit" class="pull-right">Save</button>
+</div>
+</div>
+</div>
 </mat-menu>

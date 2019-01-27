@@ -60,6 +60,9 @@ import { FeaturePopupComponent } from './components/shared/feature-popup/feature
 import { ForgotPasswordComponent } from './components/core/forgot-password/forgot-password.component';
 import { ConfirmDialogComponent } from './components/shared/confirm-dialog/confirm-dialog.component';
 
+import { LocalStorageSchema } from './schemas/local-storage.schema';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -119,7 +122,8 @@ import { ConfirmDialogComponent } from './components/shared/confirm-dialog/confi
     ForgotPasswordComponent
   ],
   providers: [D3Service, DashboardService, UserService, DepartmentService, 
-  OrganizationService, UserDashboardService ],
+  OrganizationService, UserDashboardService,
+    LocalStorageSchema ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

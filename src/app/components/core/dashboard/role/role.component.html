@@ -1,11 +1,11 @@
 <div class="role-container">
-    <mat-tab-group>
+    <mat-tab-group #tabGroup>
         <mat-tab label="Overview">
             <app-panel-header-filter (selectOrganizaion)="organizationChanged($event)"></app-panel-header-filter>
             <spinner diameter="80" class="text-center" *ngIf="roleListSpinner; else panelContent"></spinner>
             <div fxLayout="row">
                 <ng-template #panelContent>
-                    <app-expansion-panel [expansionPanelOptions]="roleDataOptions"      
+                    <app-expansion-panel *ngIf="selectedOrgId" [expansionPanelOptions]="roleDataOptions"      
                         selectorComponent="app-role-details" 
                         [data]="roles" 
                         [isHistory]="true"
@@ -15,7 +15,7 @@
             </div>
         </mat-tab>
         <mat-tab label="New">
-            <app-role-details formType="create" [orgID]="selectedOrgId"></app-role-details>
+            <app-role-details formType="create" (tabSwitch)="tabSwitch($event)" *ngIf="selectedOrgId"></app-role-details>
         </mat-tab>
     </mat-tab-group>
 </div>

@@ -4,21 +4,27 @@
       <div style="margin-top: 6%;" >
         <div *ngFor="let feature of allFeatures">
           <div fxLayout=row >
-            <div>
-              <mat-checkbox 
-                [checked]="feature.flag"
-                (change)="changeEvent($event,x)">
-              </mat-checkbox>
+            <div class="flex-1">
+              <div>
+                <mat-checkbox 
+                  (change)="changeEvent($event,x)"
+                  [(ngModel)]="feature.activeFlag">
+                </mat-checkbox>
+                <span class="message" >{{feature.name}}</span>
+              </div>
             </div>
-            <div style=" border-bottom: black 1px solid;margin-left: 20px;">
-              <span class="message" >{{feature.resources}}</span>
+            <div  class="flex-1" *ngFor="let permission of feature.rules[1].permissions">
+                <mat-checkbox 
+                  [(ngModel)]="permission.defaultFlag" *ngIf="!feature.hidePermissions">
+                </mat-checkbox>
+                <span class="message" *ngIf="!feature.hidePermissions">{{permission.userKey}}</span>
             </div>
           </div>
          </div>
       </div>
-      <div style="padding-top: 10%;" fxLayout=row>
-        <button mat-raised-button type="submit" class="pull-right">Cancel</button>
-        <button mat-raised-button type="submit" class="pull-right" >Save</button>
+      <div class="pull-right">
+        <button mat-raised-button type="submit" (click) ="onCancel()" class="pull-right margin-10">Cancel</button>
+        <button mat-raised-button type="submit" (click)="saveFeature()" class="pull-right margin-10" >Save</button>
       </div>
     </div>
   </div>

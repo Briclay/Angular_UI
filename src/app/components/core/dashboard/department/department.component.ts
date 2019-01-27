@@ -11,25 +11,36 @@ import { HistoryPopupComponent } from '../../../../components/shared/history-pop
 })
 export class DepartmentComponent implements OnInit {
 	
-	departments: DepartmentData;
+	departments: any;
 	departmentDataOptions = [];
 	historyData: any;
+	selectedOrgId: string;
+	depListSpinner: boolean;
 
 	constructor(private departmentService: DepartmentService,
     public dialog: MatDialog) { }
 
-
 	ngOnInit() {
-		this.departmentService.getAll().pipe().subscribe(res => {
+	}
+
+	organizationChanged(org) {
+		this.selectedOrgId = org._id;
+		this.depListSpinner = true;
+		this.departmentService.getAll(org._id).pipe().subscribe(res => {
 			this.departments = res;
+			this.depListSpinner = false;
+			this.departments.forEach((list) => list.features = (list.access && list.access.length));
 			this.departmentDataOptions = [
-			{
-				title: 'name', key: 'name', hideTitle: true, type: 'label'
-			}, 
-			{
-				title: 'Features', key: 'aaa'
-			}
+				{
+					title: 'name', key: 'name', hideTitle: true, type: 'label'
+				},
+				{
+					title: 'Features', key: 'features'
+				}
 			]
+		}, (error: any) => {
+			console.error('error', error);
+			this.depListSpinner = false;
 		});
 	}
 

@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {WorkOrderData} from './interface';
 import {WorkOrderService} from './work-order.service';
+import {merge as observableMerge, Subject} from 'rxjs';
+import { Router, ActivatedRoute } from '@angular/router';
+import {takeUntil} from 'rxjs/operators';
 
 @Component({
   selector: 'app-work-order',
@@ -11,16 +14,40 @@ export class WorkOrderComponent implements OnInit {
   isLoading: boolean;
   workOrder: WorkOrderData;
   workOrderDataOption: any;
+  orgID: string;
 
-  constructor(private workOrderService: WorkOrderService) { }
+  private unsubscribe: Subject<any> = new Subject();
+
+  constructor(
+    private workOrderService: WorkOrderService,
+    private router: Router,
+    private route: ActivatedRoute,) { }
 
   ngOnInit() {
-    this.getWorkOrder();
+    observableMerge(this.route.params, this.route.queryParams).pipe(
+      	takeUntil(this.unsubscribe))
+      	.subscribe((params) => this.loadRoute(params));
   }
+
+   public ngOnDestroy(): void {
+		this.unsubscribe.next();
+		this.unsubscribe.complete();
+	}
+
+  loadRoute(params: any) {
+		if('orgID' in params) {
+			this.orgID = params['orgID'];
+      this.getWorkOrder();
+		}
+	}
+
+  organizationChanged(org) {
+		this.router.navigate([], {queryParams: {orgID: org.value ? org.value._id : org._id} , queryParamsHandling: 'merge'});
+	}
 
   getWorkOrder() {
     this.isLoading = true;
-    this.workOrderService.getWorkOrder('filter[_organisationId]=5a5844cd734d1d61613f7066').pipe().subscribe(res => {
+    this.workOrderService.getWorkOrder(`filter[_organisationId]=${this.orgID}`).pipe().subscribe(res => {
       this.workOrder = res;
       this.isLoading = false;
       this.workOrderDataOption = [
