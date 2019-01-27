@@ -47,9 +47,6 @@ export class WorkRequestDetailsComponent implements OnInit {
     private workRequestService: WorkRequestService,
     private userService: UserService) {
     //get org id for superadmin
-    this.route.queryParams.subscribe(params => {
-      this.orgId = params['orgId']
-    });
     this.todayDate = (new Date()).toISOString();
     
     //list of typ of work
@@ -82,8 +79,8 @@ export class WorkRequestDetailsComponent implements OnInit {
 
 
     this.workTrackerForm = this.formBuilder.group({
-      _organisationId: '5a5844cd734d1d61613f7066',
-      _projectId: ['5a5844cd734d1d61613f7066', Validators.required],
+      _organisationId: this.orgId,
+      _projectId: ['', Validators.required],
       requestNumber: this.reuqestNumber,
       status: 'Open',
       date: new FormControl((new Date())),
@@ -111,11 +108,15 @@ export class WorkRequestDetailsComponent implements OnInit {
   }
   
   ngOnInit() {
-    this.assignValuesToForm()
-    this.getAllProjectsList();
-    this.getAllWorkRequestTracker();
-    this.getUsers();
-    this.getWorkCategory(`filter[_organisationId]=5a5844cd734d1d61613f7066`);
+    this.route.queryParams.subscribe(params => {
+      this.orgId = params['orgID'];
+      this.assignValuesToForm()
+      this.getAllProjectsList();
+      this.getAllWorkRequestTracker();
+      this.getUsers();
+      this.getWorkCategory();
+    });
+    
   }
 
   assignValuesToForm() {
@@ -126,9 +127,9 @@ export class WorkRequestDetailsComponent implements OnInit {
 
   getAllProjectsList() {
     //get all project
-    this.projectService.getProjects(`filter[_organisationId]=5a5844cd734d1d61613f7066`)
+    this.projectService.getProjects(`${this.orgId}`)
       .pipe().subscribe(res => {
-        this.projectsList = res.data;
+        this.projectsList = res;
           if (this.projectsList.length <= 0) {
             //TODO add error component
             console.error('No projects found')
@@ -141,7 +142,7 @@ export class WorkRequestDetailsComponent implements OnInit {
 
   getAllWorkRequestTracker() {
     //get all work request for calculting request number
-    this.workRequestService.getWorkRequest(`filter[_organisationId]=5a5844cd734d1d61613f7066`)
+    this.workRequestService.getWorkRequest(`filter[_organisationId]=${this.orgId}`)
       .pipe().subscribe(res => {
         this.requestTrcakerList = res;
         if( this.formType !== 'create' ) {
@@ -157,6 +158,7 @@ export class WorkRequestDetailsComponent implements OnInit {
   }
   workTrackerFormSubmit() {
     if (this.workTrackerForm.valid) {
+      this.workTrackerForm.value._organisationId = this.orgId;
       if (this.workTrackerForm.value.initiatedDate && this.workTrackerForm.value.RFAapprovalDate) {
         if (this.workTrackerForm.value.initiatedDate < this.workTrackerForm.value.RFAapprovalDate) {
           this.onSave();
@@ -172,7 +174,7 @@ export class WorkRequestDetailsComponent implements OnInit {
   getUsers() {
     this.userService.getUser()
       .pipe().subscribe(res => {
-        this.userList = res.data;
+        this.userList = res;
       }, (error: any) => {
         //TODO add error component
         console.error('error', error)
@@ -223,7 +225,7 @@ export class WorkRequestDetailsComponent implements OnInit {
     // if (this.workTrackerForm.value.date <= this.workTrackerForm.value.needByDate) {
     if (this.workTrackerForm.value.leadDuration) {
       let dateOffset = (24 * 60 * 60 * 1000) * this.workTrackerForm.value.leadDuration;
-      let need_date = this.workTrackerForm.value.needByDate.getTime() - dateOffset;
+      let need_date = this.workTrackerForm.value.needByDate.getTime();
       this.workTrackerForm.value.needByDate.setTime(need_date);
       var timeDiff = this.workTrackerForm.value.needByDate.getTime() - this.workTrackerForm.value.date.getTime();
       var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
@@ -315,10 +317,12 @@ export class WorkRequestDetailsComponent implements OnInit {
     }
   }
 
-  getWorkCategory(orgId) {
-    this.workRequestService.getWorkCategory(orgId)
+  getWorkCategory(orgId?) {
+    this.workRequestService.getWorkCategory(`filter[_organisationId]=${this.orgId}`)
       .pipe().subscribe(res => {
-        this.workCategory = res[0].configValues
+        if(res.length) {
+          this.workCategory = res[0].configValues
+        }
       }, (error: any) => {
         //TODO add error component
         console.error('error', error)
