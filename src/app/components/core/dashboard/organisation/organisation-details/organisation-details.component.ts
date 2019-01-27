@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import * as _ from 'lodash';
@@ -9,7 +9,8 @@ import { FeaturePopupComponent } from '../../../../../components/shared/feature-
 import { MatDialog, MatSnackBar, MAT_DIALOG_DATA } from '@angular/material';
 import { AuthService } from '../../../../../services/auth.service';
 declare var moment: any;
-import {FileManagerService} from "../../file-manager/file-manager.service"
+import {FileManagerService} from "../../file-manager/file-manager.service";
+import {FeatureService} from "../../../../../services/features/features.service";
 
 @Component({
   selector: 'app-organisation-details',
@@ -19,11 +20,13 @@ import {FileManagerService} from "../../file-manager/file-manager.service"
 export class OrganisationDetailsComponent implements OnInit {
   @Input() data: any;
   @Input() formType: string;
+  @Output() public tabSwitch: EventEmitter<any> = new EventEmitter<any>();
   
   organisationsList: any;
   userAuth: any;
   temp = [];
   organizationDetailsForm: FormGroup;
+  featuresList: any;
   getApprovals = ['File' ,'Service Request' ,'Snag Master']
   plans = [ 'Basic', 'Standard', 'Premium', 'Enterprise']
   allFeatures = [
@@ -145,6 +148,7 @@ export class OrganisationDetailsComponent implements OnInit {
     private snackBar : MatSnackBar,
     private auth: AuthService,
     private fileManagerService: FileManagerService,
+    private featureService: FeatureService
     ) {
     this.organisationsList = this.organizationService.organisations;
     this.userAuth = JSON.parse(window.localStorage.getItem('authUser'));
@@ -219,7 +223,8 @@ export class OrganisationDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.assignValuesToForm();
-    console.log('moment(date).format(format);')
+    this.getFeatures();
+    this.getOrgData();
   }
 
   assignValuesToForm() {
@@ -230,13 +235,21 @@ export class OrganisationDetailsComponent implements OnInit {
   
 
   openDialogFeature() {
-    this.featureData = this.allFeatures;
+    this.featureData = this.featuresList;
+    this.featuresList.forEach((list) => list.hidePermissions = true)
     const dialogRef = this.dialog.open(FeaturePopupComponent, {
-      width: '450px',
-      data: this.allFeatures ? this.allFeatures : {}
+      width: '550px',
+      data: this.featuresList ? this.featuresList : {}
     });
     dialogRef.afterClosed().subscribe(result => {
-      // TODO closed event
+      if(result) {
+        let features = result.map((list) => { 
+          if(list.activeFlag) {
+            return list._id;
+          }
+       });
+        this._features = features;
+      }
     });
   }
 
@@ -288,6 +301,17 @@ export class OrganisationDetailsComponent implements OnInit {
 
   preventDefault ($event) {
     $event.preventDefault();
+  }
+
+  getOrgData() {
+    this.organizationService.getAll()
+    .pipe().subscribe(response => {
+      this.organisationCount = response.length;
+    }, (error: any) => {
+      this.snackBar.open(error.message, 'Organization', {
+        duration: 3000,
+      });
+    });
   }
 
   generateOrgCode() {
@@ -357,6 +381,8 @@ export class OrganisationDetailsComponent implements OnInit {
       this.organizationDetailsForm['_touched'] = false;
       const path = '/dashboard/organisation'
       this.router.navigate([path]);
+      this.tabSwitch.emit(0);
+      this.organizationDetailsForm.reset()
     }, (error: any) => {
       this.orgFormSubmitted = false;
       this.snackBar.open(error.message, 'Organisation', {
@@ -392,6 +418,23 @@ export class OrganisationDetailsComponent implements OnInit {
     } else {
       console.log('false');
     }
+  }
+
+  getFeatures() {
+    this.featureService.getFeatures()
+    .pipe().subscribe(response => {
+      this.featuresList = response;
+      let features = response.map((list) => { 
+          if(list.activeFlag) {
+            return list._id;
+          }
+       });
+      this._features = features;
+    }, (error: any) => {
+      this.snackBar.open(error.message, 'Features', {
+        duration: 3000,
+      });
+    });
   }
   
 }

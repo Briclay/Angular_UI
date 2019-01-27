@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { OrganizationService } from '../../../../services/organization/organization.service';
 import { OrganizationData, TableOptions } from '../../../../interfaces/interfaces';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material';
@@ -11,7 +11,7 @@ import { HistoryPopupComponent } from '../../../../components/shared/history-pop
 })
 
 export class OrganisationComponent implements OnInit {
-
+  @ViewChild('tabGroup') tabGroup;
   organisations: any;
   organisationDataOptions = [];
   historyData: any;
@@ -69,4 +69,8 @@ export class OrganisationComponent implements OnInit {
       });
     });
   }
+
+  tabSwitch(index) {
+		this.tabGroup.selectedIndex = index;
+	}
 }

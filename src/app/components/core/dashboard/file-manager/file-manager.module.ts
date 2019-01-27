@@ -8,13 +8,14 @@ import {MaterialModule} from '../../../../modules/material.module';
 import { FileMailDialogComponent } from './file-mail-dialog/file-mail-dialog.component';
 import { FileUploadDialogComponent } from './file-upload-dialog/file-upload-dialog.component';
 import { RootFolderComponent } from './root-folder/root-folder.component';
+import {SpinnerModule} from '../../../shared/spinner/spinner.module'
 
 
 @NgModule({
   declarations: [FolderCreateDialogComponent, FileShareDialogComponent, FileConfigDetailsComponent,
    FileMailDialogComponent, FileUploadDialogComponent, RootFolderComponent],
   exports: [
-    FileConfigDetailsComponent
+    FileConfigDetailsComponent,
   ],
   entryComponents: [
     
@@ -23,7 +24,8 @@ import { RootFolderComponent } from './root-folder/root-folder.component';
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
-    MaterialModule
+    MaterialModule,
+    SpinnerModule
   ]
 })
 export class FileManagerModule { }

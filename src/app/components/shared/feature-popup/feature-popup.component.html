@@ -13,11 +13,11 @@
                 <span class="message" >{{feature.name}}</span>
               </div>
             </div>
-            <div class="flex-1" *ngFor="let permission of feature.rules[1].permissions">
+            <div  class="flex-1" *ngFor="let permission of feature.rules[1].permissions">
                 <mat-checkbox 
-                  [(ngModel)]="permission.defaultFlag">
+                  [(ngModel)]="permission.defaultFlag" *ngIf="!feature.hidePermissions">
                 </mat-checkbox>
-                <span class="message" >{{permission.userKey}}</span>
+                <span class="message" *ngIf="!feature.hidePermissions">{{permission.userKey}}</span>
             </div>
           </div>
          </div>

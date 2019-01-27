@@ -12,6 +12,7 @@ export class RootFolderComponent implements OnInit {
   public dataSource: any;
   currentUrl: string;
   displayedColumns: string[] = ['type', 'name', 'createdAt', 'version'];
+  loading: boolean;
   constructor(
     private fileManagerService: FileManagerService,
     private route: ActivatedRoute,
@@ -25,13 +26,16 @@ export class RootFolderComponent implements OnInit {
     this.getSubFolder();
   }
   getSubFolder() {
+    this.loading = true;
     this.fileManagerService.getAllFolders('')
       .pipe().subscribe(res => {
         this.dataSource = new MatTableDataSource(res);
+        this.loading = false;
         if (res.length > 0) {
           this.setConfigData(res[0])
         }
       }, (error: any) => {
+        this.loading = false;
         console.error('error', error);
       })
   }
