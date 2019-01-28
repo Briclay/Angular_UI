@@ -1,17 +1,21 @@
 <div class="user-container">
-    <mat-tab-group>
+    <mat-tab-group #tabGroup>
         <mat-tab label="Overview">
-            <app-panel-header-filter></app-panel-header-filter>
+            <app-panel-header-filter (selectOrganizaion)="organizationChanged($event)"></app-panel-header-filter>
+            <spinner diameter="80" class="text-center" *ngIf="loading; else content"></spinner>
+            
             <div fxLayout="row">
-                <app-expansion-panel 
-                    [expansionPanelOptions]="userDataOptions"
-                    selectorComponent="app-user-details" 
-                    [data]="users"
-                    [isHistory]="true"></app-expansion-panel>
+                <ng-template #content>
+                    <app-expansion-panel 
+                        [expansionPanelOptions]="userDataOptions"
+                        selectorComponent="app-user-details" 
+                        [data]="users"
+                        [isHistory]="true"></app-expansion-panel>
+                </ng-template>
             </div>
         </mat-tab>
         <mat-tab label="New">
-            <app-user-details formType="create"></app-user-details>
+            <app-user-details formType="create" (tabSwitch)="tabSwitch($event)" *ngIf="orgID"></app-user-details>
         </mat-tab>
     </mat-tab-group>
 </div>

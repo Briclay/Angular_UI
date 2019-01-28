@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { UserService } from '../../../../services/user/user.service'
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { UserService } from './user.service'
 import { UserData, TableOptions } from '../../../../interfaces/interfaces';
+import { merge as observableMerge, Subject } from 'rxjs';
+import { Router, ActivatedRoute } from '@angular/router';
+import { takeUntil } from 'rxjs/operators';
 
 
 @Component({
@@ -9,13 +12,42 @@ import { UserData, TableOptions } from '../../../../interfaces/interfaces';
   styleUrls: ['./user.component.scss']
 })
 export class UserComponent implements OnInit {
+  @ViewChild('tabGroup') tabGroup;
   users: UserData;
   userDataOptions = [];
+  orgID: string;
+  loading: boolean;
 
-  constructor(private userService: UserService) { }
+  private unsubscribe: Subject<any> = new Subject();
+
+  constructor(
+    private userService: UserService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) { }
 
   ngOnInit() {
-    this.userService.getUser().pipe().subscribe(res => {
+    observableMerge(this.route.params, this.route.queryParams).pipe(
+      	takeUntil(this.unsubscribe))
+      	.subscribe((params) => this.loadRoute(params));
+
+  }
+
+  loadRoute(params: any) {
+		if('orgID' in params) {
+			this.orgID = params['orgID'];
+			this.getUsers();
+		}
+	}
+
+  organizationChanged(org) {
+    this.router.navigate([], { queryParams: { orgID: org.value ? org.value._id : org._id }, queryParamsHandling: 'merge' });
+  }
+
+  getUsers() {
+    this.loading = true;
+    this.userService.getUser(this.orgID).pipe().subscribe(res => {
+      this.loading = false;
       this.users = res;
       this.userDataOptions = [
         {
@@ -29,7 +61,15 @@ export class UserComponent implements OnInit {
         { title: 'Role', key: 'userType' },
         { title: 'Department', key: 'department' },
         { title: 'Email', key: 'email' }]
-    });
+    }, (error: any) => {
+			console.error('error', error);
+			this.loading = false;
+		});
   }
+
+  tabSwitch(tabReq) {
+		this.tabGroup.selectedIndex = tabReq.index;
+		this.getUsers()
+	}
 
 }

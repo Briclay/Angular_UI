@@ -4,7 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import * as _ from 'lodash';
 import { MatDialog } from '@angular/material';
 import {WorkRequestService} from '../work-request.service';
-import {UserService} from '../../../../../services/user/user.service';
+import {UserService} from '../../../dashboard/user/user.service';
 import {ProjectService} from '../../../dashboard/projects/project.service';
 import {DateUtils} from '../../../../../utils/date-uitls';
 
