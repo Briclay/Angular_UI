@@ -1,9 +1,9 @@
 <div class="file-manager-config-container">
   <!-- show path -->
   <div>
-    <span *ngFor="let pathName of fullPathDisplay">
+    <!-- <span *ngFor="let pathName of fullPathDisplay">
       <a (click)="onSelectPath(pathName.path, pathName.top)">{{ pathName.name }} / </a>
-    </span>
+    </span> -->
   </div>
   <!-- Back Button -->
   <div>
@@ -90,7 +90,7 @@
     <ul class="side-nav-list file-icons" *ngIf="designDeptFlag" >
       <li *ngFor="let folder of iconArray" (click)="getClickedByIcon(folder)">
         <a>
-          <img class="icons" src="{{ folder.iconPath }}" /><br />{{ folder.name }}"
+          <img class="icons" src="{{ folder.iconPath }}" /><br />{{ folder.name }}
         </a>
       </li>
     </ul>

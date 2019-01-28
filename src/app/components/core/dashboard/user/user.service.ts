@@ -18,6 +18,11 @@ export class UserService {
         return this.apiService.get(url).pipe(map(res => res));
     }
 
+    public getSingleUser(userID): Observable<any> {
+        let url = `${environmentService.briclayCore}/users/${userID}`
+        return this.apiService.get(url).pipe(map(res => res));
+    }
+
     public saveUser(request?): Observable<any> {
         let url = `${environmentService.briclayCore}/users`
         return this.apiService.post(url, request).pipe(map(res => res));
@@ -27,6 +32,5 @@ export class UserService {
         let url = `${environmentService.briclayCore}/users/${userId}`;
         return this.apiService.put(url, request).pipe(map(res => res));
     }
-
 
 }

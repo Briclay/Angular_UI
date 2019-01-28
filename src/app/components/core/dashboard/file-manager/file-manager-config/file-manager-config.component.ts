@@ -90,8 +90,10 @@ export class FileManagerConfigComponent implements OnInit {
       this.currentLevel = tempValue.top;
       this.previousFolderName = tempValue.name;
       var tempData = JSON.parse(window.localStorage.getItem('FOLDER_PROCESS_FLOW')).configValues;
+     console.log('tempData',tempData);
       if (tempData.length > 0) {
         this.deptConfigData = JSON.parse(window.localStorage.getItem('FOLDER_CONFIG_DETAILS'));
+        console.log('deptConfigData',this.deptConfigData);
         if (this.deptConfigData) {
           this.populateConfigData(this.deptConfigData);
         } else {
@@ -102,6 +104,8 @@ export class FileManagerConfigComponent implements OnInit {
             this.deptConfigData = tempData[pos];
             console.log('this.deptConfigData' + JSON.stringify(this.deptConfigData));
             this.populateConfigData(tempData[pos]);
+          }else{
+            this.tableFlag = true;
           }
 
         }
@@ -114,8 +118,10 @@ export class FileManagerConfigComponent implements OnInit {
     if (tempData.details.length > 0) {
       //fetch project key and display project drop down
       var pPos = _.findIndex(tempData.details, function (o) { return o.level == level + 1; });
+      console.log('pPos'+pPos);
       if (pPos != -1) {
         var details = tempData.details[pPos];
+        console.log('details',details);
         if ('project' === details.name) {
           if (_.isArray(details.folderName) && details.folderName.length > 0) {
             var getPreFolderPos = _.indexOf(details.folderName, this.previousFolderName);
