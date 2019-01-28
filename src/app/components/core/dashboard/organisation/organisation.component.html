@@ -1,6 +1,6 @@
 <div class="user-container">
-  <mat-tab-group>
-    <mat-tab label="Overview" #tabGroup>
+  <mat-tab-group #tabGroup>
+    <mat-tab label="Overview" >
       <app-panel-header-filter (selectOrganizaion)="organizationChanged($event)"></app-panel-header-filter>
       <spinner diameter="80" class="text-center" *ngIf="orgListSpinner; else panelContent"></spinner>
       <div fxLayout="row">
@@ -14,8 +14,7 @@
       </div>
     </mat-tab>
     <mat-tab label="New">
-      <app-organisation-details (tabSwitch)="tabSwitch($event)" formType="create"></app-organisation-details>
+      <app-organisation-details formType="create" (tabSwitch)="tabSwitch($event)" *ngIf="selectedOrgId"></app-organisation-details>
     </mat-tab>
   </mat-tab-group>
 </div>
-

@@ -35,89 +35,7 @@ export class DepartmentDetailsComponent implements OnInit {
   deptFormSubmitted = false;
   selectedAll = false;
   editFlag = false;
-  allFeatures = [
-  {
-    "_featureId": "f1",
-    "resources": "Projects",
-    "flag" : true,
-    "permissions": [
-    {
-      "userKey": "List",
-      "reqKey": "GET",
-      "accessFlag": true
-    },
-    {
-      "userKey": "Save",
-      "reqKey": "POST",
-      "accessFlag": false
-    },
-    {
-      "userKey": "Update",
-      "reqKey": "PUT",
-      "accessFlag": true
-    },
-    {
-      "userKey": "Delete",
-      "reqKey": "DELETE",
-      "accessFlag": false
-    }
-    ]
-  },
-  {
-    "_featureId": "f2",
-    "resources": "Snagmaster",
-    "flag" : true,
-    "permissions": [
-    {
-      "userKey": "List",
-      "reqKey": "GET",
-      "accessFlag": true
-    },
-    {
-      "userKey": "Save",
-      "reqKey": "POST",
-      "accessFlag": false
-    },
-    {
-      "userKey": "Update",
-      "reqKey": "PUT",
-      "accessFlag": true
-    },
-    {
-      "userKey": "Delete",
-      "reqKey": "DELETE",
-      "accessFlag": false
-    }
-    ]
-  },
-  {
-    "_featureId": "f3",
-    "resources": "Services",
-    "flag" : false,
-    "permissions": [
-    {
-      "userKey": "List",
-      "reqKey": "GET",
-      "accessFlag": true
-    },
-    {
-      "userKey": "Save",
-      "reqKey": "POST",
-      "accessFlag": false
-    },
-    {
-      "userKey": "Update",
-      "reqKey": "PUT",
-      "accessFlag": true
-    },
-    {
-      "userKey": "Delete",
-      "reqKey": "DELETE",
-      "accessFlag": false
-    }
-    ]
-  }
-  ]  
+ 
   featureData : any;
   allFeatureCount = 0;
   constructor(
@@ -172,18 +90,39 @@ export class DepartmentDetailsComponent implements OnInit {
     }
   }
 
-  openDialogFeature() {
-    this.featureData = this.allFeatures;
-    const dialogRef = this.dialog.open(FeaturePopupComponent, {
-      width: '450px',
-      data: this.allFeatures ? this.allFeatures : {}
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      // TODO closed event
+  getFeatures() {
+    this.DeptService.getFeature()
+    .pipe().subscribe(response => {
+      this.featuresList = response;
+      let features = response.map((list) => { 
+        if(list.activeFlag) {
+          return list;
+        }
+      });
+      this._features = features;
+      this.openDialogFeature(this._features)
+    }, (error: any) => {
+      this.snackBar.open(error.message, 'Features', {
+        duration: 3000,
+      });
     });
   }
-  changeEvent(event) {
-    this.sF = event.source.value;
+
+  openDialogFeature(featuresList) {
+    this.featureData = featuresList;
+    featuresList.forEach((list) => list.hidePermissions = true)
+    const dialogRef = this.dialog.open(FeaturePopupComponent, {
+      width: '550px',
+      data: featuresList ? featuresList : {}
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if(result) {
+        let features = result.map((list) => { 
+          return list._id;
+       });        
+        this._features = features;
+      }
+    });
   }
 
   onOrgFormValuesChanged() {
@@ -205,7 +144,7 @@ export class DepartmentDetailsComponent implements OnInit {
   onDeptFormSubmit() {
     console.log(this.departmentDetailsForm.value);
     this.deptFormSubmitted = true;
-    this.departmentDetailsForm.value._features = this.featuresArray;
+    this.departmentDetailsForm.value._features = this._features;
     /*check if id is not epmty then save otherwise update*/
     if ((!_.isUndefined(this.departmentDetailsForm.value._id) 
       && !_.isEmpty(this.departmentDetailsForm.value._id))) {

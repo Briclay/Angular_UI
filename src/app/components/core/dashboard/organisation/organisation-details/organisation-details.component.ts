@@ -29,89 +29,6 @@ export class OrganisationDetailsComponent implements OnInit {
   featuresList: any;
   getApprovals = ['File' ,'Service Request' ,'Snag Master']
   plans = [ 'Basic', 'Standard', 'Premium', 'Enterprise']
-  allFeatures = [
-  {
-    "_featureId": "f1",
-    "resources": "Projects",
-    "flag" : true,
-    "permissions": [
-      {
-        "userKey": "List",
-        "reqKey": "GET",
-        "accessFlag": true
-      },
-      {
-        "userKey": "Save",
-        "reqKey": "POST",
-        "accessFlag": false
-      },
-      {
-        "userKey": "Update",
-        "reqKey": "PUT",
-        "accessFlag": true
-      },
-      {
-        "userKey": "Delete",
-        "reqKey": "DELETE",
-        "accessFlag": false
-      }
-    ]
-  },
-  {
-    "_featureId": "f2",
-    "resources": "Snagmaster",
-    "flag" : true,
-    "permissions": [
-      {
-        "userKey": "List",
-        "reqKey": "GET",
-        "accessFlag": true
-      },
-      {
-        "userKey": "Save",
-        "reqKey": "POST",
-        "accessFlag": false
-      },
-      {
-        "userKey": "Update",
-        "reqKey": "PUT",
-        "accessFlag": true
-      },
-      {
-        "userKey": "Delete",
-        "reqKey": "DELETE",
-        "accessFlag": false
-      }
-    ]
-  },
-  {
-    "_featureId": "f3",
-    "resources": "Services",
-    "flag" : false,
-    "permissions": [
-    {
-      "userKey": "List",
-      "reqKey": "GET",
-      "accessFlag": true
-    },
-    {
-      "userKey": "Save",
-      "reqKey": "POST",
-      "accessFlag": false
-    },
-    {
-      "userKey": "Update",
-      "reqKey": "PUT",
-      "accessFlag": true
-    },
-    {
-      "userKey": "Delete",
-      "reqKey": "DELETE",
-      "accessFlag": false
-    }
-    ]
-  }
-  ]
   orgType = ['ADMINISTRATOR', 'BUILDER', 'CONTRACTOR'];
   parantselect = ['Parent Organisation', 'Child Organisation'];
   parorg: boolean = false;
@@ -125,7 +42,7 @@ export class OrganisationDetailsComponent implements OnInit {
   formErrors: any;
   orgFormErrors: any;
   orgFormSubmitted = false;
-
+  getInitFeature = [];
   organisationCode;
   sortName;
   arrName;
@@ -223,8 +140,7 @@ export class OrganisationDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.assignValuesToForm();
-    this.getFeatures();
-    this.getOrgData();
+    this.getAllFeatures();
   }
 
   assignValuesToForm() {
@@ -232,70 +148,64 @@ export class OrganisationDetailsComponent implements OnInit {
       this.organizationDetailsForm.patchValue(this.data)
     }
   }
-  
+
+  getAllFeatures(){
+    this.featureService.getFeatures()
+      .pipe().subscribe(response => {
+        this._features = response;
+    }, (error: any) => {
+      this.snackBar.open(error.message, 'Features', {
+        duration: 3000,
+      });
+    });
+  }
+
+  getFeatures() {
+    this.openDialogFeature();
+  }
 
   openDialogFeature() {
-    this.featureData = this.featuresList;
-    this.featuresList.forEach((list) => list.hidePermissions = true)
-    const dialogRef = this.dialog.open(FeaturePopupComponent, {
-      width: '550px',
-      data: this.featuresList ? this.featuresList : {}
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      if(result) {
-        let features = result.map((list) => { 
-          if(list.activeFlag) {
-            return list._id;
+    var featuresList = [] ; 
+    if(this.formType !== 'create'){
+      this.featureService.getFeatures()
+      .pipe().subscribe(response => {
+        this._features = response;
+        this.getOrgData(this.organizationDetailsForm.value._id, function(){
+          var orgFeaturesList = this.getInitFeature;
+          this._features.forEach(fl => {
+           var feature = orgFeaturesList.find((f) => return f._id == fl._id)
+           if (feature) {
+            fl.activeFlag = true;
           }
-       });
-        this._features = features;
-      }
-    });
-  }
-
-  onPhotoUpload(event) {
-    /*let reader = new FileReader();
-    if (event.target.files && event.target.files.length > 0) {
-      let file = event.target.files[0];
-      reader.readAsDataURL(file);
-      let fileExt = file.name.split(".");
-      let fileName = (new Date().getTime()) + "." + fileExt[fileExt.length - 1];
-      this.organizationService.getS3Url('file-name=' + fileName + '&file-type=' + file.type +
-        '&_organisationId=' + this.userAuth.organisation._id)
-      .then((response: any) => {
-        this.http.put(response.signedRequest, file, {
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-        }).subscribe((awsRes: any) => {
-          this.filePath = 'https://s3.ap-south-1.amazonaws.com/' + this.userAuth.organisation._id + '/' + fileName;
-          this.organizationDetailsForm.controls['logoImageUrl'].setValue(this.filePath);
-        }, (error: any) => {
-          this.snackBar.open(error.message);
-
+          else{
+            fl.activeFlag = false;
+          }
+        })
+        featuresList = this._features;
+        featuresList.forEach((list) => list.hidePermissions = true)
+        const dialogRef = this.dialog.open(FeaturePopupComponent, {
+          width: '550px',
+          data: featuresList ? featuresList : {}
         });
+        dialogRef.afterClosed().subscribe(result => {
+        });
+      }.bind(this))
+
       }, (error: any) => {
-          this.snackBar.open(error.message);
+        this.snackBar.open(error.message, 'Features', {
+          duration: 3000,
+        });
       });
-    }*/
-  }
-
-  changeEvent(event) {
-    this.sF = event.source.value;
-  }
-
-  /*dyanmic add roles*/
-
-  addOrg() {
-    if (this.sF) {
-      var name = this.sF.name;
-      this.selectedFeatureValue.push(this.sF);
-      this._features.push(this.sF._id);
-      const index = this.features.indexOf(this.sF);
-      if (index > -1) {
-        this.features.splice(index, 1);
-      }
-      this.sF = '';
-    } else {
-      console.log('Please select one feature');
+    }
+    else {
+      featuresList = this._features;
+      featuresList.forEach((list) => list.hidePermissions = true)
+      const dialogRef = this.dialog.open(FeaturePopupComponent, {
+        width: '550px',
+        data: featuresList ? featuresList : {}
+      });
+      dialogRef.afterClosed().subscribe(result => {
+      });
     }
   }
 
@@ -303,10 +213,11 @@ export class OrganisationDetailsComponent implements OnInit {
     $event.preventDefault();
   }
 
-  getOrgData() {
-    this.organizationService.getAll()
+  getOrgData(id, next) {
+    this.organizationService.getOne(id)
     .pipe().subscribe(response => {
-      this.organisationCount = response.length;
+      this.getInitFeature = response._features;
+      next();
     }, (error: any) => {
       this.snackBar.open(error.message, 'Organization', {
         duration: 3000,
@@ -322,14 +233,25 @@ export class OrganisationDetailsComponent implements OnInit {
       this.arrName.forEach((value: any) => {
         this.sortName += value.slice(0, 1);
       })
-      let str = this.sortName.toUpperCase() + '-' + this.organisationCount;
+      let str = this.sortName.toUpperCase() + '-' + new Date().toISOString();
       this.organizationDetailsForm.controls['orgCode'].setValue(str);
     }
   }
 
 
   onOrgFormSubmit() {
-    this.organizationDetailsForm.value._features = this._features;
+    this._features.map(f =>{
+      delete (f.hidePermissions)
+    })
+    var selectedFeatures = [];
+    this._features.forEach((list) => { 
+      if(list.activeFlag){
+        selectedFeatures.push(list._id);
+      }
+    });
+
+    this.organizationDetailsForm.value._features = selectedFeatures;
+
     this.organizationDetailsForm.value.subscription.validTill = moment(this.organizationDetailsForm.value.subscription.validTill).local().format("YYYY-MM-DD HH:mm:ss") 
     if (this.organizationDetailsForm.value._id == (undefined || "")) {
       this.orgFormSubmitted = true;
@@ -382,7 +304,6 @@ export class OrganisationDetailsComponent implements OnInit {
       const path = '/dashboard/organisation'
       this.router.navigate([path]);
       this.tabSwitch.emit(0);
-      this.organizationDetailsForm.reset()
     }, (error: any) => {
       this.orgFormSubmitted = false;
       this.snackBar.open(error.message, 'Organisation', {
@@ -420,22 +341,6 @@ export class OrganisationDetailsComponent implements OnInit {
     }
   }
 
-  getFeatures() {
-    this.featureService.getFeatures()
-    .pipe().subscribe(response => {
-      this.featuresList = response;
-      let features = response.map((list) => { 
-          if(list.activeFlag) {
-            return list._id;
-          }
-       });
-      this._features = features;
-    }, (error: any) => {
-      this.snackBar.open(error.message, 'Features', {
-        duration: 3000,
-      });
-    });
-  }
   
 }
   

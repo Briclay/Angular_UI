@@ -85,7 +85,6 @@ export class RoleDetailsComponent implements OnInit {
           console.error('error', error);
         });
     }
-		
 	}
 
   getFeatures() {
@@ -101,8 +100,6 @@ export class RoleDetailsComponent implements OnInit {
           console.error('error', error);
         });
     }
-    
-		
 	}
 
   openDialogFeature(featureData) {
