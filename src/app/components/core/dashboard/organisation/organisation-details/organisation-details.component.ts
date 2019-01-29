@@ -174,7 +174,7 @@ export class OrganisationDetailsComponent implements OnInit {
         this.getOrgData(this.organizationDetailsForm.value._id, function(){
           var orgFeaturesList = this.getInitFeature;
           this._features.forEach(fl => {
-           var feature = orgFeaturesList.find((f) => return f._id == fl._id)
+           var feature = orgFeaturesList.find((f) => {return f._id == fl._id})
            if (feature) {
             fl.activeFlag = true;
           }

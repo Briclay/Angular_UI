@@ -21,7 +21,6 @@ export class DepartmentComponent implements OnInit {
 	selectedOrgId: string;
 	depListSpinner: boolean;
     featuresCount : any;
-	selectedOrgId: string;
 	private unsubscribe: Subject<any> = new Subject();
 
 	constructor(private departmentService: DepartmentService,

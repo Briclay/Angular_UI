@@ -42,8 +42,6 @@ export class DepartmentDetailsComponent implements OnInit {
   featureData : any;
   allFeatureCount = 0;
   getInitFeature = [];
-  featureData : any;
-
   constructor(
     private DeptService: DepartmentService,
     private formBuilder : FormBuilder,
@@ -122,7 +120,7 @@ export class DepartmentDetailsComponent implements OnInit {
         this.getDepartmentById(this.departmentDetailsForm.value._id, function(){
           var orgFeaturesList = this.getInitFeature;
           this._features.forEach(fl => {
-           var feature = orgFeaturesList.find((f) => return f._id == fl._id)
+           var feature = orgFeaturesList.find((f) => { return f._id == fl._id })
            if (feature) {
             fl.activeFlag = true;
           }
