@@ -11,6 +11,7 @@ import { AuthService } from '../../../../../services/auth.service';
 declare var moment: any;
 import {FileManagerService} from "../../file-manager/file-manager.service";
 import {FeatureService} from "../../../../../services/features/features.service";
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-organisation-details',
@@ -29,89 +30,6 @@ export class OrganisationDetailsComponent implements OnInit {
   featuresList: any;
   getApprovals = ['File' ,'Service Request' ,'Snag Master']
   plans = [ 'Basic', 'Standard', 'Premium', 'Enterprise']
-  allFeatures = [
-  {
-    "_featureId": "f1",
-    "resources": "Projects",
-    "flag" : true,
-    "permissions": [
-      {
-        "userKey": "List",
-        "reqKey": "GET",
-        "accessFlag": true
-      },
-      {
-        "userKey": "Save",
-        "reqKey": "POST",
-        "accessFlag": false
-      },
-      {
-        "userKey": "Update",
-        "reqKey": "PUT",
-        "accessFlag": true
-      },
-      {
-        "userKey": "Delete",
-        "reqKey": "DELETE",
-        "accessFlag": false
-      }
-    ]
-  },
-  {
-    "_featureId": "f2",
-    "resources": "Snagmaster",
-    "flag" : true,
-    "permissions": [
-      {
-        "userKey": "List",
-        "reqKey": "GET",
-        "accessFlag": true
-      },
-      {
-        "userKey": "Save",
-        "reqKey": "POST",
-        "accessFlag": false
-      },
-      {
-        "userKey": "Update",
-        "reqKey": "PUT",
-        "accessFlag": true
-      },
-      {
-        "userKey": "Delete",
-        "reqKey": "DELETE",
-        "accessFlag": false
-      }
-    ]
-  },
-  {
-    "_featureId": "f3",
-    "resources": "Services",
-    "flag" : false,
-    "permissions": [
-    {
-      "userKey": "List",
-      "reqKey": "GET",
-      "accessFlag": true
-    },
-    {
-      "userKey": "Save",
-      "reqKey": "POST",
-      "accessFlag": false
-    },
-    {
-      "userKey": "Update",
-      "reqKey": "PUT",
-      "accessFlag": true
-    },
-    {
-      "userKey": "Delete",
-      "reqKey": "DELETE",
-      "accessFlag": false
-    }
-    ]
-  }
-  ]
   orgType = ['ADMINISTRATOR', 'BUILDER', 'CONTRACTOR'];
   parantselect = ['Parent Organisation', 'Child Organisation'];
   parorg: boolean = false;
@@ -148,7 +66,8 @@ export class OrganisationDetailsComponent implements OnInit {
     private snackBar : MatSnackBar,
     private auth: AuthService,
     private fileManagerService: FileManagerService,
-    private featureService: FeatureService
+    private featureService: FeatureService,
+    private http: HttpClient
     ) {
     this.organisationsList = this.organizationService.organisations;
     this.userAuth = JSON.parse(window.localStorage.getItem('authUser'));
@@ -400,7 +319,7 @@ export class OrganisationDetailsComponent implements OnInit {
       let fileExt = file.name.split(".");
       let fileName = (new Date().getTime()) + "." + fileExt[fileExt.length - 1];
 
-      this.fileManagerService.getS3Url('file-name=' + fileName + '&file-type=' + file.type)
+      this.fileManagerService.getS3Url(`file-name=${fileName}&file-type=${file.type}&_organisationId=organization-logo`)
         .pipe().subscribe(res => {
           let json = {
             savedFileName: fileName,
@@ -418,6 +337,17 @@ export class OrganisationDetailsComponent implements OnInit {
     } else {
       console.log('false');
     }
+  }
+
+  saveOnS3(response: any, file, body: any) {
+    this.http.put(response.signedRequest, file, {
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+    }).subscribe((awsRes: any) => {
+      let filePath = `https://s3.ap-south-1.amazonaws.com/organization-logo/${body.savedFileName}`;
+      this.organizationDetailsForm.controls['logoImage'].setValue(filePath)
+    }, (error: any) => {
+      console.log('error' + JSON.stringify(error));
+    });
   }
 
   getFeatures() {
