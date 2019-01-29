@@ -23,7 +23,6 @@ export class RootFolderComponent implements OnInit {
   }
 
   ngOnInit() {
-  
     this.getSubFolder();
   }
   getSubFolder() {
@@ -31,7 +30,6 @@ export class RootFolderComponent implements OnInit {
     this.loading = true;
     this.fileManagerService.getAllFolders(filter)
       .pipe().subscribe(res => {
-        console.log('res',res);
         this.dataSource = new MatTableDataSource(res);
         this.loading = false;
         if (res.length > 0) {
@@ -81,6 +79,9 @@ export class RootFolderComponent implements OnInit {
       stack.push(json);
       window.localStorage.stack = JSON.stringify(stack);
       window.localStorage.FOLDER_CONFIG_DETAILS= JSON.stringify('');
+      window.localStorage.files_project = JSON.stringify('');
+      window.localStorage.files_iconArray = JSON.stringify('');
+      window.localStorage.projectLevel = JSON.stringify('');
       // route to dept folder list
       this.router.navigate([path]).then(() => {
         this.ngOnInit();
