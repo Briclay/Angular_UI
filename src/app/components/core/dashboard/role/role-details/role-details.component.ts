@@ -95,10 +95,10 @@ export class RoleDetailsComponent implements OnInit {
       let departmentId = this.roleDetailsForm.value._departmentId;
       this.roleService.getFeatures(userType, departmentId )
       .pipe().subscribe(res => {
-          this.openDialogFeature(res)
-        }, (error: any) => {
-          console.error('error', error);
-        });
+        this.openDialogFeature(res)
+      }, (error: any) => {
+        console.error('error', error);
+      });
     }
 	}
 
@@ -120,8 +120,6 @@ export class RoleDetailsComponent implements OnInit {
         });
         this.roleDetailsForm.value.access = result;
       }
-      
-
     });
   }
 
