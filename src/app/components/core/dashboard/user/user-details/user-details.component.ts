@@ -7,7 +7,8 @@ import { MatDialog, MatSnackBar, MAT_DIALOG_DATA } from '@angular/material';
 import {merge as observableMerge, Subject} from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
 import {takeUntil} from 'rxjs/operators';
-import {UserService} from "../user.service"
+import {UserService} from "../user.service";
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-user-details',
@@ -36,7 +37,8 @@ export class UserDetailsComponent implements OnInit {
     private roleService: RoleService,
     private departmentService: DepartmentService,
     private userService: UserService,
-    private fileManagerService: FileManagerService
+    private fileManagerService: FileManagerService,
+    private http: HttpClient
   ) {
     
   }
@@ -111,12 +113,40 @@ export class UserDetailsComponent implements OnInit {
 
       this.fileManagerService.getS3Url(`file-name=${fileName}&file-type=${file.type}&_organisationId=${this.orgID}`)
         .pipe().subscribe(res => {
-          this.userDetailsForm.controls['profileImageUrl'].setValue(res.url)
+          let json = {
+            savedFileName: fileName,
+            _organisationId: this.orgID,
+            name: file.name,
+            type: 'file',
+            fileExt: fileExt[fileExt.length - 1],
+            path: res.url,
+            size: file.size,
+            message: "File uploaded by ",
+            details: "file original name is " + file.name
+          };
+          this.saveOnS3(res, file, json)
         }, (error: any) => {
         });
     } else {
       console.log('false');
     }
+  }
+
+  saveOnS3(response: any, file, body: any) {
+    this.http.put(response.signedRequest, file, {
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+    }).subscribe((awsRes: any) => {
+      let filePath = 'https://s3.ap-south-1.amazonaws.com/' + this.orgID + '/' + body.savedFileName;
+      this.userDetailsForm.controls['profileImageUrl'].setValue(filePath)
+    }, (error: any) => {
+      console.log('error' + JSON.stringify(error));
+    });
+    // this.fileManagerService.saveOnS3(response.signedRequest, file, {
+    //   headers: { 'Content-Type': 'application/x-www-form-urlencoded', "Authorization" : JSON.parse(window.localStorage.getItem('authToken')) }
+    // }).pipe().subscribe(res => {
+    //     this.userDetailsForm.controls['profileImageUrl'].setValue(res.url)
+    //   }, (error: any) => {
+    // });
   }
 
   assignValuesToForm() {
