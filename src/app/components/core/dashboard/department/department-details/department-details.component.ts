@@ -40,7 +40,7 @@ export class DepartmentDetailsComponent implements OnInit {
   editFlag = false;
   _features = [];
   featureData : any;
-  allFeatureCount = 0;
+  allFeatureCount : any;
   getInitFeature = [];
   constructor(
     private DeptService: DepartmentService,
@@ -54,7 +54,6 @@ export class DepartmentDetailsComponent implements OnInit {
     private auth: AuthService,
     private featureService: FeatureService) 
   {
-
     //this.userAuth = this.auth.get();
     this.userAuth = JSON.parse(window.localStorage.getItem('authUserOrganisation'));
     this._organisationId = this.userAuth._id;
@@ -80,9 +79,7 @@ export class DepartmentDetailsComponent implements OnInit {
     this.departmentDetailsForm.valueChanges.subscribe(() => {
       this.onOrgFormValuesChanged();
     })
-
-    //get single or list
-    //this.getFeatureByOrg(this._organisationId);
+    
   }
 
   ngOnInit() {
@@ -135,7 +132,6 @@ export class DepartmentDetailsComponent implements OnInit {
           data: featuresList ? featuresList : {}
         });
         dialogRef.afterClosed().subscribe(result => {
-          this.departmentDetailsForm.controls['_features'].setValue(result.length)
         });
       }.bind(this))
 
@@ -153,7 +149,6 @@ export class DepartmentDetailsComponent implements OnInit {
         data: featuresList ? featuresList : {}
       });
       dialogRef.afterClosed().subscribe(result => {
-        this.departmentDetailsForm.controls['_features'].setValue(result.length)
       });
     }
   }

@@ -43,7 +43,7 @@ export class OrganisationDetailsComponent implements OnInit {
   formErrors: any;
   orgFormErrors: any;
   orgFormSubmitted = false;
-  getInitFeature = [];
+  getInitFeature : any;
   organisationCode;
   sortName;
   arrName;
@@ -239,7 +239,6 @@ export class OrganisationDetailsComponent implements OnInit {
     }
   }
 
-
   onOrgFormSubmit() {
     this._features.map(f =>{
       delete (f.hidePermissions)
@@ -250,10 +249,8 @@ export class OrganisationDetailsComponent implements OnInit {
         selectedFeatures.push(list._id);
       }
     });
-
     this.organizationDetailsForm.value._features = selectedFeatures;
-
-    this.organizationDetailsForm.value.subscription.validTill = moment(this.organizationDetailsForm.value.subscription.validTill).local().format("YYYY-MM-DD HH:mm:ss") 
+    this.organizationDetailsForm.value.subscription.validTill = moment(this.organizationDetailsForm.value.subscription.validTill).local().format("YYYY-MM-DD") 
     if (this.organizationDetailsForm.value._id == (undefined || "")) {
       this.orgFormSubmitted = true;
       this.saveApiCall(this.organizationDetailsForm.value);
@@ -297,7 +294,7 @@ export class OrganisationDetailsComponent implements OnInit {
     this.organizationService.update(id, formData)
     .pipe().subscribe(response => {
       this.orgFormSubmitted = false;
-      console.log(response.message,'response.message')
+      console.log(response,'response.message')
       this.snackBar.open("Organisation updated successfully", 'Organisation', {
         duration: 2000,
       });

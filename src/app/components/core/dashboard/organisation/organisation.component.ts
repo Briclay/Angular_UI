@@ -3,7 +3,6 @@ import { OrganizationService } from '../../../../services/organization/organizat
 import { OrganizationData, TableOptions } from '../../../../interfaces/interfaces';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material';
 import { HistoryPopupComponent } from '../../../../components/shared/history-popup/history-popup.component'
-import {merge as observableMerge, Subject} from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
 import {takeUntil} from 'rxjs/operators';
 
@@ -20,7 +19,6 @@ export class OrganisationComponent implements OnInit {
   historyData: any;
   selectedOrgId: string;
   orgListSpinner: boolean;
-  private unsubscribe: Subject<any> = new Subject();
 
   constructor(
     private organisationService: OrganizationService,
@@ -34,7 +32,7 @@ export class OrganisationComponent implements OnInit {
     this.organisationService.getAll(org._id).pipe().subscribe(res => {
       this.organisations = res;
       this.orgListSpinner = false;
-      this.organisations.forEach((list) => list._features = (list._features && list._features.length));
+      //this.organisations.forEach((list) => list._features = (list._features && list._features.length));
       this.organisationDataOptions = [
         {
           title: 'name', key: 'name', hideTitle: true, type: 'label'

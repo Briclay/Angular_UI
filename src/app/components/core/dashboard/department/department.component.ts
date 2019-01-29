@@ -51,19 +51,21 @@ export class DepartmentComponent implements OnInit {
 		this.router.navigate([], {queryParams: {orgID: org.value ? org.value._id : org._id} , queryParamsHandling: 'merge'});
 	}
 
-
 	getDepartmentData() {
 		this.depListSpinner = true;
 		this.departmentService.getAll(this.selectedOrgId).pipe().subscribe(res => {
 			this.departments = res;
 			this.depListSpinner = false;
-			this.departments.forEach((list) => list._features = (list._features && list._features.length));
+			var flength = 
+			flength = this.departments.forEach((list) => {
+				return (list._features && list._features.length)
+			});
 			this.departmentDataOptions = [
 				{
 					title: 'name', key: 'name', hideTitle: true, type: 'label'
 				},
 				{
-					title: 'Features', key: '_features'
+					title: 'Features', key: 'flength'
 				}
 			]
 		}, (error: any) => {
