@@ -90,6 +90,17 @@ export class ApiService {
       }));
   }
 
+   public putFile(url: string, bodyObj: any = {}, fileHeader?): Observable<any> {
+    let reqUrl = `${API_BASE}${url}`;
+    let body = JSON.stringify(bodyObj);
+    return this.http
+      .put(reqUrl, bodyObj, fileHeader).pipe(
+      map(res => res),
+      catchError((errorResp) => {
+        return this.handleError(errorResp);
+      }));
+  }
+
   private handleError(errorResp) {
     if(errorResp instanceof HttpErrorResponse) {
       if(errorResp.error) {

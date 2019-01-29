@@ -40,12 +40,18 @@ export class FileConfigDetailsComponent implements OnInit {
         return "assets/fileManager/doc.png"
       else
         if (fileExt.toLowerCase() == 'xls' || fileExt.toLowerCase() == "xlsx")
-          return "assets/fileManager/7.png"
+          return "assets/fileManager/xls.png"
       if (fileExt.toLowerCase() == 'pdf')
         return "assets/fileManager/pdf.png"
       else
-        if (fileExt.toLowerCase() == "png" || "jpg" == fileExt.toLowerCase() || fileExt.toLowerCase() == "gif" || fileExt.toLowerCase() == "pgm")
-          return "assets/fileManager/img.png"
+       if (fileExt.toLowerCase() == "jpg" || fileExt.toLowerCase() == "jpeg")
+          return "assets/fileManager/jpg.png"
+        else      
+        if (fileExt.toLowerCase() == "png")
+          return "assets/fileManager/png.png"
+        else  
+        if (fileExt.toLowerCase() == "dwg")
+          return "assets/fileManager/dwg.png"          
         else
           return "assets/fileManager/file.png"
     }

@@ -24,8 +24,8 @@
             <div formGroupName="subscription">
               <mat-form-field appearance="outline">
                 <mat-label>Plan</mat-label>
-                <mat-select placeholder="Plan">
-                  <mat-option *ngFor="let plan of plans" [value]="plan">
+                <mat-select placeholder="Plan" [(value)]="selected" >
+                  <mat-option *ngFor="let plan of plans"  [value]="plan">
                     {{plan}}
                   </mat-option>
                 </mat-select>

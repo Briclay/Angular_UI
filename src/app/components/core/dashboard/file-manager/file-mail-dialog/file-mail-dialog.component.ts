@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { UserService } from '../../../../../services/user/user.service';
+import { UserService } from '../../../dashboard/user/user.service';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { FileManagerService } from '../file-manager.service'
 

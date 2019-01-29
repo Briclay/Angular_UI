@@ -11,6 +11,7 @@ import { AuthService } from '../../../../../services/auth.service';
 declare var moment: any;
 import {FileManagerService} from "../../file-manager/file-manager.service";
 import {FeatureService} from "../../../../../services/features/features.service";
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-organisation-details',
@@ -28,7 +29,7 @@ export class OrganisationDetailsComponent implements OnInit {
   organizationDetailsForm: FormGroup;
   featuresList: any;
   getApprovals = ['File' ,'Service Request' ,'Snag Master']
-  plans = [ 'Basic', 'Standard', 'Premium', 'Enterprise']
+  plans = ['basic', 'standard', 'permium', 'enterprise']
   orgType = ['ADMINISTRATOR', 'BUILDER', 'CONTRACTOR'];
   parantselect = ['Parent Organisation', 'Child Organisation'];
   parorg: boolean = false;
@@ -57,7 +58,7 @@ export class OrganisationDetailsComponent implements OnInit {
   filePath = 'assets/images/avatars/camera_blue.png';
   featureData : any;
   selectedAll = false;
-
+  selected = 'basic';
   constructor(private formBuilder: FormBuilder,    
     private organizationService: OrganizationService,
     private router :Router,
@@ -66,7 +67,8 @@ export class OrganisationDetailsComponent implements OnInit {
     private snackBar : MatSnackBar,
     private auth: AuthService,
     private fileManagerService: FileManagerService,
-    private featureService: FeatureService
+    private featureService: FeatureService,
+    private http: HttpClient
     ) {
     this.organisationsList = this.organizationService.organisations;
     this.userAuth = JSON.parse(window.localStorage.getItem('authUser'));
@@ -250,6 +252,8 @@ export class OrganisationDetailsComponent implements OnInit {
       }
     });
     this.organizationDetailsForm.value._features = selectedFeatures;
+    this.organizationDetailsForm.value.subscription.registrationDate = moment(new Date()).local().format("YYYY-MM-DD")
+    this.organizationDetailsForm.value.subscription.plan = this.selected; 
     this.organizationDetailsForm.value.subscription.validTill = moment(this.organizationDetailsForm.value.subscription.validTill).local().format("YYYY-MM-DD") 
     if (this.organizationDetailsForm.value._id == (undefined || "")) {
       this.orgFormSubmitted = true;
@@ -319,7 +323,7 @@ export class OrganisationDetailsComponent implements OnInit {
       let fileExt = file.name.split(".");
       let fileName = (new Date().getTime()) + "." + fileExt[fileExt.length - 1];
 
-      this.fileManagerService.getS3Url('file-name=' + fileName + '&file-type=' + file.type)
+      this.fileManagerService.getS3Url(`file-name=${fileName}&file-type=${file.type}&_organisationId=organization-logo`)
         .pipe().subscribe(res => {
           let json = {
             savedFileName: fileName,
@@ -339,6 +343,15 @@ export class OrganisationDetailsComponent implements OnInit {
     }
   }
 
-  
+  saveOnS3(response: any, file, body: any) {
+    this.http.put(response.signedRequest, file, {
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+    }).subscribe((awsRes: any) => {
+      let filePath = `https://s3.ap-south-1.amazonaws.com/organization-logo/${body.savedFileName}`;
+      this.organizationDetailsForm.controls['logoImage'].setValue(filePath)
+    }, (error: any) => {
+      console.log('error' + JSON.stringify(error));
+    });
+  }
 }
   

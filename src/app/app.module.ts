@@ -20,7 +20,6 @@ import { BarChartComponent } from './components/shared/bar-chart/bar-chart.compo
 import { D3Service } from 'd3-ng2-service';
 import { DashboardService } from './services/dashboard/dashboard.service';
 import { OrganizationService } from './services/organization/organization.service';
-import { UserService } from './services/user/user.service';
 import { UserDashboardService } from './services/user-dashboard/user-dashboard.service';
 import { DepartmentService } from './services/department/department.service';
 import { ExpansionPanelComponent } from './components/shared/expansion-panel/expansion-panel.component';
@@ -121,7 +120,7 @@ import { LocalStorageSchema } from './schemas/local-storage.schema';
     FeaturePopupComponent,
     ForgotPasswordComponent
   ],
-  providers: [D3Service, DashboardService, UserService, DepartmentService, 
+  providers: [D3Service, DashboardService, DepartmentService, 
   OrganizationService, UserDashboardService,
     LocalStorageSchema ],
   bootstrap: [AppComponent]
