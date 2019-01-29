@@ -6,6 +6,7 @@ import { HistoryPopupComponent } from '../../../../components/shared/history-pop
 import {merge as observableMerge, Subject} from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
 import {takeUntil} from 'rxjs/operators';
+
 @Component({
   selector: 'app-organisation',
   templateUrl: './organisation.component.html',
@@ -33,7 +34,7 @@ export class OrganisationComponent implements OnInit {
     this.organisationService.getAll(org._id).pipe().subscribe(res => {
       this.organisations = res;
       this.orgListSpinner = false;
-      this.organisations.forEach((list) => list.features = (list.access && list.access.length));
+      this.organisations.forEach((list) => list._features = (list._features && list._features.length));
       this.organisationDataOptions = [
         {
           title: 'name', key: 'name', hideTitle: true, type: 'label'

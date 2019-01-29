@@ -34,6 +34,7 @@ export class OrganisationDetailsComponent implements OnInit {
   parorg: boolean = false;
   IsShow: boolean = false;
   features = [];
+  form: FormGroup;
   organisationCount: number;
   featuresArray = [];
   selectedFeatureArray = [];
