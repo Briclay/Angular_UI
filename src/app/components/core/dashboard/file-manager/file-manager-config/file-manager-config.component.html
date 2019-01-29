@@ -1,16 +1,16 @@
 <div class="file-manager-config-container">
   <!-- show path -->
-  <div>
+  <!-- <div> -->
     <!-- <span *ngFor="let pathName of fullPathDisplay">
       <a (click)="onSelectPath(pathName.path, pathName.top)">{{ pathName.name }} / </a>
     </span> -->
-  </div>
+ <!--  </div> -->
   <!-- Back Button -->
-  <div>
+<!--   <div>
     <span class="back-btn" fxLayout="row">
       <button mat-raised-button (click)="goBackButton()">Back</button>
     </span>
-  </div>
+  </div> -->
   <!-- rend back button -->
   <!-- project selection box nad project details -->
   <mat-card>
@@ -86,39 +86,59 @@
   <div fxLayout="row" class="file-details">
     <!-- <mat-card *ngIf="!selectedProjectData;else selectedProjectTemplate" class="width-100 marginTop30 text-danger text-center">
       * Select Project
-    </mat-card> -->
-    <ul class="side-nav-list file-icons" *ngIf="designDeptFlag" >
+    </mat-card> --> 
+<!--     <mat-card *ngIf="!selectedProjectData;else selectedProjectTemplate" 
+      class="width-100 marginTop30 text-danger text-center">
+      * Select Project
+    </mat-card>  -->   
+    <mat-card>
+    <ul class="side-nav-list file-icons" *ngIf="designDeptFlag">
       <li *ngFor="let folder of iconArray" (click)="getClickedByIcon(folder)">
         <a>
           <img class="icons" src="{{ folder.iconPath }}" /><br />{{ folder.name }}
         </a>
       </li>
     </ul>
+  </mat-card>
     <!-- icon for fil upload nad folder create -->
     <div class="file-list" *ngIf="tableFlag">
       <mat-card class="margin-btm-10 list-header">
         <div fxLayout="row align-item-center" class="file-list-header">
-          <div class="flex-grow ">
+         <!--  <div class="flex-grow ">
            
-          </div>
+          </div> -->
+<!--           <div class="flex-grow no-border justify-content-center"> -->
+<!--             <span fxLayout="row" fxLayoutAlign="space-around center" > -->
+      <!-- <button mat-raised-button (click)="goBackButton()">Back</button> -->
+   <!--            <img  src="assets/images/icons/back.png" (click)="goBackButton()" width="5%" height="25px" padding-top="100px" label="Create_Folder">    -->  
+         <!--    </span>          -->   
+          <!-- </div> -->
           <div class="flex-grow no-border">
           </div>
-          <div class="flex-grow no-border">
-          </div>
-          <div class="flex-grow no-border">
-          </div>
-          <div class="flex-grow no-border">
-          </div>
-          <div class="flex-grow no-border justify-content-center">
-            <mat-icon matTooltip="Create Folder" (click)="openFolderDialog()" class="hand-cursor margin-left-4">create_new_folder</mat-icon>
-            <span (click)="fileInput.click()">
-              <mat-icon matTooltip="Upload" class="hand-cursor margin-left-4">cloud_upload</mat-icon>
-              <input #fileInput type="file" (change)="onFileInput($event)" style="display:none;" />
+          <!-- <div class="flex-grow no-border"> -->
+       <!--    </div> -->
+          <!-- <div class="flex-grow no-border"> -->
+ <!--          </div>     --> 
+          <div class="flex-grow: 3; no-border justify-content-center">
+ <!--            <mat-icon matTooltip="Create Folder" (click)="openFolderDialog()" class="hand-cursor margin-left-4">create_new_folder</mat-icon> -->
+            <span fxLayout="row" >
+  <img  matTooltip="Home Folder" src="assets/images/icons/Home.png" (click)="openFolderDialog()" width="7%" height="20px"label="Home Folder"class="hand-cursor margin-left-4" >            
+              <img  matTooltip="Back" src="assets/images/icons/back.png" (click)="goBackButton()" width="7%" height="20px"  label="Create_Folder" class="hand-cursor margin-left-4">   
+
+                 <img  matTooltip="Create Folder" src="assets/images/icons/Create_Folder.png" (click)="openFolderDialog()" width="20px" height="25px" label="Create_Folder"class="hand-cursor margin-left-4" >
+                <span (click)="fileInput.click()">
+<!--               <mat-icon matTooltip="Upload" class="hand-cursor margin-left-4">cloud_upload</mat-icon> -->
+<!--               <input #fileInput type="file" (change)="onFileInput($event)" style="display:none;" /> -->
+                <img  matTooltip="File Upload" src="assets/images/icons/File_Upload.png" title="Upload" width="20px" height="25px" class="hand-cursor margin-left-4">
+                <input #fileInput type="file" (change)="onFileInput($event)" style="display:none;" />  <!-- </span> Upload</p> --> 
+              </span>
             </span>
           </div>
         </div>
       </mat-card>
       <div class="expansion-container">
+
+       <spinner diameter="80" *ngIf="folderListLoading; else folderList"></spinner>         
         <!-- <spinner diameter="80" *ngIf="folderListLoading; else folderList"></spinner> -->
         <div>
           <!-- table Implemenetion -->
@@ -149,21 +169,21 @@
             <ng-container matColumnDef="logs">
               <th mat-header-cell *matHeaderCellDef> logs </th>
               <td mat-cell *matCellDef="let element" (click)="getLogs(element)">
-                <mat-icon class="mt-icn">info_outline</mat-icon>
+                <img _ngcontent-c9="" matTooltip="Details"  width="30px" src="assets/images/icons/Details.png">
               </td>
             </ng-container>
             <!-- email Column -->
             <ng-container matColumnDef="email">
               <th mat-header-cell *matHeaderCellDef> email </th>
               <td mat-cell *matCellDef="let element" (click)="openMailDialog(element)">
-                <mat-icon color="primary" class="icon-style material-icons">email</mat-icon>
+                <img _ngcontent-c9="" matTooltip="Email" width="30px" src="assets/images/icons/Email.png">
               </td>
             </ng-container>
             <!-- share Column -->
             <ng-container matColumnDef="share">
               <th mat-header-cell *matHeaderCellDef> share </th>
               <td mat-cell *matCellDef="let element" (click)="openShareDialog(element)">
-                <mat-icon color="primary" class="icon-style material-icons">share</mat-icon>
+                <img _ngcontent-c9="" matTooltip="Share" width="30px" src="assets/images/icons/File_Share.png">
               </td>
             </ng-container>
 
@@ -174,6 +194,7 @@
         </div>
       </div>
     </div>
+
     <!-- end icon  -->
     <div class="file-sub-details" *ngIf="!projectFlag">
 
@@ -192,6 +213,7 @@
       </mat-card>
       <!-- end files details -->
     </div>
+
   </div>
 
 </div>
