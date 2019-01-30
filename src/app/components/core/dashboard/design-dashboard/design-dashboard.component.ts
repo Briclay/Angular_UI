@@ -20,6 +20,9 @@ export class DesignDashboardComponent implements OnInit {
   userAuth : any;
   profileImageUrl = "";
   filePath = 'assets/images/avatars/camera_blue.png';
+  user: any;
+  userName: any;
+  roleName: any;
 
   projectConsultances : any[] = [
     {
@@ -173,7 +176,10 @@ export class DesignDashboardComponent implements OnInit {
   ]
 
   constructor(private fileManagerService: FileManagerService,
-    private http: HttpClient) { 
+    private http: HttpClient) {    
+      this.user = JSON.parse(window.localStorage.getItem('authUser')); 
+      this.userName = this.user.displayName;
+      this.roleName = this.user._roleId.name
     this.userAuth = JSON.parse(window.localStorage.getItem('authUserOrganisation'));
     this.orgID = this.userAuth._id;
   }

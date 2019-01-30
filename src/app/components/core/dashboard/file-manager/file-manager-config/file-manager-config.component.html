@@ -93,8 +93,8 @@
       class="width-100 marginTop30 text-danger text-center">
       * Select Project
     </mat-card>  -->   
-    <mat-card>
-      <ul class="side-nav-list file-icons" *ngIf="iconArray.length>0">
+    <mat-card *ngIf="iconArray.length>0">
+      <ul class="side-nav-list file-icons" >
         <li *ngFor="let folder of iconArray" (click)="getClickedByIcon(folder)">
           <a>
             <img class="icons" src="{{ folder.iconPath }}" /><br />{{ folder.name }}
@@ -124,15 +124,15 @@
                <div class="flex-grow: 3; no-border justify-content-center">
                  <!--            <mat-icon matTooltip="Create Folder" (click)="openFolderDialog()" class="hand-cursor margin-left-4">create_new_folder</mat-icon> -->
                  <span fxLayout="row" >
-                  <img  matTooltip="Home Folder" width="30px" src="assets/images/icons/Home.png" (click)="backHomePage()"  height="20px" label="Home Folder" class="hand-cursor margin-left-4">            
-                  <img  matTooltip="Back" src="assets/images/icons/back.png" (click)="goBackButton()"  width="30px" height="20px"  label="Create_Folder" class="hand-cursor margin-left-4" style="margin-top: 2px;">   
+                  <img  matTooltip="Home Folder" width="25px" src="assets/images/icons/Home.png" (click)="backHomePage()"  height="20px" label="Home Folder" class="hand-cursor margin-left-4">            
+                  <img  matTooltip="Back" src="assets/images/icons/back.png" (click)="goBackButton()"  width="25px" height="20px"  label="Create_Folder" class="hand-cursor margin-left-4" style="margin-top: 2px;">   
       
-                  <img  matTooltip="Create Folder" width="30px" src="assets/images/icons/Create_Folder.png" (click)="openFolderDialog()" height="25px" label="Create_Folder" class="hand-cursor margin-left-4" >
+                  <img  matTooltip="Create Folder" width="25px" src="assets/images/icons/Create_Folder.png" (click)="openFolderDialog()" height="25px" label="Create_Folder" class="hand-cursor margin-left-4" >
 
                   <span (click)="fileInput.click()">
                     <!--               <mat-icon matTooltip="Upload" class="hand-cursor margin-left-4">cloud_upload</mat-icon> -->
                     <!--               <input #fileInput type="file" (change)="onFileInput($event)" style="display:none;" /> -->
-                    <img  matTooltip="File Upload" width="30px" src="assets/images/icons/File_Upload.png" title="Upload"  height="25px" class="hand-cursor margin-left-4">
+                    <img  matTooltip="File Upload" width="25px" src="assets/images/icons/File_Upload.png" title="Upload"  height="25px" class="hand-cursor margin-left-4">
                     <input #fileInput type="file" (change)="onFileInput($event)" style="display:none;" />  <!-- </span> Upload</p> --> 
                   </span>
                 </span>
@@ -176,14 +176,14 @@
               </ng-container>
               <!-- email Column -->
               <ng-container matColumnDef="email">
-                <th mat-header-cell *matHeaderCellDef width="50px" align="right">email</th>
+                <th mat-header-cell *matHeaderCellDef width="55px" align="right">email</th>
                 <td mat-cell *matCellDef="let element" (click)="openMailDialog(element)">
                   <img _ngcontent-c9="" matTooltip="Email" src="assets/images/icons/Email.png" style="width: 50%;" align="center">
                 </td>
               </ng-container>
               <!-- share Column -->
               <ng-container matColumnDef="share">
-                <th mat-header-cell *matHeaderCellDef  width="50px"  align="right">share</th>
+                <th mat-header-cell *matHeaderCellDef  width="60px"  align="right">share</th>
                 <td mat-cell *matCellDef="let element" (click)="openShareDialog(element)">
                   <img _ngcontent-c9="" matTooltip="Share" src="assets/images/icons/File_Share.png" style="width: 50%;" align="center">
                 </td>
@@ -205,12 +205,16 @@
 
       <!-- end icon  -->
       <div class="file-sub-details" *ngIf="!projectFlag">
-
+       <!-- 
         <mat-card class="margin-btm-10">
-          <div *ngIf="folderDetailsDataOption" class="flex-box">
+          <div *ngIf="folderDetailsDataOption" zclass="flex-box">
             <img src="{{getIcon(folderDetailsDataOption.type,folderDetailsDataOption.fileExt)}}" width="35" height="35" />
             <label class="margin-5">{{folderDetailsDataOption.name}}</label>
           </div>
+        </mat-card> -->
+
+        <mat-card class="margin-btm-10">
+            <div class="margin-5 label-value" align="justify-content-center" >{{folderDetailsDataOption.name}}</div>
         </mat-card>
         <!-- file details -->
         <mat-card class="margin-btm-10">

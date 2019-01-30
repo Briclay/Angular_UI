@@ -102,6 +102,7 @@ export class FileManagerConfigComponent implements OnInit {
     this.folderConfigData();
     this.getProjectListinIt();
     this.getSingleFolder();
+
   }
   folderConfigData() {
     var tempValue = this.localStack.pop();
@@ -383,6 +384,8 @@ export class FileManagerConfigComponent implements OnInit {
 
   //click on icon
   getClickedByIcon(value) {
+    this.folderDetailsDataOption = value;
+    console.log(this.folderDetailsDataOption,"this.folderDetailsDataOption")
     if (this.orgId && this.deptId && value) {
       if (value.type === 'folder') {
         this.projectFlag = false;
@@ -440,6 +443,7 @@ export class FileManagerConfigComponent implements OnInit {
   getFileDetails(fileList) {
     this.fileDetialsLoading = true;
     this.folderDetailsDataOption = fileList;
+
   }
 
   onFileInput(event, fileList?) {
