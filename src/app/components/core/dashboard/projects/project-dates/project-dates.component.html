@@ -1,15 +1,28 @@
-<form novalidate>
-  <mat-form-field appearance="outline">
-    <mat-label>Begin Date</mat-label>
-    <input matInput [matDatepicker]="picker" placeholder="Choose a date">
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-  </mat-form-field>
-
-  <mat-form-field appearance="outline">
-    <mat-label>Begin Date</mat-label>
-    <input matInput [matDatepicker]="picker" placeholder="Choose a date">
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-  </mat-form-field>
-</form>
+<div>
+  <form novalidate  [formGroup]="dateForm">
+    <div fxLayout="row">
+      <mat-form-field appearance="outline">
+        <mat-label>Begin Date</mat-label>
+        <input matInput [matDatepicker]="beginDate" placeholder="Choose a beginDate" formControlName="beginDate" (dateChange)="beginDateSelected()" [min]="todayDate">
+        <mat-datepicker-toggle matSuffix [for]="beginDate"></mat-datepicker-toggle>
+        <mat-datepicker #beginDate></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field appearance="outline" >
+        <mat-label>Completion Date</mat-label>
+        <input matInput [matDatepicker]="completionDate" placeholder="Choose a completionDate" [min]="beginDate" formControlName="completionDate" disabled="{{beginDateFlag}}">
+        <mat-datepicker-toggle matSuffix [for]="completionDate"></mat-datepicker-toggle>
+        <mat-datepicker #completionDate></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <div fxLayout="row">
+      <div>
+        <button mat-raised-button>
+          <span>Cancel</span>
+        </button>
+        <button type="submit" mat-raised-button [disabled]=" !dateForm.valid"  (click)="onSubmit()">
+          <span>submit</span>
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

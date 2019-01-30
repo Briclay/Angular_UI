@@ -1,17 +1,17 @@
 <div class="project-container">
   <mat-tab-group>
     <mat-tab label="Overview">
-      <app-panel-header-filter (selectOrganizaion)="getProjects($event)"></app-panel-header-filter>
+      <!-- <app-panel-header-filter (selectOrganizaion)="getProjects($event)"></app-panel-header-filter>
       <spinner diameter="80" *ngIf="projectLoading; else projectListTemplate"></spinner>
       <ng-template #projectListTemplate>
         <div fxLayout="row">
-          <app-expansion-panel [expansionPanelOptions]="projectDataOptions" selectorComponent="app-project-details" [data]="projects"
-            [isHistory]="true"></app-expansion-panel>
+          <app-expansion-panel [expansionPanelOptions]="projectDataOptions" selectorComponent="app-project-details"
+            [data]="projects" [isHistory]="true"></app-expansion-panel>
         </div>
-      </ng-template>
+      </ng-template> -->
     </mat-tab>
     <mat-tab label="New">
-      <app-project-details formType="create" [projectListData]="projects"></app-project-details>
+       <app-project-create formType="create" (tabSwitch)="tabSwitch(index)"></app-project-create>
     </mat-tab>
   </mat-tab-group>
 </div>

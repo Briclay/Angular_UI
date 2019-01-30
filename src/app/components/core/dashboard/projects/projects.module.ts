@@ -5,13 +5,14 @@ import { ProjectPhasesComponent } from './project-phases/project-phases.componen
 import { ProjectTeamsComponent } from './project-teams/project-teams.component';
 import { ProjectDatesComponent } from './project-dates/project-dates.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import {ProjectService} from './project.service';
-import {MaterialModule} from '../../../../modules/material.module'
+import { ProjectService } from './project.service';
+import { MaterialModule } from '../../../../modules/material.module';
+import { ProjectCreateComponent } from './project-create/project-create.component'
 
 @NgModule({
   imports: [
     CommonModule,
-    ReactiveFormsModule, 
+    ReactiveFormsModule,
     FormsModule,
     MaterialModule
   ],
@@ -19,15 +20,17 @@ import {MaterialModule} from '../../../../modules/material.module'
     ProjectDetailsComponent,
     ProjectPhasesComponent,
     ProjectTeamsComponent,
-    ProjectDatesComponent
+    ProjectDatesComponent,
+    ProjectCreateComponent
 
   ],
   exports: [
     ProjectDetailsComponent,
     ProjectPhasesComponent,
     ProjectTeamsComponent,
-    ProjectDatesComponent
+    ProjectDatesComponent,
+    ProjectCreateComponent
   ],
   providers: [ProjectService]
 })
-export class ProjectModule {}
+export class ProjectModule { }

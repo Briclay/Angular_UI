@@ -1,0 +1,91 @@
+<div class="project-details-container">
+  <!-- start card section  -->
+  <mat-card>
+    <!-- main div -->
+    <div class="project-content">
+      <form>
+        <div fxLayout="row">
+          <!-- first section -->
+          <div fxFlex="20" class="border-right-gray">
+            New Project
+            <div (click)="fileInput.click()" class="upload-photo">
+              <div class="list">
+                Add Images
+                <img src="{{filePath}}" class="img-upload">
+                <!-- <span>File Upload</span> -->
+                <input #fileInput type="file" (change)="onPhotoUpload($event)" style="display:none;" accept="image/x-png,image/gif,image/jpeg" />
+              </div>
+            </div>
+          </div>
+          <!-- end fisrt section -->
+          <!-- second section -->
+          <div fxFlex="50" class="border-right-gray">
+            <div fxLayout="row" class="margin-10">
+              <div fxFlex="50">
+                <mat-form-field appearance="outline" fxFlex="90">
+                  <mat-label>Project Name</mat-label>
+                  <input matInput placeholder="Project Name" required (keyup)="generateOrgCode()" [disabled]="disableFlag">
+                </mat-form-field>
+              </div>
+              <div fxFlex="50">
+                <mat-form-field appearance="outline" fxFlex="90">
+                  <mat-label>Project Code</mat-label>
+                  <input matInput placeholder="Project Code" type="text" required readonly>
+                </mat-form-field>
+              </div>
+            </div>
+            <div fxLayouy="row" class="margin-10">
+              <mat-form-field appearance="outline" fxFlex="100">
+                <mat-label>Description</mat-label>
+                <textarea matInput placeholder="Description" required></textarea>
+              </mat-form-field>
+            </div>
+          </div>
+          <!-- end section -->
+          <!-- third section -->
+          <div fxFlex="30">
+            <div fxLayouy="row" class="margin-10">
+              <!-- start -->
+              <div fxFlex="30" class="margin-10">
+                <mat-form-field appearance="outline" fxLayouy="row">
+                  <mat-label>Location</mat-label>
+                  <input type="number" matInput placeholder="Location" min=0>
+                </mat-form-field>
+                <br />
+                <mat-form-field appearance="outline" fxLayouy="row">
+                  <mat-label>City</mat-label>
+                  <input type="text" name="totalUnits" matInput>
+                </mat-form-field>
+                <br />
+              </div>
+              <div fxFlex="30" class="margin-10">
+                <mat-form-field appearance="outline" fxLayouy="row">
+                  <mat-label>Total Units</mat-label>
+                  <input type="text" matInput [max]="5000000" name="totalUnits">
+                </mat-form-field>
+                <mat-form-field appearance="outline" fxLayouy="row">
+                  <mat-label>Budget</mat-label>
+                  <input type="text" matInput>
+                </mat-form-field>
+              </div>
+              <!-- start button sectiom -->
+              <div fxFlex="40" class="margin-10">
+                <button mat-raised-button class="popup-btn" (click)="openDetailsDialog()">Details</button>
+                <br />
+                <button mat-raised-button class="popup-btn" (click)="openPhaseDialog()">Phases</button>
+                <br />
+                <button mat-raised-button class="popup-btn" (click)="openTeamDialog()">Team</button>
+                <br />
+                <button mat-raised-button class="popup-btn" (click)="openDateDialog()">Dates</button>
+              </div>
+            </div>
+            <!-- end button section -->
+          </div>
+          <!-- end third section -->
+        </div>
+      </form>
+    </div>
+    <!-- end main div -->
+  </mat-card>
+  <!-- end card section -->
+</div>
