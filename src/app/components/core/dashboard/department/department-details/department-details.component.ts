@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { DepartmentService } from '../../../../../services/department/department.service';
 import { AuthenticationService } from '../../../../../services/authentication/authentication.service';
@@ -8,6 +8,8 @@ import * as _ from 'lodash';
 import { FeaturePopupComponent } from '../../../../../components/shared/feature-popup/feature-popup.component'
 import { MatDialog,  MatSnackBar ,MAT_DIALOG_DATA } from '@angular/material';
 import { AuthService } from '../../../../../services/auth.service';
+import {FeatureService} from "../../../../../services/features/features.service";
+declare var moment: any;
 
 @Component({
   selector: 'app-department-details',
@@ -17,6 +19,7 @@ import { AuthService } from '../../../../../services/auth.service';
 export class DepartmentDetailsComponent implements OnInit {
   @Input() data: any;
   @Input() formType: string;
+  @Output() public tabSwitch: EventEmitter<any> = new EventEmitter<any>();
 
   userAuth: any;
   departmentDetailsForm: FormGroup;
@@ -35,91 +38,10 @@ export class DepartmentDetailsComponent implements OnInit {
   deptFormSubmitted = false;
   selectedAll = false;
   editFlag = false;
-  allFeatures = [
-  {
-    "_featureId": "f1",
-    "resources": "Projects",
-    "flag" : true,
-    "permissions": [
-    {
-      "userKey": "List",
-      "reqKey": "GET",
-      "accessFlag": true
-    },
-    {
-      "userKey": "Save",
-      "reqKey": "POST",
-      "accessFlag": false
-    },
-    {
-      "userKey": "Update",
-      "reqKey": "PUT",
-      "accessFlag": true
-    },
-    {
-      "userKey": "Delete",
-      "reqKey": "DELETE",
-      "accessFlag": false
-    }
-    ]
-  },
-  {
-    "_featureId": "f2",
-    "resources": "Snagmaster",
-    "flag" : true,
-    "permissions": [
-    {
-      "userKey": "List",
-      "reqKey": "GET",
-      "accessFlag": true
-    },
-    {
-      "userKey": "Save",
-      "reqKey": "POST",
-      "accessFlag": false
-    },
-    {
-      "userKey": "Update",
-      "reqKey": "PUT",
-      "accessFlag": true
-    },
-    {
-      "userKey": "Delete",
-      "reqKey": "DELETE",
-      "accessFlag": false
-    }
-    ]
-  },
-  {
-    "_featureId": "f3",
-    "resources": "Services",
-    "flag" : false,
-    "permissions": [
-    {
-      "userKey": "List",
-      "reqKey": "GET",
-      "accessFlag": true
-    },
-    {
-      "userKey": "Save",
-      "reqKey": "POST",
-      "accessFlag": false
-    },
-    {
-      "userKey": "Update",
-      "reqKey": "PUT",
-      "accessFlag": true
-    },
-    {
-      "userKey": "Delete",
-      "reqKey": "DELETE",
-      "accessFlag": false
-    }
-    ]
-  }
-  ]  
+  _features = [];
   featureData : any;
-  allFeatureCount = 0;
+  allFeatureCount : any;
+  getInitFeature = [];
   constructor(
     private DeptService: DepartmentService,
     private formBuilder : FormBuilder,
@@ -129,9 +51,9 @@ export class DepartmentDetailsComponent implements OnInit {
     private router: Router,
     private dialog : MatDialog,
     private snackBar: MatSnackBar,
-    private auth: AuthService) 
+    private auth: AuthService,
+    private featureService: FeatureService) 
   {
-
     //this.userAuth = this.auth.get();
     this.userAuth = JSON.parse(window.localStorage.getItem('authUserOrganisation'));
     this._organisationId = this.userAuth._id;
@@ -157,13 +79,12 @@ export class DepartmentDetailsComponent implements OnInit {
     this.departmentDetailsForm.valueChanges.subscribe(() => {
       this.onOrgFormValuesChanged();
     })
-
-    //get single or list
-    //this.getFeatureByOrg(this._organisationId);
+    
   }
 
   ngOnInit() {
     this.assignValuesToForm();
+    this.getAllFeatures();
   }
   
   assignValuesToForm() {
@@ -171,19 +92,77 @@ export class DepartmentDetailsComponent implements OnInit {
       this.departmentDetailsForm.patchValue(this.data)
     }
   }
-
-  openDialogFeature() {
-    this.featureData = this.allFeatures;
-    const dialogRef = this.dialog.open(FeaturePopupComponent, {
-      width: '450px',
-      data: this.allFeatures ? this.allFeatures : {}
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      // TODO closed event
+  
+  getAllFeatures(){
+    this.featureService.getFeatures()
+      .pipe().subscribe(response => {
+        this._features = response;
+    }, (error: any) => {
+      this.snackBar.open(error.message, 'Features', {
+        duration: 3000,
+      });
     });
   }
-  changeEvent(event) {
-    this.sF = event.source.value;
+
+  getFeatures() {
+    this.openDialogFeature();
+  }
+
+  openDialogFeature() {
+    var featuresList = [] ; 
+    if(this.formType !== 'create'){
+      this.featureService.getFeatures()
+      .pipe().subscribe(response => {
+        this._features = response;
+        this.getDepartmentById(this.departmentDetailsForm.value._id, function(){
+          var orgFeaturesList = this.getInitFeature;
+          this._features.forEach(fl => {
+           var feature = orgFeaturesList.find((f) => { return f._id == fl._id })
+           if (feature) {
+            fl.activeFlag = true;
+          }
+          else{
+            fl.activeFlag = false;
+          }
+        })
+        featuresList = this._features;
+        featuresList.forEach((list) => list.hidePermissions = true)
+        const dialogRef = this.dialog.open(FeaturePopupComponent, {
+          width: '550px',
+          data: featuresList ? featuresList : {}
+        });
+        dialogRef.afterClosed().subscribe(result => {
+        });
+      }.bind(this))
+
+      }, (error: any) => {
+        this.snackBar.open(error.message, 'Features', {
+          duration: 3000,
+        });
+      });
+    }
+    else {
+      featuresList = this._features;
+      featuresList.forEach((list) => list.hidePermissions = true)
+      const dialogRef = this.dialog.open(FeaturePopupComponent, {
+        width: '550px',
+        data: featuresList ? featuresList : {}
+      });
+      dialogRef.afterClosed().subscribe(result => {
+      });
+    }
+  }
+
+  getDepartmentById(id, next) {
+    this.DeptService.getOne(id)
+    .pipe().subscribe(response => {
+      this.getInitFeature = response._features;
+      next();
+    }, (error: any) => {
+      this.snackBar.open(error.message, 'Department', {
+        duration: 3000,
+      });
+    });
   }
 
   onOrgFormValuesChanged() {
@@ -205,8 +184,17 @@ export class DepartmentDetailsComponent implements OnInit {
   onDeptFormSubmit() {
     console.log(this.departmentDetailsForm.value);
     this.deptFormSubmitted = true;
-    this.departmentDetailsForm.value._features = this.featuresArray;
-    /*check if id is not epmty then save otherwise update*/
+    this._features.map(f =>{
+      delete (f.hidePermissions)
+    })
+    var selectedFeatures = [];
+    this._features.forEach((list) => { 
+      if(list.activeFlag){
+        selectedFeatures.push(list._id);
+      }
+    });
+    this.departmentDetailsForm.value._features = selectedFeatures;
+        /*check if id is not epmty then save otherwise update*/
     if ((!_.isUndefined(this.departmentDetailsForm.value._id) 
       && !_.isEmpty(this.departmentDetailsForm.value._id))) {
       this.DeptService.update(this.departmentDetailsForm.value._id, this.departmentDetailsForm.value)

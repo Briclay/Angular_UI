@@ -39,15 +39,15 @@ export class OrganizationService {
 	}
 
 	public getFeature (): Observable<any> {
-        let url = `${environmentService.briclayCore}/features?select=*`;
+        let url = `${environmentService.briclayCore}/features?fieldsToShow=name,baseRoute,activeFlag`;
         return this.apiService.get(url).pipe(map(res => res));
     }
 
-	public getAll(id?): Observable<any> {
-        let url = `${environmentService.briclayCore}/organisations?select=*`;
+	public getAll(id): Observable<any> {
+        let url = `${environmentService.briclayCore}/organisations?select=*&filter[_id]=${id}`;
         return this.apiService.get(url).pipe(map(res => res));
     }
-    
+
     public getOne(id): Observable<any> {
         let url =  `${environmentService.briclayCore}/organisations/${id}`;
         return this.apiService.get(url, id).pipe(map(res => res));
@@ -70,7 +70,6 @@ export class OrganizationService {
 
    /* getS3Url(query: string): Observable<any> {
 	    let url = `/file/sign-s3?${query}`
->>>>>>> origin/Sonal_Changes
 	    return this.apiService.get(url).pipe(map(res => res));
     }*/
 

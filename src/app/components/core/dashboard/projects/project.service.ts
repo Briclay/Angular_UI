@@ -18,5 +18,9 @@ export class ProjectService {
         let url = `${environmentService.briclayCore}/projects/${projID}`
         return this.apiService.get(url).pipe(map(res     => res));
     }
+    public save(body: any): Observable<any> {
+        let url = `${environmentService.briclayCore}/projects`
+        return this.apiService.post(url, body).pipe(map(res => res));
+    }
 }
 

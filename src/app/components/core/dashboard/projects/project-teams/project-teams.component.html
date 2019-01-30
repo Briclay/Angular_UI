@@ -6,29 +6,32 @@
         <div fxLayout="row">
           <div fxFlex="40" class="border-right-gray">
             <mat-form-field>
-              <mat-select placeholder="Favorite food" appearance="outline" fxFlex="50">
+              <mat-select placeholder="Department" appearance="outline" fxFlex="50" (selectionChange)="onSelectDept($event)">
                 <mat-label>Department</mat-label>
-                <mat-option *ngFor="let food of foods" [value]="food.value">
-                  {{food.viewValue}}
+                <mat-option *ngFor="let dept of deptList" [value]="dept">
+                  {{dept.name}}
                 </mat-option>
               </mat-select>
             </mat-form-field>
             <mat-form-field>
-              <mat-select placeholder="Favorite food" appearance="outline" fxFlex="50">
+              <mat-select placeholder="Favorite food" appearance="outline" fxFlex="50" (selectionChange)="onSelectUser($event)">
                 <mat-label>Users</mat-label>
-                <mat-option *ngFor="let food of foods" [value]="food.value">
-                  {{food.viewValue}}
+                <mat-option *ngFor="let users of userList" [value]="users">
+                  {{users.username}}
                 </mat-option>
               </mat-select>
             </mat-form-field>
+            <span (click)="addUser()">
+              add
+            </span>
           </div>
           <div fxFlex="60" class="border-right-gray">
-            <div fxLayout="row">
-              <div>
+            <div fxLayout="row" *ngFor="let user of userArray;let i = index">
+              <div (click)="deleteUser(i)">
                 delete
               </div>
               <div>
-                colu
+               {{user.email}}
               </div>
               <div>
 
@@ -39,6 +42,14 @@
             </div>
           </div>
         </div>
+        <div fxLayout="row">
+            <button mat-raised-button>
+                    <span>Cancel</span>
+            </button>
+            <button type="submit" mat-raised-button (click)="onSubmit()">
+                    <span>submit</span>
+            </button>
+    </div>
       </form>
     </div>
   </mat-card>

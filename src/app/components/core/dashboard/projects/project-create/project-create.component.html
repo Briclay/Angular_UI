@@ -3,18 +3,22 @@
   <mat-card>
     <!-- main div -->
     <div class="project-content">
-      <form>
+      <form [formGroup]="projectForm" novalidate>
         <div fxLayout="row">
           <!-- first section -->
           <div fxFlex="20" class="border-right-gray">
             New Project
-            <div (click)="fileInput.click()" class="upload-photo">
+            <div class="upload-photo">
               <div class="list">
-                Add Images
-                <img src="{{filePath}}" class="img-upload">
-                <!-- <span>File Upload</span> -->
-                <input #fileInput type="file" (change)="onPhotoUpload($event)" style="display:none;" accept="image/x-png,image/gif,image/jpeg" />
+                  <span (click)="fileInput.click()">
+                      <img  matTooltip="File Upload" width="25px" src="assets/images/icons/File_Upload.png" title="Upload"  height="25px" class="hand-cursor margin-left-4">
+                      <input #fileInput type="file" (change)="onFileInput($event)" style="display:none;" />  <!-- </span> Upload</p> --> 
+                    </span>
               </div>
+              <div *ngFor="let img of imageArray">
+                  <img src="{{img}}" width="30%">
+              </div>
+
             </div>
           </div>
           <!-- end fisrt section -->
@@ -24,48 +28,48 @@
               <div fxFlex="50">
                 <mat-form-field appearance="outline" fxFlex="90">
                   <mat-label>Project Name</mat-label>
-                  <input matInput placeholder="Project Name" required (keyup)="generateOrgCode()" [disabled]="disableFlag">
+                  <input matInput placeholder="Project Name" required (keyup)="generateProjectCode()" [disabled]="disableFlag" formControlName="name">
                 </mat-form-field>
               </div>
               <div fxFlex="50">
                 <mat-form-field appearance="outline" fxFlex="90">
                   <mat-label>Project Code</mat-label>
-                  <input matInput placeholder="Project Code" type="text" required readonly>
+                  <input matInput placeholder="Project Code" type="text" required readonly formControlName="projectCode">
                 </mat-form-field>
               </div>
             </div>
             <div fxLayouy="row" class="margin-10">
               <mat-form-field appearance="outline" fxFlex="100">
                 <mat-label>Description</mat-label>
-                <textarea matInput placeholder="Description" required></textarea>
+                <textarea matInput placeholder="Description" required formControlName="description"></textarea>
               </mat-form-field>
             </div>
           </div>
           <!-- end section -->
           <!-- third section -->
           <div fxFlex="30">
-            <div fxLayouy="row" class="margin-10">
+            <div fxLayouy="row" class="margin-10" formGroupName="projectDetails">
               <!-- start -->
               <div fxFlex="30" class="margin-10">
                 <mat-form-field appearance="outline" fxLayouy="row">
                   <mat-label>Location</mat-label>
-                  <input type="number" matInput placeholder="Location" min=0>
+                  <input type="number" matInput placeholder="Location" min=0 formControlName="location">
                 </mat-form-field>
                 <br />
                 <mat-form-field appearance="outline" fxLayouy="row">
                   <mat-label>City</mat-label>
-                  <input type="text" name="totalUnits" matInput>
+                  <input type="text" name="totalUnits" matInput formControlName="blocks">
                 </mat-form-field>
                 <br />
               </div>
               <div fxFlex="30" class="margin-10">
                 <mat-form-field appearance="outline" fxLayouy="row">
                   <mat-label>Total Units</mat-label>
-                  <input type="text" matInput [max]="5000000" name="totalUnits">
+                  <input type="text" matInput [max]="5000000" name="totalUnits" formControlName="totalUnit">
                 </mat-form-field>
                 <mat-form-field appearance="outline" fxLayouy="row">
                   <mat-label>Budget</mat-label>
-                  <input type="text" matInput>
+                  <input type="text" matInput formControlName="budget">
                 </mat-form-field>
               </div>
               <!-- start button sectiom -->
@@ -83,6 +87,14 @@
           </div>
           <!-- end third section -->
         </div>
+        <div fxLayout="row">
+            <button mat-raised-button>
+                    <span>Cancel</span>
+            </button>
+            <button type="submit" mat-raised-button (click)="onSubmit()">
+                    <span>submit</span>
+            </button>
+    </div>
       </form>
     </div>
     <!-- end main div -->

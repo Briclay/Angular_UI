@@ -64,6 +64,8 @@ import { ProjectDatesComponent } from './components/core/dashboard/projects/proj
 import { ProjectDetailsComponent } from './components/core/dashboard/projects/project-details/project-details.component';
 import { ProjectPhasesComponent } from './components/core/dashboard/projects/project-phases/project-phases.component';
 import { ProjectTeamsComponent } from './components/core/dashboard/projects/project-teams/project-teams.component';
+import { TopMenuComponent } from './components/shared/top-menu/top-menu.component';
+
 
 @NgModule({
   declarations: [
@@ -98,7 +100,8 @@ import { ProjectTeamsComponent } from './components/core/dashboard/projects/proj
     DesignDashboardComponent,
     FeaturePopupComponent,
     ForgotPasswordComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    TopMenuComponent
   ],
   imports: [
     BrowserModule,

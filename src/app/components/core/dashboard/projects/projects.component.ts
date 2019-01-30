@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ProjectService} from './project.service'
+import { MatDialog, MatTableDataSource } from '@angular/material';
 
 @Component({
   selector: 'app-projects',
@@ -8,43 +9,36 @@ import {ProjectService} from './project.service'
 })
 export class ProjectsComponent implements OnInit {
   projectDataOptions = [];
+  public dataSource: any;
   projects: any = {
     data: []
   };
+  orgId:string;
   projectLoading: boolean;
+  displayedColumns: string[] = ['name','projectCode','budget','toatlUnit'];
   constructor(private projectService: ProjectService) { 
-    this.projectDataOptions = [
-      {
-        title: 'Image', key: 'logoImageUrl', hideTitle: true, type: 'image'
-      },
-      {
-        title: 'User Name', type: 'list', list: [
-          { title: 'UserName', key: 'name', hideTitle: true, type: 'label' },
-          { title: 'Address', key: 'projectDetails.location', hideTitle: true, type: 'label' },
-          { title: 'Address', key: 'projectDetails.projectStatus', hideTitle: true, type: 'label' }
-        ]
-      },
-      { title: 'Project Code', key: 'projectCode' },
-      { title: 'Total Units', key: 'projectDetails.unitNumber' },
-      { title: 'Budget', key: 'projectDetails.unitNumber' }]
-
+    var org=JSON.parse(window.localStorage.authUserOrganisation);
+    this.orgId = org._id;
+    this.getProjects();
   }
 
   ngOnInit() {
    // this.getProjects();
   }
 
-  getProjects(org?) {
-    console.log('getProjects', org)
-    let orgID = org ? org.value._id : '5a5844cd734d1d61613f7066';
-    this.projectLoading = true;
-    this.projectService.getProjects('filter[_organisationId]=' + orgID).pipe().subscribe(res => {
+  getProjects() {
+    this.projectService.getProjects( this.orgId).pipe().subscribe(res => {
+      console.log('res',res);
       this.projectLoading = false;
       this.projects = res;
+      this.dataSource = new MatTableDataSource(res);
     }, (error: any) => {
         console.error('error', error);
         this.projectLoading = false;
       });
+  }
+  tabSwitch(index) {
+    this.getProjects();
   }
 
 }

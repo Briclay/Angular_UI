@@ -54,6 +54,7 @@ export class ProjectDatesComponent implements OnInit {
   }
   onSubmit() {
     console.log('this.dateForm', this.dateForm.value);
+    this.dialogRef.close(this.dateForm.value);
   }
   beginDateSelected() {
     console.log('beginDateSelected', this.dateForm.value.beginDate);

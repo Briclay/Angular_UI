@@ -1,5 +1,6 @@
+<app-top-menu></app-top-menu>
 <div class="project-container">
-  <mat-tab-group>
+  <mat-tab-group #tabGroup>
     <mat-tab label="Overview">
       <!-- <app-panel-header-filter (selectOrganizaion)="getProjects($event)"></app-panel-header-filter>
       <spinner diameter="80" *ngIf="projectLoading; else projectListTemplate"></spinner>
@@ -9,9 +10,50 @@
             [data]="projects" [isHistory]="true"></app-expansion-panel>
         </div>
       </ng-template> -->
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+        
+        <!-- name Column -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef width="500px"> name </th>
+          <td mat-cell *matCellDef="let element"> 
+            <div>
+                <span>
+                    <img src="{{element.imageUrls[0]}}" width="30%">
+                </span>
+              <span>
+                  {{element.name}} 
+              </span>
+              <span>
+                  {{element.description}} 
+              </span>
+            </div>
+            
+          </td>
+        </ng-container>
+        <!-- name type -->
+        <ng-container matColumnDef="projectCode">
+          <th mat-header-cell *matHeaderCellDef> projectCode </th>
+          <td mat-cell *matCellDef="let element">{{element.projectCode}}
+          </td>
+        </ng-container>
+         <!-- name budget -->
+         <ng-container matColumnDef="budget">
+            <th mat-header-cell *matHeaderCellDef width="500px"> budget </th>
+            <td mat-cell *matCellDef="let element"> {{element.budget}} </td>
+          </ng-container>
+           <!-- name Column -->
+         <ng-container matColumnDef="toatlUnit">
+            <th mat-header-cell *matHeaderCellDef width="500px"> toatlUnit </th>
+            <td mat-cell *matCellDef="let element">{{element.toatlUnit}} </td>
+          </ng-container>
+        <!-- created Column -->
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" (dblclick)="recursiveCall(row)"></tr>
+      </table>
     </mat-tab>
     <mat-tab label="New">
-       <app-project-create formType="create" (tabSwitch)="tabSwitch(index)"></app-project-create>
+      <app-project-create formType="create" (click)="tabSwitch(index)"></app-project-create>
     </mat-tab>
   </mat-tab-group>
 </div>

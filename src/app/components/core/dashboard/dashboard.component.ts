@@ -6,9 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-	constructor() { }
+	features : any;
+	constructor() { 
+	    this.features = JSON.parse(window.localStorage.getItem('_features'));
+	}
 
-	  ngOnInit() {
-	  }
+  	ngOnInit() {
+  	}
 
 }

@@ -72,6 +72,7 @@ export class ProjectDetailsComponent implements OnInit {
     this.detailsForm.value.carParkingArea =this.parkingArray;
     this.detailsForm.value.units = this.uniteArray;
     console.log(' finaly send to this.detailsForm',this.detailsForm.value);
+    this.dialogRef.close(this.detailsForm.value);
   }
   addUnits(){
     this.uniteArray.push(this.detailsForm.value.dummyUnits);
