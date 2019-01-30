@@ -1,54 +1,27 @@
 <div class="side-nav">
   <ul class="side-nav-list">
-    <!-- <li class="side-nav-div">
-      <a routerLink="/dashboard/home" routerLinkActive="active">
-        <img class="side-nav-icon-size" src="assets/images/icons/Dashboard.png" >  
-      </a>
-    </li> -->
     <li>
       <a routerLink="/dashboard/design-dashboard" routerLinkActive="active">
         <img class="side-nav-icon-size" src="assets/images/icons/Dashboard.png" >
         Dashboard
       </a>
     </li>
-    <li class="side-nav-div">
-      <a routerLink="/dashboard/organisation" routerLinkActive="active">
-        <img class="side-nav-icon-size" src="assets/images/icons/Organisation_Color.png" >
-        Organisation
-      </a>
-    </li>
-    <li class="side-nav-div">
-      <a routerLink="/dashboard/role" routerLinkActive="active">
-        <img class="side-nav-icon-size" src="assets/images/icons/Role.png" >
-        Roles
-      </a>
-    </li>
-    <li class="side-nav-div">
-      <a routerLink="/dashboard/department" routerLinkActive="active">
-        <img class="side-nav-icon-size" src="assets/images/icons/Department.png">
-        Department
-      </a>
-    </li>
-    <!-- <li class="side-nav-div">
-      <a routerLink="/dashboard/settings" routerLinkActive="active">
-        <img class="side-nav-icon-size" src="assets/images/icons/Settings_Briclay.png" >
-        Settings
+    <div *ngIf="!coreViewOnly" >
+      <div *ngFor="let feature of allfeatures">
+        <li class="side-nav-div">
+          <a routerLink="/dashboard{{feature.baseRoute}}" routerLinkActive="active">
+            <img class="side-nav-icon-size" src="assets/images/icons{{feature.baseRoute}}.png" >
+            <p>{{feature.name}}</p>
+          </a>
+        </li>
+      </div>
+    </div>
+  </ul>
+  <!-- <li class="side-nav-div">
+      <a routerLink="/dashboard/home" routerLinkActive="active">
+        <img class="side-nav-icon-size" src="assets/images/icons/Dashboard.png" >  
       </a>
     </li> -->
-    <li class="side-nav-div">
-      <a routerLink="/dashboard/user" routerLinkActive="active" >
-        <img class="side-nav-icon-size" src="assets/images/icons/Users.png" >
-        <p>User</p>
-      </a>
-    </li>
-    <li class="side-nav-div">
-      <a routerLink="/dashboard/projects" routerLinkActive="active">
-        <!-- <mat-icon>view_comfy</mat-icon><br/> -->
-        <img class="side-nav-icon-size" src="assets/images/icons/projects.png" >        
-        Projects
-      </a>
-    </li>
-  </ul>
 
   <div class="logo_div">
     <img class="logo" src="assets/images/logos/Briclay.png" >
