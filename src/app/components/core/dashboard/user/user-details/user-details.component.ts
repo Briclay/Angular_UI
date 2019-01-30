@@ -57,8 +57,8 @@ export class UserDetailsComponent implements OnInit {
   loadRoute(params: any) {
 		if('orgID' in params) {
 			this.orgID = params['orgID'];
-      this.getRoles();
       this.getDepartments();
+      this.getRoles();
       this.userDetailsForm = this.createFormGroup();
       this.assignValuesToForm();
 		}

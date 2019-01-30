@@ -73,18 +73,18 @@
           </div>
           <div class="user-details-form-list">
             <mat-form-field appearance="outline">
-              <mat-label>Role</mat-label>
-              <mat-select placeholder="Role" formControlName="_roleId">
-                <mat-option *ngFor="let role of roles" [value]="role._id">
-                  {{role.name}}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-            <mat-form-field appearance="outline">
               <mat-label>Departments</mat-label>
               <mat-select placeholder="Departments" formControlName="_departmentId">
                 <mat-option *ngFor="let department of departments" [value]="department._id">
                   {{department.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Role</mat-label>
+              <mat-select [disabled]="!userDetailsForm.value._departmentId" placeholder="Role" formControlName="_roleId">
+                <mat-option *ngFor="let role of roles" [value]="role._id">
+                  {{role.name}}
                 </mat-option>
               </mat-select>
             </mat-form-field>
