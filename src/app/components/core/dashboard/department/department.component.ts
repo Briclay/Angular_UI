@@ -91,8 +91,8 @@ export class DepartmentComponent implements OnInit {
 			});
 
 			dialogRef.afterClosed().subscribe(result => {
-        // TODO closed event
-    });
+        	// TODO closed event
+    		});
 		});
 	}
 

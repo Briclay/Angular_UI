@@ -3,6 +3,7 @@ import { OrganizationService } from '../../../../services/organization/organizat
 import { OrganizationData, TableOptions } from '../../../../interfaces/interfaces';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material';
 import { HistoryPopupComponent } from '../../../../components/shared/history-popup/history-popup.component'
+import {merge as observableMerge, Subject} from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
 import {takeUntil} from 'rxjs/operators';
 
@@ -14,22 +15,46 @@ import {takeUntil} from 'rxjs/operators';
 
 export class OrganisationComponent implements OnInit {
   @ViewChild('tabGroup') tabGroup;
+
   organisations: any;
   organisationDataOptions = [];
   historyData: any;
   selectedOrgId: string;
   orgListSpinner: boolean;
+  private unsubscribe: Subject<any> = new Subject();
 
   constructor(
     private organisationService: OrganizationService,
-    public dialog: MatDialog) { }
+    public dialog: MatDialog,
+    private router: Router,
+    private route: ActivatedRoute) { }
+
   ngOnInit() {
+    observableMerge(this.route.params, this.route.queryParams).pipe(
+        takeUntil(this.unsubscribe))
+        .subscribe((params) => this.loadRoute(params));
+
+  }
+
+  public ngOnDestroy(): void {
+    this.unsubscribe.next();
+    this.unsubscribe.complete();
+  }
+
+  loadRoute(params: any) {
+    if('orgID' in params) {
+      this.selectedOrgId = params['orgID'];
+      this.getOrganisationData();
+    }
   }
 
   organizationChanged(org) {
-    this.selectedOrgId = org._id;
+    this.router.navigate([], {queryParams: {orgID: org.value ? org.value._id : org._id} , queryParamsHandling: 'merge'});
+  }
+
+  getOrganisationData() {
     this.orgListSpinner = true;
-    this.organisationService.getAll(org._id).pipe().subscribe(res => {
+    this.organisationService.getAll(this.selectedOrgId).pipe().subscribe(res => {
       this.organisations = res;
       this.orgListSpinner = false;
       //this.organisations.forEach((list) => list._features = (list._features && list._features.length));
@@ -74,5 +99,6 @@ export class OrganisationComponent implements OnInit {
 
   tabSwitch(tabReq) {
     this.tabGroup.selectedIndex = tabReq.index;
+    this.getOrganisationData()
   }
 }

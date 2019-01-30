@@ -28,17 +28,17 @@ const routes: Routes = [
         }
       },
       {
-        path: 'organisation', component: OrganisationComponent, data: {
+        path: 'organisations', component: OrganisationComponent, data: {
           breadcrumb: 'Organisation'
         }
       },
       {
-        path: 'role', component: RoleComponent, data: {
+        path: 'roles', component: RoleComponent, data: {
           breadcrumb: 'Role'
         }
       },
       {
-        path: 'department', component: DepartmentComponent, data: {
+        path: 'departments', component: DepartmentComponent, data: {
           breadcrumb: 'department'
         }
       },
@@ -65,7 +65,7 @@ const routes: Routes = [
       },
 
       {
-        path: 'user', component: UserComponent, data: {
+        path: 'users', component: UserComponent, data: {
           breadcrumb: 'Users'
         }
       },

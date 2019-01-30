@@ -43,11 +43,11 @@ export class OrganizationService {
         return this.apiService.get(url).pipe(map(res => res));
     }
 
-	public getAll(id?): Observable<any> {
-        let url = `${environmentService.briclayCore}/organisations?select=*`;
+	public getAll(id): Observable<any> {
+        let url = `${environmentService.briclayCore}/organisations?select=*&filter[_id]=${id}`;
         return this.apiService.get(url).pipe(map(res => res));
     }
-    
+
     public getOne(id): Observable<any> {
         let url =  `${environmentService.briclayCore}/organisations/${id}`;
         return this.apiService.get(url, id).pipe(map(res => res));
