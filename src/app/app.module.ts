@@ -60,6 +60,7 @@ import { ForgotPasswordComponent } from './components/core/forgot-password/forgo
 import { ConfirmDialogComponent } from './components/shared/confirm-dialog/confirm-dialog.component';
 
 import { LocalStorageSchema } from './schemas/local-storage.schema';
+import { TopMenuComponent } from './components/shared/top-menu/top-menu.component';
 
 
 @NgModule({
@@ -95,7 +96,8 @@ import { LocalStorageSchema } from './schemas/local-storage.schema';
     DesignDashboardComponent,
     FeaturePopupComponent,
     ForgotPasswordComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    TopMenuComponent
   ],
   imports: [
     BrowserModule,

@@ -27,6 +27,7 @@ export class FeaturePopupComponent implements OnInit {
 
   saveFeature() {
     this.dialogRef.close(this.allFeatures)
+    console.log(this.allFeatures, 'this.allFeatures')
   }
 
 

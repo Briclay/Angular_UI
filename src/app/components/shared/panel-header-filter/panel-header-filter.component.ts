@@ -26,7 +26,7 @@ export class PanelHeaderFilterComponent implements OnInit {
         this.organizations = res;
         this.selectOrganizaion.emit(this.selectedOrg)
       }, (error: any) => {
-        console.error('error', error);
+        console.log('error', error);
       })
   }
 

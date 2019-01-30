@@ -3,6 +3,8 @@ import { OrganizationService } from '../../../../services/organization/organizat
 import { OrganizationData, TableOptions } from '../../../../interfaces/interfaces';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material';
 import { HistoryPopupComponent } from '../../../../components/shared/history-popup/history-popup.component'
+import { Router, ActivatedRoute } from '@angular/router';
+import {takeUntil} from 'rxjs/operators';
 
 @Component({
   selector: 'app-organisation',
@@ -30,7 +32,7 @@ export class OrganisationComponent implements OnInit {
     this.organisationService.getAll(org._id).pipe().subscribe(res => {
       this.organisations = res;
       this.orgListSpinner = false;
-      this.organisations.forEach((list) => list.features = (list.access && list.access.length));
+      //this.organisations.forEach((list) => list._features = (list._features && list._features.length));
       this.organisationDataOptions = [
         {
           title: 'name', key: 'name', hideTitle: true, type: 'label'
@@ -70,7 +72,7 @@ export class OrganisationComponent implements OnInit {
     });
   }
 
-  tabSwitch(index) {
-		this.tabGroup.selectedIndex = index;
-	}
+  tabSwitch(tabReq) {
+    this.tabGroup.selectedIndex = tabReq.index;
+  }
 }

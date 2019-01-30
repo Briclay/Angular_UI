@@ -38,10 +38,16 @@
           <div class="user-details-form-list">
             <div fxLayout=row>
               <div style="margin-left: 30px;margin-bottom: 50px;">Total Features</div>
-              <div style="margin-left: 30px;margin-bottom: 50px;">{{allFeatureCount}}</div>
+               <div style="margin-left: 30px;margin-bottom: 50px;">{{allFeatureCount}}</div>
+                <!-- <div>
+                <mat-form-field class="margin_right_25" appearance="outline">
+                  <mat-label>Total Features</mat-label>
+                  <input matInput formControlName="_features" readonly>
+                </mat-form-field>
+              </div>   -->          
             </div>
             <div>
-              <button (click)="openDialogFeature()" class="margin-left-4" mat-raised-button class="feature_btn" 
+              <button (click)="getFeatures()" class="margin-left-4" mat-raised-button class="feature_btn" 
               >Features</button>
             </div>
           </div>

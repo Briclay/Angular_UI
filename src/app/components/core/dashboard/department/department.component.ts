@@ -3,6 +3,9 @@ import { DepartmentService } from '../../../../services/department/department.se
 import { DepartmentData, TableOptions } from '../../../../interfaces/interfaces';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material';
 import { HistoryPopupComponent } from '../../../../components/shared/history-popup/history-popup.component'
+import {merge as observableMerge, Subject} from 'rxjs';
+import { Router, ActivatedRoute } from '@angular/router';
+import {takeUntil} from 'rxjs/operators';
 
 @Component({
 	selector: 'app-department',
@@ -10,32 +13,59 @@ import { HistoryPopupComponent } from '../../../../components/shared/history-pop
 	styleUrls: ['./department.component.scss']
 })
 export class DepartmentComponent implements OnInit {
-	
+	@ViewChild('tabGroup') tabGroup;
+
 	departments: any;
 	departmentDataOptions = [];
 	historyData: any;
 	selectedOrgId: string;
 	depListSpinner: boolean;
+    featuresCount : any;
+	private unsubscribe: Subject<any> = new Subject();
 
 	constructor(private departmentService: DepartmentService,
-    public dialog: MatDialog) { }
+    public dialog: MatDialog,
+    private router: Router,
+    	private route: ActivatedRoute) { }
 
 	ngOnInit() {
+		observableMerge(this.route.params, this.route.queryParams).pipe(
+      	takeUntil(this.unsubscribe))
+      	.subscribe((params) => this.loadRoute(params));
+
+	}
+
+	public ngOnDestroy(): void {
+		this.unsubscribe.next();
+		this.unsubscribe.complete();
+	}
+
+	loadRoute(params: any) {
+		if('orgID' in params) {
+			this.selectedOrgId = params['orgID'];
+			this.getDepartmentData();
+		}
 	}
 
 	organizationChanged(org) {
-		this.selectedOrgId = org._id;
+		this.router.navigate([], {queryParams: {orgID: org.value ? org.value._id : org._id} , queryParamsHandling: 'merge'});
+	}
+
+	getDepartmentData() {
 		this.depListSpinner = true;
-		this.departmentService.getAll(org._id).pipe().subscribe(res => {
+		this.departmentService.getAll(this.selectedOrgId).pipe().subscribe(res => {
 			this.departments = res;
 			this.depListSpinner = false;
-			this.departments.forEach((list) => list.features = (list.access && list.access.length));
+			var flength = 
+			flength = this.departments.forEach((list) => {
+				return (list._features && list._features.length)
+			});
 			this.departmentDataOptions = [
 				{
 					title: 'name', key: 'name', hideTitle: true, type: 'label'
 				},
 				{
-					title: 'Features', key: 'features'
+					title: 'Features', key: 'flength'
 				}
 			]
 		}, (error: any) => {
@@ -64,5 +94,19 @@ export class DepartmentComponent implements OnInit {
         // TODO closed event
     });
 		});
+	}
+
+	getDepartments() {
+		this.departmentService.getDepartmentByOrg(`filter[_organisationId]=${this.selectedOrgId}` )
+		.pipe().subscribe(res => {
+				console.log('res', res)
+			}, (error: any) => {
+				console.error('error', error);
+			});
+	}
+
+	tabSwitch(tabReq) {
+		this.tabGroup.selectedIndex = tabReq.index;
+		this.getDepartmentData()
 	}
 }

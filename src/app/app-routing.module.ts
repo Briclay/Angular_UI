@@ -94,7 +94,8 @@ const routes: Routes = [
           breadcrumb: 'Users'
         }
       },
-      { path: '**', redirectTo: 'user', pathMatch: 'full' }
+      /*{ path: '**', redirectTo: 'user', pathMatch: 'full'}*/
+      {  path: '**', redirectTo: 'design-dashboard', pathMatch: 'full'  }
     ]
   },
   { path: '**', redirectTo: 'login', pathMatch: 'full' }

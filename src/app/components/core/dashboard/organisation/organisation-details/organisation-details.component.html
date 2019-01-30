@@ -24,22 +24,21 @@
             <div formGroupName="subscription">
               <mat-form-field appearance="outline">
                 <mat-label>Plan</mat-label>
-                <mat-select placeholder="Plan">
-                  <mat-option *ngFor="let plan of plans" [value]="plan">
+                <mat-select placeholder="Plan" [(value)]="selected" >
+                  <mat-option *ngFor="let plan of plans"  [value]="plan">
                     {{plan}}
                   </mat-option>
                 </mat-select>
               </mat-form-field>
               <mat-form-field appearance="outline" style="width: 200px;">
                 <mat-label>Valid till</mat-label>
-<!--                 <input matInput formControlName="validTill">
- -->                <input matInput [matDatepicker]="picker1" placeholder="" formControlName="validTill">
+               <input matInput [matDatepicker]="picker1" placeholder="" formControlName="validTill">
                   <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                   <mat-datepicker #picker1></mat-datepicker>
               </mat-form-field>
             </div>
             <div>
-              <button (click)="openDialogFeature()" class="margin-left-4" mat-raised-button class="feature_btn" 
+              <button (click)="getFeatures()" class="margin-left-4" mat-raised-button class="feature_btn" 
               >Features</button>
             </div>
           </div>

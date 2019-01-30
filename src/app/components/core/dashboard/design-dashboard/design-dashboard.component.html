@@ -3,20 +3,24 @@
     <div fxLayout=row >
       <div fxLayout="row" >
         <div>
-          <div class="dottedBorder" >
-            <img class="userImage" src="/assets/images/backgrounds/autumn.jpg">
-            <div align="center" class="greenDot"></div>
-          </div>
-          <div fxLayout="column" style="text-align: center;">
+            <div class="dottedBorder" >
+              <img src="{{filePath}}" class="userImage" (click)="fileInput.click()"/>
+              <input #fileInput type="file" (change)="onFileInput($event)"  style="display:none;" />
+              <!-- <div align="center" class="greenDot"></div> -->
+            </div>
+         <!--  <div fxLayout="column" style="text-align: center;">
             <span class="text-color">Vinay R</span>
             <span class="text-color-light ">QMS</span>
+          </div> -->
+           <div fxLayout="column" style="text-align: center;">
+            <span class="text-color">Name</span>
           </div>
         </div>
       </div>
       <div fxFlex=88 fxLayout=column>
         <div fxLayout="row" >
           <mat-card class="header-shadow" style="display: inline;flex :1;height: 15px;">
-            <div class="pull-left panel-left" style="margin-top: -14px;">
+            <!-- <div class="pull-left panel-left" style="margin-top: -14px;">
               <mat-form-field appearance="outline" class="fisrtFrom">
                 <mat-label>Organization</mat-label>
                 <mat-select placeholder="Select Organization">
@@ -25,15 +29,19 @@
                   </mat-option>
                 </mat-select>
               </mat-form-field>
-            </div>
-            <div class="pull-right" fxLayout=row style="place-content: space-around;">
+            </div> -->
+            <div fxLayout=row style="place-content: space-around;">
               <div fxLayout=row style="place-content: space-around;">
                 <img style="height: 20px;width: 20px;" src="/assets/images/icons/projects_Active.png">
-                <div class="tab-btn" style="margin-left:10px;" > Projects</div>
+                <a routerLink="/dashboard/projects" style="text-decoration: none;">
+                  <div class="tab-btn" style="margin-left:10px;" > Projects</div>
+                </a>
               </div>
               <div fxLayout=row style="place-content: space-around;">
                <img style="height: 30px;width: 30px;margin-top: -5px;" src="/assets/images/icons/File_Manager_Active.png">
-               <div class="tab-btn" >File Manager</div>
+                <a routerLink="/dashboard/file-manager" style="text-decoration: none;">
+                  <div class="tab-btn" >File Manager</div>
+                </a>
              </div>
              <div fxLayout=row style="place-content: space-around;">
               <img style="height: 20px;width: 20px;" src="/assets/images/icons/Work_Request _active.png">
@@ -42,7 +50,7 @@
           </div>
         </mat-card> 
       </div>
-      <div fxLayout=row>
+      <!-- <div fxLayout=row>
         <div class="content-head" fxLayout=column style="min-width: -webkit-fill-available;">
           <div class="first-card">
             <mat-card class="matCard" fxFlex=20 fxLayout=column *ngFor="let project of projects">
@@ -58,11 +66,16 @@
             </mat-card>
           </div> 
         </div>
-      </div>
+      </div> -->
+      <div fxLayout=row>
+        <div class="content-head" fxLayout=column style="min-width: -webkit-fill-available;">
+          <div class="font_12_light" style="text-align: center;">Coming soon..</div>
+        </div>
+      </div> 
     </div>
   </div>
 
-  <div fxLayout=row>
+  <!-- <div fxLayout=row>
     <mat-card>
       <div fxLayout=row >
         <div fxFlex=20 style="position:relative; ">
@@ -168,25 +181,25 @@
         </div>
       </div>
     </mat-card>
-  <mat-card fxFlex=40 class="matCardPI">
-    <div class="font_17" style="text-align: center">Project Consultants</div>
-    <div fxLayout=row >
-      <div fxLayout=column style="flex: 1;">
-          <div fxLayout=row style="place-content: space-around;"> 
-            <div class="font_12" ></div>
-            <div class="font_12" style="margin-left: 5px;" >Internal</div>
-            <div class="font_12" >External</div>
-          </div>
-          <div *ngFor="let pc of projectConsultances">
-            <mat-card fxLayout=row class="matCard1" style="place-content: space-around;">
-              <div class="font_12_light" >{{pc.name}}</div>
-              <div class="font_12_light" >{{pc.internaluser}}</div>
-              <div class="font_12_light" >{{pc.externaluser}}</div>
-            </mat-card>
-          </div>
+    <mat-card fxFlex=40 class="matCardPI">
+      <div class="font_17" style="text-align: center">Project Consultants</div>
+      <div fxLayout=row >
+        <div fxLayout=column style="flex: 1;">
+            <div fxLayout=row style="place-content: space-around;"> 
+              <div class="font_12" ></div>
+              <div class="font_12" style="margin-left: 5px;" >Internal</div>
+              <div class="font_12" >External</div>
+            </div>
+            <div *ngFor="let pc of projectConsultances">
+              <mat-card fxLayout=row class="matCard1" style="place-content: space-around;">
+                <div class="font_12_light" >{{pc.name}}</div>
+                <div class="font_12_light" >{{pc.internaluser}}</div>
+                <div class="font_12_light" >{{pc.externaluser}}</div>
+              </mat-card>
+            </div>
+        </div>
       </div>
-    </div>
-  </mat-card>
-</div>
+    </mat-card>
+  </div> -->
 </div>
 </div>
