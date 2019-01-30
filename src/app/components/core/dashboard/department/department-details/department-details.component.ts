@@ -56,7 +56,7 @@ export class DepartmentDetailsComponent implements OnInit {
   {
     //this.userAuth = this.auth.get();
     this.userAuth = JSON.parse(window.localStorage.getItem('authUserOrganisation'));
-    this._organisationId = this.userAuth._id;
+    this._organisationId = this.route.queryParams._value.orgID;
     this.deptFormErrors = {
       name: {},
       description: {},
@@ -213,7 +213,7 @@ export class DepartmentDetailsComponent implements OnInit {
   } 
   else {
     delete this.departmentDetailsForm.value._id;
-    this.departmentDetailsForm.value._organisationId  = this._organisationId;
+    this.departmentDetailsForm.value._organisationId = this.route.queryParams._value.orgID;    
     this.DeptService.save(this.departmentDetailsForm.value)
     .pipe().subscribe(response => {
       this.deptFormSubmitted = false;
