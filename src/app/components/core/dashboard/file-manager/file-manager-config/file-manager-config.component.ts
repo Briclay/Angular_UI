@@ -5,6 +5,7 @@ import { OrganisationService } from '../../organisation/organisation.service';
 import { FileManagerService } from "../file-manager.service";
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 
 import * as _ from 'lodash';
 
@@ -33,6 +34,8 @@ export class FileManagerConfigComponent implements OnInit {
     logoImageUrl: "assets/images/building-2.jpg",
     name: 'list'
   };
+  form: FormGroup;
+  fileForm: FormGroup;
   public dataSource: any;
   folderData: any;
   subFolderData: any;
@@ -61,7 +64,7 @@ export class FileManagerConfigComponent implements OnInit {
   deptConfigData: any;
   iconArray = [];
   tableFlag = false;
-  displayedColumns: string[] = ['type', 'name', 'createdAt', 'version', 'logs', 'email', 'share'];
+  displayedColumns: string[] = ['type', 'name', 'createdAt', 'version', 'logs', 'email', 'share', 'download'];
   constructor(
     private projectService: ProjectService,
     private fileManagerService: FileManagerService,
@@ -70,30 +73,44 @@ export class FileManagerConfigComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private location: PlatformLocation,
-    private http: HttpClient
+    private http: HttpClient,
+    private formBuilder: FormBuilder
   ) {
     this.route.params.subscribe(params => {
       this.orgId = params['orgId'];
       this.deptId = params['deptId'];
       this.fileId = params['fileId'];
     });
+    this.fileForm = this.formBuilder.group({
+      formProject: ''
+    });
+    if (window.localStorage.files_project) {
+      this.selectedProjectData = JSON.parse(window.localStorage.files_project);
+    }
+    if (window.localStorage.files_iconArray) {
+      this.iconArray = JSON.parse(window.localStorage.files_iconArray);
+    }
     //restric browser back button
     location.onPopState(() => {
       window.history.forward();
     });
   }
-
+  ngOnInit() {
+    this.currentUrl = this.router.url;
+    this.localStack = JSON.parse(window.localStorage.getItem('stack'));
+    this.fullPathDisplay = JSON.parse(window.localStorage.getItem('stack'));
+    this.folderConfigData();
+    this.getProjectListinIt();
+    this.getSingleFolder();
+  }
   folderConfigData() {
     var tempValue = this.localStack.pop();
-    console.log('tempValue' + JSON.stringify(tempValue));
     if (tempValue) {
       this.currentLevel = tempValue.top;
       this.previousFolderName = tempValue.name;
       var tempData = JSON.parse(window.localStorage.getItem('FOLDER_PROCESS_FLOW')).configValues;
-     console.log('tempData',tempData);
       if (tempData.length > 0) {
         this.deptConfigData = JSON.parse(window.localStorage.getItem('FOLDER_CONFIG_DETAILS'));
-        console.log('deptConfigData',this.deptConfigData);
         if (this.deptConfigData) {
           this.populateConfigData(this.deptConfigData);
         } else {
@@ -102,9 +119,8 @@ export class FileManagerConfigComponent implements OnInit {
           if (pos != -1) {
             window.localStorage.FOLDER_CONFIG_DETAILS = JSON.stringify(tempData[pos]);
             this.deptConfigData = tempData[pos];
-            console.log('this.deptConfigData' + JSON.stringify(this.deptConfigData));
             this.populateConfigData(tempData[pos]);
-          }else{
+          } else {
             this.tableFlag = true;
           }
 
@@ -118,11 +134,10 @@ export class FileManagerConfigComponent implements OnInit {
     if (tempData.details.length > 0) {
       //fetch project key and display project drop down
       var pPos = _.findIndex(tempData.details, function (o) { return o.level == level + 1; });
-      console.log('pPos'+pPos);
       if (pPos != -1) {
         var details = tempData.details[pPos];
-        console.log('details',details);
         if ('project' === details.name) {
+          window.localStorage.projectLevel = details.level;
           if (_.isArray(details.folderName) && details.folderName.length > 0) {
             var getPreFolderPos = _.indexOf(details.folderName, this.previousFolderName);
             if (getPreFolderPos != -1) {
@@ -146,15 +161,6 @@ export class FileManagerConfigComponent implements OnInit {
       }
     }
   }
-  ngOnInit() {
-    this.currentUrl = this.router.url;
-    this.localStack = JSON.parse(window.localStorage.getItem('stack'));
-    this.fullPathDisplay = JSON.parse(window.localStorage.getItem('stack'));
-    this.folderConfigData();
-    this.getProjectListinIt();
-    this.getSingleFolder();
-  }
-
   getOrganiztions() {
     this.organisationService.getOrganization()
       .pipe().subscribe(res => {
@@ -163,10 +169,16 @@ export class FileManagerConfigComponent implements OnInit {
         console.error('error', error);
       })
   }
-
-  getProjectListinIt(orgId?) {
+  compareObjects(o1: any, o2: any): boolean {
+    return o1.name === o2.name && o1.id === o2.id;
+  }
+  getProjectListinIt() {
     this.projectService.getProjects(this.orgId)
       .pipe().subscribe(res => {
+        var proj = JSON.parse(window.localStorage.files_project);
+        if (proj) {
+          this.fileForm.get('formProject').setValue(proj);
+        }
         this.projectlist = res;
       }, (error: any) => {
         console.error('error', error);
@@ -180,6 +192,7 @@ export class FileManagerConfigComponent implements OnInit {
   */
   getSingleProject(list) {
     this.selectedProjectData = list.value;
+    window.localStorage.files_project = JSON.stringify(this.selectedProjectData);
     var body = {
       name: this.selectedProjectData.name,
       _organisationId: this.orgId,
@@ -244,6 +257,7 @@ export class FileManagerConfigComponent implements OnInit {
     this.fileManagerService.getSingleFile(id)
       .pipe().subscribe(res => {
         this.iconArray = res;
+        window.localStorage.files_iconArray = JSON.stringify(this.iconArray);
       }, (error: any) => {
         console.error('error', error);
       })
@@ -312,7 +326,6 @@ export class FileManagerConfigComponent implements OnInit {
       .pipe().subscribe(res => {
         this.filesData = res;
         this.fileListLoading = false;
-
       }, (error: any) => {
         console.error('error', error);
         this.fileListLoading = false;
@@ -332,16 +345,16 @@ export class FileManagerConfigComponent implements OnInit {
       if (fileExt.toLowerCase() == 'pdf')
         return "assets/fileManager/pdf.png"
       else
-       if (fileExt.toLowerCase() == "jpg" || fileExt.toLowerCase() == "jpeg")
+        if (fileExt.toLowerCase() == "jpg" || fileExt.toLowerCase() == "jpeg")
           return "assets/fileManager/jpg.png"
-        else      
-        if (fileExt.toLowerCase() == "png")
-          return "assets/fileManager/png.png"
-        else  
-        if (fileExt.toLowerCase() == "dwg")
-          return "assets/fileManager/dwg.png"             
         else
-          return "assets/fileManager/file.png"
+          if (fileExt.toLowerCase() == "png")
+            return "assets/fileManager/png.png"
+          else
+            if (fileExt.toLowerCase() == "dwg")
+              return "assets/fileManager/dwg.png"
+            else
+              return "assets/fileManager/file.png"
     }
   }
   recursiveCall(data) {
@@ -392,12 +405,25 @@ export class FileManagerConfigComponent implements OnInit {
   goBackButton() {
     if (!_.isEmpty(this.fullPathDisplay)) {
       let temp = this.fullPathDisplay.pop();
+      if (window.localStorage.projectLevel) {
+        if (window.localStorage.projectLevel == temp.top) {
+          // window.localStorage.files_iconArray = JSON.stringify('');
+          //window.localStorage.files_project = JSON.stringify('');
+        }
+      }
       const path = temp.path;
       window.localStorage.stack = JSON.stringify(this.fullPathDisplay);
       this.router.navigate([path]).then(() => {
         this.ngOnInit();
       });
     }
+  }
+  backHomePage() {
+    var homeBack = JSON.parse(window.localStorage.getItem('stack'));
+    const path = homeBack[0].path;
+    this.router.navigate([path]).then(() => {
+      this.ngOnInit();
+    });
   }
   //this method for route navigation 
   onSelectPath(path, top) {
@@ -423,7 +449,6 @@ export class FileManagerConfigComponent implements OnInit {
       reader.readAsDataURL(file);
       let fileExt = file.name.split(".");
       let fileName = (new Date().getTime()) + "." + fileExt[fileExt.length - 1];
-
       this.fileManagerService.getS3Url('file-name=' + fileName + '&file-type=' + file.type + '&_organisationId=' + this.orgId)
         .pipe().subscribe(res => {
           let json = {
@@ -450,7 +475,7 @@ export class FileManagerConfigComponent implements OnInit {
     this.http.put(response.signedRequest, file, {
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
     }).subscribe((awsRes: any) => {
-      body.path = 'https://s3.ap-south-1.amazonaws.com/' + this.orgId + '/' + response.savedFileName;
+      body.path = 'https://s3.ap-south-1.amazonaws.com/' + this.orgId + '/' + body.savedFileName;
       //this.getAssingedUser(json);
       this.onSaveFile(body)
     }, (error: any) => {
@@ -495,6 +520,14 @@ export class FileManagerConfigComponent implements OnInit {
   getLogs(data: any) {
     if (data.type == 'file') {
       this.fileDetails = data;
+    }
+  }
+  /*downlaod file */
+  downloadFile(row) {
+    if (row.type.toLowerCase() !== 'folder') {
+      window.open(row.path);
+    } else {
+      console.log('row', row);
     }
   }
   //contract departmetn project increament
