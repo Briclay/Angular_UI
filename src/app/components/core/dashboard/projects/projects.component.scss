@@ -1,7 +1,14 @@
-::ng-deep .project-container {
-.expansion-container {
-mat-expansion-panel-header {
-min-height: 55px;
-}
-}
-}
+
+
+			.project-image-name {
+					width: 75px;
+					height: 50px;
+					border-radius: 15px;	
+			}
+
+			.project-list-name {
+			font: 'Montserrat', sans-serif;
+								min-height: 50px;
+								width: 50px;
+
+			}
