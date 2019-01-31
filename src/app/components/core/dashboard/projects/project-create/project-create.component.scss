@@ -1,7 +1,7 @@
 .project-details-container {
     .upload-photo {
         border: 1px solid #999;
-        border-radius: 3px;
+        border-radius: 15px;
         height: 100px;
         margin: 15px;
         text-align: center;
@@ -15,6 +15,10 @@
         }
         .list{
             flex: 1;
+        border-radius: 10px;
+        height: 75px;
+        margin: 10px;            
+
         }
     }
     .img-upload {

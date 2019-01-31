@@ -2,29 +2,29 @@
 <div class="project-container">
   <mat-tab-group #tabGroup>
     <mat-tab label="Overview">
-      <!-- <app-panel-header-filter (selectOrganizaion)="getProjects($event)"></app-panel-header-filter>
+      <app-panel-header-filter (selectOrganizaion)="getProjects($event)"></app-panel-header-filter>
       <spinner diameter="80" *ngIf="projectLoading; else projectListTemplate"></spinner>
-      <ng-template #projectListTemplate>
+<!--       <ng-template #projectListTemplate>
         <div fxLayout="row">
           <app-expansion-panel [expansionPanelOptions]="projectDataOptions" selectorComponent="app-project-details"
             [data]="projects" [isHistory]="true"></app-expansion-panel>
         </div>
       </ng-template> -->
-      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
-        
+
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
         <!-- name Column -->
         <ng-container matColumnDef="name">
-          <th mat-header-cell *matHeaderCellDef width="500px"> name </th>
-          <td mat-cell *matCellDef="let element"> 
-            <div>
+          <th mat-header-cell *matHeaderCellDef  width="700px"> name </th>
+          <td mat-cell *matCellDef="let element" class="tableHeight"> 
+            <div class="project-list-name">
                 <span>
-                    <img src="{{element.imageUrls[0]}}" width="30%">
+                    <img src="{{element.imageUrls[0]}}" class="projectImage">
                 </span>
-              <span>
+              <span class="project-list-name">
                   {{element.name}} 
               </span>
-              <span>
+              <span class="project-list-name">
                   {{element.description}} 
               </span>
             </div>

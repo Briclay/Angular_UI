@@ -30,6 +30,7 @@ export class ProjectCreateComponent implements OnInit {
   dates: any;
   team: any;
   details: any;
+  projectType = ['RESIDENTIAL', 'COMMERCIAL', 'MIXED DEVELOPMENT', 'VILLA PROJECTS'];  
   constructor(
     private dialog: MatDialog,
     private formBuilder: FormBuilder,

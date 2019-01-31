@@ -10,13 +10,13 @@
             New Project
             <div class="upload-photo">
               <div class="list">
-                  <span (click)="fileInput.click()">
-                      <img  matTooltip="File Upload" width="25px" src="assets/images/icons/File_Upload.png" title="Upload"  height="25px" class="hand-cursor margin-left-4">
-                      <input #fileInput type="file" (change)="onFileInput($event)" style="display:none;" />  <!-- </span> Upload</p> --> 
-                    </span>
+                <span (click)="fileInput.click()">
+                  <img  matTooltip="File Upload" width="75px" src="assets/images/icons/Camera.png" title="Upload"  class="hand-cursor margin-left-4">
+                  <input #fileInput type="file" (change)="onFileInput($event)" style="display:none;" />  <!-- </span> Upload</p> --> 
+                </span>
               </div>
               <div *ngFor="let img of imageArray">
-                  <img src="{{img}}" width="30%">
+                <img src="{{img}}" width="100%">
               </div>
 
             </div>
@@ -44,60 +44,70 @@
                 <textarea matInput placeholder="Description" required formControlName="description"></textarea>
               </mat-form-field>
             </div>
-          </div>
-          <!-- end section -->
-          <!-- third section -->
-          <div fxFlex="30">
-            <div fxLayouy="row" class="margin-10" formGroupName="projectDetails">
-              <!-- start -->
-              <div fxFlex="30" class="margin-10">
-                <mat-form-field appearance="outline" fxLayouy="row">
-                  <mat-label>Location</mat-label>
-                  <input type="number" matInput placeholder="Location" min=0 formControlName="location">
-                </mat-form-field>
-                <br />
-                <mat-form-field appearance="outline" fxLayouy="row">
-                  <mat-label>City</mat-label>
-                  <input type="text" name="totalUnits" matInput formControlName="blocks">
-                </mat-form-field>
-                <br />
-              </div>
-              <div fxFlex="30" class="margin-10">
-                <mat-form-field appearance="outline" fxLayouy="row">
-                  <mat-label>Total Units</mat-label>
-                  <input type="text" matInput [max]="5000000" name="totalUnits" formControlName="totalUnit">
-                </mat-form-field>
-                <mat-form-field appearance="outline" fxLayouy="row">
-                  <mat-label>Budget</mat-label>
-                  <input type="text" matInput formControlName="budget">
-                </mat-form-field>
-              </div>
-              <!-- start button sectiom -->
-              <div fxFlex="40" class="margin-10">
-                <button mat-raised-button class="popup-btn" (click)="openDetailsDialog()">Details</button>
-                <br />
-                <button mat-raised-button class="popup-btn" (click)="openPhaseDialog()">Phases</button>
-                <br />
-                <button mat-raised-button class="popup-btn" (click)="openTeamDialog()">Team</button>
-                <br />
-                <button mat-raised-button class="popup-btn" (click)="openDateDialog()">Dates</button>
-              </div>
-            </div>
-            <!-- end button section -->
-          </div>
-          <!-- end third section -->
-        </div>
-        <div fxLayout="row">
-            <button mat-raised-button>
-                    <span>Cancel</span>
-            </button>
-            <button type="submit" mat-raised-button (click)="onSubmit()">
-                    <span>submit</span>
-            </button>
-    </div>
-      </form>
-    </div>
-    <!-- end main div -->
-  </mat-card>
-  <!-- end card section -->
+            <div fxLayouy="row" class="margin-10">
+              <mat-form-field appearance="outline">
+                <mat-label>Project Type</mat-label>                
+                <mat-select formControlName="type">
+                <mat-option *ngFor="let types of projectType" [value]="types">
+                {{types}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>      
+        </div>                        
+      </div>
+      <!-- end section -->
+      <!-- third section -->
+      <div fxFlex="30">
+        <div fxLayouy="row" class="margin-10" formGroupName="projectDetails" style="place-content: space-between">
+          <!-- start -->
+          <div fxFlex="30" class="margin-10">
+            <mat-form-field appearance="outline" fxLayouy="row">
+              <mat-label>Location</mat-label>
+              <input type="text" matInput placeholder="Location" min=0 formControlName="location">
+            </mat-form-field>
+            <br />
+            <mat-form-field appearance="outline" fxLayouy="row">
+              <mat-label>City</mat-label>
+              <input type="text" name="totalUnits" matInput formControlName="blocks">
+            </mat-form-field>                
+            <br />
+<!--               </div>
+  <div fxFlex="30" class="margin-10"> -->
+    <mat-form-field appearance="outline" fxLayouy="row">
+      <mat-label>Total Units</mat-label>
+      <input type="number" matInput [max]="50000" name="totalUnits" formControlName="totalUnit">
+    </mat-form-field>
+    <mat-form-field appearance="outline" fxLayouy="row">
+      <mat-label>Budget</mat-label>
+      <input type="number" matInput formControlName="budget">
+    </mat-form-field>
+  </div>
+  <!-- start button sectiom -->
+  <div fxFlex="40" class="margin-10">
+    <button disabled mat-raised-button class="popup-btn" (click)="openDetailsDialog()">Details</button>
+    <br />
+    <button disabled mat-raised-button class="popup-btn" (click)="openPhaseDialog()">Phases</button>
+    <br />
+    <button disabled mat-raised-button class="popup-btn" (click)="openTeamDialog()">Team</button>
+    <br />
+    <button disabled mat-raised-button class="popup-btn" (click)="openDateDialog()">Dates</button>
+  </div>
+</div>
+<!-- end button section -->
+</div>
+<!-- end third section -->
+</div>
+<div fxLayout="row">
+  <button mat-raised-button>
+    <span>Cancel</span>
+  </button>
+  <button type="submit" mat-raised-button (click)="onSubmit()">
+    <span>submit</span>
+  </button>
+</div>
+</form>
+</div>
+<!-- end main div -->
+</mat-card>
+<!-- end card section -->
 </div>
