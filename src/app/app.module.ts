@@ -65,6 +65,7 @@ import { ProjectDetailsComponent } from './components/core/dashboard/projects/pr
 import { ProjectPhasesComponent } from './components/core/dashboard/projects/project-phases/project-phases.component';
 import { ProjectTeamsComponent } from './components/core/dashboard/projects/project-teams/project-teams.component';
 import { TopMenuComponent } from './components/shared/top-menu/top-menu.component';
+import { OrganisationDropDownComponent } from './components/shared/organisation-drop-down/organisation-drop-down.component';
 
 
 @NgModule({
@@ -101,7 +102,8 @@ import { TopMenuComponent } from './components/shared/top-menu/top-menu.componen
     FeaturePopupComponent,
     ForgotPasswordComponent,
     ConfirmDialogComponent,
-    TopMenuComponent
+    TopMenuComponent,
+    OrganisationDropDownComponent
   ],
   imports: [
     BrowserModule,

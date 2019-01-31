@@ -1,14 +1,4 @@
 <mat-card class="panel-header">
-  <div class="pull-left panel-left">
-    <mat-form-field appearance="outline">
-      <mat-label>Organization</mat-label>
-      <mat-select placeholder="Select Organization"  (selectionChange)="organizationChanged($event)" [(ngModel)]="selectedOrg">
-        <mat-option *ngFor="let organization of organizations" [value]="organization" >
-          {{organization.name}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-  </div>
   <div class="pull-right">
     <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]">
     </mat-paginator>
