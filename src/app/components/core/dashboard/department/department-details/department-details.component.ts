@@ -9,6 +9,8 @@ import { FeaturePopupComponent } from '../../../../../components/shared/feature-
 import { MatDialog,  MatSnackBar ,MAT_DIALOG_DATA } from '@angular/material';
 import { AuthService } from '../../../../../services/auth.service';
 import {FeatureService} from "../../../../../services/features/features.service";
+import {merge as observableMerge, Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
 declare var moment: any;
 
 @Component({
@@ -42,6 +44,7 @@ export class DepartmentDetailsComponent implements OnInit {
   featureData : any;
   allFeatureCount : any;
   getInitFeature = [];
+  private unsubscribe: Subject<any> = new Subject();
   constructor(
     private DeptService: DepartmentService,
     private formBuilder : FormBuilder,
@@ -56,7 +59,6 @@ export class DepartmentDetailsComponent implements OnInit {
   {
     //this.userAuth = this.auth.get();
     this.userAuth = JSON.parse(window.localStorage.getItem('authUserOrganisation'));
-    this._organisationId = this.route.queryParams._value.orgID;
     this.deptFormErrors = {
       name: {},
       description: {},
@@ -65,27 +67,35 @@ export class DepartmentDetailsComponent implements OnInit {
       _roles: [],
       specialFolder: {}
     };
-
-    this.departmentDetailsForm = this.formBuilder.group({
-      _id: ['', Validators.required],
-      name: ['', Validators.required],
-      description: ['', Validators.required],
-      _features: this.formBuilder.array([]),
-      _roles : this.formBuilder.array([]),
-      _organisationId: ['', Validators.required],
-      sharedResource: this.formBuilder.array([]),
-      specialFolder: [true, Validators.required],
-    });
-    this.departmentDetailsForm.valueChanges.subscribe(() => {
-      this.onOrgFormValuesChanged();
-    })
     
   }
 
   ngOnInit() {
-    this.assignValuesToForm();
-    this.getAllFeatures();
+    observableMerge(this.route.params, this.route.queryParams).pipe(
+      	takeUntil(this.unsubscribe))
+      	.subscribe((params) => this.loadRoute(params));
   }
+
+  loadRoute(params: any) {
+		if('orgID' in params) {
+			this._organisationId = params['orgID'];
+        this.departmentDetailsForm = this.formBuilder.group({
+        _id: ['', Validators.required],
+        name: ['', Validators.required],
+        description: ['', Validators.required],
+        _features: this.formBuilder.array([]),
+        _roles : this.formBuilder.array([]),
+        _organisationId: [this._organisationId, Validators.required],
+        sharedResource: this.formBuilder.array([]),
+        specialFolder: [true, Validators.required],
+      });
+      this.departmentDetailsForm.valueChanges.subscribe(() => {
+        this.onOrgFormValuesChanged();
+      })
+			this.assignValuesToForm();
+      this.getAllFeatures();
+		}
+	}
   
   assignValuesToForm() {
     if(this.formType !== 'create') {
@@ -213,7 +223,6 @@ export class DepartmentDetailsComponent implements OnInit {
   } 
   else {
     delete this.departmentDetailsForm.value._id;
-    this.departmentDetailsForm.value._organisationId = this.route.queryParams._value.orgID;    
     this.DeptService.save(this.departmentDetailsForm.value)
     .pipe().subscribe(response => {
       this.deptFormSubmitted = false;
