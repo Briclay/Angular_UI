@@ -42,7 +42,6 @@ export class RoleDetailsComponent implements OnInit {
       	.subscribe((params) => this.loadRoute(params));
     this.roleDetailsForm = this.createFormGroup();
     this.assignValuesToForm();
-    this.getDepartments();
   }
 
   public ngOnDestroy(): void {
@@ -52,7 +51,8 @@ export class RoleDetailsComponent implements OnInit {
 
   loadRoute(params: any) {
 		if('orgID' in params) {
-			this.orgID = params['orgID']
+			this.orgID = params['orgID'];
+      this.getDepartments();    
 		}
 	}
 

@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "matkraft-angular-boilerplate": {
+    "Briclay": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/matkraft-angular-boilerplate",
+            "outputPath": "dist/Briclay",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -63,18 +63,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "matkraft-angular-boilerplate:build"
+            "browserTarget": "Briclay:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "matkraft-angular-boilerplate:build:production"
+              "browserTarget": "Briclay:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "matkraft-angular-boilerplate:build"
+            "browserTarget": "Briclay:build"
           }
         },
         "test": {
@@ -108,7 +108,7 @@
         }
       }
     },
-    "matkraft-angular-boilerplate-e2e": {
+    "Briclay-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "prefix": "",
@@ -117,11 +117,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "matkraft-angular-boilerplate:serve"
+            "devServerTarget": "Briclay:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "matkraft-angular-boilerplate:serve:production"
+              "devServerTarget": "Briclay:serve:production"
             }
           }
         },
@@ -137,5 +137,5 @@
       }
     }
   },
-  "defaultProject": "matkraft-angular-boilerplate"
+  "defaultProject": "Briclay"
 }
