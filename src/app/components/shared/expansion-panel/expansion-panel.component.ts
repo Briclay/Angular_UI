@@ -7,6 +7,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class ExpansionPanelComponent implements OnInit {
   @Input() expansionPanelOptions: any;
+  @Input() isDisabled: boolean;
   @Input() data: any; 
   @Input() selectorComponent: any;
   @Input() isHistory: boolean;

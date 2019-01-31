@@ -1,7 +1,14 @@
 ::ng-deep .project-container {
     .expansion-container {
+        .img-logo {
+            min-width: 70px;
+            border-radius: 10px;
+        }
         mat-expansion-panel-header {
             min-height: 55px;
+        }
+        .mat-expansion-panel-content {
+            display: none;
         }
     }
 }
