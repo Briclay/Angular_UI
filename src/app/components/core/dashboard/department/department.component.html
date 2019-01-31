@@ -3,15 +3,17 @@
     <mat-tab-group #tabGroup>
         <mat-tab label="Overview">
             <app-panel-header-filter (selectOrganizaion)="organizationChanged($event)"></app-panel-header-filter>
-            <spinner diameter="80" class="text-center" *ngIf="depListSpinner; else panelContent"></spinner>
+            <spinner diameter="80" class="text-center" *ngIf="depListSpinner; else content"></spinner>
             <div fxLayout="row">
-                <app-expansion-panel 
-                    [expansionPanelOptions]="departmentDataOptions"
-                    selectorComponent="app-department-details" 
-                    [data]="departments"
-                    [isHistory]="true"
-                    (openHistort)="openDialog(data)">
-                </app-expansion-panel>
+                <ng-template #content>
+                    <app-expansion-panel 
+                        [expansionPanelOptions]="departmentDataOptions"
+                        selectorComponent="app-department-details" 
+                        [data]="departments"
+                        [isHistory]="true"
+                        (openHistort)="openDialog(data)">
+                    </app-expansion-panel>
+                </ng-template>    
             </div>
         </mat-tab>
         <mat-tab label="New">

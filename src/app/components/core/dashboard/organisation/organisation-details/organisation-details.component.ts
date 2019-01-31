@@ -59,7 +59,7 @@ export class OrganisationDetailsComponent implements OnInit {
   featureData : any;
   selectedAll = false;
   selected = 'basic';
-  myFilter : any;
+  myFilter = new Date();
 
   constructor(private formBuilder: FormBuilder,    
     private organizationService: OrganizationService,
@@ -73,13 +73,6 @@ export class OrganisationDetailsComponent implements OnInit {
     private http: HttpClient
     ) {
 
-    /*this.myFilter = (d: Date): boolean => {
-      const date = d.getDate();
-      let nD = new Date()
-      // Prevent Saturday and Sunday from being selected.
-      return (date !== 0 && date !== 1 && date !== 2  && date !== 3 && date !== 4
-        && date !== 5 && date !== 6 && date === nD);
-    }*/
     this.organisationsList = this.organizationService.organisations;
     this.userAuth = JSON.parse(window.localStorage.getItem('authUser'));
     // this.onGetFeature();
