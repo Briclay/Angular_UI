@@ -5,8 +5,10 @@
   <div fxLayout="row" fxLayoutAlign="space-between start">
     <div fxFlex="25">
       <mat-card fxFlex="100" class="card-form">
-        <form [formGroup]="phaseForm" novalidate>
-          <div class="display-phs-block1">
+        <!-- commented for build -->
+<!-- <form [formGroup]="phaseForm" novalidate>-->          
+        <form novalidate>
+         <div class="display-phs-block1">
             <div fxLayout="column">
               <div class="project-team-form-feilds" fxLayout="row">
                 <div fxLayout="column" id="phase-and-tower-box">
@@ -15,21 +17,21 @@
                       <input matInput placeholder="Phase" formControlName="name">
                     </mat-form-field>
                   </div>
-                  <div formArrayName="blocks" class="phs-n-twr-btn">
+                  <!-- <div formArrayName="blocks" class="phs-n-twr-btn">
                     <div class="phs-blc1" fxLayout="row" *ngFor="let block of blocks.controls;let i = index">
                       <mat-form-field [formGroupName]="i">
                         <input matInput placeholder="Block/tower" formControlName="name">
                       </mat-form-field>
                       <mat-icon class="mt-icn mt-icn-delete" (click)="deleteBlocks(i)" *ngIf="phaseForm.controls.blocks.controls.length > 1">delete</mat-icon>
                     </div>
-                  </div>
+                  </div> -->
                 </div>
-                <div fxLayout="column" id="add-btn-div">
+               <!--  <div fxLayout="column" id="add-btn-div">
                   <div mat-icon class="mt-icn-plus mat-icon material-icons" title="Create Block" (click)="addBlocks()">add</div>
-                </div>
+                </div> -->
               </div>
               <div id="ok-btn-div">
-                <button id="btn-show-data-in-right" (click)="createPhaseArray()"> Add </button>
+                <button id="btn-show-data-in-right"> Add </button>
               </div>
             </div>
           </div>
@@ -47,8 +49,9 @@
               </div>
             </div>
             <div>
-              <div fxLayout="row" *ngFor="let phase of PhaseList;let i = index; let lastList = last"
-                   class="display-phs-content" [ngClass]="{ 'border-btm' : !lastList }">
+              <!-- commented for build -->
+             <!--  <div fxLayout="row" *ngFor="let phase of PhaseList;let i = index; let lastList = last"
+                class="display-phs-content" [ngClass]="{ 'border-btm' : !lastList }">
                 <div class="project-team-form-feilds" fxLayout="row" fxLayoutAlign="space-between center" fxFlex="100">
                   <div fxFlex="50">
                     <mat-form-field class="tblphs">
@@ -64,7 +67,7 @@
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>
