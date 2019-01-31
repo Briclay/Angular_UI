@@ -1,20 +1,24 @@
 .project-details-container {
     .upload-photo {
         border: 1px solid #999;
-        border-radius: 3px;
+        border-radius: 15px;
         height: 100px;
         margin: 15px;
         text-align: center;
         display: flex;
         align-items: center;
         img {
-            max-width: 82%;
-            height: auto;
+           height : auto;
+           width : 40%;
             vertical-align: top;
             border: none;
         }
         .list{
             flex: 1;
+        border-radius: 10px;
+        height: 75px;
+        margin: 10px;            
+
         }
     }
     .img-upload {
@@ -25,6 +29,11 @@
     }
     .popup-btn {
         width: 100px;
-        margin-bottom: 10px;
+    }
+    .uploadedImg {
+        height : 35px;
+        width : 35px;
+        vertical-align: top;
+        border: none;
     }
 }

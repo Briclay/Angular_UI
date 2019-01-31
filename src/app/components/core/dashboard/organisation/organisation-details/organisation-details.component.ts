@@ -59,7 +59,7 @@ export class OrganisationDetailsComponent implements OnInit {
   featureData : any;
   selectedAll = false;
   selected = 'basic';
-  myFilter : any;
+  myFilter = new Date();
 
   constructor(private formBuilder: FormBuilder,    
     private organizationService: OrganizationService,
@@ -73,13 +73,6 @@ export class OrganisationDetailsComponent implements OnInit {
     private http: HttpClient
     ) {
 
-    /*this.myFilter = (d: Date): boolean => {
-      const date = d.getDate();
-      let nD = new Date()
-      // Prevent Saturday and Sunday from being selected.
-      return (date !== 0 && date !== 1 && date !== 2  && date !== 3 && date !== 4
-        && date !== 5 && date !== 6 && date === nD);
-    }*/
     this.organisationsList = this.organizationService.organisations;
     this.userAuth = JSON.parse(window.localStorage.getItem('authUser'));
     // this.onGetFeature();
@@ -120,12 +113,12 @@ export class OrganisationDetailsComponent implements OnInit {
       name: ['', Validators.required],
       orgCode: ['', Validators.required],
       orgType: ['', Validators.required],
-      logoImageUrl: this.formBuilder.array([]),
+      logoImageUrl: [''],
       logoImage: [''],
-      /*      _parentOrganisationId: this.formBuilder.array([]),*/
-      _childOrganisationsId: this.formBuilder.array([]),
-      _features: this.formBuilder.array([]),
-      sharedFeature : this.formBuilder.array([]),
+      /*      _parentOrganisationId: [''],*/
+      _childOrganisationsId: [''],
+      _features: [''],
+      sharedFeature : [''],
       subscription: this.formBuilder.group({
         plan: ['', Validators.required],
         validTill : ['', Validators.required],
@@ -149,6 +142,10 @@ export class OrganisationDetailsComponent implements OnInit {
         pincode: ['', [Validators.required, Validators.minLength(6)]]
       }),
     });
+
+    this.organizationDetailsForm.valueChanges.subscribe(() => {
+      this.onOrgFormValuesChanged();
+    })
   }
 
   ngOnInit() {
@@ -159,6 +156,22 @@ export class OrganisationDetailsComponent implements OnInit {
   assignValuesToForm() {
     if(this.formType !== 'create') {
       this.organizationDetailsForm.patchValue(this.data)
+    }
+  }
+
+   onOrgFormValuesChanged() {
+    for (const field in this.formErrors) {
+      if (!this.formErrors.hasOwnProperty(field)) {
+        continue;
+      }
+      // Clear previous errors
+      this.formErrors[field] = {};
+      // Get the control
+      const control = this.form.get(field);
+
+      if (control && control.dirty && !control.valid) {
+        this.formErrors[field] = control.errors;
+      }
     }
   }
 

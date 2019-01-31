@@ -1,17 +1,20 @@
+<app-organisation-drop-down (selectOrganizaion)="organizationChanged($event)"></app-organisation-drop-down>
 <app-top-menu></app-top-menu>
 <div class="user-container">
   <mat-tab-group #tabGroup>
     <mat-tab label="Overview" >
-      <app-panel-header-filter (selectOrganizaion)="organizationChanged($event)"></app-panel-header-filter>
-      <spinner diameter="80" class="text-center" *ngIf="orgListSpinner; else panelContent"></spinner>
+      <app-panel-header-filter></app-panel-header-filter>
+      <spinner diameter="80" class="text-center" *ngIf="orgListSpinner; else content"></spinner>
       <div fxLayout="row">
-        <app-expansion-panel 
-          [expansionPanelOptions]="organisationDataOptions"
-          selectorComponent="app-organisation-details" 
-          [data]="organisations"
-          [isHistory]="true"
-          (openHistort)="openDialog(data)">
-        </app-expansion-panel>
+        <ng-template #content>
+          <app-expansion-panel 
+            [expansionPanelOptions]="organisationDataOptions"
+            selectorComponent="app-organisation-details" 
+            [data]="organisations"
+            [isHistory]="true"
+            (openHistort)="openDialog(data)">
+          </app-expansion-panel>
+        </ng-template>
       </div>
     </mat-tab>
     <mat-tab label="New">
@@ -19,4 +22,3 @@
     </mat-tab>
   </mat-tab-group>
 </div>
-

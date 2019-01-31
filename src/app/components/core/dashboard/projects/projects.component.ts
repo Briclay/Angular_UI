@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ProjectService } from './project.service'
 import { MatDialog, MatTableDataSource } from '@angular/material';
+import { ProjectService } from './project.service';
+import { merge as observableMerge, Subject } from 'rxjs';
+import { Router, ActivatedRoute } from '@angular/router';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-projects',
@@ -13,21 +16,35 @@ export class ProjectsComponent implements OnInit {
   projects: any = {
     data: []
   };
-  orgId: string;
+  orgID: string;
   projectLoading: boolean;
   displayedColumns: string[] = ['name', 'projectCode', 'budget', 'toatlUnit'];
-  constructor(private projectService: ProjectService) {
+  private unsubscribe: Subject<any> = new Subject();
+
+  constructor(
+    private projectService: ProjectService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {
     var org = JSON.parse(window.localStorage.authUserOrganisation);
-    this.orgId = org._id;
+    this.orgID = org._id;
     this.getProjects();
   }
 
   ngOnInit() {
-    // this.getProjects();
+    observableMerge(this.route.params, this.route.queryParams).pipe(
+      takeUntil(this.unsubscribe))
+      .subscribe((params) => this.loadRoute(params));
   }
 
+  loadRoute(params: any) {
+    if ('orgID' in params) {
+      this.orgID = params['orgID'];
+      this.getProjects();
+    }
+  }
   getProjects() {
-    this.projectService.getProjects(this.orgId).pipe().subscribe(res => {
+    this.projectService.getProjects(this.orgID).pipe().subscribe(res => {
       console.log('res', res);
       this.projectLoading = false;
       res.forEach((list) => { 
@@ -58,6 +75,11 @@ export class ProjectsComponent implements OnInit {
       this.projectLoading = false;
     });
   }
+
+  organizationChanged(org: any) {
+    this.router.navigate([], { queryParams: { orgID: org.value ? org.value._id : org._id }, queryParamsHandling: 'merge' });
+  }
+
   tabSwitch(index) {
     this.getProjects();
   }

@@ -1,5 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { OrganisationService } from '../../core/dashboard/organisation/organisation.service';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-panel-header-filter',
@@ -7,33 +6,10 @@ import { OrganisationService } from '../../core/dashboard/organisation/organisat
   styleUrls: ['./panel-header-filter.component.scss']
 })
 export class PanelHeaderFilterComponent implements OnInit {
-  organizations: any[] = [
-    { value: 'organizations-1', viewValue: 'Organizations-1' },
-    { value: 'organizations-2', viewValue: 'Organizations-2' },
-    { value: 'organizations-3', viewValue: 'Organizations-3' }
-  ];
-  constructor(private organisationService: OrganisationService) { }
-  @Output() selectOrganizaion = new EventEmitter();
-  selectedOrg: any;
+
+  constructor() { }
+
   ngOnInit() {
-    this.getOrganiztions()
-  }
-
-  getOrganiztions() {
-    this.organisationService.getOrganization()
-      .pipe().subscribe(res => {
-        this.selectedOrg = res[0];
-        this.organizations = res;
-        this.selectOrganizaion.emit(this.selectedOrg)
-      }, (error: any) => {
-        console.log('error', error);
-      })
-  }
-
-  organizationChanged(org) {
-    if(org) {
-     this.selectOrganizaion.emit(org)
-    }
   }
 
 }

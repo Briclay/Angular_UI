@@ -30,6 +30,7 @@ export class ProjectCreateComponent implements OnInit {
   dates: any;
   team: any;
   details: any;
+  projectType = ['RESIDENTIAL', 'COMMERCIAL', 'MIXED DEVELOPMENT', 'VILLA PROJECTS'];  
   constructor(
     private dialog: MatDialog,
     private formBuilder: FormBuilder,
@@ -47,15 +48,15 @@ export class ProjectCreateComponent implements OnInit {
       name: ['', Validators.required],
       projectCode: ['', Validators.required],
       description: [''],
-      units: [''],
+      units: this.formBuilder.array([]),
       status:"OPEN",
       type: [''],
       beginDate: [''],
       completionDate: [''],
       phases: this.formBuilder.array([]),
       imageUrls: [''],
-      _teamMembers: [''],
-      carParkingArea: [''],
+      _teamMembers: this.formBuilder.array([]),
+      carParkingArea: this.formBuilder.array([]),
       projectDetails: this.formBuilder.group({
         location: [''],
         blocks: [''],
@@ -134,7 +135,21 @@ export class ProjectCreateComponent implements OnInit {
         }
       });
   }
-  generateProjectCode(str: string, count: number) {
+  /*generateProjectCode(str: string, count: number) {
+    let name = this.projectForm.value.name;
+    if (name) {
+      var arrName = name.split(' ');
+      var sortName = '';
+      arrName.forEach((value: any) => {
+        sortName += value.slice(0, 1);
+      })
+      let str = sortName.toUpperCase() + '-' + this.projectCount;
+      //return str;
+      this.projectForm.controls['projectCode'].setValue(str);
+      //  this.projectId = str;
+    }
+  }*/
+  generateProjectCode() {
     let name = this.projectForm.value.name;
     if (name) {
       var arrName = name.split(' ');

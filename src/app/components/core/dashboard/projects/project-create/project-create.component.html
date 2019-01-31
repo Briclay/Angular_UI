@@ -10,94 +10,103 @@
             New Project
             <div class="upload-photo">
               <div class="list">
-                  <span (click)="fileInput.click()">
-                      <img  matTooltip="File Upload" width="25px" src="assets/images/icons/File_Upload.png" title="Upload"  height="25px" class="hand-cursor margin-left-4">
-                      <input #fileInput type="file" (change)="onFileInput($event)" style="display:none;" />  <!-- </span> Upload</p> --> 
-                    </span>
+                <span (click)="fileInput.click()">
+                  <img  matTooltip="File Upload" width="75px" src="assets/images/icons/Camera.png" title="Upload"  class="hand-cursor margin-left-4">
+                  <input #fileInput type="file" (change)="onFileInput($event)" style="display:none;" />  
+                  <!-- </span> Upload</p> --> 
+                </span>
               </div>
+            </div>
+            <div fxLayout="row">
               <div *ngFor="let img of imageArray">
-                  <img src="{{img}}" width="30%">
+                <div style="padding : 5px; margin-left: 15px;">
+                  <img src="{{img}}" class="uploadedImg">
+                </div>
               </div>
-
             </div>
           </div>
           <!-- end fisrt section -->
           <!-- second section -->
           <div fxFlex="50" class="border-right-gray">
-            <div fxLayout="row" class="margin-10">
-              <div fxFlex="50">
-                <mat-form-field appearance="outline" fxFlex="90">
+            <div  class="margin-10" fxLayout=column>
+              <div fxLayout="row">
+                <mat-form-field class="padding_1" appearance="outline" fxFlex="30">
                   <mat-label>Project Name</mat-label>
-                  <input matInput placeholder="Project Name" required (keyup)="generateProjectCode()" [disabled]="disableFlag" formControlName="name">
-                </mat-form-field>
-              </div>
-              <div fxFlex="50">
-                <mat-form-field appearance="outline" fxFlex="90">
+                  <input matInput placeholder="Project Name" required (keyup)="generateProjectCode()"  formControlName="name">
+                </mat-form-field >
+                <mat-form-field class="padding_1" appearance="outline" fxFlex="30">
                   <mat-label>Project Code</mat-label>
                   <input matInput placeholder="Project Code" type="text" required readonly formControlName="projectCode">
                 </mat-form-field>
+
+                <mat-form-field class="padding_1" appearance="outline" fxFlex="30">
+                  <mat-label>Project Type</mat-label>                
+                    <mat-select formControlName="type">
+                      <mat-option *ngFor="let types of projectType" [value]="types">
+                      {{types}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field> 
+              </div>
+              <div> 
+                <mat-form-field appearance="outline" fxFlex="60">
+                  <mat-label>Description</mat-label>
+                  <textarea matInput placeholder="Description" required formControlName="description"></textarea>
+                </mat-form-field>
               </div>
             </div>
-            <div fxLayouy="row" class="margin-10">
-              <mat-form-field appearance="outline" fxFlex="100">
-                <mat-label>Description</mat-label>
-                <textarea matInput placeholder="Description" required formControlName="description"></textarea>
-              </mat-form-field>
-            </div>
+         <!--  <div fxLayouy="row" class="margin-10">
+        </div> -->                        
+      </div>
+      <!-- end section -->
+      <!-- third section -->
+      <div fxFlex="30" class="padding_1">
+        <div fxLayout="row"  formGroupName="projectDetails" style="place-content: space-between">
+          <!-- start -->
+          <div fxLayout="column">
+            <mat-form-field appearance="outline"  fxLayout="row">
+              <mat-label>Location</mat-label>
+              <input type="text" matInput placeholder="Location" min=0 formControlName="location">
+            </mat-form-field>
+            <mat-form-field appearance="outline"  fxLayout="row"  >
+              <mat-label>City</mat-label>
+              <input type="text" name="totalUnits" matInput formControlName="blocks">
+            </mat-form-field>                
+            <mat-form-field appearance="outline" fxLayout="row">
+              <mat-label>Total Units</mat-label>
+              <input type="number" matInput [max]="50000" name="totalUnits" formControlName="totalUnit">
+            </mat-form-field>
+            <mat-form-field appearance="outline" fxLayout="row">
+              <mat-label>Budget</mat-label>
+              <input type="number" matInput formControlName="budget">
+            </mat-form-field>
           </div>
-          <!-- end section -->
-          <!-- third section -->
-          <div fxFlex="30">
-            <div fxLayouy="row" class="margin-10" formGroupName="projectDetails">
-              <!-- start -->
-              <div fxFlex="30" class="margin-10">
-                <mat-form-field appearance="outline" fxLayouy="row">
-                  <mat-label>Location</mat-label>
-                  <input type="number" matInput placeholder="Location" min=0 formControlName="location">
-                </mat-form-field>
-                <br />
-                <mat-form-field appearance="outline" fxLayouy="row">
-                  <mat-label>City</mat-label>
-                  <input type="text" name="totalUnits" matInput formControlName="blocks">
-                </mat-form-field>
-                <br />
-              </div>
-              <div fxFlex="30" class="margin-10">
-                <mat-form-field appearance="outline" fxLayouy="row">
-                  <mat-label>Total Units</mat-label>
-                  <input type="text" matInput [max]="5000000" name="totalUnits" formControlName="totalUnit">
-                </mat-form-field>
-                <mat-form-field appearance="outline" fxLayouy="row">
-                  <mat-label>Budget</mat-label>
-                  <input type="text" matInput formControlName="budget">
-                </mat-form-field>
-              </div>
-              <!-- start button sectiom -->
-              <div fxFlex="40" class="margin-10">
-                <button mat-raised-button class="popup-btn" (click)="openDetailsDialog()">Details</button>
-                <br />
-                <button mat-raised-button class="popup-btn" (click)="openPhaseDialog()">Phases</button>
-                <br />
-                <button mat-raised-button class="popup-btn" (click)="openTeamDialog()">Team</button>
-                <br />
-                <button mat-raised-button class="popup-btn" (click)="openDateDialog()">Dates</button>
-              </div>
-            </div>
-            <!-- end button section -->
+          <!-- start button sectiom -->
+          <div fxLayout="column" >
+            <button disabled mat-raised-button class="popup-btn" (click)="openDetailsDialog()">Details</button>
+            <br />
+            <button disabled mat-raised-button class="popup-btn" (click)="openPhaseDialog()">Phases</button>
+            <br />
+            <button disabled mat-raised-button class="popup-btn" (click)="openTeamDialog()">Team</button>
+            <br />
+            <button disabled mat-raised-button class="popup-btn" (click)="openDateDialog()">Dates</button>
           </div>
-          <!-- end third section -->
         </div>
-        <div fxLayout="row">
-            <button mat-raised-button>
-                    <span>Cancel</span>
-            </button>
-            <button type="submit" mat-raised-button (click)="onSubmit()">
-                    <span>submit</span>
-            </button>
-    </div>
-      </form>
-    </div>
-    <!-- end main div -->
-  </mat-card>
-  <!-- end card section -->
+        <!-- end button section -->
+      </div>
+<!-- end third section -->
+</div>
+<div fxLayout="row">
+  <button mat-raised-button>
+    <span>Cancel</span>
+  </button>
+  <button type="submit" mat-raised-button (click)="onSubmit()">
+    <span>submit</span>
+  </button>
+</div>
+</form>
+</div>
+<!-- end main div -->
+</mat-card>
+<!-- end card section -->
 </div>
