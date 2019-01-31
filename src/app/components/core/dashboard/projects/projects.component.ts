@@ -37,6 +37,9 @@ export class ProjectsComponent implements OnInit {
         this.projectLoading = false;
       });
   }
+
+
+  
   tabSwitch(index) {
     this.getProjects();
   }
