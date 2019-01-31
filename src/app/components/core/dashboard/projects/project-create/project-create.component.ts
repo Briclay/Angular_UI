@@ -134,7 +134,21 @@ export class ProjectCreateComponent implements OnInit {
         }
       });
   }
-  generateProjectCode(str: string, count: number) {
+  /*generateProjectCode(str: string, count: number) {
+    let name = this.projectForm.value.name;
+    if (name) {
+      var arrName = name.split(' ');
+      var sortName = '';
+      arrName.forEach((value: any) => {
+        sortName += value.slice(0, 1);
+      })
+      let str = sortName.toUpperCase() + '-' + this.projectCount;
+      //return str;
+      this.projectForm.controls['projectCode'].setValue(str);
+      //  this.projectId = str;
+    }
+  }*/
+  generateProjectCode() {
     let name = this.projectForm.value.name;
     if (name) {
       var arrName = name.split(' ');
