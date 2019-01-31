@@ -120,12 +120,12 @@ export class OrganisationDetailsComponent implements OnInit {
       name: ['', Validators.required],
       orgCode: ['', Validators.required],
       orgType: ['', Validators.required],
-      logoImageUrl: this.formBuilder.array([]),
+      logoImageUrl: [''],
       logoImage: [''],
-      /*      _parentOrganisationId: this.formBuilder.array([]),*/
-      _childOrganisationsId: this.formBuilder.array([]),
-      _features: this.formBuilder.array([]),
-      sharedFeature : this.formBuilder.array([]),
+      /*      _parentOrganisationId: [''],*/
+      _childOrganisationsId: [''],
+      _features: [''],
+      sharedFeature : [''],
       subscription: this.formBuilder.group({
         plan: ['', Validators.required],
         validTill : ['', Validators.required],
@@ -149,6 +149,10 @@ export class OrganisationDetailsComponent implements OnInit {
         pincode: ['', [Validators.required, Validators.minLength(6)]]
       }),
     });
+
+    this.organizationDetailsForm.valueChanges.subscribe(() => {
+      this.onOrgFormValuesChanged();
+    })
   }
 
   ngOnInit() {
@@ -159,6 +163,22 @@ export class OrganisationDetailsComponent implements OnInit {
   assignValuesToForm() {
     if(this.formType !== 'create') {
       this.organizationDetailsForm.patchValue(this.data)
+    }
+  }
+
+   onOrgFormValuesChanged() {
+    for (const field in this.formErrors) {
+      if (!this.formErrors.hasOwnProperty(field)) {
+        continue;
+      }
+      // Clear previous errors
+      this.formErrors[field] = {};
+      // Get the control
+      const control = this.form.get(field);
+
+      if (control && control.dirty && !control.valid) {
+        this.formErrors[field] = control.errors;
+      }
     }
   }
 

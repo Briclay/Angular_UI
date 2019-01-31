@@ -57,6 +57,8 @@ export class DepartmentDetailsComponent implements OnInit {
     //this.userAuth = this.auth.get();
     this.userAuth = JSON.parse(window.localStorage.getItem('authUserOrganisation'));
     this._organisationId = this.route.queryParams._value.orgID;
+    //this._organisationId = this.userAuth._id;
+
     this.deptFormErrors = {
       name: {},
       description: {},
