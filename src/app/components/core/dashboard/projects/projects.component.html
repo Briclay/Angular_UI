@@ -71,7 +71,7 @@
 				</table>
 			</mat-tab>
 			<mat-tab label="New">
-				<app-project-create formType="create" (click)="tabSwitch($event)"></app-project-create>
+				<app-project-create formType="create" (click)="tabSwitch($event)" *ngIf="orgId"></app-project-create>
 			</mat-tab>
 		</mat-tab-group>
 	</div>

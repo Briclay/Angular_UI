@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {ProjectService} from './project.service'
-import { MatDialog, MatTableDataSource } from '@angular/material';
+import { ProjectService } from './project.service';
+import { merge as observableMerge, Subject } from 'rxjs';
+import { MatTableDataSource } from '@angular/material';
+import { Router, ActivatedRoute } from '@angular/router';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-projects',
@@ -13,33 +16,50 @@ export class ProjectsComponent implements OnInit {
   projects: any = {
     data: []
   };
-  orgId:string;
+  orgId: string;
+  orgID: string;
   projectLoading: boolean;
-  displayedColumns: string[] = ['name','projectCode','budget','toatlUnit'];
-  constructor(private projectService: ProjectService) { 
-    var org=JSON.parse(window.localStorage.authUserOrganisation);
+  displayedColumns: string[] = ['name', 'projectCode', 'budget', 'toatlUnit'];
+  private unsubscribe: Subject<any> = new Subject();
+
+  constructor(
+    private projectService: ProjectService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {
+    var org = JSON.parse(window.localStorage.authUserOrganisation);
     this.orgId = org._id;
     this.getProjects();
   }
 
   ngOnInit() {
-   // this.getProjects();
+    observableMerge(this.route.params, this.route.queryParams).pipe(
+      takeUntil(this.unsubscribe))
+      .subscribe((params) => this.loadRoute(params));
   }
 
+  loadRoute(params: any) {
+    if ('orgID' in params) {
+      this.orgId = params['orgID'];
+      this.getProjects();
+    }
+  }
   getProjects() {
-    this.projectService.getProjects( this.orgId).pipe().subscribe(res => {
-      console.log('res',res);
+    this.projectService.getProjects(this.orgId).pipe().subscribe(res => {
+      console.log('res', res);
       this.projectLoading = false;
       this.projects = res;
       this.dataSource = new MatTableDataSource(res);
     }, (error: any) => {
-        console.error('error', error);
-        this.projectLoading = false;
-      });
+      console.error('error', error);
+      this.projectLoading = false;
+    });
   }
 
+  organizationChanged(org: any) {
+    this.router.navigate([], { queryParams: { orgID: org.value ? org.value._id : org._id }, queryParamsHandling: 'merge' });
+  }
 
-  
   tabSwitch(index) {
     this.getProjects();
   }

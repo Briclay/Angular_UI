@@ -64,6 +64,7 @@ export class FileManagerConfigComponent implements OnInit {
   deptConfigData: any;
   iconArray = [];
   tableFlag = false;
+  designIconArray = [];
   displayedColumns: string[] = ['type', 'name', 'createdAt', 'version', 'logs', 'email', 'share', 'download'];
   constructor(
     private projectService: ProjectService,
@@ -139,6 +140,8 @@ export class FileManagerConfigComponent implements OnInit {
         var details = tempData.details[pPos];
         if ('project' === details.name) {
           window.localStorage.projectLevel = details.level;
+          //get data from config for sorting;
+          this.getDesignSortList();
           if (_.isArray(details.folderName) && details.folderName.length > 0) {
             var getPreFolderPos = _.indexOf(details.folderName, this.previousFolderName);
             if (getPreFolderPos != -1) {
@@ -258,6 +261,7 @@ export class FileManagerConfigComponent implements OnInit {
     this.fileManagerService.getSingleFile(id)
       .pipe().subscribe(res => {
         this.iconArray = res;
+        this.doDesignSort();
         window.localStorage.files_iconArray = JSON.stringify(this.iconArray);
       }, (error: any) => {
         console.error('error', error);
@@ -385,7 +389,7 @@ export class FileManagerConfigComponent implements OnInit {
   //click on icon
   getClickedByIcon(value) {
     this.folderDetailsDataOption = value;
-    console.log(this.folderDetailsDataOption,"this.folderDetailsDataOption")
+    console.log(this.folderDetailsDataOption, "this.folderDetailsDataOption")
     if (this.orgId && this.deptId && value) {
       if (value.type === 'folder') {
         this.projectFlag = false;
@@ -545,6 +549,38 @@ export class FileManagerConfigComponent implements OnInit {
     while (count < findSize.size) {
       str = '0' + str;
       count++;
+    }
+  }
+  getDesignSortList() {
+    this.fileManagerService.getConfig('filter[configKey]=design_icon_sort')
+      .pipe().subscribe(response => {
+        if (response.length > 0) {
+          this.designIconArray = response[0].configValues;
+        } else {
+          this.designIconArray = [];
+        }
+      }, (error: any) => {
+        console.error('error', error);
+      });
+  }
+  doDesignSort() {
+    let len = this.designIconArray.length;
+    if(len>0){
+      var tempArray = [];
+      for (var i = 0; i < len; i++) {
+        var name = this.designIconArray[i];
+        var index = _.findIndex(this.iconArray, function (value) {
+          return value.name.toLowerCase() == name.toLowerCase();
+        });
+        if (index != -1) {
+          tempArray.push(this.iconArray[index]);
+          this.iconArray.splice(index, 1);
+        }
+      }
+      for (let prop in this.iconArray) {
+        tempArray.push(this.iconArray[prop]);
+      }
+      this.iconArray = tempArray;
     }
   }
 
