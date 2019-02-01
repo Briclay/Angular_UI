@@ -3,6 +3,9 @@ import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@ang
 import { MatDialogRef } from '@angular/material';
 import { ProjectService } from '../project.service';
 import * as _ from 'lodash';
+import { merge as observableMerge, Subject } from 'rxjs';
+import { Router, ActivatedRoute } from '@angular/router';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-project-details',
