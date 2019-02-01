@@ -1,4 +1,4 @@
-import { Component, OnInit,ViewChild} from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatTableDataSource } from '@angular/material';
 import { ProjectService } from './project.service';
 import { merge as observableMerge, Subject } from 'rxjs';
@@ -20,6 +20,7 @@ export class ProjectsComponent implements OnInit {
   };
   selectedOrgId: string;
   projectLoading = false;
+  orgID: any;
   displayedColumns: string[] = ['name', 'projectCode', 'budget', 'toatlUnit'];
   private unsubscribe: Subject<any> = new Subject();
 
@@ -28,45 +29,46 @@ export class ProjectsComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute
   ) {
-    /*var org = JSON.parse(window.localStorage.authUserOrganisation);
-    this.orgID = org._id;*/
+    var org = JSON.parse(window.localStorage.authUserOrganisation);
+    this.orgID = org._id;
   }
 
   ngOnInit() {
-    observableMerge(this.route.params, this.route.queryParams).pipe(
-      takeUntil(this.unsubscribe))
-      .subscribe((params) => this.loadRoute(params));
+    this.getProjects();
+    // observableMerge(this.route.params, this.route.queryParams).pipe(
+    //   takeUntil(this.unsubscribe))
+    //   .subscribe((params) => this.loadRoute(params));
   }
 
   public ngOnDestroy(): void {
-    this.unsubscribe.next();
-    this.unsubscribe.complete();
+    // this.unsubscribe.next();
+    //this.unsubscribe.complete();
   }
 
-  loadRoute(params: any) {
-    if ('orgID' in params) {
-      this.selectedOrgId = params['orgID'];
-      this.getProjects();
-    }
-  }
+  // loadRoute(params: any) {
+  //   if ('orgID' in params) {
+  //     this.selectedOrgId = params['orgID'];
+  //     this.getProjects();
+  //   }
+  // }
 
-  organizationChanged(org: any) {
-    this.router.navigate([], { queryParams: { orgID: org.value ? org.value._id : org._id }, queryParamsHandling: 'merge' });
-  }
+  // organizationChanged(org: any) {
+  //   this.router.navigate([], { queryParams: { orgID: org.value ? org.value._id : org._id }, queryParamsHandling: 'merge' });
+  // }
 
   getProjects() {
-    this.projectService.getProjects(this.selectedOrgId).pipe().subscribe(res => {
+    this.projectService.getProjects(this.orgID).pipe().subscribe(res => {
       console.log('res', res);
       this.projectLoading = false;
-      res.forEach((list) => { 
+      res.forEach((list) => {
         list.displayLogo = list.imageUrls[0];
         list.unitNumber = list.units.reduce((accumulator, currentValue) => {
-            return accumulator + currentValue.count;
+          return accumulator + currentValue.count;
         }, 0);
-    })
+      })
       this.projects = res;
       this.projectDataOptions = [
-                {
+        {
           title: 'Image', key: 'displayLogo', hideTitle: true, type: 'image'
         },
         {
@@ -87,7 +89,7 @@ export class ProjectsComponent implements OnInit {
     });
   }
 
-  
+
 
   tabSwitch(tabReq) {
     this.tabGroup.selectedIndex = tabReq.index;

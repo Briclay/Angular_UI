@@ -26,7 +26,7 @@ export class RootFolderComponent implements OnInit {
     this.getSubFolder();
   }
   getSubFolder() {
-    var filter = 'filter[_organisationId]=5c4ab4f1e7179a090e09c750&filter[_departmentId]=5c4dc0baba17c6141c381f8d&filter[name]=Design'
+    var filter = ''
     this.loading = true;
     this.fileManagerService.getAllFolders(filter)
       .pipe().subscribe(res => {
