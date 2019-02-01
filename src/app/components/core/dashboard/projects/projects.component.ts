@@ -26,9 +26,6 @@ export class ProjectsComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute
   ) {
-    var org = JSON.parse(window.localStorage.authUserOrganisation);
-    this.orgID = org._id;
-    this.getProjects();
   }
 
   ngOnInit() {
