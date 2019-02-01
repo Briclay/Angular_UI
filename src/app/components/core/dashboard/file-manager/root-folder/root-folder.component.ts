@@ -14,19 +14,26 @@ export class RootFolderComponent implements OnInit {
   currentUrl: string;
   displayedColumns: string[] = ['type', 'name', 'createdAt', 'version'];
   loading: boolean;
+  org: any;
+  dept: any;
   constructor(
     private fileManagerService: FileManagerService,
     private route: ActivatedRoute,
     private router: Router
   ) {
     this.currentUrl = this.router.url;
+    this.org = JSON.parse(window.localStorage.authUserOrganisation);
+    this.dept = JSON.parse(window.localStorage.authUserDepartment);
+    console.log('org', this.org);
+    console.log('dept', this.dept);
+
   }
 
   ngOnInit() {
     this.getSubFolder();
   }
   getSubFolder() {
-    var filter = ''
+    var filter = 'filter[_organisationId]=' + this.org._id + '&filter[_departmentId]=' + this.dept._id + '&filter[name]=' + this.dept.name
     this.loading = true;
     this.fileManagerService.getAllFolders(filter)
       .pipe().subscribe(res => {
@@ -78,7 +85,7 @@ export class RootFolderComponent implements OnInit {
       };
       stack.push(json);
       window.localStorage.stack = JSON.stringify(stack);
-      window.localStorage.FOLDER_CONFIG_DETAILS= JSON.stringify('');
+      window.localStorage.FOLDER_CONFIG_DETAILS = JSON.stringify('');
       window.localStorage.files_project = JSON.stringify('');
       window.localStorage.files_iconArray = JSON.stringify('');
       window.localStorage.projectLevel = JSON.stringify('');

@@ -44,7 +44,7 @@ export class AuthService {
 
     // pick only schema userObj
     this.storage._departmentId = _.pick(auth.userObj._roleId._departmentId, _.keys(this.localStorageSchema.authUserDepartment.properties));
-    window.localStorage.setItem('authUserDepartment', JSON.stringify(auth.userObj._roleId._departmentId));
+    window.localStorage.setItem('authUserDepartment', JSON.stringify(auth.userObj._departmentId));
     
     this.storage.access = auth.userObj._roleId.access 
     window.localStorage.setItem('access', JSON.stringify(auth.userObj._roleId.access));
