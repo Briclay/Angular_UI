@@ -66,12 +66,15 @@ import { ProjectPhasesComponent } from './components/core/dashboard/projects/pro
 import { ProjectTeamsComponent } from './components/core/dashboard/projects/project-teams/project-teams.component';
 import { TopMenuComponent } from './components/shared/top-menu/top-menu.component';
 import { OrganisationDropDownComponent } from './components/shared/organisation-drop-down/organisation-drop-down.component';
+import { ResetPasswordComponent } from './components/core/reset-password/reset-password.component';
+import { ChangePasswordComponent } from './components/core/change-password/change-password.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     DynamicTableComponent,
+    ResetPasswordComponent,
     LoginComponent,
     DashboardComponent,
     UserComponent,
@@ -103,7 +106,8 @@ import { OrganisationDropDownComponent } from './components/shared/organisation-
     ForgotPasswordComponent,
     ConfirmDialogComponent,
     TopMenuComponent,
-    OrganisationDropDownComponent
+    OrganisationDropDownComponent,
+    ChangePasswordComponent
   ],
   imports: [
     BrowserModule,

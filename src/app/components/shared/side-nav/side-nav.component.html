@@ -6,16 +6,28 @@
         Dashboard
       </a>
     </li>
-    <div *ngIf="!coreViewOnly" >
-      <div *ngFor="let feature of allfeatures">
+    <div *ngIf="coreViewOnly" >
+      <div *ngFor="let feature of access">
         <li class="side-nav-div">
-          <a routerLink="/dashboard{{feature.baseRoute}}" routerLinkActive="active">
-            <img class="side-nav-icon-size" src="assets/images/icons{{feature.baseRoute}}.png" >
+          <a routerLink="/dashboard{{feature.rules[0].resources}}" routerLinkActive="active">
+            <img class="side-nav-icon-size" src="assets/images/icons{{feature.rules[0].resources}}.png" >
+            <p>{{feature._featureId.name}}</p>
+          </a>
+        </li>
+      </div>
+    </div>
+
+    <div *ngIf="superadminAccess" >
+      <div *ngFor="let feature of allAccess">
+        <li class="side-nav-div">
+          <a routerLink="/dashboard{{feature.resources}}" routerLinkActive="active">
+            <img class="side-nav-icon-size" src="assets/images/icons{{feature.resources}}.png" >
             <p>{{feature.name}}</p>
           </a>
         </li>
       </div>
     </div>
+
   </ul>
   <!-- <li class="side-nav-div">
       <a routerLink="/dashboard/home" routerLinkActive="active">

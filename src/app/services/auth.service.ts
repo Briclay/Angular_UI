@@ -46,13 +46,13 @@ export class AuthService {
     this.storage._departmentId = _.pick(auth.userObj._roleId._departmentId, _.keys(this.localStorageSchema.authUserDepartment.properties));
     window.localStorage.setItem('authUserDepartment', JSON.stringify(auth.userObj._roleId._departmentId));
     
-    this.storage._features = auth.userObj._departmentId._features 
-    window.localStorage.setItem('_features', JSON.stringify(auth.userObj._departmentId._features));
+    this.storage.access = auth.userObj._roleId.access 
+    window.localStorage.setItem('access', JSON.stringify(auth.userObj._roleId.access));
     
     return true;
   }
 
- /* get(key ? : string): boolean {
+  /*get(key ? : string): boolean {
 
     // check & get auth token from storage
     if (!this.storage.token) {
@@ -82,13 +82,13 @@ export class AuthService {
     }
 
     // check & get auth user department from storage
-    if (!this.storage._features) {
-      this.storage._features = JSON.Parse(window.localStorage.getItem('_features'));
+    if (!this.storage.access) {
+      this.storage.access = JSON.Parse(window.localStorage.getItem('access'));
     }
 
     return this.storage;
-  }
-*/
+  }*/
+
   /*delete(auth: any): boolean {
     if (auth) {
       window.localStorage.removeItem(auth);

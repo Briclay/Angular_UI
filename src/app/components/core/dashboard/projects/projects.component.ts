@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChild} from '@angular/core';
 import { MatDialog, MatTableDataSource } from '@angular/material';
 import { ProjectService } from './project.service';
 import { merge as observableMerge, Subject } from 'rxjs';
@@ -11,13 +11,15 @@ import { takeUntil } from 'rxjs/operators';
   styleUrls: ['./projects.component.scss']
 })
 export class ProjectsComponent implements OnInit {
+  @ViewChild('tabGroup') tabGroup;
+
   projectDataOptions = [];
   public dataSource: any;
   projects: any = {
     data: []
   };
-  orgID: string;
-  projectLoading: boolean;
+  selectedOrgId: string;
+  projectLoading = false;
   displayedColumns: string[] = ['name', 'projectCode', 'budget', 'toatlUnit'];
   private unsubscribe: Subject<any> = new Subject();
 
@@ -26,9 +28,8 @@ export class ProjectsComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute
   ) {
-    var org = JSON.parse(window.localStorage.authUserOrganisation);
-    this.orgID = org._id;
-    this.getProjects();
+    /*var org = JSON.parse(window.localStorage.authUserOrganisation);
+    this.orgID = org._id;*/
   }
 
   ngOnInit() {
@@ -37,14 +38,24 @@ export class ProjectsComponent implements OnInit {
       .subscribe((params) => this.loadRoute(params));
   }
 
+  public ngOnDestroy(): void {
+    this.unsubscribe.next();
+    this.unsubscribe.complete();
+  }
+
   loadRoute(params: any) {
     if ('orgID' in params) {
-      this.orgID = params['orgID'];
+      this.selectedOrgId = params['orgID'];
       this.getProjects();
     }
   }
+
+  organizationChanged(org: any) {
+    this.router.navigate([], { queryParams: { orgID: org.value ? org.value._id : org._id }, queryParamsHandling: 'merge' });
+  }
+
   getProjects() {
-    this.projectService.getProjects(this.orgID).pipe().subscribe(res => {
+    this.projectService.getProjects(this.selectedOrgId).pipe().subscribe(res => {
       console.log('res', res);
       this.projectLoading = false;
       res.forEach((list) => { 
@@ -76,11 +87,10 @@ export class ProjectsComponent implements OnInit {
     });
   }
 
-  organizationChanged(org: any) {
-    this.router.navigate([], { queryParams: { orgID: org.value ? org.value._id : org._id }, queryParamsHandling: 'merge' });
-  }
+  
 
-  tabSwitch(index) {
+  tabSwitch(tabReq) {
+    this.tabGroup.selectedIndex = tabReq.index;
     this.getProjects();
   }
 

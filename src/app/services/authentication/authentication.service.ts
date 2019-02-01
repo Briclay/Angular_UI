@@ -16,4 +16,14 @@ export class AuthenticationService {
         let url = `${environmentService.briclayCore}/auth/signin`;
         return this.apiService.post(url, request).pipe(map(res => res));
     }
+
+    public forgotPwd(request): Observable<any> {
+        let url = `${environmentService.briclayCore}/auth/forgot`;
+        return this.apiService.post(url, request).pipe(map(res => res));
+    }
+
+    public resetPwd(request, token): Observable<any> {
+        let url = `${environmentService.briclayCore}/auth/reset?token=${token}`;
+        return this.apiService.post(url, request).pipe(map(res => res));
+    }
 }

@@ -3,8 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from './../../../services/authentication/authentication.service';
 import { Router } from '@angular/router';
 import { MatDialog,  MatSnackBar ,MAT_DIALOG_DATA } from '@angular/material';
-import { ForgotPasswordComponent } from '../forgot-password/forgot-password.component'
 import { AuthService } from './../../../services/auth.service';
+import { ForgotPasswordComponent } from '../forgot-password/forgot-password.component';
 
 @Component({
 	selector: 'app-login',

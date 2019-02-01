@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './components/core/login/login.component';
+import { ResetPasswordComponent } from './components/core/reset-password/reset-password.component';
+import { ChangePasswordComponent } from './components/core/change-password/change-password.component';
 import { DashboardComponent } from './components/core/dashboard/dashboard.component';
 import { UserComponent } from './components/core/dashboard/user/user.component';
 import { ProjectsComponent } from './components/core/dashboard/projects/projects.component';
@@ -19,6 +21,9 @@ import { RootFolderComponent } from './components/core/dashboard/file-manager/ro
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
+  { path: 'reset-password', component: ResetPasswordComponent },
+  { path: 'change-password', component: ChangePasswordComponent },
+
   {
     path: 'dashboard', component: DashboardComponent,
     children: [
@@ -99,6 +104,7 @@ const routes: Routes = [
     ]
   },
   { path: '**', redirectTo: 'login', pathMatch: 'full' }
+  
 ];
 
 @NgModule({
