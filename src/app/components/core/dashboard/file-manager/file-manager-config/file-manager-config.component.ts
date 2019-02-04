@@ -9,7 +9,7 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 
 import * as _ from 'lodash';
 
-import { MatDialog, MatTableDataSource } from '@angular/material';
+import { MatDialog, MatTableDataSource, MatSnackBar } from '@angular/material';
 import { FolderCreateDialogComponent } from '../folder-create-dialog/folder-create-dialog.component';
 import { FileShareDialogComponent } from '../file-share-dialog/file-share-dialog.component';
 import { FileMailDialogComponent } from '../file-mail-dialog/file-mail-dialog.component';
@@ -75,7 +75,8 @@ export class FileManagerConfigComponent implements OnInit {
     private router: Router,
     private location: PlatformLocation,
     private http: HttpClient,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private snackBar: MatSnackBar
   ) {
     this.route.params.subscribe(params => {
       this.orgId = params['orgId'];
@@ -87,6 +88,7 @@ export class FileManagerConfigComponent implements OnInit {
     });
     if (window.localStorage.files_project) {
       this.selectedProjectData = JSON.parse(window.localStorage.files_project);
+      this.getProjectListinIt();
     }
     if (window.localStorage.files_iconArray) {
       this.iconArray = JSON.parse(window.localStorage.files_iconArray);
@@ -101,32 +103,37 @@ export class FileManagerConfigComponent implements OnInit {
     this.localStack = JSON.parse(window.localStorage.getItem('stack'));
     this.fullPathDisplay = JSON.parse(window.localStorage.getItem('stack'));
     this.folderConfigData();
-    this.getProjectListinIt();
     this.getSingleFolder();
-
   }
   folderConfigData() {
     var tempValue = this.localStack.pop();
     if (tempValue) {
       this.currentLevel = tempValue.top;
       this.previousFolderName = tempValue.name;
-      var tempData = JSON.parse(window.localStorage.getItem('FOLDER_PROCESS_FLOW')).configValues;
-      if (tempData.length > 0) {
-        this.deptConfigData = JSON.parse(window.localStorage.getItem('FOLDER_CONFIG_DETAILS'));
-        if (this.deptConfigData) {
-          this.populateConfigData(this.deptConfigData);
-        } else {
-          var name = this.previousFolderName;
-          var pos = _.findIndex(tempData, function (o) { return o.deptName == name; });
-          if (pos != -1) {
-            window.localStorage.FOLDER_CONFIG_DETAILS = JSON.stringify(tempData[pos]);
-            this.deptConfigData = tempData[pos];
-            this.populateConfigData(tempData[pos]);
+      if (window.localStorage.getItem('FOLDER_PROCESS_FLOW') != '{}') {
+        var tempData = JSON.parse(window.localStorage.getItem('FOLDER_PROCESS_FLOW')).configValues;
+        if (tempData.length > 0) {
+          this.deptConfigData = JSON.parse(window.localStorage.getItem('FOLDER_CONFIG_DETAILS'));
+          if (this.deptConfigData) {
+            this.populateConfigData(this.deptConfigData);
           } else {
-            this.tableFlag = true;
-          }
+            var name = this.previousFolderName;
+            var pos = _.findIndex(tempData, function (o) { return o.deptName == name; });
+            if (pos != -1) {
+              window.localStorage.FOLDER_CONFIG_DETAILS = JSON.stringify(tempData[pos]);
+              this.deptConfigData = tempData[pos];
+              this.populateConfigData(tempData[pos]);
+            } else {
+              this.tableFlag = true;
+            }
 
+          }
         }
+      } else {
+        // this.snackBar.open('No config data found', 'Folder Config', {
+        //   duration: 2000,
+        // });
+        this.tableFlag = true;
       }
     }
   }
@@ -139,14 +146,19 @@ export class FileManagerConfigComponent implements OnInit {
       if (pPos != -1) {
         var details = tempData.details[pPos];
         if ('project' === details.name) {
+          this.getProjectListinIt();
           window.localStorage.projectLevel = details.level;
           //get data from config for sorting;
           this.getDesignSortList();
           if (_.isArray(details.folderName) && details.folderName.length > 0) {
             var getPreFolderPos = _.indexOf(details.folderName, this.previousFolderName);
             if (getPreFolderPos != -1) {
-              this.tableFlag = false
               this.projectFlag = true;
+              if(tempData.deptName != 'Design'){
+                this.tableFlag = true;
+              }else{
+                this.tableFlag = false;
+              }
             } else {
               this.tableFlag = true
               this.projectFlag = false;
@@ -161,7 +173,13 @@ export class FileManagerConfigComponent implements OnInit {
         }
       } else {
         this.tableFlag = true;
-        this.projectFlag = false;
+        if(this.selectedProjectData){
+          this.getProjectListinIt();
+          this.projectFlag = true;
+        }else{
+          this.projectFlag = false;
+
+        }
       }
     }
   }
@@ -183,9 +201,19 @@ export class FileManagerConfigComponent implements OnInit {
         if (proj) {
           this.fileForm.get('formProject').setValue(proj);
         }
-        this.projectlist = res;
+        if(res.length > 0){
+          this.projectlist = res;
+        }else{
+          // this.snackBar.open('No data found', 'project', {
+          //   duration: 2000,
+          // });
+        }
+        
       }, (error: any) => {
         console.error('error', error);
+        this.snackBar.open(error.message, 'project', {
+          duration: 2000,
+        });
       })
   }
   /*
@@ -241,7 +269,7 @@ export class FileManagerConfigComponent implements OnInit {
           if (this.designDeptFlag) {
             this.getIconFoldersByApi(row);
           } else {
-            this.tableFlag = false;
+            this.tableFlag = true;
             this.getSingleFolder();
           }
         } else {
@@ -389,7 +417,6 @@ export class FileManagerConfigComponent implements OnInit {
   //click on icon
   getClickedByIcon(value) {
     this.folderDetailsDataOption = value;
-    console.log(this.folderDetailsDataOption, "this.folderDetailsDataOption")
     if (this.orgId && this.deptId && value) {
       if (value.type === 'folder') {
         this.projectFlag = false;
@@ -412,11 +439,10 @@ export class FileManagerConfigComponent implements OnInit {
   goBackButton() {
     if (!_.isEmpty(this.fullPathDisplay)) {
       let temp = this.fullPathDisplay.pop();
-      if (window.localStorage.projectLevel) {
-        if (window.localStorage.projectLevel == temp.top) {
+      if (window.localStorage.projectLevel < temp.top) {
           // window.localStorage.files_iconArray = JSON.stringify('');
-          //window.localStorage.files_project = JSON.stringify('');
-        }
+           window.localStorage.files_project = JSON.stringify('');
+           this.projectFlag = false;
       }
       const path = temp.path;
       window.localStorage.stack = JSON.stringify(this.fullPathDisplay);
@@ -550,6 +576,7 @@ export class FileManagerConfigComponent implements OnInit {
       str = '0' + str;
       count++;
     }
+    return str;
   }
   getDesignSortList() {
     this.fileManagerService.getConfig('filter[configKey]=design_icon_sort')
@@ -565,7 +592,7 @@ export class FileManagerConfigComponent implements OnInit {
   }
   doDesignSort() {
     let len = this.designIconArray.length;
-    if(len>0){
+    if (len > 0) {
       var tempArray = [];
       for (var i = 0; i < len; i++) {
         var name = this.designIconArray[i];

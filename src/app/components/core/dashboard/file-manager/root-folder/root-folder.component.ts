@@ -1,7 +1,7 @@
 import { filter } from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import { FileManagerService } from "../file-manager.service";
-import { MatTableDataSource } from '@angular/material';
+import { MatTableDataSource, MatSnackBar } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -16,43 +16,95 @@ export class RootFolderComponent implements OnInit {
   loading: boolean;
   org: any;
   dept: any;
+  authUser: any;
   constructor(
     private fileManagerService: FileManagerService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private snackBar: MatSnackBar
   ) {
     this.currentUrl = this.router.url;
     this.org = JSON.parse(window.localStorage.authUserOrganisation);
     this.dept = JSON.parse(window.localStorage.authUserDepartment);
-    console.log('org', this.org);
-    console.log('dept', this.dept);
-
+    this.authUser = JSON.parse(window.localStorage.authUser);
   }
 
   ngOnInit() {
     this.getSubFolder();
   }
   getSubFolder() {
-    var filter = 'filter[_organisationId]=' + this.org._id + '&filter[_departmentId]=' + this.dept._id + '&filter[name]=' + this.dept.name
+    if (this.authUser.userType === 'SUPERADMIN') {
+      var filter = 'filter[_parentId]=';
+    } else {
+      if (this.authUser.userType === 'ADMIN') {
+        var filter = 'filter[_organisationId]=' + this.org._id + '&filter[name]=' + this.org.name;
+      } else {
+        var filter = 'filter[_organisationId]=' + this.org._id + '&filter[_departmentId]=' + this.dept._id + '&filter[name]=' + this.dept.name;
+
+      }
+    }
     this.loading = true;
     this.fileManagerService.getAllFolders(filter)
       .pipe().subscribe(res => {
-        this.dataSource = new MatTableDataSource(res);
+        if (this.authUser.userType === 'ADMIN') {
+          if (res.length > 0) {
+            this.adminFolder(res);
+          }
+        } else {
+          this.dataSource = new MatTableDataSource(res);
+        }
         this.loading = false;
         if (res.length > 0) {
-          this.setConfigData(res[0])
+          this.setConfigData(res[0]);
+        } else {
+          this.snackBar.open('No data found', 'Folder', {
+            duration: 2000,
+          });
         }
       }, (error: any) => {
         this.loading = false;
+        console.error('error', error);
+        this.snackBar.open('error', 'Folder', {
+          duration: 2000,
+        });
+      })
+  }
+  adminFolder(data) {
+    var filter = 'filter[_organisationId]=' + this.org._id + '&filter[_parentId]=' + data[0]._id;
+    this.fileManagerService.getAllFolders(filter)
+      .pipe().subscribe(res => {
+        if (res.length > 0) {
+          this.dataSource = new MatTableDataSource(res);
+        } else {
+          this.snackBar.open('No data found', 'Folder', {
+            duration: 2000,
+          });
+        }
+        this.loading = false;
+      }, (error: any) => {
+        this.loading = false;
+        this.snackBar.open(error.message, 'Folder', {
+          duration: 2000,
+        });
         console.error('error', error);
       })
   }
   setConfigData(data: any) {
     this.fileManagerService.getConfig('filter[_organisationId]=' + data._organisationId + '&filter[configKey]=FOLDER_PROCESS_FLOW')
       .pipe().subscribe(res => {
-        window.localStorage.FOLDER_PROCESS_FLOW = JSON.stringify(res[0]);
+        if (res.length > 0) {
+          window.localStorage.FOLDER_PROCESS_FLOW = JSON.stringify(res[0]);
+        } else {
+         window.localStorage.FOLDER_PROCESS_FLOW = JSON.stringify({});
+          this.snackBar.open('NO config data found !', 'Folder Config', {
+            duration: 2000,
+          });
+        }
       }, (error: any) => {
         console.error('error', error);
+        this.snackBar.open(error.message, 'Folder Config', {
+          duration: 2000,
+        });
       })
   }
   getIcon(fileExt: string, type: string) {
