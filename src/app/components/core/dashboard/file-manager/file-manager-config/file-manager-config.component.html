@@ -43,8 +43,8 @@
 
       <div class="flex-grow">
         <div class="project-content">
-          <div class="project-details-header">
-            <img src="{{selectedProjectStatus.logoImageUrl}}" width="100%" (click)="openImageSlider(selectedProjectStatus.logoImageUrl)" />
+          <div class="project-details-header" *ngIf="selectedProjectData.imageUrls.length>0">
+            <img src="{{selectedProjectData.imageUrls[0]}}" width="100%" (click)="openImageSlider(selectedProjectData.logoImageUrl)" />
             <div class="project-name">
               {{selectedProjectData.name}}
             </div>

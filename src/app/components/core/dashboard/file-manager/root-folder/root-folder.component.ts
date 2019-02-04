@@ -33,6 +33,7 @@ export class RootFolderComponent implements OnInit {
     this.getSubFolder();
   }
   getSubFolder() {
+    console.log('this.authUser.userType', this.authUser.userType);
     if (this.authUser.userType === 'SUPERADMIN') {
       var filter = 'filter[_parentId]=';
     } else {

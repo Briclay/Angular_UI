@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { PlatformLocation } from '@angular/common'
+import { PlatformLocation } from '@angular/common';
 import { ProjectService } from '../../projects/project.service';
 import { OrganisationService } from '../../organisation/organisation.service';
-import { FileManagerService } from "../file-manager.service";
+import { FileManagerService } from '../file-manager.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
@@ -31,7 +31,7 @@ export class FileManagerConfigComponent implements OnInit {
   organizations: any[];
   projectlist: any;
   selectedProjectStatus = {
-    logoImageUrl: "assets/images/building-2.jpg",
+    logoImageUrl: 'assets/images/building-2.jpg',
     name: 'list'
   };
   form: FormGroup;
@@ -93,7 +93,8 @@ export class FileManagerConfigComponent implements OnInit {
     if (window.localStorage.files_iconArray) {
       this.iconArray = JSON.parse(window.localStorage.files_iconArray);
     }
-    //restric browser back button
+    console.log('this.iconArray ', this.iconArray);
+    // restric browser back button
     location.onPopState(() => {
       window.history.forward();
     });
@@ -106,19 +107,19 @@ export class FileManagerConfigComponent implements OnInit {
     this.getSingleFolder();
   }
   folderConfigData() {
-    var tempValue = this.localStack.pop();
+    const tempValue = this.localStack.pop();
     if (tempValue) {
       this.currentLevel = tempValue.top;
       this.previousFolderName = tempValue.name;
       if (window.localStorage.getItem('FOLDER_PROCESS_FLOW') != '{}') {
-        var tempData = JSON.parse(window.localStorage.getItem('FOLDER_PROCESS_FLOW')).configValues;
+        const tempData = JSON.parse(window.localStorage.getItem('FOLDER_PROCESS_FLOW')).configValues;
         if (tempData.length > 0) {
           this.deptConfigData = JSON.parse(window.localStorage.getItem('FOLDER_CONFIG_DETAILS'));
           if (this.deptConfigData) {
             this.populateConfigData(this.deptConfigData);
           } else {
-            var name = this.previousFolderName;
-            var pos = _.findIndex(tempData, function (o) { return o.deptName == name; });
+            const name = this.previousFolderName;
+            const pos = _.findIndex(tempData, function (o) { return o.deptName == name; });
             if (pos != -1) {
               window.localStorage.FOLDER_CONFIG_DETAILS = JSON.stringify(tempData[pos]);
               this.deptConfigData = tempData[pos];
@@ -137,7 +138,7 @@ export class FileManagerConfigComponent implements OnInit {
       }
     }
   }
-  //check cuurent level and config levl
+  // check cuurent level and config levl
   populateConfigData(tempData: any) {
     var level = this.currentLevel;
     if (tempData.details.length > 0) {
@@ -148,35 +149,35 @@ export class FileManagerConfigComponent implements OnInit {
         if ('project' === details.name) {
           this.getProjectListinIt();
           window.localStorage.projectLevel = details.level;
-          //get data from config for sorting;
+          // get data from config for sorting;
           this.getDesignSortList();
           if (_.isArray(details.folderName) && details.folderName.length > 0) {
-            var getPreFolderPos = _.indexOf(details.folderName, this.previousFolderName);
-            if (getPreFolderPos != -1) {
+            const getPreFolderPos = _.indexOf(details.folderName, this.previousFolderName);
+            if (getPreFolderPos !== -1) {
               this.projectFlag = true;
-              if(tempData.deptName != 'Design'){
+              if (tempData.deptName !== 'Design') {
                 this.tableFlag = true;
-              }else{
+              } else {
                 this.tableFlag = false;
               }
             } else {
-              this.tableFlag = true
+              this.tableFlag = true;
               this.projectFlag = false;
             }
           } else {
-            this.tableFlag = false
+            this.tableFlag = false;
             this.projectFlag = true;
           }
         } else {
-          this.tableFlag = true
+          this.tableFlag = true;
           this.projectFlag = false;
         }
       } else {
         this.tableFlag = true;
-        if(this.selectedProjectData){
+        if (this.selectedProjectData) {
           this.getProjectListinIt();
           this.projectFlag = true;
-        }else{
+        } else {
           this.projectFlag = false;
 
         }
@@ -201,14 +202,14 @@ export class FileManagerConfigComponent implements OnInit {
         if (proj) {
           this.fileForm.get('formProject').setValue(proj);
         }
-        if(res.length > 0){
+        if (res.length > 0) {
           this.projectlist = res;
-        }else{
+        } else {
           // this.snackBar.open('No data found', 'project', {
           //   duration: 2000,
           // });
         }
-        
+
       }, (error: any) => {
         console.error('error', error);
         this.snackBar.open(error.message, 'project', {
@@ -224,8 +225,9 @@ export class FileManagerConfigComponent implements OnInit {
   */
   getSingleProject(list) {
     this.selectedProjectData = list.value;
+    console.log('this.selectedProjectData', this.selectedProjectData);
     window.localStorage.files_project = JSON.stringify(this.selectedProjectData);
-    var body = {
+    const body = {
       name: this.selectedProjectData.name,
       _organisationId: this.orgId,
       _departmentId: this.deptId,
@@ -233,18 +235,20 @@ export class FileManagerConfigComponent implements OnInit {
       owner: '',
       _projectId: this.selectedProjectData._id,
       shared: [],
-      details: "This folder is created by ",
-      accessFlag: "Private"
-    }
-    //logic for only contrcat departemt to add fodler name with id
-    if (this.deptConfigData.deptName == 'Contracts') {
+      details: 'This folder is created by ',
+      accessFlag: 'Private'
+    };
+    console.log('this.deptConfigData', this.deptConfigData);
+    // logic for only contrcat departemt to add fodler name with id
+    if (this.deptConfigData.deptName === 'Contracts') {
       this.fileManagerService.getSingleFile(this.fileId)
         .pipe().subscribe(res => {
-          body.name = this.createProjectNumber(res.length + 1) + "-" + this.selectedProjectData.name;
+          body.name = this.createProjectNumber(res.length + 1) + '-' + this.selectedProjectData.name;
           this.createProjectFolder(body, this.selectedProjectData);
         });
     } else {
-      //else normal folder creation
+      console.log('Design');
+      // else normal folder creation
       this.createProjectFolder(body, this.selectedProjectData);
     }
   }
@@ -264,7 +268,8 @@ export class FileManagerConfigComponent implements OnInit {
           this.getSingleFolder();
         }
       }, (error: any) => {
-        //if exist then show tbales otherwise show erro
+        console.log('error', error);
+        // if exist then show tbales otherwise show erro
         if ('Folder exist' === error.message) {
           if (this.designDeptFlag) {
             this.getIconFoldersByApi(row);
@@ -272,8 +277,6 @@ export class FileManagerConfigComponent implements OnInit {
             this.tableFlag = true;
             this.getSingleFolder();
           }
-        } else {
-          console.log('error', error);
         }
       });
   }
@@ -281,9 +284,9 @@ export class FileManagerConfigComponent implements OnInit {
     this.folderListLoading = true;
     this.fileManagerService.getAllFolders('filter[_projectId]=' + row._id + '&filter[name]=' + row.name + '&filter[_departmentId]=' + this.deptId)
       .pipe().subscribe(res => {
-        this.getIconsFolder(res[0]._id)
+        this.getIconsFolder(res[0]._id);
       }, (error: any) => {
-      })
+      });
   }
   getIconsFolder(id) {
     this.fileManagerService.getSingleFile(id)
@@ -440,9 +443,9 @@ export class FileManagerConfigComponent implements OnInit {
     if (!_.isEmpty(this.fullPathDisplay)) {
       let temp = this.fullPathDisplay.pop();
       if (window.localStorage.projectLevel < temp.top) {
-          // window.localStorage.files_iconArray = JSON.stringify('');
-           window.localStorage.files_project = JSON.stringify('');
-           this.projectFlag = false;
+        // window.localStorage.files_iconArray = JSON.stringify('');
+        window.localStorage.files_project = JSON.stringify('');
+        this.projectFlag = false;
       }
       const path = temp.path;
       window.localStorage.stack = JSON.stringify(this.fullPathDisplay);
