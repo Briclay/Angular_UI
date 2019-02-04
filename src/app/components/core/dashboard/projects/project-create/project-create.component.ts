@@ -37,6 +37,7 @@ export class ProjectCreateComponent implements OnInit {
   dates: any;
   team: any;
   details: any;
+  orgId: any;
   projectType = ['RESIDENTIAL', 'COMMERCIAL', 'MIXED DEVELOPMENT', 'VILLA PROJECTS']; 
   _organisationId : any;
   private unsubscribe: Subject<any> = new Subject();
@@ -52,16 +53,47 @@ export class ProjectCreateComponent implements OnInit {
     private router: Router
 
   ) {
-    /*var org=JSON.parse(window.localStorage.authUserOrganisation);
+    var org=JSON.parse(window.localStorage.authUserOrganisation);
     var tempOrg =  org._id;
-    this.orgId = tempOrg;*/
+    this.orgID = tempOrg;
    
   }
 
   ngOnInit() {
-    observableMerge(this.route.params, this.route.queryParams).pipe(
-        takeUntil(this.unsubscribe))
-        .subscribe((params) => this.loadRoute(params));
+    this.projectForm = this.formBuilder.group({
+      _organisationId: [this.orgID, Validators.required],
+      name: ['', Validators.required],
+      projectCode: ['', Validators.required],
+      description: [''],
+      units: this.formBuilder.array([]),
+      status:"OPEN",
+      type: [''],
+      beginDate: [''],
+      completionDate: [''],
+      phases: this.formBuilder.array([]),
+      imageUrls: [''],
+      _teamMembers: this.formBuilder.array([]),
+      carParkingArea: this.formBuilder.array([]),
+      projectDetails: this.formBuilder.group({
+        location: [''],
+        blocks: [''],
+        landArea: [''],
+        carpetarea: [''],
+        saleArea: [''],
+        crmTeam: [''],
+        totalUnit: [''],
+        budget: ['']
+      })
+    });
+
+    this.projectForm.valueChanges.subscribe(() => {
+      this.onOrgFormValuesChanged();
+    })
+    this.assignValuesToForm();
+    this.getAllProjects();
+    // observableMerge(this.route.params, this.route.queryParams).pipe(
+    //     takeUntil(this.unsubscribe))
+    //     .subscribe((params) => this.loadRoute(params));
   }
 
   assignValuesToForm() {
@@ -74,37 +106,7 @@ export class ProjectCreateComponent implements OnInit {
     if('orgID' in params) {
       this.orgID = params['orgID'];
 
-      this.projectForm = this.formBuilder.group({
-        _organisationId: [this.orgID, Validators.required],
-        name: ['', Validators.required],
-        projectCode: ['', Validators.required],
-        description: [''],
-        units: this.formBuilder.array([]),
-        status:"OPEN",
-        type: [''],
-        beginDate: [''],
-        completionDate: [''],
-        phases: this.formBuilder.array([]),
-        imageUrls: [''],
-        _teamMembers: this.formBuilder.array([]),
-        carParkingArea: this.formBuilder.array([]),
-        projectDetails: this.formBuilder.group({
-          location: [''],
-          blocks: [''],
-          landArea: [''],
-          carpetarea: [''],
-          saleArea: [''],
-          crmTeam: [''],
-          totalUnit: [''],
-          budget: ['']
-        })
-      });
-
-      this.projectForm.valueChanges.subscribe(() => {
-        this.onOrgFormValuesChanged();
-      })
-      this.assignValuesToForm();
-      this.getAllProjects();
+     
     }
   }
 
