@@ -22,7 +22,7 @@ import { RootFolderComponent } from './components/core/dashboard/file-manager/ro
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'reset-password', component: ResetPasswordComponent },
-  { path: 'change-password', component: ChangePasswordComponent },
+  { path: 'change-password/:id', component: ChangePasswordComponent },
 
   {
     path: 'dashboard', component: DashboardComponent,

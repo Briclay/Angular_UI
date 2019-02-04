@@ -133,8 +133,10 @@ export class UserDetailsComponent implements OnInit {
   }
 
   saveOnS3(response: any, file, body: any) {
+    //headers.append('Access-Control-Allow-Credentials', 'true');
+
     this.http.put(response.signedRequest, file, {
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' , 'Access-Control-Allow-Origin': 'true' }
     }).subscribe((awsRes: any) => {
       let filePath = 'https://s3.ap-south-1.amazonaws.com/' + this.orgID + '/' + body.savedFileName;
       this.userDetailsForm.controls['profileImageUrl'].setValue(filePath)

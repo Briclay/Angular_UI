@@ -95,6 +95,8 @@ export class RoleDetailsComponent implements OnInit {
       let departmentId = this.roleDetailsForm.value._departmentId;
       this.roleService.getFeatures(userType, departmentId )
       .pipe().subscribe(res => {
+        res.forEach((d) => d.check = false)
+        console.log(res, "res")
         this.openDialogFeature(res)
       }, (error: any) => {
         console.error('error', error);

@@ -18,9 +18,11 @@
       </button> 
     </div>
     <mat-menu #menulog="matMenu">
-      <button mat-menu-item>
-        <mat-icon>exit_to_app</mat-icon>
-        <span [routerLink]="'/login'" >Logout</span>
+      <button mat-menu-item >
+        <div [routerLink]="'/login'" >
+          <mat-icon>exit_to_app</mat-icon>
+          <span >Logout</span>
+        </div>
       </button>
     </mat-menu>
     <mat-menu #notificationMenu="matMenu"  class="panel">

@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import {FileManagerService} from '../../../../components/core/dashboard/file-manager/file-manager.service';
+import {UserService} from '../../../../components/core/dashboard/user/user.service';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { MatDialog,  MatSnackBar ,MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
   selector: 'app-design-dashboard',
@@ -9,7 +11,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   styleUrls: ['./design-dashboard.component.scss']
 })
 export class DesignDashboardComponent implements OnInit {
-
+  @Input() data: any;
+  @Input() formType: string;
+  
   organizations: any[] = [
     { value: 'organizations-1', viewValue: 'Organizations-1' },
     { value: 'organizations-2', viewValue: 'Organizations-2' },
@@ -18,13 +22,12 @@ export class DesignDashboardComponent implements OnInit {
   designDashForm: FormGroup;
   orgID: string;
   userAuth : any;
-  profileImageUrl = "";
-  filePath = 'assets/images/avatars/camera_blue.png';
+  profileImageUrl : any;
   user: any;
   userName: any;
   roleName: any;
 
-  projectConsultances : any[] = [
+/*  projectConsultances : any[] = [
     {
       "_id": "1",
       "name": "Architect",
@@ -173,13 +176,18 @@ export class DesignDashboardComponent implements OnInit {
       "name": "Milestone",
       "address" : "Ulsoor Bangalore"
     },
-  ]
+  ]*/
 
-  constructor(private fileManagerService: FileManagerService,
-    private http: HttpClient) {    
+  constructor(
+    private fileManagerService: FileManagerService,
+    private http: HttpClient,
+    private userService : UserService,
+    private snackBar : MatSnackBar) {    
+
       this.user = JSON.parse(window.localStorage.getItem('authUser')); 
       this.userName = this.user.displayName;
-      this.roleName = this.user._roleId.name
+      this.roleName = this.user._roleId.name;
+      this.profileImageUrl = this.user.profileImageUrl ? this.user.profileImageUrl : "./assets/images/avatars/profile.jpg";;
     this.userAuth = JSON.parse(window.localStorage.getItem('authUserOrganisation'));
     this.orgID = this.userAuth._id;
   }
@@ -210,6 +218,9 @@ export class DesignDashboardComponent implements OnInit {
           };
           this.saveOnS3(res, file, json)
         }, (error: any) => {
+           this.snackBar.open(error.message, 'error', {
+            duration: 5000,
+          });
           console.log(error)
         });
     } else {
@@ -223,9 +234,13 @@ export class DesignDashboardComponent implements OnInit {
     }).subscribe((awsRes: any) => {
       let filePath = 'https://s3.ap-south-1.amazonaws.com/' + this.orgID + '/' + body.savedFileName;
       //this.designDashForm.controls['profileImageUrl'].setValue(filePath)
-      this.filePath = filePath;
+      this.profileImageUrl = filePath;
+      console.log(this.profileImageUrl, "filePath")
     }, (error: any) => {
-      console.log('error' + JSON.stringify(error));
+      this.snackBar.open(error.message, 'error', {
+        duration: 5000,
+      });
+      console.log(error)
     });
     // this.fileManagerService.saveOnS3(response.signedRequest, file, {
     //   headers: { 'Content-Type': 'application/x-www-form-urlencoded', "Authorization" : JSON.parse(window.localStorage.getItem('authToken')) }
@@ -233,6 +248,41 @@ export class DesignDashboardComponent implements OnInit {
     //     this.userDetailsForm.controls['profileImageUrl'].setValue(res.url)
     //   }, (error: any) => {
     // });
+  }
+
+  onSubmit() {
+    let userData = {
+      _organisationId : this.orgID,
+      profileImageUrl : this.profileImageUrl
+    }
+    if(this.data._id) {
+      this.userService.updateUser(this.data._id, userData )
+      .pipe().subscribe(res => {
+          this.isLoading = false;
+          this.snackBar.open("Profile image updated Succesfully", 'User', {
+            duration: 5000,
+          });
+        }, (error: any) => {
+          this.snackBar.open(error.message, 'User', {
+            duration: 5000,
+          });
+        });
+    } else {
+      this.userService.saveUser(userData)
+      .pipe().subscribe(res => {
+          this.isLoading = false;
+          this.snackBar.open("Profile image updated Succesfully", 'User', {
+            duration: 5000,
+          });
+          let tabReq = {index: 0, orgId: this.userDetailsForm.value._organisationId}
+          this.tabSwitch.emit(tabReq);
+          this.userDetailsForm.reset()
+        }, (error: any) => {
+          this.snackBar.open(error.message, 'User', {
+            duration: 5000,
+          });
+        });
+    }
   }
 
 }

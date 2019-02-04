@@ -74,13 +74,19 @@ export class LoginComponent implements OnInit {
 		if (this.loginForm.valid) {
 			this.authenticationService.login(this.loginForm.value)
 			.pipe().subscribe(response =>  {
+				console.log(response, "loginResponse")
 				this.isLoading = false;
                 this.auth.set(response);
-				console.log(response, "loginResponse")
-				this.loginForm.reset();
-				this.loginForm['_touched'] = false;
-				const path = '/dashboard';
-				this.router.navigateByUrl(path);
+                if(response.userObj.newUser){
+                	const path = '/change-password/' + response.userObj._id;
+					this.router.navigateByUrl(path);
+                }
+                else {
+                	this.loginForm.reset();
+					this.loginForm['_touched'] = false;
+					const path = '/dashboard';
+					this.router.navigateByUrl(path);
+                }
 			}, (error: any) => {
 				this.isLoading = false;
 				this.snackBar.open("Invalid username or password", 'login', {

@@ -40,23 +40,10 @@
         </div>
         <button mat-raised-button style="background-color: #2196F3; color: white;" type="submit" 
             class="submit-button"  [disabled]="isLoading || !loginForm.valid" aria-label="LOG IN" (click)="onLoginFormSubmit()">LOGIN
-      <!-- Material Design Spinner -->
-      <div class="spinner-wrapper" *ngIf="isLoading">
-        <div class="spinner">
-          <div class="inner">
-            <div class="gap"></div>
-            <div class="left">
-              <div class="half-circle"></div>
-            </div>
-            <div class="right">
-              <div class="half-circle"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- / Material Design Spinner -->
-      
         </button>
+        <div style ="place-content :center;">
+          <mat-spinner style="margin:0 auto;" *ngIf="isLoading" [diameter]="40"></mat-spinner>
+        </div>
       </form>
     </div>
   </div>

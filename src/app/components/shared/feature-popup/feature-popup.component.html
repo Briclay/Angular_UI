@@ -6,7 +6,7 @@
           <div fxLayout=row >
             <div class="flex-1">
               <div>
-                <mat-checkbox 
+                <mat-checkbox *ngIf="feature.check"
                   [(ngModel)]="feature.activeFlag">
                 </mat-checkbox>
                 <span class="message" >{{feature.name}}</span>

@@ -137,6 +137,7 @@ export class DepartmentDetailsComponent implements OnInit {
         })
         featuresList = this._features;
         featuresList.forEach((list) => list.hidePermissions = true)
+        featuresList.forEach((d) => d.check = true)
         const dialogRef = this.dialog.open(FeaturePopupComponent, {
           width: '550px',
           data: featuresList ? featuresList : {}
