@@ -26,6 +26,7 @@ export class DesignDashboardComponent implements OnInit {
   user: any;
   userName: any;
   roleName: any;
+  isLoading : any;
 
 /*  projectConsultances : any[] = [
     {
@@ -245,7 +246,7 @@ export class DesignDashboardComponent implements OnInit {
     // this.fileManagerService.saveOnS3(response.signedRequest, file, {
     //   headers: { 'Content-Type': 'application/x-www-form-urlencoded', "Authorization" : JSON.parse(window.localStorage.getItem('authToken')) }
     // }).pipe().subscribe(res => {
-    //     this.userDetailsForm.controls['profileImageUrl'].setValue(res.url)
+    //     this.designDashForm.controls['profileImageUrl'].setValue(res.url)
     //   }, (error: any) => {
     // });
   }
@@ -274,9 +275,8 @@ export class DesignDashboardComponent implements OnInit {
           this.snackBar.open("Profile image updated Succesfully", 'User', {
             duration: 5000,
           });
-          let tabReq = {index: 0, orgId: this.userDetailsForm.value._organisationId}
-          this.tabSwitch.emit(tabReq);
-          this.userDetailsForm.reset()
+          let tabReq = {index: 0, orgId: this.designDashForm.value._organisationId}
+          this.designDashForm.reset()
         }, (error: any) => {
           this.snackBar.open(error.message, 'User', {
             duration: 5000,
