@@ -28,24 +28,24 @@
     <!-- start project details -->
     <div fxLayout="row" *ngIf="selectedProjectData">
       <div class="flex-grow text-center">
-        Details
+        <strong class="text-color"></strong>
       </div>
       <div class="flex-grow no-border">
+        <strong class="text-color">Details</strong>
       </div>
       <div class="flex-grow no-border text-center">
-        Units
+        <strong class="text-color">Units</strong>
       </div>
       <div class="flex-grow text-center">
-        Car Parking
+        <strong class="text-color">Car Parking</strong>
       </div>
     </div>
     <div fxLayout="row" *ngIf="selectedProjectData;">
-
       <div class="flex-grow">
         <div class="project-content">
           <div class="project-details-header" *ngIf="selectedProjectData.imageUrls.length>0">
-            <img src="{{selectedProjectData.imageUrls[0]}}" width="100%" (click)="openImageSlider(selectedProjectData.logoImageUrl)" />
-            <div class="project-name">
+            <img src="{{selectedProjectData.imageUrls[0]}}" style="height: 177px;width: 235px;"  (click)="openImageSlider(selectedProjectData.logoImageUrl)" />
+            <div class="project-name ">
               {{selectedProjectData.name}}
             </div>
           </div>
@@ -117,31 +117,37 @@
           <!--    </span>          -->
           <!-- </div> -->
           <div class="flex-grow no-border">
+            <div class="pull-left">
+              <strong class="text-color">{{clickedIconName}}</strong>
+            </div>
           </div>
           <!-- <div class="flex-grow no-border"> -->
           <!--    </div> -->
           <!-- <div class="flex-grow no-border"> -->
           <!--          </div>     -->
-          <div class="flex-grow: 3; no-border justify-content-center">
+          <div class="flex-grow: 3; no-border ">
             <!--            <mat-icon matTooltip="Create Folder" (click)="openFolderDialog()" class="hand-cursor margin-left-4">create_new_folder</mat-icon> -->
-            <span fxLayout="row">
-              <img matTooltip="Home Folder" width="25px" src="assets/images/icons/Home.png" (click)="backHomePage()"
-                height="20px" label="Home Folder" class="hand-cursor margin-left-4">
-              <img matTooltip="Back" src="assets/images/icons/back.png" (click)="goBackButton()" width="25px" height="20px"
-                label="Create_Folder" class="hand-cursor margin-left-4" style="margin-top: 2px;">
+            
+            <div class="pull-right">
+              <span fxLayout="row">
+                <img matTooltip="Home Folder" width="25px" src="assets/images/icons/Home.png" (click)="backHomePage()"
+                  height="20px" label="Home Folder" class="hand-cursor margin-left-4">
+                <img matTooltip="Back" src="assets/images/icons/back.png" (click)="goBackButton()" width="25px" height="20px"
+                  label="Create_Folder" class="hand-cursor margin-left-4" style="margin-top: 2px;">
 
-              <img matTooltip="Create Folder" width="25px" src="assets/images/icons/Create_Folder.png" (click)="openFolderDialog()"
-                height="25px" label="Create_Folder" class="hand-cursor margin-left-4">
+                <img matTooltip="Create Folder" width="25px" src="assets/images/icons/Create_Folder.png" (click)="openFolderDialog()"
+                  height="25px" label="Create_Folder" class="hand-cursor margin-left-4">
 
-              <span (click)="fileInput.click()">
-                <!--               <mat-icon matTooltip="Upload" class="hand-cursor margin-left-4">cloud_upload</mat-icon> -->
-                <!--               <input #fileInput type="file" (change)="onFileInput($event)" style="display:none;" /> -->
-                <img matTooltip="File Upload" width="25px" src="assets/images/icons/File_Upload.png" title="Upload"
-                  height="25px" class="hand-cursor margin-left-4">
-                <input #fileInput type="file" (change)="onFileInput($event)" style="display:none;" />
-                <!-- </span> Upload</p> -->
+                <span (click)="fileInput.click()">
+                  <!--               <mat-icon matTooltip="Upload" class="hand-cursor margin-left-4">cloud_upload</mat-icon> -->
+                  <!--               <input #fileInput type="file" (change)="onFileInput($event)" style="display:none;" /> -->
+                  <img matTooltip="File Upload" width="25px" src="assets/images/icons/File_Upload.png" title="Upload"
+                    height="25px" class="hand-cursor margin-left-4">
+                  <input #fileInput type="file" (change)="onFileInput($event)" style="display:none;" />
+                  <!-- </span> Upload</p> -->
+                </span>
               </span>
-            </span>
+            </div>
           </div>
         </div>
       </mat-card>
@@ -154,42 +160,42 @@
           <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
             <!-- name type -->
             <ng-container matColumnDef="type">
-              <th mat-header-cell *matHeaderCellDef> type </th>
+              <th mat-header-cell *matHeaderCellDef> Type </th>
               <td mat-cell *matCellDef="let element"> <img src="{{getIcon(element.fileExt,element.type)}}" width="30%">
               </td>
             </ng-container>
             <!-- name Column -->
             <ng-container matColumnDef="name">
-              <th mat-header-cell *matHeaderCellDef width="500px"> name </th>
+              <th mat-header-cell *matHeaderCellDef width="500px"> Name </th>
               <td mat-cell *matCellDef="let element"> {{element.name}} </td>
             </ng-container>
             <!-- created Column -->
             <ng-container matColumnDef="createdAt">
-              <th mat-header-cell *matHeaderCellDef width="100px"> name </th>
+              <th mat-header-cell *matHeaderCellDef width="100px"> Date </th>
               <td mat-cell *matCellDef="let element"> {{element.createdAt | date:'dd/MM/yyyy'}} </td>
             </ng-container>
             <!-- version Column -->
             <ng-container matColumnDef="version">
-              <th mat-header-cell *matHeaderCellDef width="75px"> version </th>
+              <th mat-header-cell *matHeaderCellDef width="75px"> Version </th>
               <td mat-cell *matCellDef="let element"> {{element.version}} </td>
             </ng-container>
             <!-- logs Column -->
             <ng-container matColumnDef="logs">
-              <th mat-header-cell *matHeaderCellDef width="50px" align="right">logs</th>
+              <th mat-header-cell *matHeaderCellDef width="50px" align="right">Logs</th>
               <td mat-cell *matCellDef="let element" (click)="getLogs(element)">
                 <img _ngcontent-c9="" matTooltip="Details" src="assets/images/icons/Details.png" style="width: 50%;">
               </td>
             </ng-container>
             <!-- email Column -->
             <ng-container matColumnDef="email">
-              <th mat-header-cell *matHeaderCellDef width="55px" align="right">email</th>
+              <th mat-header-cell *matHeaderCellDef width="55px" align="right">Email</th>
               <td mat-cell *matCellDef="let element" (click)="openMailDialog(element)">
                 <img _ngcontent-c9="" matTooltip="Email" src="assets/images/icons/Email.png" style="width: 50%;" align="center">
               </td>
             </ng-container>
             <!-- share Column -->
             <ng-container matColumnDef="share">
-              <th mat-header-cell *matHeaderCellDef width="60px" align="right">share</th>
+              <th mat-header-cell *matHeaderCellDef width="60px" align="right">Share</th>
               <td mat-cell *matCellDef="let element" (click)="openShareDialog(element)">
                 <img _ngcontent-c9="" matTooltip="Share" src="assets/images/icons/File_Share.png" style="width: 50%;"
                   align="center">
@@ -197,7 +203,7 @@
             </ng-container>
             <!-- Download Column -->
             <ng-container matColumnDef="download">
-              <th mat-header-cell *matHeaderCellDef width="50px" align="right">download</th>
+              <th mat-header-cell *matHeaderCellDef width="50px" align="right">Download</th>
               <td mat-cell *matCellDef="let element" (click)="downloadFile(element)">
                 <img _ngcontent-c9="" matTooltip="Download" src="assets/images/icons/download.png" style="width: 50%;"
                   align="center">

@@ -5,7 +5,9 @@
   <mat-tab-group #tabGroup>
     <mat-tab label="Overview">
        <app-panel-header-filter></app-panel-header-filter>
-      <spinner diameter="80" *ngIf="projectLoading; else projectListTemplate"></spinner>
+        <div style ="place-content :center;">
+          <mat-spinner style="margin:0 auto;" *ngIf="projectLoading; else projectListTemplate" [diameter]="40"></mat-spinner>
+        </div>
       <ng-template #projectListTemplate>
         <div fxLayout="row">
           <app-expansion-panel  *ngIf="projects" [expansionPanelOptions]="projectDataOptions"
