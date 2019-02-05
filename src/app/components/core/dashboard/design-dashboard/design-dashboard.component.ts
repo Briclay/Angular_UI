@@ -188,7 +188,7 @@ export class DesignDashboardComponent implements OnInit {
       this.user = JSON.parse(window.localStorage.getItem('authUser')); 
       this.userName = this.user.displayName;
       this.roleName = this.user._roleId.name;
-      this.profileImageUrl = this.user.profileImageUrl ? this.user.profileImageUrl : "./assets/images/avatars/profile.jpg";;
+      this.profileImageUrl = this.user.profileImageUrl ? this.user.profileImageUrl : "./assets/images/avatars/profile.jpg";
     this.userAuth = JSON.parse(window.localStorage.getItem('authUserOrganisation'));
     this.orgID = this.userAuth._id;
   }

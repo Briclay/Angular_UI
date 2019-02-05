@@ -10,6 +10,7 @@ export class HeaderComponent implements OnInit {
 
 	userAuth : any;
 	userName : any;
+	userImage : any;
 
 	notifications = [
 	  { 
@@ -43,6 +44,6 @@ export class HeaderComponent implements OnInit {
   	ngOnInit() {
     	this.userAuth = JSON.parse(window.localStorage.getItem('authUser'));
   		this.userName = this.userAuth.displayName ? this.userAuth.displayName : "";
-
+  		this.userImage = this.userAuth.profileImageUrl ? this.userAuth.profileImageUrl : "./assets/images/avatars/profile.jpg";
   	}
 }
