@@ -95,7 +95,7 @@
       * Select Project
     </mat-card>  -->
     <mat-card *ngIf="iconArray.length>0">
-      <ul class="side-nav-list file-icons">
+      <ul class="side-nav-list file-icons" style="overflow: auto; height: 300px;">
         <li *ngFor="let folder of iconArray" (click)="getClickedByIcon(folder)">
           <a>
             <img class="icons" src="{{ folder.iconPath }}" /><br />{{ folder.name }}
