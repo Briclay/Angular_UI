@@ -64,6 +64,7 @@ export class FileManagerConfigComponent implements OnInit {
   deptConfigData: any;
   iconArray = [];
   tableFlag = false;
+  clickedIconName : any;
   designIconArray = [];
   displayedColumns: string[] = ['type', 'name', 'createdAt', 'version', 'logs', 'email', 'share', 'download'];
   constructor(
@@ -419,6 +420,7 @@ export class FileManagerConfigComponent implements OnInit {
 
   //click on icon
   getClickedByIcon(value) {
+    this.clickedIconName = value.name;
     this.folderDetailsDataOption = value;
     if (this.orgId && this.deptId && value) {
       if (value.type === 'folder') {
@@ -555,6 +557,7 @@ export class FileManagerConfigComponent implements OnInit {
     }
   }
   getLogs(data: any) {
+    debugger;
     if (data.type == 'file') {
       this.fileDetails = data;
     }

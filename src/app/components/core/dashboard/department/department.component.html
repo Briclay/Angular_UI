@@ -3,7 +3,9 @@
 <div class="user-container">
     <mat-tab-group #tabGroup>
         <mat-tab label="Overview">
-            <spinner diameter="80" class="text-center" *ngIf="depListSpinner; else content"></spinner>
+            <div style ="place-content :center;">
+                <mat-spinner style="margin:0 auto;" *ngIf="depListSpinner; else content" [diameter]="40"></mat-spinner>
+            </div>
             <div fxLayout="row">
                 <ng-template #content>
                     <app-expansion-panel 

@@ -220,8 +220,10 @@
               <button type="submit" mat-raised-button class="save-button" color="white-bg" [disabled]="isLoading || !workTrackerForm.valid"
                 (click)="workTrackerFormSubmit()">
                 <span>Save</span>
-                <spinner diameter="40" class="pull-left" *ngIf="isLoading"></spinner>
               </button>
+              <div style ="place-content :center;">
+                <mat-spinner style="margin:0 auto;" *ngIf="isLoading" [diameter]="40"></mat-spinner>
+              </div>
             </div>
           </div>
         </div>

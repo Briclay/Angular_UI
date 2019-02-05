@@ -66,8 +66,10 @@
                 Features</button>
             <button [disabled]="isLoading"  (click)="onSubmit()" mat-raised-button type="submit" class="pull-right">
               Submit
-              <spinner diameter="40" class="pull-left" *ngIf="isLoading"></spinner>
             </button>
+            <div style ="place-content :center;">
+              <mat-spinner style="margin:0 auto;" *ngIf="isLoading;" [diameter]="40"></mat-spinner>
+            </div>
             <div class="clearfix"></div>
           </div>
         </div>

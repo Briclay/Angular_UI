@@ -4,7 +4,9 @@
       <mat-tab label="Overview">
           <!-- <app-panel-header-filter (selectOrganizaion)="organizationChanged($event)"></app-panel-header-filter> -->
           <div fxLayout="row">
-              <spinner *ngIf="isLoading; else dataLoaded" class="align-center-block"></spinner>
+              <div style ="place-content :center;">
+                <mat-spinner style="margin:0 auto;" *ngIf="isLoading; else dataLoaded" [diameter]="40"></mat-spinner>
+              </div>
               <ng-template #dataLoaded>
                 <app-expansion-panel 
                     [expansionPanelOptions]="workRequestDataOption"

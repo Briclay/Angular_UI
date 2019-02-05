@@ -4,8 +4,9 @@
     <mat-tab-group #tabGroup>
         <mat-tab label="Overview">
             <app-panel-header-filter></app-panel-header-filter>
-            <spinner diameter="80" class="text-center" *ngIf="loading; else content"></spinner>
-            
+             <div style ="place-content :center;">
+                <mat-spinner style="margin:0 auto;" *ngIf="loading; else content" [diameter]="40"></mat-spinner>
+              </div>
             <div fxLayout="row">
                 <ng-template #content>
                     <app-expansion-panel 

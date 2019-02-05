@@ -1,6 +1,8 @@
 
 <div>
-  <spinner *ngIf="loading; else content"></spinner>
+  <div style ="place-content :center;">
+    <mat-spinner style="margin:0 auto;" *ngIf="loading; else content" [diameter]="40"></mat-spinner>
+  </div>
   <ng-template #content>
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
       <!-- name type -->
