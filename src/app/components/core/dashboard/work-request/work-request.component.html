@@ -1,7 +1,8 @@
+<app-organisation-drop-down (selectOrganizaion)="organizationChanged($event)"></app-organisation-drop-down>
 <div class="work-request-container">
   <mat-tab-group #tabGroup>
       <mat-tab label="Overview">
-          <app-panel-header-filter (selectOrganizaion)="organizationChanged($event)"></app-panel-header-filter>
+          <!-- <app-panel-header-filter (selectOrganizaion)="organizationChanged($event)"></app-panel-header-filter> -->
           <div fxLayout="row">
               <spinner *ngIf="isLoading; else dataLoaded" class="align-center-block"></spinner>
               <ng-template #dataLoaded>

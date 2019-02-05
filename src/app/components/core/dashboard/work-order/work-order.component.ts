@@ -12,7 +12,7 @@ import {takeUntil} from 'rxjs/operators';
 })
 export class WorkOrderComponent implements OnInit {
   isLoading: boolean;
-  workOrder: WorkOrderData;
+  workOrder = [];
   workOrderDataOption: any;
   orgID: string;
 
@@ -21,7 +21,7 @@ export class WorkOrderComponent implements OnInit {
   constructor(
     private workOrderService: WorkOrderService,
     private router: Router,
-    private route: ActivatedRoute,) { }
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
     observableMerge(this.route.params, this.route.queryParams).pipe(
