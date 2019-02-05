@@ -77,7 +77,7 @@ export class LoginComponent implements OnInit {
 				console.log(response, "loginResponse")
 				this.isLoading = false;
                 this.auth.set(response);
-                if(response.userObj.newUser){
+              /*  if(response.userObj.newUser){
                 	const path = '/change-password/' + response.userObj._id;
 					this.router.navigateByUrl(path);
                 }
@@ -86,7 +86,11 @@ export class LoginComponent implements OnInit {
 					this.loginForm['_touched'] = false;
 					const path = '/dashboard';
 					this.router.navigateByUrl(path);
-                }
+                }*/
+                this.loginForm.reset();
+					this.loginForm['_touched'] = false;
+					const path = '/dashboard';
+					this.router.navigateByUrl(path);
 			}, (error: any) => {
 				this.isLoading = false;
 				this.snackBar.open("Invalid username or password", 'login', {

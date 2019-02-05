@@ -9,7 +9,7 @@
             <div fxLayout="row">
                 <ng-template #content>
                     <app-expansion-panel 
-                        [expansionPanelOptions]="userDataOptions"
+                         *ngIf="orgID" [expansionPanelOptions]="userDataOptions"
                         selectorComponent="app-user-details" 
                         [data]="users"
                         [isHistory]="true"></app-expansion-panel>

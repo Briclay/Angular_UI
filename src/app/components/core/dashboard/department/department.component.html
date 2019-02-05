@@ -7,7 +7,7 @@
             <div fxLayout="row">
                 <ng-template #content>
                     <app-expansion-panel 
-                        [expansionPanelOptions]="departmentDataOptions"
+                        *ngIf="selectedOrgId" [expansionPanelOptions]="departmentDataOptions" 
                         selectorComponent="app-department-details" 
                         [data]="departments"
                         [isHistory]="true"

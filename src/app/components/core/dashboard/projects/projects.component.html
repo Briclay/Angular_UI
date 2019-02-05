@@ -1,4 +1,5 @@
-<app-organisation-drop-down (selectOrganizaion)="organizationChanged($event)"></app-organisation-drop-down>
+<!-- <app-organisation-drop-down (selectOrganizaion)="organizationChanged($event)"></app-organisation-drop-down>
+ -->
 <app-top-menu></app-top-menu>
 <div class="project-container">
   <mat-tab-group #tabGroup>
@@ -7,8 +8,8 @@
       <spinner diameter="80" *ngIf="projectLoading; else projectListTemplate"></spinner>
       <ng-template #projectListTemplate>
         <div fxLayout="row">
-          <app-expansion-panel [isDisabled]="true" [expansionPanelOptions]="projectDataOptions"
-            [data]="projects" [isHistory]="true"></app-expansion-panel>
+          <app-expansion-panel  *ngIf="projects" [expansionPanelOptions]="projectDataOptions"
+            [isDisabled]="true"  [data]="projects" [isHistory]="true"></app-expansion-panel>
         </div>
       </ng-template> 
      

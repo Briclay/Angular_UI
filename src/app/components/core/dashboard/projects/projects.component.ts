@@ -15,9 +15,11 @@ export class ProjectsComponent implements OnInit {
 
   projectDataOptions = [];
   public dataSource: any;
-  projects: any = {
+  /*projects: any = {
     data: []
   };
+  */
+  projects = [];
   selectedOrgId: string;
   projectLoading = false;
   orgID: any;
