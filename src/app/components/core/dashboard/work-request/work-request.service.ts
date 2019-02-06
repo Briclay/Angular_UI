@@ -10,22 +10,22 @@ import {environmentService} from "../../../../constant/environment"
 export class WorkRequestService {
     constructor(private apiService: ApiService) { }
     public getWorkRequest(orgID): Observable<any> {
-        let url = `${environmentService.briclayWorkRequest}/work-request?${orgID}&order=createdAt&sort=desc`;
+        const url = `${environmentService.briclayWorkRequest}/work-request?${orgID}&order=createdAt&sort=desc`;
         return this.apiService.get(url).pipe(map(res => res));
     }
 
     public saveWorkRequest(request): Observable<any> {
-        let url = `${environmentService.briclayWorkRequest}/work-request`;
+        const url = `${environmentService.briclayWorkRequest}/work-request`;
         return this.apiService.post(url, request).pipe(map(res => res));
     }
 
-    public getWorkCategory(orgID): Observable<any> {
-        let url = `${environmentService.briclayWorkRequest}/work-config?${orgID}&configValues=WORK_CATEGORY`;
+    public getWorkConfig(orgID): Observable<any> {
+        const url = `${environmentService.briclayWorkRequest}/work-config?${orgID}&configValues=WORK_CATEGORY`;
         return this.apiService.get(url).pipe(map(res => res));
     }
 
     public updateWorkRequest(request, requestID): Observable<any> {
-        let url = `${environmentService.briclayWorkRequest}/work-request/${requestID}`;
+        const url = `${environmentService.briclayWorkRequest}/work-request/${requestID}`;
         return this.apiService.put(url, request).pipe(map(res => res));
     }
 }

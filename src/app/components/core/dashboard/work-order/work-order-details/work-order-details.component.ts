@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import * as _ from 'lodash';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { WorkOrderService } from '../work-order.service';
-import { WorkRequestService } from '../../work-request/work-request.service'
+import { WorkRequestService } from '../../work-request/work-request.service';
 import { OrganisationService } from '../../organisation/organisation.service';
 import { ProjectService } from '../../projects/project.service';
 import {merge as observableMerge, Subject} from 'rxjs';
@@ -60,7 +60,7 @@ export class WorkOrderDetailsComponent implements OnInit {
       status: {},
       date: {},
       totalValue: {}
-    }
+    };
     this.orderTrackerForm = this.formBuilder.group({
       _organisationId: this.orgId,
       _projectId: [Validators.required],
@@ -92,7 +92,7 @@ export class WorkOrderDetailsComponent implements OnInit {
       .subscribe((params) => this.loadRoute(params));
   }
 
-  public ngOnDestroy(): void {
+  public ngOnDestroy() {
     this.unsubscribe.next();
     this.unsubscribe.complete();
   }
@@ -125,10 +125,10 @@ export class WorkOrderDetailsComponent implements OnInit {
     }
   }
   createOrderId(number) {
-    var str = '' + number;
-    var count = 0;
-    var padArray = [{ len: 1, size: 3 }, { len: 2, size: 2 }, { len: 3, size: 1 }, { len: 4, size: 0 }]
-    var findSize = _.find(padArray, function (item) {
+    let str = '' + number;
+    let count = 0;
+    const padArray = [{ len: 1, size: 3 }, { len: 2, size: 2 }, { len: 3, size: 1 }, { len: 4, size: 0 }];
+    const findSize = _.find(padArray, function (item) {
       return item.len === str.length;
     });
     while (count < findSize.size) {
@@ -156,26 +156,26 @@ export class WorkOrderDetailsComponent implements OnInit {
     this.workOrderService.getWorkOrder('filter[_organisationId]=' + this.orgId)
       .pipe().subscribe(res => {
         this.orderList = res;
-        this.orderTrackerForm.controls['_workOrderId'].setValue("A" + this.createOrderId(res.length + 1));
+        this.orderTrackerForm.controls['_workOrderId'].setValue('A' + this.createOrderId(res.length + 1));
         this.workList = [];
-        var countCheck = 0;
+        let countCheck = 0;
         // to task for future
-        for (var i = 0; i < this.requestTrackerList.length; i++) {
+        for (let i = 0; i < this.requestTrackerList.length; i++) {
           countCheck = 0;
 
-          for (var j = 0; j < this.orderList.length; j++) {
+          for (let j = 0; j < this.orderList.length; j++) {
             if (_.isEqual(this.requestTrackerList[i].requestNumber, this.orderList[j]._workRequestId.requestNumber)) {
               countCheck = 1;
               break;
             }
           }
-          if (countCheck == 0) {
+          if (countCheck === 0) {
             this.workList.push(this.requestTrackerList[i]);
           }
         }
         // });
       }, (error: any) => {
-        //TODO add error component
+        // TODO add error component
         console.error('error', error);
       });
   }
@@ -187,10 +187,10 @@ export class WorkOrderDetailsComponent implements OnInit {
         this.getDate(this.orgCode);
       }, (error: any) => {
         console.error('error', error);
-      })
+      });
   }
   getProjectCode(orgCode, date) {
-    var reuquetNumber;
+    let reuquetNumber;
     if (!_.isUndefined(this.requestTrackerList) && !_.isEmpty(this.requestTrackerList)) {
       reuquetNumber = this.requestTrackerList[0].requestNumber;
     }
@@ -198,20 +198,21 @@ export class WorkOrderDetailsComponent implements OnInit {
     console.log('date' + date);
     console.log('reuquetNumber' + reuquetNumber);
     console.log('reuquetNumber' + reuquetNumber);
-    var refNumber = orgCode + "/" + date + "/" + reuquetNumber + "/";
+    let refNumber = orgCode + '/' + date + '/' + reuquetNumber + '/';
     this.projectService.getSingleProjects(this.orderTrackerForm.value.workRequestList._projectId._id)
       .pipe().subscribe(res => {
         console.log('res.projectCode' + res.projectCode);
-        this.orderTrackerForm.controls['workOrderFullRefNumber'].setValue(refNumber = refNumber + res.projectCode + "-" + this.createOrderId(this.orderList.length) + "/" + this.orderTrackerForm.value._workOrderId);
+        // tslint:disable-next-line:max-line-length
+        this.orderTrackerForm.controls['workOrderFullRefNumber'].setValue(refNumber = refNumber + res.projectCode + '-' + this.createOrderId(this.orderList.length) + '/' + this.orderTrackerForm.value._workOrderId);
       }, (error: any) => {
-        console.log('error', error)
+        console.log('error', error);
         this.orderTrackerForm.controls['workOrderFullRefNumber'].setValue(refNumber);
       });
   }
   getDate(orgCode) {
-    var cuurentYear, preYear;
-    var month = parseInt(this.initiatedDate.getMonth().toString());
-    var year = parseInt(this.initiatedDate.getFullYear().toString());
+    let cuurentYear, preYear;
+    const month = parseInt(this.initiatedDate.getMonth().toString());
+    const year = parseInt(this.initiatedDate.getFullYear().toString());
     if (month > 3) {
       cuurentYear = year + 1;
       preYear = year;
@@ -219,28 +220,28 @@ export class WorkOrderDetailsComponent implements OnInit {
       cuurentYear = year;
       preYear = year - 1;
     }
-    this.getProjectCode(orgCode, ((this.getSubString(preYear, 2, 4)) + "-" + this.getSubString(cuurentYear, 2, 4)));
+    this.getProjectCode(orgCode, ((this.getSubString(preYear, 2, 4)) + '-' + this.getSubString(cuurentYear, 2, 4)));
   }
   genrateFullRefNumber() {
-    this.getOrgCode()
+    this.getOrgCode();
   }
   getSubString(str, pos1, pos2) {
     return str.toString().substring(pos1, pos2);
   }
   assignValuesToForm() {
     if (this.formType !== 'create') {
-      this.orderTrackerForm.patchValue(this.data)
+      this.orderTrackerForm.patchValue(this.data);
     }
   }
   getAllWorkRequest() {
-    //get all work request for calculting request number
+    // get all work request for calculting request number
     this.workRequestService.getWorkRequest(`filter[_organisationId]=` + this.orgId)
       .pipe().subscribe(res => {
         this.requestTrackerList = res;
         this.getAllWorkOrder();
       }, (error: any) => {
-        //TODO add error component
-        console.error('error', error)
+        // TODO add error component
+        console.error('error', error);
       });
   }
 
@@ -249,12 +250,12 @@ export class WorkOrderDetailsComponent implements OnInit {
     if (this.orderTrackerForm.valid) {
       this.workOrderService.save(this.orderTrackerForm.value)
         .pipe().subscribe(res => {
-          console.log('res', res)
+          console.log('res', res);
         }, (error: any) => {
-          console.log('error', error)
+          console.log('error', error);
         });
     } else {
-      console.log('invliad form')
+      console.log('invliad form');
     }
   }
   cancel() {

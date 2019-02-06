@@ -7,6 +7,8 @@ import { WorkRequestService } from '../work-request.service';
 import { UserService } from '../../../dashboard/user/user.service';
 import { ProjectService } from '../../../dashboard/projects/project.service';
 import { DateUtils } from '../../../../../utils/date-uitls';
+import { merge as observableMerge, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-work-request-details',
@@ -17,17 +19,18 @@ export class WorkRequestDetailsComponent implements OnInit {
   @Input() formType: string;
   @Input() data: any;
   @Output() public tabSwitch: EventEmitter<any> = new EventEmitter<any>();
+  private unsubscribe: Subject<any> = new Subject();
   form: FormGroup;
   formErrors: any;
   workTrackerFormErrors: any;
   userAuth: any;
   workTrackerForm: FormGroup;
-  workCategory: any;
+  workCategory = [];
   typeOfWork: any;
   requestTrcakerList: any;
   reuqestNumber: String;
-  projectsList: any;
-  userList: any;
+  projectsList = [];
+  userList = [];
   todayDate: String;
   status: any;
 
@@ -37,8 +40,9 @@ export class WorkRequestDetailsComponent implements OnInit {
     timeToComplete: null,
     leadDaysToComplete: null,
     leadTimeRequire: null
-  }
+  };
   orgId: string;
+  orgDetails: any;
   isLoading: boolean;
   constructor(private formBuilder: FormBuilder,
     private router: Router,
@@ -47,13 +51,16 @@ export class WorkRequestDetailsComponent implements OnInit {
     private projectService: ProjectService,
     private workRequestService: WorkRequestService,
     private userService: UserService) {
-    //get org id for superadmin
+    // get org id for superadmin
     this.todayDate = (new Date()).toISOString();
-    this.orgId = '5a5844cd734d1d61613f7066';
-    //list of typ of work
-    this.typeOfWork = ["Contractor Appointement", "Termination order"];
-
-
+   // this.org = JSON.parse(window.localStorage.authUserOrganisation);
+    // this.dept = JSON.parse(window.localStorage.authUserDepartment);
+    // this.authUser = JSON.parse(window.localStorage.authUser);
+    this.orgDetails =  JSON.parse(window.localStorage.authUserOrganisation);
+    this.orgId = this.orgDetails._id;
+   // console.log('this.orgId' + JSON.stringify(this.orgId));
+    // list of typ of work
+    this.typeOfWork = ['Contractor Appointement', 'Termination order'];
     this.workTrackerFormErrors = {
       requestNumber: {},
       date: {},
@@ -92,6 +99,7 @@ export class WorkRequestDetailsComponent implements OnInit {
       leadTimeRequire: ['', Validators.required],
       needByDate: ['', Validators.required],
       leadDaysToComplete: ['', Validators.required],
+      workDummyCategory: [''],
       needByStatusReason: [''],
       supportRole: null,
       awardedDate: [''],
@@ -103,46 +111,72 @@ export class WorkRequestDetailsComponent implements OnInit {
       workOrderPutDate: [''],
       workOrderApprovalDate: ['']
     });
+    this.getAllWorkRequestTracker();
+    this.getUsers();
+    this.getAllProjectsList();
+    this.getWorkCategory();
   }
   noOfDays() {
-    this.workTrackerForm.controls['leadTimeRequire'].setValue(this.workTrackerForm.value.workCategory.noOfDays);
+    console.log(' this.workTrackerForm no of days' + JSON.stringify(this.workTrackerForm.value));
+    const name = this.workTrackerForm.value.workCategory;
+    const selectedWorkCat = _.filter(this.workCategory, function(data) {
+      console.log('data ', data);
+      return data.name === name;
+    });
+    console.log('selectedWorkCat', selectedWorkCat);
+    this.workTrackerForm.controls['leadTimeRequire'].setValue(selectedWorkCat[0].noOfDays);
   }
 
   ngOnInit() {
-    this.route.queryParams.subscribe(params => {
-      this.orgId = params['orgID'];
-      this.assignValuesToForm()
-      this.getAllProjectsList();
-      this.getAllWorkRequestTracker();
-      this.getUsers();
-      this.getWorkCategory();
-    });
-    
+    // tslint:disable-next-line:max-line-length
+    observableMerge(this.route.params, this.route.queryParams).pipe(takeUntil(this.unsubscribe)).subscribe((params) => this.loadRoute(params));
+    // this.route.queryParams.subscribe(params => {
+    //   this.orgId = params['orgID'];
+    //    this.assignValuesToForm();
+    //   this.getAllProjectsList();
+    //   this.getAllWorkRequestTracker();
+    //   this.getUsers();
+    //   this.getWorkCategory();
+    // });
   }
 
+  loadRoute(params: any) {
+    if ('orgID' in params) {
+      this.orgId = params['orgID'];
+      this.assignValuesToForm();
+      this.getAllWorkRequestTracker();
+      this.getUsers();
+      this.getAllProjectsList();
+      this.getWorkCategory();
+      // this.getWorkRequest();
+    }
+  }
   assignValuesToForm() {
     if (this.formType !== 'create') {
-      this.workTrackerForm.patchValue(this.data)
+      this.workTrackerForm.patchValue(this.data);
     }
   }
 
   getAllProjectsList() {
-    //get all project
-    this.projectService.getProjects(`${this.orgId}`)
+    // get all project
+    this.projectService.getProjects(this.orgId)
       .pipe().subscribe(res => {
+        console.log('projectt res', res);
         this.projectsList = res;
-          if (this.projectsList.length <= 0) {
-            //TODO add error component
-            console.error('No projects found')
-          }
+        // if (this.projectsList.length <= 0) {
+        //   console.error('No projects found');
+        // } else {
+        //   this.projectsList = res;
+
+        // }
       }, (error: any) => {
-        //TODO add error component
-        console.error('error', error)
+        // TODO add error component
+        console.error('error', error);
       });
   }
 
   getAllWorkRequestTracker() {
-    //get all work request for calculting request number
+    // get all work request for calculting request number
     this.workRequestService.getWorkRequest(`filter[_organisationId]=${this.orgId}`)
       .pipe().subscribe(res => {
         this.requestTrcakerList = res;
@@ -153,12 +187,12 @@ export class WorkRequestDetailsComponent implements OnInit {
         }
         this.workTrackerForm.controls['requestNumber'].setValue(this.reuqestNumber);
       }, (error: any) => {
-        //TODO add error component
-        console.error('error', error)
+        // TODO add error component
+        console.error('error', error);
       });
   }
   workTrackerFormSubmit() {
-    console.log('(this.workTrackerForm'+JSON.stringify(this.workTrackerForm.value));
+    console.log('(this.workTrackerForm' + JSON.stringify(this.workTrackerForm.value));
     if (this.workTrackerForm.valid) {
       this.workTrackerForm.value._organisationId = this.orgId;
       if (this.workTrackerForm.value.initiatedDate && this.workTrackerForm.value.RFAapprovalDate) {
@@ -174,70 +208,73 @@ export class WorkRequestDetailsComponent implements OnInit {
   }
 
   getUsers() {
-    this.userService.getUser(`filter[_organisationId]=${this.orgId}`)
+    this.userService.getUser(this.orgId)
       .pipe().subscribe(res => {
         this.userList = res;
       }, (error: any) => {
-        //TODO add error component
-        console.error('error', error)
+        // TODO add error component
+        console.error('error', error);
       });
   }
 
   saveWorkRequest(requestData) {
-    console.log('requestData'+JSON.stringify(requestData));
+    console.log('requestData' + JSON.stringify(requestData));
     this.isLoading = true;
     this.workRequestService.saveWorkRequest(requestData)
       .pipe().subscribe(res => {
         this.isLoading = false;
         this.tabSwitch.emit(0);
-        this.workTrackerForm.reset()
+        this.workTrackerForm.reset();
       }, (error: any) => {
-        //TODO add error component
+        // TODO add error component
         console.error('error', error);
         this.isLoading = false;
       });
   }
 
   updateWorkRequest(requestData) {
-    console.log('requestData'+JSON.stringify(requestData));
-    requestData = { ...requestData }
+    console.log('requestData' + JSON.stringify(requestData));
+    requestData = { ...requestData };
     delete requestData.needByDate;
     this.isLoading = true;
     this.workRequestService.updateWorkRequest(requestData, this.data._id)
       .pipe().subscribe(res => {
         console.log('updateWorkRequest saved', res);
         this.isLoading = false;
-
       }, (error: any) => {
-        //TODO add error component
+        // TODO add error component
         console.error('error', error);
         this.isLoading = false;
       });
   }
 
   onSave() {
-    console.log('this.formType'+this.formType);
+    console.log('this.formType' + this.formType);
+    console.log('on save ' , this.workTrackerForm.value);
     const requestData = {
       ...this.workTrackerForm.value,
-      workCategory: this.workTrackerForm.value.workCategory.name,
+      workCategory: this.workTrackerForm.value.workDummyCategory.name,
       leadTimeRequire: this.workTrackerForm.value.leadTimeRequire
-    }
-    this.formType !== 'create' ? this.updateWorkRequest(requestData) : this.saveWorkRequest(requestData)
+    };
+    console.log('on save requestData' , requestData);
+
+    this.formType !== 'create' ? this.updateWorkRequest(requestData) : this.saveWorkRequest(requestData);
   }
   /* Open dailog for reason */
 
   calLeadDaysToComplete() {
     console.log('date');
     console.log(this.workTrackerForm.value.leadTimeRequire);
+    console.log(this.workTrackerForm.value.leadDuration);
     console.log(_.isNumber(this.workTrackerForm.value.leadTimeRequire));
     // if (this.workTrackerForm.value.date <= this.workTrackerForm.value.needByDate) {
-    if (this.workTrackerForm.value.leadDuration) {
-      let dateOffset = (24 * 60 * 60 * 1000) * this.workTrackerForm.value.leadDuration;
-      let need_date = this.workTrackerForm.value.needByDate.getTime();
+    if (this.workTrackerForm.value.leadTimeRequire) {
+      const dateOffset = (24 * 60 * 60 * 1000) * this.workTrackerForm.value.leadTimeRequire;
+      const need_date = this.workTrackerForm.value.needByDate.getTime();
       this.workTrackerForm.value.needByDate.setTime(need_date);
-      var timeDiff = this.workTrackerForm.value.needByDate.getTime() - this.workTrackerForm.value.date.getTime();
-      var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
-      console.log('diffDays'+ typeof diffDays);
+      const timeDiff = this.workTrackerForm.value.needByDate.getTime() - this.workTrackerForm.value.date.getTime();
+      const diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+      console.log('diffDays of lead days to comlete' + typeof diffDays);
       this.workTrackerForm.controls['leadDaysToComplete'].setValue(diffDays);
       this.time.leadDaysToComplete = diffDays;
     } else {
@@ -256,23 +293,14 @@ export class WorkRequestDetailsComponent implements OnInit {
     }
     if (this.workTrackerForm.value.initiatedDate && this.workTrackerForm.value.RFAapprovalDate) {
       if (this.workTrackerForm.value.initiatedDate < this.workTrackerForm.value.RFAapprovalDate) {
-        var timeDiff = Math.abs(this.workTrackerForm.value.initiatedDate.getTime() - this.workTrackerForm.value.RFAapprovalDate.getTime());
-        var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+        // tslint:disable-next-line:max-line-length
+        const timeDiff = Math.abs(this.workTrackerForm.value.initiatedDate.getTime() - this.workTrackerForm.value.RFAapprovalDate.getTime());
+        const diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+        console.log('diffDays of time to complete',diffDays);
         this.workTrackerForm.controls['timeToComplete'].setValue(diffDays);
         this.time.timeToComplete = diffDays;
 
       } else {
-      }
-    }
-  }
-  calLeadTimeComplete() {
-    if (this.workTrackerForm.value.date && this.workTrackerForm.value.needByDate && this.workTrackerForm.value.leadTimeRequire) {
-      this.leadDateTime.setDate(this.workTrackerForm.value.date.getDate() + this.workTrackerForm.value.leadTimeRequire);
-      this.needByDate.setDate(this.workTrackerForm.value.needByDate.getDate() - this.workTrackerForm.value.leadTimeRequire);
-      if (this.leadDateTime > this.needByDate) {
-        this.workTrackerForm.controls['leadDaysToComplete'].setValue(this.leadDateTime);
-      } else {
-        this.workTrackerForm.controls['leadDaysToComplete'].setValue(this.needByDate);
       }
     }
   }
@@ -292,10 +320,10 @@ export class WorkRequestDetailsComponent implements OnInit {
     }
   }
   createRequestNumber(number) {
-    var str = '' + number;
-    var count = 0;
-    var padArray = [{ len: 1, size: 3 }, { len: 2, size: 2 }, { len: 3, size: 1 }, { len: 4, size: 0 }]
-    var findSize = _.find(padArray, function (item) {
+    let str = '' + number;
+    let count = 0;
+    const padArray = [{ len: 1, size: 3 }, { len: 2, size: 2 }, { len: 3, size: 1 }, { len: 4, size: 0 }];
+    const findSize = _.find(padArray, function (item) {
       return item.len === str.length;
     });
     while (count < findSize.size) {
@@ -305,7 +333,7 @@ export class WorkRequestDetailsComponent implements OnInit {
     return str;
   }
   cancel() {
-    const path = '/work-request-tracker'
+    const path = '/work-request-tracker';
     this.router.navigate([path]);
   }
   onFormValuesChanged() {
@@ -313,7 +341,6 @@ export class WorkRequestDetailsComponent implements OnInit {
       if (!this.formErrors.hasOwnProperty(field)) {
         continue;
       }
-
       // Clear previous errors
       this.formErrors[field] = {};
 
@@ -327,16 +354,15 @@ export class WorkRequestDetailsComponent implements OnInit {
   }
 
   getWorkCategory(orgId?) {
-    this.workRequestService.getWorkCategory(`filter[_organisationId]=${this.orgId}`)
+    this.workRequestService.getWorkConfig(`filter[_organisationId]=${this.orgId}`)
       .pipe().subscribe(res => {
-        if(res.length) {
-          this.workCategory = res[0].configValues
+        if (res.length) {
+          this.workCategory = res[0].configValues;
         }
       }, (error: any) => {
-        //TODO add error component
-        console.error('error', error)
+        // TODO add error component
+        console.error('error', error);
       });
-
   }
 
 }

@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import {WorkRequestService} from './work-request.service';
-import {RequestTrackerData} from './interface';
-import {merge as observableMerge, Subject} from 'rxjs';
+import { WorkRequestService } from './work-request.service';
+import { RequestTrackerData } from './interface';
+import { merge as observableMerge, Subject } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
-import {takeUntil} from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-work-request',
@@ -12,44 +12,51 @@ import {takeUntil} from 'rxjs/operators';
 })
 export class WorkRequestComponent implements OnInit {
   @ViewChild('tabGroup') tabGroup;
-  
+
   isLoading: boolean;
   workRequest: RequestTrackerData;
   workRequestDataOption: any;
   orgID: string;
+  orgDetails: any;
   private unsubscribe: Subject<any> = new Subject();
 
   constructor(
-    private workRequestService : WorkRequestService,
+    private workRequestService: WorkRequestService,
     private router: Router,
     private route: ActivatedRoute,
-   ) { }
+   ) {
+    this.orgDetails =  JSON.parse(window.localStorage.authUserOrganisation);
+    this.orgID = this.orgDetails._id;
+    console.log('this.orgId' + JSON.stringify(this.orgDetails));
+    this.getWorkRequest();
+   }
 
   ngOnInit() {
-    observableMerge(this.route.params, this.route.queryParams).pipe(
-      	takeUntil(this.unsubscribe))
-      	.subscribe((params) => this.loadRoute(params));
+    // tslint:disable-next-line:max-line-length
+    observableMerge(this.route.params, this.route.queryParams).pipe(takeUntil(this.unsubscribe)).subscribe((params) => this.loadRoute(params));
   }
 
   public ngOnDestroy(): void {
-		this.unsubscribe.next();
-		this.unsubscribe.complete();
-	}
+    this.unsubscribe.next();
+    this.unsubscribe.complete();
+  }
 
   loadRoute(params: any) {
-		if('orgID' in params) {
-			this.orgID = params['orgID'];
+    if ('orgID' in params) {
+      this.orgID = params['orgID'];
       this.getWorkRequest();
-		}
-	}
-  
+    }
+  }
+
   organizationChanged(org) {
-		this.router.navigate([], {queryParams: {orgID: org.value ? org.value._id : org._id} , queryParamsHandling: 'merge'});
-	}
+  this.router.navigate([], {queryParams: {orgID: org.value ? org.value._id : org._id} , queryParamsHandling: 'merge'});
+  }
 
   getWorkRequest() {
     this.isLoading = true;
-    this.workRequestService.getWorkRequest(`filter[_organisationId]=${this.orgID}`).pipe().subscribe(res => {
+    console.log('this.orgID' + this.orgID);
+    this.workRequestService.getWorkRequest('filter[_organisationId]=' + this.orgID).pipe().subscribe(res => {
+      console.log('res', res);
       this.workRequest = res;
       this.isLoading = false;
       this.workRequestDataOption = [
@@ -68,7 +75,7 @@ export class WorkRequestComponent implements OnInit {
         { title: 'Order Description ', key: 'workDescription', display: 'block' },
         { title: 'Initiated Date', key: 'initiatedDate', display: 'block', type: 'date' },
         { title: 'Work Category ', key: 'workCategory', display: 'block' },
-      ]
+      ];
     });
   }
 
