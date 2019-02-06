@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from './../../../services/authentication/authentication.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatDialog,  MatSnackBar ,MAT_DIALOG_DATA } from '@angular/material';
@@ -20,6 +20,9 @@ export class ChangePasswordComponent implements OnInit {
 	userId : any;
 	userData : any;
 	emailId :any;
+	usrType : any;
+	newFlagSet : boolean;
+
 	constructor(
 		private route: ActivatedRoute,
 		private formBuilder: FormBuilder,
@@ -31,11 +34,12 @@ export class ChangePasswordComponent implements OnInit {
 		private usersService : UserService) 
 	{
 		this.changePasswordFormErrors = {
+			userType : {},
+			newUser : {},
 			email: {},
-			newPassword: {},
-			comfirmPassword : {}
+			password: {},
+			confirmPassword : {}
 		}
-
 		this.route.params.subscribe(params => {
 			this.userId = params['id'];   
 		}); 
@@ -44,15 +48,22 @@ export class ChangePasswordComponent implements OnInit {
 	getUserbyId(){
 		this.usersService.getSingleUser(this.userId)
 		.pipe().subscribe(response =>  {
-			this.emailId = response.email;
+			//this.userData = response;
+			if(response){
+				this.emailId = response.email;
+				this.usrType = response.userType;
+				this.newFlagSet = response.newUser;
+			}
 		});
 	}
 	ngOnInit() {
 		this.getUserbyId();
 		this.changePasswordForm = this.formBuilder.group({
-			email: [this.emailId, Validators.required],
-			newPassword: ['', Validators.required],
-			comfirmPassword: ['', Validators.required]
+			userType : [this.usrType],
+			newUser : [this.newFlagSet],
+			email: [this.emailId],
+			password: ['', Validators.required],
+			confirmPassword: ['', [Validators.required, confirmPassword]]
 		});
 		this.changePasswordForm.valueChanges.subscribe(() => {
 			this.onchangePasswordFormValuesChanged();
@@ -74,18 +85,41 @@ export class ChangePasswordComponent implements OnInit {
 	  }
 	}
 
-	/*onchangeFormSubmit() {
-    if (this.changePasswordForm.valid) {
-      this.authenticationService.changePassword(this.userId ,  this.changePasswordForm.value)
-		.pipe().subscribe(response =>  {
-          console.log(response)
-          this.changePasswordForm.reset();
-          this.changePasswordForm['_touched'] = false;
+	onchangeFormSubmit() {
+		//if (this.changePasswordForm.valid) {
+			this.changePasswordForm.value.userType = this.usrType;	
+			this.changePasswordForm.value.newUser = false;
+			this.changePasswordForm.value.email = this.emailId;
+			delete this.changePasswordForm.value.confirmPassword;
+			this.authenticationService.changePassword(this.userId ,  this.changePasswordForm.value)
+			.pipe().subscribe(response =>  {
+				console.log(response)
+				this.changePasswordForm.reset();
+				this.changePasswordForm['_touched'] = false;
           // redirect login
-         this.router.navigateByUrl('/auth/login');
+          this.router.navigateByUrl('/auth/login');
         }, (error: any) => {
-          console.log(error, "error")
+        	console.log(error, "error")
         });
-    }
-  }*/
+		//}
+	}
+}
+
+function confirmPassword(control: AbstractControl) {
+	if (!control.parent || !control) {
+		return;
+	}
+	const password = control.parent.get('password');
+	const confirmPassword = control.parent.get('confirmPassword');
+	if (!password || !confirmPassword) {
+		return;
+	}
+	if (confirmPassword.value === '') {
+		return;
+	}
+	if (password.value !== confirmPassword.value) {
+		return {
+			passwordsNotMatch: true
+		};
+	}
 }

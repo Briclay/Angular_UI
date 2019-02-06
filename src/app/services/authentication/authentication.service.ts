@@ -22,6 +22,11 @@ export class AuthenticationService {
         return this.apiService.post(url, request).pipe(map(res => res));
     }
 
+    public changePassword(id, request): Observable<any> {
+        let url = `${environmentService.briclayCore}/users/${id}`;
+        return this.apiService.put(url, request).pipe(map(res => res));
+    }
+
     public resetPwd(request, token): Observable<any> {
         let url = `${environmentService.briclayCore}/auth/reset?token=${token}`;
         return this.apiService.post(url, request).pipe(map(res => res));

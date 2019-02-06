@@ -329,7 +329,6 @@ export class FileManagerConfigComponent implements OnInit {
           }
         });
     }
-
   }
 
   openMailDialog(element) {
@@ -560,6 +559,7 @@ export class FileManagerConfigComponent implements OnInit {
     debugger;
     if (data.type == 'file') {
       this.fileDetails = data;
+      console.log(this.fileDetails, "this.fileDetails")
     }
   }
   /*downlaod file */

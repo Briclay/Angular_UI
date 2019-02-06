@@ -218,7 +218,9 @@
     </div>
 
     <!-- end icon  -->
-    <div class="file-sub-details" *ngIf="!projectFlag">
+<!--     <div class="file-sub-details" *ngIf="!projectFlag">
+ -->      
+    <div class="file-sub-details" >
       <!-- 
         <mat-card class="margin-btm-10">
           <div *ngIf="folderDetailsDataOption" zclass="flex-box">
@@ -232,14 +234,12 @@
       </mat-card> -->
       <!-- file details -->
       <mat-card class="margin-btm-10" *ngIf="fileDetails">
-        <div >
+        <div>
           <app-file-config-details [folderDetailsDataOption]="fileDetails">
           </app-file-config-details>
         </div>
       </mat-card>
       <!-- end files details -->
     </div>
-
   </div>
-
 </div>
