@@ -22,11 +22,13 @@ export class DesignDashboardComponent implements OnInit {
   designDashForm: FormGroup;
   orgID: string;
   userAuth : any;
-  profileImageUrl : any;
+  profileImageUrl = "";
   user: any;
+  userId : any;
   userName: any;
   roleName: any;
-  isLoading : any;
+  isLoading : boolean;
+  usrType : any;
 
 /*  projectConsultances : any[] = [
     {
@@ -186,6 +188,8 @@ export class DesignDashboardComponent implements OnInit {
     private snackBar : MatSnackBar) {    
 
       this.user = JSON.parse(window.localStorage.getItem('authUser')); 
+      this.userId = this.user._id;
+      this.usrType = this.user.userType;
       this.userName = this.user.displayName;
       this.roleName = this.user._roleId.name;
       this.profileImageUrl = this.user.profileImageUrl ? this.user.profileImageUrl : "./assets/images/avatars/profile.jpg";
@@ -230,13 +234,18 @@ export class DesignDashboardComponent implements OnInit {
   }
 
   saveOnS3(response: any, file, body: any) {
+    this.isLoading = true;
     this.http.put(response.signedRequest, file, {
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
     }).subscribe((awsRes: any) => {
       let filePath = 'https://s3.ap-south-1.amazonaws.com/' + this.orgID + '/' + body.savedFileName;
       //this.designDashForm.controls['profileImageUrl'].setValue(filePath)
       this.profileImageUrl = filePath;
+      this.isLoading = false;
       console.log(this.profileImageUrl, "filePath")
+      if(this.profileImageUrl !== ""){
+        this.onSubmit()
+      }
     }, (error: any) => {
       this.snackBar.open(error.message, 'error', {
         duration: 5000,
@@ -254,35 +263,21 @@ export class DesignDashboardComponent implements OnInit {
   onSubmit() {
     let userData = {
       _organisationId : this.orgID,
-      profileImageUrl : this.profileImageUrl
+      profileImageUrl : this.profileImageUrl,
+      userType : this.usrType
     }
-    if(this.data._id) {
-      this.userService.updateUser(this.data._id, userData )
-      .pipe().subscribe(res => {
-          this.isLoading = false;
-          this.snackBar.open("Profile image updated Succesfully", 'User', {
-            duration: 5000,
-          });
-        }, (error: any) => {
-          this.snackBar.open(error.message, 'User', {
-            duration: 5000,
-          });
+    this.userService.updateUser(this.userId, userData )
+    .pipe().subscribe(res => {
+        this.isLoading = false;
+        this.snackBar.open("Profile image updated Succesfully", 'User', {
+          duration: 5000,
         });
-    } else {
-      this.userService.saveUser(userData)
-      .pipe().subscribe(res => {
-          this.isLoading = false;
-          this.snackBar.open("Profile image updated Succesfully", 'User', {
-            duration: 5000,
-          });
-          let tabReq = {index: 0, orgId: this.designDashForm.value._organisationId}
-          this.designDashForm.reset()
-        }, (error: any) => {
-          this.snackBar.open(error.message, 'User', {
-            duration: 5000,
-          });
+      }, (error: any) => {
+        this.isLoading = false;
+        this.snackBar.open(error.message, 'User', {
+          duration: 5000,
         });
-    }
+      });
   }
 
 }

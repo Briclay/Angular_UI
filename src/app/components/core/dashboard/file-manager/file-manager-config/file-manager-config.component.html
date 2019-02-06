@@ -26,6 +26,10 @@
       </mat-form-field>
     </form>
     <!-- start project details -->
+
+    <div style ="place-content :center;">
+      <mat-spinner style="margin:0 auto;" *ngIf="isLoading" [diameter]="40"></mat-spinner>
+    </div>
     <div fxLayout="row" *ngIf="selectedProjectData">
       <div class="flex-grow text-center">
         <strong class="text-color"></strong>
@@ -44,7 +48,7 @@
       <div class="flex-grow">
         <div class="project-content">
           <div class="project-details-header" *ngIf="selectedProjectData.imageUrls.length>0">
-            <img src="{{selectedProjectData.imageUrls[0]}}" style="height: 177px;width: 235px;"  (click)="openImageSlider(selectedProjectData.logoImageUrl)" />
+            <img src="{{selectedProjectData.imageUrls[0]}}" style="height: 130px;width: 145px;"  (click)="openImageSlider(selectedProjectData.logoImageUrl)" />
             <div class="project-name ">
               {{selectedProjectData.name}}
             </div>
@@ -52,7 +56,6 @@
         </div>
       </div>
       <div class="flex-grow">
-
         <mat-form-field appearance="outline">
           <mat-label>Land Area</mat-label>
           <input matInput readonly placeholder="Land area" [value]="selectedProjectData.projectDetails.landArea">
@@ -86,7 +89,7 @@
   </mat-card>
 
   <!-- end project details -->
-  <div fxLayout="row" class="file-details">
+  <div fxLayout="row" class="file-details" style="margin-top: 5px;">
     <!-- <mat-card *ngIf="!selectedProjectData;else selectedProjectTemplate" class="width-100 marginTop30 text-danger text-center">
       * Select Project
     </mat-card> -->
@@ -94,7 +97,7 @@
       class="width-100 marginTop30 text-danger text-center">
       * Select Project
     </mat-card>  -->
-    <mat-card *ngIf="iconArray.length>0">
+    <mat-card *ngIf="iconArray.length>0" style="margin-right: 7px;">
       <ul class="side-nav-list file-icons" style="overflow: auto; height: 300px;">
         <li *ngFor="let folder of iconArray" (click)="getClickedByIcon(folder)">
           <a>
@@ -151,7 +154,7 @@
           </div>
         </div>
       </mat-card>
-      <div class="expansion-container">
+      <div >
 
         <!-- <spinner diameter="80" *ngIf="folderListLoading; else folderList"></spinner>          -->
         <!-- <spinner diameter="80" *ngIf="folderListLoading; else folderList"></spinner> -->
@@ -220,7 +223,7 @@
     <!-- end icon  -->
 <!--     <div class="file-sub-details" *ngIf="!projectFlag">
  -->      
-    <div class="file-sub-details" >
+    <div class="file-sub-details" *ngIf="fileDetails">
       <!-- 
         <mat-card class="margin-btm-10">
           <div *ngIf="folderDetailsDataOption" zclass="flex-box">
@@ -233,7 +236,7 @@
          <div class="margin-5 label-value" align="justify-content-center" >{{folderDetailsDataOption.name}}</div> 
       </mat-card> -->
       <!-- file details -->
-      <mat-card class="margin-btm-10" *ngIf="fileDetails">
+      <mat-card class="margin-btm-10" >
         <div>
           <app-file-config-details [folderDetailsDataOption]="fileDetails">
           </app-file-config-details>

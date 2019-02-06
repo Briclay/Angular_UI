@@ -19,22 +19,17 @@ table {
         text-align: center;
         color: #032a57cf;
         font-weight: 600;
-        height: 26px;
-        width: 240px;
+        display: inline-block;
+        padding: 5px;
         .project-addrs {
             color: #FFFFFF;
         }
-    }
-    img {
-        width:80%;
-        border-top-left-radius: 10px;	
     }
 }
 .text-color {
     color: #032a57cf;
     font-weight: 600!important;
 }
-
             
 .side-nav-list {
     margin: 0px;
@@ -73,7 +68,6 @@ table {
 }
 .file-list {
     flex: 5;
-    margin: 10px;
 }
 .file-sub-details {
     flex: 2;
@@ -144,10 +138,6 @@ mat-expansion-panel-header {
         
     }
     
-}
-img {
-    width: 32px;
-    border-radius: 50%;
 }
 .file-list-card {
     padding: 2px;

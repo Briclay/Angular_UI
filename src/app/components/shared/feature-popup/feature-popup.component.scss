@@ -10,4 +10,13 @@
         font: 400 13px Roboto,"Helvetica Neue",sans-serif;
         color :#032a57cf; 
     }
+    ::ng-deep .mat-checkbox-checkmark-path {
+        stroke: white !important;
+    }
+
+    ::ng-deep  .mat-checkbox-checked.mat-accent .mat-checkbox-background,
+        .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+        background-color: #00aff0;
+        }
+
 }

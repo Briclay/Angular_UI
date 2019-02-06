@@ -72,6 +72,10 @@
       <div fxLayout=row>
         <div class="content-head" fxLayout=column style="min-width: -webkit-fill-available;">
           <div class="font_12_light" style="text-align: center;">Coming soon..</div>
+          
+         <div style ="place-content :center;">
+          <mat-spinner style="margin:0 auto;" *ngIf="isLoading" [diameter]="40"></mat-spinner>
+        </div>
         </div>
       </div> 
     </div>

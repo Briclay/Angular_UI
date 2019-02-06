@@ -64,6 +64,7 @@ export class FileManagerConfigComponent implements OnInit {
   deptConfigData: any;
   iconArray = [];
   tableFlag = false;
+  isLoading : boolean;
   clickedIconName : any;
   designIconArray = [];
   displayedColumns: string[] = ['type', 'name', 'createdAt', 'version', 'logs', 'email', 'share', 'download'];
@@ -225,6 +226,7 @@ export class FileManagerConfigComponent implements OnInit {
     * if exist show table or shoe icons  
   */
   getSingleProject(list) {
+    this.isLoading = true;
     this.selectedProjectData = list.value;
     console.log('this.selectedProjectData', this.selectedProjectData);
     window.localStorage.files_project = JSON.stringify(this.selectedProjectData);
@@ -244,17 +246,20 @@ export class FileManagerConfigComponent implements OnInit {
     if (this.deptConfigData.deptName === 'Contracts') {
       this.fileManagerService.getSingleFile(this.fileId)
         .pipe().subscribe(res => {
+          this.isLoading = false;
           body.name = this.createProjectNumber(res.length + 1) + '-' + this.selectedProjectData.name;
           this.createProjectFolder(body, this.selectedProjectData);
         });
     } else {
       console.log('Design');
+      this.isLoading = false;
       // else normal folder creation
       this.createProjectFolder(body, this.selectedProjectData);
     }
   }
 
   createProjectFolder(body, row) {
+    this.isLoading = true;
     if (this.deptConfigData.iconFlag) {
       this.designDeptFlag = true;
     } else {
@@ -262,6 +267,7 @@ export class FileManagerConfigComponent implements OnInit {
     }
     this.fileManagerService.saveFolder(body)
       .pipe().subscribe(res => {
+        this.isLoading = false;
         if (this.designDeptFlag) {
           this.getIconFoldersByApi(row);
         } else {
@@ -282,9 +288,10 @@ export class FileManagerConfigComponent implements OnInit {
       });
   }
   getIconFoldersByApi(row) {
-    this.folderListLoading = true;
+    this.isLoading = true;
     this.fileManagerService.getAllFolders('filter[_projectId]=' + row._id + '&filter[name]=' + row.name + '&filter[_departmentId]=' + this.deptId)
       .pipe().subscribe(res => {
+        this.isLoading = false;
         this.getIconsFolder(res[0]._id);
       }, (error: any) => {
       });
@@ -349,8 +356,10 @@ export class FileManagerConfigComponent implements OnInit {
 
 
   getSingleFolder() {
+    this.isLoading = true;
     this.fileManagerService.getSingleFile(this.fileId)
       .pipe().subscribe(res => {
+        this.isLoading = false;
         this.dataSource = new MatTableDataSource(res);
       }, (error: any) => {
         console.error('error', error);
@@ -521,8 +530,12 @@ export class FileManagerConfigComponent implements OnInit {
     });
   }
   onSaveFile(body: any) {
+
+    this.isLoading = true;
     this.fileManagerService.saveFile(body)
       .pipe().subscribe(res => {
+
+        this.isLoading = false;
         this.getSingleFolder();
       }, (error: any) => {
         if ('Folder exist' === error.message) {
