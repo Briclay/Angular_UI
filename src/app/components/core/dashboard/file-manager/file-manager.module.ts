@@ -8,14 +8,18 @@ import {MaterialModule} from '../../../../modules/material.module';
 import { FileMailDialogComponent } from './file-mail-dialog/file-mail-dialog.component';
 import { FileUploadDialogComponent } from './file-upload-dialog/file-upload-dialog.component';
 import { RootFolderComponent } from './root-folder/root-folder.component';
-import {SpinnerModule} from '../../../shared/spinner/spinner.module'
+import {SpinnerModule} from '../../../shared/spinner/spinner.module';
+import { FileConfigDesignTemplateComponent } from './file-manager-config/file-config-details/file-config-design-template/file-config-design-template.component';
+import { FileConfigContractTemplateComponent } from './file-manager-config/file-config-details/file-config-contract-template/file-config-contract-template.component'
 
 
 @NgModule({
   declarations: [FolderCreateDialogComponent, FileShareDialogComponent, FileConfigDetailsComponent,
-   FileMailDialogComponent, FileUploadDialogComponent, RootFolderComponent],
+   FileMailDialogComponent, FileUploadDialogComponent, RootFolderComponent, FileConfigDesignTemplateComponent, FileConfigContractTemplateComponent],
   exports: [
     FileConfigDetailsComponent,
+    FileConfigDesignTemplateComponent,
+    FileConfigContractTemplateComponent
   ],
   entryComponents: [
     

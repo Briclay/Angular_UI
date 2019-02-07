@@ -43,6 +43,8 @@ export class FileManagerConfigComponent implements OnInit {
   filesData: any;
   filesDetailsData: any;
   folderDetailsDataOption: any;
+  folderDetailsDesignDataOption: any;
+  folderDetailsContractDataOption : any;
   fileDetails: any;
   productOption: any;
   folderListLoading: boolean;

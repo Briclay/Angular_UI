@@ -1,0 +1,52 @@
+<div fxLayout="row" >
+  <div class="flex-grow text-center">
+    <strong class="text-color"></strong>
+  </div>
+  <div class="flex-grow no-border">
+    <strong class="text-color">Details</strong>
+  </div>
+  <div class="flex-grow no-border text-center">
+    <strong class="text-color">Units</strong>
+  </div>
+  <div class="flex-grow text-center">
+    <strong class="text-color">Car Parking</strong>
+  </div>
+</div>
+<div fxLayout="row" >
+  <div class="flex-grow">
+    <div class="project-content">
+      <div class="project-details-header" *ngIf="logsData.imageUrls.length>0">
+        <img src="{{logsData.imageUrls[0]}}" style="height: 130px;width: 145px;"  (click)="openImageSlider(logsData.logoImageUrl)" />
+        <div class="project-name ">
+          {{logsData.name}}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="flex-grow">
+    <mat-form-field appearance="outline">
+      <mat-label>Land Area</mat-label>
+      <input matInput readonly placeholder="Land area" [value]="logsData.projectDetails.landArea">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Carpet Area</mat-label>
+      <input matInput placeholder="Carpet area" readonly [value]="logsData.projectDetails.carpetarea">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Sale Area</mat-label>
+      <input matInput placeholder="Sale Area" readonly [value]="logsData.projectDetails.saleArea">
+    </mat-form-field>
+  </div>
+  <div class="flex-grow ">
+    <mat-form-field appearance="outline" *ngFor="let units of logsData.units">
+      <mat-label>{{units.bhk}}</mat-label>
+      <input matInput readonly [value]="units.count">
+    </mat-form-field>
+  </div>
+  <div class="flex-grow ">
+    <mat-form-field appearance="outline" *ngFor="let carParking of logsData.carParkingArea">
+      <mat-label>{{carParking.area}}</mat-label>
+      <input matInput readonly [value]="carParking.count">
+    </mat-form-field>
+  </div>
+</div>

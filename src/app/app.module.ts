@@ -43,7 +43,6 @@ import { WorkOrderComponent } from './components/core/dashboard/work-order/work-
 import { FileShareDialogComponent } from './components/core/dashboard/file-manager/file-share-dialog/file-share-dialog.component'
 import { FileMailDialogComponent } from './components/core/dashboard/file-manager/file-mail-dialog/file-mail-dialog.component'
 
-
 //  all Briclay project Modules imports below
 import { WorkOrderModule } from './components/core/dashboard/work-order/work-order.module';
 import { RoleModule } from './components/core/dashboard/role/role.module';
@@ -68,7 +67,6 @@ import { TopMenuComponent } from './components/shared/top-menu/top-menu.componen
 import { OrganisationDropDownComponent } from './components/shared/organisation-drop-down/organisation-drop-down.component';
 import { ResetPasswordComponent } from './components/core/reset-password/reset-password.component';
 import { ChangePasswordComponent } from './components/core/change-password/change-password.component';
-
 
 @NgModule({
   declarations: [
@@ -107,7 +105,7 @@ import { ChangePasswordComponent } from './components/core/change-password/chang
     ConfirmDialogComponent,
     TopMenuComponent,
     OrganisationDropDownComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
   ],
   imports: [
     BrowserModule,

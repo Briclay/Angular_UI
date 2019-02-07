@@ -1,0 +1,21 @@
+.flex-grow {
+    flex: 1;
+    padding: 5px;
+}
+.flex-grow:not(:first-child) {
+    border-right: 1px solid #cccccc;
+}
+.project-content {
+    .project-name {
+        margin-top: -20px;
+        background-color: #ccc;
+        text-align: center;
+        color: #032a57cf;
+        font-weight: 600;
+        display: inline-block;
+        padding: 5px;
+        .project-addrs {
+            color: #FFFFFF;
+        }
+    }
+}
