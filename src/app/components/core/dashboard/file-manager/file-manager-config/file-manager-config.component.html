@@ -15,16 +15,19 @@
   <!-- project selection box nad project details -->
   <mat-card *ngIf="projectFlag">
     <form name="fileForm" [formGroup]="fileForm" novalidate>
-      <mat-form-field appearance="outline">
-        <mat-label>Select Project</mat-label>
-        <mat-select placeholder="Select Project" formControlName="formProject" (selectionChange)="getSingleProject($event)"
-        [compareWith]="compareObjects">
-        <mat-option *ngFor="let p of projectlist" [value]="p">
-          {{p.name}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-  </form>
+       <!--  
+       <mat-form-field appearance="outline">
+          <mat-label>Select Project</mat-label>
+          <mat-select placeholder="Select Project" formControlName="formProject" (selectionChange)="getSingleProject($event)"
+          [compareWith]="compareObjects">
+          <mat-option *ngFor="let p of projectlist" [value]="p">
+            {{p.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field> -->
+      <app-project-drop-down (selectProjects)="projectChanged($event)"></app-project-drop-down>
+    </form>
+    
   <!-- start project details -->
   
   <div style ="place-content :center;">

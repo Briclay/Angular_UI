@@ -67,6 +67,7 @@ import { TopMenuComponent } from './components/shared/top-menu/top-menu.componen
 import { OrganisationDropDownComponent } from './components/shared/organisation-drop-down/organisation-drop-down.component';
 import { ResetPasswordComponent } from './components/core/reset-password/reset-password.component';
 import { ChangePasswordComponent } from './components/core/change-password/change-password.component';
+import { ProjectDropDownComponent } from './components/shared/project-drop-down/project-drop-down.component';
 
 @NgModule({
   declarations: [
@@ -106,6 +107,7 @@ import { ChangePasswordComponent } from './components/core/change-password/chang
     TopMenuComponent,
     OrganisationDropDownComponent,
     ChangePasswordComponent,
+    ProjectDropDownComponent,
   ],
   imports: [
     BrowserModule,

@@ -110,6 +110,13 @@ export class FileManagerConfigComponent implements OnInit {
     this.folderConfigData();
     this.getSingleFolder();
   }
+
+  projectChanged(proj) {
+    this.router.navigate([], {queryParams: {orgId: proj.value ? proj.value._id : proj._id} , queryParamsHandling: 'merge'});
+    console.log(proj)
+    this.getSingleProject(proj);
+  }
+  
   folderConfigData() {
     const tempValue = this.localStack.pop();
     if (tempValue) {

@@ -61,8 +61,8 @@ export class DepartmentService {
 		return of(history)
 	}
 
-	public getFeature (): Observable<any> {
-        let url = `${environmentService.briclayCore}/features?select=*`;
+	public getFeatures (id): Observable<any> {
+        let url = `${environmentService.briclayCore}/features?select=*&filter[_organisationId]=${id}`;
         return this.apiService.get(url).pipe(map(res => res));
     }
 

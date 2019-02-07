@@ -104,6 +104,7 @@ export class DepartmentDetailsComponent implements OnInit {
   }
   
   getAllFeatures(){
+    /*his.DeptService.getFeatures(this._organisationId)*/
     this.featureService.getFeatures()
       .pipe().subscribe(response => {
         this._features = response;
