@@ -44,6 +44,7 @@ export class DepartmentDetailsComponent implements OnInit {
   featureData : any;
   allFeatureCount : any;
   getInitFeature = [];
+  specialFolderCheck : boolean;
   private unsubscribe: Subject<any> = new Subject();
   constructor(
     private DeptService: DepartmentService,
@@ -87,7 +88,7 @@ export class DepartmentDetailsComponent implements OnInit {
         _roles : this.formBuilder.array([]),
         _organisationId: [this._organisationId, Validators.required],
         sharedResource: this.formBuilder.array([]),
-        specialFolder: [true, Validators.required],
+        specialFolder: ['', Validators.required],
       });
       this.departmentDetailsForm.valueChanges.subscribe(() => {
         this.onOrgFormValuesChanged();
@@ -101,6 +102,10 @@ export class DepartmentDetailsComponent implements OnInit {
     if(this.formType !== 'create') {
       this.departmentDetailsForm.patchValue(this.data)
     }
+  }
+
+  specialFolderValue (event){
+   this.specialFolderCheck = event.checked;
   }
   
   getAllFeatures(){
@@ -207,6 +212,7 @@ export class DepartmentDetailsComponent implements OnInit {
       }
     });
     this.departmentDetailsForm.value._features = selectedFeatures;
+    this.departmentDetailsForm.value.specialFolder = this.specialFolderCheck;
         /*check if id is not epmty then save otherwise update*/
     if ((!_.isUndefined(this.departmentDetailsForm.value._id) 
       && !_.isEmpty(this.departmentDetailsForm.value._id))) {
