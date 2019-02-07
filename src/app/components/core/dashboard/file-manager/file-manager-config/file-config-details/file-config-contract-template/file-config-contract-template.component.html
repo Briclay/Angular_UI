@@ -1,4 +1,15 @@
-<div fxLayout="row" >
+<div fxLayout="row">
+  <div>
+    <mat-form-field appearance="outline">
+      <mat-label>Request Number</mat-label>
+      <mat-select placeholder="Request Number" (selectionChange)="onChangedRequest($event)">
+        <mat-option [value]="null" *ngIf="workRequest.length<=0">No Request Number</mat-option>
+        <mat-option *ngFor="let request of workRequest" [value]="request">
+          {{ request.requestNumber }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
   <div class="flex-grow text-center">
     <strong class="text-color"></strong>
   </div>
@@ -12,61 +23,51 @@
     <strong class="text-color">Status</strong>
   </div>
 </div>
-<div fxLayout="row" >
-  <div class="flex-grow">
-    <div class="project-content">
-      <div class="project-details-header" *ngIf="logsData.imageUrls.length>0">
-        <img src="{{logsData.imageUrls[0]}}" style="height: 130px;width: 145px;"  (click)="openImageSlider(logsData.logoImageUrl)" />
-        <div class="project-name ">
-          {{logsData.name}}
-        </div>
-      </div>
-    </div>
-  </div>
+<div fxLayout="row">
   <div class="flex-grow">
     <mat-form-field appearance="outline">
       <mat-label>Request</mat-label>
-      <input matInput readonly placeholder="Land area" [value]="logsData.projectDetails.landArea">
+      <input matInput readonly placeholder="request Number" [value]="selectedRequestNumber.requestNumber">
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Package/Description</mat-label>
-      <textarea matInput placeholder="Package/Description" readonly [value]="logsData.projectDetails.carpetarea"></textarea> 
+      <textarea matInput placeholder="Package/Description" readonly [value]="selectedRequestNumber.workDescription"></textarea>
     </mat-form-field>
   </div>
   <div class="flex-grow ">
     <div fxLayout=row>
       <mat-form-field appearance="outline">
         <mat-label>Initiated Dates</mat-label>
-        <input matInput placeholder="Initiated Dates" readonly [value]="logsData.projectDetails.carpetarea">
+    <input matInput placeholder="Initiated Dates" readonly [value]="selectedRequestNumber.requestNumber">
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>RFA Approval</mat-label>
-        <input matInput placeholder="RFA Approval" readonly [value]="logsData.projectDetails.carpetarea">
+        <input matInput placeholder="RFA Approval" readonly [value]="selectedRequestNumber.RFAapprovalDate">
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>WO Approval</mat-label>
-        <input matInput placeholder="WO Approval" readonly [value]="logsData.projectDetails.carpetarea">
+        <input matInput placeholder="WO Approval" readonly [value]="selectedRequestNumber.workOrderApprovalDate">
       </mat-form-field>
     </div>
     <div fxLayout=row>
       <mat-form-field appearance="outline">
         <mat-label>RFA Put Up</mat-label>
-        <input matInput placeholder="RFA Put Up" readonly [value]="logsData.projectDetails.carpetarea">
+        <input matInput placeholder="RFA Put Up" readonly [value]="selectedRequestNumber.RFAPutUpDate">
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>WO Put Up</mat-label>
-        <input matInput placeholder="WO Put Up" readonly [value]="logsData.projectDetails.carpetarea">
+        <input matInput placeholder="WO Put Up" readonly [value]="selectedRequestNumber.workOrderPutDate">
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Award Date</mat-label>
-        <input matInput placeholder="Award Date" readonly [value]="logsData.projectDetails.carpetarea">
+        <input matInput placeholder="Award Date" readonly [value]="selectedRequestNumber.awardedDate">
       </mat-form-field>
     </div>
   </div>
   <div class="flex-grow ">
     <mat-form-field appearance="outline">
       <mat-label>Status</mat-label>
-      <input matInput placeholder="Status" readonly [value]="logsData.projectDetails.carpetarea">
+      <input matInput placeholder="Status" readonly [value]="selectedRequestNumber.status">
     </mat-form-field>
   </div>
 </div>

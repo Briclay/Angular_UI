@@ -6,9 +6,9 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./file-config-design-template.component.scss']
 })
 export class FileConfigDesignTemplateComponent implements OnInit {
- 	@Input()
+  @Input()
   public folderDetailsDesignDataOption: any;
-  logsData:any;
+  logsData: any;
   constructor() { }
 
   ngOnInit() {
