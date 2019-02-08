@@ -36,6 +36,11 @@ export class FileManagerService {
     return this.apiService.put(url, body).pipe(map(res => res));
   }
 
+  rootShareFiles(): Observable<any> {
+    let url = `${environmentService.briclayFileManager}/file/root/share`;
+    return this.apiService.get(url).pipe(map(res => res));
+  }
+
   shareMail(fileID: string, body: any): Observable<any> {
     let url = `${environmentService.briclayFileManager}/file/send/${fileID}`;
     return this.apiService.put(url, body).pipe(map(res => res));

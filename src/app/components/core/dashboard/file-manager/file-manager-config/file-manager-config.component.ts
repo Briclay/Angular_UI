@@ -11,10 +11,7 @@ import { FolderCreateDialogComponent } from '../folder-create-dialog/folder-crea
 import { FileShareDialogComponent } from '../file-share-dialog/file-share-dialog.component';
 import { FileMailDialogComponent } from '../file-mail-dialog/file-mail-dialog.component';
 import { ConfirmDialogComponent } from '../../../../shared/confirm-dialog/confirm-dialog.component';
-
 import * as _ from 'lodash';
-
-
 
 export interface PeriodicElement {
   name: string;
@@ -385,6 +382,7 @@ export class FileManagerConfigComponent implements OnInit {
         console.error('error', error);
       });
   }
+  
   getFiles(folder) {
     this.fileListLoading = true;
     this.fileManagerService.getFiles(folder._id)
