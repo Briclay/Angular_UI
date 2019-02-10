@@ -148,4 +148,9 @@ export class RootFolderComponent implements OnInit {
       });
     }
   }
+
+  routeSharedFolder (){
+    const path = '/dashboard/file-manager/shared-folder'
+      this.router.navigate([path]);
+  }
 }

@@ -18,6 +18,7 @@ import { NcmDashboardComponent } from './components/core/dashboard/ncm-dashboard
 import { FileManagerComponent } from './components/core/dashboard/file-manager/file-manager.component';
 import { DesignDashboardComponent } from './components/core/dashboard/design-dashboard/design-dashboard.component';
 import { RootFolderComponent } from './components/core/dashboard/file-manager/root-folder/root-folder.component';
+import { FileSharedFolderComponent } from './components/core/dashboard/file-manager/file-shared-folder/file-shared-folder.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -90,6 +91,11 @@ const routes: Routes = [
       },
       {
         path: 'file-manager', component: RootFolderComponent, data: {
+          breadcrumb: 'Users'
+        }
+      }, 
+      {
+        path: 'file-manager/shared-folder', component: FileSharedFolderComponent, data: {
           breadcrumb: 'Users'
         }
       },
