@@ -14,12 +14,14 @@ export class FileShareDialogComponent implements OnInit {
   selectedUser: any;
   userLoading: boolean;
   sharedFileError: any;
+  org: any;
   constructor(private userService: UserService,
     public dialogRef: MatDialogRef<FileShareDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private formBuilder: FormBuilder,
     private fileManagerService: FileManagerService) { }
   ngOnInit() {
+    this.org = JSON.parse(window.localStorage.authUserOrganisation);
     this.getUsers();
   }
 
@@ -33,18 +35,18 @@ export class FileShareDialogComponent implements OnInit {
 
   getUsers() {
     this.userLoading = true;
-    this.userService.getUser().pipe().subscribe(res => {
+    this.userService.getUser(this.org._id).pipe().subscribe(res => {
       this.users = res;
       this.userLoading = false;
     }, (error: any) => {
       console.error('error', error);
       this.userLoading = false;
-    })
+    });
   }
 
   shareFile() {
     this.sharedFileError = '';
-    var body = {
+    const body = {
       activeFlag: true,
       sharedByUserId: this.selectedUser._id
     };
@@ -52,11 +54,9 @@ export class FileShareDialogComponent implements OnInit {
       .pipe().subscribe((response: any) => {
         this.dialogRef.close('success');
       }, (error: any) => {
-        console.error(error)
+        console.error(error);
         this.sharedFileError = error;
         this.dialogRef.close('error');
       });
   }
-
-
 }
