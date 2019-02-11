@@ -8,6 +8,7 @@ mat-accordion {
     }
     mat-expansion-panel-header {
         position: relative;
+        height : 56px!important;
         &.mat-expanded {
             background: #FAFAFA;
         }

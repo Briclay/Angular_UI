@@ -19,6 +19,7 @@ import { FileManagerComponent } from './components/core/dashboard/file-manager/f
 import { DesignDashboardComponent } from './components/core/dashboard/design-dashboard/design-dashboard.component';
 import { RootFolderComponent } from './components/core/dashboard/file-manager/root-folder/root-folder.component';
 import { FileSharedFolderComponent } from './components/core/dashboard/file-manager/file-shared-folder/file-shared-folder.component';
+import { IssueTrackerComponent } from './components/core/dashboard/issue-tracker/issue-tracker.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -101,6 +102,10 @@ const routes: Routes = [
       },
       {
         path: 'design-dashboard', component: DesignDashboardComponent, data: {
+          breadcrumb: 'Users'
+        }
+      },{
+        path: 'issue-tracker', component: IssueTrackerComponent, data: {
           breadcrumb: 'Users'
         }
       },

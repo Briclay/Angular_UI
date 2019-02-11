@@ -1,0 +1,47 @@
+.create-user {
+    margin-bottom: 15px;
+}
+.user-container {
+    .user-details {
+        margin-left: 15px;
+    }
+
+    .text_color {
+        font: 600 18px Roboto,"Helvetica Neue",sans-serif;
+        color :#032A57;
+        text-align: center;
+        margin-top: 18px;
+    }
+    .text_color_sm {
+        font: 600 14px Roboto,"Helvetica Neue",sans-serif;
+        color :#032A57;
+        text-align: center;
+        margin-top: 7px;
+    }
+    .margin_right_10 {
+        margin-right : 15px;
+    }
+}
+::ng-deep .user-container .mat-card-header-text {
+    background-color: #ebf9fc;
+    margin: -16px 0px 10px -16px;
+    padding: 6px 25px;
+    .mat-card-title{
+        font-size: 15px;
+        margin-bottom: 0px;
+    }
+}
+mat-form-field {
+    margin-right: 30px;
+}
+::ng-deep .user-container .expansion-container {
+    padding: 10px;
+    mat-expansion-panel-header {
+        mat-panel-title {
+            &.mat-expansion-panel-header-title:nth-child(2) {
+                flex: 0.5 !important;
+            }
+        }
+        
+    }
+}

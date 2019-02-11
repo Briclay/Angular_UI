@@ -1,23 +1,64 @@
-<app-top-menu></app-top-menu>
 <div class="user-container">
+    <div fxLayout=row style="height : 55px;">
+        <div class="pull-left" style="background-color: #00a1ff4a; border-radius: 0px 10px 10px 0px;" fxFlex=15>
+            <div class="text_color">Issue Tracker</div>
+        </div>
+        <div fxLayout=row  style ="place-content :space-around;" fxFlex=85>
+        
+             <div fxLayout=row style="place-content :space-between;">
+                <div fxLayout=column class="margin_right_10">
+                    <div class="text_color_sm ">110 </div>
+                     <div class="text_color_sm ">Open issue </div>  
+                </div>
+                 <div fxLayout=column>
+                    <div class="text_color_sm">70 </div>
+                     <div class="text_color_sm">Closed issue </div>  
+                </div>
+            </div>
+             <div fxLayout=row style="place-content :space-between;">
+                 <div fxLayout=column class="margin_right_10">
+                    <div class="text_color_sm">11 </div>
+                     <div class="text_color_sm">Overdue </div>  
+                </div>
+                 <div fxLayout=column>
+                    <div class="text_color_sm">8</div>
+                     <div class="text_color_sm">Due today</div>  
+                </div>
+            </div>
+             <div fxLayout=row style=" place-content :space-between;">
+                <div fxLayout=column class="margin_right_10">
+                    <div class="text_color_sm">390 </div>
+                     <div class="text_color_sm">Total issue </div>  
+                </div>
+                 <div fxLayout=column>
+                    <div class="text_color_sm">50%</div>
+                     <div class="text_color_sm">Efficiency </div>  
+                </div>
+            </div>
+        </div> 
+    </div>
+
     <mat-tab-group #tabGroup>
         <mat-tab label="Overview">
             <app-panel-header-filter></app-panel-header-filter>
              <div style ="place-content :center;">
-                <mat-spinner style="margin:0 auto;" *ngIf="loading; else content" [diameter]="40"></mat-spinner>
+                <mat-spinner style="margin:0 auto;" *ngIf="listSpinner; else content" [diameter]="40"></mat-spinner>
               </div>
-            <div fxLayout="row">
+              <div fxLayout="row">
                 <ng-template #content>
-                    <app-expansion-panel 
-                        [expansionPanelOptions]="userDataOptions"
-                        selectorComponent="app-user-details" 
-                        [data]="users"
-                        [isHistory]="true"></app-expansion-panel>
+                    <div fxLayout="row">
+                        <app-expansion-panel *ngIf="projectsList"
+                            [expansionPanelOptions]="projectsDataOptions"
+                            selectorComponent="app-issue-tracker-details" 
+                            [data]="projectsList" >
+                        </app-expansion-panel>
+                    </div>        
                 </ng-template>
             </div>
         </mat-tab>
         <mat-tab label="New">
-            <app-user-details formType="create" (tabSwitch)="tabSwitch($event)"></app-user-details>
+            <app-issue-tracker-details formType="create" (tabSwitch)="tabSwitch($event)" ></app-issue-tracker-details>
         </mat-tab>
     </mat-tab-group>
 </div>
+

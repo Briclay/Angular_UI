@@ -11,6 +11,7 @@ import {MaterialModule} from "./material.module";
 import {SpinnerModule} from "../components/shared/spinner/spinner.module";
 import {WorkRequestDetailsComponent} from '../components/core/dashboard/work-request/work-request-details/work-request-details.component';
 import {WorkOrderDetailsComponent} from '../components/core/dashboard/work-order/work-order-details/work-order-details.component';
+import {IssueTrackerDetailsComponent} from '../components/core/dashboard/issue-tracker/issue-tracker-details/issue-tracker-details.component';
 
 @NgModule({
   imports: [
@@ -27,7 +28,8 @@ import {WorkOrderDetailsComponent} from '../components/core/dashboard/work-order
     DepartmentDetailsComponent,
     WorkRequestDetailsComponent,
     WorkOrderDetailsComponent,
-    UserDashDetailsComponent
+    UserDashDetailsComponent,
+    IssueTrackerDetailsComponent
   ],
   exports: [
     UserDetailsComponent, 
@@ -36,7 +38,8 @@ import {WorkOrderDetailsComponent} from '../components/core/dashboard/work-order
     DepartmentDetailsComponent, 
     WorkRequestDetailsComponent,
     WorkOrderDetailsComponent,
-    UserDashDetailsComponent
+    UserDashDetailsComponent,
+    IssueTrackerDetailsComponent
   ],
   entryComponents: [
     UserDetailsComponent,
@@ -45,7 +48,8 @@ import {WorkOrderDetailsComponent} from '../components/core/dashboard/work-order
     DepartmentDetailsComponent,
     WorkRequestDetailsComponent,
     WorkOrderDetailsComponent,
-    UserDashDetailsComponent
+    UserDashDetailsComponent,
+    IssueTrackerDetailsComponent
   ],
   providers: [WidgetService]
 })

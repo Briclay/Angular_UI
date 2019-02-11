@@ -39,6 +39,7 @@ export class ProjectCreateComponent implements OnInit {
   details: any;
   orgId: any;
   projectType = ['RESIDENTIAL', 'COMMERCIAL', 'MIXED DEVELOPMENT', 'VILLA PROJECTS']; 
+  projectStatus = [ 'OPEN', 'LAUNCH', 'INPROGRESS', 'COMPLETED']; 
   _organisationId : any;
   private unsubscribe: Subject<any> = new Subject();
   constructor(
@@ -66,7 +67,7 @@ export class ProjectCreateComponent implements OnInit {
       projectCode: ['', Validators.required],
       description: [''],
       units: this.formBuilder.array([]),
-      status:"OPEN",
+      status: ['', Validators.required],
       type: [''],
       beginDate: [''],
       completionDate: [''],

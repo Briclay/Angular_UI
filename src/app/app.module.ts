@@ -29,7 +29,8 @@ import { OrganisationComponent } from './components/core/dashboard/organisation/
 import { RoleComponent } from './components/core/dashboard/role/role.component';
 import { PanelHeaderFilterComponent } from './components/shared/panel-header-filter/panel-header-filter.component';
 import { WorkRequestComponent } from './components/core/dashboard/work-request/work-request.component';
-import { ProjectModule } from './components/core/dashboard/projects/projects.module'
+import { ProjectModule } from './components/core/dashboard/projects/projects.module';
+import { IssueTrackerComponent } from './components/core/dashboard/issue-tracker/issue-tracker.component';
 import { OrganisationCreateComponent } from './components/core/dashboard/organisation/organisation-create/organisation-create.component';
 import { RoleCreateComponent } from './components/core/dashboard/role/role-create/role-create.component';
 import { DepartmentComponent } from './components/core/dashboard/department/department.component';
@@ -108,6 +109,7 @@ import { ProjectDropDownComponent } from './components/shared/project-drop-down/
     OrganisationDropDownComponent,
     ChangePasswordComponent,
     ProjectDropDownComponent,
+    IssueTrackerComponent
   ],
   imports: [
     BrowserModule,
