@@ -1,0 +1,74 @@
+
+<div id="register" fxLayoutAlign="center center"> 
+  <div id="register-form-wrapper"  fxLayout="row" fxLayoutAlign="center center">
+
+    <div id="register-form" >     
+      <form  name="registerForm"  [formGroup]="registerForm" novalidate>
+       <div class="logo-row">
+        <img src="assets/images/logos/Briclay.png" alt="logo" class="logo">
+      </div>  
+     <div class="logo-row" >New User</div>
+     <div>
+     </div>
+        <div fxLayout="row" class="inputBoxShadow">
+          <div class="nameAndPwd" >First Name</div>
+          <div>
+            <mat-form-field>
+              <input matInput formControlName="firstName" type="firstName" placeholder="First Name">
+            </mat-form-field>
+          </div>
+        </div>
+        <div fxLayout="row" class="inputBoxShadow" style="margin-top: 30px;">
+          <div class="nameAndPwd">Last Name</div>
+          <mat-form-field>
+            <input matInput formControlName="lastName" type="lastName" placeholder="Last Name" >
+          </mat-form-field>
+        </div>
+        <div fxLayout="row" class="inputBoxShadow" style="margin-top: 30px;">
+          <div class="nameAndPwd">Email ID</div>
+          <mat-form-field>
+            <input matInput formControlName="emailId" type="emailId" placeholder="Email ID" >
+          </mat-form-field>
+        </div>
+        <div fxLayout="row" class="inputBoxShadow" style="margin-top: 30px;">
+          <div class="nameAndPwd">Organisation</div>
+          <mat-form-field>
+            <mat-select placeholder="Select Organisation" formControlName="organisation" type="organisation">
+            </mat-select>
+          </mat-form-field>
+        </div>  
+        <div fxLayout="row" class="inputBoxShadow" style="margin-top: 30px;">
+          <div class="nameAndPwd">Department</div>
+          <mat-form-field>
+            <mat-select formControlName="department" type="department" placeholder="Select Department" >
+            </mat-select>	
+          </mat-form-field>
+        </div>                        
+        <div class="sign-in-instead">
+          <a class="sign-in" (click)="openLoginForm()">
+            Sign In Instead?
+          </a>
+        </div>
+        <button mat-raised-button style="background-color: #2196F3; color: white;" type="submit" 
+            class="submit-button"  [disabled]="isLoading || !registerForm.valid" aria-label="Register" (click)="onRegisterFormSubmit()">Register
+      <!-- Material Design Spinner -->
+      <div class="spinner-wrapper" *ngIf="isLoading">
+        <div class="spinner">
+          <div class="inner">
+            <div class="gap"></div>
+            <div class="left">
+              <div class="half-circle"></div>
+            </div>
+            <div class="right">
+              <div class="half-circle"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- / Material Design Spinner -->
+      
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

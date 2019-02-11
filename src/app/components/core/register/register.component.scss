@@ -1,0 +1,91 @@
+	  :host {
+	  	#register-head {
+	  		.main-head {
+	  			padding: 5px;
+	  			height : 45px;
+	  			box-shadow: 0 4px 8px 0 rgba(0,0,0,0.12),0 2px 4px 0 rgba(0,0,0,0.08);
+	  			.title{
+	  				position: relative;
+	  				top: 10%;
+	  				left: 50%;
+	  				transform: translateY(-50%);
+	  				font-size: 30px;
+	  				color : gray;
+	  			}
+	  		}
+	  		.title-div {
+	  			background-color :  #00aff0;
+	  			height : 45px;
+	  		}
+	  	}
+	  	#register {
+	  		flex-direction : row;
+	  		overflow: auto;
+	  		background-color : white!important;
+	  		width: 100%;
+	  		background-size: cover;
+	  		height:100vh;
+
+	  		#register-form-wrapper {
+	  			flex: 1 0 auto;
+	  			padding: 32px;
+	  			#register-form {
+	  				padding: 32px;
+	  				background-color : white;
+	  				text-align: center;
+	  				.inputBoxShadow {
+	  					box-shadow: 0 4px 8px 0 rgba(0,0,0,0.12),0 2px 4px 0 rgba(0,0,0,0.08);
+	  					border-radius: 10px;
+	  					place-content: space-around;
+	  				}
+	  				.logo {
+	  					margin: 20px 10px 50px 5px;
+	  					text-align: center;
+	  					width: 150px;
+	  					height: 40px;  
+	  				}    
+	  				.logo-row {
+	  					position: relative;
+	  					width: 500px;
+	  					text-align: center;
+	  				}      
+	  				.nameAndPwd {
+	  					margin: 28px 20px 0px 20px;   
+	  				}
+	  				form {
+	  					padding : 7%;
+	  					width: 100%;
+	  					text-align: center;
+	  					mat-form-field {
+	  						width: 384px;
+	  						height: 50px;
+	  						padding : 5px;
+	  					}
+	  					md-input-container label {
+	  						color: red;
+	  					}
+	  					md-input-container.md-input-focused label {
+	  						color: blue;
+	  					}
+	  					.sign-in-instead {
+	  						font-size: 13px;
+	  						margin-top: 8px;
+	  						text-align: right;
+	  						.sign-in {
+	  							font-size: 13px;
+	  							font-weight: 500;
+	  							margin-bottom: 16px;
+	  							color: gray;
+	  							cursor: pointer;
+	  						}
+	  					}
+	  					.submit-button {
+	  						width: 220px;
+	  						margin: 16px auto;
+	  						display: block;
+	  					}
+	  				}
+	  			}
+	  		}
+	  	}
+	  }

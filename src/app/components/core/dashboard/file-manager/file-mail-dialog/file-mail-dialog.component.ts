@@ -16,14 +16,15 @@ export class FileMailDialogComponent implements OnInit {
   userLoading: boolean;
   sharedFileError: any;
   dailogForm: FormGroup;
-
+  org: any;
   constructor(private userService: UserService,
     public dialogRef: MatDialogRef<FileMailDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private formBuilder: FormBuilder,
-    private fileManagerService: FileManagerService) { 
-    }
+    private fileManagerService: FileManagerService) {
+  }
   ngOnInit() {
+    this.org = JSON.parse(window.localStorage.authUserOrganisation);
     this.dailogForm = this.formBuilder.group({
       message: ['', Validators.required],
       toMail: ['']
@@ -41,23 +42,23 @@ export class FileMailDialogComponent implements OnInit {
 
   getUsers() {
     this.userLoading = true;
-    this.userService.getUser().pipe().subscribe(res => {
+    this.userService.getUser(this.org._id).pipe().subscribe(res => {
       this.users = res;
       this.userLoading = false;
     }, (error: any) => {
       this.userLoading = false;
-    })
+    });
   }
 
   shareMail() {
     this.sharedFileError = '';
     this.dailogForm.value.toMail = this.selectedUser.email;
-     this.fileManagerService.shareMail(this.data.fileId,  this.dailogForm.value)
-       .pipe().subscribe((response: any) => {
-         this.dialogRef.close('success');
-       }, (error: any) => {
+    this.fileManagerService.shareMail(this.data.fileId, this.dailogForm.value)
+      .pipe().subscribe((response: any) => {
+        this.dialogRef.close('success');
+      }, (error: any) => {
         this.dialogRef.close('erro');
-       });
+      });
   }
 
 }
