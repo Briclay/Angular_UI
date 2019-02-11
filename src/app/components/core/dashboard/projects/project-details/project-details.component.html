@@ -94,7 +94,7 @@
         </div>
         <div fxLayout="row">
           <button mat-raised-button>
-            <span>Cancel</span>
+            <span (click)="onCancel()" >Cancel</span>
           </button>
           <button type="submit" mat-raised-button (click)="onSubmit()">
             <span>Submit</span>

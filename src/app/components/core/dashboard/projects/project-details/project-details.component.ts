@@ -77,6 +77,9 @@ export class ProjectDetailsComponent implements OnInit {
     console.log(' finaly send to this.detailsForm',this.detailsForm.value);
     this.dialogRef.close(this.detailsForm.value);
   }
+  onCancel (){
+    this.dialogRef.close();
+  }
   addUnits(){
     this.uniteArray.push(this.detailsForm.value.dummyUnits);
   }
