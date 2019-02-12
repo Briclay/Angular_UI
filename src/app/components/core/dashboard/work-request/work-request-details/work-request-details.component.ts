@@ -44,6 +44,7 @@ export class WorkRequestDetailsComponent implements OnInit {
   orgId: string;
   orgDetails: any;
   isLoading: boolean;
+  dept: any;
   constructor(private formBuilder: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
@@ -53,12 +54,9 @@ export class WorkRequestDetailsComponent implements OnInit {
     private userService: UserService) {
     // get org id for superadmin
     this.todayDate = (new Date()).toISOString();
-   // this.org = JSON.parse(window.localStorage.authUserOrganisation);
-    // this.dept = JSON.parse(window.localStorage.authUserDepartment);
-    // this.authUser = JSON.parse(window.localStorage.authUser);
-    this.orgDetails =  JSON.parse(window.localStorage.authUserOrganisation);
+    this.orgDetails = JSON.parse(window.localStorage.authUserOrganisation);
+    this.dept = JSON.parse(window.localStorage.authUserDepartment);
     this.orgId = this.orgDetails._id;
-   // console.log('this.orgId' + JSON.stringify(this.orgId));
     // list of typ of work
     this.typeOfWork = ['Contractor Appointement', 'Termination order'];
     this.workTrackerFormErrors = {
@@ -119,7 +117,7 @@ export class WorkRequestDetailsComponent implements OnInit {
   noOfDays() {
     console.log(' this.workTrackerForm no of days' + JSON.stringify(this.workTrackerForm.value));
     const name = this.workTrackerForm.value.workCategory;
-    const selectedWorkCat = _.filter(this.workCategory, function(data) {
+    const selectedWorkCat = _.filter(this.workCategory, function (data) {
       console.log('data ', data);
       return data.name === name;
     });
@@ -130,14 +128,6 @@ export class WorkRequestDetailsComponent implements OnInit {
   ngOnInit() {
     // tslint:disable-next-line:max-line-length
     observableMerge(this.route.params, this.route.queryParams).pipe(takeUntil(this.unsubscribe)).subscribe((params) => this.loadRoute(params));
-    // this.route.queryParams.subscribe(params => {
-    //   this.orgId = params['orgID'];
-    //    this.assignValuesToForm();
-    //   this.getAllProjectsList();
-    //   this.getAllWorkRequestTracker();
-    //   this.getUsers();
-    //   this.getWorkCategory();
-    // });
   }
 
   loadRoute(params: any) {
@@ -163,12 +153,6 @@ export class WorkRequestDetailsComponent implements OnInit {
       .pipe().subscribe(res => {
         console.log('projectt res', res);
         this.projectsList = res;
-        // if (this.projectsList.length <= 0) {
-        //   console.error('No projects found');
-        // } else {
-        //   this.projectsList = res;
-
-        // }
       }, (error: any) => {
         // TODO add error component
         console.error('error', error);
@@ -208,7 +192,7 @@ export class WorkRequestDetailsComponent implements OnInit {
   }
 
   getUsers() {
-    this.userService.getUser(this.orgId)
+    this.userService.getUser(this.orgId + '&filter[_departmentId]=' + this.dept._id)
       .pipe().subscribe(res => {
         this.userList = res;
       }, (error: any) => {
@@ -250,13 +234,13 @@ export class WorkRequestDetailsComponent implements OnInit {
 
   onSave() {
     console.log('this.formType' + this.formType);
-    console.log('on save ' , this.workTrackerForm.value);
+    console.log('on save ', this.workTrackerForm.value);
     const requestData = {
       ...this.workTrackerForm.value,
       workCategory: this.workTrackerForm.value.workDummyCategory.name,
       leadTimeRequire: this.workTrackerForm.value.leadTimeRequire
     };
-    console.log('on save requestData' , requestData);
+    console.log('on save requestData', requestData);
 
     this.formType !== 'create' ? this.updateWorkRequest(requestData) : this.saveWorkRequest(requestData);
   }
@@ -296,7 +280,7 @@ export class WorkRequestDetailsComponent implements OnInit {
         // tslint:disable-next-line:max-line-length
         const timeDiff = Math.abs(this.workTrackerForm.value.initiatedDate.getTime() - this.workTrackerForm.value.RFAapprovalDate.getTime());
         const diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
-        console.log('diffDays of time to complete',diffDays);
+        console.log('diffDays of time to complete', diffDays);
         this.workTrackerForm.controls['timeToComplete'].setValue(diffDays);
         this.time.timeToComplete = diffDays;
 

@@ -54,9 +54,7 @@ export class WorkRequestComponent implements OnInit {
 
   getWorkRequest() {
     this.isLoading = true;
-    console.log('this.orgID' + this.orgID);
     this.workRequestService.getWorkRequest('filter[_organisationId]=' + this.orgID).pipe().subscribe(res => {
-      console.log('res', res);
       this.workRequest = res;
       this.isLoading = false;
       this.workRequestDataOption = [
