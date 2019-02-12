@@ -71,6 +71,9 @@ import { ResetPasswordComponent } from './components/core/reset-password/reset-p
 import { ChangePasswordComponent } from './components/core/change-password/change-password.component';
 import { ProjectDropDownComponent } from './components/shared/project-drop-down/project-drop-down.component';
 import { IssueTrackerCreateComponent } from './components/core/dashboard/issue-tracker/issue-tracker-create/issue-tracker-create.component';
+import { GroupedBarChartComponent } from './components/shared/grouped-bar-chart/grouped-bar-chart.component';
+import { NcmComponent } from './components/core/dashboard/ncm/ncm.component';
+import { DonutChartComponent } from './components/shared/donut-chart/donut-chart.component';
 
 @NgModule({
   declarations: [
@@ -113,7 +116,10 @@ import { IssueTrackerCreateComponent } from './components/core/dashboard/issue-t
     ProjectDropDownComponent,
     IssueTrackerComponent,
     RegisterComponent,
-    IssueTrackerCreateComponent
+    IssueTrackerCreateComponent,
+    GroupedBarChartComponent,
+    NcmComponent,
+    DonutChartComponent
   ],
   imports: [
     BrowserModule,

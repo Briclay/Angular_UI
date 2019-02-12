@@ -1,0 +1,25 @@
+<app-organisation-drop-down (selectOrganizaion)="organizationChanged($event)"></app-organisation-drop-down>
+<app-top-menu></app-top-menu>
+<div class="user-container">
+    <mat-tab-group #tabGroup>
+        <mat-tab label="Overview">
+            <div style ="place-content :center;">
+                <mat-spinner style="margin:0 auto;" *ngIf="depListSpinner; else content" [diameter]="40"></mat-spinner>
+            </div>
+            <div fxLayout="row">
+                <ng-template #content>
+                    <app-expansion-panel 
+                        *ngIf="selectedOrgId" [expansionPanelOptions]="departmentDataOptions" 
+                        selectorComponent="app-department-details" 
+                        [data]="departments"
+                        [isHistory]="true"
+                        (openHistort)="openDialog(data)">
+                    </app-expansion-panel>
+                </ng-template>    
+            </div>
+        </mat-tab>
+        <mat-tab label="New">
+            <app-department-details formType="create" (tabSwitch)="tabSwitch($event)" *ngIf="selectedOrgId"></app-department-details>
+        </mat-tab>
+    </mat-tab-group>
+</div>

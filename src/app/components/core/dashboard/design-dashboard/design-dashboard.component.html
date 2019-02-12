@@ -71,7 +71,16 @@
       </div> -->
       <div fxLayout=row>
         <div class="content-head" fxLayout=column style="min-width: -webkit-fill-available;">
-          <div class="font_12_light" style="text-align: center;">Coming soon..</div>
+          <div class="font_12_light" style="text-align: center;">
+            <div class="flex-box">
+              <mat-card class="flex-1">
+                <app-grouped-bar-chart></app-grouped-bar-chart>
+              </mat-card>
+              <mat-card class="flex-1 margin-left-4">
+                <app-donut-chart></app-donut-chart>
+              </mat-card>
+            </div>
+          </div>
           
          <div style ="place-content :center;">
           <mat-spinner style="margin:0 auto;" *ngIf="isLoading" [diameter]="40"></mat-spinner>

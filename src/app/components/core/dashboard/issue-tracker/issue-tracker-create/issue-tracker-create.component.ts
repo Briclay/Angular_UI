@@ -6,7 +6,6 @@ import { merge as observableMerge, Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 import { ProjectService } from '../../../dashboard/projects/project.service';
 import { UserService} from '../../../dashboard/user/user.service';
-import { UserService} from '../../../dashboard/user/user.service';
 import { DepartmentService} from "../../../../../services/department/department.service";
 
 @Component({
