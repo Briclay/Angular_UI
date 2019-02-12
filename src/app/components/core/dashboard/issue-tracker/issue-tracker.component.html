@@ -57,7 +57,8 @@
             </div>
         </mat-tab>
         <mat-tab label="New">
-            <app-issue-tracker-details formType="create" (tabSwitch)="tabSwitch($event)" ></app-issue-tracker-details>
+            <app-issue-tracker-create formType="create" (tabSwitch)="tabSwitch($event)" >
+            </app-issue-tracker-create>
         </mat-tab>
     </mat-tab-group>
 </div>

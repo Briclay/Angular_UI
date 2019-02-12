@@ -7,6 +7,7 @@ import { WorkRequestDetailsComponent } from '../../components/core/dashboard/wor
 import {WorkOrderDetailsComponent} from '../../components/core/dashboard/work-order/work-order-details/work-order-details.component';
 import { UserDashDetailsComponent } from '../../components/core/dashboard/user-dashboard/user-dash-details/user-dash-details.component';
 import { IssueTrackerDetailsComponent } from '../../components/core/dashboard/issue-tracker/issue-tracker-details/issue-tracker-details.component';
+import { IssueTrackerCreateComponent } from '../../components/core/dashboard/issue-tracker/issue-tracker-create/issue-tracker-create.component';
 
 @Injectable()
 export class WidgetService {
@@ -18,6 +19,7 @@ export class WidgetService {
 		'app-work-request-details': WorkRequestDetailsComponent,
 		'app-work-order-details': WorkOrderDetailsComponent,
 		'app-user-dash-details': UserDashDetailsComponent,
-		'app-issue-tracker-details':IssueTrackerDetailsComponent
+		'app-issue-tracker-details':IssueTrackerDetailsComponent,
+		'app-issue-tracker-create' : IssueTrackerCreateComponent
 	};
 }

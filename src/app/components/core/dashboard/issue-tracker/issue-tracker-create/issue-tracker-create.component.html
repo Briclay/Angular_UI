@@ -1,3 +1,94 @@
-<p>
-  issue-tracker-create works!
-</p>
+<div class="issue-tracker-details-container">
+  <div style ="place-content :center;">
+    <mat-spinner style="margin:0 auto;" *ngIf="loading" [diameter]="20"></mat-spinner>
+  </div>
+  <form [formGroup]="issueTrackerCreateForm" class="issue-tracker-details-form">
+    <mat-card>
+      <div class="issue-tracker-details-card">
+        <div class="issue-tracker-details-name">
+          <mat-form-field appearance="outline">
+            <mat-label>Project</mat-label>
+            <mat-select placeholder="Select project">
+              <mat-option *ngFor="let project of projects" [value]="project">
+                {{project.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="outline" style="width: 200px;">
+            <mat-label>ID #</mat-label>
+            <input matInput formControlName="IssuesID">
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Issue Type</mat-label>
+             <mat-select placeholder="Select issueTypes">
+              <mat-option *ngFor="let issueType of issueTypes" [value]="issueType">
+                {{issueType}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="issue-tracker-details-content">
+          <div class="issue-tracker-details-form-list">
+              <mat-form-field appearance="outline" style="width: 270px;"  >
+                <mat-label>Description</mat-label>
+                <textarea rows=5 matInput formControlName="description"></textarea>
+              </mat-form-field> 
+              <div fxLayout=row>
+                <mat-form-field appearance="outline" >
+                  <mat-label>Assigned To</mat-label>
+                  <mat-select placeholder="Select project" (selectionChange)="selectedUser($event.value)">
+                    <mat-option *ngFor="let assigned of users" [value]="assigned">
+                      {{assigned.name.first }} {{assigned.name.last}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <div style ="place-content :center;">
+                  <mat-spinner style="margin:0 auto;" *ngIf="isDepratmentLoading" [diameter]="20"></mat-spinner>
+                </div>
+                <span style="color: red;margin-left: 15px;">{{selectedUserDepartment }}</span>
+              </div>
+          </div>
+        </div>
+        <div class="issue-tracker-details-content">
+          <div class="issue-tracker-details-form-list">
+            <mat-form-field  appearance="outline" style="width: 200px;">
+              <mat-label>Created Date</mat-label>
+              <input matInput [matDatepicker]="picker2" placeholder="" formControlName="createdAt">
+                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                <mat-datepicker #picker2></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Created By</mat-label>
+              <input matInput formControlName="createdBy" readonly>
+            </mat-form-field>
+            <mat-form-field  appearance="outline" style="width: 200px;">
+              <mat-label>Date of Completion</mat-label>
+              <input matInput [matDatepicker]="picker3" placeholder="" formControlName="completionDate">
+                <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+                <mat-datepicker #picker3></mat-datepicker>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="issue-tracker-details-content">
+          <div class="issue-tracker-details-form-list">
+            <mat-form-field appearance="outline" style="width: 270px;"  >
+              <mat-label>Remarks</mat-label>
+              <textarea  rows=5 matInput formControlName="remarks" ></textarea>
+            </mat-form-field> 
+          </div>
+        </div>
+      </div>
+      <div fxLayout=row class="pull-right" > 
+        <div fxLayout=column style="align-items: center;">
+          <img style="height: 30px;width: 30px;" src="assets/images/icons/close_red.png" />
+          <span>Cancel</span>
+        </div>
+        <div fxLayout=column class="hand-cursor" style="align-items: center;margin-left: 20px;"  (click)="onFormSubmit()">
+          <img style="height: 30px;" src="assets/images/icons/submitIcon.png" />
+          <span>Save</span>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+    </mat-card>
+  </form>
+</div>

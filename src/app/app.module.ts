@@ -70,6 +70,7 @@ import { OrganisationDropDownComponent } from './components/shared/organisation-
 import { ResetPasswordComponent } from './components/core/reset-password/reset-password.component';
 import { ChangePasswordComponent } from './components/core/change-password/change-password.component';
 import { ProjectDropDownComponent } from './components/shared/project-drop-down/project-drop-down.component';
+import { IssueTrackerCreateComponent } from './components/core/dashboard/issue-tracker/issue-tracker-create/issue-tracker-create.component';
 
 @NgModule({
   declarations: [
@@ -111,7 +112,8 @@ import { ProjectDropDownComponent } from './components/shared/project-drop-down/
     ChangePasswordComponent,
     ProjectDropDownComponent,
     IssueTrackerComponent,
-    RegisterComponent
+    RegisterComponent,
+    IssueTrackerCreateComponent
   ],
   imports: [
     BrowserModule,
