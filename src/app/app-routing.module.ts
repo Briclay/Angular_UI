@@ -20,9 +20,11 @@ import { DesignDashboardComponent } from './components/core/dashboard/design-das
 import { RootFolderComponent } from './components/core/dashboard/file-manager/root-folder/root-folder.component';
 import { FileSharedFolderComponent } from './components/core/dashboard/file-manager/file-shared-folder/file-shared-folder.component';
 import { IssueTrackerComponent } from './components/core/dashboard/issue-tracker/issue-tracker.component';
+import { RegisterComponent } from './components/core/register/register.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
   { path: 'reset-password', component: ResetPasswordComponent },
   { path: 'change-password/:id', component: ChangePasswordComponent },
   {

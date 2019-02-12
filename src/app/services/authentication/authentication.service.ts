@@ -5,7 +5,7 @@ import { ApiService } from "./../api.service";
 import {environmentService} from "./../../constant/environment"
 
 @Injectable({
- providedIn: 'root',
+    providedIn: 'root',
 })
 
 export class AuthenticationService {
@@ -14,6 +14,11 @@ export class AuthenticationService {
 
     public login(request): Observable<any> {
         let url = `${environmentService.briclayCore}/auth/signin`;
+        return this.apiService.post(url, request).pipe(map(res => res));
+    }
+
+    public register(request): Observable<any> {
+        let url = `${environmentService.briclayCore}/auth/signup`;
         return this.apiService.post(url, request).pipe(map(res => res));
     }
 

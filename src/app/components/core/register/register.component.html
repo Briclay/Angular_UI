@@ -1,47 +1,72 @@
 
 <div id="register" fxLayoutAlign="center center"> 
-  <div id="register-form-wrapper"  fxLayout="row" fxLayoutAlign="center center">
-
-    <div id="register-form" >     
+  <div id="register-form-wrapper"  fxLayout="column" fxLayoutAlign="center center">
+    
+    <div id="register-form" >    
+    <div class="logo-row" style="    margin-top: 50px;">
+      <img src="assets/images/logos/Briclay.png" alt="logo" class="logo">
+    </div>   
       <form  name="registerForm"  [formGroup]="registerForm" novalidate>
-       <div class="logo-row">
-        <img src="assets/images/logos/Briclay.png" alt="logo" class="logo">
-      </div>  
-     <div class="logo-row" >New User</div>
-     <div>
-     </div>
+      <div formGroupName="name">
         <div fxLayout="row" class="inputBoxShadow">
           <div class="nameAndPwd" >First Name</div>
-          <div>
-            <mat-form-field>
-              <input matInput formControlName="firstName" type="firstName" placeholder="First Name">
-            </mat-form-field>
-          </div>
+          <mat-form-field>
+            <input matInput formControlName="first" type="text" placeholder="First Name">
+          </mat-form-field>
         </div>
-        <div fxLayout="row" class="inputBoxShadow" style="margin-top: 30px;">
+        <div fxLayout="row" class="inputBoxShadow" style="margin-top: 20px;">
           <div class="nameAndPwd">Last Name</div>
           <mat-form-field>
-            <input matInput formControlName="lastName" type="lastName" placeholder="Last Name" >
+            <input matInput formControlName="last" type="text" placeholder="Last Name" >
           </mat-form-field>
         </div>
-        <div fxLayout="row" class="inputBoxShadow" style="margin-top: 30px;">
+      </div>   
+        <div fxLayout="row" class="inputBoxShadow" style="margin-top: 20px;">
           <div class="nameAndPwd">Email ID</div>
           <mat-form-field>
-            <input matInput formControlName="emailId" type="emailId" placeholder="Email ID" >
+            <input matInput formControlName="email" type="email" placeholder="Email ID" >
           </mat-form-field>
         </div>
-        <div fxLayout="row" class="inputBoxShadow" style="margin-top: 30px;">
+        <div fxLayout="row" class="inputBoxShadow" style="margin-top: 20px;">
+          <div class="nameAndPwd">Phone</div>
+          <mat-form-field>
+            <input matInput formControlName="phone" type="number" placeholder="Phone number" >
+          </mat-form-field>
+        </div>
+        <div fxLayout="row" class="inputBoxShadow" style="margin-top: 20px;">
+          <div class="nameAndPwd">Password</div>
+          <mat-form-field>
+            <input matInput formControlName="password" type="text" placeholder="Password" >
+          </mat-form-field>
+        </div>
+        <div fxLayout="row" class="inputBoxShadow" style="margin-top: 20px;">
+          <div class="nameAndPwd">User Name</div>
+          <mat-form-field>
+            <input matInput formControlName="username" type="text" placeholder="User Name" >
+          </mat-form-field>
+        </div>
+        <div fxLayout="row" class="inputBoxShadow" style="margin-top: 20px;">
           <div class="nameAndPwd">Organisation</div>
           <mat-form-field>
-            <mat-select placeholder="Select Organisation" formControlName="organisation" type="organisation">
-            </mat-select>
+            <input matInput formControlName="_organisationId" type="text" placeholder="Organisation" >
+            <!-- <mat-select placeholder="Select Organisation" formControlName="_organisationId" type="organisation">
+            </mat-select> -->
           </mat-form-field>
         </div>  
-        <div fxLayout="row" class="inputBoxShadow" style="margin-top: 30px;">
+        <div fxLayout="row" class="inputBoxShadow" style="margin-top: 20px;">
           <div class="nameAndPwd">Department</div>
           <mat-form-field>
-            <mat-select formControlName="department" type="department" placeholder="Select Department" >
-            </mat-select>	
+            <input matInput formControlName="_departmentId" type="text" placeholder="Department" >
+          <!--   <mat-select formControlName="_departmentId" type="department" placeholder="Select Department" >
+            </mat-select>	 -->
+          </mat-form-field>
+        </div>                  
+        <div fxLayout="row" class="inputBoxShadow" style="margin-top: 20px;">
+          <div class="nameAndPwd">Role</div>
+          <mat-form-field>
+            <input matInput formControlName="_roleId" type="text" placeholder="Roles" >
+           <!--  <mat-select formControlName="_roleId" type="department" placeholder="Select Roles" >
+            </mat-select>  -->
           </mat-form-field>
         </div>                        
         <div class="sign-in-instead">
@@ -50,23 +75,7 @@
           </a>
         </div>
         <button mat-raised-button style="background-color: #2196F3; color: white;" type="submit" 
-            class="submit-button"  [disabled]="isLoading || !registerForm.valid" aria-label="Register" (click)="onRegisterFormSubmit()">Register
-      <!-- Material Design Spinner -->
-      <div class="spinner-wrapper" *ngIf="isLoading">
-        <div class="spinner">
-          <div class="inner">
-            <div class="gap"></div>
-            <div class="left">
-              <div class="half-circle"></div>
-            </div>
-            <div class="right">
-              <div class="half-circle"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- / Material Design Spinner -->
-      
+            class="submit-button"  aria-label="Register" (click)="onRegisterFormSubmit()">Register
         </button>
       </form>
     </div>

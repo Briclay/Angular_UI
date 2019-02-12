@@ -68,6 +68,11 @@ export class LoginComponent implements OnInit {
 	  }
 	}
 
+	openRegisterForm (){
+		const path = '/register'
+	    this.router.navigate([path]);
+	}
+
 	onLoginFormSubmit() {
 		this.onLoginFormValuesChanged()
 		this.isLoading = true;

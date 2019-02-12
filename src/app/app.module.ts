@@ -7,6 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DynamicTableComponent } from './components/shared/dynamic-table/dynamic-table.component';
 import { LoginComponent } from './components/core/login/login.component';
+import { RegisterComponent } from './components/core/register/register.component';
 import { DashboardComponent } from './components/core/dashboard/dashboard.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { UserComponent } from './components/core/dashboard/user/user.component';
@@ -109,7 +110,8 @@ import { ProjectDropDownComponent } from './components/shared/project-drop-down/
     OrganisationDropDownComponent,
     ChangePasswordComponent,
     ProjectDropDownComponent,
-    IssueTrackerComponent
+    IssueTrackerComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

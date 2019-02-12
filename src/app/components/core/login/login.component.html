@@ -33,10 +33,17 @@
             <input matInput formControlName="password" type="password" placeholder="Enter password" >
           </mat-form-field>
         </div>
-        <div class="remember-forgot-password">
-          <a class="forgot-password" (click)="openForgotPwdPopup()">
-            Forgot Password?
-          </a>
+        <div fxLayout="row" style ="place-content :space-between;">
+          <div class="remember-forgot-password" style="margin-left: 15px;">
+            <a class="forgot-password" (click)="openRegisterForm()">
+              Sign Up
+            </a>
+          </div>
+          <div class="remember-forgot-password">
+            <a class="forgot-password" (click)="openForgotPwdPopup()">
+              Forgot Password?
+            </a>
+          </div>
         </div>
         <button mat-raised-button style="background-color: #2196F3; color: white;" type="submit" 
             class="submit-button"  [disabled]="isLoading || !loginForm.valid" aria-label="LOG IN" (click)="onLoginFormSubmit()">LOGIN
