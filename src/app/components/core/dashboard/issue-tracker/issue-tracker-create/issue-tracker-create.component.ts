@@ -52,7 +52,6 @@ export class IssueTrackerCreateComponent implements OnInit {
 			completionDate: {},
 			remarks: {}
 		};
-
 		let org = JSON.parse(window.localStorage.getItem('authUserOrganisation'));
 		this.orgID = org._id
 		let user = JSON.parse(window.localStorage.getItem('authUser'));

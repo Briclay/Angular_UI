@@ -6,7 +6,7 @@ import { FileManagerService } from '../file-manager.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { MatDialog, MatTableDataSource, MatSnackBar } from '@angular/material';
+import { MatDialog, MatSnackBar , MatTableDataSource } from '@angular/material';
 import { FolderCreateDialogComponent } from '../folder-create-dialog/folder-create-dialog.component';
 import { FileShareDialogComponent } from '../file-share-dialog/file-share-dialog.component';
 import { FileMailDialogComponent } from '../file-mail-dialog/file-mail-dialog.component';
@@ -227,7 +227,6 @@ export class FileManagerConfigComponent implements OnInit {
           //   duration: 2000,
           // });
         }
-
       }, (error: any) => {
         console.error('error', error);
         this.snackBar.open(error.message, 'project', {
@@ -292,8 +291,12 @@ export class FileManagerConfigComponent implements OnInit {
         }
       }, (error: any) => {
         console.log('error', error);
+       
         // if exist then show tbales otherwise show erro
         if ('Folder exist' === error.message) {
+          /*this.snackBar.open(error.message, 'Folder', {
+            duration: 3000,
+          });*/
           if (this.designDeptFlag) {
             this.getIconFoldersByApi(row);
           } else {
@@ -379,6 +382,9 @@ export class FileManagerConfigComponent implements OnInit {
         this.isLoading = false;
         this.dataSource = new MatTableDataSource(res);
       }, (error: any) => {
+        this.snackBar.open(error.message, 'Folder', {
+          duration: 3000,
+        });
         console.error('error', error);
       });
   }
@@ -390,6 +396,9 @@ export class FileManagerConfigComponent implements OnInit {
         this.filesData = res;
         this.fileListLoading = false;
       }, (error: any) => {
+        this.snackBar.open(error.message, 'File', {
+          duration: 3000,
+        });
         console.error('error', error);
         this.fileListLoading = false;
       });

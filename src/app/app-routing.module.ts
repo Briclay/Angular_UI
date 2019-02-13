@@ -102,6 +102,11 @@ const routes: Routes = [
           breadcrumb: 'Users'
         }
       },
+       {
+        path: 'file-manager/shared-folder/:id', component: FileSharedFolderComponent, data: {
+          breadcrumb: 'Users'
+        }
+      },
       {
         path: 'design-dashboard', component: DesignDashboardComponent, data: {
           breadcrumb: 'Users'
