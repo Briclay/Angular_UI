@@ -34,37 +34,38 @@
             }
         }
     }
+
+    .margin-left50 {
+    margin-inline-start: 50px;
+    }
+    .time-label {
+        margin-left: 20px;
+    }
+    .time-value {
+        margin-left: 40px;
+    }
+    .time-status {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background-color: #4caf50;
+        display: inline-block;
+    }
+    .time-status.red {
+        background-color: #ff5959;
+    }
+    .time-status.red {
+        background-color: #ff5959;
+    }  
+    .hdr-inpt {
+        margin-bottom: 15px;
+    }
+    spinner {
+        margin: 6px 5px;
+    }
+    .save-button {
+        width: 100px;
+    }
     
 }
 
-.margin-left50 {
-    margin-inline-start: 50px;
-}
-.time-label {
-    margin-left: 20px;
-}
-.time-value {
-    margin-left: 40px;
-}
-.time-status {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background-color: #4caf50;
-    display: inline-block;
-}
-.time-status.red {
-    background-color: #ff5959;
-}
-.time-status.red {
-    background-color: #ff5959;
-}  
-.hdr-inpt {
-    margin-bottom: 15px;
-}
-spinner {
-    margin: 6px 5px;
-}
-.save-button {
-    width: 100px;
-}
