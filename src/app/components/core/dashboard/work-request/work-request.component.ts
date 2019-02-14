@@ -33,7 +33,7 @@ export class WorkRequestComponent implements OnInit {
 
   ngOnInit() {
     // tslint:disable-next-line:max-line-length
-    observableMerge(this.route.params, this.route.queryParams).pipe(takeUntil(this.unsubscribe)).subscribe((params) => this.loadRoute(params));
+    //observableMerge(this.route.params, this.route.queryParams).pipe(takeUntil(this.unsubscribe)).subscribe((params) => this.loadRoute(params));
   }
 
   public ngOnDestroy(): void {
@@ -41,17 +41,17 @@ export class WorkRequestComponent implements OnInit {
     this.unsubscribe.complete();
   }
 
-  loadRoute(params: any) {
+  /*loadRoute(params: any) {
     if ('orgID' in params) {
       this.orgID = params['orgID'];
       this.getWorkRequest();
     }
-  }
+  }*/
 
-  organizationChanged(org) {
-  this.router.navigate([], {queryParams: {orgID: org.value ? org.value._id : org._id} , queryParamsHandling: 'merge'});
+  /*organizationChanged(org) {
+    this.router.navigate([], {queryParams: {orgID: org.value ? org.value._id : org._id} , queryParamsHandling: 'merge'});
   }
-
+*/
   getWorkRequest() {
     this.isLoading = true;
     this.workRequestService.getWorkRequest('filter[_organisationId]=' + this.orgID).pipe().subscribe(res => {

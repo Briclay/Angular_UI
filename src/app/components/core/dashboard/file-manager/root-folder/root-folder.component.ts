@@ -17,6 +17,7 @@ export class RootFolderComponent implements OnInit {
   org: any;
   dept: any;
   authUser: any;
+  allFolders : any;
   constructor(
     private fileManagerService: FileManagerService,
     private route: ActivatedRoute,
@@ -52,6 +53,7 @@ export class RootFolderComponent implements OnInit {
             this.adminFolder(res);
           }
         } else {
+          this.allFolders = res;
           this.dataSource = new MatTableDataSource(res);
         }
         this.loading = false;
@@ -147,6 +149,12 @@ export class RootFolderComponent implements OnInit {
         this.ngOnInit();
       });
     }
+  }
+
+  goToNext (){
+    this.snackBar.open('Coming Soon', '!!!!!', {
+      duration: 2000,
+    });
   }
 
   routeSharedFolder (){

@@ -22,6 +22,7 @@ export class FileSharedFolderComponent implements OnInit {
 	localStack : any;    
   fileDetails : any;
   isLoading : boolean;
+  viewLog =false;
 	constructor(
 		private fileManagerService: FileManagerService,
 		private route: ActivatedRoute,
@@ -44,9 +45,14 @@ export class FileSharedFolderComponent implements OnInit {
 		if(this.folderId)
     	this.getSingleFolder(this.folderId);
   }
-  goToHome (){
+  backHomePage (){
   	const path = '/dashboard/file-manager/shared-folder/'
-    this.router.navigate([path]);
+    this.router.navigate([path]);/**/
+    /*const homeBack = JSON.parse(window.localStorage.getItem('stack'));
+    const path = homeBack[0].path;
+    this.router.navigate([path]).then(() => {
+      //this.ngOnInit();
+    });*/
   }
 
   goBackButton() {
@@ -58,9 +64,36 @@ export class FileSharedFolderComponent implements OnInit {
       	this.folderId = temp._id
       window.localStorage.stack = JSON.stringify(this.fullPathDisplay);
       this.router.navigate([path]).then(() => {
+        if(this.folderId)
        this.getSingleFolder(this.folderId)
       });
     }
+  }
+
+  // this method for get iocn in html passing file extension
+  getIcon(fileExt: string, type: string) {
+    if (type.toLowerCase() == 'folder')
+      return "assets/fileManager/folder.png"
+    else {
+      if (fileExt.toLowerCase() == 'doc' || fileExt.toLowerCase() == 'docx')
+        return "assets/fileManager/doc.png"
+      else
+        if (fileExt.toLowerCase() == 'xls' || fileExt.toLowerCase() == "xlsx")
+          return "assets/fileManager/xls.png"
+        if (fileExt.toLowerCase() == 'pdf')
+          return "assets/fileManager/pdf.png"
+        else
+          if (fileExt.toLowerCase() == "jpg" || fileExt.toLowerCase() == "jpeg")
+            return "assets/fileManager/jpg.png"
+          else
+            if (fileExt.toLowerCase() == "png")
+              return "assets/fileManager/png.png"
+            else
+              if (fileExt.toLowerCase() == "dwg")
+                return "assets/fileManager/dwg.png"
+              else
+                return "assets/fileManager/file.png"
+            }
   }
 
   getRootShareFiles() {
@@ -127,6 +160,7 @@ export class FileSharedFolderComponent implements OnInit {
       //this.getSingleFolder(this.folderId)
     }
     if(data.type ===  'file'){
+      this.viewLog = true;
       this.getLogs(data)
     }
   }

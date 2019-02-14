@@ -1,3 +1,42 @@
+.work-request-details-container {
+    padding: 10px;
+    .work-request-details-form {
+        
+        .work-request-details-card {
+            flex: 1;
+            display: flex;
+            font: 400 13px/20px Roboto,"Helvetica Neue",sans-serif;
+            .work-request-details-name {
+                flex: 0.6;
+                img {
+                    width: 100px;
+                    border-radius: 5px;
+                }
+                .work-requestname-input {
+                    margin-top: 10px;
+                }
+            }
+            .work-request-details-content {
+                flex: 1;
+                .work-request-details-content-title {
+                    margin-left: 10px;
+                }
+                .work-request-details-form-list {
+                    border-left: 2px solid #999999;
+                    min-height: 200px;
+                    padding: 10px;
+                }
+                .feature_btn {
+                    border-radius: 17px;
+                    background-color: #2196F3; 
+                    color: white;
+                }
+            }
+        }
+    }
+    
+}
+
 .margin-left50 {
     margin-inline-start: 50px;
 }
