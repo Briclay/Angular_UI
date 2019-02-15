@@ -56,17 +56,23 @@ export class FileSharedFolderComponent implements OnInit {
   }
 
   goBackButton() {
-  	this.fullPathDisplay = JSON.parse(window.localStorage.getItem('stack'));
-    if (!_.isEmpty(this.fullPathDisplay)) {
-    	this.fullPathDisplay.pop();
-      const temp = this.fullPathDisplay[this.fullPathDisplay.length - 1];
-      const path = temp.path;
-      	this.folderId = temp._id
-      window.localStorage.stack = JSON.stringify(this.fullPathDisplay);
-      this.router.navigate([path]).then(() => {
-        if(this.folderId)
-       this.getSingleFolder(this.folderId)
-      });
+    if(!this.folderId){
+      const path = '/dashboard/file-manager'
+      this.router.navigate([path]);/**/
+    }
+    else {
+      this.fullPathDisplay = JSON.parse(window.localStorage.getItem('stack'));
+      if (!_.isEmpty(this.fullPathDisplay)) {
+        this.fullPathDisplay.pop();
+        const temp = this.fullPathDisplay[this.fullPathDisplay.length - 1];
+        const path = temp.path;
+          this.folderId = temp._id
+        window.localStorage.stack = JSON.stringify(this.fullPathDisplay);
+        this.router.navigate([path]).then(() => {
+          if(this.folderId)
+         this.getSingleFolder(this.folderId)
+        });
+      }
     }
   }
 
