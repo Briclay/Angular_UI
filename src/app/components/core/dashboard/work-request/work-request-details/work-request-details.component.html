@@ -44,7 +44,7 @@
             <div style="position: relative;">
               <mat-form-field appearance="outline">
                 <mat-label>Work Category</mat-label>
-                <mat-select class="wrk-catgry" placeholder="Work Category" formControlName="workCategory" (selectionChange)="noOfDays($event)"required>
+                <mat-select class="wrk-catgry" placeholder="Work Category" formControlName="workCategory" (selectionChange)="noOfDays()"required>
                   <mat-option [value]="null" *ngIf="workCategory.length<=0">No Work Category</mat-option>
                   <mat-option *ngFor="let workCat of workCategory" [value]="workCat.name">
                     {{ workCat.name }}

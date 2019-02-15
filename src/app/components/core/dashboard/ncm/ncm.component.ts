@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./ncm.component.scss']
 })
 export class NcmComponent implements OnInit {
-
+  ncmListSpinner : boolean;
   constructor() { }
 
   ngOnInit() {
