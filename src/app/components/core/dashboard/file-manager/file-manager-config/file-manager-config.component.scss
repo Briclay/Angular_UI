@@ -38,6 +38,19 @@ table {
     color: #ffffff;
     text-align: center;
 }
+
+.side-nav-list li.side-nav-div {
+   padding : 6px 3px;
+}
+
+.bg_color {
+    color : grey;
+}
+
+.bg_color_active {
+    color : #3cc0f0;
+}
+ 
 .side-nav-icon-size {
     height: 45px;
     width: 45px;
@@ -54,7 +67,6 @@ table {
         color: #3cc0f0;
     }
 }
-
 
 .side-nav-list mat-icon {
     font-size: 35px;
