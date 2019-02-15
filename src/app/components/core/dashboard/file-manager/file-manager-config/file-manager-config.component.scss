@@ -40,15 +40,17 @@ table {
 }
 
 .side-nav-list li.side-nav-div {
-   padding : 6px 3px;
+   padding : 1px 1px;
 }
 
 .bg_color {
     color : grey;
+    font-size : 12px;
 }
 
 .bg_color_active {
     color : #3cc0f0;
+    font-size : 12px;
 }
  
 .side-nav-icon-size {
@@ -56,7 +58,7 @@ table {
     width: 45px;
 }
 .side-nav-list li {
-    padding: 10px 0px;
+    padding: 5px 0px;
 }
 .side-nav-list li a {
     font-size: 10px;
@@ -75,7 +77,7 @@ table {
 .file-icons {
     flex: 0.1;
     img {
-        width: 32px;
+        width: 22px;
     }
 }
 .file-list {

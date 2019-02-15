@@ -12,14 +12,13 @@
               <div class="list">
                 <span (click)="fileInput.click()">
                   <img  matTooltip="File Upload" width="75px" src="assets/images/icons/Camera.png" title="Upload"  class="hand-cursor margin-left-4">
-                  <input #fileInput type="file" (change)="onFileInput($event)" style="display:none;" />  
-                  <!-- </span> Upload</p> --> 
+                  <input #fileInput type="file" (change)="onFileInput($event)" style="display:none;" /> <!-- </span> Upload</p> --> 
                 </span>
               </div>
             </div>
             <div fxLayout="row">
               <div *ngFor="let img of imageArray">
-                <div style="padding : 5px; margin-left: 15px;">
+                <div style="padding : 5px; margin-left: 15px;margin-top: -15px;">
                   <img src="{{img}}" class="uploadedImg">
                 </div>
               </div>
