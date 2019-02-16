@@ -6,7 +6,7 @@ import { FileManagerService } from '../file-manager.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { MatDialog, MatSnackBar , MatTableDataSource } from '@angular/material';
+import { MatDialog, MatSnackBar, MatTableDataSource } from '@angular/material';
 import { FolderCreateDialogComponent } from '../folder-create-dialog/folder-create-dialog.component';
 import { FileShareDialogComponent } from '../file-share-dialog/file-share-dialog.component';
 import { FileMailDialogComponent } from '../file-mail-dialog/file-mail-dialog.component';
@@ -291,7 +291,6 @@ export class FileManagerConfigComponent implements OnInit {
         }
       }, (error: any) => {
         console.log('error', error);
-       
         // if exist then show tbales otherwise show erro
         if ('Folder exist' === error.message) {
           /*this.snackBar.open(error.message, 'Folder', {
@@ -308,11 +307,18 @@ export class FileManagerConfigComponent implements OnInit {
   }
   getIconFoldersByApi(row) {
     this.isLoading = true;
+    console.log('row', row);
     // tslint:disable-next-line:max-line-length
     this.fileManagerService.getAllFolders('filter[_projectId]=' + row._id + '&filter[name]=' + row.name + '&filter[_departmentId]=' + this.deptId)
       .pipe().subscribe(res => {
-        this.isLoading = false;
-        this.getIconsFolder(res[0]._id);
+        if (res.length > 0) {
+          this.isLoading = false;
+          this.getIconsFolder(res[0]._id);
+        } else {
+          this.snackBar.open('Project folder is not created ! Please check project name', 'Project Folder', {
+            duration: 3000,
+          });
+        }
       }, (error: any) => {
       });
   }
@@ -388,7 +394,7 @@ export class FileManagerConfigComponent implements OnInit {
         console.error('error', error);
       });
   }
-  
+
   getFiles(folder) {
     this.fileListLoading = true;
     this.fileManagerService.getFiles(folder._id)
