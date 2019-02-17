@@ -64,7 +64,8 @@ export class OrganisationComponent implements OnInit {
         },
         {
           title: 'Plan', key: 'subscription.plan',
-        }, {
+        }, 
+        {
           title: 'Valid till', key: 'subscription.validTill'
         }, {
         title: 'Entities', key: '0'

@@ -12,14 +12,13 @@
               <div class="list">
                 <span (click)="fileInput.click()">
                   <img  matTooltip="File Upload" width="75px" src="assets/images/icons/Camera.png" title="Upload"  class="hand-cursor margin-left-4">
-                  <input #fileInput type="file" (change)="onFileInput($event)" style="display:none;" />  
-                  <!-- </span> Upload</p> --> 
+                  <input #fileInput type="file" (change)="onFileInput($event)" style="display:none;" /> <!-- </span> Upload</p> --> 
                 </span>
               </div>
             </div>
             <div fxLayout="row">
               <div *ngFor="let img of imageArray">
-                <div style="padding : 5px; margin-left: 15px;">
+                <div style="padding : 5px; margin-left: 15px;margin-top: -15px;">
                   <img src="{{img}}" class="uploadedImg">
                 </div>
               </div>
@@ -41,8 +40,8 @@
 
                 <mat-form-field class="padding_1" appearance="outline" fxFlex="30">
                   <mat-label>Project Type</mat-label>                
-                    <mat-select formControlName="type">
-                      <mat-option *ngFor="let types of projectType" [value]="types">
+                  <mat-select formControlName="type">
+                    <mat-option *ngFor="let types of projectType" [value]="types">
                       {{types}}
                     </mat-option>
                   </mat-select>
@@ -56,20 +55,18 @@
 
                 <mat-form-field class="padding_1" appearance="outline" fxFlex="30">
                   <mat-label>Project Status</mat-label>                
-                    <mat-select formControlName="status">
-                      <mat-option *ngFor="let status of projectStatus" [value]="status">
+                  <mat-select formControlName="status">
+                    <mat-option *ngFor="let status of projectStatus" [value]="status">
                       {{status}}
                     </mat-option>
                   </mat-select>
                 </mat-form-field> 
               </div>
-            </div>
-         <!--  <div fxLayouy="row" class="margin-10">
-        </div> -->                        
-      </div>
-      <!-- end section -->
-      <!-- third section -->
-      <div fxFlex="30" class="padding_1">
+            </div>                  
+          </div>
+       <!-- end section -->
+       <!-- third section -->
+       <div fxFlex="30" class="padding_1">
         <div fxLayout="row"  formGroupName="projectDetails" style="place-content: space-between">
           <!-- start -->
           <div fxLayout="column">
@@ -92,30 +89,42 @@
           </div>
           <!-- start button sectiom -->
           <div fxLayout="column" >
-            <button  mat-raised-button class="popup-btn" (click)="openDetailsDialog()">Details</button>
-            <br />
-            <button disabled mat-raised-button class="popup-btn" (click)="openPhaseDialog()">Phases</button>
-            <br />
-            <button disabled mat-raised-button class="popup-btn" (click)="openTeamDialog()">Team</button>
-            <br />
-            <button disabled mat-raised-button class="popup-btn" (click)="openDateDialog()">Dates</button>
+            <div fxLayout="row" >
+              <div (click)="openDetailsDialog()" style="margin-top: 5px;" >
+                <img matTooltip="Details" style="width: 35px;height: 35px;" src="assets/images/icons/Details.png" >
+              </div>
+              <!-- <div (click)="openPhaseDialog()" style="margin-left: 5px;"> -->
+                <div  style="margin-left: 5px;">
+                  <img matTooltip="Phases" style="width: 45px;height: 45px;" src="assets/images/icons/Phases.png" >
+                </div>
+              </div>
+              <div fxLayout="row" >
+                <!-- <div (click)="openTeamDialog()" > -->
+                  <div>  
+                    <img matTooltip="Team" style="width: 35px;height: 35px;" src="assets/images/icons/Team.png" >
+                  </div>
+                  <!-- <div (click)="openDateDialog()" style="margin-left: 10px;"> -->
+                    <div  style="margin-left: 10px;">  
+                      <img matTooltip="Dates" style="width: 35px;height: 35px;" src="assets/images/icons/Date.png" >
+                    </div>
+                  </div>  
+                </div>
+              </div>
+              <!-- end button section -->
+            </div>
+            <!-- end third section -->
           </div>
-        </div>
-        <!-- end button section -->
+          <div fxLayout="row">
+            <button mat-raised-button>
+              <span>Cancel</span>
+            </button>
+            <button type="submit" mat-raised-button (click)="onSubmit()">
+              <span>submit</span>
+            </button>
+          </div>
+        </form>
       </div>
-<!-- end third section -->
-</div>
-<div fxLayout="row">
-  <button mat-raised-button>
-    <span>Cancel</span>
-  </button>
-  <button type="submit" mat-raised-button (click)="onSubmit()">
-    <span>submit</span>
-  </button>
-</div>
-</form>
-</div>
-<!-- end main div -->
-</mat-card>
-<!-- end card section -->
-</div>
+      <!-- end main div -->
+    </mat-card>
+    <!-- end card section -->
+  </div>

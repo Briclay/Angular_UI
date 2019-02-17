@@ -3,10 +3,10 @@
     <div fxLayout=row >
       <div fxLayout="row" >
         <div>
-            <div class="dottedBorder" >
-              <img src="{{profileImageUrl}}" class="userImage" (click)="fileInput.click()"/>
-              <input #fileInput type="file" (change)="onFileInput($event)"  style="display:none;" />
-            </div>
+          <div class="dottedBorder" >
+            <img src="{{profileImageUrl}}" class="userImage" (click)="fileInput.click()"/>
+            <input #fileInput type="file" (change)="onFileInput($event)"  style="display:none;" />
+          </div>
          <!--  <div fxLayout="column" style="text-align: center;">
             <span class="text-color">Vinay R</span>
             <span class="text-color-light ">QMS</span>
@@ -33,19 +33,19 @@
               </mat-form-field>
             </div> -->
             <div fxLayout=row style="place-content: space-around;">
-              <div fxLayout=row style="place-content: space-around;">
+              <div fxLayout=row style="place-content: space-around;" class="hand-cursor">
                 <img style="height: 20px;width: 20px;" src="/assets/images/icons/projects_Active.png">
                 <a routerLink="/dashboard/projects" style="text-decoration: none;">
                   <div class="tab-btn" style="margin-left:10px;" > Projects</div>
                 </a>
               </div>
-              <div fxLayout=row style="place-content: space-around;">
+              <div fxLayout=row style="place-content: space-around;" class="hand-cursor">
                <img style="height: 30px;width: 30px;margin-top: -5px;" src="/assets/images/icons/File_Manager_Active.png">
                 <a routerLink="/dashboard/file-manager" style="text-decoration: none;">
                   <div class="tab-btn" >File Manager</div>
                 </a>
              </div>
-             <div fxLayout=row style="place-content: space-around;">
+             <div fxLayout=row style="place-content: space-around;" class="hand-cursor">
               <img style="height: 20px;width: 20px;" src="/assets/images/icons/Work_Request _active.png">
               <div class="tab-btn" style="margin-left:10px;">Document Checklist</div>
             </div>
@@ -69,7 +69,7 @@
           </div> 
         </div>
       </div> -->
-      <div fxLayout=row>
+      <!-- <div fxLayout=row>
         <div class="content-head" fxLayout=column style="min-width: -webkit-fill-available;">
           <div class="font_12_light" style="text-align: center;">
             <div class="flex-box">
@@ -82,11 +82,11 @@
             </div>
           </div>
           
-         <div style ="place-content :center;">
-          <mat-spinner style="margin:0 auto;" *ngIf="isLoading" [diameter]="40"></mat-spinner>
+          <div style ="place-content :center;">
+            <mat-spinner style="margin:0 auto;" *ngIf="isLoading" [diameter]="40"></mat-spinner>
+          </div>
         </div>
-        </div>
-      </div> 
+      </div>  -->
     </div>
   </div>
 

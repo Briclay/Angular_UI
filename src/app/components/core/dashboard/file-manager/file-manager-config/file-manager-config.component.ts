@@ -6,7 +6,7 @@ import { FileManagerService } from '../file-manager.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { MatDialog, MatTableDataSource, MatSnackBar } from '@angular/material';
+import { MatDialog, MatSnackBar, MatTableDataSource } from '@angular/material';
 import { FolderCreateDialogComponent } from '../folder-create-dialog/folder-create-dialog.component';
 import { FileShareDialogComponent } from '../file-share-dialog/file-share-dialog.component';
 import { FileMailDialogComponent } from '../file-mail-dialog/file-mail-dialog.component';
@@ -227,7 +227,6 @@ export class FileManagerConfigComponent implements OnInit {
           //   duration: 2000,
           // });
         }
-
       }, (error: any) => {
         console.error('error', error);
         this.snackBar.open(error.message, 'project', {
@@ -294,6 +293,9 @@ export class FileManagerConfigComponent implements OnInit {
         console.log('error', error);
         // if exist then show tbales otherwise show erro
         if ('Folder exist' === error.message) {
+          /*this.snackBar.open(error.message, 'Folder', {
+            duration: 3000,
+          });*/
           if (this.designDeptFlag) {
             this.getIconFoldersByApi(row);
           } else {
@@ -305,11 +307,18 @@ export class FileManagerConfigComponent implements OnInit {
   }
   getIconFoldersByApi(row) {
     this.isLoading = true;
+    console.log('row', row);
     // tslint:disable-next-line:max-line-length
     this.fileManagerService.getAllFolders('filter[_projectId]=' + row._id + '&filter[name]=' + row.name + '&filter[_departmentId]=' + this.deptId)
       .pipe().subscribe(res => {
-        this.isLoading = false;
-        this.getIconsFolder(res[0]._id);
+        if (res.length > 0) {
+          this.isLoading = false;
+          this.getIconsFolder(res[0]._id);
+        } else {
+          this.snackBar.open('Project folder is not created ! Please check project name', 'Project Folder', {
+            duration: 3000,
+          });
+        }
       }, (error: any) => {
       });
   }
@@ -379,10 +388,13 @@ export class FileManagerConfigComponent implements OnInit {
         this.isLoading = false;
         this.dataSource = new MatTableDataSource(res);
       }, (error: any) => {
+        this.snackBar.open(error.message, 'Folder', {
+          duration: 3000,
+        });
         console.error('error', error);
       });
   }
-  
+
   getFiles(folder) {
     this.fileListLoading = true;
     this.fileManagerService.getFiles(folder._id)
@@ -390,6 +402,9 @@ export class FileManagerConfigComponent implements OnInit {
         this.filesData = res;
         this.fileListLoading = false;
       }, (error: any) => {
+        this.snackBar.open(error.message, 'File', {
+          duration: 3000,
+        });
         console.error('error', error);
         this.fileListLoading = false;
       });

@@ -13,13 +13,13 @@
   </div> -->
   <!-- rend back button -->
   <!-- contract section -->
-  <mat-card>
-    <!-- contracts template -->
-     <app-file-config-contract-template *ngIf="workRequestFlag"  (workRequestData)="getWorkRequestata($event)">
-      </app-file-config-contract-template>
+<!--   <mat-card>
+ -->    <!-- contracts template -->
+     <!-- <app-file-config-contract-template *ngIf="workRequestFlag"  (workRequestData)="getWorkRequestata($event)">
+      </app-file-config-contract-template> -->
     <!-- end contracts template -->
-  </mat-card>
-  <!-- end contract section -->
+<!--   </mat-card>
+ -->  <!-- end contract section -->
     <!-- project selection box nad project details -->
     <mat-card *ngIf="projectFlag">
       <form name="fileForm" [formGroup]="fileForm" novalidate>
@@ -44,12 +44,15 @@
   <!-- end project details -->
   <div fxLayout="row" class="file-details" style="margin-top: 5px;">
     <mat-card *ngIf="iconArray.length>0" style="margin-right: 7px;">
-      <ul class="side-nav-list file-icons" style="overflow: auto; height: 300px;">
-        <li *ngFor="let folder of iconArray" (click)="getClickedByIcon(folder)">
-          <a>
-            <img class="icons" src="{{ folder.iconPath }}" /><br />{{ folder.name }}
+      <ul class="side-nav-list file-icons" style="overflow: auto; height: 500px;">
+        <li class="side-nav-div" *ngFor="let folder of iconArray" (click)="getClickedByIcon(folder)">
+          <a >
+            <img class="icons" src="{{ folder.iconPath }}" /><br />
+            <p class="{{folder.name === clickedIconName ? 'bg_color_active' : 'bg_color'}}"
+               >{{ folder.name }}</p>
           </a>
         </li>
+        <!-- routerLink="/dashboard/file-manager/{{currentUrl}}"-->  
       </ul>
     </mat-card>
     <!-- icon for fil upload nad folder create -->
@@ -88,13 +91,13 @@
           <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
             <!-- name type -->
             <ng-container matColumnDef="type">
-              <th mat-header-cell *matHeaderCellDef> Type </th>
-              <td mat-cell *matCellDef="let element"> <img src="{{getIcon(element.fileExt,element.type)}}" width="40px">
+              <th mat-header-cell *matHeaderCellDef width="80px" > Type </th>
+              <td mat-cell *matCellDef="let element"> <img src="{{getIcon(element.fileExt,element.type)}}" width="25px">
               </td>
             </ng-container>
             <!-- name Column -->
             <ng-container matColumnDef="name">
-              <th mat-header-cell *matHeaderCellDef width="500px"> Name </th>
+              <th mat-header-cell *matHeaderCellDef width="150px"> Name </th>
               <td mat-cell *matCellDef="let element"> {{element.name}} </td>
             </ng-container>
             <!-- created Column -->
@@ -111,29 +114,29 @@
             <ng-container matColumnDef="logs">
               <th mat-header-cell *matHeaderCellDef width="50px" align="right">Logs</th>
               <td mat-cell *matCellDef="let element" (click)="getLogs(element)">
-                <img _ngcontent-c9="" matTooltip="Details" src="assets/images/icons/Details.png" style="width: 50%;">
+                <img _ngcontent-c9="" matTooltip="Details" src="assets/images/icons/Details.png" style="width: 30px;">
               </td>
             </ng-container>
             <!-- email Column -->
             <ng-container matColumnDef="email">
               <th mat-header-cell *matHeaderCellDef width="55px" align="right">Email</th>
               <td mat-cell *matCellDef="let element" (click)="openMailDialog(element)">
-                <img _ngcontent-c9="" matTooltip="Email" src="assets/images/icons/Email.png" style="width: 50%;" align="center">
+                <img _ngcontent-c9="" matTooltip="Email" src="assets/images/icons/Email.png" style="width: 35px;" align="center">
               </td>
             </ng-container>
             <!-- share Column -->
             <ng-container matColumnDef="share">
               <th mat-header-cell *matHeaderCellDef width="60px" align="right">Share</th>
               <td mat-cell *matCellDef="let element" (click)="openShareDialog(element)">
-                <img _ngcontent-c9="" matTooltip="Share" src="assets/images/icons/File_Share.png" style="width: 50%;"
+                <img _ngcontent-c9="" matTooltip="Share" src="assets/images/icons/File_Share.png" style="width: 35px;"
                   align="center">
               </td>
             </ng-container>
             <!-- Download Column -->
             <ng-container matColumnDef="download">
               <th mat-header-cell *matHeaderCellDef width="50px" align="right">Download</th>
-              <td class="hand-cursor" mat-cell *matCellDef="let element" (click)="downloadFile(element)">
-                <img _ngcontent-c9="" matTooltip="Download" src="assets/images/icons/download.png" style="width: 50%;"
+              <td mat-cell *matCellDef="let element" (click)="downloadFile(element)">
+                <img _ngcontent-c9="" matTooltip="Download" src="assets/images/icons/download.png" style="width: 35px;"
                   align="center">
               </td>
             </ng-container>

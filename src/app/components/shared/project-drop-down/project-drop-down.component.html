@@ -1,5 +1,5 @@
   <div>
-    <mat-form-field appearance="outline">
+    <mat-form-field appearance="outline" style="width: 215px;">
       <mat-label>Projects</mat-label>
       <mat-select placeholder="Select Projects"  (selectionChange)="projectChanged($event)" [(ngModel)]="selectedProj">
         <mat-option *ngFor="let project of projectlist" [value]="project" >

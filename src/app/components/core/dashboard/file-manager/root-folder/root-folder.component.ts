@@ -17,6 +17,7 @@ export class RootFolderComponent implements OnInit {
   org: any;
   dept: any;
   authUser: any;
+  allFolders : any;
   constructor(
     private fileManagerService: FileManagerService,
     private route: ActivatedRoute,
@@ -52,6 +53,7 @@ export class RootFolderComponent implements OnInit {
             this.adminFolder(res);
           }
         } else {
+          this.allFolders = res;
           this.dataSource = new MatTableDataSource(res);
         }
         this.loading = false;
@@ -149,8 +151,23 @@ export class RootFolderComponent implements OnInit {
     }
   }
 
+  goToNext (){
+    this.snackBar.open('Coming Soon', '!!!!!', {
+      duration: 2000,
+    });
+  }
+
   routeSharedFolder (){
-    const path = '/dashboard/file-manager/shared-folder'
-      this.router.navigate([path]);
+    const path = '/dashboard/file-manager/shared-folder/';
+    let top = 1;
+    let stack = []
+    let json = {
+      name: 'Shared',
+      path: this.currentUrl,
+      top: top,
+    };
+    stack.push(json);
+    window.localStorage.stack = JSON.stringify(stack);
+    this.router.navigate([path])
   }
 }

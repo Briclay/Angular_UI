@@ -1,31 +1,71 @@
-.margin-left50 {
+.work-request-details-container {
+    padding: 10px;
+    .work-request-details-form {
+        
+        .work-request-details-card {
+            flex: 1;
+            display: flex;
+            font: 400 13px/20px Roboto,"Helvetica Neue",sans-serif;
+            .work-request-details-name {
+                flex: 0.6;
+                img {
+                    width: 100px;
+                    border-radius: 5px;
+                }
+                .work-requestname-input {
+                    margin-top: 10px;
+                }
+            }
+            .work-request-details-content {
+                flex: 1;
+                .work-request-details-content-title {
+                    margin-left: 10px;
+                }
+                .work-request-details-form-list {
+                    border-left: 2px solid #999999;
+                    min-height: 200px;
+                    padding: 10px;
+                }
+                .feature_btn {
+                    border-radius: 17px;
+                    background-color: #2196F3; 
+                    color: white;
+                }
+            }
+        }
+    }
+
+    .margin-left50 {
     margin-inline-start: 50px;
+    }
+    .time-label {
+        margin-left: 20px;
+    }
+    .time-value {
+        margin-left: 40px;
+    }
+    .time-status {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background-color: #4caf50;
+        display: inline-block;
+    }
+    .time-status.red {
+        background-color: #ff5959;
+    }
+    .time-status.red {
+        background-color: #ff5959;
+    }  
+    .hdr-inpt {
+        margin-bottom: 15px;
+    }
+    spinner {
+        margin: 6px 5px;
+    }
+    .save-button {
+        width: 100px;
+    }
+    
 }
-.time-label {
-    margin-left: 20px;
-}
-.time-value {
-    margin-left: 40px;
-}
-.time-status {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background-color: #4caf50;
-    display: inline-block;
-}
-.time-status.red {
-    background-color: #ff5959;
-}
-.time-status.red {
-    background-color: #ff5959;
-}  
-.hdr-inpt {
-    margin-bottom: 15px;
-}
-spinner {
-    margin: 6px 5px;
-}
-.save-button {
-    width: 100px;
-}
+

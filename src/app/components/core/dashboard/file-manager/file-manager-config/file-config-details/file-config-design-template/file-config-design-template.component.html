@@ -16,7 +16,7 @@
   <div class="flex-grow">
     <div class="project-content">
       <div class="project-details-header" *ngIf="logsData.imageUrls.length>0">
-        <img src="{{logsData.imageUrls[0]}}" style="height: 130px;width: 145px;"  (click)="openImageSlider(logsData.logoImageUrl)" />
+        <img src="{{logsData.imageUrls[0]}}" class="imgDiv" (click)="openImageSlider(logsData.logoImageUrl)" />
         <div class="project-name ">
           {{logsData.name}}
         </div>

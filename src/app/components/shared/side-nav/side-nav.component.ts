@@ -58,6 +58,7 @@ export class SideNavComponent implements OnInit {
     }
     if(this.currentUserType === "superadmin"){
       this.superadminAccess = true;
+      console.log( this.superadminAccess)
     }
   }
 }

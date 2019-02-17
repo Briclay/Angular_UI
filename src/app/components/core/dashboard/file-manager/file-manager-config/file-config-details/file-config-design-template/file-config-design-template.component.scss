@@ -5,8 +5,13 @@
 .flex-grow:not(:first-child) {
     border-right: 1px solid #cccccc;
 }
+.imgDiv {
+    height: 130px;
+    width: 215px;
+}
 .project-content {
     .project-name {
+        width: 206px;
         margin-top: -20px;
         background-color: #ccc;
         text-align: center;
