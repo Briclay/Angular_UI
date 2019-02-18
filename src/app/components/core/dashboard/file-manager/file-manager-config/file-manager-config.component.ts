@@ -472,8 +472,9 @@ export class FileManagerConfigComponent implements OnInit {
       if (value.type === 'folder') {
         this.projectFlag = false;
         let top = 0;
+        let stack; 
         window.localStorage.stack = JSON.stringify([]);
-        let stack = JSON.parse(window.localStorage.getItem('stack'));
+        stack = JSON.parse(window.localStorage.getItem('stack'));
         if (stack.length == 0) {
           top = 0;
         } else {
@@ -484,7 +485,7 @@ export class FileManagerConfigComponent implements OnInit {
           path: this.currentUrl,
           top: top + 1
         };
-        let stack = JSON.parse(window.localStorage.getItem('stack'));
+        stack = JSON.parse(window.localStorage.getItem('stack'));
         stack.push(json);
         window.localStorage.stack = JSON.stringify(stack);
         const path = '/dashboard/file-manager/' + this.orgId + '/' + this.deptId + '/' + value._id;

@@ -26,9 +26,9 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns" style="width:40%" align="center"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;" (dblclick)="routeFielManger(row)"></tr>
     </table> -->
-    <div *ngFor="let element of allFolders; ">
-      <div class="hand-cursor" fxLayout=row (click)="routeFielManger(element)">
-        <mat-card style="width:26%;height: 48px;background-color: #d3d3d385;" class="hand-cursor">
+    <div *ngFor="let element of allFolders;">
+      <div fxLayout=row >
+        <mat-card class="hand-cursor" (click)="routeFielManger(element)"  style="width:26%;height: 48px;background-color: #d3d3d385;display: inline-block;">
           <div fxLayout=row style="position: relative;">
             <div class="icon" >
               <img style="width:65px;height: 65px;" src="assets/images/icons/design-icon.png">
