@@ -35,27 +35,31 @@ export class RootFolderComponent implements OnInit {
   }
   getSubFolder() {
     console.log('this.authUser.userType', this.authUser.userType);
-    if (this.authUser.userType === 'SUPERADMIN') {
+   if (this.authUser.userType === 'SUPERADMIN') {
       var filter = 'filter[_parentId]=';
     } else {
-      if (this.authUser.userType === 'ADMIN') {
+      var filter = 'filter[_organisationId]=' + this.org._id + '&filter[_parentId]=';
+      /* if (this.authUser.userType === 'ADMIN') {
         var filter = 'filter[_organisationId]=' + this.org._id + '&filter[name]=' + this.org.name;
       } else {
         var filter = 'filter[_organisationId]=' + this.org._id + '&filter[_departmentId]=' + this.dept._id + '&filter[name]=' + this.dept.name;
 
-      }
+      }*/
     }
     this.loading = true;
+    console.log('filter', filter);
     this.fileManagerService.getAllFolders(filter)
       .pipe().subscribe(res => {
-        if (this.authUser.userType === 'ADMIN') {
-          if (res.length > 0) {
-            this.adminFolder(res);
-          }
-        } else {
+        console.log('res ' + JSON.stringify(res));
+         if (this.authUser.userType === 'SUPERADMIN') {
           this.allFolders = res;
           this.dataSource = new MatTableDataSource(res);
+        } else {
+          if ( res.length > 0 ) {
+            this.adminFolder(res);
+          }
         }
+        this.dataSource = new MatTableDataSource(res);
         this.loading = false;
         if (res.length > 0) {
           this.setConfigData(res[0]);
@@ -70,12 +74,20 @@ export class RootFolderComponent implements OnInit {
         this.snackBar.open('error', 'Folder', {
           duration: 2000,
         });
-      })
+      });
   }
   adminFolder(data) {
-    var filter = 'filter[_organisationId]=' + this.org._id + '&filter[_parentId]=' + data[0]._id;
+    console.log('this.dept._id', this.dept._id);
+    let filter;
+    if (this.authUser.userType === 'ADMIN') {
+      filter = 'filter[_organisationId]=' + this.org._id + '&filter[_parentId]=' + data[0]._id;
+    } else {
+      filter = 'filter[_organisationId]=' + this.org._id + '&filter[_parentId]=' + data[0]._id + '&filter[_departmentId]=' + this.dept._id;
+    }
+    console.log('filter in admin', filter);
     this.fileManagerService.getAllFolders(filter)
       .pipe().subscribe(res => {
+        console.log('res in admin ', res);
         if (res.length > 0) {
           this.dataSource = new MatTableDataSource(res);
         } else {
