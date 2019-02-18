@@ -59,10 +59,12 @@
     <div class="file-list" *ngIf="tableFlag">
       <mat-card class="margin-btm-10 list-header">
         <div fxLayout="row align-item-center" class="file-list-header">
-
+         
           <div class="flex-grow no-border">
             <div class="pull-left">
-              <strong class="text-color">{{clickedIconName}}</strong>
+               <span  *ngFor="let pathName of path">
+                <a class="text-color">{{ pathName.name }} / </a>
+              </span>
             </div>
           </div>
           <div class="flex-grow: 3; no-border ">

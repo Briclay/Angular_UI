@@ -69,6 +69,9 @@ export class FileManagerConfigComponent implements OnInit {
   workRequestDetails: any;
   designIconArray = [];
   workRequestFlag = false;
+  path: any;
+  pathName: any;
+  fullpath: any;
 
   displayedColumns: string[] = ['type', 'name', 'createdAt', 'version', 'logs', 'email', 'share', 'download'];
   constructor(
@@ -108,6 +111,7 @@ export class FileManagerConfigComponent implements OnInit {
     this.currentUrl = this.router.url;
     this.localStack = JSON.parse(window.localStorage.getItem('stack'));
     this.fullPathDisplay = JSON.parse(window.localStorage.getItem('stack'));
+    this.path = JSON.parse(window.localStorage.getItem('stack'));
     this.folderConfigData();
     this.getSingleFolder();
   }
@@ -460,24 +464,36 @@ export class FileManagerConfigComponent implements OnInit {
   }
 
   // click on icon
+
   getClickedByIcon(value) {
     this.clickedIconName = value.name;
     this.folderDetailsDataOption = value;
     if (this.orgId && this.deptId && value) {
       if (value.type === 'folder') {
         this.projectFlag = false;
+        let top = 0;
+        window.localStorage.stack = JSON.stringify([]);
         let stack = JSON.parse(window.localStorage.getItem('stack'));
+        if (stack.length == 0) {
+          top = 0;
+        } else {
+          top = parseInt(stack[stack.length - 1].top)
+        }
         const json = {
           name: value.name,
           path: this.currentUrl,
-          top: parseInt(stack[stack.length - 1].top) + 1
+          top: top + 1
         };
+        let stack = JSON.parse(window.localStorage.getItem('stack'));
         stack.push(json);
         window.localStorage.stack = JSON.stringify(stack);
         const path = '/dashboard/file-manager/' + this.orgId + '/' + this.deptId + '/' + value._id;
         // route to dept folder list
         this.router.navigate([path]).then(() => {
-          this.ngOnInit();
+          this.tableFlag = true;
+          //this.ngOnInit();
+          this.getSingleFolder();
+          this.path = JSON.parse(window.localStorage.getItem('stack'));
         });
       }
     }
