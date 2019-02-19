@@ -26,7 +26,71 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns" style="width:40%" align="center"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;" (dblclick)="routeFielManger(row)"></tr>
     </table> -->
+
     <div *ngFor="let element of allFolders;">
+      <div *ngIf="element.name === 'Design' ">
+        <div fxLayout=row >
+          <mat-card class="hand-cursor" (click)="routeFielManger(element)"  style="width:26%;height: 48px;background-color: #d3d3d385;display: inline-block;">
+            <div fxLayout=row style="position: relative;">
+              <div class="icon" >
+                <img style="width:65px;height: 65px;" src="assets/images/icons/design-icon.png">
+              </div>
+              <div class="text" style="position: absolute;
+                background-color: blue;
+                color: white;
+                top: 32px;
+                width: 65px;
+                font-weight: 600;" ><span>{{element.name}} </span>
+              </div>
+              <div fxLayout=row style="margin-left: 10px;margin: 8px 0px 0px 20px;">
+                <div style="color: blue;
+                  font-size: 17px;">{{element.name}} Department Repository</div>
+              </div>
+            </div>
+          </mat-card>
+        </div>
+      </div>
+    </div>
+    <div fxLayout=row >
+        <div fxLayout=row style="margin-top: 20px;margin-right: 20px;" (click)="routeSharedFolder()" class="hand-cursor">
+          <span style="width:55%;height: 48px;">
+            <div fxLayout=row style="position: relative;">
+              <div class="icon" >
+                <img style="width:110px;height: 110px;" src="assets/images/icons/Shared.png">
+              </div>
+              <div class="text" style="position: absolute;
+                color: white;
+                top: 38px;
+                right: -17px;
+                font-size: 13px;
+                font-weight: 600;" ><span>Shared</span></div>
+            </div>
+          </span>
+        </div>
+        <div *ngFor="let element of allFolders;">
+          <div *ngIf="element.name !== 'Design' " fxLayout=row style="margin-top: 20px;margin-right: 20px;" (click)="routeFielManger(element)" class="hand-cursor">
+            <span style="width:55%;height: 48px;">
+              <div fxLayout=row style="position: relative;">
+                <div class="icon" >
+                  <div *ngIf="element.name === 'template' ">
+                    <img style="width:110px;height: 110px;" src="assets/images/icons/Template.png">
+                  </div>
+                  <div *ngIf="element.name === 'library' ">
+                    <img style="width:110px;height: 110px;" src="assets/images/icons/Library.png">
+                  </div>
+                </div>
+                <div class="text" style="position: absolute;
+                  color: white;
+                  top: 38px;
+                  left: 25px;
+                  font-size: 13px;
+                  font-weight: 600;" ><span>{{element.name}}</span></div>
+              </div>
+            </span>
+          </div>
+        </div>
+      </div>
+    <!-- <div *ngFor="let element of allFolders;">
       <div fxLayout=row >
         <mat-card class="hand-cursor" (click)="routeFielManger(element)"  style="width:26%;height: 48px;background-color: #d3d3d385;display: inline-block;">
           <div fxLayout=row style="position: relative;">
@@ -37,7 +101,7 @@
               background-color: blue;
               color: white;
               top: 32px;
-              width: 56px;
+              width: 65px;
               font-weight: 600;" ><span>{{element.name}} </span>
             </div>
             <div fxLayout=row style="margin-left: 10px;margin: 8px 0px 0px 20px;">
@@ -95,6 +159,6 @@
           </div>
         </span>
       </div>
-    </div>
+    </div> -->
   </ng-template>
 </div>

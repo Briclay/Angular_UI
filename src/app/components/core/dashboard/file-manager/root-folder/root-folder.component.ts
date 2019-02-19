@@ -89,6 +89,7 @@ export class RootFolderComponent implements OnInit {
       .pipe().subscribe(res => {
         console.log('res in admin ', res);
         if (res.length > 0) {
+          this.allFolders = res;
           this.dataSource = new MatTableDataSource(res);
         } else {
           this.snackBar.open('No data found', 'Folder', {

@@ -113,7 +113,7 @@ export class FileManagerConfigComponent implements OnInit {
     this.fullPathDisplay = JSON.parse(window.localStorage.getItem('stack'));
     this.path = JSON.parse(window.localStorage.getItem('stack'));
     this.folderConfigData();
-    this.getSingleFolder();
+    this.getSingleFolder(this.fileId);
   }
 
   projectChanged(proj) {
@@ -291,7 +291,7 @@ export class FileManagerConfigComponent implements OnInit {
           this.getIconFoldersByApi(row);
         } else {
           this.tableFlag = true;
-          this.getSingleFolder();
+          this.getSingleFolder(this.fileId);
         }
       }, (error: any) => {
         console.log('error', error);
@@ -304,7 +304,7 @@ export class FileManagerConfigComponent implements OnInit {
             this.getIconFoldersByApi(row);
           } else {
             this.tableFlag = true;
-            this.getSingleFolder();
+            this.getSingleFolder(this.fileId);
           }
         }
       });
@@ -347,7 +347,7 @@ export class FileManagerConfigComponent implements OnInit {
     }).afterClosed()
       .subscribe(response => {
         if (response === 'success') {
-          this.getSingleFolder();
+          this.getSingleFolder(this.fileId);
         }
       });
   }
@@ -362,7 +362,7 @@ export class FileManagerConfigComponent implements OnInit {
       }).afterClosed()
         .subscribe(response => {
           if (response === 'success') {
-            this.getSingleFolder();
+            this.getSingleFolder(this.fileId);
           }
         });
     }
@@ -378,23 +378,23 @@ export class FileManagerConfigComponent implements OnInit {
       }).afterClosed()
         .subscribe(response => {
           if (response === 'success') {
-            this.getSingleFolder();
+            this.getSingleFolder(this.fileId);
           }
         });
     }
   }
 
 
-  getSingleFolder() {
+  getSingleFolder(id) {
     this.isLoading = true;
-    this.fileManagerService.getSingleFile(this.fileId)
+    this.fileManagerService.getSingleFile(id)
       .pipe().subscribe(res => {
         this.isLoading = false;
         this.dataSource = new MatTableDataSource(res);
       }, (error: any) => {
-        this.snackBar.open(error.message, 'Folder', {
-          duration: 3000,
-        });
+        // this.snackBar.open(error.message, 'Folder', {
+        //   duration: 3000,
+        // });
         console.error('error', error);
       });
   }
@@ -440,6 +440,7 @@ export class FileManagerConfigComponent implements OnInit {
     }
   }
   recursiveCall(data) {
+    this.fileId = data._id
     if (data.type === 'folder') {
       const path = '/dashboard/file-manager/' + this.orgId + '/' + this.deptId + '/' + data._id;
       let top = 0;
@@ -451,14 +452,18 @@ export class FileManagerConfigComponent implements OnInit {
       }
       const json = {
         name: data.name,
-        path: this.currentUrl,
+        path: path,
         top: top + 1,
+        id: data._id
       };
       stack.push(json);
       window.localStorage.stack = JSON.stringify(stack);
       // route to dept folder list
       this.router.navigate([path]).then(() => {
-        this.ngOnInit();
+        if(this.fileId){
+          this.getSingleFolder(this.fileId);
+        }
+        this.path = JSON.parse(window.localStorage.getItem('stack'));
       });
     }
   }
@@ -466,13 +471,15 @@ export class FileManagerConfigComponent implements OnInit {
   // click on icon
 
   getClickedByIcon(value) {
+    this.fileId = value._id
     this.clickedIconName = value.name;
     this.folderDetailsDataOption = value;
     if (this.orgId && this.deptId && value) {
       if (value.type === 'folder') {
-        this.projectFlag = false;
+        //this.projectFlag = false;
+        const path = '/dashboard/file-manager/' + this.orgId + '/' + this.deptId + '/' + value._id;
         let top = 0;
-        let stack; 
+        let stack;
         window.localStorage.stack = JSON.stringify([]);
         stack = JSON.parse(window.localStorage.getItem('stack'));
         if (stack.length == 0) {
@@ -482,44 +489,56 @@ export class FileManagerConfigComponent implements OnInit {
         }
         const json = {
           name: value.name,
-          path: this.currentUrl,
+          path: path,
           top: top + 1
         };
         stack = JSON.parse(window.localStorage.getItem('stack'));
         stack.push(json);
         window.localStorage.stack = JSON.stringify(stack);
-        const path = '/dashboard/file-manager/' + this.orgId + '/' + this.deptId + '/' + value._id;
         // route to dept folder list
         this.router.navigate([path]).then(() => {
           this.tableFlag = true;
           //this.ngOnInit();
-          this.getSingleFolder();
+          if(this.fileId){
+            this.getSingleFolder(this.fileId);
+          }
           this.path = JSON.parse(window.localStorage.getItem('stack'));
         });
       }
     }
   }
-  goBackButton() {
-    if (!_.isEmpty(this.fullPathDisplay)) {
-      const temp = this.fullPathDisplay.pop();
-      if (window.localStorage.projectLevel < temp.top) {
-        // window.localStorage.files_iconArray = JSON.stringify('');
-        window.localStorage.files_project = JSON.stringify('');
-        this.projectFlag = false;
+
+   goBackButton() {
+    if(!this.fileId){
+      const path = '/dashboard/file-manager'
+      this.router.navigate([path]);/**/
+    }
+    else {
+      this.path = JSON.parse(window.localStorage.getItem('stack'));
+      if (!_.isEmpty(this.path)) {
+        this.path.pop();
+        const temp = this.path[this.path.length - 1];
+        const path = temp.path;
+          this.fileId = temp._id
+        window.localStorage.stack = JSON.stringify(this.path);
+        this.router.navigate([path]).then(() => {
+          if(this.fileId){
+            this.getSingleFolder(this.fileId)
+          }
+          this.path = JSON.parse(window.localStorage.getItem('stack'));
+        });
       }
-      const path = temp.path;
-      window.localStorage.stack = JSON.stringify(this.fullPathDisplay);
-      this.router.navigate([path]).then(() => {
-        this.ngOnInit();
-      });
     }
   }
+
   backHomePage() {
-    const homeBack = JSON.parse(window.localStorage.getItem('stack'));
+    const path = '/dashboard/file-manager'
+    this.router.navigate([path]);/**/
+    /*const homeBack = JSON.parse(window.localStorage.getItem('stack'));
     const path = homeBack[0].path;
     this.router.navigate([path]).then(() => {
       this.ngOnInit();
-    });
+    });*/
   }
   // this method for route navigation
   onSelectPath(path, top) {
@@ -584,7 +603,7 @@ export class FileManagerConfigComponent implements OnInit {
     this.fileManagerService.saveFile(body)
       .pipe().subscribe(res => {
         this.isLoading = false;
-        this.getSingleFolder();
+        this.getSingleFolder(this.fileId);
       }, (error: any) => {
         if ('Folder exist' === error.message) {
           this.onFileReplcaeDailog(body);
@@ -610,7 +629,7 @@ export class FileManagerConfigComponent implements OnInit {
     if (body) {
       this.fileManagerService.updateFile(body._id, body)
         .pipe().subscribe(res => {
-          this.getSingleFolder();
+          this.getSingleFolder(this.fileId);
         }, (error: any) => {
           console.log('error', error);
         });
@@ -693,10 +712,10 @@ export class FileManagerConfigComponent implements OnInit {
     };
     this.fileManagerService.saveFolder(json)
       .pipe().subscribe(res => {
-        this.getSingleFolder();
+        this.getSingleFolder(this.fileId);
       }, (error: any) => {
         console.log('error', error);
-        this.getSingleFolder();
+        this.getSingleFolder(this.fileId);
       });
   }
 
