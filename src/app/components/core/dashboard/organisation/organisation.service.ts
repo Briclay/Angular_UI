@@ -11,14 +11,13 @@ export class OrganisationService {
 
   constructor(private apiService: ApiService) { }
 
-  public getOrganization(): Observable<any> {
-        let url = `${environmentService.briclayCore}/organisations?select=name&order=createdAt&sort=desc`
+    public getOrganization(): Observable<any> {
+        let url = `${environmentService.briclayApiBase}/organisations?select=name&order=createdAt&sort=desc`
         return this.apiService.get(url).pipe(map(res => res));
     }
 
     public getOneOrg(fileId: string): Observable<any> {
-      let url = `${environmentService.briclayCore}/organisations/${fileId}`
+      let url = `${environmentService.briclayApiBase}/organisations/${fileId}`
       return this.apiService.get(url).pipe(map(res => res));
-  }
-
+    }
 }

@@ -35,7 +35,7 @@ export class RoleService {
     ) { }
     // pass params data
     public getData(ordID): Observable<RoleData> {
-        let url = `${environmentService.briclayCore}/roles?select=all&filter[_organisationId]=${ordID}`
+        let url = `${environmentService.briclayApiBase}/roles?select=all&filter[_organisationId]=${ordID}`
         return this.apiService.get(url).pipe(map(res     => res));
     }
 
@@ -44,17 +44,17 @@ export class RoleService {
 	}
 
 	public getFeatures(userType, departID): Observable<any> {
-		let url = `${environmentService.briclayCore}/rolefeatures?userType=${userType}&departmentId=${departID}`
+		let url = `${environmentService.briclayApiBase}/rolefeatures?userType=${userType}&departmentId=${departID}`
         return this.apiService.get(url).pipe(map(res => res));
 	}
 
 	public createRole(request): Observable<any> {
-        let url = `${environmentService.briclayCore}/roles?filter[_organisationId]=${request._organisationId}`;
+        let url = `${environmentService.briclayApiBase}/roles?filter[_organisationId]=${request._organisationId}`;
         return this.apiService.post(url, request).pipe(map(res => res));
     }
 
 	public updateRole(roleId, request): Observable<any> {
-        let url = `${environmentService.briclayCore}/roles/${roleId}`;
+        let url = `${environmentService.briclayApiBase}/roles/${roleId}`;
         return this.apiService.put(url, request).pipe(map(res => res));
     }
 }

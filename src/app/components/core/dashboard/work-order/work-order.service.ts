@@ -10,11 +10,11 @@ import {environmentService} from "../../../../constant/environment"
 export class WorkOrderService {
     constructor(private apiService: ApiService) { }
     public getWorkOrder(orgId): Observable<any> {
-        let url = `${environmentService.briclayWorkRequest}/work-order?${orgId}&order=createdAt&sort=desc`
+        let url = `${environmentService.briclayApiBase}/work-order?${orgId}&order=createdAt&sort=desc`
         return this.apiService.get(url).pipe(map(res => res));
     }
     public save(requestObj): Observable<any> {
-        let url = `${environmentService.briclayFileManager}/work-order`
+        let url = `${environmentService.briclayApiBase}/work-order`
         return this.apiService.post(url, requestObj).pipe(map(res => res));
     }
 }

@@ -13,27 +13,27 @@ export class AuthenticationService {
     // pass params data
 
     public login(request): Observable<any> {
-        let url = `${environmentService.briclayCore}/auth/signin`;
+        let url = `${environmentService.briclayApiBase}/auth/signin`;
         return this.apiService.post(url, request).pipe(map(res => res));
     }
 
     public register(request): Observable<any> {
-        let url = `${environmentService.briclayCore}/auth/signup`;
+        let url = `${environmentService.briclayApiBase}/auth/signup`;
         return this.apiService.post(url, request).pipe(map(res => res));
     }
 
     public forgotPwd(request): Observable<any> {
-        let url = `${environmentService.briclayCore}/auth/forgot`;
+        let url = `${environmentService.briclayApiBase}/auth/forgot`;
         return this.apiService.post(url, request).pipe(map(res => res));
     }
 
     public changePassword(id, request): Observable<any> {
-        let url = `${environmentService.briclayCore}/users/${id}`;
+        let url = `${environmentService.briclayApiBase}/users/${id}`;
         return this.apiService.put(url, request).pipe(map(res => res));
     }
 
     public resetPwd(request, token): Observable<any> {
-        let url = `${environmentService.briclayCore}/auth/reset?token=${token}`;
+        let url = `${environmentService.briclayApiBase}/auth/reset?token=${token}`;
         return this.apiService.post(url, request).pipe(map(res => res));
     }
 }

@@ -39,32 +39,32 @@ export class OrganizationService {
 	}
 
 	public getFeature (): Observable<any> {
-        let url = `${environmentService.briclayCore}/features?fieldsToShow=name,baseRoute,activeFlag`;
+        let url = `${environmentService.briclayApiBase}/features?fieldsToShow=name,baseRoute,activeFlag`;
         return this.apiService.get(url).pipe(map(res => res));
     }
 
 	public getAll(id): Observable<any> {
-        let url = `${environmentService.briclayCore}/organisations?select=*&filter[_id]=${id}`;
+        let url = `${environmentService.briclayApiBase}/organisations?select=*&filter[_id]=${id}`;
         return this.apiService.get(url).pipe(map(res => res));
     }
 
     public getOne(id): Observable<any> {
-        let url =  `${environmentService.briclayCore}/organisations/${id}`;
+        let url =  `${environmentService.briclayApiBase}/organisations/${id}`;
         return this.apiService.get(url, id).pipe(map(res => res));
     }
    
     public organisations (request): Observable<any> {
-        let url = `${environmentService.briclayCore}/organisations`;
+        let url = `${environmentService.briclayApiBase}/organisations`;
         return this.apiService.post(url, request).pipe(map(res => res));
     }
 
     public update (id, request): Observable<any> {
-        let url = `${environmentService.briclayCore}/organisations/${id}`;
+        let url = `${environmentService.briclayApiBase}/organisations/${id}`;
         return this.apiService.put(url, request).pipe(map(res => res));
     }
 
     getS3Url(query: string, request?): Observable<any> {
-	    let url = `${environmentService.briclayCore}/file/sign-s3?${query}`
+	    let url = `${environmentService.briclayApiBase}/file/sign-s3?${query}`
         return this.apiService.put(url, request).pipe(map(res => res));
     }
 

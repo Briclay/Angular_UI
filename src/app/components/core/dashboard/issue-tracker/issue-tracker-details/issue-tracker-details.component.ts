@@ -15,10 +15,10 @@ export class IssueTrackerDetailsComponent implements OnInit {
 	@Input() formType: string;
 	@Output() public tabSwitch: EventEmitter<any> = new EventEmitter<any>();
 
-	issueTrackerDetailsForm: FormGroup;
+	issueTrackerDetailsForm : FormGroup;
 	form: FormGroup;
 	formErrors: any;
-	projectFormErrors: any;
+	issueTrackerDetailsFormErrors: any;
 
 	private unsubscribe: Subject<any> = new Subject();
 	
@@ -27,40 +27,54 @@ export class IssueTrackerDetailsComponent implements OnInit {
 		private route: ActivatedRoute, 
 		private router: Router) { 
 
-		this.projectFormErrors = {
-			_id: {},
-			name: {},
-			comments: {},
-			remarks: {},
-			assigned: {},
-			issueType: {},
-			department: {},
-			updatedBy: {},
-			createdBy: {},
-			completionDate: {},
-			status : {},
-			ageing: {},
-			updatedAt : {},
-			createdAt : {},
-		};
+		this.issueTrackerDetailsFormErrors = {
+			id: {},
+			_organisationId: {},
+			_projectId: {},
+			type: {},
+			issueCode: {},
+			description: {},
+			status: {},
+			remark: {},
+			assignedTo: {},
+			assignedName: {},
+			_createdBy: {},
+			createdAt: {},
+			dateOfCompletion: {},
+			dueDate: {},
+			comments : {
+				comments: {},
+				completionDate: {},
+				_updatedBy: {},
+				updatedBy:{},
+				updatedAt: {}
+			}
+		}
 	}
 
 	ngOnInit() {
 		this.issueTrackerDetailsForm = this.formBuilder.group({
-			_id: ['', Validators.required],
-			name: ['', Validators.required],
-			comments: ['', Validators.required],
-			remarks: ['', Validators.required],
-			assigned: ['', Validators.required],
-			issueType: ['', Validators.required],
-			department: ['', Validators.required],
-			updatedBy: ['', Validators.required],
-			createdBy: ['', Validators.required],
-			completionDate: ['', Validators.required],
-			status : ['', Validators.required],
-			ageing: ['', Validators.required],
-			updatedAt : ['', Validators.required],
-			createdAt : ['' , Validators.required ]
+			id: ['' , Validators.required ],
+			_organisationId: ['' , Validators.required ],
+			_projectId: ['' , Validators.required ],
+			type: ['' , Validators.required ],
+			issueCode: ['' , Validators.required ],
+			description: ['' , Validators.required ],
+			status: ['' , Validators.required ],
+			remark: ['' , Validators.required ],
+			assignedTo: ['' , Validators.required ],
+			assignedName: ['' , Validators.required ],
+			_createdBy: ['' , Validators.required ],
+			createdAt: ['' , Validators.required ],
+			dateOfCompletion: ['' , Validators.required ],
+			dueDate: ['' , Validators.required ],
+			comments : this.formBuilder.group({
+				comments: ['' , Validators.required ],
+				completionDate: ['' , Validators.required ],
+				_updatedBy: ['' , Validators.required ],
+				updatedBy:['' , Validators.required ],
+				updatedAt: ['' , Validators.required ],
+			})
 		});
 		this.issueTrackerDetailsForm.valueChanges.subscribe(() => {
 			this.onProjectFormValuesChanges();
@@ -79,18 +93,18 @@ export class IssueTrackerDetailsComponent implements OnInit {
 			if (!this.formErrors.hasOwnProperty(field)) {
 				continue;
 			}
-	      // Clear previous errors
-	      this.formErrors[field] = {};
-	      // Get the control
-	      const control = this.form.get(field);
+      // Clear previous errors
+      this.formErrors[field] = {};
+      // Get the control
+      const control = this.form.get(field);
 
-	      if (control && control.dirty && !control.valid) {
-	      	this.formErrors[field] = control.errors;
-	      }
-	    }
-	  }
+      if (control && control.dirty && !control.valid) {
+      	this.formErrors[field] = control.errors;
+      }
+    }
+  }
 
-	  onFormSubmit() {
-	  	console.log(this.issueTrackerDetailsForm.value);
-	  }
-	}
+  onFormSubmit() {
+  	console.log(this.issueTrackerDetailsForm.value);
+  }
+}

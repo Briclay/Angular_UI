@@ -62,32 +62,32 @@ export class DepartmentService {
 	}
 
 	public getFeatures (id): Observable<any> {
-        let url = `${environmentService.briclayCore}/features?select=*&filter[_organisationId]=${id}`;
+        let url = `${environmentService.briclayApiBase}/features?select=*&filter[_organisationId]=${id}`;
         return this.apiService.get(url).pipe(map(res => res));
     }
 
 	public getAll(id): Observable<any> {
-        let url = `${environmentService.briclayCore}/departments?select=*&filter[_organisationId]=${id}`;
+        let url = `${environmentService.briclayApiBase}/departments?select=*&filter[_organisationId]=${id}`;
         return this.apiService.get(url).pipe(map(res => res));
     }
 
 	public getDepartmentByOrg(OrgId): Observable<any> {
-        let url = `${environmentService.briclayCore}/departments?select=*&${OrgId}`;
+        let url = `${environmentService.briclayApiBase}/departments?select=*&${OrgId}`;
         return this.apiService.get(url).pipe(map(res => res));
     }
 
     public getOne(id): Observable<any> {
-        let url = `${environmentService.briclayCore}/departments/${id}`;
+        let url = `${environmentService.briclayApiBase}/departments/${id}`;
         return this.apiService.get(url, id).pipe(map(res => res));
     }
 
     public update(id , request): Observable<any> {
-        let url = `${environmentService.briclayCore}/departments/${id}`;
+        let url = `${environmentService.briclayApiBase}/departments/${id}`;
         return this.apiService.put(url, request).pipe(map(res => res));
     }
 
     public save(request): Observable<any> {
-        let url = `${environmentService.briclayCore}/departments`;
+        let url = `${environmentService.briclayApiBase}/departments`;
         return this.apiService.post(url, request).pipe(map(res => res));
     }
 

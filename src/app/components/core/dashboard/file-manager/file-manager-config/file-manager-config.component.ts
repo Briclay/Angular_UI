@@ -519,7 +519,7 @@ export class FileManagerConfigComponent implements OnInit {
         this.path.pop();
         const temp = this.path[this.path.length - 1];
         const path = temp.path;
-          this.fileId = temp._id
+        this.fileId = temp._id
         window.localStorage.stack = JSON.stringify(this.path);
         this.router.navigate([path]).then(() => {
           if(this.fileId){

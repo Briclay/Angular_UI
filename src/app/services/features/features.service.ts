@@ -13,7 +13,7 @@ export class FeatureService {
     ) { }
 
     public getFeatures(): Observable<any> {
-        let url = `${environmentService.briclayCore}/features`
+        let url = `${environmentService.briclayApiBase}/features`
         return this.apiService.get(url).pipe(map(res     => res));
     }
 }

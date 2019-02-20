@@ -14,7 +14,7 @@ export class DepartmentService {
     ) { }
     // pass params data
     public getAllDept(orgId?): Observable<any> {
-        let url = `${environmentService.briclayCore}/departments?select=all&filter[_organisationId]=${orgId}`
+        let url = `${environmentService.briclayApiBase}/departments?select=all&filter[_organisationId]=${orgId}`
         return this.apiService.get(url).pipe(map(res => res));
     }
 

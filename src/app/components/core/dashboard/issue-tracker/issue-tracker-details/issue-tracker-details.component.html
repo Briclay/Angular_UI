@@ -5,57 +5,46 @@
         <div class="issue-tracker-details-name">
           <mat-form-field appearance="outline">
             <mat-label>Created By</mat-label>
-            <input matInput formControlName="createdBy">
+            <input matInput formControlName="_createdBy">
           </mat-form-field>
-           <mat-form-field appearance="outline" style="width: 200px;">
-              <mat-label>Date of Completion</mat-label>
-              <input matInput [matDatepicker]="picker3" placeholder="" formControlName="createdAt">
-                <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
-                <mat-datepicker #picker3></mat-datepicker>
-            </mat-form-field>
-
+          <mat-form-field appearance="outline" style="width: 200px;">
+            <mat-label>Date of Completion</mat-label>
+            <input matInput [matDatepicker]="picker3" placeholder="" formControlName="dateOfCompletion">
+              <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+              <mat-datepicker #picker3></mat-datepicker>
+          </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>Remarks</mat-label>
-            <textarea matInput formControlName="remarks"></textarea>
+            <textarea matInput formControlName="remark"></textarea>
           </mat-form-field>
         </div>
         <div class="issue-tracker-details-content">
           <div class="issue-tracker-details-form-list">
-              <mat-form-field  appearance="outline" style="width: 200px;">
+            <div formGroupName="comments">
+              <mat-form-field  appearance="outline" style="width: 170px;">
                 <mat-label>Completion Date</mat-label>
-                <input matInput [matDatepicker]="picker1" placeholder="Completion Date" formControlName="completionDate">
+                <input style="height: 15px" matInput [matDatepicker]="picker1" placeholder="Completion Date" formControlName="completionDate">
                   <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                   <mat-datepicker #picker1></mat-datepicker>
               </mat-form-field>
-          </div>
-        </div>
-        <div class="issue-tracker-details-content">
-          <div class="issue-tracker-details-form-list">
-              <mat-form-field appearance="outline" style="width: 200px;height :200px;"  >
+              <mat-form-field appearance="outline" style="width: 170px;">
                 <mat-label>Comments</mat-label>
-                <textarea  matInput formControlName="comments"></textarea>
+                <textarea  matInput formControlName="comments" style="height: 15px"></textarea>
               </mat-form-field>
-          </div>
-        </div>
-        <div class="issue-tracker-details-content">
-          <div class="issue-tracker-details-form-list">
-            <mat-form-field class="margin_right_25" appearance="outline">
-              <mat-label>Updated By</mat-label>
-              <input matInput formControlName="updatedBy">
-            </mat-form-field>
-          </div>
-        </div>
-        <div class="issue-tracker-details-content">
-          <div class="issue-tracker-details-form-list">
-             <mat-form-field  appearance="outline" style="width: 200px;">
+              <mat-form-field appearance="outline" style="width: 170px;">
+                <mat-label>Updated By</mat-label>
+                <input matInput formControlName="updatedBy">
+              </mat-form-field>
+              <mat-form-field  appearance="outline" style="width: 170px;">
                 <mat-label>Updated on</mat-label>
                 <input matInput [matDatepicker]="picker2" placeholder="" formControlName="updatedAt">
                   <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
                   <mat-datepicker #picker2></mat-datepicker>
               </mat-form-field>
+            </div>
           </div>
         </div>
-      </div>
+      </div>  
       <button mat-raised-button type="submit" class="pull-right" (click)="onFormSubmit()">Submit</button>
       <div class="clearfix"></div>
     </mat-card>
