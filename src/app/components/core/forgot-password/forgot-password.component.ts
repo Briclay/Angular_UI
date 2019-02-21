@@ -62,7 +62,7 @@ export class ForgotPasswordComponent implements OnInit {
 				//const path = '/dashboard';
 				//this.router.navigateByUrl(path);
 			}, (error: any) => {
-				this.snackBar.open("aa", 'Forgot', {
+				this.snackBar.open(error.message, 'Forgot', {
 			      duration: 2000,
 			    });
 				console.log(error , 'err')

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormControl, FormGroup,FormArray, FormBuilder, Validators } from '@angular/forms';
 import { Router , ActivatedRoute} from '@angular/router';
 import { MatDialog,  MatSnackBar ,MAT_DIALOG_DATA } from '@angular/material';
 import { merge as observableMerge, Subject} from 'rxjs';
@@ -7,6 +7,8 @@ import {takeUntil} from 'rxjs/operators';
 import { ProjectService } from '../../../dashboard/projects/project.service';
 import { UserService} from '../../../dashboard/user/user.service';
 import { DepartmentService} from "../../../../../services/department/department.service";
+import { IssueTrackerService } from '../issue-tracker.service';
+import * as _ from 'lodash';
 
 @Component({
 	selector: 'app-issue-tracker-create',
@@ -21,62 +23,89 @@ export class IssueTrackerCreateComponent implements OnInit {
 	issueTrackerCreateForm: FormGroup;
 	form: FormGroup;
 	formErrors: any;
-	projectFormErrors: any;
 	projects = []
 	users = []
-	allprojects = [];
+	issueTrackerList: any;
+	allIssuesForReferences = [];
+	allIssuesCodes =[];
+	allIssuesType = [];
 	loading : boolean;
 	private unsubscribe: Subject<any> = new Subject();
 	orgID : any;
 	selectedUserDepartment : any;
+	selecetedProjectData : any;
+	selectedDepartmentData : any;
+	selectedAssignedUserData : any;
 	isDepratmentLoading : boolean;
 	issueTypes  = [ 'issues1' , 'issues2' ,'issues3' ,'issues4' ];
 	createdBy : any;
+	user :any;
+	depratmentLists : any;
+	userDropdownEnable = false;
+	validatedAge = 0;
+	issueCodeValue : any;
+	dateOfCompletionFilter :any;
+	comments: FormArray;
+	commentformGroup: FormGroup;
 	constructor(
+    	private dialog: MatDialog,
 		private departService : DepartmentService,
 		private projectService : ProjectService,
+		private issueTrackerService: IssueTrackerService,
 		private userService : UserService,
 		private formBuilder : FormBuilder,
+		private snackBar : MatSnackBar,
 		private route: ActivatedRoute, 
 		private router: Router) { 
-
-		this.projectFormErrors = {
-			project: {},
-			IssuesID: {},
-			issueType: {},
-			department: {},
-			description : {},
-			assigned: {},
-			createdAt : {},
-			createdBy  : {},
-			completionDate: {},
-			remarks: {}
-		};
+		
 		let org = JSON.parse(window.localStorage.getItem('authUserOrganisation'));
 		this.orgID = org._id
-		let user = JSON.parse(window.localStorage.getItem('authUser'));
-		this.createdBy = user.username;
+		this.user = JSON.parse(window.localStorage.getItem('authUser'));
+         
+        let day = new Date();
+		this.dateOfCompletionFilter = new Date(day);
+		this.dateOfCompletionFilter.setDate(day.getDate()+1);
+		console.log(this.dateOfCompletionFilter);  
 	}
 
 	ngOnInit() {
 		this.issueTrackerCreateForm = this.formBuilder.group({
-			project: ['', Validators.required],
-			IssuesID: ['', Validators.required],
-			issueType: ['', Validators.required],
-			department: ['', Validators.required],
-			description : ['', Validators.required],
-			assigned: ['', Validators.required],
-			createdAt : [new Date(), Validators.required],
-			createdBy : [this.createdBy, Validators.required],
-			completionDate: ['', Validators.required],
-			remarks: ['', Validators.required]
+			_organisationId: [this.orgID , Validators.required ],
+			_projectId: ['' , Validators.required ],
+			projectName:['' , Validators.required ],
+			_departmentId:['' , Validators.required ],
+			departmentName:['' , Validators.required ],
+			type: ['Issue'],
+			issueCode: ['' , Validators.required ],
+			description: ['' , Validators.required ],
+			status: ['OPEN' , Validators.required ],
+			remark: ['' , Validators.required ],
+			_createdBy: [this.user._id , Validators.required ],
+			createdBy : [this.user.username , Validators.required ],
+			createdAt: [new Date(), Validators.required ],
+			dateOfCompletion: ['' , Validators.required ],
+			age : [0 , Validators.required ],
+			refId: [''],
+			comments : this.formBuilder.array([])
 		});
+		this.commentformGroup = this.formBuilder.group({
+			comments: ['Initial comment' , Validators.required ],
+			completionDate: [''],
+			_updatedBy: ['' ],
+			updatedBy:['' ],
+			assignedTo: ['', Validators.required ],
+			assignedName: ['' , Validators.required ],
+			updatedAt: [''],
+			subType: ['' ],
+			status: ['OPEN' , Validators.required ],
+		})
 		this.issueTrackerCreateForm.valueChanges.subscribe(() => {
 			this.onProjectFormValuesChanges();
 		})
 		this.assignValuesToForm();
 		this.getProjects()
-		this.getUsers()
+		this.getAllDepartment()
+		this.getAllIssues()
 	}
 
 	assignValuesToForm() {
@@ -90,54 +119,127 @@ export class IssueTrackerCreateComponent implements OnInit {
 			if (!this.formErrors.hasOwnProperty(field)) {
 				continue;
 			}
-      // Clear previous errors
-      this.formErrors[field] = {};
-      // Get the control
-      const control = this.form.get(field);
+	    // Clear previous errors
+	    this.formErrors[field] = {};
+	    // Get the control
+	    const control = this.form.get(field);
+	    if (control && control.dirty && !control.valid) {
+	    	this.formErrors[field] = control.errors;
+	    }
+	  }
+	}
 
-      if (control && control.dirty && !control.valid) {
-      	this.formErrors[field] = control.errors;
-      }
-    }
-  }
+	selectProject(event){
+		this.projectService.getSingleProjects(event._id).pipe().subscribe(res => {
+			this.selecetedProjectData = res;
+		}, (error: any) => {
+			console.error('error', error);
+		});
+	}
 
-  selectedUser (event){
-  	this.isDepratmentLoading = true;
-  	if(event._departmentId){
-  		this.departService.getOne(event._departmentId).pipe().subscribe(res => {
-  			this.isDepratmentLoading = false;
-  			this.selectedUserDepartment = res.name;
-  		}, (error: any) => {
-  			console.error('error', error);
-  			this.isDepratmentLoading = false;
-  		});
-  	}
-  }
+	getAllDepartment(){
+		this.departService.getAll(this.orgID).pipe().subscribe(res => {
+			this.depratmentLists = res;
+		}, (error: any) => {
+			console.error('error', error);
+		});
+	}
 
-  getProjects() {
-  	this.loading = true;
-  	this.projectService.getProjects(this.orgID).pipe().subscribe(res => {
-  		this.loading = false;
-  		this.projects = res;
-  	}, (error: any) => {
-  		console.error('error', error);
-  		this.loading = false;
-  	});
-  }
+	selectDepartment(event){
+		this.selectedDepartmentData = event;
+		if(event && event._id){
+			this.userService.getUserByDepId(event._id).pipe().subscribe(res => {
+				this.userDropdownEnable = true;
+				this.users = res;
+			}, (error: any) => {
+				console.error('error', error);
+				this.loading = false;
+			});
+		}
+	}
 
-  getUsers() {
-  	this.loading = true;
-  	this.userService.getUser(this.orgID).pipe().subscribe(res => {
-  		this.loading = false;
-  		this.users = res;
-  	}, (error: any) => {
-  		console.error('error', error);
-  		this.loading = false;
-  	});
-  }
+	selectedUser (event){
+		this.selectedAssignedUserData = event;
+	}
 
-  onFormSubmit() {
-  	console.log(this.issueTrackerCreateForm.value, "issuesCraetedSubmittedValue");
-  }
+	getAllIssues(){
+		this.issueTrackerService.getAllIssueTracker().pipe().subscribe(res => {
+			this.allIssuesForReferences = res;
+        	this.issueTrackerCreateForm.controls['issueCode'].setValue('ID' + this.createOrderId(res.length + 1));
+			this.allIssuesForReferences.forEach(issue => {
+				this.allIssuesCodes.push(issue.issueCode)
+				this.allIssuesType.push(issue.type)
+			})
+		}, (error: any) => {
+			console.error('error', error);
+		});
+	}
+
+	createOrderId(number) {
+	    let str = '' + number;
+	    let count = 0;
+	    const padArray = [{ len: 1, size: 3 }, { len: 2, size: 2 }, { len: 3, size: 1 }, { len: 4, size: 0 }];
+	    const findSize = _.find(padArray, function (item) {
+	      return item.len === str.length;
+	    });
+	    while (count < findSize.size) {
+	      str = '0' + str;
+	      count++;
+	    }
+	    return str;
+	}
+
+	getProjects() {
+		this.loading = true;
+		this.projectService.getProjects(this.orgID).pipe().subscribe(res => {
+			this.loading = false;
+			this.projects = res;
+			this.issueCodeValue = this.issueTrackerCreateForm.value.issueCode;
+		}, (error: any) => {
+			console.error('error', error);
+			this.loading = false;
+		});
+	}
+
+	// getUsers() {
+	// 	this.loading = true;
+	// 	this.userService.getUser(this.orgID).pipe().subscribe(res => {
+	// 		this.loading = false;
+	// 		this.users = res;
+	// 	}, (error: any) => {
+	// 		console.error('error', error);
+	// 		this.loading = false;
+	// 	});
+	// }
+
+	onFormSubmit() {
+		this.issueTrackerCreateForm.value._projectId = this.selecetedProjectData._id;
+		this.issueTrackerCreateForm.value.projectName = this.selecetedProjectData.name;
+
+		this.issueTrackerCreateForm.value._departmentId = this.selectedDepartmentData._id;
+		this.issueTrackerCreateForm.value.departmentName = this.selectedDepartmentData.name;
+        
+        let assignedUserName = this.selectedAssignedUserData.name.first +" " + this.selectedAssignedUserData.name.last;
+		this.commentformGroup.value.assignedTo = this.selectedAssignedUserData._id
+		this.commentformGroup.value.assignedName = assignedUserName
+
+       	this.issueTrackerCreateForm.value.comments = [this.commentformGroup.value];
+
+		console.log(this.issueTrackerCreateForm.value, "issuesCraetedSubmittedValue");
+
+		this.issueTrackerService.createIssueTracker(this.issueTrackerCreateForm.value)
+		.pipe().subscribe(response => {
+			console.log(response, 'response.message')
+			this.snackBar.open('Issue created successfully', 'Issue-tracker', {
+				duration: 2000,
+			});
+			this.issueTrackerCreateForm['_touched'] = false;
+		}, (error: any) => {
+			this.snackBar.open(error.message, 'Issue-tracker', {
+				duration: 2000,
+			});
+			console.log(error , "error")
+		});
+	}
 }
 

@@ -13,12 +13,12 @@ import { FormBuilder, FormGroup, Validators, FormControl, FormArray } from '@ang
 export class IssueTrackerComponent implements OnInit {
   @ViewChild('tabGroup') tabGroup;
   
-  projectsList: any;
-  projectsDataOptions = [];
+  issueTrackerList: any;
+  issueTrackerDataOptions = [];
   orgId: string;
   listSpinner: boolean;
   private unsubscribe: Subject<any> = new Subject();
-  projectData = [
+  /*projectData = [
     {
       "id": 1,
       "_organisationId": "5c560b92fcd9a22fb225de04",
@@ -31,6 +31,7 @@ export class IssueTrackerComponent implements OnInit {
       "assignedTo": "5c560b93fcd9a22fb225de07",
       "assignedName": "mohit",
       "_createdBy": "5c548f8cf231a5447de94ef1",
+      "createdBy": "naruns",
       "createdAt": "2019-02-16T11:42:57.000Z",
       "dateOfCompletion": "2019-04-16T07:51:02.000Z",
       "dueDate": "2019-04-16T07:51:02.000Z",
@@ -76,6 +77,7 @@ export class IssueTrackerComponent implements OnInit {
       "assignedTo": "5c560b93fcd9a22fb225de07",
       "assignedName": "mohit",
       "_createdBy": "5c4ab8d3e7179a090e09c9ef",
+      "createdBy": "naruns",
       "createdAt": "2019-02-17T16:17:58.000Z",
       "dateOfCompletion": "2019-04-16T07:51:02.000Z",
       "dueDate": "2019-04-16T07:51:02.000Z",
@@ -141,7 +143,7 @@ export class IssueTrackerComponent implements OnInit {
       }
       ]
     }
-  ]
+  ]*/
   constructor(
     private formBuilder: FormBuilder,
     private issueTrackerService: IssueTrackerService,
@@ -149,7 +151,7 @@ export class IssueTrackerComponent implements OnInit {
     private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.getPojectsData();
+    this.getIssueTracker();
   }
 
   public ngOnDestroy(): void {
@@ -160,14 +162,14 @@ export class IssueTrackerComponent implements OnInit {
   /*loadRoute(params: any) {
     if('orgID' in params) {
       this.selectedOrgId = params['orgID'];
-      this.getPojectsData();
+      this.getIssueTracker();
     }
   }*/
 
-  getPojectsData() {
-   //this.listSpinner = true;
-     this.projectsList = this.projectData;
-     this.projectsDataOptions = [
+  getIssueTracker() {
+   this.listSpinner = true;
+     /*this.issueTrackerList = this.projectData;
+     this.issueTrackerDataOptions = [
       {
         title: 'User Name', type: 'list', list: [
         { title: 'Issue Code', key: 'issueCode',  hideTitle: true, type: 'label' },
@@ -177,35 +179,33 @@ export class IssueTrackerComponent implements OnInit {
       { title: 'Issue Type', key: 'type'},
       { title: 'Description', key: 'description', hideTitle: true, type: 'label' },
       { title: 'Assigned To ', key: 'assignedName'},
-      { title: 'Creation date', key: 'createdAt' },
+      { title: 'Creation date', key: 'createdAt' },*/
       //{ title: 'Age', key: 'ageing' }
-      ]
-   /* this.organisationService.getAllIssueTracker().pipe().subscribe(res => {
-      this.projectsList = res;
+      
+    this.issueTrackerService.getAllIssueTracker().pipe().subscribe(res => {
+      this.issueTrackerList = res;
+      console.log(this.issueTrackerList, "issueTrackerList")
       this.listSpinner = false;
-      this.projectsDataOptions = [
+      this.issueTrackerDataOptions = [
       {
         title: 'User Name', type: 'list', list: [
-        { title: 'Project Code', key: 'projectCode',  hideTitle: true, type: 'label' },
-        { title: 'Name', key: 'name', hideTitle: true, type: 'label' },
+        { title: 'Issue Code', key: 'issueCode',  hideTitle: true, type: 'label' },
         { title: 'Status', key: 'status', hideTitle: true, type: 'label', isStatus: true }
         ]
       },
-      { title: 'Issue Type', key: 'issueType'},
-      { title: 'Document', key: 'document', hideTitle: true, type: 'label' },
-      { title: 'Assigned To ', key: 'assigned.name'},
-      { title: 'Department', key: 'department', hideTitle: true, type: 'label'},
+      { title: 'Issue Type', key: 'type'},
+      { title: 'Description', key: 'description', hideTitle: true, type: 'label' },
       { title: 'Creation date', key: 'createdAt' },
-      { title: 'Age', key: 'ageing' }
+      { title: 'Age', key: 'age' }
       ]
     }, (error: any) => {
       console.error('error', error);
       this.listSpinner = false;
-    });*/
+    });
   }
 
   tabSwitch(tabReq) {
     this.tabGroup.selectedIndex = tabReq.index;
-    this.getPojectsData()
+    this.getIssueTracker()
   }
 }

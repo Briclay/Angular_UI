@@ -47,10 +47,10 @@
               <div fxLayout="row">
                 <ng-template #content>
                     <div fxLayout="row">
-                        <app-expansion-panel *ngIf="projectsList"
-                            [expansionPanelOptions]="projectsDataOptions"
+                        <app-expansion-panel *ngIf="issueTrackerList"
+                            [expansionPanelOptions]="issueTrackerDataOptions"
                             selectorComponent="app-issue-tracker-details" 
-                            [data]="projectsList" >
+                            [data]="issueTrackerList" >
                         </app-expansion-panel>
                     </div>        
                 </ng-template>

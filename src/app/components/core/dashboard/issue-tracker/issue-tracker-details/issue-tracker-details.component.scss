@@ -1,13 +1,13 @@
 .issue-tracker-details-container {
     padding: 10px;
     .issue-tracker-details-form {
-        
         .issue-tracker-details-card {
             flex: 1;
             display: flex;
             font: 400 13px/20px Roboto,"Helvetica Neue",sans-serif;
             .issue-tracker-details-name {
-                flex: 0.24;
+                margin-top : 15px;
+                flex: 0.2;
                 img {
                     width: 100px;
                     border-radius: 5px;
