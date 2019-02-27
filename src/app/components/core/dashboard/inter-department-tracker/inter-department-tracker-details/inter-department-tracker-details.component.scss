@@ -24,7 +24,9 @@
                 .issue-tracker-details-form-list {
                     border-left: 1px solid #ccc;
                     min-height: 200px;
+                    max-height: 200px;
                     padding: 10px;
+                    overflow:auto; 
                 }
             }
         }

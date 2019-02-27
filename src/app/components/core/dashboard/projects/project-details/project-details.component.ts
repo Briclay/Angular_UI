@@ -18,6 +18,7 @@ export class ProjectDetailsComponent implements OnInit {
   detailsFormErrors: any;
   userAuth: any;
   detailsForm: FormGroup;
+  filledData : any;
   uniteArray = [];
   parkingArray =[]
   projectType = ['RESIDENTIAL', 'COMMERCIAL', 'MIXED DEVELOPMENT', 'VILLA PROJECTS'];
@@ -49,7 +50,6 @@ export class ProjectDetailsComponent implements OnInit {
         area: ['', Validators.required]
       })
     });
-
   }
   onFormValuesChanged() {
     for (const field in this.formErrors) {
@@ -69,16 +69,20 @@ export class ProjectDetailsComponent implements OnInit {
     }
   }
   ngOnInit() {
+    this.detailsForm.patchValue(JSON.parse(window.localStorage.getItem('detailsForm')));
   }
   onSubmit(){
     console.log('this.detailsForm',this.detailsForm.value);
     this.detailsForm.value.carParkingArea =this.parkingArray;
     this.detailsForm.value.units = this.uniteArray;
     console.log(' finaly send to this.detailsForm',this.detailsForm.value);
+    this.filledData = this.detailsForm.value
     this.dialogRef.close(this.detailsForm.value);
+    window.localStorage.detailsForm = JSON.stringify(this.detailsForm.value);
   }
   onCancel (){
     this.dialogRef.close();
+    window.localStorage.removeItem('detailsForm');
   }
   addUnits(){
     this.uniteArray.push(this.detailsForm.value.dummyUnits);

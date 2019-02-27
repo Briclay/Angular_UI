@@ -31,7 +31,7 @@ import { RoleComponent } from './components/core/dashboard/role/role.component';
 import { PanelHeaderFilterComponent } from './components/shared/panel-header-filter/panel-header-filter.component';
 import { WorkRequestComponent } from './components/core/dashboard/work-request/work-request.component';
 import { ProjectModule } from './components/core/dashboard/projects/projects.module';
-import { IssueTrackerComponent } from './components/core/dashboard/issue-tracker/issue-tracker.component';
+import { IssueTrackerComponent } from './components/core/dashboard/inter-department-tracker/inter-department-tracker.component';
 import { OrganisationCreateComponent } from './components/core/dashboard/organisation/organisation-create/organisation-create.component';
 import { RoleCreateComponent } from './components/core/dashboard/role/role-create/role-create.component';
 import { DepartmentComponent } from './components/core/dashboard/department/department.component';
@@ -70,7 +70,7 @@ import { OrganisationDropDownComponent } from './components/shared/organisation-
 import { ResetPasswordComponent } from './components/core/reset-password/reset-password.component';
 import { ChangePasswordComponent } from './components/core/change-password/change-password.component';
 import { ProjectDropDownComponent } from './components/shared/project-drop-down/project-drop-down.component';
-import { IssueTrackerCreateComponent } from './components/core/dashboard/issue-tracker/issue-tracker-create/issue-tracker-create.component';
+import { IssueTrackerCreateComponent } from './components/core/dashboard/inter-department-tracker/inter-department-tracker-create/inter-department-tracker-create.component';
 import { GroupedBarChartComponent } from './components/shared/grouped-bar-chart/grouped-bar-chart.component';
 import { NcmComponent } from './components/core/dashboard/ncm/ncm.component';
 import { DonutChartComponent } from './components/shared/donut-chart/donut-chart.component';

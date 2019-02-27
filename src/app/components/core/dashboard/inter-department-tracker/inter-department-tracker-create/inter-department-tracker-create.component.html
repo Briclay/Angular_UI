@@ -20,11 +20,15 @@
           </mat-form-field>
           <mat-form-field appearance="outline" >
             <mat-label>Reference ID#</mat-label>
-            <mat-select placeholder="Select department" >
-              <mat-option *ngFor="let refId of allIssuesCodes" [value]="refId">
-                {{refId}}
+            <mat-select placeholder="Select reference" formControlName="refId">
+              <mat-option *ngFor="let referenceId of allIssuesCodes" [value]="referenceId.name">
+                {{referenceId.name}}
               </mat-option>
             </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="outline" style="width: 200px;">
+            <mat-label>Issue Type</mat-label>
+            <input matInput formControlName="type">
           </mat-form-field>
         </div>
         <div class="issue-tracker-details-content" fxFlex="60">
@@ -72,13 +76,13 @@
         <div class="issue-tracker-details-content" fxFlex="20">
           <div class="issue-tracker-details-form-list">
             <form [formGroup]="commentformGroup">
-              <div  formArrayName="comments">
+              <div  FormGroupName="comments">
                 <div fxLayout=column>
                   <mat-form-field appearance="outline">
                     <mat-label>Sub Type</mat-label>
-                     <mat-select placeholder="Select issueTypes">
-                      <mat-option *ngFor="let subType of allIssuesType" [value]="subType">
-                        {{subType}}
+                     <mat-select placeholder="" formControlName="subType">
+                      <mat-option *ngFor="let sType of allIssuesType" [value]="sType.name" >
+                        {{sType.name}}
                       </mat-option>
                     </mat-select>
                   </mat-form-field>

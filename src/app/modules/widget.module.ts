@@ -11,7 +11,7 @@ import {MaterialModule} from "./material.module";
 import {SpinnerModule} from "../components/shared/spinner/spinner.module";
 import {WorkRequestDetailsComponent} from '../components/core/dashboard/work-request/work-request-details/work-request-details.component';
 import {WorkOrderDetailsComponent} from '../components/core/dashboard/work-order/work-order-details/work-order-details.component';
-import {IssueTrackerDetailsComponent} from '../components/core/dashboard/issue-tracker/issue-tracker-details/issue-tracker-details.component';
+import {IssueTrackerDetailsComponent} from '../components/core/dashboard/inter-department-tracker/inter-department-tracker-details/inter-department-tracker-details.component';
 
 @NgModule({
   imports: [

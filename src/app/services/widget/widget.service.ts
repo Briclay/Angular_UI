@@ -6,8 +6,8 @@ import { DepartmentDetailsComponent } from '../../components/core/dashboard/depa
 import { WorkRequestDetailsComponent } from '../../components/core/dashboard/work-request/work-request-details/work-request-details.component';
 import {WorkOrderDetailsComponent} from '../../components/core/dashboard/work-order/work-order-details/work-order-details.component';
 import { UserDashDetailsComponent } from '../../components/core/dashboard/user-dashboard/user-dash-details/user-dash-details.component';
-import { IssueTrackerDetailsComponent } from '../../components/core/dashboard/issue-tracker/issue-tracker-details/issue-tracker-details.component';
-import { IssueTrackerCreateComponent } from '../../components/core/dashboard/issue-tracker/issue-tracker-create/issue-tracker-create.component';
+import { IssueTrackerDetailsComponent } from '../../components/core/dashboard/inter-department-tracker/inter-department-tracker-details/inter-department-tracker-details.component';
+import { IssueTrackerCreateComponent } from '../../components/core/dashboard/inter-department-tracker/inter-department-tracker-create/inter-department-tracker-create.component';
 
 @Injectable()
 export class WidgetService {

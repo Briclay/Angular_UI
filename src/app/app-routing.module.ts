@@ -19,7 +19,7 @@ import { FileManagerComponent } from './components/core/dashboard/file-manager/f
 import { DesignDashboardComponent } from './components/core/dashboard/design-dashboard/design-dashboard.component';
 import { RootFolderComponent } from './components/core/dashboard/file-manager/root-folder/root-folder.component';
 import { FileSharedFolderComponent } from './components/core/dashboard/file-manager/file-shared-folder/file-shared-folder.component';
-import { IssueTrackerComponent } from './components/core/dashboard/issue-tracker/issue-tracker.component';
+import { IssueTrackerComponent } from './components/core/dashboard/inter-department-tracker/inter-department-tracker.component';
 import { RegisterComponent } from './components/core/register/register.component';
 
 const routes: Routes = [
@@ -112,7 +112,7 @@ const routes: Routes = [
           breadcrumb: 'Users'
         }
       },{
-        path: 'issue-tracker', component: IssueTrackerComponent, data: {
+        path: 'inter-department-tracker', component: IssueTrackerComponent, data: {
           breadcrumb: 'Users'
         }
       },

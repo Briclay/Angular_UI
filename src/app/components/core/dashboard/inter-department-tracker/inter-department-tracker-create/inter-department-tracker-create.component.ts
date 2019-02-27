@@ -7,13 +7,13 @@ import {takeUntil} from 'rxjs/operators';
 import { ProjectService } from '../../../dashboard/projects/project.service';
 import { UserService} from '../../../dashboard/user/user.service';
 import { DepartmentService} from "../../../../../services/department/department.service";
-import { IssueTrackerService } from '../issue-tracker.service';
+import { IssueTrackerService } from '../inter-department-tracker.service';
 import * as _ from 'lodash';
 
 @Component({
 	selector: 'app-issue-tracker-create',
-	templateUrl: './issue-tracker-create.component.html',
-	styleUrls: ['./issue-tracker-create.component.scss']
+	templateUrl: './inter-department-tracker-create.component.html',
+	styleUrls: ['./inter-department-tracker-create.component.scss']
 })
 export class IssueTrackerCreateComponent implements OnInit {
 	@Input() data: any;
@@ -37,7 +37,6 @@ export class IssueTrackerCreateComponent implements OnInit {
 	selectedDepartmentData : any;
 	selectedAssignedUserData : any;
 	isDepratmentLoading : boolean;
-	issueTypes  = [ 'issues1' , 'issues2' ,'issues3' ,'issues4' ];
 	createdBy : any;
 	user :any;
 	depratmentLists : any;
@@ -47,6 +46,7 @@ export class IssueTrackerCreateComponent implements OnInit {
 	dateOfCompletionFilter :any;
 	comments: FormArray;
 	commentformGroup: FormGroup;
+	selectedSubType : any;
 	constructor(
     	private dialog: MatDialog,
 		private departService : DepartmentService,
@@ -75,7 +75,7 @@ export class IssueTrackerCreateComponent implements OnInit {
 			projectName:['' , Validators.required ],
 			_departmentId:['' , Validators.required ],
 			departmentName:['' , Validators.required ],
-			type: ['Issue'],
+			type: ['', Validators.required ],
 			issueCode: ['' , Validators.required ],
 			description: ['' , Validators.required ],
 			status: ['OPEN' , Validators.required ],
@@ -89,14 +89,14 @@ export class IssueTrackerCreateComponent implements OnInit {
 			comments : this.formBuilder.array([])
 		});
 		this.commentformGroup = this.formBuilder.group({
-			comments: ['Initial comment' , Validators.required ],
+			comments: ['' , Validators.required ],
 			completionDate: [''],
-			_updatedBy: ['' ],
+			_updatedBy: [''],
 			updatedBy:['' ],
 			assignedTo: ['', Validators.required ],
 			assignedName: ['' , Validators.required ],
 			updatedAt: [''],
-			subType: ['' ],
+			subType: [''],
 			status: ['OPEN' , Validators.required ],
 		})
 		this.issueTrackerCreateForm.valueChanges.subscribe(() => {
@@ -165,17 +165,17 @@ export class IssueTrackerCreateComponent implements OnInit {
 	getAllIssues(){
 		this.issueTrackerService.getAllIssueTracker().pipe().subscribe(res => {
 			this.allIssuesForReferences = res;
-        	this.issueTrackerCreateForm.controls['issueCode'].setValue('ID' + this.createOrderId(res.length + 1));
+        	this.issueTrackerCreateForm.controls['issueCode'].setValue('ID' + this.createIssueId(res.length + 1));
 			this.allIssuesForReferences.forEach(issue => {
-				this.allIssuesCodes.push(issue.issueCode)
-				this.allIssuesType.push(issue.type)
+				this.allIssuesCodes.push({'id':issue.id ,'name': issue.issueCode })
+				this.allIssuesType.push({'id':issue.id ,'name': issue.type })
 			})
 		}, (error: any) => {
 			console.error('error', error);
 		});
 	}
 
-	createOrderId(number) {
+	createIssueId(number) {
 	    let str = '' + number;
 	    let count = 0;
 	    const padArray = [{ len: 1, size: 3 }, { len: 2, size: 2 }, { len: 3, size: 1 }, { len: 4, size: 0 }];
@@ -201,32 +201,17 @@ export class IssueTrackerCreateComponent implements OnInit {
 		});
 	}
 
-	// getUsers() {
-	// 	this.loading = true;
-	// 	this.userService.getUser(this.orgID).pipe().subscribe(res => {
-	// 		this.loading = false;
-	// 		this.users = res;
-	// 	}, (error: any) => {
-	// 		console.error('error', error);
-	// 		this.loading = false;
-	// 	});
-	// }
-
 	onFormSubmit() {
 		this.issueTrackerCreateForm.value._projectId = this.selecetedProjectData._id;
 		this.issueTrackerCreateForm.value.projectName = this.selecetedProjectData.name;
-
 		this.issueTrackerCreateForm.value._departmentId = this.selectedDepartmentData._id;
 		this.issueTrackerCreateForm.value.departmentName = this.selectedDepartmentData.name;
-        
         let assignedUserName = this.selectedAssignedUserData.name.first +" " + this.selectedAssignedUserData.name.last;
 		this.commentformGroup.value.assignedTo = this.selectedAssignedUserData._id
 		this.commentformGroup.value.assignedName = assignedUserName
-
+		this.commentformGroup.value.status = 'INPROGRESS'
        	this.issueTrackerCreateForm.value.comments = [this.commentformGroup.value];
-
 		console.log(this.issueTrackerCreateForm.value, "issuesCraetedSubmittedValue");
-
 		this.issueTrackerService.createIssueTracker(this.issueTrackerCreateForm.value)
 		.pipe().subscribe(response => {
 			console.log(response, 'response.message')
@@ -234,6 +219,8 @@ export class IssueTrackerCreateComponent implements OnInit {
 				duration: 2000,
 			});
 			this.issueTrackerCreateForm['_touched'] = false;
+			let tabReq = {index: 0}
+          	this.tabSwitch.emit(tabReq);
 		}, (error: any) => {
 			this.snackBar.open(error.message, 'Issue-tracker', {
 				duration: 2000,
