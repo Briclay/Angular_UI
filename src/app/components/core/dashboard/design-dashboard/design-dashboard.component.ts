@@ -242,11 +242,9 @@ export class DesignDashboardComponent implements OnInit {
   getProjects() {
     this.projectService.getProjects(this.selectedOrgId).pipe().subscribe(res => {
       console.log('res', res);
-      this.projectLoading = false;
       this.projects = res;
     }, (error: any) => {
       console.error('error', error);
-      this.projectLoading = false;
     });
   }
 
@@ -254,7 +252,7 @@ export class DesignDashboardComponent implements OnInit {
     console.log(proj, "selected poject data")
     this.projectSelected = true;
     this.selectedProjectData = proj;
-    this.projectForm.value = proj;
+    //this.projectForm.value = proj;
   }
 
   onFileInput(event, fileList?) {

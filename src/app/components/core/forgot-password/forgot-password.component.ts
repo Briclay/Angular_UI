@@ -37,7 +37,7 @@ export class ForgotPasswordComponent implements OnInit {
 	}
 
 	closeForgotPwdPopup() {
-	    this.dialog.close();
+	    this.dialog.close(this.forgotPwdform);
   	}
 
 	onforgotPwdformValuesChanged() {
