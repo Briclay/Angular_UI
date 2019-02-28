@@ -4,6 +4,10 @@ import {UserService} from '../../../../components/core/dashboard/user/user.servi
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { MatDialog,  MatSnackBar ,MAT_DIALOG_DATA } from '@angular/material';
+import { ProjectService } from '../../../../components/core/dashboard/projects/project.service';
+import {merge as observableMerge, Subject} from 'rxjs';
+import { Router, ActivatedRoute } from '@angular/router';
+import {takeUntil} from 'rxjs/operators';
 
 @Component({
   selector: 'app-design-dashboard',
@@ -14,12 +18,9 @@ export class DesignDashboardComponent implements OnInit {
   @Input() data: any;
   @Input() formType: string;
   
-  organizations: any[] = [
-    { value: 'organizations-1', viewValue: 'Organizations-1' },
-    { value: 'organizations-2', viewValue: 'Organizations-2' },
-    { value: 'organizations-3', viewValue: 'Organizations-3' }
-  ];
+  organizations: any;
   designDashForm: FormGroup;
+  projectForm: FormGroup;
   orgID: string;
   userAuth : any;
   profileImageUrl = "";
@@ -29,8 +30,11 @@ export class DesignDashboardComponent implements OnInit {
   roleName: any;
   isLoading : boolean;
   usrType : any;
-
-/*  projectConsultances : any[] = [
+  selectedOrgId : any;  
+  projects : any;
+  projectSelected = false;
+  selectedProjectData : any;
+  projectConsultances : any[] = [
     {
       "_id": "1",
       "name": "Architect",
@@ -60,18 +64,6 @@ export class DesignDashboardComponent implements OnInit {
       "name": "Electrical Engg",
       "internaluser" : "Internal User 1",
       "externaluser" : "External User 1"
-    },
-    {
-      "_id": "6",
-      "name": "HVAC Design",
-      "internaluser" : "Internal User 1",
-      "externaluser" : "External User 1"
-    },
-    {
-      "_id": "7",
-      "name": "Landsape",
-      "internaluser" : "Internal User 1",
-      "externaluser" : "External User 1"
     }
   ]
 
@@ -87,18 +79,6 @@ export class DesignDashboardComponent implements OnInit {
       "bhk": "3 BHK",
       "no" : "140",
       "area" : "1265"
-    },
-    {
-      "_id": "3",
-      "bhk": "4 BHK",
-      "no" : "198",
-      "area" : "2045"
-    },
-    {
-      "_id": "4",
-      "bhk": "1 BHK",
-      "no" : "133",
-      "area" : "2036"
     }
   ]
 
@@ -158,10 +138,10 @@ export class DesignDashboardComponent implements OnInit {
 
   ]
   
-  projects : any[] = [
+ /* projects : any[] = [
     {
       "_id": "1",
-      "name": "Sunworth ",
+      "name": "Sunworth Sunworth Sun worthSunworth",
       "address" : "Ulsoor Bangalore"
     },
     {
@@ -179,11 +159,26 @@ export class DesignDashboardComponent implements OnInit {
       "name": "Milestone",
       "address" : "Ulsoor Bangalore"
     },
+     {
+      "_id": "5",
+      "name": "PURVA SKYDALE",
+      "address" : "Ulsoor Bangalore"
+    },
+     {
+      "_id": "6",
+      "name": "PURVA SKYDALE",
+      "address" : "Ulsoor Bangalore"
+    },
   ]*/
+  private unsubscribe: Subject<any> = new Subject();
 
   constructor(
     private fileManagerService: FileManagerService,
+    private projectService : ProjectService,
+    private formBuilder : FormBuilder,
     private http: HttpClient,
+    private router: Router,
+    private route: ActivatedRoute,
     private userService : UserService,
     private snackBar : MatSnackBar) {    
 
@@ -198,6 +193,68 @@ export class DesignDashboardComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.projectForm = this.formBuilder.group({
+      name: [''],
+      projectCode: [''],
+      description: [''],
+      units: this.formBuilder.array([]),
+      status: [''],
+      type: [''],
+      beginDate: [''],
+      completionDate: [''],
+      phases: this.formBuilder.array([]),
+      imageUrls: [''],
+      _teamMembers: this.formBuilder.array([]),
+      carParkingArea: this.formBuilder.array([]),
+      projectDetails: this.formBuilder.group({
+        location: [''],
+        blocks: [''],
+        landArea: [''],
+        carpetarea: [''],
+        saleArea: [''],
+        crmTeam: [''],
+        totalUnit: [''],
+        budget: ['']
+      })
+    });
+    
+    observableMerge(this.route.params, this.route.queryParams).pipe(
+      takeUntil(this.unsubscribe))
+      .subscribe((params) => this.loadRoute(params));
+  }
+
+  public ngOnDestroy(): void {
+    this.unsubscribe.next();
+    this.unsubscribe.complete();
+  }
+
+  loadRoute(params: any) {
+    if('orgID' in params) {
+      this.selectedOrgId = params['orgID'];
+      this.getProjects();
+    }
+  }
+
+  organizationChanged(org) {
+    this.router.navigate([], {queryParams: {orgID: org.value ? org.value._id : org._id},queryParamsHandling: 'merge'});
+  }
+
+  getProjects() {
+    this.projectService.getProjects(this.selectedOrgId).pipe().subscribe(res => {
+      console.log('res', res);
+      this.projectLoading = false;
+      this.projects = res;
+    }, (error: any) => {
+      console.error('error', error);
+      this.projectLoading = false;
+    });
+  }
+
+  selectSingleProject(proj){
+    console.log(proj, "selected poject data")
+    this.projectSelected = true;
+    this.selectedProjectData = proj;
+    this.projectForm.value = proj;
   }
 
   onFileInput(event, fileList?) {

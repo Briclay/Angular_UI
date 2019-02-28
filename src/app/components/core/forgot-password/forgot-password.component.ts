@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog ,MAT_DIALOG_DATA,MatSnackBar } from '@angular/material';
+import { MatDialog ,MatDialogRef,MAT_DIALOG_DATA,MatSnackBar } from '@angular/material';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthenticationService } from './../../../services/authentication/authentication.service';
@@ -16,6 +16,7 @@ export class ForgotPasswordComponent implements OnInit {
     userToken : any;
   	constructor(private formBuilder: FormBuilder,
 	    private router: Router,
+       	private dialog : MatDialogRef,
 	    private auth: AuthService,
 	    private authenticationService: AuthenticationService,
 	    private snackBar :MatSnackBar ) 
@@ -35,6 +36,10 @@ export class ForgotPasswordComponent implements OnInit {
 		});
 	}
 
+	closeForgotPwdPopup() {
+	    this.dialog.close();
+  	}
+
 	onforgotPwdformValuesChanged() {
 		for (const field in this.forgotPwdformErrors) {
 		if (!this.forgotPwdformErrors.hasOwnProperty(field)) {
@@ -53,14 +58,14 @@ export class ForgotPasswordComponent implements OnInit {
 	onforgotPwdformSubmit() {
 		this.onforgotPwdformValuesChanged()
 		if (this.forgotPwdform.valid) {
-			this.authenticationService.forgotPwd(this.forgotPwdform.value)
+			let emailId = this.forgotPwdform.value.email;
+			this.authenticationService.forgotPwd(emailId, this.forgotPwdform.value)
 			.pipe().subscribe(response =>  {
                 //this.auth.set(response);
 				console.log(response, "forgotPwdform")
 				this.forgotPwdform.reset();
 				this.forgotPwdform['_touched'] = false;
-				//const path = '/dashboard';
-				//this.router.navigateByUrl(path);
+				this.dialog.close();
 			}, (error: any) => {
 				this.snackBar.open(error.message, 'Forgot', {
 			      duration: 2000,
