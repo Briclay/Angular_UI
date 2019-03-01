@@ -16,7 +16,7 @@ export class ForgotPasswordComponent implements OnInit {
     userToken : any;
   	constructor(private formBuilder: FormBuilder,
 	    private router: Router,
-       	private dialog : MatDialogRef,
+       	private dialogRef : MatDialogRef<ForgotPasswordComponent>,
 	    private auth: AuthService,
 	    private authenticationService: AuthenticationService,
 	    private snackBar :MatSnackBar ) 
@@ -37,7 +37,7 @@ export class ForgotPasswordComponent implements OnInit {
 	}
 
 	closeForgotPwdPopup() {
-	    this.dialog.close(this.forgotPwdform);
+	    this.dialogRef.close(this.forgotPwdform);
   	}
 
 	onforgotPwdformValuesChanged() {
@@ -57,7 +57,8 @@ export class ForgotPasswordComponent implements OnInit {
 
 	onforgotPwdformSubmit() {
 		this.onforgotPwdformValuesChanged()
-		if (this.forgotPwdform.valid) {
+		let emailRegx = '[^@]+@[^\.]+\..+'
+		if (this.forgotPwdform.valid && this.forgotPwdform.value.email.match(emailRegx)) {
 			let emailId = this.forgotPwdform.value.email;
 			this.authenticationService.forgotPwd(emailId, this.forgotPwdform.value)
 			.pipe().subscribe(response =>  {
@@ -65,13 +66,21 @@ export class ForgotPasswordComponent implements OnInit {
 				console.log(response, "forgotPwdform")
 				this.forgotPwdform.reset();
 				this.forgotPwdform['_touched'] = false;
-				this.dialog.close();
-			}, (error: any) => {
-				this.snackBar.open(error.message, 'Forgot', {
-			      duration: 2000,
+				this.dialogRef.close();
+				this.snackBar.open(response.message, 'Forgot', {
+			      	duration: 2000,
 			    });
+			}, (error: any) => {
+					this.snackBar.open(error.message, 'Forgot', {
+				      duration: 2000,
+				    });
 				console.log(error , 'err')
 			});
+		}
+		else {
+			this.snackBar.open('Invalid email address', 'Forgot', {
+		      duration: 2000,
+		    });
 		}
   	}
 

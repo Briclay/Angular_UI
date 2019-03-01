@@ -34,54 +34,8 @@ export class DesignDashboardComponent implements OnInit {
   projects : any;
   projectSelected = false;
   selectedProjectData : any;
-  projectConsultances : any[] = [
-    {
-      "_id": "1",
-      "name": "Architect",
-      "internaluser" : "Internal User 1",
-      "externaluser" : "External User 1"
-    },
-    {
-      "_id": "2",
-      "name": "Structural Engg",
-      "internaluser" : "Internal User 1",
-      "externaluser" : "External User 1"
-    },
-    {
-      "_id": "3",
-      "name": "Public Health Engg",
-      "internaluser" : "Internal User 1",
-      "externaluser" : "External User 1"
-    },
-    {
-      "_id": "4",
-      "name": "Fire & Emergency",
-      "internaluser" : "Internal User 1",
-      "externaluser" : "External User 1"
-    },
-    {
-      "_id": "5",
-      "name": "Electrical Engg",
-      "internaluser" : "Internal User 1",
-      "externaluser" : "External User 1"
-    }
-  ]
-
-  products : any[] = [
-    {
-      "_id": "1",
-      "bhk": "2 BHK",
-      "no" : "100",
-      "area" : "1250"
-    },
-    {
-      "_id": "2",
-      "bhk": "3 BHK",
-      "no" : "140",
-      "area" : "1265"
-    }
-  ]
-
+  projectConsultants =[];
+  unitsArray =[];
   projectTypes : any[] =[
     {
       "_id": "1",
@@ -137,39 +91,7 @@ export class DesignDashboardComponent implements OnInit {
     }
 
   ]
-  
- /* projects : any[] = [
-    {
-      "_id": "1",
-      "name": "Sunworth Sunworth Sun worthSunworth",
-      "address" : "Ulsoor Bangalore"
-    },
-    {
-      "_id": "2",
-      "name": "PURVA SKYDALE",
-      "address" : "Ulsoor Bangalore"
-    },
-    {
-      "_id": "3",
-      "name": "Purva Seasons",
-      "address" : "Ulsoor Bangalore"
-    },
-    {
-      "_id": "4",
-      "name": "Milestone",
-      "address" : "Ulsoor Bangalore"
-    },
-     {
-      "_id": "5",
-      "name": "PURVA SKYDALE",
-      "address" : "Ulsoor Bangalore"
-    },
-     {
-      "_id": "6",
-      "name": "PURVA SKYDALE",
-      "address" : "Ulsoor Bangalore"
-    },
-  ]*/
+ 
   private unsubscribe: Subject<any> = new Subject();
 
   constructor(
@@ -194,16 +116,8 @@ export class DesignDashboardComponent implements OnInit {
 
   ngOnInit() {
     this.projectForm = this.formBuilder.group({
-      name: [''],
-      projectCode: [''],
-      description: [''],
       units: this.formBuilder.array([]),
-      status: [''],
-      type: [''],
-      beginDate: [''],
-      completionDate: [''],
       phases: this.formBuilder.array([]),
-      imageUrls: [''],
       _teamMembers: this.formBuilder.array([]),
       carParkingArea: this.formBuilder.array([]),
       projectDetails: this.formBuilder.group({
@@ -252,7 +166,8 @@ export class DesignDashboardComponent implements OnInit {
     console.log(proj, "selected poject data")
     this.projectSelected = true;
     this.selectedProjectData = proj;
-    //this.projectForm.value = proj;
+    this.projectConsultants = this.selectedProjectData._consultants;
+    this.unitsArray = this.selectedProjectData.units;
   }
 
   onFileInput(event, fileList?) {

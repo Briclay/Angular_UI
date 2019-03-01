@@ -88,10 +88,10 @@
             <div class="p_status_text">{{selectedProjectData.status}}</div>
           </div>
           <div fxFlex=80 fxLayout=row class="donut_image">
-            <div *ngFor="let ptype of projectTypes" fxLayout=column>
+            <!-- <div *ngFor="let ptype of projectTypes" fxLayout=column>
               <img style="height: 65px;width: 65px;margin-right: 50px;" src="/assets/images/icons/donut.png">
               <div class="font_10_PT">{{ptype.name}}</div>
-            </div>
+            </div> -->
           </div>
         </div>
       </mat-card>
@@ -105,33 +105,33 @@
               <div fxLayout=row >
                 <mat-form-field appearance="outline" class="fisrtFrom">
                   <mat-label>Built Up Area </mat-label>
-                  <input matInput placeholder="" >
+                  <input readonly matInput placeholder="" >
                 </mat-form-field>
                 <mat-form-field appearance="outline" class="fisrtFrom">
                   <mat-label>No Of Towers</mat-label>
-                  <input matInput placeholder="">
+                  <input readonly matInput placeholder="">
                 </mat-form-field>
               </div>
               <div fxLayout=row >
                 <mat-form-field appearance="outline" class="fisrtFrom">
                   <mat-label>Saleable Area</mat-label>
-                  <input matInput placeholder="">
+                  <input readonly matInput placeholder="">
                 </mat-form-field>
                 <mat-form-field appearance="outline" class="fisrtFrom">
                     <mat-label>No Of Units</mat-label>
-                    <input matInput placeholder="">
+                    <input readonly matInput placeholder="">
                   </mat-form-field>
               </div>
               <div fxLayout=row style="margin-top: 30%;">
                 <mat-form-field appearance="outline" class="fisrtFrom fisrtFromMaxWidth">
                   <mat-label>Configuration</mat-label>
-                  <input matInput placeholder="">
+                  <input readonly matInput placeholder="">
                 </mat-form-field>
               </div>
               <div fxLayout=row >
                 <mat-form-field appearance="outline" class="fisrtFrom fisrtFromMaxWidth">
                   <mat-label>Planning Authority</mat-label>
-                  <input matInput placeholder="">
+                  <input readonly matInput placeholder="">
                 </mat-form-field>
               </div>
             </div>
@@ -141,31 +141,31 @@
                 <div fxLayout=row >
                   <mat-form-field appearance="outline" class="fisrtFrom">
                     <mat-label>Total</mat-label>
-                    <input matInput placeholder="">
+                    <input readonly matInput placeholder="">
                   </mat-form-field>
                   <mat-form-field appearance="outline" class="fisrtFrom">
                     <mat-label>Basement</mat-label>
-                    <input matInput placeholder="">
+                    <input readonly matInput placeholder="">
                   </mat-form-field>
                 </div>
               <div fxLayout=row >
                 <mat-form-field appearance="outline" class="fisrtFrom">
                   <mat-label>Covered</mat-label>
-                  <input matInput placeholder="">
+                  <input readonly matInput placeholder="">
                 </mat-form-field>
                 <mat-form-field appearance="outline" class="fisrtFrom">
                     <mat-label>Surface</mat-label>
-                    <input matInput placeholder="">
+                    <input readonly matInput placeholder="">
                   </mat-form-field>
               </div>
               <div fxLayout=row >
                 <mat-form-field appearance="outline" class="fisrtFrom">
                   <mat-label>Stack</mat-label>
-                  <input matInput placeholder="">
+                  <input readonly matInput placeholder="">
                 </mat-form-field>
                 <mat-form-field appearance="outline" class="fisrtFrom">
                   <mat-label>Puzzle</mat-label>
-                  <input matInput placeholder="">
+                  <input readonly matInput placeholder="">
                 </mat-form-field>
               </div>
               <div fxLayout=column >
@@ -175,7 +175,7 @@
                     <div class="font_12" style="margin-left: 5px;" >No</div>
                     <div class="font_12" >Area (SFT)</div>
                   </div>
-                  <!-- <div *ngFor="let p of products">
+                 <!--  <div *ngIf="unitsArray.length > 0" *ngFor="let p of unitsArray">
                     <mat-card fxLayout=row class="matCard1" style="place-content: space-around;">
                       <div class="font_12_light" >{{p.bhk}}</div>
                       <div class="font_12_light" >{{p.no}}</div>
@@ -191,11 +191,11 @@
           <div fxLayout=row >
             <div fxLayout=column style="flex: 1;">
                 <div fxLayout=row style="place-content: space-around;"> 
-                  <div class="font_12" ></div>
+                  <div class="font_12" >Name</div>
                   <div class="font_12" style="margin-left: 5px;" >Internal</div>
                   <div class="font_12" >External</div>
                 </div>
-                <!-- <div *ngFor="let pc of projectConsultances">
+               <!--  <div *ngIf="projectConsultants.length > 0" *ngFor="let pc of projectConsultants">
                   <mat-card fxLayout=row class="matCard1" style="place-content: space-around;">
                     <div class="font_12_light" >{{pc.name}}</div>
                     <div class="font_12_light" >{{pc.internaluser}}</div>
