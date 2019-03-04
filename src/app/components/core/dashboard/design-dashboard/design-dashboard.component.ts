@@ -112,6 +112,7 @@ export class DesignDashboardComponent implements OnInit {
       this.profileImageUrl = this.user.profileImageUrl ? this.user.profileImageUrl : "./assets/images/avatars/profile.jpg";
     this.userAuth = JSON.parse(window.localStorage.getItem('authUserOrganisation'));
     this.orgID = this.userAuth._id;
+    this.selectedOrgId = this.orgID
   }
 
   ngOnInit() {
@@ -131,27 +132,28 @@ export class DesignDashboardComponent implements OnInit {
         budget: ['']
       })
     });
+    this.getProjects();
     
-    observableMerge(this.route.params, this.route.queryParams).pipe(
+   /* observableMerge(this.route.params, this.route.queryParams).pipe(
       takeUntil(this.unsubscribe))
-      .subscribe((params) => this.loadRoute(params));
+      .subscribe((params) => this.loadRoute(params));*/
   }
 
-  public ngOnDestroy(): void {
+  /*public ngOnDestroy(): void {
     this.unsubscribe.next();
     this.unsubscribe.complete();
-  }
+  }*/
 
-  loadRoute(params: any) {
+ /* loadRoute(params: any) {
     if('orgID' in params) {
-      this.selectedOrgId = params['orgID'];
+      this.selectedOrgId = this.orgID
       this.getProjects();
     }
-  }
+  }*/
 
-  organizationChanged(org) {
+ /* organizationChanged(org) {
     this.router.navigate([], {queryParams: {orgID: org.value ? org.value._id : org._id},queryParamsHandling: 'merge'});
-  }
+  }*/
 
   getProjects() {
     this.projectService.getProjects(this.selectedOrgId).pipe().subscribe(res => {
