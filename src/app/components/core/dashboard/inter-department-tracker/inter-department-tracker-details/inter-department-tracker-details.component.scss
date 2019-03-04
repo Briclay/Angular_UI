@@ -27,6 +27,20 @@
                     max-height: 200px;
                     padding: 10px;
                     overflow:auto; 
+
+                    .statusCheck{
+                        display: flex;
+                        font-size: 13px;
+                        border-radius: 6px;
+                        text-align: center;
+                        color: white;
+                    }
+                    .bg_color_open {
+                        background-color: #fbbc05;
+                    }
+                    .bg_color_close {
+                        background-color: #808080;
+                    }
                 }
             }
         }
@@ -34,3 +48,7 @@
     
 }
 
+
+::ng-deep .mat-form-field-appearance-legacy .mat-form-field-underline {
+     height: 0px!important;
+}

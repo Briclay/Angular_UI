@@ -65,7 +65,6 @@ export class IssueTrackerCreateComponent implements OnInit {
         let day = new Date();
 		this.dateOfCompletionFilter = new Date(day);
 		this.dateOfCompletionFilter.setDate(day.getDate()+1);
-		console.log(this.dateOfCompletionFilter);  
 	}
 
 	ngOnInit() {

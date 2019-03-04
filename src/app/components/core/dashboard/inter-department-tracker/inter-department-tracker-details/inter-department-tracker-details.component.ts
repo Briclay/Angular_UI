@@ -33,6 +33,8 @@ export class IssueTrackerDetailsComponent implements OnInit {
 	allIssuesType=[];
 	allIssuesForReferences: any;
 	closeFlag  = false;
+	dateFilter:any;
+	newCreateFlag = false;
 	private unsubscribe: Subject<any> = new Subject();
 	constructor(
 		private formBuilder : FormBuilder,
@@ -46,6 +48,10 @@ export class IssueTrackerDetailsComponent implements OnInit {
 		let org = JSON.parse(window.localStorage.getItem('authUserOrganisation'));
 		this.orgID = org._id
 		this.user = JSON.parse(window.localStorage.getItem('authUser'));
+
+		let day = new Date();
+		this.dateFilter = new Date(day);
+		this.dateFilter.setDate(day.getDate()+1);
 	}
 
 	ngOnInit() {
@@ -108,7 +114,7 @@ export class IssueTrackerDetailsComponent implements OnInit {
 		this.issueTrackerService.getAllIssueTracker().pipe().subscribe(res => {
 			this.allIssuesForReferences = res;
 			this.allIssuesForReferences.forEach(issue => {
-				this.allIssuesType.push(issue.type)
+				this.allIssuesType.push({'id':issue.id ,'name': issue.type })
 			})
 		}, (error: any) => {
 			console.error('error', error);
@@ -152,6 +158,7 @@ export class IssueTrackerDetailsComponent implements OnInit {
 	}
 
 	addComments(){
+		this.newCreateFlag = true;
 		if(this.issueTrackerDetailsForm.value.comments.length > 0){
 			this.commentsArray.push(this.issueTrackerDetailsForm.value.comments);
 		}
@@ -169,17 +176,27 @@ export class IssueTrackerDetailsComponent implements OnInit {
 		});
 	}
 
+	closeTheIssueComment(comment){
+		this.issueTrackerDetailsForm.value.comments.forEach(v => {
+			if(v.id === comment.value.id){
+				v.status = 'CLOSED'
+			}
+		})
+		this.onFormSubmit()
+	}
+
 	closeTheIssue(){
 		this.issueTrackerDetailsForm.value.status = 'CLOSED';
 		this.onFormSubmit()
 	}
 
+
 	onFormSubmit() {
 		let allDates= [];
 		let maxDate;
-		this.commentsArray.forEach(v => {
-			this.issueTrackerDetailsForm.value.comments.push(v)
-		}) 
+        if(this.newCreateFlag){
+	    	this.issueTrackerDetailsForm.value.comments.push(this.createCommentformGroup.value)
+        }
 		this.issueTrackerDetailsForm.value.comments.forEach(v => {
 			if(v.completionDate !== ""){
 				allDates.push(moment(v.completionDate).local().format("MM-DD-YYYY"))
@@ -187,17 +204,18 @@ export class IssueTrackerDetailsComponent implements OnInit {
 			console.log(allDates, 'allDates')
 		}) 
 
-		maxDate = allDates.reduce(function (a, b) { return a > b ? a : b; });
+		maxDate = allDates && allDates.reduce(function (a, b) { return a > b ? a : b; });
 		console.log(maxDate, 'maxDate')
 		let dateOfCompletion = moment(this.issueTrackerDetailsForm.value.dateOfCompletion).local().format("MM-DD-YYYY")
 		let oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
 		let firstDate = new Date(dateOfCompletion);
 		let secondDate = new Date(maxDate);
 		let diffDays = Math.round(Math.abs((firstDate.getTime() - secondDate.getTime())/(oneDay)));
-        this.issueTrackerDetailsForm.value.age = diffDays;
+        this.issueTrackerDetailsForm.value.age = diffDays || 0;
+
 		console.log(this.issueTrackerDetailsForm.value, "issuesCraetedSubmittedValue");
 
-
+        
 		this.issueTrackerService.updateIssueTracker( this.issueTrackerDetailsForm.value.id, this.issueTrackerDetailsForm.value)
 		.pipe().subscribe(response => {
 			console.log(response, 'response.message')

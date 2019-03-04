@@ -26,11 +26,14 @@
           <div class="issue-tracker-details-form-list">
             <form [formGroup]="commentformGroup">
               <div formArrayName="comments" 
-                *ngFor="let comment of issueTrackerDetailsForm.controls.comments.controls;let i=index;" >
+                *ngFor="let comment of issueTrackerDetailsForm.get('comments')['controls'];let i=index;" >
                 <div [formGroup]="comment">
-                  <mat-form-field  appearance="outline" style="width: 136px;margin-right: 5px;">
+                  <mat-form-field  class="line" style="width: 65px;">
+                    <input readonly matInput formControlName="status" class="statusCheck bg_color_open">
+                  </mat-form-field>
+                  <mat-form-field  appearance="outline" style="width: 130px;margin-right: 5px;">
                     <mat-label>Completion Date</mat-label>
-                    <input  matInput [matDatepicker]="picker1" placeholder="Completion Date" formControlName="completionDate">
+                    <input  matInput [min]="dateFilter"  [matDatepicker]="picker1" placeholder="Completion Date" formControlName="completionDate">
                       <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                       <mat-datepicker  #picker1></mat-datepicker>
                   </mat-form-field>
@@ -38,7 +41,7 @@
                     <mat-label>Comments</mat-label>
                     <textarea  matInput formControlName="comments" style="height: 20px"></textarea>
                   </mat-form-field>
-                  <mat-form-field appearance="outline" style="width: 136px;margin-right: 5px;margin-top: -5px;">
+                  <mat-form-field appearance="outline" style="width: 130px;margin-right: 5px;margin-top: -5px;">
                     <mat-label>Assigned To</mat-label>
                     <mat-select placeholder="Select user" formControlName="assignedTo"  (selectionChange)="selectedUser($event.value)">
                       <mat-option *ngFor="let user of users" [value]="user._id" >
@@ -46,23 +49,24 @@
                       </mat-option>
                     </mat-select>
                   </mat-form-field>
-                  <mat-form-field appearance="outline" style="width: 120px;margin-right: 5px;">
+                  <mat-form-field appearance="outline" style="width: 90px;margin-right: 5px;">
                     <mat-label>Sub-type</mat-label>
                     <input matInput readonly formControlName="subType" style="height: 20px;margin-right: 5px;">
                   </mat-form-field>
-                  <mat-form-field appearance="outline" style="width: 100px;margin-right: 5px;">
+                  <mat-form-field appearance="outline" style="width: 90px;margin-right: 5px;">
                     <mat-label>Updated By</mat-label>
                     <input matInput readonly formControlName="updatedBy" style="height: 20px;margin-right: 5px;">
                   </mat-form-field>
-                  <mat-form-field appearance="outline" style="width: 136px;margin-right: 5px;">
+                  <mat-form-field appearance="outline" style="width: 120px;margin-right: 5px;">
                     <mat-label>Updated on</mat-label>
                     <input matInput readonly  [matDatepicker]="picker2" placeholder="" formControlName="updatedAt">
                       <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
                       <mat-datepicker disabled #picker2></mat-datepicker>
                   </mat-form-field>
-                  <!-- <mat-form-field style="width: 68px;">
-                    <input readonly matInput formControlName="status" style="background-color:#00a1ff3b;display: flex;font-size: 10px">
-                  </mat-form-field> -->
+                  
+                  <span class="hand-cursor" style="align-items: center;" (click)="closeTheIssueComment(comment)">
+                     <button style="height: 28px;" mat-raised-button type="submit" class="pull-right">Close</button>
+                  </span>
                 </div> 
               </div>
             </form>
@@ -70,9 +74,9 @@
               <div formArrayName="comments">
                 <div *ngFor="let comment of commentsArray; let i = index;">
                   <div [formGroup]="createCommentformGroup">
-                    <mat-form-field  appearance="outline" style="width:136px;margin-right: 5px;">
+                    <mat-form-field  appearance="outline" style="width:130px;margin-right: 5px;">
                       <mat-label>Completion Date</mat-label>
-                      <input  matInput  [matDatepicker]="picker1" placeholder="Completion Date" formControlName="completionDate">
+                      <input  matInput [min]="dateFilter" [matDatepicker]="picker1" placeholder="Completion Date" formControlName="completionDate">
                         <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                         <mat-datepicker #picker1></mat-datepicker>
                     </mat-form-field>
@@ -80,7 +84,7 @@
                       <mat-label>Comments</mat-label>
                       <textarea  matInput formControlName="comments" style="height:20px"></textarea>
                     </mat-form-field>
-                    <mat-form-field appearance="outline" style="width: 136px;margin-right: 5px;margin-top: -5px;">
+                    <mat-form-field appearance="outline" style="width: 130px;margin-right: 5px;margin-top: -5px;">
                       <mat-label>Assigned To</mat-label>
                       <mat-select placeholder="Select user" formControlName="assignedTo"  (selectionChange)="selectedUser($event.value)">
                         <mat-option *ngFor="let user of users" [value]="user._id" >
@@ -88,19 +92,19 @@
                         </mat-option>
                       </mat-select>
                     </mat-form-field>
-                    <mat-form-field appearance="outline" style="width: 136px;margin-right: 5px;">
+                    <mat-form-field appearance="outline" style="width: 90px;margin-right: 5px;">
                       <mat-label>Sub Type</mat-label>
-                       <mat-select placeholder="Select issueTypes" (selectionChange)="selectSubType($event.value)">
-                        <mat-option *ngFor="let subType of allIssuesType" [value]="subType">
-                          {{subType}}
+                       <mat-select placeholder="" formControlName="subType">
+                        <mat-option *ngFor="let sType of allIssuesType" [value]="sType.name" >
+                          {{sType.name}}
                         </mat-option>
                       </mat-select>
                     </mat-form-field>
-                    <mat-form-field appearance="outline" style="width: 136px;margin-right: 5px;">
+                    <mat-form-field appearance="outline" style="width: 90px;margin-right: 5px;">
                       <mat-label>Updated By</mat-label>
                       <input matInput readonly formControlName="updatedBy" style="height:20px;margin-right:5px;">
                     </mat-form-field>
-                    <mat-form-field appearance="outline" style="width: 136px;">
+                    <mat-form-field appearance="outline" style="width: 120px;">
                       <mat-label>Updated on</mat-label>
                       <input matInput  readonly [matDatepicker]="picker3" placeholder="" formControlName="updatedAt">
                         <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
