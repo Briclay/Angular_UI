@@ -36,62 +36,12 @@ export class DesignDashboardComponent implements OnInit {
   selectedProjectData : any;
   projectConsultants =[];
   unitsArray =[];
-  projectTypes : any[] =[
-    {
-      "_id": "1",
-      "name": "Land Details",
-    },
-    {
-      "_id": "2",
-      "name": "Architecture",
-    },
-    {
-      "_id": "3",
-      "name": "Structural",
-    },
-    {
-      "_id": "4",
-      "name": "PHE",
-    },
-    {
-      "_id": "5",
-      "name": "Electrical",
-    },
-    {
-      "_id": "6",
-      "name": "Fire",
-    },
-    {
-      "_id": "7",
-      "name": "Interiors",
-    },
-    {
-      "_id": "8",
-      "name": "Landscape",
-    },
-    {
-      "_id": "9",
-      "name": "NOC",
-    },
-    {
-      "_id": "10",
-      "name": "RERA",
-    },
-    {
-      "_id": "11",
-      "name": "Area Statement",
-    },
-    {
-      "_id": "12",
-      "name": "Specifications",
-    },
-    {
-      "_id": "13",
-      "name": "Sales & Marketing",
-    }
-
-  ]
- 
+  userDeppartment : any;
+  clickedProjectName: any;
+  projectTypes =[]
+  intiallTypes =  [ 'Architecture', 'Structural','PHE', 'Electrical','Fire',
+   'HVAC','Interiors'];
+  analyticsLoading  = false;
   private unsubscribe: Subject<any> = new Subject();
 
   constructor(
@@ -111,6 +61,8 @@ export class DesignDashboardComponent implements OnInit {
       this.roleName = this.user._roleId.name;
       this.profileImageUrl = this.user.profileImageUrl ? this.user.profileImageUrl : "./assets/images/avatars/profile.jpg";
     this.userAuth = JSON.parse(window.localStorage.getItem('authUserOrganisation'));
+    let dep = JSON.parse(window.localStorage.getItem('authUserDepartment'));
+    this.userDeppartment = dep._id;
     this.orgID = this.userAuth._id;
     this.selectedOrgId = this.orgID
   }
@@ -133,28 +85,7 @@ export class DesignDashboardComponent implements OnInit {
       })
     });
     this.getProjects();
-    
-   /* observableMerge(this.route.params, this.route.queryParams).pipe(
-      takeUntil(this.unsubscribe))
-      .subscribe((params) => this.loadRoute(params));*/
   }
-
-  /*public ngOnDestroy(): void {
-    this.unsubscribe.next();
-    this.unsubscribe.complete();
-  }*/
-
- /* loadRoute(params: any) {
-    if('orgID' in params) {
-      this.selectedOrgId = this.orgID
-      this.getProjects();
-    }
-  }*/
-
- /* organizationChanged(org) {
-    this.router.navigate([], {queryParams: {orgID: org.value ? org.value._id : org._id},queryParamsHandling: 'merge'});
-  }*/
-
   getProjects() {
     this.projectService.getProjects(this.selectedOrgId).pipe().subscribe(res => {
       console.log('res', res);
@@ -168,8 +99,32 @@ export class DesignDashboardComponent implements OnInit {
     console.log(proj, "selected poject data")
     this.projectSelected = true;
     this.selectedProjectData = proj;
+    this.clickedProjectName = proj.name;
     this.projectConsultants = this.selectedProjectData._consultants;
     this.unitsArray = this.selectedProjectData.units;
+    this.getAllAnalytics()
+  }
+
+  getAllAnalytics (){
+    this.analyticsLoading = true;
+    let filter = `filter[_projectId]=${this.selectedProjectData._id}&filter[_departmentId]=${this.userDeppartment}&filter[_organisationId]=${this.orgID}&filter[name]=${this.clickedProjectName}`
+    this.fileManagerService.getAnalytics(filter)
+    .pipe().subscribe(res => {
+      this.analyticsLoading = false;
+      res.length > 0 && res.forEach(v => {
+        this.intiallTypes.forEach(ty => {
+          if(v.name === ty){
+            this.projectTypes.push(v)
+          }
+        })
+      })
+      console.log(res, 'getAllAnalytics')
+    }, (error: any) => {
+       this.snackBar.open(error.message, 'error', {
+        duration: 5000,
+      });
+      console.log(error)
+    });
   }
 
   onFileInput(event, fileList?) {

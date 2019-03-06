@@ -9,6 +9,7 @@ import { DepartmentService} from '../../../../../services/department/department.
 import * as _ from 'lodash';
 import { IssueTrackerService } from '../inter-department-tracker.service';
 declare var moment: any;
+import { UserSelectDialogComponent } from './user-select-dialog/user-select-dialog.component';
 
 @Component({
 	selector: 'app-issue-tracker-details',
@@ -19,10 +20,12 @@ export class IssueTrackerDetailsComponent implements OnInit {
 	@Input() data: any;
 	@Input() formType: string;
 	@Output() public tabSwitch: EventEmitter<any> = new EventEmitter<any>();
+	@Output() public updateRefresh: EventEmitter<any> = new EventEmitter<any>();
 
 	issueTrackerDetailsForm : FormGroup;
 	form: FormGroup;
 	formErrors: any;
+	updateLoading = false;
 	users = []
 	orgID : any;
 	commentsArray = [];
@@ -35,11 +38,13 @@ export class IssueTrackerDetailsComponent implements OnInit {
 	closeFlag  = false;
 	dateFilter:any;
 	newCreateFlag = false;
+	selectedUserData : any;
 	private unsubscribe: Subject<any> = new Subject();
 	constructor(
 		private formBuilder : FormBuilder,
 		private route: ActivatedRoute, 
 		private router: Router,
+   		private dialog : MatDialog,
 		private snackBar : MatSnackBar,
 		private userService : UserService,
 		private departService : DepartmentService,
@@ -106,6 +111,7 @@ export class IssueTrackerDetailsComponent implements OnInit {
 	assignValuesToForm() {										
 		this.issueTrackerDetailsForm.patchValue(this.data)
 		this.commentformGroup.patchValue(this.data.comments)
+		console.log(this.commentformGroup, 'this.commentformGroup')
 		console.log(this.issueTrackerDetailsForm, 'aftrpatchvalue')
 		this.setCommentsCategories();
 	}
@@ -119,6 +125,15 @@ export class IssueTrackerDetailsComponent implements OnInit {
 		}, (error: any) => {
 			console.error('error', error);
 		});
+	}
+
+	userSelectDialog(){
+		const dialogRef = this.dialog.open(UserSelectDialogComponent, {
+          width: '550px',
+        });
+        dialogRef.afterClosed().subscribe(result => {
+           this.selectedUserData = result;
+        });
 	}
 
 	setCommentsCategories(){
@@ -158,14 +173,20 @@ export class IssueTrackerDetailsComponent implements OnInit {
 	}
 
 	addComments(){
-		this.newCreateFlag = true;
-		if(this.issueTrackerDetailsForm.value.comments.length > 0){
-			this.commentsArray.push(this.issueTrackerDetailsForm.value.comments);
-		}
-		else{
-			this.commentsArray.push(this.createCommentformGroup.value);
-		}
-		console.log(this.commentsArray, "comments-all")
+		/*this.commentsArray.push(this.createCommentformGroup.value);
+		console.log(this.commentsArray, "comments-all")*/
+			this.issueTrackerDetailsForm.value.comments.forEach(v => {
+			if(v.comments !== "" && v.assignedName  !=="" && v.completionDate  !== null && v.subType  !== "" ){
+				this.newCreateFlag = true;
+				this.commentsArray.push(this.createCommentformGroup.value);
+				console.log(this.commentsArray, "comments-all")
+			}
+			else {
+				this.snackBar.open('Please first fill the all required fields', 'Issue-tracker', {
+					duration: 2000,
+				});
+			}
+		})	
 	}
 
 	getUsers() {
@@ -190,8 +211,8 @@ export class IssueTrackerDetailsComponent implements OnInit {
 		this.onFormSubmit()
 	}
 
-
 	onFormSubmit() {
+		this.updateLoading = true;
 		let allDates= [];
 		let maxDate;
         if(this.newCreateFlag){
@@ -212,16 +233,15 @@ export class IssueTrackerDetailsComponent implements OnInit {
 		let secondDate = new Date(maxDate);
 		let diffDays = Math.round(Math.abs((firstDate.getTime() - secondDate.getTime())/(oneDay)));
         this.issueTrackerDetailsForm.value.age = diffDays || 0;
-
 		console.log(this.issueTrackerDetailsForm.value, "issuesCraetedSubmittedValue");
-
-        
 		this.issueTrackerService.updateIssueTracker( this.issueTrackerDetailsForm.value.id, this.issueTrackerDetailsForm.value)
 		.pipe().subscribe(response => {
 			console.log(response, 'response.message')
 			this.snackBar.open('Issue updated successfully', 'Issue-tracker', {
 				duration: 2000,
 			});
+			this.updateRefresh.emit()
+			this.updateLoading = false;
 			/*const path = '/dashboard/issue-tracker';
 			this.router.navigateByUrl(path);*/
 			this.issueTrackerDetailsForm['_touched'] = false;

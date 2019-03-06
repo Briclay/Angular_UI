@@ -47,6 +47,7 @@ export class IssueTrackerCreateComponent implements OnInit {
 	comments: FormArray;
 	commentformGroup: FormGroup;
 	selectedSubType : any;
+	dep = [ 'aa', 'aa','aa', 'aa']
 	constructor(
     	private dialog: MatDialog,
 		private departService : DepartmentService,

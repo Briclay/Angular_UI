@@ -14,7 +14,8 @@ export class ExpansionPanelComponent implements OnInit {
   @Input() isFeature: boolean;
   @Output() public openHistort: EventEmitter<any> = new EventEmitter<any>();
   @Output() public openFeature: EventEmitter<any> = new EventEmitter<any>();
-
+  @Output() public updateRefresh: EventEmitter<any> = new EventEmitter<any>();
+  
   constructor() { }
 
   ngOnInit() {
@@ -25,6 +26,10 @@ export class ExpansionPanelComponent implements OnInit {
 
   historyClick(listData) {
     this.openHistort.emit(listData);
+  }
+
+  updateRefreshData(){
+    this.updateRefresh.emit()
   }
 
   feature(listData) {

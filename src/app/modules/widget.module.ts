@@ -12,6 +12,7 @@ import {SpinnerModule} from "../components/shared/spinner/spinner.module";
 import {WorkRequestDetailsComponent} from '../components/core/dashboard/work-request/work-request-details/work-request-details.component';
 import {WorkOrderDetailsComponent} from '../components/core/dashboard/work-order/work-order-details/work-order-details.component';
 import {IssueTrackerDetailsComponent} from '../components/core/dashboard/inter-department-tracker/inter-department-tracker-details/inter-department-tracker-details.component';
+import { ProjectCreateComponent } from '../components/core/dashboard/projects/project-create/project-create.component';
 
 @NgModule({
   imports: [
@@ -29,7 +30,8 @@ import {IssueTrackerDetailsComponent} from '../components/core/dashboard/inter-d
     WorkRequestDetailsComponent,
     WorkOrderDetailsComponent,
     UserDashDetailsComponent,
-    IssueTrackerDetailsComponent
+    IssueTrackerDetailsComponent,
+    ProjectCreateComponent
   ],
   exports: [
     UserDetailsComponent, 
@@ -39,7 +41,8 @@ import {IssueTrackerDetailsComponent} from '../components/core/dashboard/inter-d
     WorkRequestDetailsComponent,
     WorkOrderDetailsComponent,
     UserDashDetailsComponent,
-    IssueTrackerDetailsComponent
+    IssueTrackerDetailsComponent,
+    ProjectCreateComponent
   ],
   entryComponents: [
     UserDetailsComponent,
@@ -49,7 +52,8 @@ import {IssueTrackerDetailsComponent} from '../components/core/dashboard/inter-d
     WorkRequestDetailsComponent,
     WorkOrderDetailsComponent,
     UserDashDetailsComponent,
-    IssueTrackerDetailsComponent
+    IssueTrackerDetailsComponent,
+    ProjectCreateComponent
   ],
   providers: [WidgetService]
 })

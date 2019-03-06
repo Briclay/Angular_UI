@@ -18,9 +18,6 @@
       <div fxFlex=88 fxLayout=column>
         <div fxLayout="row" >
           <mat-card class="header-shadow" style="display: inline;flex :1;height: 15px;">
-            <!-- <div class="pull-left panel-left" style="margin-top: -14px;">
-              <app-organisation-drop-down (selectOrganizaion)="organizationChanged($event)"></app-organisation-drop-down>
-            </div> -->
             <div fxLayout=row style="place-content: space-around;">
               <div fxLayout=row style="place-content: space-around;" class="hand-cursor">
                 <img style="height: 20px;width: 20px;" src="/assets/images/icons/projects_Active.png">
@@ -43,20 +40,24 @@
       </div>
       <div fxLayout=row>
         <div class="content-head" fxLayout=column style="min-width: -webkit-fill-available;">
-          <div class="first-card" style="width: 100%;overflow: auto;">
-            <mat-card class="matCard" fxFlex=20 fxLayout=column *ngFor="let project of projects">
-              <div (click)="selectSingleProject(project)"  fxLayout=row style="place-content: space-between;">
-                <div fxLayout=row>
-                  <img style="height: 70px;width: 115px;border-radius: 10%;" src={{project.imageUrls[0]}}>
+          <div class="first-card" style="width: 100%;overflow: auto;padding: 5px;">
+            <mat-card class="matCard" fxFlex=25 fxLayout=column *ngFor="let project of projects">
+              <div (click)="selectSingleProject(project)"  fxLayout=row style="place-content: space-between;border-radius: 10px;" class="{{project.name === clickedProjectName ? 'bg_color_active' : 'bg_color'}}">
+                <div fxLayout=row style="padding: 5px;">
+                  <img style="height: 90px;width: 126px;border-radius: 10%;" src={{project.imageUrls[0]}}>
                 </div>
                 <div fxLayout=column>
-                  <div class="font_12">{{project.name}}</div>
-                  <div class="font_10">{{project.projectDetails.location}}</div>
+                  <div class="{{project.name === clickedProjectName ? 'p_name_active_color' : 'p_name_color'}}" >{{project.name}}</div>
+                  <div class="{{project.name === clickedProjectName ? 'p_address_active_color' : 'p_address_color'}}" >{{project.projectDetails.location}}</div>
+                  <div class="{{project.name === clickedProjectName ? 'p_address_active_color' : 'p_address_color'}}">{{project.projectDetails.blocks}}</div>
                 </div>
               </div>
             </mat-card>
           </div> 
         </div>
+      </div>
+      <div>
+        
       </div>
      <!--  <div fxLayout=row>
         <div class="content-head" fxLayout=column style="min-width: -webkit-fill-available;">
@@ -80,18 +81,29 @@
   </div>
   <div *ngIf="projectSelected">
     <div fxLayout=row *ngIf="selectedProjectData">
-      <mat-card>
+      <mat-card fxFlex=100>
         <div fxLayout=row >
-          <div fxFlex=20 style="position:relative; ">
+          <div fxFlex=25 style="position:relative; ">
             <img class="p_icon" src={{selectedProjectData.imageUrls[0]}}>
-            <div class="p_caption">{{selectedProjectData.name}}</div>
+            <div class="p_caption">
+              <div class="proj_caption">{{selectedProjectData.name}}</div>
+              <div >
+                <div class="proj_add_caption">
+                  {{selectedProjectData.projectDetails.location}} &nbsp; {{selectedProjectData.projectDetails.blocks}}
+                </div>
+              </div>
+            </div>
             <div class="p_status_text">{{selectedProjectData.status}}</div>
           </div>
-          <div fxFlex=80 fxLayout=row class="donut_image">
-            <!-- <div *ngFor="let ptype of projectTypes" fxLayout=column>
-              <img style="height: 65px;width: 65px;margin-right: 50px;" src="/assets/images/icons/donut.png">
+          <div fxFlex=75 fxLayout=row class="donut_image" style="align-items: center;">
+              <mat-spinner style="margin-left: 450px;margin:0 auto;" *ngIf="analyticsLoading;" [diameter]="40"></mat-spinner>
+            <div *ngFor="let ptype of projectTypes" fxLayout=column>
+              <div fxLayout=row  style="position: relative;">
+                <img style="height: 95px;width: 95px;margin-right: 30px;" src="/assets/images/icons/donut.png">
+                <div style="position: absolute;top: 42px;right: 75px;" class="font_10_PT">{{ptype.totalFile}}</div>
+              </div>
               <div class="font_10_PT">{{ptype.name}}</div>
-            </div> -->
+            </div>
           </div>
         </div>
       </mat-card>

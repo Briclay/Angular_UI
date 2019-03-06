@@ -35,7 +35,7 @@
         </mat-panel-title>
       </mat-expansion-panel-header>
       <app-widget-container
-        [selector]="selectorComponent" [data]="listData" >
+        [selector]="selectorComponent" [data]="listData" (updateRefresh)="updateRefreshData()"  >
       </app-widget-container>
     </mat-expansion-panel>
   </mat-accordion>

@@ -41,16 +41,16 @@
     <mat-tab-group #tabGroup>
         <mat-tab label="Overview">
             <app-panel-header-filter></app-panel-header-filter>
-             <div style ="place-content :center;">
-                <mat-spinner style="margin:0 auto;" *ngIf="listSpinner; else content" [diameter]="40"></mat-spinner>
-              </div>
+                <div style ="place-content :center;">
+                    <mat-spinner style="margin:0 auto;" *ngIf="listSpinner; else content" [diameter]="40"></mat-spinner>
+                </div>
               <div fxLayout="row">
                 <ng-template #content>
                     <div fxLayout="row">
                         <app-expansion-panel *ngIf="issueTrackerList"
                             [expansionPanelOptions]="issueTrackerDataOptions"
                             selectorComponent="app-issue-tracker-details" 
-                            [data]="issueTrackerList" >
+                            [data]="issueTrackerList" (updateRefresh)="getIssueTracker()" >
                         </app-expansion-panel>
                     </div>        
                 </ng-template>

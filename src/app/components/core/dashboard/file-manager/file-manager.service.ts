@@ -73,4 +73,9 @@ export class FileManagerService {
     return this.apiService.get(url).pipe(map(res => res));
   }
 
+  getAnalytics(filter): Observable<any> {
+    let url = `${environmentService.briclayApiBase}/folder/analytics?${filter}`
+    return this.apiService.get(url).pipe(map(res => res));
+  }
+
 }

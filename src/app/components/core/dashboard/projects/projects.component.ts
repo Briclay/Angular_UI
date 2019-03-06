@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatDialog, MatTableDataSource } from '@angular/material';
+import { MatDialog } from '@angular/material';
 import { ProjectService } from './project.service';
 import { merge as observableMerge, Subject } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -15,10 +15,6 @@ export class ProjectsComponent implements OnInit {
 
   projectDataOptions = [];
   public dataSource: any;
-  /*projects: any = {
-    data: []
-  };
-  */
   projects = [];
   selectedOrgId: string;
   projectLoading = false;
@@ -43,8 +39,8 @@ export class ProjectsComponent implements OnInit {
   }
 
   public ngOnDestroy(): void {
-    // this.unsubscribe.next();
-    //this.unsubscribe.complete();
+    this.unsubscribe.next();
+    this.unsubscribe.complete();
   }
 
   // loadRoute(params: any) {
@@ -59,6 +55,7 @@ export class ProjectsComponent implements OnInit {
   // }
 
   getProjects() {
+    this.projectLoading = true;
     this.projectService.getProjects(this.orgID).pipe().subscribe(res => {
       console.log('res', res);
       this.projectLoading = false;
@@ -77,21 +74,19 @@ export class ProjectsComponent implements OnInit {
           title: 'User Name', type: 'list', list: [
             { title: 'UserName', key: 'name', hideTitle: true, type: 'label' },
             { title: 'Address', key: 'projectDetails.location', hideTitle: true, type: 'label' },
-            { title: 'Address', key: 'status', hideTitle: true, type: 'label', isStatus: true }
+            { title: 'Address', key: 'projectDetails.blocks', hideTitle: true, type: 'label' },
+            { title: 'Status', key: 'status', hideTitle: true, type: 'label', isStatus: true }
           ]
         },
         { title: 'Project Code', key: 'projectCode' },
         { title: 'Total Units', key: 'unitNumber' },
         { title: 'Budget', key: 'projectDetails.unitNumber' }]
 
-      this.dataSource = new MatTableDataSource(res);
     }, (error: any) => {
       console.error('error', error);
       this.projectLoading = false;
     });
   }
-
-
 
   tabSwitch(tabReq) {
     this.tabGroup.selectedIndex = tabReq.index;

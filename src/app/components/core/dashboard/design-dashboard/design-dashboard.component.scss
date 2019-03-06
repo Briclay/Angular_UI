@@ -26,6 +26,40 @@
     top: 2px;
     left: 2px;
 }
+.bg_color {
+    background-color : white;
+    font-size : 12px;
+}
+
+.bg_color_active {
+    background-color : #032A57;
+    font-size : 12px;
+}
+
+.p_name_color{
+    color :#032A57;
+    font: 700 12px Roboto,"Helvetica Neue",sans-serif;
+    padding: 5px;
+}
+
+.p_name_active_color{
+    color :white;
+    font: 700 12px Roboto,"Helvetica Neue",sans-serif;
+    padding: 5px;
+}
+
+.p_address_color{
+    color :#032a57a1;
+    font: 700 10px Roboto,"Helvetica Neue",sans-serif;
+    padding: 2px;
+}
+
+.p_address_active_color{
+    color :white;
+    font: 700 10px Roboto,"Helvetica Neue",sans-serif;
+    padding: 2px;
+}
+
 .greenDot{
     position: absolute;
     right: 9px;
@@ -89,15 +123,18 @@
     color :#032A57;
     padding: 6px;
 }
+
 .font_10{
     font: 700 10px Roboto,"Helvetica Neue",sans-serif;
     color :#032a57a1;
-    padding: 6px;
+    padding: 2px;
 }
+
 .font_10_PT{
-    font: 700 10px Roboto,"Helvetica Neue",sans-serif;
+    font: 700 12px Roboto,"Helvetica Neue",sans-serif;
     color :#032a57a1;
-    margin-left: 8px;
+    margin-left: -24px;
+    text-align: center;
 }
 
 .user-details-container {
@@ -164,7 +201,7 @@
     background-color: #69af68;
     padding: 3px;
     top: 3px;
-    left: 135px;
+    left: 142px;
     font: 600 11px Roboto,"Helvetica Neue",sans-serif;
     color: white;
     border-radius: 35%;
@@ -181,7 +218,16 @@
     height: 38px;
     width: 225px;
     bottom: 0px;
+}
+
+.proj_caption{
     font: 600 12px Roboto,"Helvetica Neue",sans-serif;
+    color: black;
+    text-align : center;
+}
+
+.proj_add_caption{
+    font: 600 10px Roboto,"Helvetica Neue",sans-serif;
     color: black;
     text-align : center;
 }

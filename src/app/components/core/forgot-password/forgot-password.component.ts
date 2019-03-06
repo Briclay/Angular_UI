@@ -62,14 +62,14 @@ export class ForgotPasswordComponent implements OnInit {
 			let emailId = this.forgotPwdform.value.email;
 			this.authenticationService.forgotPwd(emailId, this.forgotPwdform.value)
 			.pipe().subscribe(response =>  {
+				let snackBar =  this.snackBar.open(response.message, 'Forgot', {
+			      	duration: 2000,
+			    });
                 //this.auth.set(response);
 				console.log(response, "forgotPwdform")
 				this.forgotPwdform.reset();
 				this.forgotPwdform['_touched'] = false;
-				this.dialogRef.close();
-				this.snackBar.open(response.message, 'Forgot', {
-			      	duration: 2000,
-			    });
+				this.dialogRef.close(snackBar);
 			}, (error: any) => {
 					this.snackBar.open(error.message, 'Forgot', {
 				      duration: 2000,

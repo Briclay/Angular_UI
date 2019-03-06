@@ -5,20 +5,37 @@
         <div fxLayout="row">
           <div fxFlex="50" >
             <div class="title"> Details</div>
-            <div class="margin-10">
-             <!--  <mat-form-field appearance="outline" style="width: 150px;">
-                <mat-label>Project Type</mat-label>
-                <mat-select formControlName="type">
-                  <mat-option *ngFor="let types of projectType"
-                    [value]="types"> {{types}}
-                  </mat-option>
-                </mat-select>
-              </mat-form-field> -->
-              <mat-form-field appearance="outline" style="width: 150px;">
-                <mat-label>Total Land Area</mat-label>
-                <input matInput placeholder="Total Area" required
-                formControlName="landArea">
-              </mat-form-field>
+            <div class="margin-10" fxLayout="row">
+              <div style="position: relative;">
+                <mat-form-field appearance="outline" class="fisrtFrom">
+                    <mat-label>Built Up Area </mat-label>
+                    <input readonly matInput placeholder="" >
+                </mat-form-field>
+                <div style="position: absolute;top: -1px;right: 7px;">
+                  <mat-form-field style="width:34px;font-size: 10px;">
+                    <select matNativeControl required>
+                      <option value="sft">SFT</option>
+                      <option value="smt">SMT</option>
+                      <option value="acr">ACR</option>
+                    </select>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div style="position: relative;">
+                <mat-form-field appearance="outline" class="fisrtFrom">
+                  <mat-label>Saleable Area</mat-label>
+                  <input readonly matInput placeholder="">
+                </mat-form-field>
+                <div style="position: absolute;top: -1px;right: 7px;">
+                  <mat-form-field style="width:34px;font-size: 10px;">
+                    <select matNativeControl required>
+                      <option value="sft">SFT</option>
+                      <option value="smt">SMT</option>
+                      <option value="acr">ACR</option>
+                    </select>
+                  </mat-form-field>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -71,8 +88,11 @@
                 <div fxLayout="row" formGroupName="dummyCarParkingArea">
                   <mat-form-field appearance="outline" style="width: 150px;margin-right: 5px;">
                     <mat-label>Parking Area</mat-label>
-                    <input matInput placeholder="Parking Area" required
-                    formControlName="area">
+                    <mat-select placeholder="Select area" >
+                      <mat-option *ngFor="let area of parkingArea" [value]="area">
+                        {{area}}
+                      </mat-option>
+                    </mat-select>
                   </mat-form-field>
                   <mat-form-field appearance="outline" style="width: 150px;margin-right: 5px;">
                     <mat-label>No.</mat-label>

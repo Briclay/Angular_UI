@@ -74,6 +74,7 @@ import { IssueTrackerCreateComponent } from './components/core/dashboard/inter-d
 import { GroupedBarChartComponent } from './components/shared/grouped-bar-chart/grouped-bar-chart.component';
 import { NcmComponent } from './components/core/dashboard/ncm/ncm.component';
 import { DonutChartComponent } from './components/shared/donut-chart/donut-chart.component';
+import { UserSelectDialogComponent } from './components/core/dashboard/inter-department-tracker/inter-department-tracker-details/user-select-dialog/user-select-dialog.component';
 
 @NgModule({
   declarations: [
@@ -119,7 +120,8 @@ import { DonutChartComponent } from './components/shared/donut-chart/donut-chart
     IssueTrackerCreateComponent,
     GroupedBarChartComponent,
     NcmComponent,
-    DonutChartComponent
+    DonutChartComponent,
+    UserSelectDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -146,7 +148,8 @@ import { DonutChartComponent } from './components/shared/donut-chart/donut-chart
     ProjectDatesComponent,
     ProjectDetailsComponent,
     ProjectPhasesComponent,
-    ProjectTeamsComponent
+    ProjectTeamsComponent,
+    UserSelectDialogComponent
   ],
   providers: [D3Service, DashboardService, DepartmentService,
     OrganizationService, UserDashboardService,

@@ -7,7 +7,8 @@ import { ProjectDatesComponent } from './project-dates/project-dates.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ProjectService } from './project.service';
 import { MaterialModule } from '../../../../modules/material.module';
-import { ProjectCreateComponent } from './project-create/project-create.component'
+//import { ProjectEditComponent } from './project-edit/project-edit.component';
+//import { ProjectCreateComponent } from './project-create/project-create.component'
 
 @NgModule({
   imports: [
@@ -20,16 +21,14 @@ import { ProjectCreateComponent } from './project-create/project-create.componen
     ProjectDetailsComponent,
     ProjectPhasesComponent,
     ProjectTeamsComponent,
-    ProjectDatesComponent,
-    ProjectCreateComponent
+    ProjectDatesComponent
 
   ],
   exports: [
     ProjectDetailsComponent,
     ProjectPhasesComponent,
     ProjectTeamsComponent,
-    ProjectDatesComponent,
-    ProjectCreateComponent
+    ProjectDatesComponent
   ],
   providers: [ProjectService]
 })

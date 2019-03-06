@@ -340,6 +340,7 @@ export class WorkRequestDetailsComponent implements OnInit {
   getWorkCategory(orgId?) {
     this.workRequestService.getWorkConfig(`filter[_organisationId]=${this.orgId}`)
       .pipe().subscribe(res => {
+        console.log(res, 'getWorkCategory')
         if (res.length) {
           this.workCategory = res[0].configValues;
         }

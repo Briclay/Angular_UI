@@ -17,11 +17,12 @@ export class ProjectDetailsComponent implements OnInit {
   formErrors: any;
   detailsFormErrors: any;
   userAuth: any;
-  detailsForm: FormGroup;
+  detailsForm: FormGroup; 
   filledData : any;
   uniteArray = [];
   parkingArray =[]
   projectType = ['RESIDENTIAL', 'COMMERCIAL', 'MIXED DEVELOPMENT', 'VILLA PROJECTS'];
+  parkingArea = ['Total', 'Basement', 'Covered', 'Surface', 'Stack','Puzzle'];
   constructor(
     public dialogRef: MatDialogRef<ProjectDetailsComponent>,
     private formBuilder: FormBuilder
@@ -31,6 +32,7 @@ export class ProjectDetailsComponent implements OnInit {
       landArea: {},
       units:{},
       carParkingArea:{},
+      area : {},
       dummyCarParkingArea:{},
       dummyUnits:{}
     };
@@ -40,6 +42,7 @@ export class ProjectDetailsComponent implements OnInit {
       landArea: ['', Validators.required],
       units: [''],
       carParkingArea: [''],
+      area : ['', Validators.required],
       dummyCarParkingArea: this.formBuilder.group({
         area: ['', Validators.required],
         count: ['', Validators.required]
@@ -69,7 +72,9 @@ export class ProjectDetailsComponent implements OnInit {
     }
   }
   ngOnInit() {
-    this.detailsForm.patchValue(JSON.parse(window.localStorage.getItem('detailsForm')));
+    if(window.localStorage.getItem('detailsForm')){
+      this.detailsForm.patchValue(JSON.parse(window.localStorage.getItem('detailsForm')));
+    }
   }
   onSubmit(){
     console.log('this.detailsForm',this.detailsForm.value);

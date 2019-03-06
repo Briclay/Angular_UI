@@ -6,15 +6,17 @@
     <mat-tab label="Overview">
        <app-panel-header-filter></app-panel-header-filter>
         <div style ="place-content :center;">
-          <mat-spinner style="margin:0 auto;" *ngIf="projectLoading; else projectListTemplate" [diameter]="40"></mat-spinner>
+          <mat-spinner style="margin:0 auto;" *ngIf="projectLoading; else content" [diameter]="40"></mat-spinner>
         </div>
-      <ng-template #projectListTemplate>
         <div fxLayout="row">
-          <app-expansion-panel  *ngIf="projects" [expansionPanelOptions]="projectDataOptions"
-            [data]="projects" [isHistory]="true"></app-expansion-panel>
+          <ng-template #content>
+            <app-expansion-panel  
+              [expansionPanelOptions]="projectDataOptions"
+              selectorComponent="app-project-create" 
+              [data]="projects" >
+            </app-expansion-panel>
+          </ng-template> 
         </div>
-      </ng-template> 
-     
     </mat-tab>
     <mat-tab label="New">
       <app-project-create formType="create" (tabSwitch)="tabSwitch($event)" ></app-project-create>

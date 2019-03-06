@@ -41,6 +41,30 @@
                     .bg_color_close {
                         background-color: #808080;
                     }
+                    .USer {
+                        display: inline-flex;
+                        height: 14px;
+                        width: 120px;
+                        margin-right: 6px;
+                        position: relative;
+                        border: 1px solid #8080804a;
+                        border-radius: 3px;
+                        color: #808080;
+                        padding: 8px 6px 4px 9px;
+                    }
+                    .assign {
+                        display: inline-block;
+                        position: absolute;
+                        top: -15px;
+                        display: inline-table;
+                        background-color: white;
+                        font: 400 10px 'Montserrat', sans-serif !important;
+                        height: 16px;
+                    }
+                    .assignUser {
+                        color:#000000c9;
+                        font: 400 13px 'Montserrat', sans-serif !important;
+                    }
                 }
             }
         }

@@ -103,13 +103,11 @@ export class ProjectCreateComponent implements OnInit {
     }
   }
 
-  loadRoute(params: any) {
+/*  loadRoute(params: any) {
     if('orgID' in params) {
       this.orgID = params['orgID'];
-
-     
     }
-  }
+  }*/
 
 
 /*  loadRoute(params: any) {
