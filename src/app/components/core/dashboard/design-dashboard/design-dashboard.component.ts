@@ -97,6 +97,7 @@ export class DesignDashboardComponent implements OnInit {
   }
 
   selectSingleProject(proj){
+    this.projectTypes = []
     if(this.analyticsLoading === false){
       console.log(proj, "selected poject data")
       this.projectSelected = true;
