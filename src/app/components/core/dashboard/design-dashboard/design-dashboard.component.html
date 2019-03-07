@@ -42,9 +42,9 @@
         <div class="content-head" fxLayout=column style="min-width: -webkit-fill-available;">
           <div class="first-card" style="width: 100%;overflow: auto;padding: 5px;">
             <mat-card class="matCard" fxFlex=25 fxLayout=column *ngFor="let project of projects">
-              <div (click)="selectSingleProject(project)"  fxLayout=row style="place-content: space-between;border-radius: 10px;" class="{{project.name === clickedProjectName ? 'bg_color_active' : 'bg_color'}}">
-                <div fxLayout=row style="padding: 5px;">
-                  <img style="height: 90px;width: 126px;border-radius: 10%;" src={{project.imageUrls[0]}}>
+              <div (click)="selectSingleProject(project)"  fxLayout=row style="place-content: space-between;border-radius: 5px;padding: 4px;" class="{{project.name === clickedProjectName ? 'bg_color_active' : 'bg_color'}}">
+                <div fxLayout=row style="padding: 2px;">
+                  <img style="height: 85px;width: 115px;border-radius: 10%;" src={{project.imageUrls[0]}}>
                 </div>
                 <div fxLayout=column>
                   <div class="{{project.name === clickedProjectName ? 'p_name_active_color' : 'p_name_color'}}" >{{project.name}}</div>
@@ -55,9 +55,6 @@
             </mat-card>
           </div> 
         </div>
-      </div>
-      <div>
-        
       </div>
      <!--  <div fxLayout=row>
         <div class="content-head" fxLayout=column style="min-width: -webkit-fill-available;">
@@ -99,8 +96,8 @@
               <mat-spinner style="margin-left: 450px;margin:0 auto;" *ngIf="analyticsLoading;" [diameter]="40"></mat-spinner>
             <div *ngFor="let ptype of projectTypes" fxLayout=column>
               <div fxLayout=row  style="position: relative;">
-                <img style="height: 95px;width: 95px;margin-right: 30px;" src="/assets/images/icons/donut.png">
-                <div style="position: absolute;top: 42px;right: 75px;" class="font_10_PT">{{ptype.totalFile}}</div>
+                <img style="height: 115px;width: 115px;margin-right: 10px;" src="/assets/images/icons/donut.png">
+                <div style="position: absolute;top: 53px;right: 62px;" class="font_10_PT">{{ptype.totalFile}}</div>
               </div>
               <div class="font_10_PT">{{ptype.name}}</div>
             </div>

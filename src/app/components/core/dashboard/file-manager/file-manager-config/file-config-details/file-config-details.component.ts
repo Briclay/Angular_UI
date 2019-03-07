@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import {UserService} from "../../../user/user.service";
 
 @Component({
   selector: 'app-file-config-details',
@@ -9,13 +10,24 @@ export class FileConfigDetailsComponent implements OnInit {
   @Input()
   public folderDetailsDataOption: any;
   logsData:any;
-  constructor() { }
+  uploadedBy : any;
+  constructor(
+    private userService: UserService) { }
 
   ngOnInit() {
   }
 
   ngOnChanges(changes: any) {
     this.logsData = this.folderDetailsDataOption;
+    let id = this.logsData._createdBy;
+
+    this.userService.getSingleUser(id).pipe().subscribe(res => {
+      this.uploadedBy = res.displayName;
+      console.log(res)
+    }, (error: any) => {
+      console.error('error', error);
+    });
+
   }
   getFileSize(value) {
     if (value) {

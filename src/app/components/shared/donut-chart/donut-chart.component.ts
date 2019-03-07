@@ -64,9 +64,9 @@ export class DonutChartComponent implements OnInit {
     const colorScale = d3.scaleOrdinal()
       .range(d3.schemeCategory10);
 
-    const colorLegend = d3.legendColor()
+    /*const colorLegend = d3.legendColor()
       .scale(colorScale)
-      .shape('circle');
+      .shape('circle');*/
 
     const row = d => {
       d.value = +d.value;
@@ -82,7 +82,7 @@ export class DonutChartComponent implements OnInit {
       .attr('d', arc)
       .attr('fill', d => colorScale(colorValue(d.data)));
 
-    colorLegendG.call(colorLegend)
+    colorLegendG.call(colorScale)
       .selectAll('.cell text')
       .attr('dy', '0.1em');
   }

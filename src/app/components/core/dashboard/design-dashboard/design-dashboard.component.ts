@@ -38,6 +38,7 @@ export class DesignDashboardComponent implements OnInit {
   unitsArray =[];
   userDeppartment : any;
   clickedProjectName: any;
+  analyticResponseCheck = false;
   projectTypes =[]
   intiallTypes =  [ 'Architecture', 'Structural','PHE', 'Electrical','Fire',
    'HVAC','Interiors'];
@@ -96,13 +97,15 @@ export class DesignDashboardComponent implements OnInit {
   }
 
   selectSingleProject(proj){
-    console.log(proj, "selected poject data")
-    this.projectSelected = true;
-    this.selectedProjectData = proj;
-    this.clickedProjectName = proj.name;
-    this.projectConsultants = this.selectedProjectData._consultants;
-    this.unitsArray = this.selectedProjectData.units;
-    this.getAllAnalytics()
+    if(this.analyticsLoading === false){
+      console.log(proj, "selected poject data")
+      this.projectSelected = true;
+      this.selectedProjectData = proj;
+      this.clickedProjectName = proj.name;
+      this.projectConsultants = this.selectedProjectData._consultants;
+      this.unitsArray = this.selectedProjectData.units;
+      this.getAllAnalytics()
+    }
   }
 
   getAllAnalytics (){
@@ -111,9 +114,9 @@ export class DesignDashboardComponent implements OnInit {
     this.fileManagerService.getAnalytics(filter)
     .pipe().subscribe(res => {
       this.analyticsLoading = false;
-      res.length > 0 && res.forEach(v => {
-        this.intiallTypes.forEach(ty => {
-          if(v.name === ty){
+      this.intiallTypes.forEach(ty => {
+        res.length > 0 && res.forEach(v => {
+          if(ty === v.name){
             this.projectTypes.push(v)
           }
         })

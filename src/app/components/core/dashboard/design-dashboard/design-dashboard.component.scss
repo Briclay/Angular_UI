@@ -39,13 +39,13 @@
 .p_name_color{
     color :#032A57;
     font: 700 12px Roboto,"Helvetica Neue",sans-serif;
-    padding: 5px;
+    padding: 2px;
 }
 
 .p_name_active_color{
     color :white;
     font: 700 12px Roboto,"Helvetica Neue",sans-serif;
-    padding: 5px;
+    padding: 2px;
 }
 
 .p_address_color{
@@ -131,8 +131,8 @@
 }
 
 .font_10_PT{
-    font: 700 12px Roboto,"Helvetica Neue",sans-serif;
-    color :#032a57a1;
+    font: 700 13px Roboto,"Helvetica Neue",sans-serif;
+    color :#032A57;
     margin-left: -24px;
     text-align: center;
 }
@@ -176,8 +176,9 @@
     
 }
 ::ng-deep .mat-card.matCard {
-    padding: 8px;
-    margin: 0px 8px;
+    padding: 0px;
+    margin-right: 5px;
+    height: 97px;
 }
 
 ::ng-deep .mat-card.matCard1 {
