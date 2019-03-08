@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatDialog } from '@angular/material';
+import { Component, OnInit,Output, Input, ViewChild,EventEmitter } from '@angular/core';
+import { MatDialog,MatPaginator } from '@angular/material';
 import { ProjectService } from './project.service';
 import { merge as observableMerge, Subject } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -12,7 +12,10 @@ import { takeUntil } from 'rxjs/operators';
 })
 export class ProjectsComponent implements OnInit {
   @ViewChild('tabGroup') tabGroup;
+  @ViewChild(MatPaginator) paginator: MatPaginator;    
 
+  pageIndex : number = 0;
+  pageSize : number = 5;
   projectDataOptions = [];
   public dataSource: any;
   projects = [];
@@ -42,7 +45,11 @@ export class ProjectsComponent implements OnInit {
     this.unsubscribe.next();
     this.unsubscribe.complete();
   }
-
+  
+  dataPaginatorChange(event){
+    this.pageIndex = event.pageIndex;
+    this.pageSize = event.pageSize;
+  }
   // loadRoute(params: any) {
   //   if ('orgID' in params) {
   //     this.selectedOrgId = params['orgID'];

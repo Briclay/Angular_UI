@@ -5,12 +5,12 @@
         <div>
           <div class="dottedBorder" >
             <img src="{{profileImageUrl}}" class="userImage" (click)="fileInput.click()"/>
-            <input #fileInput type="file" (change)="onFileInput($event)"  style="display:none;" />
+            <input #fileInput type="file" (change)="onFileInput($event)"  class="display_none" />
           </div>
-           <div fxLayout="column" style="text-align: center;">
+           <div fxLayout="column" class="text-center">
             <span class="text-color">{{userName}}</span>
           </div>
-           <div fxLayout="column" style="text-align: center;">
+           <div fxLayout="column" class="text-center">
             <span class="text-color">{{roleName}}</span>
           </div>          
         </div>
@@ -18,20 +18,20 @@
       <div fxFlex=88 fxLayout=column>
         <div fxLayout="row" >
           <mat-card class="header-shadow" style="display: inline;flex :1;height: 15px;">
-            <div fxLayout=row style="place-content: space-around;">
-              <div fxLayout=row style="place-content: space-around;" class="hand-cursor">
+            <div fxLayout=row class="content_space_arround">
+              <div fxLayout=row class="content_space_arround hand-cursor">
                 <img style="height: 20px;width: 20px;" src="/assets/images/icons/projects_Active.png">
-                <a routerLink="/dashboard/projects" style="text-decoration: none;">
+                <a routerLink="/dashboard/projects" class="text_d_none">
                   <div class="tab-btn" style="margin-left:10px;" > Projects</div>
                 </a>
               </div>
-              <div fxLayout=row style="place-content: space-around;" class="hand-cursor">
+              <div fxLayout=row class="content_space_arround hand-cursor">
                <img style="height: 30px;width: 30px;margin-top: -5px;" src="/assets/images/icons/File_Manager_Active.png">
-                <a routerLink="/dashboard/file-manager" style="text-decoration: none;">
+                <a routerLink="/dashboard/file-manager" class="text_d_none">
                   <div class="tab-btn" >File Manager</div>
                 </a>
              </div>
-             <div fxLayout=row style="place-content: space-around;" class="hand-cursor">
+             <div fxLayout=row class="content_space_arround hand-cursor">
               <img style="height: 20px;width: 20px;" src="/assets/images/icons/Work_Request _active.png">
               <div class="tab-btn" style="margin-left:10px;">Document Checklist</div>
             </div>
@@ -43,7 +43,7 @@
           <div class="first-card" style="width: 100%;overflow: auto;padding: 5px;">
             <mat-card class="matCard" fxFlex=25 fxLayout=column *ngFor="let project of projects">
               <div (click)="selectSingleProject(project)"  fxLayout=row style="place-content: space-between;border-radius: 5px;padding: 4px;" class="{{project.name === clickedProjectName ? 'bg_color_active' : 'bg_color'}}">
-                <div fxLayout=row style="padding: 2px;">
+                <div fxLayout=row class="padding_2">
                   <img style="height: 85px;width: 115px;border-radius: 10%;" src={{project.imageUrls[0]}}>
                 </div>
                 <div fxLayout=column>
@@ -80,7 +80,7 @@
     <div fxLayout=row *ngIf="selectedProjectData">
       <mat-card fxFlex=100>
         <div fxLayout=row >
-          <div fxFlex=25 style="position:relative; ">
+          <div fxFlex=25 class="position_relative">
             <img class="p_icon" src={{selectedProjectData.imageUrls[0]}}>
             <div class="p_caption">
               <div class="proj_caption">{{selectedProjectData.name}}</div>
@@ -92,10 +92,10 @@
             </div>
             <div class="p_status_text">{{selectedProjectData.status}}</div>
           </div>
-          <div fxFlex=75 fxLayout=row class="donut_image" style="align-items: center;">
+          <div fxFlex=75 fxLayout=row class="donut_image align_center" >
               <mat-spinner style="margin-left: 450px;margin:0 auto;" *ngIf="analyticsLoading;" [diameter]="40"></mat-spinner>
             <div *ngFor="let ptype of projectTypes" fxLayout=column>
-              <div fxLayout=row  style="position: relative;">
+              <div fxLayout=row  class="position_relative">
                 <img style="height: 115px;width: 115px;margin-right: 10px;" src="/assets/images/icons/donut.png">
                 <div style="position: absolute;top: 53px;right: 62px;" class="font_10_PT">{{ptype.totalFile}}</div>
               </div>
@@ -108,7 +108,7 @@
     <div *ngIf="selectedProjectData" >
       <form fxLayout=row  [formGroup]="projectForm">
         <mat-card fxFlex=60 class="matCardPI">
-          <div class="font_17" style="text-align: center">Project Details</div>
+          <div class="font_17 text-center">Project Details</div>
           <div fxLayout=row style="margin-top: 7%;">
             <div fxLayout=column >
               <div fxLayout=row >
@@ -146,7 +146,7 @@
             </div>
             <div class="clearFix"></div>
             <div fxLayout=column style="margin-top: -4%;">
-              <div class="font_12" style="text-align: center">Car Parking</div>
+              <div class="font_12 text-center" >Car Parking</div>
                 <div fxLayout=row >
                   <mat-form-field appearance="outline" class="fisrtFrom">
                     <mat-label>Total</mat-label>
@@ -178,14 +178,14 @@
                 </mat-form-field>
               </div>
               <div fxLayout=column >
-                <div class="font_12" style="text-align: center">Product</div>
-                  <div fxLayout=row style="place-content: space-around;"> 
+                <div class="font_12 text-center" >Product</div>
+                  <div fxLayout=row class="content_space_arround"> 
                     <div class="font_12" >BHK</div>
-                    <div class="font_12" style="margin-left: 5px;" >No</div>
+                    <div class="font_12 margin_left_5" >No</div>
                     <div class="font_12" >Area (SFT)</div>
                   </div>
                  <!--  <div *ngIf="unitsArray.length > 0" *ngFor="let p of unitsArray">
-                    <mat-card fxLayout=row class="matCard1" style="place-content: space-around;">
+                    <mat-card fxLayout=row class="matCard1 content_space_arround">
                       <div class="font_12_light" >{{p.bhk}}</div>
                       <div class="font_12_light" >{{p.no}}</div>
                       <div class="font_12_light" >{{p.area}}</div>
@@ -196,16 +196,16 @@
           </div>
         </mat-card>
         <mat-card fxFlex=40 class="matCardPI">
-          <div class="font_17" style="text-align: center">Project Consultants</div>
+          <div class="font_17 text-center" >Project Consultants</div>
           <div fxLayout=row >
-            <div fxLayout=column style="flex: 1;">
-                <div fxLayout=row style="place-content: space-around;"> 
+            <div fxLayout=column class="flex-1">
+                <div fxLayout=row class="content_space_arround"> 
                   <div class="font_12" >Name</div>
-                  <div class="font_12" style="margin-left: 5px;" >Internal</div>
+                  <div class="font_12 margin_left_5" >Internal</div>
                   <div class="font_12" >External</div>
                 </div>
                <!--  <div *ngIf="projectConsultants.length > 0" *ngFor="let pc of projectConsultants">
-                  <mat-card fxLayout=row class="matCard1" style="place-content: space-around;">
+                  <mat-card fxLayout=row class="matCard1" class="content_space_arround">
                     <div class="font_12_light" >{{pc.name}}</div>
                     <div class="font_12_light" >{{pc.internaluser}}</div>
                     <div class="font_12_light" >{{pc.externaluser}}</div>

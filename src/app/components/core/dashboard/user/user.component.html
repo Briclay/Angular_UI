@@ -3,17 +3,21 @@
 <div class="user-container">
     <mat-tab-group #tabGroup>
         <mat-tab label="Overview">
-            <app-panel-header-filter></app-panel-header-filter>
+            <app-panel-header-filter [data] = "users" (dataFilter)="dataPaginatorChange($event)"></app-panel-header-filter>
              <div style ="place-content :center;">
                 <mat-spinner style="margin:0 auto;" *ngIf="loading; else content" [diameter]="40"></mat-spinner>
               </div>
             <div fxLayout="row">
                 <ng-template #content>
                     <app-expansion-panel 
-                         *ngIf="orgID" [expansionPanelOptions]="userDataOptions"
+                        *ngIf="orgID" 
+                        [pageIndex]="pageIndex"
+                        [pageSize]="pageSize"
+                        [expansionPanelOptions]="userDataOptions"
                         selectorComponent="app-user-details" 
-                        [data]="users"
-                        [isHistory]="true"></app-expansion-panel>
+                        [data]="users"  (updateRefresh)="getUsers()" 
+                        [isHistory]="true">
+                    </app-expansion-panel>
                 </ng-template>
             </div>
         </mat-tab>

@@ -40,17 +40,20 @@
 
     <mat-tab-group #tabGroup>
         <mat-tab label="Overview">
-            <app-panel-header-filter></app-panel-header-filter>
-                <div style ="place-content :center;">
-                    <mat-spinner style="margin:0 auto;" *ngIf="listSpinner; else content" [diameter]="40"></mat-spinner>
-                </div>
+            <app-panel-header-filter [data] = "issueTrackerList" (dataFilter)="dataPaginatorChange($event)"></app-panel-header-filter>                
+            <div style ="place-content :center;">
+                <mat-spinner style="margin:0 auto;" *ngIf="listSpinner; else content" [diameter]="40"></mat-spinner>
+            </div>
               <div fxLayout="row">
                 <ng-template #content>
                     <div fxLayout="row">
-                        <app-expansion-panel *ngIf="issueTrackerList"
+                        <app-expansion-panel 
+                            *ngIf="issueTrackerList.length>0"
+                            [pageIndex]="pageIndex"
+                            [pageSize]="pageSize"
                             [expansionPanelOptions]="issueTrackerDataOptions"
                             selectorComponent="app-issue-tracker-details" 
-                            [data]="issueTrackerList" (updateRefresh)="getIssueTracker()" >
+                            [data]="issueTrackerList" >
                         </app-expansion-panel>
                     </div>        
                 </ng-template>

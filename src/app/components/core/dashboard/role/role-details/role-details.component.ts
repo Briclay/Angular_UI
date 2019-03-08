@@ -18,7 +18,7 @@ export class RoleDetailsComponent implements OnInit {
   @Input() formType: string;
   @Input() orgID: string;
   @Output() public tabSwitch: EventEmitter<any> = new EventEmitter<any>();
-
+  @Output() public updateRefresh: EventEmitter<any> = new EventEmitter<any>();
   userAuth: any;
   roleDetailsForm: FormGroup;
   _roleId = ['ADMIN', 'USER', 'MANAGEMENT'];
@@ -135,6 +135,7 @@ export class RoleDetailsComponent implements OnInit {
           this.snackBar.open("Roles Updated Succesfully", 'Roles', {
             duration: 5000,
           });
+          this.updateRefresh.emit()
         }, (error: any) => {
           this.snackBar.open(error.message, 'Roles', {
             duration: 5000,

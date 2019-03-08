@@ -18,6 +18,8 @@ export class IssueTrackerComponent implements OnInit {
   issueTrackerDataOptions = [];
   orgId: string;
   listSpinner: boolean;
+  pageIndex : number = 0;
+  pageSize : number = 5;
   private unsubscribe: Subject<any> = new Subject();
 
   constructor(
@@ -33,6 +35,11 @@ export class IssueTrackerComponent implements OnInit {
   public ngOnDestroy(): void {
     this.unsubscribe.next();
     this.unsubscribe.complete();
+  }
+
+  dataPaginatorChange(event){
+    this.pageIndex = event.pageIndex;
+    this.pageSize = event.pageSize;
   }
 
   getIssueTracker() {

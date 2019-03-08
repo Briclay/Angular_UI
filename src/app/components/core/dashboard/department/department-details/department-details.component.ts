@@ -22,6 +22,7 @@ export class DepartmentDetailsComponent implements OnInit {
   @Input() data: any;
   @Input() formType: string;
   @Output() public tabSwitch: EventEmitter<any> = new EventEmitter<any>();
+  @Output() public updateRefresh: EventEmitter<any> = new EventEmitter<any>();
 
   userAuth: any;
   departmentDetailsForm: FormGroup;
@@ -222,6 +223,7 @@ export class DepartmentDetailsComponent implements OnInit {
       this.snackBar.open("Department updated successfully", 'Department', {
         duration: 2000,
       });
+      this.updateRefresh.emit()
     }, (error: any) => {
       this.deptFormSubmitted = false;
       this.snackBar.open(error.message, 'Department', {

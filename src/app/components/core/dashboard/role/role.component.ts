@@ -22,6 +22,8 @@ export class RoleComponent implements OnInit {
 	roleListSpinner: boolean;
 	historyData: any;
 	selectedOrgId: string;
+	pageIndex : number = 0;
+  	pageSize : number = 5;
 
 	private unsubscribe: Subject<any> = new Subject();
 	constructor(
@@ -30,15 +32,18 @@ export class RoleComponent implements OnInit {
 		private roleService: RoleService,
 		public dialog: MatDialog,
 		private departmentService: DepartmentService,
-
 	) { }
 
 	ngOnInit() {
 		observableMerge(this.route.params, this.route.queryParams).pipe(
       	takeUntil(this.unsubscribe))
       	.subscribe((params) => this.loadRoute(params));
-
 	}
+
+	dataPaginatorChange(event){
+	    this.pageIndex = event.pageIndex;
+	    this.pageSize = event.pageSize;
+  	}
 
 	public ngOnDestroy(): void {
 		this.unsubscribe.next();

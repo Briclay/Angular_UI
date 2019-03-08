@@ -4,16 +4,18 @@
 <div class="project-container">
   <mat-tab-group #tabGroup>
     <mat-tab label="Overview">
-       <app-panel-header-filter></app-panel-header-filter>
+       <app-panel-header-filter [data] = "projects" (dataFilter)="dataPaginatorChange($event)"></app-panel-header-filter>
         <div style ="place-content :center;">
           <mat-spinner style="margin:0 auto;" *ngIf="projectLoading; else content" [diameter]="40"></mat-spinner>
         </div>
         <div fxLayout="row">
           <ng-template #content>
-            <app-expansion-panel  
+            <app-expansion-panel
+              [pageIndex]="pageIndex"
+              [pageSize]="pageSize"
               [expansionPanelOptions]="projectDataOptions"
               selectorComponent="app-project-create" 
-              [data]="projects" >
+              [data]="projects" (updateRefresh)="getProjects()" >
             </app-expansion-panel>
           </ng-template> 
         </div>

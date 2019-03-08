@@ -17,6 +17,8 @@ export class UserComponent implements OnInit {
   userDataOptions = [];
   orgID: string;
   loading: boolean;
+  pageIndex : number = 0;
+  pageSize : number = 5;
 
   private unsubscribe: Subject<any> = new Subject();
 
@@ -30,7 +32,11 @@ export class UserComponent implements OnInit {
     observableMerge(this.route.params, this.route.queryParams).pipe(
       	takeUntil(this.unsubscribe))
       	.subscribe((params) => this.loadRoute(params));
+  }
 
+  dataPaginatorChange(event){
+    this.pageIndex = event.pageIndex;
+    this.pageSize = event.pageSize;
   }
 
   loadRoute(params: any) {

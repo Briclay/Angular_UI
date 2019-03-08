@@ -19,7 +19,7 @@ export class UserDetailsComponent implements OnInit {
   @Input() data: any;
   @Input() formType: string;
   @Output() public tabSwitch: EventEmitter<any> = new EventEmitter<any>();
-
+  @Output() public updateRefresh: EventEmitter<any> = new EventEmitter<any>();
   orgID: string;
   userDetailsForm: FormGroup;
   userType = ['ADMIN', 'MANAGER', 'USER'];
@@ -166,6 +166,7 @@ export class UserDetailsComponent implements OnInit {
           this.snackBar.open("User Updated Succesfully", 'User', {
             duration: 5000,
           });
+          this.updateRefresh.emit()
         }, (error: any) => {
           this.snackBar.open(error.message, 'User', {
             duration: 5000,
