@@ -6,20 +6,21 @@ import { MatPaginator,MatSort,PageEvent } from '@angular/material';
 	templateUrl: './panel-header-filter.component.html',
 	styleUrls: ['./panel-header-filter.component.scss']
 })
-export class PanelHeaderFilterComponent implements OnInit,OnChanges
- {
+export class PanelHeaderFilterComponent implements OnInit,OnChanges{
 	@ViewChild(MatPaginator) paginator: MatPaginator;   
-  	@Input() length: length;
   	@Input() public pageSizeOptions: number[];
-  	@Input() public data: data;
+  	@Input() public data: any;
   	@Output() public dataFilter: EventEmitter<any> = new EventEmitter<any>();
 
     pageSize : number;
-
+    length : any
 	constructor() { }
 
     ngOnChanges(){
-		this.length = this.data && this.data.length;
+    	if(this.data && this.data.length > 0){
+			this.length = this.data
+    	}
+		//this.length = this.data && this.data.length;
 		this.pageSize = this.pageSize;
 		this.pageSizeOptions = [5, 10, 25, 100];
     }

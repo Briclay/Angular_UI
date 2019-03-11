@@ -3,7 +3,7 @@
 <div class="user-container">
     <mat-tab-group #tabGroup>
         <mat-tab label="Overview">
-            <app-panel-header-filter [data] = "departments" (dataFilter)="dataPaginatorChange($event)"></app-panel-header-filter> 
+            <app-panel-header-filter *ngIf="departments && departments.length>0" [data] = "departments" (dataFilter)="dataPaginatorChange($event)"></app-panel-header-filter> 
             <div style ="place-content :center;">
                 <mat-spinner style="margin:0 auto;" *ngIf="depListSpinner; else content" [diameter]="40"></mat-spinner>
             </div>
