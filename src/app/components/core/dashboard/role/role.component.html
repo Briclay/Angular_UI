@@ -3,7 +3,7 @@
 <div class="role-container">
     <mat-tab-group #tabGroup>
         <mat-tab label="Overview">
-            <app-panel-header-filter *ngIf="roles.length > 0" [data]="roles" (dataFilter)="dataPaginatorChange($event)"></app-panel-header-filter>
+            <app-panel-header-filter [data]="roles" (dataFilter)="dataPaginatorChange($event)"></app-panel-header-filter>
             <div style ="place-content :center;">
                 <mat-spinner style="margin:0 auto;" *ngIf="roleListSpinner; else panelContent" [diameter]="40"></mat-spinner>
               </div>

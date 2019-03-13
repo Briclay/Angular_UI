@@ -1,6 +1,6 @@
 <div class="issue-tracker-details-container">
-  <div style ="place-content :center;">
-    <mat-spinner style="margin:0 auto;" *ngIf="loading" [diameter]="20"></mat-spinner>
+  <div class="spiner_div">
+    <mat-spinner style="margin:0 auto;" *ngIf="loading" [diameter]="40"></mat-spinner>
   </div>
   <form [formGroup]="issueTrackerCreateForm" class="issue-tracker-details-form">
     <mat-card>
@@ -88,7 +88,7 @@
                   </mat-form-field>
                   <mat-form-field appearance="outline" *ngIf="userDropdownEnable">
                     <mat-label>Assigned To</mat-label>
-                    <mat-select placeholder="Select user" (selectionChange)="selectedUser($event.value)">
+                    <mat-select placeholder="" (selectionChange)="selectedUser($event.value)" formControlName="assignedName">
                       <mat-option *ngFor="let assignedName of users" [value]="assignedName">
                         {{assignedName.name.first }} {{assignedName.name.last}}
                       </mat-option>
@@ -101,7 +101,7 @@
         </div>
       </div>
       <div fxLayout=row class="pull-right" > 
-        <div fxLayout=column style="align-items: center;">
+        <div fxLayout=column style="align-items: center;" (click)="onFormCancel()">
           <img style="height: 30px;width: 30px;" src="assets/images/icons/close_red.png" />
           <span>Cancel</span>
         </div>

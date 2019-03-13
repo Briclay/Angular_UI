@@ -4,16 +4,18 @@
       <div>
         <div>
           <div class="dottedBorder" >
-            <img class="userImage" src="/assets/images/backgrounds/autumn.jpg">
-            <div align="center" class="greenDot"></div>
+            <img src="{{profileImageUrl}}" class="userImage" (click)="fileInput.click()"/>
+            <input #fileInput type="file" (change)="onFileInput($event)"  class="display_none" />
           </div>
-          <div fxLayout="column" style="text-align: center;padding: 17%;">
-            <span class="text-color">Santhosh K</span>
-            <span class="text-color-light ">Contracts</span>
+          <div fxLayout="column" class="text-center" style="margin-top: 20px;">
+            <span class="text-color">{{userName}}</span>
           </div>
+           <div fxLayout="column" class="text-center">
+            <span class="text-color">{{roleName}}</span>
+          </div> 
         </div>
       </div>
-      <mat-card class="report-card" fxLayout=column style="display: inline;flex :1;">
+      <mat-card class="report-card" fxLayout=column style="display: inline;flex :1;margin-top: 50px;">
         <div class="card-title">Quick Details</div>
         <div fxLayout=row style="place-content: space-between;border-bottom: 1px solid #ece8e8;">
           <div style="height: 20px;width: 20px;background: transparent;border-radius: 50%;"></div>
@@ -35,7 +37,7 @@
           <div class="count">20</div>
         </div>
       </mat-card>
-       <mat-card class="report-card" fxLayout=column style="display: inline;flex :1;">
+      <mat-card class="report-card" fxLayout=column style="display: inline;flex :1;">
         <div class="card-title">NCM</div>
         <div fxLayout=row style="place-content: space-between;border-bottom: 1px solid #ece8e8;">
           <div style="height: 20px;width: 20px;background: transparent;border-radius: 50%;"></div>
@@ -49,34 +51,34 @@
           </div>
           <div class="count">Pending</div>
         </div>
-        <div fxLayout=row style="place-content: space-between; margin-top: 10px;border-bottom: 1px solid #ece8e8;">
-          <div fxLayout=row >
-            <div style="height: 20px;width: 20px;background: transparent;border-radius: 50%;    margin-right: 6px;margin-top: -4px;"></div>
-            <div class="count">R002</div>
-          </div>  
-          <div class="count">Completed</div>
-        </div>
       </mat-card>
     </div>
-    
-    <div fxFlex=80 fxLayout="row" style="display: inline;flex :1;">
+    <div fxFlex=100 fxLayout="row" style="display: inline;flex :1;">
       <mat-card class="header-shadow" style="display: inline;flex :1;    height: 15px;">
         <div fxLayout=row style="place-content: space-around;">
-          <div fxLayout=row style="place-content: space-around;">
+          <div fxLayout=row style="place-content: space-around;" class="hand-cursor">
             <img style="height: 20px;width: 20px;" src="/assets/images/icons/projects_Active.png">
-            <div class="tab-btn" style="margin-left:10px;" > Projects</div>
+            <a routerLink="/dashboard/projects" class="text_d_none">
+              <div class="tab-btn" style="margin-left:10px;" > Projects</div>
+            </a>
           </div>
-          <div fxLayout=row style="place-content: space-around;">
+          <div fxLayout=row style="place-content: space-around;" class="hand-cursor">
             <img style="height: 20px;width: 20px;" src="/assets/images/icons/Work_Request _active.png">  
+          <a routerLink="/dashboard/work-order" class="text_d_none">
             <div class="tab-btn" style="margin-left:10px;">Work order</div>
+          </a>  
           </div>
-          <div fxLayout=row style="place-content: space-around;">
+          <div fxLayout=row style="place-content: space-around;" class="hand-cursor">
             <img style="height: 20px;width: 20px;" src="/assets/images/icons/work-order-Active.png">
+          <a routerLink="/dashboard/work-request" class="text_d_none">
             <div class="tab-btn" style="margin-left:10px;">Work Request</div>
+          </a>  
           </div>
-          <div fxLayout=row style="place-content: space-around;">
+          <div fxLayout=row style="place-content: space-around;" class="hand-cursor">
             <img style="height: 30px;width: 30px;margin-top: -5px;" src="/assets/images/icons/File_Manager_Active.png">
-            <div class="tab-btn" >File Manager</div>
+            <a routerLink="/dashboard/file-manager" class="text_d_none">
+              <div class="tab-btn" >File Manager</div>
+            </a>
           </div>
         </div>  
         <div class="content-head" fxLayout=column>

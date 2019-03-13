@@ -236,6 +236,10 @@ export class ProjectCreateComponent implements OnInit {
         console.log('error', error);
       })
   }
+
+  onFormCancel(){
+    this.projectForm.reset()
+  }
   onSubmit() {
     if(this.formType !== 'create'){
       this.projectForm.value.imageUrls = this.imageArray;

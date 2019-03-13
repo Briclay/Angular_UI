@@ -10,8 +10,10 @@ export class PanelHeaderFilterComponent implements OnInit,OnChanges{
 	@ViewChild(MatPaginator) paginator: MatPaginator;   
   	@Input() public pageSizeOptions: number[];
   	@Input() public data: any;
+  	//@Input() public length: any;
   	@Output() public dataFilter: EventEmitter<any> = new EventEmitter<any>();
-
+    
+    pageIndex : number;
     pageSize : number;
     length : any
 	constructor() { }

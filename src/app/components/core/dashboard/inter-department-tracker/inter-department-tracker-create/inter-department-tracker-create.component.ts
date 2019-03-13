@@ -201,6 +201,12 @@ export class IssueTrackerCreateComponent implements OnInit {
 		});
 	}
 
+	onFormCancel(){
+	    this.issueTrackerCreateForm.reset()
+	    this.commentformGroup.reset()
+	    this.ngOnInit()
+	}
+
 	onFormSubmit() {
 		this.issueTrackerCreateForm.value._projectId = this.selecetedProjectData._id;
 		this.issueTrackerCreateForm.value.projectName = this.selecetedProjectData.name;

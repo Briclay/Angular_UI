@@ -32,7 +32,7 @@ export class WorkOrderDetailsComponent implements OnInit {
   orderList: any;
   workList: any;
   orgId: string;
-
+  enableTypeOfConsultant = false;
   private unsubscribe: Subject<any> = new Subject();
   constructor(private formBuilder: FormBuilder,
     private workOrderService: WorkOrderService,
@@ -59,7 +59,8 @@ export class WorkOrderDetailsComponent implements OnInit {
       workOrderApprovalDate: {},
       status: {},
       date: {},
-      totalValue: {}
+      totalValue: {},
+      typeOfConsultant : {}
     };
     this.orderTrackerForm = this.formBuilder.group({
       _organisationId: this.orgId,
@@ -82,29 +83,23 @@ export class WorkOrderDetailsComponent implements OnInit {
       nameOfAgency: [''],
       status: 'In Progress',
       totalValue: [''],
-      date: new FormControl((new Date()))
+      date: new FormControl((new Date())),
+      typeOfConsultant : ['']
     });
+
+    let orgDetails = JSON.parse(window.localStorage.authUserOrganisation);
+    this.orgId = orgDetails._id
   }
 
   ngOnInit() {
-    observableMerge(this.route.params, this.route.queryParams).pipe(
-      takeUntil(this.unsubscribe))
-      .subscribe((params) => this.loadRoute(params));
+    this.assignValuesToForm();
+    this.getAllWorkRequest();
   }
 
   public ngOnDestroy() {
     this.unsubscribe.next();
     this.unsubscribe.complete();
   }
-
-  loadRoute(params: any) {
-    if ('orgID' in params) {
-      this.orgId = params['orgID'];
-      this.assignValuesToForm();
-      this.getAllWorkRequest();
-    }
-  }
-
 
   selectWorkRequest() {
     this.genrateFullRefNumber();
@@ -231,6 +226,9 @@ export class WorkOrderDetailsComponent implements OnInit {
   assignValuesToForm() {
     if (this.formType !== 'create') {
       this.orderTrackerForm.patchValue(this.data);
+      if(this.data.typeOfWork = 'Appointment of Consultant'){
+        this.enableTypeOfConsultant = true;
+      }
     }
   }
   getAllWorkRequest() {

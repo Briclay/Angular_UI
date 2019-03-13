@@ -18,6 +18,8 @@ export class RootFolderComponent implements OnInit {
   dept: any;
   authUser: any;
   allFolders : any;
+  rootAllFolders =[];
+  userDepartment : any;
   constructor(
     private fileManagerService: FileManagerService,
     private route: ActivatedRoute,
@@ -28,6 +30,7 @@ export class RootFolderComponent implements OnInit {
     this.org = JSON.parse(window.localStorage.authUserOrganisation);
     this.dept = JSON.parse(window.localStorage.authUserDepartment);
     this.authUser = JSON.parse(window.localStorage.authUser);
+    this.userDepartment = this.authUser._departmentId.name;
   }
 
   ngOnInit() {
@@ -50,7 +53,7 @@ export class RootFolderComponent implements OnInit {
     console.log('filter', filter);
     this.fileManagerService.getAllFolders(filter)
       .pipe().subscribe(res => {
-        console.log('res ' + JSON.stringify(res));
+        console.log('reszzzzzzzzzzzz ' + JSON.stringify(res));
          if (this.authUser.userType === 'SUPERADMIN') {
           this.allFolders = res;
           this.dataSource = new MatTableDataSource(res);
@@ -89,6 +92,11 @@ export class RootFolderComponent implements OnInit {
       .pipe().subscribe(res => {
         console.log('res in admin ', res);
         if (res.length > 0) {
+          res.forEach(v =>{
+            if(this.userDepartment === v.name){
+              this.rootAllFolders.push(v)
+            }
+          })
           this.allFolders = res;
           this.dataSource = new MatTableDataSource(res);
         } else {

@@ -75,6 +75,7 @@ import { GroupedBarChartComponent } from './components/shared/grouped-bar-chart/
 import { NcmComponent } from './components/core/dashboard/ncm/ncm.component';
 import { DonutChartComponent } from './components/shared/donut-chart/donut-chart.component';
 import { UserSelectDialogComponent } from './components/core/dashboard/inter-department-tracker/inter-department-tracker-details/user-select-dialog/user-select-dialog.component';
+import { WorkCategoryDialogComponent } from './components/core/dashboard/work-request/work-request-details/work-category-dialog/work-category-dialog.component';
 
 @NgModule({
   declarations: [
@@ -149,7 +150,8 @@ import { UserSelectDialogComponent } from './components/core/dashboard/inter-dep
     ProjectDetailsComponent,
     ProjectPhasesComponent,
     ProjectTeamsComponent,
-    UserSelectDialogComponent
+    UserSelectDialogComponent,
+    WorkCategoryDialogComponent
   ],
   providers: [D3Service, DashboardService, DepartmentService,
     OrganizationService, UserDashboardService,

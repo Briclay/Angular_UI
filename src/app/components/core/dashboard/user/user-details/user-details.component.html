@@ -1,5 +1,5 @@
 <div class="user-details-container">
-  <form [formGroup]="userDetailsForm" (ngSubmit)="onSubmit()" class="user-details-form">
+  <form [formGroup]="userDetailsForm"  class="user-details-form">
     <mat-card>
       <div class="user-details-card">
         <div class="user-details-name">
@@ -90,8 +90,9 @@
             </mat-form-field>
           </div>
         </div>
-      </div>
-      <button mat-raised-button type="submit" class="pull-right">Submit</button>
+      </div> 
+      <button mat-raised-button type="submit" *ngIf="formType === 'create'" (click)="onFormCancel()" class="pull-right">Cancel</button>
+      <button mat-raised-button type="submit" class="pull-right" (click)="onSubmit()">Submit</button>
       <div class="clearfix"></div>
     </mat-card>
   </form>

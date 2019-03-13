@@ -4,31 +4,8 @@
     <mat-spinner style="margin:0 auto;" *ngIf="loading; else content" [diameter]="40"></mat-spinner>
   </div>
   <ng-template #content>
-    <!-- <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-      <ng-container matColumnDef="type">
-        <th mat-header-cell *matHeaderCellDef> Type </th>
-        <td mat-cell *matCellDef="let element"> <img src="{{getIcon(element.fileExt,element.type)}}" width="40">
-        </td>
-      </ng-container>
-
-      <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef> Name </th>
-        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-      </ng-container>
-      <ng-container matColumnDef="createdAt">
-        <th mat-header-cell *matHeaderCellDef> Date </th>
-        <td mat-cell *matCellDef="let element"> {{element.createdAt | date:'dd/MM/yyyy'}} </td>
-      </ng-container>
-      <ng-container matColumnDef="version">
-        <th mat-header-cell *matHeaderCellDef> Version </th>
-        <td mat-cell *matCellDef="let element"> {{element.version}} </td>
-      </ng-container>
-      <tr mat-header-row *matHeaderRowDef="displayedColumns" style="width:40%" align="center"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;" (dblclick)="routeFielManger(row)"></tr>
-    </table> -->
-
-    <div *ngFor="let element of allFolders;">
-      <div *ngIf="element.name === 'Design' ">
+    <div *ngFor="let element of rootAllFolders;">
+      <div>
         <div fxLayout=row >
           <mat-card class="hand-cursor" (click)="routeFielManger(element)"  style="width:26%;height: 48px;background-color: #d3d3d385;display: inline-block;">
             <div fxLayout=row style="position: relative;">

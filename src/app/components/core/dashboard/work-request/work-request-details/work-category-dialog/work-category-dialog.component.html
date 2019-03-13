@@ -1,0 +1,37 @@
+<div id="dep_user" fxLayoutAlign="center center">
+  <div id="dep_user-form-wrapper"  fxLayout="row" fxLayoutAlign="center center">
+    <div id="dep_user-form" >
+      <strong>Work-Category</strong>
+        <div fxLayout="row" style="margin-top: 20px;height: 300px;"  >
+          <div fxLayout="row" style="place-content: space-between;display: flex;">
+            <div class="text_c_bold" style="min-width: 20%;">Work Category</div>
+            <div class="text_c_bold" style="min-width: 10%;">No. of Days</div>
+            <div class="text_c_bold" style="min-width: 30%;">Category Reasons</div> 
+            <div class="text_c_bold" style="min-width: 30%;">Standard Operation Procedure</div>
+          </div>
+         	<div fxLayout="row" style="min-width: 100%;" *ngFor="let workC of allWorkCategory;let i = index">
+            <div fxFlex="100" fxLayout="row" style="margin-top: 15px;display: flex;
+              align-items: center;place-content:space-between;">
+              <div style="min-width: 20%;" class="text_c " >
+                {{workC.name}}
+              </div>
+              <div style="min-width: 10%;" class="text_c" >
+                {{workC.noOfDays}}
+              </div>
+              <div  style="min-width: 30%;" class="text_c" >
+                {{workC.categoryReason}}
+              </div>
+              <div  style="min-width: 30%;" class="text_c" >
+                no data
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- <div style="margin-top:3%;">
+	        <button mat-raised-button style="background-color: #2196F3;margin-right: 15px; color: white;"  aria-label="cancel" (click)="closeUserPopup()">Cancel </button>
+	         <button mat-raised-button style="background-color: #2196F3; color: white;" aria-label="reset" (click)="onuserFormSubmit()" >Ok 
+	        </button>
+        </div> -->
+    </div>
+  </div>
+</div>

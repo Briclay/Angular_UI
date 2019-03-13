@@ -72,7 +72,8 @@ export class FileManagerConfigComponent implements OnInit {
   path: any;
   pathName: any;
   fullpath: any;
-
+  fileUploadLoader = false;
+  checkFlag = false;
   displayedColumns: string[] = ['type', 'name', 'createdAt', 'version', 'logs', 'email', 'share', 'download'];
   constructor(
     private projectService: ProjectService,
@@ -90,6 +91,9 @@ export class FileManagerConfigComponent implements OnInit {
       this.orgId = params['orgId'];
       this.deptId = params['deptId'];
       this.fileId = params['fileId'];
+      if(this.checkFlag){
+        this.folderConfigData();
+      }
     });
     this.fileForm = this.formBuilder.group({
       formProject: ''
@@ -112,8 +116,12 @@ export class FileManagerConfigComponent implements OnInit {
     this.localStack = JSON.parse(window.localStorage.getItem('stack'));
     this.fullPathDisplay = JSON.parse(window.localStorage.getItem('stack'));
     this.path = JSON.parse(window.localStorage.getItem('stack'));
+
     this.folderConfigData();
     this.getSingleFolder(this.fileId);
+   
+    /*this.deptConfigData = JSON.parse(window.localStorage.getItem('FOLDER_CONFIG_DETAILS'));
+    this.populateConfigData(this.deptConfigData);*/
   }
 
   projectChanged(proj) {
@@ -123,37 +131,40 @@ export class FileManagerConfigComponent implements OnInit {
   }
 
   folderConfigData() {
-    const tempValue = this.localStack.pop();
-    if (tempValue) {
-      this.currentLevel = tempValue.top;
-      this.previousFolderName = tempValue.name;
-      if (window.localStorage.getItem('FOLDER_PROCESS_FLOW') !== '{}') {
-        const tempData = JSON.parse(window.localStorage.getItem('FOLDER_PROCESS_FLOW')).configValues;
-        if (tempData.length > 0) {
-          this.deptConfigData = JSON.parse(window.localStorage.getItem('FOLDER_CONFIG_DETAILS'));
-          if (this.deptConfigData) {
-            this.populateConfigData(this.deptConfigData);
-          } else {
-            const name = this.previousFolderName;
-            const pos = _.findIndex(tempData, function (o) { return o.deptName === name; });
-            if (pos !== -1) {
-              window.localStorage.FOLDER_CONFIG_DETAILS = JSON.stringify(tempData[pos]);
-              this.deptConfigData = tempData[pos];
-              this.populateConfigData(tempData[pos]);
+      this.localStack = JSON.parse(window.localStorage.getItem('stack'));
+      const tempValue = this.localStack.pop();
+      if (tempValue) {
+        this.currentLevel = tempValue.top;
+        this.previousFolderName = tempValue.name;
+        if (window.localStorage.getItem('FOLDER_PROCESS_FLOW') !== '{}') {
+          const tempData = JSON.parse(window.localStorage.getItem('FOLDER_PROCESS_FLOW')).configValues;
+          if (tempData.length > 0) {
+            this.deptConfigData = JSON.parse(window.localStorage.getItem('FOLDER_CONFIG_DETAILS'));
+            if (this.deptConfigData) {
+              this.populateConfigData(this.deptConfigData);
+              this.checkFlag = true;
             } else {
-              this.tableFlag = true;
-            }
+              const name = this.previousFolderName;
+              const pos = _.findIndex(tempData, function (o) { return o.deptName === name; });
+              if (pos !== -1) {
+                window.localStorage.FOLDER_CONFIG_DETAILS = JSON.stringify(tempData[pos]);
+                this.deptConfigData = tempData[pos];
+                this.populateConfigData(tempData[pos]);
+                this.checkFlag = true;
+              } else {
+                this.tableFlag = true;
+              }
 
+            }
           }
+        } else {
+          // this.snackBar.open('No config data found', 'Folder Config', {
+          //   duration: 2000,
+          // });
+          this.tableFlag = true;
         }
-      } else {
-        // this.snackBar.open('No config data found', 'Folder Config', {
-        //   duration: 2000,
-        // });
-        this.tableFlag = true;
       }
     }
-  }
   // check cuurent level and config levl
   populateConfigData(tempData: any) {
     const level = this.currentLevel;
@@ -180,28 +191,40 @@ export class FileManagerConfigComponent implements OnInit {
               }
             } else {
               this.tableFlag = true;
-              this.projectFlag = false;
+              if(tempData.deptName === 'Design'){
+                this.projectFlag = true;
+              }
             }
           } else {
             this.tableFlag = false;
             this.projectFlag = true;
           }
         } else {
-          if ('work-request' === details.name) {
+          if (('work-request' || 'amendment') === details.name) {
             this.workRequestFlag = true;
           }
-          console.log('this.workRequestFlag', this.workRequestFlag);
           this.tableFlag = true;
           this.projectFlag = false;
+          if(tempData.deptName === 'Design'){
+            this.projectFlag = true;
+          }
         }
       } else {
         this.tableFlag = true;
         if (this.selectedProjectData) {
           this.getProjectListinIt();
           this.projectFlag = true;
+        } 
+        if (this.selectedProjectData == "") {
+          this.getProjectListinIt();
+          this.projectFlag = true;
         } else {
-          this.projectFlag = false;
-
+          if(tempData.deptName === "Design"){
+            this.projectFlag = true;
+          }
+          else{
+            this.projectFlag = false;
+          }
         }
       }
     }
@@ -440,6 +463,7 @@ export class FileManagerConfigComponent implements OnInit {
     }
   }
   recursiveCall(data) {
+    this.folderConfigData();
     this.fileId = data._id
     if (data.type === 'folder') {
       const path = '/dashboard/file-manager/' + this.orgId + '/' + this.deptId + '/' + data._id;
@@ -602,7 +626,7 @@ export class FileManagerConfigComponent implements OnInit {
     this.isLoading = true;
     this.fileManagerService.saveFile(body)
       .pipe().subscribe(res => {
-        this.isLoading = false;
+      this.isLoading = false;
         this.getSingleFolder(this.fileId);
       }, (error: any) => {
         if ('Folder exist' === error.message) {

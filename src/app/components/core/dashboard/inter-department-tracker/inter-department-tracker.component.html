@@ -1,38 +1,37 @@
 <div class="user-container">
-    <div fxLayout=row style="height : 55px;">
-        <div class="pull-left" style="background-color: #00a1ff4a; border-radius: 0px 10px 10px 0px;" fxFlex=15>
+    <div fxLayout=row class="height_55">
+        <div class="pull-left user_div" fxFlex=15>
             <div class="text_color">Inter Department Tracker</div>
         </div>
-        <div fxLayout=row  style ="place-content :space-around;" fxFlex=85>
-        
-             <div fxLayout=row style="place-content :space-between;">
+        <div fxLayout=row  class="content_space_arround" fxFlex=85>
+            <div fxLayout=row class="content_space_between">
                 <div fxLayout=column class="margin_right_10">
                     <div class="text_color_sm ">110 </div>
-                     <div class="text_color_sm ">Open issue </div>  
+                    <div class="text_color_sm ">Open issue </div>  
                 </div>
-                 <div fxLayout=column>
+                <div fxLayout=column>
                     <div class="text_color_sm">70 </div>
-                     <div class="text_color_sm">Closed issue </div>  
+                    <div class="text_color_sm">Closed issue </div>  
                 </div>
             </div>
-             <div fxLayout=row style="place-content :space-between;">
-                 <div fxLayout=column class="margin_right_10">
+            <div fxLayout=row class="content_space_between">
+                <div fxLayout=column class="margin_right_10">
                     <div class="text_color_sm">11 </div>
-                     <div class="text_color_sm">Overdue </div>  
+                    <div class="text_color_sm">Overdue </div>  
                 </div>
-                 <div fxLayout=column>
+                <div fxLayout=column>
                     <div class="text_color_sm">8</div>
-                     <div class="text_color_sm">Due today</div>  
+                    <div class="text_color_sm">Due today</div>  
                 </div>
             </div>
-             <div fxLayout=row style=" place-content :space-between;">
+            <div fxLayout=row class="content_space_between">
                 <div fxLayout=column class="margin_right_10">
                     <div class="text_color_sm">390 </div>
-                     <div class="text_color_sm">Total issue </div>  
+                    <div class="text_color_sm">Total issue </div>  
                 </div>
-                 <div fxLayout=column>
+                <div fxLayout=column>
                     <div class="text_color_sm">50%</div>
-                     <div class="text_color_sm">Efficiency </div>  
+                    <div class="text_color_sm">Efficiency </div>  
                 </div>
             </div>
         </div> 
@@ -41,8 +40,8 @@
     <mat-tab-group #tabGroup>
         <mat-tab label="Overview">
             <app-panel-header-filter [data] = "issueTrackerList" (dataFilter)="dataPaginatorChange($event)"></app-panel-header-filter>                
-            <div style ="place-content :center;">
-                <mat-spinner style="margin:0 auto;" *ngIf="listSpinner; else content" [diameter]="40"></mat-spinner>
+            <div class="content_center">
+                <mat-spinner class="spiner_div" *ngIf="listSpinner; else content" [diameter]="40"></mat-spinner>
             </div>
               <div fxLayout="row">
                 <ng-template #content>

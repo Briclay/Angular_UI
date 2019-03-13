@@ -200,6 +200,10 @@ export class DepartmentDetailsComponent implements OnInit {
     }
   }
 
+  onFormCancel(){
+    this.departmentDetailsForm.reset()
+  }
+
   onDeptFormSubmit() {
     console.log(this.departmentDetailsForm.value);
     this.deptFormSubmitted = true;

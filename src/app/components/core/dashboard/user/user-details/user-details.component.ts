@@ -157,6 +157,10 @@ export class UserDetailsComponent implements OnInit {
     }
   }
 
+  onFormCancel(){
+    this.userDetailsForm.reset()
+  }
+
   onSubmit() {
     // Do useful stuff with the gathered data
     if(this.formType !== 'create') {

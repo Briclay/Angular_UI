@@ -15,7 +15,8 @@ export class WorkOrderComponent implements OnInit {
   workOrder = [];
   workOrderDataOption: any;
   orgID: string;
-
+  pageIndex : number = 0;
+  pageSize : number = 5;
   private unsubscribe: Subject<any> = new Subject();
 
   constructor(
@@ -24,9 +25,7 @@ export class WorkOrderComponent implements OnInit {
     private route: ActivatedRoute) { }
 
   ngOnInit() {
-    observableMerge(this.route.params, this.route.queryParams).pipe(
-      	takeUntil(this.unsubscribe))
-      	.subscribe((params) => this.loadRoute(params));
+    this.getWorkOrder();
   }
 
    public ngOnDestroy(): void {
@@ -34,12 +33,10 @@ export class WorkOrderComponent implements OnInit {
 		this.unsubscribe.complete();
 	}
 
-  loadRoute(params: any) {
-		if('orgID' in params) {
-			this.orgID = params['orgID'];
-      this.getWorkOrder();
-		}
-	}
+  dataPaginatorChange(event){
+    this.pageIndex = event.pageIndex;
+    this.pageSize = event.pageSize;
+  }
 
   organizationChanged(org) {
 		this.router.navigate([], {queryParams: {orgID: org.value ? org.value._id : org._id} , queryParamsHandling: 'merge'});

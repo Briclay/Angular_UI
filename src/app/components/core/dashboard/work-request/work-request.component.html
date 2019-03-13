@@ -1,23 +1,24 @@
-<!-- <app-organisation-drop-down (selectOrganizaion)="organizationChanged($event)"></app-organisation-drop-down>
- --><div class="work-request-container">
+<div class="work-request-container">
   <mat-tab-group #tabGroup>
       <mat-tab label="Overview">
-          <!-- <app-panel-header-filter (selectOrganizaion)="organizationChanged($event)"></app-panel-header-filter> -->
+         <app-panel-header-filter [data]="workRequests" (dataFilter)="dataPaginatorChange($event)"></app-panel-header-filter>
           <div fxLayout="row">
               <div style ="place-content :center;">
-                <mat-spinner style="margin:0 auto;" *ngIf="isLoading; else dataLoaded" [diameter]="40"></mat-spinner>
+                <mat-spinner style="margin:0 auto;" *ngIf="isLoading; else content" [diameter]="40"></mat-spinner>
               </div>
-              <ng-template #dataLoaded>
+              <ng-template #content>
                 <app-expansion-panel 
-                    [expansionPanelOptions]="workRequestDataOption"
-                    selectorComponent="app-work-request-details" 
-                    [data]="workRequest"
-                    [isHistory]="true"></app-expansion-panel>
+                  [expansionPanelOptions]="workRequestDataOption"
+                  [pageIndex]="pageIndex"
+                  [pageSize]="pageSize"
+                  selectorComponent="app-work-request-details" 
+                  [data]="workRequests"
+                  [isHistory]="true" (updateRefresh)="getWorkRequest()"></app-expansion-panel>
               </ng-template>
           </div>
       </mat-tab>
       <mat-tab label="New">
-          <app-work-request-details  formType="create" ></app-work-request-details>
+        <app-work-request-details  formType="create" (tabSwitch)="tabSwitch($event)" ></app-work-request-details>
       </mat-tab>
   </mat-tab-group>
 </div>

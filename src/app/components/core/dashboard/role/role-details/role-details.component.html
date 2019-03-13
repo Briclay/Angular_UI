@@ -56,13 +56,13 @@
                 </mat-form-field>
               </div>
               <div>
-
               </div>
             </div>
             <button [disabled]="(!roleDetailsForm.value.userType && !roleDetailsForm.value._departmentId)"  
               (click)="getFeatures()" 
               class="margin-left-4" mat-raised-button class="feature_btn">
                 Features</button>
+            <button mat-raised-button type="submit" *ngIf="formType === 'create'" (click)="onFormCancel()" class="pull-right">Cancel</button>
             <button [disabled]="isLoading"  (click)="onSubmit()" mat-raised-button type="submit" class="pull-right">
               Submit
             </button>

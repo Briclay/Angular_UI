@@ -61,6 +61,7 @@
           </div>
         </div>
       </div>
+      <button mat-raised-button type="submit" *ngIf="formType === 'create'" (click)="onFormCancel()" class="pull-right">Cancel</button>
       <button mat-raised-button type="submit" (click)="onDeptFormSubmit()" class="pull-right">Submit</button>
       <div class="clearfix"></div>
     </mat-card>

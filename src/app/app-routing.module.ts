@@ -78,7 +78,7 @@ const routes: Routes = [
         }
       },
       {
-        path: 'user-dashboard', component: UserDashboardComponent, data: {
+        path: 'contracts-dashboard', component: UserDashboardComponent, data: {
           breadcrumb: 'Users'
         }
       },
@@ -117,7 +117,7 @@ const routes: Routes = [
         }
       },
       /*{ path: '**', redirectTo: 'user', pathMatch: 'full'}*/
-      {  path: '**', redirectTo: 'design-dashboard', pathMatch: 'full'  }
+      {  path: '**', redirectTo: 'dashboard', pathMatch: 'full'  }
     ]
   },
   { path: '**', redirectTo: 'login', pathMatch: 'full' }

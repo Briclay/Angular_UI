@@ -266,7 +266,9 @@ export class OrganisationDetailsComponent implements OnInit {
       this.organizationDetailsForm.controls['orgCode'].setValue(str);
     }
   }
-
+  onFormCancel(){
+    this.organizationDetailsForm.reset()
+  }
   onOrgFormSubmit() {
     this._features.map(f =>{
       delete (f.hidePermissions)

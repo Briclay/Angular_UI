@@ -14,10 +14,12 @@ export class WorkRequestComponent implements OnInit {
   @ViewChild('tabGroup') tabGroup;
 
   isLoading: boolean;
-  workRequest: RequestTrackerData;
+  workRequests: any;
   workRequestDataOption: any;
   orgID: string;
   orgDetails: any;
+  pageIndex : number = 0;
+  pageSize : number = 5;
   private unsubscribe: Subject<any> = new Subject();
 
   constructor(
@@ -31,36 +33,24 @@ export class WorkRequestComponent implements OnInit {
     this.getWorkRequest();
    }
 
-  ngOnInit() {
-    // tslint:disable-next-line:max-line-length
-    //observableMerge(this.route.params, this.route.queryParams).pipe(takeUntil(this.unsubscribe)).subscribe((params) => this.loadRoute(params));
-  }
+  ngOnInit() {}
 
   public ngOnDestroy(): void {
     this.unsubscribe.next();
     this.unsubscribe.complete();
   }
 
-  /*loadRoute(params: any) {
-    if ('orgID' in params) {
-      this.orgID = params['orgID'];
-      this.getWorkRequest();
-    }
-  }*/
-
-  /*organizationChanged(org) {
-    this.router.navigate([], {queryParams: {orgID: org.value ? org.value._id : org._id} , queryParamsHandling: 'merge'});
+  dataPaginatorChange(event){
+    this.pageIndex = event.pageIndex;
+    this.pageSize = event.pageSize;
   }
-*/
+
   getWorkRequest() {
     this.isLoading = true;
     this.workRequestService.getWorkRequest('filter[_organisationId]=' + this.orgID).pipe().subscribe(res => {
-      this.workRequest = res;
+      this.workRequests = res;
       this.isLoading = false;
       this.workRequestDataOption = [
-        {
-          title: 'Image', key: 'logoImageUrl', hideTitle: true, type: 'image'
-        },
         {
           title: 'User Name', type: 'list', list: [
             { title: 'requestNumber', key: 'requestNumber', hideTitle: true, type: 'label' },
@@ -77,9 +67,8 @@ export class WorkRequestComponent implements OnInit {
     });
   }
 
-  tabSwitch(index) {
-    this.tabGroup.selectedIndex = index;
+  tabSwitch(tabReq) {
+    this.tabGroup.selectedIndex = tabReq.index;
     this.getWorkRequest();
   }
-
 }

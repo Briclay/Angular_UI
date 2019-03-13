@@ -125,6 +125,10 @@ export class RoleDetailsComponent implements OnInit {
     });
   }
 
+  onFormCancel(){
+    this.roleDetailsForm.reset()
+  }
+
   onSubmit() {
     // Do useful stuff with the gathered data
     this.roleDetailsForm.value._organisationId = this.orgID;
