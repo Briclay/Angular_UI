@@ -7,31 +7,31 @@
             <div class="title"> Details</div>
             <div class="margin-10" fxLayout="row">
               <div style="position: relative;">
-                <mat-form-field appearance="outline" >
+                <mat-form-field appearance="outline" style="width: 78%;" >
                     <mat-label>Built Up Area </mat-label>
-                    <input readonly matInput placeholder="" >
+                    <input  type="number" matInput placeholder="" >
                 </mat-form-field>
                 <div style="position: absolute;top: -1px;right: 7px;">
                   <mat-form-field style="width:34px;font-size: 10px;">
                     <select matNativeControl required>
                       <option value="sft">SFT</option>
-                      <option value="smt">SMT</option>
-                      <option value="acr">ACR</option>
+                     <!--  <option value="smt">SMT</option>
+                      <option value="acr">ACR</option> -->
                     </select>
                   </mat-form-field>
                 </div>
               </div>
               <div style="position: relative;margin-left: 5px;">
-                <mat-form-field appearance="outline" >
+                <mat-form-field appearance="outline" style="width: 78%;" >
                   <mat-label>Saleable Area</mat-label>
-                  <input readonly matInput placeholder="">
+                  <input  type="number" matInput placeholder="">
                 </mat-form-field>
                 <div style="position: absolute;top: -1px;right: 7px;">
                   <mat-form-field style="width:34px;font-size: 10px;">
                     <select matNativeControl required>
                       <option value="sft">SFT</option>
-                      <option value="smt">SMT</option>
-                      <option value="acr">ACR</option>
+                      <!-- <option value="smt">SMT</option>
+                      <option value="acr">ACR</option> -->
                     </select>
                   </mat-form-field>
                 </div>
@@ -51,12 +51,12 @@
                 </mat-form-field>
                 <mat-form-field appearance="outline" style="width: 130px;margin-right: 5px;">
                   <mat-label>No</mat-label>
-                  <input matInput placeholder="No." required
+                  <input type="number" matInput placeholder="No." required
                   formControlName="count">
                 </mat-form-field>
                 <mat-form-field appearance="outline" style="width: 130px;margin-right: 5px;">
                   <mat-label>Area (SFT)</mat-label>
-                  <input matInput placeholder="Area (SFT)" required
+                  <input type="number" matInput placeholder="Area (SFT)" required
                   formControlName="area">
                 </mat-form-field>
                 <span (click)="addUnits()" style="margin-top: 5px;">
@@ -96,7 +96,7 @@
                   </mat-form-field>
                   <mat-form-field appearance="outline" style="width: 150px;margin-right: 5px;">
                     <mat-label>No.</mat-label>
-                    <input matInput placeholder="No." required
+                    <input type="number" matInput placeholder="No." required
                     formControlName="count">
                   </mat-form-field>
                   <span (click)="addParking()" style="margin-top: 5px;">

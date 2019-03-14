@@ -11,24 +11,31 @@ import { Router } from '@angular/router';
 export class WorkCategoryDialogComponent implements OnInit {
 
 	allWorkCategory : any;
+  sopDetails : any;
 	constructor(public dialogRef: MatDialogRef<WorkCategoryDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
     	let org = JSON.parse(window.localStorage.getItem('authUserOrganisation'));
 	}
 
-  	ngOnInit() {
-  		if(this.data && this.data.length > 0){
-  			this.allWorkCategory = this.data
-  		}
-  		console.log(this.data, 'work-category-dialog')
+	ngOnInit() {
+		if(this.data && this.data.length > 0){
+			this.allWorkCategory = this.data
+		}
+		console.log(this.data, 'work-category-dialog')
 	}
 
 	closeUserPopup() {
-	    this.dialogRef.close();
-  	}
+    this.dialogRef.close();
+	}
+
+  viewSop(){
+    this.data.forEach(v => {
+
+    })
+  }
 
 	onuserFormSubmit() {
 		this.dialogRef.close();
-  	}
+	}
 
 }

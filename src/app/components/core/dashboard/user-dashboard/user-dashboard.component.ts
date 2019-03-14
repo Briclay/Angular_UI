@@ -9,7 +9,9 @@ import {merge as observableMerge, Subject} from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
 import {takeUntil} from 'rxjs/operators';
 import { UserDashboardService } from '../../../../services/user-dashboard/user-dashboard.service';
-import { UserDashboardData, TableOptions } from '../../../../interfaces/interfaces';
+import { WorkRequestService } from '../../../../components/core/dashboard/work-request/work-request.service';
+
+declare var moment: any;
 
 @Component({
   selector: 'app-user-dashboard',
@@ -20,7 +22,7 @@ export class UserDashboardComponent implements OnInit {
   @Input() data: any;
   @Input() formType: string;
 
-  userWorkOrderData: UserDashboardData;
+  userWorkOrderData: any;
   userWorkOrderDataOptions = [];
   userAuth : any;
   profileImageUrl = "";
@@ -32,8 +34,12 @@ export class UserDashboardComponent implements OnInit {
   isLoading = false;
   orgID : any;
   userName : any;
-
-  constructor(private userDashboardService: UserDashboardService,
+  pageIndex : number = 0;
+  pageSize : number = 5;
+  projName : any;
+  private unsubscribe: Subject<any> = new Subject();
+ 
+  constructor(private workRequestService: WorkRequestService,
     private fileManagerService: FileManagerService,
     private projectService : ProjectService,
     private formBuilder : FormBuilder,
@@ -52,29 +58,39 @@ export class UserDashboardComponent implements OnInit {
       this.orgID = this.orgData._id;
   }
   ngOnInit() {
-    this.userDashboardService.getData().pipe().subscribe(res => {
+    this.workRequestService.getWorkRequest(this.orgID).pipe().subscribe(res => {
     this.userWorkOrderData = res;
+    console.log(this.userWorkOrderData , 'userWorkOrderData')
+    res.forEach((list) => {
+      list.needByDate = moment(list.needByDate).local().format("MM-DD-YYYY")
+      list.initiatedDate = moment(list.initiatedDate).local().format("MM-DD-YYYY")
+    })
     this.userWorkOrderDataOptions = [
       {
-        title: 'workRequestID', key: 'workRequestID', hideTitle: true, type: 'label'
+        title: 'requestNumber', key: 'requestNumber', hideTitle: true, type: 'label'
       }, 
+      // {
+      //   title: 'workOrderID', key: 'workOrderID', hideTitle: true, type: 'label'
+      // },
       {
-        title: 'workOrderID', key: 'workOrderID', hideTitle: true, type: 'label'
+        title: 'initiatedDate', key: 'initiatedDate', hideTitle: true, type: 'label'
       },
       {
         title: 'typeOfWork', key: 'typeOfWork', hideTitle: true, type: 'label'
       },
       {
-        title: 'project', key: 'project', hideTitle: true, type: 'label'
-      },
-      {
-        title: 'package', key: 'package', hideTitle: true, type: 'label'
+        title: 'workDescription', key: 'workDescription', hideTitle: true, type: 'label'
       },
       {
         title: 'needByDate', key: 'needByDate', hideTitle: true, type: 'label'
       }
     ]
     });
+  }
+
+  public ngOnDestroy(): void {
+    this.unsubscribe.next();
+    this.unsubscribe.complete();
   }
 
   onFileInput(event, fileList?) {

@@ -16,28 +16,7 @@
         </div>
       </div>
       <div fxFlex=88 fxLayout=column>
-        <div fxLayout="row" >
-          <mat-card class="header-shadow" style="display: inline;flex :1;height: 15px;">
-            <div fxLayout=row class="content_space_arround">
-              <div fxLayout=row class="content_space_arround hand-cursor">
-                <img style="height: 20px;width: 20px;" src="/assets/images/icons/projects_Active.png">
-                <a routerLink="/dashboard/projects" class="text_d_none">
-                  <div class="tab-btn" style="margin-left:10px;" > Projects</div>
-                </a>
-              </div>
-              <div fxLayout=row class="content_space_arround hand-cursor">
-               <img style="height: 30px;width: 30px;margin-top: -5px;" src="/assets/images/icons/File_Manager_Active.png">
-                <a routerLink="/dashboard/file-manager" class="text_d_none">
-                  <div class="tab-btn" >File Manager</div>
-                </a>
-             </div>
-             <div fxLayout=row class="content_space_arround hand-cursor">
-              <img style="height: 20px;width: 20px;" src="/assets/images/icons/Work_Request _active.png">
-              <div class="tab-btn" style="margin-left:10px;">Document Checklist</div>
-            </div>
-          </div>
-        </mat-card> 
-      </div>
+      <app-top-menu></app-top-menu>
       <div fxLayout=row>
         <div class="content-head" fxLayout=column style="min-width: -webkit-fill-available;">
           <div class="first-card" style="width: 100%;overflow: auto;padding: 5px;">

@@ -63,8 +63,8 @@ export class WorkRequestDetailsComponent implements OnInit {
     this.orgId = this.orgDetails._id;
     // list of typ of work
 
-    this.typeOfWork = [ 'Contractor Appointement' ,'Termination Order']
-    //this.typeOfWork = ['Appointment of contractor', 'Appointment of consultant','Variation order','Termination Order'];
+    //this.typeOfWork = [ 'Contractor Appointement' ,'Termination Order']
+    this.typeOfWork = ['Appointment of contractor', 'Appointment of consultant','Variation order','Termination Order'];
     this.workTrackerFormErrors = {
       requestNumber: {},
       date: {},
@@ -147,6 +147,9 @@ export class WorkRequestDetailsComponent implements OnInit {
   assignValuesToForm() {
     if (this.formType !== 'create') {
       this.workTrackerForm.patchValue(this.data);
+      if(this.data.typeOfWork === 'Appointment of consultant'){
+        this.enableTypeOfConsultant = true;
+      }
     }
   }
 

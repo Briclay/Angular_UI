@@ -22,7 +22,8 @@ export class ProjectDetailsComponent implements OnInit {
   uniteArray = [];
   parkingArray =[]
   projectType = ['RESIDENTIAL', 'COMMERCIAL', 'MIXED DEVELOPMENT', 'VILLA PROJECTS'];
-  parkingArea = ['Total', 'Basement', 'Covered', 'Surface', 'Stack','Puzzle'];
+  parkingArea = ['Basement', 'Covered', 'Surface', 'Stack','Puzzle'];
+
   constructor(
     public dialogRef: MatDialogRef<ProjectDetailsComponent>,
     private formBuilder: FormBuilder
@@ -59,10 +60,8 @@ export class ProjectDetailsComponent implements OnInit {
       if (!this.formErrors.hasOwnProperty(field)) {
         continue;
       }
-
       // Clear previous errors
       this.formErrors[field] = {};
-
       // Get the control
       const control = this.form.get(field);
 

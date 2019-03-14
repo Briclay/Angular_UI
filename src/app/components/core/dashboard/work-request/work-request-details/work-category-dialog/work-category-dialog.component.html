@@ -9,20 +9,22 @@
             <div class="text_c_bold" style="min-width: 30%;">Category Reasons</div> 
             <div class="text_c_bold" style="min-width: 30%;">Standard Operation Procedure</div>
           </div>
-         	<div fxLayout="row" style="min-width: 100%;" *ngFor="let workC of allWorkCategory;let i = index">
-            <div fxFlex="100" fxLayout="row" style="margin-top: 15px;display: flex;
-              align-items: center;place-content:space-between;">
-              <div style="min-width: 20%;" class="text_c " >
-                {{workC.name}}
+          <div fxLayout="row" style="min-width: 100%;">
+            <div  style="min-width: 70%;" fxLayout="row"  >
+              <div fxLayout="row" style="min-width: 70%;margin-top: 15px;display: flex;
+                align-items: center;place-content:space-between;" *ngFor="let workC of allWorkCategory;let i=index;">
+                <div style="min-width: 20%;" class="text_c hand-cursur " (click)="sopDetails(workC)">
+                  {{workC.name}}
+                </div>
+                <div style="min-width: 10%;" class="text_c" >
+                  {{workC.noOfDays}}
+                </div>
+                <div  style="min-width: 30%;" class="text_c" >
+                  {{workC.categoryReason}}
+                </div>
               </div>
-              <div style="min-width: 10%;" class="text_c" >
-                {{workC.noOfDays}}
-              </div>
-              <div  style="min-width: 30%;" class="text_c" >
-                {{workC.categoryReason}}
-              </div>
-              <div  style="min-width: 30%;" class="text_c" >
-                no data
+              <div fxLayout="row"  style="min-width: 30%;">
+                <div class="text_c" >no data</div>
               </div>
             </div>
           </div>

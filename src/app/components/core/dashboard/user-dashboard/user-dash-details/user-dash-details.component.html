@@ -6,60 +6,59 @@
 					<div class="username-input">
 						<mat-form-field class="margin_right_25" appearance="outline">
 							<mat-label>Work Category</mat-label>
-							<input matInput formControlName="workCategory">
+							<input matInput readonly formControlName="requestNumber">
 						</mat-form-field>
 						<mat-form-field class="margin_right_25" appearance="outline">
-							<mat-label>Support Role</mat-label>
-							<input matInput formControlName="supportRole">
+							<mat-label>Type Of Work</mat-label>
+							<input matInput readonly formControlName="typeOfWork">
 						</mat-form-field>
-						<mat-form-field class="margin_right_25" appearance="outline">
+						<!-- <mat-form-field class="margin_right_25" appearance="outline">
 							<mat-label>Assignee</mat-label>
 							<input matInput formControlName="assignee">
-						</mat-form-field>
+						</mat-form-field> -->
 					</div>
 				</div>
 				<div class="user-details-content">
 					<div class="user-details-form-list">
-						<mat-form-field appearance="outline">
+						<mat-form-field appearance="outline" class="datePicker">
 							<mat-label>Intiate Date</mat-label>
-							<input matInput [matDatepicker]="picker" placeholder="" formControlName="putintiateDate">
+							<input matInput readonly [matDatepicker]="picker" placeholder="" formControlName="initiatedDate">
 							<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-							<mat-datepicker #picker></mat-datepicker>
+							<mat-datepicker disabled #picker></mat-datepicker>
 						</mat-form-field>
-						<mat-form-field appearance="outline">
+						<mat-form-field appearance="outline" class="datePicker">
 							<mat-label>RFA Put-up Date</mat-label>
-							<input matInput [matDatepicker]="picker1" placeholder="" formControlName="RFAPutDate">
+							<input matInput readonly [matDatepicker]="picker1" placeholder="" formControlName="RFAPutUpDate">
 							<mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-							<mat-datepicker #picker1></mat-datepicker>
+							<mat-datepicker disabled #picker1></mat-datepicker>
 						</mat-form-field>
-						<mat-form-field appearance="outline">
+						<mat-form-field appearance="outline" class="datePicker">
 							<mat-label>WO Put-up Date</mat-label>
-							<input matInput [matDatepicker]="picker2" placeholder="" formControlName="WOPutDate">
+							<input matInput readonly [matDatepicker]="picker2" placeholder="" formControlName="workOrderPutDate">
 							<mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-							<mat-datepicker #picker2></mat-datepicker>
+							<mat-datepicker disabled #picker2></mat-datepicker>
 						</mat-form-field>
 					</div>
 				</div>
-
 				<div class="user-details-content">
 					<div class="user-details-form-list">
-						<mat-form-field appearance="outline">
-							<mat-label>Intiate Date</mat-label>
-							<input matInput [matDatepicker]="picker4" placeholder="" formControlName="approvalintiateDate">
+						<mat-form-field appearance="outline" class="datePicker">
+							<mat-label>Need By Date</mat-label>
+							<input matInput readonly [matDatepicker]="picker4" placeholder="" formControlName="needByDate">
 							<mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
-							<mat-datepicker #picker4></mat-datepicker>
+							<mat-datepicker disabled #picker4></mat-datepicker>
 						</mat-form-field>
-						<mat-form-field appearance="outline">
+						<mat-form-field appearance="outline" class="datePicker">
 							<mat-label>RFA Approval Date</mat-label>
-							<input matInput [matDatepicker]="picker5" placeholder="" formControlName="RFAApprovalDate">
+							<input matInput readonly [matDatepicker]="picker5" placeholder="" formControlName="RFAapprovalDate">
 							<mat-datepicker-toggle matSuffix [for]="picker5"></mat-datepicker-toggle>
-							<mat-datepicker #picker5></mat-datepicker>
+							<mat-datepicker disabled #picker5></mat-datepicker>
 						</mat-form-field>
-						<mat-form-field appearance="outline">
+						<mat-form-field appearance="outline" class="datePicker">
 							<mat-label>WO Approval Date</mat-label>
-							<input matInput [matDatepicker]="picker6" placeholder="" formControlName="WOApprovalDate">
+							<input matInput readonly [matDatepicker]="picker6" placeholder="" formControlName="workOrderApprovalDate">
 							<mat-datepicker-toggle matSuffix [for]="picker6"></mat-datepicker-toggle>
-							<mat-datepicker #picker6></mat-datepicker>
+							<mat-datepicker disabled #picker6></mat-datepicker>
 						</mat-form-field>
 					</div>
 				</div>
@@ -68,15 +67,15 @@
 					<div class="user-details-form-list">
 						<mat-form-field class="margin_right_25" appearance="outline">
 							<mat-label>Status</mat-label>
-							<input matInput formControlName="status">
+							<input matInput readonly formControlName="status">
 						</mat-form-field>
 						<mat-form-field class="margin_right_25" appearance="outline">
 							<mat-label>Document Status</mat-label>
-							<input matInput formControlName="documentStatus">
+							<input matInput readonly formControlName="documentStatus">
 						</mat-form-field> 
 						<mat-form-field class="margin_right_25" appearance="outline">
 							<mat-label>Remarks</mat-label>
-							<input matInput formControlName="remarks">
+							<input matInput readonly formControlName="remark">
 						</mat-form-field>
 					</div>
 				</div>

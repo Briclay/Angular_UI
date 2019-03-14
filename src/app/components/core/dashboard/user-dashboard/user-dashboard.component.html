@@ -1,4 +1,4 @@
-<div class="main-content" >
+<div class="main-content" style="overflow: -webkit-paged-x;">
   <div  class="main-head">
     <div fxLayout=column >
       <div>
@@ -53,9 +53,9 @@
         </div>
       </mat-card>
     </div>
-    <div fxFlex=100 fxLayout="row" style="display: inline;flex :1;">
-      <mat-card class="header-shadow" style="display: inline;flex :1;    height: 15px;">
-        <div fxLayout=row style="place-content: space-around;">
+    <div  style="width: 90%;" fxLayout="row" style="display: inline;flex :1;">
+      <mat-card class="header-shadow" style="display: inline;flex :1;width: 90%;height: 15px;">
+        <!-- <div fxLayout=row style="place-content: space-around;">
           <div fxLayout=row style="place-content: space-around;" class="hand-cursor">
             <img style="height: 20px;width: 20px;" src="/assets/images/icons/projects_Active.png">
             <a routerLink="/dashboard/projects" class="text_d_none">
@@ -80,11 +80,12 @@
               <div class="tab-btn" >File Manager</div>
             </a>
           </div>
-        </div>  
+        </div>   -->
+        <app-top-menu></app-top-menu>
         <div class="content-head" fxLayout=column>
           <div class="first-card">
             <mat-card class="report-card" fxFlex=20 fxLayout=column>
-              <div class="card-title">Total recieved documents</div>
+              <div class="card-title">Total Request </div>
               <div fxLayout=row style="place-content: space-between;">
                 <div>
                   <div class="font_12">22</div>
@@ -201,24 +202,26 @@
             </mat-card>
           </div>  
         </div>
-        <div class="work_order_able">
+        <div class="work_order_able" style="width: 95%">
           <div class="user-container" >
             <mat-card >
               <div fxLayout=row style="place-content: space-between;">
-                <div class="table_header_text" >Work Request ID</div>
-                <div class="table_header_text" >Work Order ID</div>
-                <div class="table_header_text" >Type of work</div>
-                <div class="table_header_text" >Project</div>
-                <div class="table_header_text" >Package/Description</div>
-                <div class="table_header_text" >Need By date</div>
-                <div class="table_header_text">History</div>
+                <div class="table_header_text" style="width:20%">Work Request ID</div>
+                <div class="table_header_text" style="width:20%">Initiated Date</div>
+                <div class="table_header_text" style="width:15%">Type of work</div>
+                <div class="table_header_text" style="width:16%">Package/Description</div>
+                <div class="table_header_text" style="width:9%">Need By date</div>
+                <div class="table_header_text" style="width:6%">History</div>
               </div>
             </mat-card>
             <div fxLayout="row">
               <app-expansion-panel 
+                *ngIf="userWorkOrderData && userWorkOrderData.length > 0"
+                [pageIndex]="pageIndex"
+                [pageSize]="pageSize"
                 [expansionPanelOptions]="userWorkOrderDataOptions"
                 selectorComponent="app-user-dash-details" 
-                [data]="userWorkOrderData.data"
+                [data]="userWorkOrderData"
                 [isHistory]="true">
               </app-expansion-panel>
             </div>
