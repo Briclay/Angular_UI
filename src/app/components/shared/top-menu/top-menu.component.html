@@ -19,15 +19,15 @@
           <div class="tab-btn" style="margin-left:10px;">Document Checklist</div>
         </div>
         <div fxLayout=row style="place-content: space-around;" class="hand-cursor" *ngIf="userDep === 'Contracts'">
-          <img style="height: 20px;width: 20px;" src="/assets/images/icons/Work_Request _active.png">  
-          <a routerLink="/dashboard/work-order" style="text-decoration: none;">
-            <div class="tab-btn" style="margin-left:10px;">Work order</div>
-          </a>  
-        </div>
-        <div fxLayout=row style="place-content: space-around;" class="hand-cursor" *ngIf="userDep === 'Contracts'">
           <img style="height: 20px;width: 20px;" src="/assets/images/icons/work-order-Active.png">
           <a routerLink="/dashboard/work-request" style="text-decoration: none;">
             <div class="tab-btn" >Work Request</div>
+          </a>  
+        </div>
+        <div fxLayout=row style="place-content: space-around;" class="hand-cursor" *ngIf="userDep === 'Contracts'">
+          <img style="height: 20px;width: 20px;" src="/assets/images/icons/Work_Request _active.png">  
+          <a routerLink="/dashboard/work-order" style="text-decoration: none;">
+            <div class="tab-btn" style="margin-left:10px;">Work order</div>
           </a>  
         </div>
       </div>
