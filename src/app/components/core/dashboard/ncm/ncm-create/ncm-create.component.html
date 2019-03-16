@@ -1,0 +1,163 @@
+  <div class="user-details-container">
+ 	<div [formGroup]="ncmCreateForm"   class="user-details-form">
+ 		<mat-card class="mat-card">
+ 			<div class="user-details-card">
+ 				<div class="user-details-name" fxLayout="column" >
+          <div style="height: 20px" > 
+          </div>
+
+          <div  style="margin-left: 0px; border-right: 2px solid lightgrey;height: 237px"  fxLayout="column" >
+
+            <mat-form-field appearance="outline" style="width: 103px;margin: 2px;margin-left: 48px;">
+            <mat-label>Bpd/ID</mat-label>
+            <mat-select placeholder="Bpd/ID" formControlName="bpd">
+              <mat-option *ngFor="let bpd of bpdId" [value]="bpd">
+                {{bpd}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+             <mat-form-field class="example-full-width" appearance="outline"  style="width: 103px;margin: 2px;margin-left: 48px;">
+  <input matInput [min]="myFilter" [max]="maxDate" [matDatepicker]="picker" placeholder="Date">
+  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-datepicker #picker></mat-datepicker>
+</mat-form-field>
+
+          
+
+          
+
+           
+ 
+
+           
+
+
+      </div>
+    </div>
+    <div class="username-input" style="margin-left: 20px;" >
+
+      <div class="user-details-content">
+       <div class="user-details-content-title" >
+        <strong> Risk Statement</strong>
+      </div>
+      <div style="margin-top: 17px">
+       <mat-form-field appearance="outline" class="margin_right_25">
+        <mat-label>Statement</mat-label>
+        <input matInput formControlName="statement" >
+      </mat-form-field>
+    </div>
+    <br>
+    <div style="margin-top: -27px" >
+      <mat-form-field appearance="outline" class="margin_right_25">
+       <mat-label>Cause</mat-label>
+       <input matInput formControlName="cause" >
+     </mat-form-field>
+   </div>
+   <br>
+   <div style="margin-top: -26px;">
+    <mat-form-field appearance="outline" class="margin_right_25">
+     <mat-label>Effect</mat-label>
+     <input matInput formControlName="effect">
+   </mat-form-field>
+ </div>
+</div>   
+
+</div>
+
+<div class="user-details-content" style="margin-left: 6px;">
+  <div class="user-details-content-title" style="margin-left: 93px">
+   <strong>Parameters</strong>
+ </div>
+ <div class="user-details-form-list" style="margin-left: 0px;">
+   <div fxLayout="row" style="margin-top: 7px;">
+    <mat-form-field appearance="outline" class="margin_right_26">
+     <mat-label>Likelihood</mat-label>
+     <input matInput formControlName="likelihood" >
+   </mat-form-field>
+   <mat-form-field appearance="outline" class="margin_right_26">
+     <mat-label>Impact</mat-label>
+     <input matInput formControlName="impact" >
+   </mat-form-field>
+ </div>
+ <br>
+ <div style="width: 316px;margin-top: -27px" >
+  <mat-form-field appearance="outline" class="margin_right_28" >
+   <mat-label>Mention Current Control</mat-label>
+   <input matInput formControlName="mentionCurrentControl" >
+ </mat-form-field>
+</div>
+<br>
+<div fxLayout="row"  >
+  <div style="width: 87px; margin-top: -27px; margin-left: 0px" >
+   <mat-label  style="margin-right: 10px;">Controls Mentioned In <br>
+    Respective<br>
+  Process Areas(BPDs)</mat-label>
+</div>
+<div style="width: 87px; margin-top: 11px" >
+ <mat-checkbox  matInput formControlName="controls" (change)="controlsValue($event)"></mat-checkbox>
+</div>
+<div style="width: 87px; margin-top: -27px;">
+ <mat-form-field appearance="outline" class="margin_right_27" >
+  <mat-label>Consequence</mat-label>
+  <input matInput formControlName="consequence" >
+</mat-form-field>
+</div>
+
+
+</div>
+</div>
+</div>
+<div class="user-details-content">
+  <div class="user-details-content-title">
+   <strong>Mitigation</strong>
+ </div>
+ <div class="user-details-form-list" style="margin-top: 0px">
+   <div fxLayout="row" style="margin-top: 16px;width: 10px">
+    <mat-form-field appearance="outline" class="margin_right_36">
+      <mat-label>Mitigation Plan</mat-label>
+      <input matInput formControlName="mitigationPlan">
+    </mat-form-field>
+  </div>
+  <div fxLayout="row" style="width: 0%;margin-top: 0px">
+    <mat-form-field appearance="outline" class="margin_right_30">
+     <mat-label>Budget</mat-label>
+     <input matInput formControlName="budget" >
+   </mat-form-field>
+   <mat-form-field appearance="outline" class="margin_right_31" >
+     <mat-label>Resource</mat-label>
+     <input matInput formControlName="resource" >
+   </mat-form-field>
+ </div>
+ <div fxLayout="row" style="margin-top: 5px" >
+   <mat-form-field appearance="outline" style="width: 95px;margin-top: -8px">
+     <mat-label>Time</mat-label>
+      
+     <input matInput   [min]="myFilter"  [matDatepicker]="picker1" placeholder="" formControlName="validTill">
+     <mat-datepicker-toggle matSuffix [for]="picker1" ></mat-datepicker-toggle>
+     <mat-datepicker #picker1></mat-datepicker>
+   </mat-form-field>
+   <div >
+     <button     (click)="openDetailsDialog()"  class="margin-left-4" mat-raised-button class="feature_btn"  
+     >Opportunity</button>
+   </div>
+ </div>
+</div>
+
+<div fxLayout="row" style="margin-top: -55px;    margin-left: 182px;" >
+<div fxLayout=column style="align-items: center;margin-left: 20px;margin-bottom:20px" (click)="reset()">
+          <img style="height: 30px;width: 30px;" src="assets/images/icons/close_red.png" />
+          <span>Cancel</span>
+        </div>
+        <div fxLayout=column class="hand-cursor" style="align-items: center;margin-left: 20px;" (click)="onFormSubmit()">
+          <img style="height: 30px;" src="assets/images/icons/submitIcon.png" />
+          <span>Save</span>
+        </div>
+        </div>
+</div>
+</div>
+
+<div class="clearfix"></div>
+</mat-card>
+</div>
+</div>
+<!-- [disabled]="(!roleDetailsForm.value.userType && !roleDetailsForm.value._departmentId)" -->

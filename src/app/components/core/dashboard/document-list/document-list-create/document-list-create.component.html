@@ -1,0 +1,146 @@
+ <div class="user-details-container">
+  <div  class="user-details-form">
+    <div class="user-details-card">
+      <div class="user-details-name" [formGroup]="documentListForm">
+        <div class="username-input">
+          
+           <mat-form-field appearance="outline" >
+        <mat-label>Document Type</mat-label>
+        <mat-select placeholder="">
+          <mat-option *ngFor="let documentType of documentLists" [value]="documentType" >
+            {{documentType}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+          <br/>
+           <mat-form-field appearance="outline">
+             <mat-label>List</mat-label>
+            <input matInput formControlName="list">
+          </mat-form-field>
+<br>
+        <mat-form-field appearance="outline" style="width: 200px;">
+                <mat-label>Valid till</mat-label>
+               <input matInput [min]="myFilter" [matDatepicker]="picker1" placeholder="" formControlName="validTill">
+                  <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                  <mat-datepicker #picker1></mat-datepicker>
+              </mat-form-field>
+   
+        </div>
+        
+      </div>
+       <mat-card >
+      <div  fxLayout="row"  [formGroup]="documentCreateForm">
+        <div>
+          <mat-form-field appearance="outline" style="width: 150px; margin: 2px;">
+            <mat-label>Drawing No</mat-label>
+            <input matInput formControlName="drawingNo" required>
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field appearance="outline" style="width: 182px;margin: 2px;">
+            <mat-label>Drawing Name</mat-label>
+            <input matInput formControlName="drawingName" required>
+          </mat-form-field>  
+        </div>
+        <div>
+          <mat-form-field appearance="outline" style="width: 103px;margin: 2px;">
+            <mat-label>Revision</mat-label>
+            <mat-select placeholder="Revision" formControlName="revision">
+              <mat-option *ngFor="let revision of revesionData" [value]="revision">
+                {{revision}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div> 
+          <mat-form-field  appearance="outline" style="width: 111px; margin: 2px;">
+            <mat-label>Weightage</mat-label>
+            <!-- <input matInput formControlName="weightage" required > -->
+            <input  matInput formControlName="weightage" required type="number" max="100" accuracy="2" min="0" id="inputRRPDiscount">
+          </mat-form-field> 
+        </div>
+        <div> 
+          <mat-form-field appearance="outline" style="width: 150px; margin: 2px;">
+            <mat-label>Purpose</mat-label>
+            <input matInput formControlName="purpose" required>
+          </mat-form-field> 
+        </div>
+        <div> 
+          <mat-form-field appearance="outline" style="width: 250px; margin: 2px;">
+            <mat-label>Remarks</mat-label>
+            <input matInput formControlName="remarks" required>
+          </mat-form-field>
+        </div>
+      </div>
+
+
+       <div  fxLayout="column"  [formGroup]="addForm" >
+        <div  fxLayout="row" *ngFor="let addForm of addData" >
+        <div>
+          <mat-form-field appearance="outline" style="width: 150px; margin: 2px;">
+            <mat-label>Drawing No</mat-label>
+            <input matInput formControlName="drawingNo" required>
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field appearance="outline" style="width: 182px;margin: 2px;">
+            <mat-label>Drawing Name</mat-label>
+            <input matInput formControlName="drawingName" required>
+          </mat-form-field>  
+        </div>
+        <div>
+          <mat-form-field appearance="outline" style="width: 103px;margin: 2px;">
+            <mat-label>Revision</mat-label>
+            <mat-select placeholder="Revision" formControlName="revision">
+              <mat-option *ngFor="let revision of revesionData" [value]="revision">
+                {{revision}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div> 
+          <mat-form-field  appearance="outline" style="width: 111px; margin: 2px;">
+            <mat-label>Weightage</mat-label>
+            <!-- <input matInput formControlName="weightage" required > -->
+            <input  matInput formControlName="weightage" required type="number" max="100" accuracy="2" min="0" id="inputRRPDiscount">
+          </mat-form-field> 
+        </div>
+        <div> 
+          <mat-form-field appearance="outline" style="width: 150px; margin: 2px;">
+            <mat-label>Purpose</mat-label>
+            <input matInput formControlName="purpose" required>
+          </mat-form-field> 
+        </div>
+        <div> 
+          <mat-form-field appearance="outline" style="width: 250px; margin: 2px;">
+            <mat-label>Remarks</mat-label>
+            <input matInput formControlName="remarks" required>
+          </mat-form-field>
+        </div>
+      </div>
+      </div>
+
+
+      <div fxLayout=row class="pull-right"  > 
+        <div fxLayout=column class="hand-cursor" style="align-items: center;margin-left: 20px;" (click)="onAdd()" >
+
+          <img style="height: 30px;" src="assets/images/icons/Add.png" />
+          <span>Add</span>
+         
+
+        </div>
+        <div fxLayout=column style="align-items: center;margin-left: 20px;margin-bottom:20px" (click)="reset()">
+          <img style="height: 30px;width: 30px;" src="assets/images/icons/close_red.png" />
+          <span>Cancel</span>
+        </div>
+        <div fxLayout=column class="hand-cursor" style="align-items: center;margin-left: 20px;" (click)="onSubmit()">
+          <img style="height: 30px;" src="assets/images/icons/submitIcon.png" />
+          <span>Save</span>
+        </div>
+
+      </div>
+    </mat-card>
+    </div>
+  </div>
+</div>
+

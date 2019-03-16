@@ -13,11 +13,24 @@ export class WorkRequestService {
         const url = `${environmentService.briclayApiBase}/work-request?${orgID}&order=createdAt&sort=desc`;
         return this.apiService.get(url).pipe(map(res => res));
     }
+    public getSingleWork(id): Observable<any> {
+        const url = `${environmentService.briclayApiBase}/work-config/${id}`;
+        return this.apiService.get(url).pipe(map(res => res));
+    }
 
     public saveWorkRequest(request): Observable<any> {
         const url = `${environmentService.briclayApiBase}/work-request`;
         return this.apiService.post(url, request).pipe(map(res => res));
     }
+     public saveWorkConfig(request): Observable<any> {
+        const url = `${environmentService.briclayApiBase}/work-config`;
+        return this.apiService.post(url, request).pipe(map(res => res));
+    }
+     public updateWorkConfig(request): Observable<any> {
+        const url = `${environmentService.briclayApiBase}/work-config`;
+        return this.apiService.post(url, request).pipe(map(res => res));
+    }
+
 
     public getWorkConfig(orgID): Observable<any> {
         const url = `${environmentService.briclayApiBase}/work-config?${orgID}&configValues=WORK_CATEGORY`;

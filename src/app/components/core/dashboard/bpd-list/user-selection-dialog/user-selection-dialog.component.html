@@ -1,0 +1,29 @@
+  <div fxLayout=row [formGroup]="userForm">
+   <mat-form-field appearance="outline" >
+        <mat-label>Department</mat-label>
+        <mat-select placeholder="" (selectionChange)="selectDepartment($event.value)">
+          <mat-option *ngFor="let departmentName of departmentLists" [value]="departmentName" >
+            {{departmentName.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="outline" >
+        <mat-label>Assigned To</mat-label>
+        <mat-select  placeholder="Select user" (selectionChange)="selectedUser($event.value)">
+          <mat-option *ngFor="let user of usersList" [value]="user._id">
+            {{user.name.first }} {{user.name.last}}
+          </mat-option>
+        </mat-select>
+    </mat-form-field>
+  </div>
+  <div fxLayout=row style="margin-left: 0em">
+  	<div class="hand-cursor"  fxLayout=column style="align-items:right;margin-left:274px;" (click)="onCancel()">
+          <img style="height: 30px;width: 30px;" src="assets/images/icons/close_red.png" />
+          <span>Cancel</span>
+        </div>
+        <div fxLayout=column class="hand-cursor" style="align-items: center;margin-left:25px; " (click)="onSubmit()" >
+          <img style="height: 30px;" src="assets/images/icons/submitIcon.png" />
+          <span>Save</span>
+        </div>
+  </div>
+  

@@ -1,24 +1,80 @@
-<!-- <app-organisation-drop-down (selectOrganizaion)="organizationChanged($event)"></app-organisation-drop-down> -->
-<app-top-menu></app-top-menu>
+  <!-- <app-organisation-drop-down (selectOrganizaion)="organizationChanged($event)"></app-organisation-drop-down> -->
+<div fxFlex=100 fxLayout=column>
+  <div fxLayout="row" >
+    <mat-card class="header-shadow" style="display: inline;flex :1;height: 3px;">
+
+     <div fxLayout=row style="place-content: space-around;    float: left;
+    margin-top: -14px;" class="hand-cursor">
+        <img style="height: 25px;width: 25px;" src="/assets/images/icons/Home.png">
+        <span style="font: bolder;font-size: 26px;">></span>
+        <span style="font: bolder;font-size: 14px;margin-top: 7px;">Risk</span>
+        <span style="font: bolder;font-size: 17px;margin-top: 7px;">/</span>
+        <span style="font: bolder;font-size: 14px;margin-top: 7px;">Opportunity</span>
+     </div>
+
+     <div fxLayout=row style="place-content: space-around;margin-top: -11px;margin-right: 8em;
+     float: right;" >
+     <div fxLayout=row style="place-content: space-around;" class="hand-cursor" style="margin-right: 112px;">
+      <img style="height: 25px;width: 25px;" src="/assets/images/icons/projects_Active.png">
+      <a routerLink="/dashboard/projects" style="text-decoration: none;">
+        <div class="tab-btn" style="margin-left:10px;" > Projects</div>
+      </a>
+    </div>
+    <div fxLayout=row style="place-content: space-around;" class="hand-cursor" style="margin-right: 112px;">
+     <img style="height: 35px;width: 35px;margin-top: -5px;" src="/assets/images/icons/File_Manager_Active.png">
+     <a routerLink="/dashboard/file-manager" style="text-decoration: none;">
+      <div class="tab-btn" >File Manager</div>
+    </a>
+  </div>
+  <div fxLayout=row style="place-content: space-around;" class="hand-cursor">
+    <img style="height: 25px;width: 25px;" src="/assets/images/icons/Work_Request _active.png">
+    <div class="tab-btn" style="margin-left:10px;">Bpd List</div>
+  </div>
+</div>
+</mat-card> 
+</div>
+
 <div class="user-container">
-    <mat-tab-group #tabGroup>
-        <mat-tab label="Overview">
-            <div style ="place-content :center;">
-                <mat-spinner style="margin:0 auto;" *ngIf="ncmListSpinner; else content" [diameter]="40"></mat-spinner>
-            </div>
-            <div fxLayout="row">
-                <ng-template #content>
-                    <app-expansion-panel  [expansionPanelOptions]="departmentDataOptions" 
-                        selectorComponent="app-department-details" 
-                        [data]="departments"
-                        [isHistory]="true"
-                        (openHistort)="openDialog(data)">
-                    </app-expansion-panel>
-                </ng-template>    
-            </div>
-        </mat-tab>
-        <mat-tab label="New">
-            <app-department-details formType="create" ></app-department-details>
-        </mat-tab>
-    </mat-tab-group>
+  <mat-tab-group #tabGroup>
+    <mat-tab label="Overview" >
+      <mat-card class="panel-header">
+          <div>
+    <mat-form-field appearance="outline" style="width: 215px;">
+      <mat-label>Select Process</mat-label>
+      <mat-select placeholder="Select Process"  (selectionChange)="projectChanged($event)" [(ngModel)]="selectedProj">
+        <mat-option *ngFor="let project of projectlist" [value]="project" >
+          {{project.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="pull-right" style="margin-top: -64px;">
+    <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]">
+    </mat-paginator>
+    <mat-form-field class="example-full-width" appearance="outline">
+      <mat-label>Search</mat-label>
+      <input matInput placeholder="Search">
+    </mat-form-field>
+  </div>
+  <div class="clearfix"></div>
+</mat-card>
+      <div style ="place-content :center;">
+        <mat-spinner style="margin:0 auto;" *ngIf="ncmListSpinner; else content" [diameter]="40"></mat-spinner>
+      </div>
+      <div fxLayout="row">
+        <ng-template #content>
+          <app-expansion-panel 
+          [expansionPanelOptions]="ncmListDataOptions" 
+          selectorComponent="app-ncm-details" 
+          [data]="ncmList"
+          [isHistory]="true"
+          (openHistort)="openDialog(data)">
+        </app-expansion-panel>
+      </ng-template>
+    </div>
+  </mat-tab>
+  <mat-tab label="New">
+    <app-ncm-create formType="create" (tabSwitch)="tabSwitch($event)" > </app-ncm-create>
+  </mat-tab>
+</mat-tab-group>
 </div>
