@@ -22,10 +22,18 @@
               <input matInput placeholder="" formControlName="assignedUser" readonly>
             </mat-form-field>
           </div>
-          <div  fxFlex="30" fxLayout="row" fxLayoutAlign="start center">
+          <div  fxFlex="20" fxLayout="row" fxLayoutAlign="start center">
             <mat-form-field appearance="outline">
               <mat-label>Work Order Full Ref Number</mat-label>
               <input matInput placeholder="" formControlName="workOrderFullRefNumber" readonly>
+            </mat-form-field>
+          </div>
+          <div  fxFlex="20" fxLayout="row" fxLayoutAlign="start center">
+            <mat-form-field appearance="outline" style="width: 85%;">
+              <mat-label>Order Date</mat-label>
+              <input matInput [min]="initiatedDate" placeholder="" [matDatepicker]="orderDate" formControlName="orderDate">
+                <mat-datepicker-toggle matSuffix [for]="orderDate"></mat-datepicker-toggle>
+                <mat-datepicker #orderDate></mat-datepicker>
             </mat-form-field>
           </div>
         </div>
@@ -99,7 +107,7 @@
 
           <div fxLayout="row">
             <div  fxFlex="20">
-              <mat-form-field appearance="outline" fxLayoutAlign="start center" fxFlex="15">
+              <mat-form-field appearance="outline" fxLayoutAlign="start center" style="width: 85%;">
                 <mat-label>Work Order Put Date</mat-label>
                 <input matInput placeholder="Work Order Put Date" [matDatepicker]="workOrderPutDate" formControlName="workOrderPutDate">
                 <mat-datepicker-toggle matSuffix [for]="workOrderPutDate"></mat-datepicker-toggle>
@@ -107,7 +115,7 @@
               </mat-form-field>
             </div>
             <div  fxFlex="20">
-              <mat-form-field appearance="outline" fxLayoutAlign="start center">
+              <mat-form-field appearance="outline" fxLayoutAlign="start center" style="width: 85%;">
                 <mat-label>Work Order Approval Date</mat-label>
                 <input matInput  placeholder="Work Order Approval Date" [matDatepicker]="workOrderApprovalDate"
                        formControlName="workOrderApprovalDate">
@@ -116,7 +124,7 @@
               </mat-form-field>
             </div>
             <div  fxFlex="20">
-              <mat-form-field appearance="outline" fxLayoutAlign="start center">
+              <mat-form-field appearance="outline" fxLayoutAlign="start center" style="width: 85%;">
                 <mat-label>Award Date</mat-label>
                 <input matInput  placeholder="Award Date" [matDatepicker]="awardDate"
                        formControlName="awardedDate" readonly>

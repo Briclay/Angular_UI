@@ -2,10 +2,10 @@
   <mat-tab-group #tabGroup>
       <mat-tab label="Overview">
          <app-panel-header-filter [data]="workRequests" (dataFilter)="dataPaginatorChange($event)"></app-panel-header-filter>
-          <div fxLayout="row">
-              <div style ="place-content :center;">
-                <mat-spinner style="margin:0 auto;" *ngIf="isLoading; else content" [diameter]="40"></mat-spinner>
-              </div>
+            <div style ="place-content :center;">
+              <mat-spinner style="margin:0 auto;" *ngIf="isLoading; else content" [diameter]="40"></mat-spinner>
+            </div>
+            <div fxLayout="row">
               <ng-template #content>
                 <app-expansion-panel 
                   [expansionPanelOptions]="workRequestDataOption"
@@ -15,7 +15,7 @@
                   [data]="workRequests"
                   [isHistory]="true" (updateRefresh)="getWorkRequest()"></app-expansion-panel>
               </ng-template>
-          </div>
+            </div>
       </mat-tab>
       <mat-tab label="New">
         <app-work-request-details  formType="create" (tabSwitch)="tabSwitch($event)" ></app-work-request-details>

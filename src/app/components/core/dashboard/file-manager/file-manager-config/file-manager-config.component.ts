@@ -74,6 +74,7 @@ export class FileManagerConfigComponent implements OnInit {
   fullpath: any;
   fileUploadLoader = false;
   checkFlag = false;
+  selectProjectStatus ="";
   displayedColumns: string[] = ['type', 'name', 'createdAt', 'version', 'logs', 'email', 'share', 'download'];
   constructor(
     private projectService: ProjectService,
@@ -94,7 +95,9 @@ export class FileManagerConfigComponent implements OnInit {
       if(this.checkFlag){
         this.folderConfigData();
       }
+      this.selectProjectStatus = "";
     });
+
     this.fileForm = this.formBuilder.group({
       formProject: ''
     });
@@ -110,6 +113,7 @@ export class FileManagerConfigComponent implements OnInit {
     location.onPopState(() => {
       window.history.forward();
     });
+
   }
   ngOnInit() {
     this.currentUrl = this.router.url;
@@ -125,6 +129,7 @@ export class FileManagerConfigComponent implements OnInit {
   }
 
   projectChanged(proj) {
+    this.selectProjectStatus = "";
     this.router.navigate([], { queryParams: { orgId: proj.value ? proj.value._id : proj._id }, queryParamsHandling: 'merge' });
     console.log(proj);
     this.getSingleProject(proj);
@@ -183,7 +188,14 @@ export class FileManagerConfigComponent implements OnInit {
           if (_.isArray(details.folderName) && details.folderName.length > 0) {
             const getPreFolderPos = _.indexOf(details.folderName, this.previousFolderName);
             if (getPreFolderPos !== -1) {
-              this.projectFlag = true;
+              if(tempData.deptName === 'Contracts'){
+                if(level+1 === 4 ){
+                  this.projectFlag = true;
+                }
+              }
+              else{
+                this.projectFlag = true;
+              }
               if (tempData.deptName !== 'Design') {
                 this.tableFlag = true;
               } else {
@@ -197,7 +209,14 @@ export class FileManagerConfigComponent implements OnInit {
             }
           } else {
             this.tableFlag = false;
-            this.projectFlag = true;
+            if(tempData.deptName === 'Contracts'){
+              if(level+1 === 4 ){
+                this.projectFlag = true;
+              }
+            }
+            else{
+              this.projectFlag = true;
+            }
           }
         } else {
           if (('work-request' || 'amendment') === details.name) {
@@ -213,11 +232,25 @@ export class FileManagerConfigComponent implements OnInit {
         this.tableFlag = true;
         if (this.selectedProjectData) {
           this.getProjectListinIt();
-          this.projectFlag = true;
+           if(tempData.deptName === 'Contracts'){
+              if(level+1 === 4 ){
+                this.projectFlag = true;
+              }
+            }
+            else{
+              this.projectFlag = true;
+            }
         } 
         if (this.selectedProjectData == "") {
           this.getProjectListinIt();
-          this.projectFlag = true;
+           if(tempData.deptName === 'Contracts'){
+              if(level+1 == 4 ){
+                this.projectFlag = true;
+              }
+            }
+            else{
+              this.projectFlag = true;
+            }
         } else {
           if(tempData.deptName === "Design"){
             this.projectFlag = true;
@@ -269,7 +302,10 @@ export class FileManagerConfigComponent implements OnInit {
   */
   getSingleProject(list) {
     this.isLoading = true;
-    this.selectedProjectData = list.value;
+/*    this.selectProjectStatus = list.status;
+*/    this.selectedProjectData = list.value;
+    this.selectProjectStatus = list.value.status
+
     console.log('this.selectedProjectData', this.selectedProjectData);
     window.localStorage.files_project = JSON.stringify(this.selectedProjectData);
     const body = {
@@ -720,13 +756,12 @@ export class FileManagerConfigComponent implements OnInit {
     }
   }
   getWorkRequestata(workData: any) {
-    this.workRequestDetails = workData;
-    this.createFolder(workData.requestNumber, workData._id);
+    this.createFolder(workData.typeOfWork, workData._id);
   }
-  createFolder(name, workId) {
+  createFolder(typeOfWorkName, workId) {
     const json = {
       _organisationId: this.orgId,
-      name: name,
+      name: typeOfWorkName,
       _departmentId: this.deptId,
       _parentId: this.fileId,
       _workRequestId: workId,

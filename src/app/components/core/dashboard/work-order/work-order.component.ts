@@ -12,11 +12,12 @@ import {takeUntil} from 'rxjs/operators';
 })
 export class WorkOrderComponent implements OnInit {
   isLoading: boolean;
-  workOrder = [];
+  workOrders :any;
   workOrderDataOption: any;
   orgID: string;
   pageIndex : number = 0;
   pageSize : number = 5;
+  orgDetails : any;
   private unsubscribe: Subject<any> = new Subject();
 
   constructor(
@@ -25,6 +26,8 @@ export class WorkOrderComponent implements OnInit {
     private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.orgDetails =  JSON.parse(window.localStorage.authUserOrganisation);
+    this.orgID = this.orgDetails._id;
     this.getWorkOrder();
   }
 
@@ -38,14 +41,10 @@ export class WorkOrderComponent implements OnInit {
     this.pageSize = event.pageSize;
   }
 
-  organizationChanged(org) {
-		this.router.navigate([], {queryParams: {orgID: org.value ? org.value._id : org._id} , queryParamsHandling: 'merge'});
-	}
-
   getWorkOrder() {
     this.isLoading = true;
     this.workOrderService.getWorkOrder(`filter[_organisationId]=${this.orgID}`).pipe().subscribe(res => {
-      this.workOrder = res;
+      this.workOrders = res;
       this.isLoading = false;
       this.workOrderDataOption = [
         {

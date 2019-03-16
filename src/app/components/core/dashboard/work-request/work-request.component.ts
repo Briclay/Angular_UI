@@ -4,6 +4,7 @@ import { RequestTrackerData } from './interface';
 import { merge as observableMerge, Subject } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
 import { takeUntil } from 'rxjs/operators';
+declare var moment: any;
 
 @Component({
   selector: 'app-work-request',
@@ -45,9 +46,13 @@ export class WorkRequestComponent implements OnInit {
     this.pageSize = event.pageSize;
   }
 
-  getWorkRequest() {
+  getWorkRequest() {  
     this.isLoading = true;
     this.workRequestService.getWorkRequest('filter[_organisationId]=' + this.orgID).pipe().subscribe(res => {
+      res.length > 0 && res.forEach((list) => {
+        list.needByDateDummy = moment(list.needByDate).local().format("MM-DD-YYYY")
+        list.initiatedDateDummy = moment(list.initiatedDate).local().format("MM-DD-YYYY")
+      })
       this.workRequests = res;
       this.isLoading = false;
       this.workRequestDataOption = [
@@ -57,11 +62,11 @@ export class WorkRequestComponent implements OnInit {
             { title: 'status', key: 'status', hideTitle: true, type: 'label', isStatus: true }
           ]
         },
-        { title: 'Need By Date', key: 'needByDate', display: 'block', type: 'date' },
+        { title: 'Need By Date', key: 'needByDateDummy', display: 'block', type: 'date' },
         { title: 'Assignee', key: '', display: 'block' },
         { title: 'Type of Work ', key: 'typeOfWork', display: 'block' },
         { title: 'Order Description ', key: 'workDescription', display: 'block' },
-        { title: 'Initiated Date', key: 'initiatedDate', display: 'block', type: 'date' },
+        { title: 'Initiated Date', key: 'initiatedDateDummy', display: 'block', type: 'date' },
         { title: 'Work Category ', key: 'workCategory', display: 'block' },
       ];
     });

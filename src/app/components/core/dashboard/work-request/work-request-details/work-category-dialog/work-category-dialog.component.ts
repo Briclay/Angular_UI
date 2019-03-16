@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 export class WorkCategoryDialogComponent implements OnInit {
 
 	allWorkCategory : any;
-  sopDetails : any;
+  sopDetails = [];
 	constructor(public dialogRef: MatDialogRef<WorkCategoryDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
     	let org = JSON.parse(window.localStorage.getItem('authUserOrganisation'));
@@ -28,9 +28,17 @@ export class WorkCategoryDialogComponent implements OnInit {
     this.dialogRef.close();
 	}
 
-  viewSop(){
+  viewSop(event){
+  	this.sopDetails = []
     this.data.forEach(v => {
-
+      if(v.name === event){
+      	if(v.steps.length > 0){
+      		this.sopDetails = v.steps;
+      	}
+      	else {
+      		this.sopDetails.push('no data')
+      	}
+      }
     })
   }
 

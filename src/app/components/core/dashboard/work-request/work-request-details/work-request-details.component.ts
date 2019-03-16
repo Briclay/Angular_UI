@@ -29,7 +29,6 @@ export class WorkRequestDetailsComponent implements OnInit {
   userAuth: any;
   workTrackerForm: FormGroup;
   workCategory = [];
-  typeOfWork: any;
   requestTrcakerList: any;
   reuqestNumber: String;
   projectsList = [];
@@ -38,16 +37,23 @@ export class WorkRequestDetailsComponent implements OnInit {
   status: any;
   leadDateTime = (new Date());
   needByDate = (new Date());
+  initiatedDate = (new Date());
   time = {
     timeToComplete: null,
     leadDaysToComplete: null,
     leadTimeRequire: null
   };
+  allWorkCtaegories = []
   orgId: string;
+  selectedTypeOFConsultantValue : any;
   orgDetails: any;
   isLoading: boolean;
   dept: any;
   enableTypeOfConsultant = false;
+  enableOthersConsultant = false;
+  typeOfConsultants = [ 'Architecture', 'Structural', 'MEP', 'Plumbing and Fire','Electrical and HVAC', 'Architecture Liaison', 'Environment Clearance', 'Others' ];
+  typeOfWork = ['Appointment of Contractor', 'Appointment of Consultant','Variation Order','Termination Order'];
+
   constructor(private formBuilder: FormBuilder,
     private router: Router,
     private snackBar: MatSnackBar,
@@ -61,10 +67,6 @@ export class WorkRequestDetailsComponent implements OnInit {
     this.orgDetails = JSON.parse(window.localStorage.authUserOrganisation);
     this.dept = JSON.parse(window.localStorage.authUserDepartment);
     this.orgId = this.orgDetails._id;
-    // list of typ of work
-
-    //this.typeOfWork = [ 'Contractor Appointement' ,'Termination Order']
-    this.typeOfWork = ['Appointment of contractor', 'Appointment of consultant','Variation order','Termination Order'];
     this.workTrackerFormErrors = {
       requestNumber: {},
       date: {},
@@ -168,7 +170,7 @@ export class WorkRequestDetailsComponent implements OnInit {
   workCategoryDialog(){
     const dialogRef = this.dialog.open(WorkCategoryDialogComponent, {
           width: '800px',
-          data : this.workCategory
+          data : this.allWorkCtaegories
         });
         dialogRef.afterClosed().subscribe(result => {
           
@@ -176,10 +178,49 @@ export class WorkRequestDetailsComponent implements OnInit {
   }
 
   selectTypeOfWork(event){
+    console.log(this.allWorkCtaegories, 'allWorkCtaegories')
     this.enableTypeOfConsultant = false;
-    if('Appointment of consultant' === event){
+    if('Appointment of Consultant' === event){
+      this.workCategory = []
       this.enableTypeOfConsultant = true;
+      this.allWorkCtaegories.forEach(v =>{
+        if( v.name.substr(0, 11) === 'Consultancy'){
+          this.workCategory.push(v)
+        }
+      })
     }
+    else if('Appointment of Contractor' === event){
+      this.workCategory = []
+      this.allWorkCtaegories.forEach(v =>{
+        if( v.name.substr(0, 4) === 'Work'){
+          this.workCategory.push(v)
+        }
+      })
+    }else if('Variation Order' === event){
+      this.workCategory = []
+      this.allWorkCtaegories.forEach(v =>{
+        if( v.name.substr(0, 9) === 'Variation' || v.name === 'EOT'){
+          this.workCategory.push(v)
+        }
+      })
+    }
+    else if('Termination Order' === event){
+      this.workCategory = []
+      this.allWorkCtaegories.forEach(v =>{
+        if( v.name.substr(0, 11) === 'Termination' || v.name === 'Showcause notice'){
+          this.workCategory.push(v)
+        }
+      })
+    }
+  }
+
+  selectAofConsultant(event){
+    this.selectedTypeOFConsultantValue = event;
+    this.enableOthersConsultant = false;
+    if('Others' === event){
+      this.enableOthersConsultant = true;
+    }
+    
   }
 
   getAllWorkRequestTracker() {
@@ -198,23 +239,19 @@ export class WorkRequestDetailsComponent implements OnInit {
         console.error('error', error);
       });
   }
+
   workTrackerFormSubmit() {
     console.log('(this.workTrackerForm' + JSON.stringify(this.workTrackerForm.value));
     //if (this.workTrackerForm.valid) {
       this.workTrackerForm.value._organisationId = this.orgId;
-      if (this.workTrackerForm.value.initiatedDate && this.workTrackerForm.value.RFAapprovalDate) {
-        if (this.workTrackerForm.value.initiatedDate < this.workTrackerForm.value.RFAapprovalDate) {
+        if (this.workTrackerForm.value.needByDate ) {
           this.onSave();
-        } else {
-          this.snackBar.open("Enter initiated Date & RFA approval Date", 'Work-request', {
+        }
+        else{
+          this.snackBar.open(" Please enter Need By Date ", 'Work-request', {
             duration: 3000,
           });
         }
-      } else {
-        this.onSave();
-      }
-   /* } else {
-    }*/
   }
 
   getUsers() {
@@ -374,7 +411,8 @@ export class WorkRequestDetailsComponent implements OnInit {
       .pipe().subscribe(res => {
         console.log(res, 'getWorkCategory')
         if (res.length) {
-          this.workCategory = res[0].configValues;
+          this.allWorkCtaegories = res[0].configValues;
+          //this.workCategory = res[0].configValues;
         }
       }, (error: any) => {
         // TODO add error component

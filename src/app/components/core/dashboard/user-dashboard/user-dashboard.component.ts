@@ -10,7 +10,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 import {takeUntil} from 'rxjs/operators';
 import { UserDashboardService } from '../../../../services/user-dashboard/user-dashboard.service';
 import { WorkRequestService } from '../../../../components/core/dashboard/work-request/work-request.service';
-
 declare var moment: any;
 
 @Component({
@@ -59,21 +58,20 @@ export class UserDashboardComponent implements OnInit {
   }
   ngOnInit() {
     this.workRequestService.getWorkRequest(this.orgID).pipe().subscribe(res => {
+     res.length > 0 && res.forEach((list) => {
+        list.needByDateDummy = moment(list.needByDate).local().format("MM-DD-YYYY")
+        list.initiatedDateDummy = moment(list.initiatedDate).local().format("MM-DD-YYYY")
+      })
     this.userWorkOrderData = res;
-    console.log(this.userWorkOrderData , 'userWorkOrderData')
-    res.forEach((list) => {
-      list.needByDate = moment(list.needByDate).local().format("MM-DD-YYYY")
-      list.initiatedDate = moment(list.initiatedDate).local().format("MM-DD-YYYY")
-    })
     this.userWorkOrderDataOptions = [
       {
         title: 'requestNumber', key: 'requestNumber', hideTitle: true, type: 'label'
       }, 
-      // {
-      //   title: 'workOrderID', key: 'workOrderID', hideTitle: true, type: 'label'
-      // },
+     /* {
+        title: 'workOrderID', key: 'workOrderID', hideTitle: true, type: 'label'
+      },*/
       {
-        title: 'initiatedDate', key: 'initiatedDate', hideTitle: true, type: 'label'
+        title: 'initiatedDate', key: 'initiatedDateDummy', hideTitle: true, type: 'label'
       },
       {
         title: 'typeOfWork', key: 'typeOfWork', hideTitle: true, type: 'label'
@@ -82,7 +80,7 @@ export class UserDashboardComponent implements OnInit {
         title: 'workDescription', key: 'workDescription', hideTitle: true, type: 'label'
       },
       {
-        title: 'needByDate', key: 'needByDate', hideTitle: true, type: 'label'
+        title: 'needByDate', key: 'needByDateDummy', hideTitle: true, type: 'label'
       }
     ]
     });
