@@ -194,7 +194,8 @@ export class WorkOrderDetailsComponent implements OnInit {
     this.organisationService.getOneOrg(this.orgId)
       .pipe().subscribe(res => {
         console.log('res' + JSON.stringify(res));
-        this.orgCode = res.orgCode;
+        let orgModifiedCode = res.orgCode.substr(0, res.orgCode.indexOf('-')); 
+        this.orgCode = orgModifiedCode;
         this.getDate(this.orgCode);
       }, (error: any) => {
         console.error('error', error);

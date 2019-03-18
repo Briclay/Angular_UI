@@ -20,16 +20,32 @@ export class IssueTrackerComponent implements OnInit {
   listSpinner: boolean;
   pageIndex : number = 0;
   pageSize : number = 5;
+  getAnalytics :any;
+  depId : string;
+  userId : string;
+  selectedDep : any;
+  selectedUser : any;
+  totalIssue : any;
+  totalEfficiency : any;
   private unsubscribe: Subject<any> = new Subject();
 
   constructor(
     private formBuilder: FormBuilder,
     private issueTrackerService: IssueTrackerService,
     private router: Router,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute) {
+
+    let orgDetails= JSON.parse(window.localStorage.authUserOrganisation);
+    this.orgId  = orgDetails._id;
+    let department= JSON.parse(window.localStorage.authUserDepartment);
+    this.depId  = department._id;
+    let user= JSON.parse(window.localStorage.authUser);
+    this.userId  = user._id;
+   }
 
   ngOnInit() {
     this.getIssueTracker();
+    this.getAllAnalytics();
   }
 
   public ngOnDestroy(): void {
@@ -40,6 +56,30 @@ export class IssueTrackerComponent implements OnInit {
   dataPaginatorChange(event){
     this.pageIndex = event.pageIndex;
     this.pageSize = event.pageSize;
+  }
+
+  getAllAnalytics(){
+    let filter;
+    if(this.selectedDep){
+     filter  = `filter[_organisationId]=${this.orgId}&filter[assignedTo]=${this.userId}&filter[_departmentId]=${this.selectedDep}`
+    }else if(this.selectedUser){
+     filter  = `filter[_organisationId]=${this.orgId}&filter[assignedTo]=${this.selectedUser}&filter[_departmentId]=${this.depId}`
+    }else{
+     filter  = `filter[_organisationId]=${this.orgId}&filter[assignedTo]=${this.userId}`
+    }
+    this.issueTrackerService.getIssueTrackerAnalytics(filter).pipe().subscribe(res => {
+      this.getAnalytics = res;
+      this.totalIssue = (this.getAnalytics.openCount + this.getAnalytics.closedCount);
+      let eff = (this.getAnalytics.totalIssue / this.getAnalytics.closedCount) ;
+      if(eff !== NaN){
+        this.totalEfficiency = eff
+      }
+      console.log(this.getAnalytics, "getAnalytics")
+      this.listSpinner = false;
+    }, (error: any) => {
+      console.error('error', error);
+      this.listSpinner = false;
+    });
   }
 
   getIssueTracker() {

@@ -36,6 +36,12 @@ export class UserDashboardComponent implements OnInit {
   pageIndex : number = 0;
   pageSize : number = 5;
   projName : any;
+  allItems : any;
+  enableInputWR = false;
+  enableInputNBD = false;
+  enableInputID = false;
+  enableInputTOW = false;
+  enableInputDES = false;
   private unsubscribe: Subject<any> = new Subject();
  
   constructor(private workRequestService: WorkRequestService,
@@ -63,6 +69,7 @@ export class UserDashboardComponent implements OnInit {
         list.initiatedDateDummy = moment(list.initiatedDate).local().format("MM-DD-YYYY")
       })
     this.userWorkOrderData = res;
+    this.allItems= res;
     this.userWorkOrderDataOptions = [
       {
         title: 'requestNumber', key: 'requestNumber', hideTitle: true, type: 'label'
@@ -84,6 +91,40 @@ export class UserDashboardComponent implements OnInit {
       }
     ]
     });
+  }
+
+  viewInputForFilterDataWR(){
+    this.enableInputWR = true;
+  }
+  viewInputForFilterDataID(){
+    this.enableInputID = true;
+  }
+  viewInputForFilterDataTOW(){
+    this.enableInputTOW = true;
+  }
+  viewInputForFilterDataDES(){
+    this.enableInputDES = true;
+  }
+  viewInputForFilterDataNBD(){
+    this.enableInputNBD = true;
+  }
+
+  assignCopy(){
+     this.userWorkOrderData = Object.assign([], this.allItems);
+  }
+
+  filterItem(value){
+    if(!value){
+       this.assignCopy();
+    } // when nothing has typed
+    this.userWorkOrderData = Object.assign([], this.allItems).filter(
+      item => (item.requestNumber.toLowerCase().indexOf(value.toLowerCase()) > -1)
+      || (item.typeOfWork.toLowerCase().indexOf(value.toLowerCase()) > -1)
+      || (item.initiatedDate.toLowerCase().indexOf(value.toLowerCase()) > -1)
+      || (item.needByDate.toLowerCase().indexOf(value.toLowerCase()) > -1)
+      || (item.workDescription.toLowerCase().indexOf(value.toLowerCase()) > -1)
+    )  
+    console.log(this.userWorkOrderData, 'this.userWorkOrderData')
   }
 
   public ngOnDestroy(): void {

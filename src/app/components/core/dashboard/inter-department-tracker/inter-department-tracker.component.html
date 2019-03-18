@@ -6,31 +6,31 @@
         <div fxLayout=row  class="content_space_arround" fxFlex=85>
             <div fxLayout=row class="content_space_between">
                 <div fxLayout=column class="margin_right_10">
-                    <div class="text_color_sm ">110 </div>
+                    <div class="text_color_sm ">{{getAnalytics && getAnalytics.openCount}}</div>
                     <div class="text_color_sm ">Open issue </div>  
                 </div>
                 <div fxLayout=column>
-                    <div class="text_color_sm">70 </div>
+                    <div class="text_color_sm">{{getAnalytics && getAnalytics.closedCount}}</div>
                     <div class="text_color_sm">Closed issue </div>  
                 </div>
             </div>
             <div fxLayout=row class="content_space_between">
                 <div fxLayout=column class="margin_right_10">
-                    <div class="text_color_sm">11 </div>
+                    <div class="text_color_sm">{{getAnalytics && getAnalytics.overDue}}</div>
                     <div class="text_color_sm">Overdue </div>  
                 </div>
                 <div fxLayout=column>
-                    <div class="text_color_sm">8</div>
+                    <div class="text_color_sm">{{getAnalytics && getAnalytics.dueToday}}</div>
                     <div class="text_color_sm">Due today</div>  
                 </div>
             </div>
             <div fxLayout=row class="content_space_between">
                 <div fxLayout=column class="margin_right_10">
-                    <div class="text_color_sm">390 </div>
+                    <div class="text_color_sm">{{totalIssue && totalIssue}}</div>
                     <div class="text_color_sm">Total issue </div>  
                 </div>
                 <div fxLayout=column>
-                    <div class="text_color_sm">50%</div>
+                    <div class="text_color_sm">{{totalEfficiency || 0}}%</div>
                     <div class="text_color_sm">Efficiency </div>  
                 </div>
             </div>
