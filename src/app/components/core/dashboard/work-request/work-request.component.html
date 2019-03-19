@@ -9,6 +9,7 @@
             <div fxLayout="row">
               <ng-template #content>
                 <app-expansion-panel 
+                  *ngIf="workRequests"
                   [expansionPanelOptions]="workRequestDataOption"
                   [pageIndex]="pageIndex"
                   [pageSize]="pageSize"

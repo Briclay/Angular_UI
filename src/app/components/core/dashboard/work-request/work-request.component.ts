@@ -92,6 +92,9 @@ export class WorkRequestComponent implements OnInit {
       else if(this.resFlag){
         this.workRequests = res;
       }
+      else {
+        this.workRequests = res;
+      }
       this.isLoading = false;
       this.workRequestDataOption = [
         {
