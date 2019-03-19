@@ -75,6 +75,7 @@ export class FileManagerConfigComponent implements OnInit {
   fileUploadLoader = false;
   checkFlag = false;
   selectProjectStatus ="";
+  selectedName:any;
   displayedColumns: string[] = ['type', 'name', 'createdAt', 'version', 'logs', 'email', 'share', 'download'];
   constructor(
     private projectService: ProjectService,
@@ -180,6 +181,7 @@ export class FileManagerConfigComponent implements OnInit {
       if (pPos !== -1) {
         const details = tempData.details[pPos];
         console.log(' details.name', details.name);
+        this.selectedName = details.name;
         if ('project' === details.name) {
           this.getProjectListinIt();
           window.localStorage.projectLevel = details.level;
@@ -196,9 +198,8 @@ export class FileManagerConfigComponent implements OnInit {
               else{
                 this.projectFlag = true;
               }
-              if (tempData.deptName !== 'Design') {
-                this.tableFlag = true;
-              } else {
+              
+               else {
                 this.tableFlag = false;
               }
             } else {
@@ -206,6 +207,10 @@ export class FileManagerConfigComponent implements OnInit {
               if(tempData.deptName === 'Design'){
                 this.projectFlag = true;
               }
+              if (tempData.deptName === 'Contracts') {
+                this.projectFlag = true;
+              }
+
             }
           } else {
             this.tableFlag = false;
@@ -244,7 +249,7 @@ export class FileManagerConfigComponent implements OnInit {
         if (this.selectedProjectData == "") {
           this.getProjectListinIt();
            if(tempData.deptName === 'Contracts'){
-              if(level+1 == 4 ){
+              if(level+1 === 4 ){
                 this.projectFlag = true;
               }
             }
@@ -618,6 +623,8 @@ export class FileManagerConfigComponent implements OnInit {
 
   }
 
+
+
   onFileInput(event, fileList?) {
     let reader = new FileReader()
     if (event.target.files && event.target.files.length > 0) {
@@ -640,7 +647,13 @@ export class FileManagerConfigComponent implements OnInit {
             message: "File uploaded by ",
             details: "file original name is " + file.name
           };
-          this.saveOnS3(res, file, json);
+
+          if(this.selectedName === 'RFA' ||this.selectedName=== 'WO/Agreement'){
+           console.log('RFA & WO/Agreement')
+          }
+          else{
+            this.saveOnS3(res, file, json);
+          }
         }, (error: any) => {
         });
     } else {
