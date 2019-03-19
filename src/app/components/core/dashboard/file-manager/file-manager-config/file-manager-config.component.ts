@@ -197,9 +197,6 @@ export class FileManagerConfigComponent implements OnInit {
               }
               else{
                 this.projectFlag = true;
-              }
-              
-               else {
                 this.tableFlag = false;
               }
             } else {
@@ -648,7 +645,7 @@ export class FileManagerConfigComponent implements OnInit {
             details: "file original name is " + file.name
           };
 
-          if(this.selectedName === 'RFA' ||this.selectedName=== 'WO/Agreement'){
+          if(this.selectedName === 'RFA' ||this.selectedName === 'WO/Agreement'){
            console.log('RFA & WO/Agreement')
           }
           else{
