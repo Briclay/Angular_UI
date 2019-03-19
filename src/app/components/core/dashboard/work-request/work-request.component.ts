@@ -21,6 +21,9 @@ export class WorkRequestComponent implements OnInit {
   orgDetails: any;
   pageIndex : number = 0;
   pageSize : number = 5;
+  statusValueFromParams : string;
+  getAnalytics : any;
+  resFlag = false;
   private unsubscribe: Subject<any> = new Subject();
 
   constructor(
@@ -30,11 +33,23 @@ export class WorkRequestComponent implements OnInit {
    ) {
     this.orgDetails =  JSON.parse(window.localStorage.authUserOrganisation);
     this.orgID = this.orgDetails._id;
-    console.log('this.orgId' + JSON.stringify(this.orgDetails));
-    this.getWorkRequest();
    }
 
-  ngOnInit() {}
+  ngOnInit() {
+    observableMerge(this.route.params, this.route.queryParams).pipe(
+    takeUntil(this.unsubscribe))
+    .subscribe((queryParams) => this.loadRoute(queryParams));
+  }
+
+  loadRoute(queryParams: any) {
+    if('filter[status]' in queryParams) {
+      this.statusValueFromParams = queryParams['filter[status]'];
+      this.getWorkRequest();
+    }
+    else{
+      this.getWorkRequest();
+    }
+  }
 
   public ngOnDestroy(): void {
     this.unsubscribe.next();
@@ -46,14 +61,37 @@ export class WorkRequestComponent implements OnInit {
     this.pageSize = event.pageSize;
   }
 
+ /* getWorkReAnalytics(){
+    this.workRequestService.getWorkRequestAnalytics(this.orgID).pipe().subscribe(res => {
+      this.getAnalytics = res;
+      console.log(this.getAnalytics, "getAnalyticsgetWorkRequest")
+    }, (error: any) => {
+      console.error('error', error);
+    });
+  }*/
+
   getWorkRequest() {  
     this.isLoading = true;
-    this.workRequestService.getWorkRequest('filter[_organisationId]=' + this.orgID).pipe().subscribe(res => {
+    let filter;
+    if(this.statusValueFromParams){
+      this.resFlag = true;
+      filter = `filter[_organisationId]=${this.orgID}&filter[status]=${this.statusValueFromParams}`
+    }
+    else{
+      filter = `filter[_organisationId]=${this.orgID}`
+    }
+    this.workRequestService.getWorkRequest(filter).pipe().subscribe(res => {
       res.length > 0 && res.forEach((list) => {
         list.needByDateDummy = moment(list.needByDate).local().format("MM-DD-YYYY")
         list.initiatedDateDummy = moment(list.initiatedDate).local().format("MM-DD-YYYY")
       })
-      this.workRequests = res;
+      if(this.resFlag){
+        this.workRequests = res;
+        this.resFlag = false;
+      }
+      else if(this.resFlag){
+        this.workRequests = res;
+      }
       this.isLoading = false;
       this.workRequestDataOption = [
         {

@@ -9,8 +9,9 @@ import {environmentService} from "../../../../constant/environment"
 })
 export class WorkRequestService {
     constructor(private apiService: ApiService) { }
-    public getWorkRequest(orgID): Observable<any> {
-        const url = `${environmentService.briclayApiBase}/work-request?${orgID}&order=createdAt&sort=desc`;
+
+    public getWorkRequest(filter): Observable<any> {
+        const url = `${environmentService.briclayApiBase}/work-request?${filter}&order=createdAt&sort=desc`;
         return this.apiService.get(url).pipe(map(res => res));
     }
 
@@ -27,5 +28,14 @@ export class WorkRequestService {
     public updateWorkRequest(request, requestID): Observable<any> {
         const url = `${environmentService.briclayApiBase}/work-request/${requestID}`;
         return this.apiService.put(url, request).pipe(map(res => res));
+    }
+
+    public getWorkRequestAnalytics(orgID): Observable<any> {
+        const url = `${environmentService.briclayApiBase}/work-request/analytics?filter[_organisationId]=${orgID}`;
+        return this.apiService.get(url).pipe(map(res => res));
+    }
+    public getWorkRequestProjectsAnalytics(orgID): Observable<any> {
+        const url = `${environmentService.briclayApiBase}/work-request/project/analytics?filter[_organisationId]=${orgID}`;
+        return this.apiService.get(url).pipe(map(res => res));
     }
 }

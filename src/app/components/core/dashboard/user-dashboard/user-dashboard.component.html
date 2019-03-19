@@ -16,37 +16,26 @@
         </div>
       </div>
       <mat-card class="report-card" fxLayout=column style="display: inline;flex :1;margin-top: 50px;">
-        <div class="card-title">Quick Details</div>
-        <div fxLayout=row style="place-content: space-between;border-bottom: 1px solid #ece8e8;">
-          <div style="height: 20px;width: 20px;background: transparent;border-radius: 50%;"></div>
+        <div class="card_title_1">Quick Details</div>
+        <div fxLayout=row style="place-content: space-between;border-bottom: 1px solid #ece8e8;padding: 10px;">
            <div class="details-head">Projects</div>
           <div class="details-head">Request</div>
         </div>
-        <div fxLayout=row style="place-content: space-between; margin-top: 10px;border-bottom: 1px solid #ece8e8;">
+        <div fxLayout=row style="place-content: space-between; margin-top: 10px;" *ngFor="let v of getProjectsAnalytics">
           <div fxLayout=row >
-            <div style="height: 20px;width: 20px;background: #bbdef3;border-radius: 50%;    margin-right: 6px;margin-top: -4px;"></div>
-            <div class="count">Palm Beach</div>
+            <div class="count">{{v.projectName}}</div>
           </div>
-          <div class="count">15</div>
-        </div>
-        <div fxLayout=row style="place-content: space-between; margin-top: 10px;border-bottom: 1px solid #ece8e8;">
-          <div fxLayout=row >
-            <div style="height: 20px;width: 20px;background: #bbdef3;border-radius: 50%;    margin-right: 6px;margin-top: -4px;"></div>
-            <div class="count">Skyworth</div>
-          </div>  
-          <div class="count">20</div>
+          <div class="count">{{v.count}}</div>
         </div>
       </mat-card>
       <mat-card class="report-card" fxLayout=column style="display: inline;flex :1;">
-        <div class="card-title">NCM</div>
-        <div fxLayout=row style="place-content: space-between;border-bottom: 1px solid #ece8e8;">
-          <div style="height: 20px;width: 20px;background: transparent;border-radius: 50%;"></div>
-           <div class="details-head">Risk ID</div>
+        <div class="card_title_1">NCM</div>
+        <div fxLayout=row style="place-content: space-between;border-bottom: 1px solid #ece8e8;padding: 10px;">
+          <div class="details-head">Risk ID</div>
           <div class="details-head">Status</div>
         </div>
-        <div fxLayout=row style="place-content: space-between; margin-top: 10px;border-bottom: 1px solid #ece8e8;">
+        <div fxLayout=row style="place-content: space-between; margin-top: 10px;">
           <div fxLayout=row >
-            <div style="height: 20px;width: 20px;background: transparent;border-radius: 50%;    margin-right: 6px;margin-top: -4px;"></div>
             <div class="count">R001</div>
           </div>
           <div class="count">Pending</div>
@@ -56,121 +45,90 @@
     <div  style="width: 90%;" fxLayout="row" style="display: inline;flex :1;">
       <mat-card class="header-shadow" style="display: inline;flex :1;width: 90%;height: 15px;">
         <app-top-menu></app-top-menu>
-        <div class="content-head" fxLayout=column>
-          <div class="first-card">
-            <mat-card class="report-card" fxFlex=15 fxLayout=column>
-              <div class="card-title">Total Request </div>
-              <div fxLayout=row style="place-content: space-between;">
-                <div>
-                  <div class="font_12">22</div>
-                 <!--  <div fxLayout=row>
-                    <img style="height: 10px;width: 10px;" src="/assets/images/icons/dn-arrow.png">
-                    <div style="color:red; font-size: 8px;">23%</div>
-                  </div> -->
-                </div>
-                <!-- <div>
-                  <div class="font_12">38</div>
-                  <div fxLayout=row>
-                    <img style="height: 10px;width: 14px;" src="/assets/images/icons/arrow-up.jpeg">
-                    <div style="color:#11542f; font-size: 8px;">13%</div>
-                  </div>
-                </div> -->
-              </div>
-            </mat-card>
-            <mat-card class="report-card" fxFlex=15 fxLayout=column>
-              <div class="card-title">Total Completed</div>
-              <div fxLayout=row style="place-content: space-between;">
-                <div>
-                  <div class="font_12">154</div>
-                 <!--  <div fxLayout=row>
-                    <img style="height: 10px;width: 10px;" src="/assets/images/icons/dn-arrow.png">
-                    <div style="color:red; font-size: 8px;">23%</div>
-                  </div> -->
-                </div>
-              </div>
-            </mat-card>
-            <mat-card class="report-card" fxFlex=15 fxLayout=column>
-              <div class="card-title">Pending Request</div>
-             <div fxLayout=row style="place-content: space-between;">
-                <div>
-                  <div class="font_12">11</div>
-                 <!--  <div fxLayout=row>
-                    <img style="height: 10px;width: 10px;" src="/assets/images/icons/dn-arrow.png">
-                    <div style="color:red; font-size: 8px;">23%</div>
-                  </div> -->
-                </div>
-              </div>
-            </mat-card>
+        <div class="content-head" fxLayout=row>
+          <div fxLayout=column style="display: inline-flex;">
+            <div class="first-card">
+              <mat-card class="report_card_top" (click)="goToWorkRequestNoFilter()" fxFlex=33 fxLayout=row style="place-content: space-between;height: 85%;align-items: center;">
+                <div class="card-title">Total Request </div>
+                <div class="font_12">{{getAnalytics && getAnalytics.totatRequest}}</div>
+              </mat-card>
+              <mat-card class="report_card_top" (click)="goToWorkRequest('Completed')" fxFlex=33 fxLayout=row style="place-content: space-between;height: 85%;align-items: center;">
+                <div class="card-title">Total Completed </div>
+                <div class="font_12">{{getAnalytics && getAnalytics.totalComplete}}</div>
+              </mat-card> 
+              <mat-card class="report_card_top" (click)="goToWorkRequest('In Progress')"  fxFlex=33 fxLayout=row style="place-content: space-between;height: 85%;align-items: center;">
+                <div class="card-title">Pending Request </div>
+                <div class="font_12">{{getAnalytics && getAnalytics.pendingRequest}}</div>
+              </mat-card> 
+            </div>
+            <div class="first-card" style="margin-top: 10px;" >  
+              <mat-card class="report_card_top" fxFlex=33 (click)="goToWorkRequest('RFA Approved')" fxLayout=row style="place-content: space-between;height: 85%;align-items: center;">
+                <div class="card-title">Awating RFA approval</div>
+                <div class="font_12">{{getAnalytics && getAnalytics.toatlRfaApproval}}</div>
+              </mat-card> 
+             <!--  <mat-card class="report_card_top" fxFlex=19 fxLayout=row                 style="place-content:space-between;">
+                <div class="card-title">Awating WO approval</div>
+                <div class="font_12">{{getAnalytics.totatRequest}}</div>
+              </mat-card> -->
+              <mat-card class="report_card_top" fxFlex=33 fxLayout=row style="place-content: space-between;height: 85%;align-items: center;">
+                <div class="card-title">Awating WO approval</div>
+                <div class="font_12">{{getAnalytics && getAnalytics.onHold}}</div>
+              </mat-card>
+              <mat-card class="report_card_top" fxFlex=33 fxLayout=row style="place-content: space-between;height: 85%;align-items: center;">
+                <div class="card-title">Task in due date</div>
+                <div class="font_12">{{getAnalytics && getAnalytics.dueDate}}</div>
+              </mat-card>
+            </div> 
           </div>
-          <div class="first-card">
-            <mat-card class="report-card" fxFlex=15 fxLayout=column>
-              <div class="card-title">Awating RFa approval</div>
-              <div fxLayout=row style="place-content: space-between;">
-                <div>
-                  <div class="font_12">11</div>
-                  <!-- <div fxLayout=row>
-                    <img style="height: 10px;width: 10px;" src="/assets/images/icons/dn-arrow.png">
-                    <div style="color:red; font-size: 8px;">23%</div>
-                  </div> -->
-                </div>
-              </div>
-            </mat-card>
-            <mat-card class="report-card" fxFlex=15 fxLayout=column>
-              <div class="card-title">Awating WO approval</div>
-              <div fxLayout=row style="place-content: space-between;">
-                <div>
-                  <div class="font_12">147</div>
-                  <!-- <div fxLayout=row>
-                    <img style="height: 10px;width: 10px;" src="/assets/images/icons/dn-arrow.png">
-                    <div style="color:red; font-size: 8px;">23%</div>
-                  </div> -->
-                </div>
-              </div>
-            </mat-card>
-            <mat-card class="report-card" fxFlex=15 fxLayout=column>
-              <div class="card-title">Task in due date</div>
-              <div fxLayout=row style="place-content: space-between;">
-                <div>
-                  <div class="font_12">14</div>
-                 <!--  <div fxLayout=row>
-                    <img style="height: 10px;width: 10px;" src="/assets/images/icons/dn-arrow.png">
-                    <div style="color:red; font-size: 8px;">23%</div>
-                  </div> -->
-                </div>
-              </div>
-            </mat-card>
-          </div>  
+          <div fxLayout=row>
+            <img  style="height: 220px;width: 500px;" src="/assets/images/icons/dummyDashGraph.png" />
+          </div>
         </div>
         <div class="work_order_able" style="width: 95%">
           <div class="user-container" >
             <mat-card >
               <div fxLayout=row style="place-content: space-between;">
-                <div class="table_header_text" style="width:12%">
-                  <span (click)="viewInputForFilterDataWR()">Work Request ID</span>
+                <div class="table_header_text" style="width:13%">
+                  <div fxLayout=row >
+                    <span fxLayout=row  >Work Request ID</span>
+                    <img  style="height: 12px;width: 12px;" src="/assets/images/icons/Filter.png" (click)="viewInputForFilterDataWR()" />
+                  </div>
                   <span *ngIf="enableInputWR">            
                     <input #myInput type="text" (input)="filterItem(myInput.value)" style="color:#032A57; font-size: 11px;"/>
                   </span>
                 </div>
-                <div class="table_header_text" style="width:9%">
-                  <span (click)="viewInputForFilterDataID()">Initiated Date</span>
+                <div class="table_header_text" style="width:10%">
+                  <div fxLayout=row >
+                    <span fxLayout=row  >Initiated Date</span>
+                    <img  style="height: 12px;width: 12px;" src="/assets/images/icons/Filter.png" (click)="viewInputForFilterDataID()" />
+                  </div>
                   <span *ngIf="enableInputID">            
                     <input #myInput type="text" (input)="filterItem(myInput.value)" style="color:#032A57; font-size: 11px;"/>
                   </span>
                 </div>
-                <div class="table_header_text" style="width:83px;">
-                  <span (click)="viewInputForFilterDataTOW()">Type of work</span>
+                <div class="table_header_text" style="width:10%;">
+                  <div fxLayout=row >
+                    <span fxLayout=row  >Type of work</span>
+                    <img  style="height: 12px;width: 12px;" src="/assets/images/icons/Filter.png" (click)="viewInputForFilterDataTOW()" />
+                  </div>
                   <span *ngIf="enableInputTOW">            
                     <input #myInput type="text" (input)="filterItem(myInput.value)" style="color:#032A57; font-size: 11px;"/>
                   </span>
                 </div>
                 <div class="table_header_text" style="width:12%">
-                  <span (click)="viewInputForFilterDataDES()">Package/Description</span>
+                  <div fxLayout=row >
+                    <span fxLayout=row  >Package/Description</span>
+                    <img  style="height: 12px;width: 12px;" src="/assets/images/icons/Filter.png" (click)="viewInputForFilterDataDES()" />
+                  </div>
                   <span *ngIf="enableInputDES">            
                     <input #myInput type="text" (input)="filterItem(myInput.value)" style="color:#032A57; font-size: 11px;"/>
                   </span>
                 </div>
                 <div class="table_header_text" style="width:14%">
-                  <span (click)="viewInputForFilterDataNBD()">Need By date</span>
+                  <div fxLayout=row >
+                    <span fxLayout=row  >Need By date</span>
+                    <img  style="height: 12px;width: 12px;" src="/assets/images/icons/Filter.png" (click)="viewInputForFilterDataNBD()" />
+                  </div>
                   <span *ngIf="enableInputNBD">            
                     <input #myInput type="text" (input)="filterItem(myInput.value)" style="color:#032A57; font-size: 11px;"/>
                   </span>

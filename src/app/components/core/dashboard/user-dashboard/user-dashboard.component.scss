@@ -64,11 +64,22 @@
 }
 .report-card {
    display: flex;
-   margin : 3px 0px 0px 6px
+   margin : 3px 0px 0px 6px;
+}
+report_card_top {
+   display: flex;
+   margin : 3px 0px 0px 6px;
+   align-items : center;
 }
 .card-title {
 	display: block;
 	font: 400 13px Roboto,"Helvetica Neue",sans-serif;
+    color :grey;
+}
+
+.card_title_1 {
+    display: block;
+    font: 400 13px Roboto,"Helvetica Neue",sans-serif;
     color :grey;
     margin-bottom : 25px;
 }
@@ -82,7 +93,7 @@
     padding: 5px;
 }
 .font_12{
-    font: 700 12px Roboto,"Helvetica Neue",sans-serif;
+    font: 700 40px Roboto,"Helvetica Neue",sans-serif;
     color :#696969;
 }
 

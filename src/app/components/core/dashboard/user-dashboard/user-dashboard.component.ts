@@ -42,6 +42,9 @@ export class UserDashboardComponent implements OnInit {
   enableInputID = false;
   enableInputTOW = false;
   enableInputDES = false;
+  getAnalytics : any;
+  getProjectsAnalytics : any;
+
   private unsubscribe: Subject<any> = new Subject();
  
   constructor(private workRequestService: WorkRequestService,
@@ -63,33 +66,76 @@ export class UserDashboardComponent implements OnInit {
       this.orgID = this.orgData._id;
   }
   ngOnInit() {
-    this.workRequestService.getWorkRequest(this.orgID).pipe().subscribe(res => {
-     res.length > 0 && res.forEach((list) => {
+    this.getAllREquests();
+    this.getWorkReAnalytics();
+    this.getWorkReProjectAnalytics();
+  }
+
+  getWorkReAnalytics(){
+    this.workRequestService.getWorkRequestAnalytics(this.orgID).pipe().subscribe(res => {
+      this.getAnalytics = res;
+    }, (error: any) => {
+      console.error('error', error);
+    });
+  }
+
+  getWorkReProjectAnalytics(){
+    this.workRequestService.getWorkRequestProjectsAnalytics(this.orgID).pipe().subscribe(resp => {
+      let workReResponse = resp;
+      workReResponse.forEach(v => {
+        this.projectService.getSingleProjects(v._id).pipe().subscribe(res => {
+          workReResponse.length > 0 && workReResponse.forEach((list) => {
+            if(res._id === list._id){
+              list.projectName = res.name;
+            }
+          })
+          this.getProjectsAnalytics = workReResponse;
+          console.log(workReResponse, 'workReResponse')
+        });
+      })
+    }, (error: any) => {
+      console.error('error', error);
+    });
+  }
+
+  goToWorkRequest(key){
+    let path;
+
+    if(key === undefined){
+      path = `/dashboard/work-request`;
+    }else{
+      let k = 'filter[status]=' + key
+      path = `/dashboard/work-request?${k}`
+    }      
+    this.router.navigateByUrl(path);
+    //this.router.navigateByUrl(path);
+  }
+
+  getAllREquests (){
+   this.workRequestService.getWorkRequest(this.orgID).pipe().subscribe(res => {
+      res.length > 0 && res.forEach((list) => {
         list.needByDateDummy = moment(list.needByDate).local().format("MM-DD-YYYY")
         list.initiatedDateDummy = moment(list.initiatedDate).local().format("MM-DD-YYYY")
       })
-    this.userWorkOrderData = res;
-    this.allItems= res;
-    this.userWorkOrderDataOptions = [
-      {
-        title: 'requestNumber', key: 'requestNumber', hideTitle: true, type: 'label'
-      }, 
-     /* {
-        title: 'workOrderID', key: 'workOrderID', hideTitle: true, type: 'label'
-      },*/
-      {
-        title: 'initiatedDate', key: 'initiatedDateDummy', hideTitle: true, type: 'label'
-      },
-      {
-        title: 'typeOfWork', key: 'typeOfWork', hideTitle: true, type: 'label'
-      },
-      {
-        title: 'workDescription', key: 'workDescription', hideTitle: true, type: 'label'
-      },
-      {
-        title: 'needByDate', key: 'needByDateDummy', hideTitle: true, type: 'label'
-      }
-    ]
+      this.userWorkOrderData = res;
+      this.allItems= res;
+      this.userWorkOrderDataOptions = [
+        {
+          title: 'requestNumber', key: 'requestNumber', hideTitle: true, type: 'label'
+        }, 
+        {
+          title: 'initiatedDate', key: 'initiatedDateDummy', hideTitle: true, type: 'label'
+        },
+        {
+          title: 'typeOfWork', key: 'typeOfWork', hideTitle: true, type: 'label'
+        },
+        {
+          title: 'workDescription', key: 'workDescription', hideTitle: true, type: 'label'
+        },
+        {
+          title: 'needByDate', key: 'needByDateDummy', hideTitle: true, type: 'label'
+        }
+      ]
     });
   }
 
@@ -108,7 +154,8 @@ export class UserDashboardComponent implements OnInit {
   viewInputForFilterDataNBD(){
     this.enableInputNBD = true;
   }
-
+  
+  
   assignCopy(){
      this.userWorkOrderData = Object.assign([], this.allItems);
   }
