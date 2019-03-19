@@ -24,6 +24,7 @@ export class WorkRequestComponent implements OnInit {
   statusValueFromParams : string;
   getAnalytics : any;
   resFlag = false;
+  resFlagInit = false;
   private unsubscribe: Subject<any> = new Subject();
 
   constructor(
@@ -75,9 +76,11 @@ export class WorkRequestComponent implements OnInit {
     let filter;
     if(this.statusValueFromParams){
       this.resFlag = true;
+      this.resFlagInit = false;;
       filter = `filter[_organisationId]=${this.orgID}&filter[status]=${this.statusValueFromParams}`
     }
     else{
+      this.resFlagInit = true;
       filter = `filter[_organisationId]=${this.orgID}`
     }
     this.workRequestService.getWorkRequest(filter).pipe().subscribe(res => {
@@ -92,7 +95,7 @@ export class WorkRequestComponent implements OnInit {
       else if(this.resFlag){
         this.workRequests = res;
       }
-      else {
+      else if(this.resFlagInit) {
         this.workRequests = res;
       }
       this.isLoading = false;

@@ -98,6 +98,11 @@ export class UserDashboardComponent implements OnInit {
     });
   }
 
+  goToWorkRequestNoFilter(){
+    let path = `/dashboard/work-request`
+    this.router.navigateByUrl(path);
+  }
+
   goToWorkRequest(key){
     let path;
 
