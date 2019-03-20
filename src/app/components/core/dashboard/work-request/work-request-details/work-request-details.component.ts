@@ -52,7 +52,7 @@ export class WorkRequestDetailsComponent implements OnInit {
   enableTypeOfConsultant = false;
   enableOthersConsultant = false;
   typeOfConsultants = [ 'Architecture', 'Structural', 'MEP', 'Plumbing and Fire','Electrical and HVAC', 'Architecture Liaison', 'Environment Clearance', 'Others' ];
-  typeOfWork = ['Appointment of Contractor', 'Appointment of Consultant','Variation Order','Termination Order'];
+  typeOfWork = ['Appointment of contractor', 'Appointment of consultant','Variation order','Termination Order'];
 
   constructor(private formBuilder: FormBuilder,
     private router: Router,
@@ -180,7 +180,7 @@ export class WorkRequestDetailsComponent implements OnInit {
   selectTypeOfWork(event){
     console.log(this.allWorkCtaegories, 'allWorkCtaegories')
     this.enableTypeOfConsultant = false;
-    if('Appointment of Consultant' === event){
+    if('Appointment of consultant' === event){
       this.workCategory = []
       this.enableTypeOfConsultant = true;
       this.allWorkCtaegories.forEach(v =>{
@@ -189,14 +189,14 @@ export class WorkRequestDetailsComponent implements OnInit {
         }
       })
     }
-    else if('Appointment of Contractor' === event){
+    else if('Appointment of contractor' === event){
       this.workCategory = []
       this.allWorkCtaegories.forEach(v =>{
         if( v.name.substr(0, 4) === 'Work'){
           this.workCategory.push(v)
         }
       })
-    }else if('Variation Order' === event){
+    }else if('Variation order' === event){
       this.workCategory = []
       this.allWorkCtaegories.forEach(v =>{
         if( v.name.substr(0, 9) === 'Variation' || v.name === 'EOT'){

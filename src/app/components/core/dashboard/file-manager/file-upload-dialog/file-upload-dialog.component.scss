@@ -1,0 +1,21 @@
+.dialog-container {
+    mat-form-field {
+        margin-top: 20px;
+    }
+
+    .p_name_color{
+	    color :#032A57;
+	    font: 400 12px Roboto,"Helvetica Neue",sans-serif;
+	    padding: 2px;
+	}
+
+	.p_filename_color{
+	    color :#032A57;
+	    font: 700 11px Roboto,"Helvetica Neue",sans-serif;
+		border: 1px solid black;
+    	border-radius: 3px;
+    	margin-left:10px;
+    	padding : 2px;
+	}
+
+}

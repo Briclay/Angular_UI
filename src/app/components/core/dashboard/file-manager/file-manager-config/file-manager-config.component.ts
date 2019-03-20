@@ -12,6 +12,7 @@ import { FileShareDialogComponent } from '../file-share-dialog/file-share-dialog
 import { FileMailDialogComponent } from '../file-mail-dialog/file-mail-dialog.component';
 import { ConfirmDialogComponent } from '../../../../shared/confirm-dialog/confirm-dialog.component';
 import * as _ from 'lodash';
+import { FileUploadDialogComponent } from '../file-upload-dialog/file-upload-dialog.component';
 
 export interface PeriodicElement {
   name: string;
@@ -76,6 +77,7 @@ export class FileManagerConfigComponent implements OnInit {
   checkFlag = false;
   selectProjectStatus ="";
   selectedName:any;
+  selectedFileData : any;
   displayedColumns: string[] = ['type', 'name', 'createdAt', 'version', 'logs', 'email', 'share', 'download'];
   constructor(
     private projectService: ProjectService,
@@ -181,7 +183,6 @@ export class FileManagerConfigComponent implements OnInit {
       if (pPos !== -1) {
         const details = tempData.details[pPos];
         console.log(' details.name', details.name);
-        this.selectedName = details.name;
         if ('project' === details.name) {
           this.getProjectListinIt();
           window.localStorage.projectLevel = details.level;
@@ -445,6 +446,26 @@ export class FileManagerConfigComponent implements OnInit {
     }
   }
 
+  openfileUploadDialogForRfaWo(response: any, file, body: any) {
+
+    this.selectedFileData = body; 
+    console.log(response, 'file upload data')
+    const dialogRef = this.dialog.open(FileUploadDialogComponent, {
+      width: '600px',
+      data: file
+    }).afterClosed()
+    .subscribe(res => {
+        /*this.selectedFileData.approval = res.approval;
+        this.selectedFileData.approval = res.approval;*/
+        // body.approval = res.approval;
+        // body.remarks = res.remarks;
+
+        console.log(body, 'body before file upload for RFA & WO')
+        this.saveOnS3(response, file, body);
+        console.log(res, 'file upload data after submit')
+    });
+  }
+
 
   getSingleFolder(id) {
     this.isLoading = true;
@@ -501,6 +522,7 @@ export class FileManagerConfigComponent implements OnInit {
     }
   }
   recursiveCall(data) {
+    this.selectedName = data.name.substring(3);
     this.folderConfigData();
     this.fileId = data._id
     if (data.type === 'folder') {
@@ -645,8 +667,9 @@ export class FileManagerConfigComponent implements OnInit {
             details: "file original name is " + file.name
           };
 
-          if(this.selectedName === 'RFA' ||this.selectedName === 'WO/Agreement'){
-           console.log('RFA & WO/Agreement')
+          if(this.selectedName === 'RFA' ||this.selectedName === 'Order/Agreement'){
+            console.log('RFA & WO/Agreement')
+            this.openfileUploadDialogForRfaWo(res, file, json)
           }
           else{
             this.saveOnS3(res, file, json);
@@ -669,6 +692,7 @@ export class FileManagerConfigComponent implements OnInit {
     });
   }
   onSaveFile(body: any) {
+    console.log(body, 'body')
     this.isLoading = true;
     this.fileManagerService.saveFile(body)
       .pipe().subscribe(res => {

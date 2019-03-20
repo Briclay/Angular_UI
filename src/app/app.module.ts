@@ -44,6 +44,7 @@ import { FolderCreateDialogComponent } from './components/core/dashboard/file-ma
 import { WorkOrderComponent } from './components/core/dashboard/work-order/work-order.component';
 import { FileShareDialogComponent } from './components/core/dashboard/file-manager/file-share-dialog/file-share-dialog.component'
 import { FileMailDialogComponent } from './components/core/dashboard/file-manager/file-mail-dialog/file-mail-dialog.component'
+import { FileUploadDialogComponent } from './components/core/dashboard/file-manager/file-upload-dialog/file-upload-dialog.component'
 
 //  all Briclay project Modules imports below
 import { WorkOrderModule } from './components/core/dashboard/work-order/work-order.module';
@@ -151,7 +152,8 @@ import { WorkCategoryDialogComponent } from './components/core/dashboard/work-re
     ProjectPhasesComponent,
     ProjectTeamsComponent,
     UserSelectDialogComponent,
-    WorkCategoryDialogComponent
+    WorkCategoryDialogComponent,
+    FileUploadDialogComponent
   ],
   providers: [D3Service, DashboardService, DepartmentService,
     OrganizationService, UserDashboardService,
