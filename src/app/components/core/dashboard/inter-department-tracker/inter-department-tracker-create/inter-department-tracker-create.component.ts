@@ -23,6 +23,8 @@ export class IssueTrackerCreateComponent implements OnInit {
 	@Output() public tabSwitch: EventEmitter<any> = new EventEmitter<any>();
 
 	issueTrackerCreateForm: FormGroup;
+	createCommentformGroup: FormGroup;
+
 	form: FormGroup;
 	formErrors: any;
 	projects = []
