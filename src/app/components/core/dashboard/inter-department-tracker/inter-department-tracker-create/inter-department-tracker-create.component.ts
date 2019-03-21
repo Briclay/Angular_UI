@@ -10,6 +10,7 @@ import { DepartmentService} from "../../../../../services/department/department.
 import { IssueTrackerService } from '../inter-department-tracker.service';
 import * as _ from 'lodash';
 declare var moment: any;
+import { UserSelectDialogComponent } from '../inter-department-tracker-details/user-select-dialog/user-select-dialog.component';
 
 @Component({
 	selector: 'app-issue-tracker-create',
@@ -30,6 +31,7 @@ export class IssueTrackerCreateComponent implements OnInit {
 	allIssuesForReferences = [];
 	allIssuesCodes =[];
 	allIssuesType = [];
+	newCreateFlag = false;
 	loading : boolean;
 	private unsubscribe: Subject<any> = new Subject();
 	orgID : any;
@@ -39,6 +41,7 @@ export class IssueTrackerCreateComponent implements OnInit {
 	selectedAssignedUserData : any;
 	isDepratmentLoading : boolean;
 	createdBy : any;
+	commentsArray  =[]
 	user :any;
 	depratmentLists : any;
 	userDropdownEnable = false;
@@ -49,12 +52,9 @@ export class IssueTrackerCreateComponent implements OnInit {
 	commentformGroup: FormGroup;
 	addForm : FormGroup;
 	selectedSubType : any;
-	 Validators;
+    selectedUserData : any;
 
-	myFilter =  moment(new Date()).format("YYYY-MM-DD HH:mm:ss");
-	//yourFilter =  moment(new Date()).format("MM-DD-YYYY HH:mm:ss");
-	array = [];
-	dep = [ 'aa', 'aa','aa', 'aa']
+	myFilter : any;
 	constructor(
     	private dialog: MatDialog,
 		private departService : DepartmentService,
@@ -73,7 +73,8 @@ export class IssueTrackerCreateComponent implements OnInit {
         let day = new Date();
 		let aa = new Date(day);
 		aa.setDate(day.getDate()+1);
-		this.dateOfCompletionFilter = moment(aa).format("MM-DD-YYYY");
+		this.dateOfCompletionFilter = moment(aa).format("YYYY-MM-DD");
+		//this.myFilter = moment(aa).format("YYYY-MM-DD  HH:mm:ss");
 	}
 
 	ngOnInit() {
@@ -96,28 +97,29 @@ export class IssueTrackerCreateComponent implements OnInit {
 			refId: [''],
 			comments : this.formBuilder.array([])
 		});
-		this.addForm = this.formBuilder.group({
-	     	comments: ['' , Validators.required ],
-			completionDate: [''],
-			_updatedBy: [''],
-			updatedBy:['' ],
-			assignedTo: ['', Validators.required ],
-			assignedName: ['' , Validators.required ],
-			updatedAt: [''],
-			subType: [''],
-			status: ['OPEN' , Validators.required ],       
-        });
-		
 		this.commentformGroup = this.formBuilder.group({
-			comments: ['' , Validators.required ],
-			completionDate: ['' , Validators.required],
-			_updatedBy: [''],
-			updatedBy:['' ],
-			assignedTo: ['', Validators.required ],
-			assignedName: ['' , Validators.required ],
-			updatedAt: [''],
+			comments: ['' , Validators.required],
+			completionDate: [''],
+			_updatedBy: [this.user._id],
+			updatedBy:[this.user.username],
+			assignedTo: ['', Validators.required],
+			assignedName: ['' , Validators.required],
+			updatedAt: [new Date()],
+			subType: ['', Validators.required],
+			status: ['' , Validators.required ],
+			actualCompletionDate : ['' , Validators.required ],
+		})
+		this.createCommentformGroup = this.formBuilder.group({
+			comments: ['' , Validators.required],
+			completionDate: [''],
+			_updatedBy: [this.user._id],
+			updatedBy:[this.user.username],
+			assignedTo: ['', Validators.required],
+			assignedName: ['' , Validators.required],
+			updatedAt: [new Date()],
 			subType: [''],
 			status: ['OPEN' , Validators.required ],
+			actualCompletionDate : ['' , Validators.required ],
 		})
 		this.issueTrackerCreateForm.valueChanges.subscribe(() => {
 			this.onProjectFormValuesChanges();
@@ -132,6 +134,21 @@ export class IssueTrackerCreateComponent implements OnInit {
 		if(this.formType !== 'create') {
 			this.issueTrackerCreateForm.patchValue(this.data)
 		}
+	}
+	addComments(){
+		this.newCreateFlag = true;
+		this.commentsArray.push(this.createCommentformGroup.value);
+		console.log(this.commentsArray, "comments-all")
+	}
+
+    userSelectDialog(){
+		const dialogRef = this.dialog.open(UserSelectDialogComponent, {
+          width: '550px',
+        });
+        dialogRef.afterClosed().subscribe(result => {
+           this.selectedUserData = result;
+           console.log(this.selectedUserData)
+        });
 	}
 
 	onProjectFormValuesChanges() {
@@ -165,7 +182,7 @@ export class IssueTrackerCreateComponent implements OnInit {
 		});
 	}
 
-	selectDepartment(event){
+	/*selectDepartment(event){
 		this.selectedDepartmentData = event;
 		if(event && event._id){
 			this.userService.getUserByDepId(event._id).pipe().subscribe(res => {
@@ -176,7 +193,7 @@ export class IssueTrackerCreateComponent implements OnInit {
 				this.loading = false;
 			});
 		}
-	}
+	}*/
 
 	selectedUser (event){
 		this.selectedAssignedUserData = event;
@@ -228,18 +245,24 @@ export class IssueTrackerCreateComponent implements OnInit {
 	}
 
 	onFormSubmit() {
-		console.log(   this.commentformGroup.value , '77777777777777777777' )
-		console.log( this.array, ' this.array')
+		if(this.newCreateFlag){
+	    	this.issueTrackerCreateForm.value.comments.push(this.createCommentformGroup.value)
+        }
 		this.issueTrackerCreateForm.value._projectId = this.selecetedProjectData._id;
 		this.issueTrackerCreateForm.value.projectName = this.selecetedProjectData.name;
-		this.issueTrackerCreateForm.value._departmentId = this.selectedDepartmentData._id;
-		this.issueTrackerCreateForm.value.departmentName = this.selectedDepartmentData.name;
+		this.issueTrackerCreateForm.value._departmentId = this.selectedUserData.depId;
+		this.issueTrackerCreateForm.value.departmentName = this.selectedUserData.depName;
         //let assignedUserName = this.selectedAssignedUserData.name.first +" " + this.selectedAssignedUserData.name.last;
 		//this.commentformGroup.value.assignedTo = this.selectedAssignedUserData._id
 		//this.commentformGroup.value.assignedName = assignedUserName
 		//this.commentformGroup.value.status = 'INPROGRESS'
-		this.issueTrackerCreateForm.value.comments = this.array;
+		//this.issueTrackerCreateForm.value.comments = this.array;
        	//this.issueTrackerCreateForm.value.comments = [this.commentformGroup.value];
+       	this.issueTrackerCreateForm.value.comments.forEach(v => {
+			v.completionDate = moment(v.completionDate).local().format("YYYY-MM-DD")
+			v.actualCompletionDate = moment(v.actualCompletionDate).local().format("YYYY-MM-DD")
+		}) 
+		this.issueTrackerCreateForm.value.dateOfCompletion = moment(this.issueTrackerCreateForm.value.dateOfCompletion).local().format("YYYY-MM-DD")
 		console.log(this.issueTrackerCreateForm.value, "issuesCraetedSubmittedValue");
 		this.issueTrackerService.createIssueTracker(this.issueTrackerCreateForm.value)
 		.pipe().subscribe(response => {
@@ -256,22 +279,22 @@ export class IssueTrackerCreateComponent implements OnInit {
 			});
 			console.log(error , "error")
 		});
-	}
+	}/*
 	onAdd(){
 
 		this.array.push(this.addForm.value);
-		/*if ("!commentformGroup.valid") {
+		if ("!commentformGroup.valid") {
 			//[disabled]
 		}
 		//isDisabled="!commentformGroup.valid"
 		else{
 			this.array.push(this.addForm.value);
-		}*/
+		}
 		
 		 
 		/*console.log(this.commentformGroup.value, 'sfsdf')
 	    this.array.push(this.addForm.value);
-	    console.log(this.array, 'SSSSSSDSDSD')*/
-	}
+	    console.log(this.array, 'SSSSSSDSDSD')
+	}*/
 }
 

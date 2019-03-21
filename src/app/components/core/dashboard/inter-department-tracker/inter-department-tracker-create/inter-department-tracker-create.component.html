@@ -5,8 +5,8 @@
   <form [formGroup]="issueTrackerCreateForm" class="issue-tracker-details-form">
     <mat-card style="height: 17em;">
       <div class="issue-tracker-details-card">
-        <div class="issue-tracker-details-name" fxFlex="20"  style="margin-top: 4px;">
-          <mat-form-field appearance="outline" style="width: 225px;">
+        <div class="issue-tracker-details-name" fxFlex="15"  style="margin-top: 4px;">
+          <mat-form-field appearance="outline" style="width: 150px;">
             <mat-label>Project</mat-label>
             <mat-select placeholder="Select project" (selectionChange)="selectProject($event.value)">
               <mat-option *ngFor="let projectName of projects" [value]="projectName">
@@ -14,11 +14,11 @@
               </mat-option>
             </mat-select>
           </mat-form-field>
-          <mat-form-field appearance="outline"  style="width: 225px;" >
+          <mat-form-field appearance="outline"  style="width: 150px;" >
             <mat-label>ID #</mat-label>
             <input matInput readonly formControlName="issueCode">
           </mat-form-field>
-          <mat-form-field appearance="outline"  style="width: 225px;">
+          <mat-form-field appearance="outline"  style="width: 150px;">
             <mat-label>Reference ID#</mat-label>
             <mat-select placeholder="Select reference" formControlName="refId">
               <mat-option *ngFor="let referenceId of allIssuesCodes" [value]="referenceId.name">
@@ -26,37 +26,34 @@
               </mat-option>
             </mat-select>
           </mat-form-field>
-          <mat-form-field appearance="outline" style="width: 225px;">
-                  <mat-label>Department</mat-label>
-                  <mat-select placeholder="" (selectionChange)="selectDepartment($event.value)">
-                    <mat-option *ngFor="let departmentName of depratmentLists" [value]="departmentName" >
-                      {{departmentName.name }}
-                    </mat-option>
-                  </mat-select>
-                </mat-form-field>
-               
-          
+         <!--  <mat-form-field appearance="outline" style="width: 150px;">
+            <mat-label>Department</mat-label>
+            <mat-select placeholder="" (selectionChange)="selectDepartment($event.value)">
+              <mat-option *ngFor="let departmentName of depratmentLists" [value]="departmentName" >
+                {{departmentName.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field> -->
         </div>
-        <div  style="margin-left: 0px; border-left: 1px solid lightgrey;height: 237px"  fxLayout="column"  fxFlex="25">
+        <div  style="margin-left: 0px; border-left: 1px solid lightgrey;height: 237px"  fxLayout="column"  fxFlex="17">
           <div class="issue-tracker-details-form-list" style="width: 0%" >
             <div fxLayout=row style="width: 0%">
               <div fxLayout=column >
-               <mat-form-field appearance="outline" style="width: 250px;margin-left: 22px;">
-            <mat-label>Issue Type</mat-label>
-            <input matInput formControlName="type">
-          </mat-form-field>
-
-               <mat-form-field  appearance="outline" style="width: 250px;margin-left: 22px;">
+               <mat-form-field appearance="outline" style="width: 150px;margin-left: 22px;">
+                  <mat-label>Issue Type</mat-label>
+                  <input matInput formControlName="type">
+                </mat-form-field>
+               <mat-form-field  appearance="outline" style="width: 150px;margin-left: 22px;">
                   <mat-label>Date of Completion</mat-label>
-                  <input matInput [min]="dateOfCompletionFilter" [matDatepicker]="picker3" placeholder="" formControlName="dateOfCompletion">
+                  <input matInput [matDatepicker]="picker3" placeholder="" formControlName="dateOfCompletion">
                     <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
                     <mat-datepicker #picker3></mat-datepicker>
                 </mat-form-field>
-                <mat-form-field appearance="outline" style="width: 250px;margin-left: 22px;"  >
+                <mat-form-field appearance="outline" style="width: 150px;margin-left: 22px;"  >
                   <mat-label>Description</mat-label>
                   <textarea style="height:20px" matInput formControlName="description"></textarea>
                 </mat-form-field>
-                 <mat-form-field appearance="outline" style="width: 250px;margin-left: 22px;">
+                 <mat-form-field appearance="outline" style="width: 150px;margin-left: 22px;">
                   <mat-label>Remarks</mat-label>
                   <textarea  style="height:20px" matInput formControlName="remark" ></textarea>
                 </mat-form-field> 
@@ -65,9 +62,9 @@
             </div>
           </div>
         </div>
-        <div style="margin-left: 0px; border-left: 1px solid lightgrey;height: 237px"  fxLayout="column"  fxFlex="20" >
+        <div style="margin-left: 0px; border-left: 1px solid lightgrey;height: 237px"  fxLayout="row"  fxFlex="65" >
           <div class="issue-tracker-details-form-list">
-            <form [formGroup]="commentformGroup">
+           <!--  <form [formGroup]="commentformGroup">
               <div  FormGroupName="comments">
                 <div fxLayout=row>
                    <mat-form-field  appearance="outline" style="width: 164px;margin-left: 22px;">
@@ -90,30 +87,88 @@
                   </mat-form-field>
                 </div>
               </div>
-            </form>
-          </div>
-          <div class="issue-tracker-details-form-list" fxLayout="column">
-            <form [formGroup]="addForm" >
-              <div  FormGroupName="comments">
-                <div fxLayout=row *ngFor="let addForm of array">
-                    <mat-form-field appearance="outline" style="width: 164px;margin-left: 22px;">
-                      <mat-label>Completion Date</mat-label>
-                        <input matInput [min]="myFilter" [matDatepicker]="picker1" placeholder="Completion Date" formControlName="completionDate">
-                          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                      <mat-datepicker #picker1></mat-datepicker>
-                    </mat-form-field>
-                    <mat-form-field appearance="outline" style="width: 164px;margin-left: 22px;">
-                      <mat-label>Comments</mat-label>
-                      <textarea  matInput formControlName="comments" style="height:20px" ></textarea>
-                    </mat-form-field>
-                  <mat-form-field appearance="outline" *ngIf="userDropdownEnable" style="width: 164px;margin-left: 22px;">
+            </form> -->
+             <form [formGroup]="commentformGroup">
+              <div formArrayName="comments" 
+                *ngFor="let comment of issueTrackerCreateForm.get('comments')['controls'];let i=index;" >
+                <div [formGroup]="comment" fxLayout="row">
+                  <mat-form-field  appearance="outline" style="width: 164px;margin-right: 10px;">
+                    <mat-label>Completion Date</mat-label>
+                    <input  matInput  [matDatepicker]="comDate" placeholder="Completion Date" formControlName="completionDate">
+                      <mat-datepicker-toggle matSuffix [for]="comDate"></mat-datepicker-toggle>
+                      <mat-datepicker  #comDate></mat-datepicker>
+                  </mat-form-field>
+                 
+                  <mat-form-field  appearance="outline" style="width: 150px;margin-right: 5px;margin-top: -5px;">
                     <mat-label>Assigned To</mat-label>
-                    <mat-select placeholder="" (selectionChange)="selectedUser($event.value)" formControlName="assignedName" >
-                      <mat-option *ngFor="let assignedName of users" [value]="assignedName">
-                        {{assignedName.name.first }} {{assignedName.name.last}}
+                    <mat-select placeholder="Select user" formControlName="assignedTo"  (selectionChange)="selectedUser($event.value)">
+                      <mat-option *ngFor="let user of users" [value]="user._id" >
+                        {{user.name.first}} {{ user.name.last}}
                       </mat-option>
                     </mat-select>
                   </mat-form-field>
+                  <mat-form-field  appearance="outline" style="width:209px;margin-right:5px;">
+                      <mat-label>Actual Completion Date</mat-label>
+                      <input  matInput [min]="todayDateFilter" [matDatepicker]="actualCD" placeholder="Completion Date" formControlName="actualCompletionDate">
+                        <mat-datepicker-toggle matSuffix [for]="actualCD"></mat-datepicker-toggle>
+                        <mat-datepicker #actualCD></mat-datepicker>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" style="width: 180px;margin-right: 5px;">
+                      <mat-label>Comments</mat-label>
+                      <textarea  matInput formControlName="comments" style="height: 20px"></textarea>
+                    </mat-form-field>
+                </div> 
+              </div>
+            </form>
+          </div>
+          <div class="issue-tracker-details-form-list" fxLayout="row">
+           <form [formGroup]="createCommentformGroup">
+              <div formArrayName="comments">
+                <div *ngFor="let comment of commentsArray; let i = index;">
+                  <div [formGroup]="createCommentformGroup" fxLayout="row">
+                    <mat-form-field  appearance="outline" style="width:164px;margin-right: 5px;">
+                      <mat-label>Completion Date</mat-label>
+                      <input  matInput  [matDatepicker]="picker1" placeholder="Completion Date" formControlName="completionDate">
+                        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                        <mat-datepicker #picker1></mat-datepicker>
+                    </mat-form-field>
+                   
+                    <span style="display: inline-flex;
+                        height: 14px;
+                        width: 120px;
+                        margin-right: 6px;
+                        position: relative;
+                        border: 1px solid #8080804a;
+                        border-radius: 3px;
+                        color: #808080;
+                        padding: 8px 6px 4px 9px;">
+                      <span (click)="userSelectDialog()" >
+                        <span style="  display: inline-block;
+                        position: absolute;
+                        top: -15px;
+                        display: inline-table;
+                        background-color: white;
+                        font: 400 10px 'Montserrat', sans-serif !important;
+                        height: 16px;">Assigned To</span>
+                        <div style="display:inline-flex;" *ngIf="selectedUserData ">
+                          <span style=" color:#000000c9;
+                    font: 400 13px 'Montserrat', sans-serif !important;"> {{selectedUserData.userName.first}}</span>&nbsp;
+                           <span style=" color:#000000c9;
+                    font: 400 13px 'Montserrat', sans-serif !important;"> {{ selectedUserData.userName.last}}</span>
+                        </div>
+                      </span>
+                    </span>  
+                    <mat-form-field  appearance="outline" style="width:209px;margin-right:5px;">
+                      <mat-label>Actual Completion Date</mat-label>
+                      <input  matInput [matDatepicker]="picker4" placeholder="Completion Date" formControlName="actualCompletionDate">
+                        <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
+                        <mat-datepicker #picker4></mat-datepicker>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" style="width:180px;margin-right: 5px;">
+                      <mat-label>Comments</mat-label>
+                      <textarea  matInput formControlName="comments" style="height:20px"></textarea>
+                    </mat-form-field>
+                  </div>
                 </div>
               </div>
             </form>
@@ -124,7 +179,7 @@
           
       </div>
       <div fxLayout=row class="pull-right" style="margin-top: -50px;">
-      <div fxLayout=column class="hand-cursor" style="align-items: center;margin-left: 20px;" (click)="onAdd() " >
+      <div fxLayout=column class="hand-cursor" style="align-items: center;margin-left: 20px;" (click)="addComments() " >
         <img style="height: 30px;width: 30px;" src="assets/images/icons/Add.png" />
         <span>Add</span>
       </div> 

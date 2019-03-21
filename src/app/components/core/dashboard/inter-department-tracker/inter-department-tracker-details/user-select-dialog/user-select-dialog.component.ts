@@ -89,7 +89,13 @@ export class UserSelectDialogComponent implements OnInit {
 
 	onuserFormSubmit() {
 		this.onuserFormValuesChanged()
-		this.dialogRef.close(this.selectedAssignedUserData);
+		let obj = {
+			'userId' : this.selectedAssignedUserData._id,
+			'userName' : this.selectedAssignedUserData.name,
+			'depId' : this.selectedDepartmentData._id,
+			'depName' : this.selectedDepartmentData.name,
+		}
+		this.dialogRef.close(obj);
   	}
 
 }
