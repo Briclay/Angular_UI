@@ -81,7 +81,7 @@ export class WorkOrderComponent implements OnInit {
   }
   
   assignCopy(){
-     this.workOrders = Object.assign([], this.allItems);
+    this.workOrders = Object.assign([], this.allItems);
   }
 
   filterItem(value){
@@ -107,14 +107,17 @@ export class WorkOrderComponent implements OnInit {
           this.workRequestService.getSingleWorkRequest(list._workRequestId).pipe().subscribe(resp => {
             list.assignedName = resp._assignedId;
             list.workRequestNumber = resp.requestNumber;
-            list.workDescription = resp.workDescription
+            list.workDescription = resp.workDescription;
+            if(list.typeOfWork === null){
+              list.typeOfWork = resp.typeOfWork;
+            }
             this.userService.getSingleUser(resp._assignedId).pipe().subscribe(response => {
               list.assignedName = response.displayName;
               this.workOrders = res;
               this.allItems = res;
             })
           })
-        })  
+        })
       })
       console.log(this.workOrders, 'workOrdersworkOrders')
       this.isLoading = false;
@@ -127,7 +130,7 @@ export class WorkOrderComponent implements OnInit {
         },
         { title: 'Work Request ID', key: 'workRequestNumber', display: 'block' },
         { title: 'Assignee', key: 'assignedName', display: 'block' },
-        { title: 'Type of Work ', key: 'typeOfWork', display: 'block' },
+        { title: 'Type of Work ', key: 'typeOfWork',display: 'block' },
         { title: 'Package/Order Description', key: 'workDescription', display: 'block' },
         { title: 'WO Full RefNumber', key: 'workOrderFullRefNumber', display: 'block' },
       ]

@@ -68,7 +68,8 @@
             <div  fxFlex="40">
               <mat-form-field appearance="outline" fxLayoutAlign="start center">
                 <mat-label>Package/Description</mat-label>
-                <input matInput class="width-100" placeholder="Package/Description" formControlName="workDescription" readonly>
+                <input matInput *ngIf="formType === 'create'" class="width-100" placeholder="Package/Description" formControlName="workDescription" readonly>
+                 <input matInput *ngIf="formType !== 'create'" class="width-100" placeholder="Package/Description" formControlName="workDescription" >
               </mat-form-field>
             </div>
           </div>
@@ -133,12 +134,12 @@
                 <mat-datepicker #awardDate></mat-datepicker>
               </mat-form-field>
             </div>
-            <div  fxFlex="20">
+            <!--  <div  fxFlex="20">
               <mat-form-field appearance="outline" fxLayoutAlign="start center">
                 <mat-label>Total Value</mat-label>
                 <input type="number" matInput placeholder="Total Value" formControlName="totalValue">
               </mat-form-field>
-            </div>
+            </div> -->
             <div  fxFlex="20">
               <section class="check-status">
                 <span>Document Approval Status </span>
@@ -154,7 +155,7 @@
           <div fxFlex="100">
             <!-- button -->
             <div class="button-row" fxLayoutAlign="end center">
-              <button mat-raised-button class="cancel-button" color="white-bg" (click)=cancel()>Cancel</button>
+              <button mat-raised-button class="cancel-button" color="white-bg" >Cancel</button>
               <div class="space"></div>
               <button type="submit" mat-raised-button class="save-button" color="white-bg" (click)=onOrderFormSubmit()>Save</button>
             </div>

@@ -71,7 +71,7 @@
             <div fxLayout="row">
               <ng-template #content>
                 <app-expansion-panel 
-                  *ngIf="workOrders.length > 0"
+                  *ngIf="workOrders && workOrders.length > 0"
                   [expansionPanelOptions]="workOrderDataOption"
                   [pageIndex]="pageIndex"
                   [pageSize]="pageSize"
