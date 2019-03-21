@@ -67,6 +67,7 @@ export class WorkOrderDetailsComponent implements OnInit {
       status: {},
       date: {},
       totalValue: {},
+      remark:{},
       typeOfConsultant : {}
     };
     this.orderTrackerForm = this.formBuilder.group({
@@ -89,6 +90,7 @@ export class WorkOrderDetailsComponent implements OnInit {
       workOrderFullRefNumber: ['', Validators.required],
       workRequest: [''],
       nameOfAgency: [''],
+      remark: [''],
       status: 'In Progress',
       totalValue: [''],
       date: new FormControl((new Date())),

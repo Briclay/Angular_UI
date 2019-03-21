@@ -31,16 +31,13 @@
                   <mat-form-field  class="line" style="width: 65px;" >
                     <input  readonly matInput formControlName="status" class="statusCheck bg_color_open">
                   </mat-form-field>
-                  <mat-form-field  appearance="outline" style="width: 130px;margin-right: 5px;">
+                  <mat-form-field  appearance="outline" style="width: 164px;margin-right: 10px;">
                     <mat-label>Completion Date</mat-label>
-                    <input  matInput [min]="dateFilter"  [matDatepicker]="picker1" placeholder="Completion Date" formControlName="completionDate">
-                      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                      <mat-datepicker  #picker1></mat-datepicker>
+                    <input  matInput [min]="dateFilter"  [matDatepicker]="comDate" placeholder="Completion Date" formControlName="completionDate">
+                      <mat-datepicker-toggle matSuffix [for]="comDate"></mat-datepicker-toggle>
+                      <mat-datepicker  #comDate></mat-datepicker>
                   </mat-form-field>
-                  <mat-form-field appearance="outline" style="width: 130px;margin-right: 5px;">
-                    <mat-label>Comments</mat-label>
-                    <textarea  matInput formControlName="comments" style="height: 20px"></textarea>
-                  </mat-form-field>
+                 
                   <mat-form-field  appearance="outline" style="width: 150px;margin-right: 5px;margin-top: -5px;">
                     <mat-label>Assigned To</mat-label>
                     <mat-select placeholder="Select user" formControlName="assignedTo"  (selectionChange)="selectedUser($event.value)">
@@ -49,11 +46,21 @@
                       </mat-option>
                     </mat-select>
                   </mat-form-field>
-                  <mat-form-field appearance="outline" style="width: 90px;margin-right: 5px;">
+                  <mat-form-field  appearance="outline" style="width:209px;margin-right:5px;">
+                      <mat-label>Actual Completion Date</mat-label>
+                      <input  matInput [min]="todayDateFilter" [matDatepicker]="actualCD" placeholder="Completion Date" formControlName="actualCompletionDate">
+                        <mat-datepicker-toggle matSuffix [for]="actualCD"></mat-datepicker-toggle>
+                        <mat-datepicker #actualCD></mat-datepicker>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" style="width: 180px;margin-right: 5px;">
+                      <mat-label>Comments</mat-label>
+                      <textarea  matInput formControlName="comments" style="height: 20px"></textarea>
+                    </mat-form-field>
+                  <!-- <mat-form-field appearance="outline" style="width: 90px;margin-right: 5px;">
                     <mat-label>Sub-type</mat-label>
                     <input matInput readonly formControlName="subType" style="height: 20px;margin-right: 5px;">
-                  </mat-form-field>
-                  <mat-form-field appearance="outline" style="width: 90px;margin-right: 5px;">
+                  </mat-form-field> -->
+                  <!-- <mat-form-field appearance="outline" style="width: 90px;margin-right: 5px;">
                     <mat-label>Updated By</mat-label>
                     <input matInput readonly formControlName="updatedBy" style="height: 20px;margin-right: 5px;">
                   </mat-form-field>
@@ -62,7 +69,7 @@
                     <input matInput readonly  [matDatepicker]="picker2" placeholder="" formControlName="updatedAt">
                       <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
                       <mat-datepicker disabled #picker2></mat-datepicker>
-                  </mat-form-field>
+                  </mat-form-field> -->
                   
                   <span class="hand-cursor" style="align-items: center;" (click)="closeTheIssueComment(comment)">
                      <button style="height: 28px;" mat-raised-button type="submit" class="pull-right">Close</button>
@@ -74,16 +81,13 @@
               <div formArrayName="comments">
                 <div *ngFor="let comment of commentsArray; let i = index;">
                   <div [formGroup]="createCommentformGroup">
-                    <mat-form-field  appearance="outline" style="width:130px;margin-right: 5px;">
+                    <mat-form-field  appearance="outline" style="width:164px;margin-right: 5px;">
                       <mat-label>Completion Date</mat-label>
                       <input  matInput [min]="dateFilter" [matDatepicker]="picker1" placeholder="Completion Date" formControlName="completionDate">
                         <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                         <mat-datepicker #picker1></mat-datepicker>
                     </mat-form-field>
-                    <mat-form-field appearance="outline" style="width:136px;margin-right: 5px;">
-                      <mat-label>Comments</mat-label>
-                      <textarea  matInput formControlName="comments" style="height:20px"></textarea>
-                    </mat-form-field>
+                   
                     <span class="USer">
                       <span (click)="userSelectDialog()" >
                         <span class="assign">Assigned To</span>
@@ -93,15 +97,25 @@
                         </div>
                       </span>
                     </span>  
-                    <mat-form-field appearance="outline" style="width: 90px;margin-right: 5px;">
+                    <mat-form-field  appearance="outline" style="width:209px;margin-right:5px;">
+                      <mat-label>Actual Completion Date</mat-label>
+                      <input  matInput [min]="todayDateFilter" [matDatepicker]="picker4" placeholder="Completion Date" formControlName="actualCompletionDate">
+                        <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
+                        <mat-datepicker #picker4></mat-datepicker>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" style="width:180px;margin-right: 5px;">
+                      <mat-label>Comments</mat-label>
+                      <textarea  matInput formControlName="comments" style="height:20px"></textarea>
+                    </mat-form-field>
+                    <!-- <mat-form-field appearance="outline" style="width: 90px;margin-right: 5px;">
                       <mat-label>Sub Type</mat-label>
                        <mat-select placeholder="" formControlName="subType">
                         <mat-option *ngFor="let sType of allIssuesType" [value]="sType.name" >
                           {{sType.name}}
                         </mat-option>
                       </mat-select>
-                    </mat-form-field>
-                    <mat-form-field appearance="outline" style="width: 90px;margin-right: 5px;">
+                    </mat-form-field> -->
+                   <!--  <mat-form-field appearance="outline" style="width: 90px;margin-right: 5px;">
                       <mat-label>Updated By</mat-label>
                       <input matInput readonly formControlName="updatedBy" style="height:20px;margin-right:5px;">
                     </mat-form-field>
@@ -110,7 +124,7 @@
                       <input matInput  readonly [matDatepicker]="picker3" placeholder="" formControlName="updatedAt">
                         <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
                         <mat-datepicker disabled #picker3></mat-datepicker>
-                    </mat-form-field>
+                    </mat-form-field> -->
                   </div>
                 </div>
               </div>

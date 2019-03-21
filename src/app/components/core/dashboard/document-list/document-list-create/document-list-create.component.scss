@@ -1,0 +1,120 @@
+.dialog-container {
+    mat-form-field {
+        margin-top: 20px;
+    }
+}
+.mat-toolbar-row, .mat-toolbar-single-row {
+    display: flex;
+    box-sizing: border-box;
+    padding: -11px 16px;
+    width: 20%;
+    flex-direction: column;
+    align-items: center;
+    white-space: nowrap;
+}
+.mat-toolbar-row, .mat-toolbar-single-row {
+    height: 213px;
+}
+.mat-form-field-appearance-outline .mat-form-field-wrapper {
+ transition: box-shadow 280ms cubic-bezier(.4,0,.2,1);
+    margin: -1.75em 0;
+}
+.mat-card-title-group {
+    display: flex;
+    justify-content: space-around;
+}
+ 
+
+.body {
+    display: block;
+    position: relative;
+    flex: auto;
+    min-width: 0;
+    width: 120px;
+}
+.filterButtonsDiv {
+  display:grid;
+  grid-gap: 2px;
+  grid-template-columns: 2fr 5fr;
+  grid-template-rows: 22px;
+}
+.mat-card {
+    margin: -2.75em -2;
+    width:70;
+}
+  .pull-right {
+        margin-top: 20px;
+        bottom: 10px;
+        z-index: 7;
+    }
+    .valuePadding {
+  border: 1px inset #ccc;
+}
+.valuePadding input {
+  border: none;
+  padding:0px;
+  outline: none;
+}
+.user-details-container {
+    padding: 10px;
+    .user-details-form {
+        
+        .user-details-card {
+            flex: 1;
+            display: flex;
+            font: 400 13px/20px Roboto,"Helvetica Neue",sans-serif;
+            .user-details-name {
+                flex: 0.1;
+                img {
+                    width: 100px;
+                    border-radius: 5px;
+                }
+                .username-input {
+                    margin-top: 45px;
+                }
+            }
+            .user-details-content {
+                flex: 1;
+                .user-details-content-title {
+                    margin-left: 10px;
+                    margin-bottom: 10px;
+                }
+                .user-details-form-list {
+                }
+                .feature_btn {
+                    border-radius: 17px;
+                    background-color: #2196F3; 
+                    color: white;
+                }
+                .feature_btn[disabled] {
+                    background-color: rgba(0,0,0,.12);
+                }
+            }
+        }
+    }
+}
+
+::ng-deep .mat-menu-panel.featurePanel {
+  max-width:400px!important;
+  min-width: 450px!important;
+  width: 100vw; 
+  margin-left: -8px;
+  margin-top: 5px;
+  overflow: auto!important;
+  min-height : auto;
+}
+.feature_container{
+    padding : 4%;
+    .title {
+        font: 700 12px Roboto,"Helvetica Neue",sans-serif;
+        color :#032a57cf;
+        padding : 1%;
+        border-left: #8c8686 2px solid;
+    }
+    .message {
+        font: 400 11px Roboto,"Helvetica Neue",sans-serif;
+        color :#032a57cf; 
+        padding : 1%;
+        border-left: #8c8686 2px solid;
+    }
+}

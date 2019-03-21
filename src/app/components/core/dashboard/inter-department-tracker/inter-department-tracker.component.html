@@ -47,7 +47,7 @@
                 <ng-template #content>
                     <div fxLayout="row">
                         <app-expansion-panel 
-                            *ngIf="issueTrackerList.length>0"
+                            *ngIf="issueTrackerList && issueTrackerList.length>0"
                             [pageIndex]="pageIndex"
                             [pageSize]="pageSize"
                             [expansionPanelOptions]="issueTrackerDataOptions"

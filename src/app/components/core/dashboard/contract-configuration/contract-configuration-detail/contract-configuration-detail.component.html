@@ -1,0 +1,72 @@
+ <div style="padding-top: 2px" fxLayout="row">
+   <mat-card fxLayout=row style="height: 50px; place-justify-content: left;width: 100%;padding-top: 7px" class="panel-header">
+    <div style="width:43%;">
+      <mat-form-field appearance="outline"  >
+        <mat-label>Select Config</mat-label>
+        <mat-select placeholder="" (selectionChange)="categoryChanged($event.value)" >
+          <mat-option  [value]="workCategory && workCategory.length > 0 && workCategory[0]._id" >
+            {{workCategory && workCategory.length > 0 && workCategory[0].configKey}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div style ="place-content :center;">
+      <mat-spinner style="margin:0 auto;" *ngIf="contractSpinner" [diameter]="40"></mat-spinner>
+    </div>
+    <div class="pull-right" style="height: 30px">
+      <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]" style="    margin-left: 277px;
+      margin-top: -9px;">
+    </mat-paginator>
+    <mat-form-field class="example-full-width" appearance="outline">
+      <mat-label>Search</mat-label>
+      <input matInput placeholder="Search">
+    </mat-form-field>
+  </div>
+  <div class="clearfix"></div>
+</mat-card>
+</div>
+<mat-card>
+  <form >
+    <div  fxLayout="row" *ngFor="let v of workSelection" [formGroup]="contractDetailForm">
+      <div >
+        <mat-form-field appearance="outline" style="width: 240px; margin: 2px;" >
+          <mat-label>Name</mat-label>
+
+          <input matInput formControlName="name" required [(value)]="v.name">       
+        </mat-form-field>
+      </div>
+      <div >
+        <mat-form-field appearance="outline" style="width: 160px; margin: 2px;">
+          <mat-label>No. Of Days</mat-label>
+          <input matInput formControlName="noOfDays" required  [(value)]="v.noOfDays" >
+
+        </mat-form-field>
+      </div>
+      <div >
+        <mat-form-field appearance="outline" style="width: 290px; margin: 2px;">
+          <mat-label>Category Reason</mat-label>
+          <input matInput formControlName="categoryReason" required   [(value)]="v.categoryReason">
+
+        </mat-form-field>
+      </div>
+        <div >
+          <mat-form-field appearance="outline" style="width: 350px; margin: 2px;">
+            <mat-label>Steps</mat-label>
+           <!--  <input matInput formControlName="steps" required [(value)]="v.steps" > -->
+            <textarea matInput formControlName="steps"  required [(value)]="v.steps"></textarea>
+          </mat-form-field>
+        </div>
+
+      </div>
+    </form>
+    <br>
+    <div fxLayout=column class="hand-cursor" style=" margin-left: 86em;margin-top: -25px">
+      <img style="height: 30px;width: 30px;" src="assets/images/icons/close_red.png" />
+      <span>Cancel</span>
+    </div>
+    <div fxLayout=row class="hand-cursor" style=" margin-left: 91em;margin-top: -48px" (click)="onSubmit()">
+      <img style="height: 30px;" src="assets/images/icons/submitIcon.png" />
+      <span style="margin-top: 31px;margin-left: -29px">Save</span>
+    </div>
+
+  </mat-card>

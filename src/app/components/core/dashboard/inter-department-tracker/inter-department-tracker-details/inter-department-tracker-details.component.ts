@@ -37,6 +37,7 @@ export class IssueTrackerDetailsComponent implements OnInit {
 	allIssuesForReferences: any;
 	closeFlag  = false;
 	dateFilter:any;
+	todayDateFilter = new Date()
 	newCreateFlag = false;
 	selectedUserData : any;
 	private unsubscribe: Subject<any> = new Subject();
@@ -81,13 +82,14 @@ export class IssueTrackerDetailsComponent implements OnInit {
 		this.commentformGroup = this.formBuilder.group({
 			comments: ['' , Validators.required],
 			completionDate: [''],
-			_updatedBy: [''],
-			updatedBy:[''],
+			_updatedBy: [this.user._id],
+			updatedBy:[this.user.username],
 			assignedTo: ['', Validators.required],
 			assignedName: ['' , Validators.required],
-			updatedAt: [''],
+			updatedAt: [new Date()],
 			subType: ['', Validators.required],
 			status: ['' , Validators.required ],
+			actualCompletionDate : ['' , Validators.required ],
 		})
 		this.createCommentformGroup = this.formBuilder.group({
 			comments: ['' , Validators.required],
@@ -99,6 +101,7 @@ export class IssueTrackerDetailsComponent implements OnInit {
 			updatedAt: [new Date()],
 			subType: [''],
 			status: ['OPEN' , Validators.required ],
+			actualCompletionDate : ['' , Validators.required ],
 		})
 		this.issueTrackerDetailsForm.valueChanges.subscribe(() => {
 			this.onIssueTrackerFormValuesChanges();
@@ -175,18 +178,18 @@ export class IssueTrackerDetailsComponent implements OnInit {
 	addComments(){
 		/*this.commentsArray.push(this.createCommentformGroup.value);
 		console.log(this.commentsArray, "comments-all")*/
-			this.issueTrackerDetailsForm.value.comments.forEach(v => {
-			if(v.comments !== "" && v.assignedName  !=="" && v.completionDate  !== null && v.subType  !== "" ){
+			//this.issueTrackerDetailsForm.value.comments.forEach(v => {
+			//if(v.comments !== "" && v.assignedName  !=="" && v.completionDate  !== null && v.subType  !== "" ){
 				this.newCreateFlag = true;
 				this.commentsArray.push(this.createCommentformGroup.value);
 				console.log(this.commentsArray, "comments-all")
-			}
-			else {
-				this.snackBar.open('Please first fill the all required fields', 'Issue-tracker', {
-					duration: 2000,
-				});
-			}
-		})	
+			//}
+			// else {
+			// 	this.snackBar.open('Please first fill the all required fields', 'Issue-tracker', {
+			// 		duration: 2000,
+			// 	});
+			// }
+		//})	
 	}
 
 	getUsers() {
@@ -201,6 +204,7 @@ export class IssueTrackerDetailsComponent implements OnInit {
 		this.issueTrackerDetailsForm.value.comments.forEach(v => {
 			if(v.id === comment.value.id){
 				v.status = 'CLOSED'
+				v.actualCompletionDate = new Date()
 			}
 		})
 		this.onFormSubmit()

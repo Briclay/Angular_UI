@@ -21,6 +21,10 @@ import { RootFolderComponent } from './components/core/dashboard/file-manager/ro
 import { FileSharedFolderComponent } from './components/core/dashboard/file-manager/file-shared-folder/file-shared-folder.component';
 import { IssueTrackerComponent } from './components/core/dashboard/inter-department-tracker/inter-department-tracker.component';
 import { RegisterComponent } from './components/core/register/register.component';
+import { DocumentListComponent } from './components/core/dashboard/document-list/document-list.component';
+import { NcmComponent } from './components/core/dashboard/ncm/ncm.component';
+import { BpdListComponent } from './components/core/dashboard/bpd-list/bpd-list.component';
+import { ContractConfigurationComponent } from './components/core/dashboard/contract-configuration/contract-configuration.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -113,6 +117,26 @@ const routes: Routes = [
         }
       },{
         path: 'inter-department-tracker', component: IssueTrackerComponent, data: {
+          breadcrumb: 'Users'
+        }
+      },
+      {
+        path: 'document-list', component: DocumentListComponent, data: {
+          breadcrumb: 'Users'
+        }
+      },
+      {
+        path: 'ncm', component: NcmComponent, data: {
+          breadcrumb: 'Users'
+        }
+      },
+      {
+        path: 'contract-configuration', component: ContractConfigurationComponent, data: {
+          breadcrumb: 'Users'
+        }
+      },
+      {
+        path: 'bpd-list', component: BpdListComponent, data: {
           breadcrumb: 'Users'
         }
       },

@@ -75,6 +75,14 @@ import { IssueTrackerCreateComponent } from './components/core/dashboard/inter-d
 import { GroupedBarChartComponent } from './components/shared/grouped-bar-chart/grouped-bar-chart.component';
 import { NcmComponent } from './components/core/dashboard/ncm/ncm.component';
 import { DonutChartComponent } from './components/shared/donut-chart/donut-chart.component';
+import { DocumentListComponent } from './components/core/dashboard/document-list/document-list.component';
+import { BpdListComponent } from './components/core/dashboard/bpd-list/bpd-list.component';
+import { UserSelectionDialogComponent } from './components/core/dashboard/bpd-list/user-selection-dialog/user-selection-dialog.component';
+import { ContractConfigurationComponent } from './components/core/dashboard/contract-configuration/contract-configuration.component';
+//import { BpdListCreateComponent } from './components/core/dashboard/bpd-list/bpd-list-create/bpd-list-create.component';
+//import { ContractConfigurationDetailComponent } from './components/core/dashboard/contract-configuration/contract-configuration-detail/contract-configuration-detail.component';
+//import { ContractConfigurationCreateComponent } from './components/core/dashboard/contract-configuration/contract-configuration-create/contract-configuration-create.component';
+ //import { DocumentListCreateComponent } from './components/core/dashboard/document-list/document-list-create/document-list-create.component';
 import { UserSelectDialogComponent } from './components/core/dashboard/inter-department-tracker/inter-department-tracker-details/user-select-dialog/user-select-dialog.component';
 import { WorkCategoryDialogComponent } from './components/core/dashboard/work-request/work-request-details/work-category-dialog/work-category-dialog.component';
 
@@ -123,6 +131,20 @@ import { WorkCategoryDialogComponent } from './components/core/dashboard/work-re
     GroupedBarChartComponent,
     NcmComponent,
     DonutChartComponent,
+    DocumentListComponent,
+    BpdListComponent,
+    
+    UserSelectionDialogComponent,
+    
+    ContractConfigurationComponent,
+    
+    //BpdListCreateComponent,
+    
+    //ContractConfigurationDetailComponent,
+    
+    //ContractConfigurationCreateComponent,
+   
+    //DocumentListCreateComponent
     UserSelectDialogComponent
   ],
   imports: [
@@ -151,6 +173,7 @@ import { WorkCategoryDialogComponent } from './components/core/dashboard/work-re
     ProjectDetailsComponent,
     ProjectPhasesComponent,
     ProjectTeamsComponent,
+    UserSelectionDialogComponent,
     UserSelectDialogComponent,
     WorkCategoryDialogComponent,
     FileUploadDialogComponent

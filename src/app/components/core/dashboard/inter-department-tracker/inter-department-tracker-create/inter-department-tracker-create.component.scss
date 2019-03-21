@@ -11,7 +11,7 @@
                 margin-top: 15px;
                 margin-right : 5px;
                 img {
-                    width: 100px;
+                    width: 23%;
                     border-radius: 5px;
                 }
                 .issue-trackername-input {
@@ -22,6 +22,7 @@
                 flex: 1;
                 .issue-tracker-details-content-title {
                     margin-left: 10px;
+                    max-width: 24%;
                 }
                 .issue-tracker-details-form-list {
                     border-left: 1px solid #ccc;

@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { constantService } from '../../constant/constant.serive';
 import { UserDashboardData } from '../../interfaces/interfaces';
 
 const data: UserDashboardData = {

@@ -3,10 +3,10 @@
     <mat-spinner style="margin:0 auto;" *ngIf="loading" [diameter]="40"></mat-spinner>
   </div>
   <form [formGroup]="issueTrackerCreateForm" class="issue-tracker-details-form">
-    <mat-card>
+    <mat-card style="height: 17em;">
       <div class="issue-tracker-details-card">
-        <div class="issue-tracker-details-name" fxFlex="20">
-          <mat-form-field appearance="outline">
+        <div class="issue-tracker-details-name" fxFlex="20"  style="margin-top: 4px;">
+          <mat-form-field appearance="outline" style="width: 225px;">
             <mat-label>Project</mat-label>
             <mat-select placeholder="Select project" (selectionChange)="selectProject($event.value)">
               <mat-option *ngFor="let projectName of projects" [value]="projectName">
@@ -14,11 +14,11 @@
               </mat-option>
             </mat-select>
           </mat-form-field>
-          <mat-form-field appearance="outline" style="width: 200px;">
+          <mat-form-field appearance="outline"  style="width: 225px;" >
             <mat-label>ID #</mat-label>
             <input matInput readonly formControlName="issueCode">
           </mat-form-field>
-          <mat-form-field appearance="outline" >
+          <mat-form-field appearance="outline"  style="width: 225px;">
             <mat-label>Reference ID#</mat-label>
             <mat-select placeholder="Select reference" formControlName="refId">
               <mat-option *ngFor="let referenceId of allIssuesCodes" [value]="referenceId.name">
@@ -26,32 +26,7 @@
               </mat-option>
             </mat-select>
           </mat-form-field>
-          <mat-form-field appearance="outline" style="width: 200px;">
-            <mat-label>Issue Type</mat-label>
-            <input matInput formControlName="type">
-          </mat-form-field>
-        </div>
-        <div class="issue-tracker-details-content" fxFlex="60">
-          <div class="issue-tracker-details-form-list" >
-            <div fxLayout=row style="place-content: space-around">
-              <div fxLayout=column >
-                <mat-form-field appearance="outline" style="width: 250px;">
-                  <mat-label>Created By</mat-label>
-                  <input matInput formControlName="createdBy" readonly>
-                </mat-form-field>
-                <mat-form-field  appearance="outline" style="width: 250px;">
-                  <mat-label>Created Date</mat-label>
-                  <input matInput readonly [matDatepicker]="picker2" placeholder="" formControlName="createdAt">
-                  <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-                  <mat-datepicker #picker2></mat-datepicker>
-                </mat-form-field>
-                <mat-form-field appearance="outline" style="width: 250px;"  >
-                  <mat-label>Description</mat-label>
-                  <textarea rows=3 matInput formControlName="description"></textarea>
-                </mat-form-field> 
-              </div>
-              <div fxLayout=column >
-                <mat-form-field appearance="outline" style="width: 250px;">
+          <mat-form-field appearance="outline" style="width: 225px;">
                   <mat-label>Department</mat-label>
                   <mat-select placeholder="" (selectionChange)="selectDepartment($event.value)">
                     <mat-option *ngFor="let departmentName of depratmentLists" [value]="departmentName" >
@@ -59,34 +34,53 @@
                     </mat-option>
                   </mat-select>
                 </mat-form-field>
-                <mat-form-field  appearance="outline" style="width: 250px;">
+               
+          
+        </div>
+        <div  style="margin-left: 0px; border-left: 1px solid lightgrey;height: 237px"  fxLayout="column"  fxFlex="25">
+          <div class="issue-tracker-details-form-list" style="width: 0%" >
+            <div fxLayout=row style="width: 0%">
+              <div fxLayout=column >
+               <mat-form-field appearance="outline" style="width: 250px;margin-left: 22px;">
+            <mat-label>Issue Type</mat-label>
+            <input matInput formControlName="type">
+          </mat-form-field>
+
+               <mat-form-field  appearance="outline" style="width: 250px;margin-left: 22px;">
                   <mat-label>Date of Completion</mat-label>
                   <input matInput [min]="dateOfCompletionFilter" [matDatepicker]="picker3" placeholder="" formControlName="dateOfCompletion">
                     <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
                     <mat-datepicker #picker3></mat-datepicker>
                 </mat-form-field>
-                <mat-form-field appearance="outline" style="width: 250px;"  >
+                <mat-form-field appearance="outline" style="width: 250px;margin-left: 22px;"  >
+                  <mat-label>Description</mat-label>
+                  <textarea style="height:20px" matInput formControlName="description"></textarea>
+                </mat-form-field>
+                 <mat-form-field appearance="outline" style="width: 250px;margin-left: 22px;">
                   <mat-label>Remarks</mat-label>
-                  <textarea  rows=3 matInput formControlName="remark" ></textarea>
+                  <textarea  style="height:20px" matInput formControlName="remark" ></textarea>
                 </mat-form-field> 
               </div>
+               
             </div>
           </div>
         </div>
-        <div class="issue-tracker-details-content" fxFlex="20">
+        <div style="margin-left: 0px; border-left: 1px solid lightgrey;height: 237px"  fxLayout="column"  fxFlex="20" >
           <div class="issue-tracker-details-form-list">
             <form [formGroup]="commentformGroup">
               <div  FormGroupName="comments">
-                <div fxLayout=column>
-                  <mat-form-field appearance="outline">
-                    <mat-label>Sub Type</mat-label>
-                     <mat-select placeholder="" formControlName="subType">
-                      <mat-option *ngFor="let sType of allIssuesType" [value]="sType.name" >
-                        {{sType.name}}
-                      </mat-option>
-                    </mat-select>
-                  </mat-form-field>
-                  <mat-form-field appearance="outline" *ngIf="userDropdownEnable">
+                <div fxLayout=row>
+                   <mat-form-field  appearance="outline" style="width: 164px;margin-left: 22px;">
+                      <mat-label>Completion Date</mat-label>
+                      <input  matInput [min]="dateFilter" [matDatepicker]="picker2" placeholder="Completion Date" formControlName="completionDate">
+                        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                        <mat-datepicker #picker2></mat-datepicker>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" style="width: 164px;margin-left: 22px;">
+                      <mat-label>Comments</mat-label>
+                      <textarea  matInput formControlName="comments" style="height:20px"></textarea>
+                    </mat-form-field>
+                  <mat-form-field appearance="outline" *ngIf="userDropdownEnable" style="width: 164px;margin-left: 22px;">
                     <mat-label>Assigned To</mat-label>
                     <mat-select placeholder="" (selectionChange)="selectedUser($event.value)" formControlName="assignedName">
                       <mat-option *ngFor="let assignedName of users" [value]="assignedName">
@@ -98,10 +92,43 @@
               </div>
             </form>
           </div>
+          <div class="issue-tracker-details-form-list" fxLayout="column">
+            <form [formGroup]="addForm" >
+              <div  FormGroupName="comments">
+                <div fxLayout=row *ngFor="let addForm of array">
+                    <mat-form-field appearance="outline" style="width: 164px;margin-left: 22px;">
+                      <mat-label>Completion Date</mat-label>
+                        <input matInput [min]="myFilter" [matDatepicker]="picker1" placeholder="Completion Date" formControlName="completionDate">
+                          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                      <mat-datepicker #picker1></mat-datepicker>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" style="width: 164px;margin-left: 22px;">
+                      <mat-label>Comments</mat-label>
+                      <textarea  matInput formControlName="comments" style="height:20px" ></textarea>
+                    </mat-form-field>
+                  <mat-form-field appearance="outline" *ngIf="userDropdownEnable" style="width: 164px;margin-left: 22px;">
+                    <mat-label>Assigned To</mat-label>
+                    <mat-select placeholder="" (selectionChange)="selectedUser($event.value)" formControlName="assignedName" >
+                      <mat-option *ngFor="let assignedName of users" [value]="assignedName">
+                        {{assignedName.name.first }} {{assignedName.name.last}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+            </form>
+          </div>
+       
         </div>
+       <br>
+          
       </div>
-      <div fxLayout=row class="pull-right" > 
-        <div fxLayout=column style="align-items: center;" (click)="onFormCancel()">
+      <div fxLayout=row class="pull-right" style="margin-top: -50px;">
+      <div fxLayout=column class="hand-cursor" style="align-items: center;margin-left: 20px;" (click)="onAdd() " >
+        <img style="height: 30px;width: 30px;" src="assets/images/icons/Add.png" />
+        <span>Add</span>
+      </div> 
+        <div fxLayout=column style="align-items: center;margin-left: 19px;" (click)="onFormCancel()" >
           <img style="height: 30px;width: 30px;" src="assets/images/icons/close_red.png" />
           <span>Cancel</span>
         </div>

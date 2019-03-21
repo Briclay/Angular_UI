@@ -12,6 +12,15 @@ import {SpinnerModule} from "../components/shared/spinner/spinner.module";
 import {WorkRequestDetailsComponent} from '../components/core/dashboard/work-request/work-request-details/work-request-details.component';
 import {WorkOrderDetailsComponent} from '../components/core/dashboard/work-order/work-order-details/work-order-details.component';
 import {IssueTrackerDetailsComponent} from '../components/core/dashboard/inter-department-tracker/inter-department-tracker-details/inter-department-tracker-details.component';
+import { DocumentListDetailsComponent } from '../components/core/dashboard/document-list/document-list-details/document-list-details.component';
+import { DocumentListMoreDetailsComponent } from '../components/core/dashboard/document-list/document-list-details/document-list-more-details/document-list-more-details.component';
+import { DocumentListCreateComponent } from '../components/core/dashboard/document-list/document-list-create/document-list-create.component';
+import { NcmDetailsComponent } from '../components/core/dashboard/ncm/ncm-details/ncm-details.component';
+import { NcmCreateComponent } from '../components/core/dashboard/ncm/ncm-create/ncm-create.component';
+import { OpportunityDetailsComponent } from '../components/core/dashboard/ncm/ncm-details/opportunity-details/opportunity-details.component';
+import { ContractConfigurationDetailComponent } from '../components/core/dashboard/contract-configuration/contract-configuration-detail/contract-configuration-detail.component';
+import { ContractConfigurationCreateComponent } from '../components/core/dashboard/contract-configuration/contract-configuration-create/contract-configuration-create.component';
+import { BpdListCreateComponent } from '../components/core/dashboard/bpd-list/bpd-list-create/bpd-list-create.component';
 import { ProjectCreateComponent } from '../components/core/dashboard/projects/project-create/project-create.component';
 
 @NgModule({
@@ -31,6 +40,15 @@ import { ProjectCreateComponent } from '../components/core/dashboard/projects/pr
     WorkOrderDetailsComponent,
     UserDashDetailsComponent,
     IssueTrackerDetailsComponent,
+    DocumentListDetailsComponent,
+    DocumentListMoreDetailsComponent,
+    DocumentListCreateComponent,
+    NcmDetailsComponent,
+    NcmCreateComponent,
+    OpportunityDetailsComponent,
+    ContractConfigurationDetailComponent,
+    ContractConfigurationCreateComponent,
+    BpdListCreateComponent,
     ProjectCreateComponent
   ],
   exports: [
@@ -42,6 +60,15 @@ import { ProjectCreateComponent } from '../components/core/dashboard/projects/pr
     WorkOrderDetailsComponent,
     UserDashDetailsComponent,
     IssueTrackerDetailsComponent,
+    DocumentListDetailsComponent,
+    DocumentListMoreDetailsComponent,
+    DocumentListCreateComponent,
+    NcmDetailsComponent,
+    NcmCreateComponent,
+    OpportunityDetailsComponent,
+    ContractConfigurationDetailComponent,
+    ContractConfigurationCreateComponent,
+    BpdListCreateComponent,
     ProjectCreateComponent
   ],
   entryComponents: [
@@ -53,6 +80,15 @@ import { ProjectCreateComponent } from '../components/core/dashboard/projects/pr
     WorkOrderDetailsComponent,
     UserDashDetailsComponent,
     IssueTrackerDetailsComponent,
+    DocumentListDetailsComponent,
+    DocumentListMoreDetailsComponent,
+    DocumentListCreateComponent,
+    NcmDetailsComponent,
+    NcmCreateComponent,
+    OpportunityDetailsComponent,
+    ContractConfigurationDetailComponent,
+    ContractConfigurationCreateComponent,
+    BpdListCreateComponent,
     ProjectCreateComponent
   ],
   providers: [WidgetService]

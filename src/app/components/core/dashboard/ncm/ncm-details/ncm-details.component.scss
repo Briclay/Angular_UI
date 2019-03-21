@@ -1,0 +1,137 @@
+  .mat-card{
+  transition: box-shadow 280ms cubic-bezier(.4,0,.2,1);
+    display: block;
+    position: relative;
+    padding: 0px;
+    border-radius: 12px;
+  }
+ .user-details-container {
+    padding: 10px;
+    .user-details-form {
+        
+        .user-details-card {
+            flex: 1;
+            display: flex;
+            font: 400 13px/20px Roboto,"Helvetica Neue",sans-serif;
+            .user-details-name {
+                flex: 0.6;
+                
+                img {
+                    width: 100px;
+                    border-radius: 5px;
+                }
+                .username-input {
+                    margin-top: 10px;
+                     
+                }
+               
+            }
+            .user-details-content {
+                flex: 1;
+                height:10px;
+                .user-details-content-title {
+                    margin-left: 54px;
+                    width:-1px;
+                    
+                }
+                .user-details-form-list {
+                    border-left: 2px solid lightgrey;
+                    min-height: 219px;
+                    padding: 10px;
+                    width:110px;
+
+                }
+                .margin_right_26{
+                 width: 161px;
+                 margin-left: 2px;
+
+                }
+                .margin_right_27{
+                 width: 161px;
+                 margin-left:64px;
+                 margin-bottom:0px;
+
+                }
+                .margin_right_28{
+                 width: 328px;
+                
+
+                }
+                .margin_right_29{
+                 width: 0px;
+                
+
+                }
+ .margin_right_30{
+                 width: 95px;
+                 margin-top:-9px;
+                
+
+                }
+                .margin_right_31{
+                 width: 101px;
+                 margin-left:7px;
+                 margin-top:-9px;
+                
+
+                }
+                 .margin_right_32{
+                 width: 139px;
+                
+
+                }
+                .margin_right_36{
+                 width: -1px;
+                 margin-top:-9px;
+                
+
+                }
+
+
+                .feature_btn {
+                    border-radius: 17px;
+                    background-color: #2196F3; 
+                    color: white;
+                    margin-left:12px;
+                    width:-1px;
+                    margin-top:-7px;
+                }
+                
+                 ::ng-deep  .mat-checkbox-checked.mat-accent .mat-checkbox-background,
+    .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+    background-color: #00aff0;
+}
+
+            }
+        }
+    }
+    
+}
+
+.feature_container{
+    padding : 10%;
+    .title {
+        font: 400 13px/20px Roboto,"Helvetica Neue",sans-serif;
+        color :#032a57cf;
+        border-bottom: #4cacda 1px solid;
+        padding : 2%;
+    }
+    .message {
+        font: 400 12px Roboto,"Helvetica Neue",sans-serif;
+        color :#032a57cf; 
+    }
+      .example-container {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .example-container > * {
+        width: 100%;
+      }
+} 
+
+::ng-deep .mat-form-field-appearance-legacy .mat-form-field-underline {
+    height: 0px!important;
+
+}
+ 

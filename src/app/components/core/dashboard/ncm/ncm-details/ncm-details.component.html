@@ -1,0 +1,149 @@
+ <div class="user-details-container">
+ 	<div [formGroup]="ncmListForm"  *ngFor="let v of list" class="user-details-form">
+ 		<mat-card class="mat-card">
+ 			<div class="user-details-card">
+ 				<div class="user-details-name" fxLayout="column" >
+          <div style="height: 20px" > 
+          </div>
+          <div  style="margin-left: 73px; border-right: 2px solid lightgrey;height: 237px"  fxLayout="column" >
+           <mat-form-field  class="margin" style="width: 45px; margin: 2px;margin-bottom: -33px">
+            <input matInput formControlName="revision" required   [(ngModel)]="v.revision">
+          </mat-form-field>
+          <mat-form-field   class="margin" style="width: 52px; margin: 2px;margin-bottom: -35px">
+            <input matInput formControlName="bpd" required [(ngModel)]="v.bpd">
+          </mat-form-field>
+          <mat-form-field   class="margin" style="width: 71px; margin: 2px;margin-bottom: -20px;border-bottom: 1px solid gray;height: 37px;margin-left: -6px;">
+            <input matInput formControlName="date" required [(ngModel)]="v.date">
+          </mat-form-field>
+          <mat-form-field   class="margin" style="width: 68px; margin: 2px;margin-bottom: -33px;    margin-top: 19px;margin-left: 0px;">
+            <input matInput formControlName="purchase" required [(ngModel)]="v.purchase">
+          </mat-form-field>
+          <mat-form-field   class="margin" style="width: 78px; margin: 2px;margin-bottom: -18px;margin-left: -5px;">
+            <input matInput formControlName="name" required [(ngModel)]="v.name" >
+          </mat-form-field>
+          <div class="approve" style="background-color: #63c363;
+          width: 60px;
+          padding: 7px;
+          margin: 3px;
+          border-radius: 34px;
+          height: 15px;
+          margin-left: -6px;"> 
+          <mat-form-field style="margin-top: -17px;">
+            <input matInput formControlName="status" required style="color: white"  [(ngModel)]="v.status">
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+    <div class="username-input" style="margin-left: 20px;" >
+      <div class="user-details-content">
+       <div class="user-details-content-title" >
+        <strong> Risk Statement</strong>
+      </div>
+      <div style="margin-top: 17px">
+       <mat-form-field appearance="outline" class="margin_right_25">
+        <mat-label>Statement</mat-label>
+        <input matInput formControlName="statement" [(ngModel)]="v.statement">
+      </mat-form-field>
+    </div>
+    <br>
+    <div style="margin-top: -27px" >
+      <mat-form-field appearance="outline" class="margin_right_25">
+       <mat-label>Cause</mat-label>
+       <input matInput formControlName="cause" [(ngModel)]="v.cause">
+     </mat-form-field>
+   </div>
+   <br>
+   <div style="margin-top: -26px;">
+    <mat-form-field appearance="outline" class="margin_right_25">
+     <mat-label>Effect</mat-label>
+     <input matInput formControlName="effect" [(ngModel)]="v.effect">
+   </mat-form-field>
+ </div>
+</div>   
+</div>
+<div class="user-details-content" style="margin-left: 6px;">
+  <div class="user-details-content-title" style="margin-left: 93px">
+   <strong>Parameters</strong>
+ </div>
+ <div class="user-details-form-list" style="margin-left: 0px;">
+   <div fxLayout="row" style="margin-top: 7px;">
+    <mat-form-field appearance="outline" class="margin_right_26">
+     <mat-label>Likelihood</mat-label>
+     <input matInput formControlName="likelihood" [(ngModel)]="v.likelihood">
+   </mat-form-field>
+   <mat-form-field appearance="outline" class="margin_right_26">
+     <mat-label>Impact</mat-label>
+     <input matInput formControlName="impact" [(ngModel)]="v.impact">
+   </mat-form-field>
+ </div>
+ <br>
+ <div style="width: 316px;margin-top: -27px" >
+  <mat-form-field appearance="outline" class="margin_right_28" >
+   <mat-label>Mention Current Control</mat-label>
+   <input matInput formControlName="mentionCurrentControl" [(ngModel)]="v.mentionCurrentControl">
+ </mat-form-field>
+</div>
+<br>
+<div fxLayout="row"  >
+  <div style="width: 87px; margin-top: -27px; margin-left: 0px" >
+   <mat-label  style="margin-right: 10px;">Controls Mentioned In <br>
+    Respective<br>
+  Process Areas(BPDs)</mat-label>
+</div>
+<div style="width: 87px; margin-top: 11px" >
+ <mat-checkbox  matInput formControlName="controls" (change)="controlsValue($event)" [(ngModel)]="v.controls"></mat-checkbox>
+</div>
+<div style="width: 87px; margin-top: -27px;">
+ <mat-form-field appearance="outline" class="margin_right_27" >
+  <mat-label>Consequence</mat-label>
+  <input matInput formControlName="consequence" [(ngModel)]="v.consequence">
+</mat-form-field>
+</div>
+
+
+</div>
+</div>
+</div>
+<div class="user-details-content">
+  <div class="user-details-content-title">
+   <strong>Mitigation</strong>
+ </div>
+ <div class="user-details-form-list" style="margin-top: 0px">
+   <div fxLayout="row" style="margin-top: 16px;width: 10px">
+    <mat-form-field appearance="outline" class="margin_right_36">
+      <mat-label>Mitigation Plan</mat-label>
+      <input matInput formControlName="mitigationPlan" [(ngModel)]="v.mitigationPlan">
+    </mat-form-field>
+  </div>
+  <div fxLayout="row" style="width: 0%;margin-top: 0px">
+    <mat-form-field appearance="outline" class="margin_right_30">
+     <mat-label>Budget</mat-label>
+     <input matInput formControlName="budget" [(ngModel)]="v.budget">
+   </mat-form-field>
+   <mat-form-field appearance="outline" class="margin_right_31" >
+     <mat-label>Resource</mat-label>
+     <input matInput formControlName="resource" [(ngModel)]="v.resource">
+   </mat-form-field>
+ </div>
+ <div fxLayout="row" style="margin-top: 5px" >
+   <mat-form-field appearance="outline" style="width: 95px;margin-top: -8px">
+     <mat-label>Time</mat-label>
+     
+     <input matInput   [min]="myFilter"  [matDatepicker]="picker1" placeholder="" formControlName="validTill">
+     <mat-datepicker-toggle matSuffix [for]="picker1" ></mat-datepicker-toggle>
+     <mat-datepicker #picker1></mat-datepicker>
+   </mat-form-field>
+   <div >
+     <button     (click)="openDetailsDialog()" [ngStyle]="{'background-color': buttonColor}" class="margin-left-4" mat-raised-button class="feature_btn"  
+     >Opportunity</button>
+   </div>
+ </div>
+</div>
+</div>
+</div>
+
+<div class="clearfix"></div>
+</mat-card>
+</div>
+</div>
+<!-- [disabled]="(!roleDetailsForm.value.userType && !roleDetailsForm.value._departmentId)" -->

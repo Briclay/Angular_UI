@@ -9,6 +9,7 @@ import { UserService} from '../../../dashboard/user/user.service';
 import { DepartmentService} from "../../../../../services/department/department.service";
 import { IssueTrackerService } from '../inter-department-tracker.service';
 import * as _ from 'lodash';
+declare var moment: any;
 
 @Component({
 	selector: 'app-issue-tracker-create',
@@ -46,7 +47,13 @@ export class IssueTrackerCreateComponent implements OnInit {
 	dateOfCompletionFilter :any;
 	comments: FormArray;
 	commentformGroup: FormGroup;
+	addForm : FormGroup;
 	selectedSubType : any;
+	 Validators;
+
+	myFilter =  moment(new Date()).format("YYYY-MM-DD HH:mm:ss");
+	//yourFilter =  moment(new Date()).format("MM-DD-YYYY HH:mm:ss");
+	array = [];
 	dep = [ 'aa', 'aa','aa', 'aa']
 	constructor(
     	private dialog: MatDialog,
@@ -64,8 +71,9 @@ export class IssueTrackerCreateComponent implements OnInit {
 		this.user = JSON.parse(window.localStorage.getItem('authUser'));
          
         let day = new Date();
-		this.dateOfCompletionFilter = new Date(day);
-		this.dateOfCompletionFilter.setDate(day.getDate()+1);
+		let aa = new Date(day);
+		aa.setDate(day.getDate()+1);
+		this.dateOfCompletionFilter = moment(aa).format("MM-DD-YYYY");
 	}
 
 	ngOnInit() {
@@ -88,9 +96,21 @@ export class IssueTrackerCreateComponent implements OnInit {
 			refId: [''],
 			comments : this.formBuilder.array([])
 		});
+		this.addForm = this.formBuilder.group({
+	     	comments: ['' , Validators.required ],
+			completionDate: [''],
+			_updatedBy: [''],
+			updatedBy:['' ],
+			assignedTo: ['', Validators.required ],
+			assignedName: ['' , Validators.required ],
+			updatedAt: [''],
+			subType: [''],
+			status: ['OPEN' , Validators.required ],       
+        });
+		
 		this.commentformGroup = this.formBuilder.group({
 			comments: ['' , Validators.required ],
-			completionDate: [''],
+			completionDate: ['' , Validators.required],
 			_updatedBy: [''],
 			updatedBy:['' ],
 			assignedTo: ['', Validators.required ],
@@ -208,31 +228,50 @@ export class IssueTrackerCreateComponent implements OnInit {
 	}
 
 	onFormSubmit() {
+		console.log(   this.commentformGroup.value , '77777777777777777777' )
+		console.log( this.array, ' this.array')
 		this.issueTrackerCreateForm.value._projectId = this.selecetedProjectData._id;
 		this.issueTrackerCreateForm.value.projectName = this.selecetedProjectData.name;
 		this.issueTrackerCreateForm.value._departmentId = this.selectedDepartmentData._id;
 		this.issueTrackerCreateForm.value.departmentName = this.selectedDepartmentData.name;
-        let assignedUserName = this.selectedAssignedUserData.name.first +" " + this.selectedAssignedUserData.name.last;
-		this.commentformGroup.value.assignedTo = this.selectedAssignedUserData._id
-		this.commentformGroup.value.assignedName = assignedUserName
-		this.commentformGroup.value.status = 'INPROGRESS'
-       	this.issueTrackerCreateForm.value.comments = [this.commentformGroup.value];
+        //let assignedUserName = this.selectedAssignedUserData.name.first +" " + this.selectedAssignedUserData.name.last;
+		//this.commentformGroup.value.assignedTo = this.selectedAssignedUserData._id
+		//this.commentformGroup.value.assignedName = assignedUserName
+		//this.commentformGroup.value.status = 'INPROGRESS'
+		this.issueTrackerCreateForm.value.comments = this.array;
+       	//this.issueTrackerCreateForm.value.comments = [this.commentformGroup.value];
 		console.log(this.issueTrackerCreateForm.value, "issuesCraetedSubmittedValue");
 		this.issueTrackerService.createIssueTracker(this.issueTrackerCreateForm.value)
 		.pipe().subscribe(response => {
 			console.log(response, 'response.message')
-			this.snackBar.open('Issue created successfully', 'Issue-tracker', {
+			this.snackBar.open('inter-department-tracker created successfully', 'inter-department-tracker', {
 				duration: 2000,
 			});
 			this.issueTrackerCreateForm['_touched'] = false;
 			let tabReq = {index: 0}
           	this.tabSwitch.emit(tabReq);
 		}, (error: any) => {
-			this.snackBar.open(error.message, 'Issue-tracker', {
+			this.snackBar.open(error.message, 'inter-department-tracker', {
 				duration: 2000,
 			});
 			console.log(error , "error")
 		});
+	}
+	onAdd(){
+
+		this.array.push(this.addForm.value);
+		/*if ("!commentformGroup.valid") {
+			//[disabled]
+		}
+		//isDisabled="!commentformGroup.valid"
+		else{
+			this.array.push(this.addForm.value);
+		}*/
+		
+		 
+		/*console.log(this.commentformGroup.value, 'sfsdf')
+	    this.array.push(this.addForm.value);
+	    console.log(this.array, 'SSSSSSDSDSD')*/
 	}
 }
 

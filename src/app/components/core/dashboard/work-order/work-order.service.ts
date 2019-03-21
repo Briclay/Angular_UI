@@ -21,6 +21,6 @@ export class WorkOrderService {
 
     public update(requestObj, woId): Observable<any> {
         let url = `${environmentService.briclayApiBase}/work-order/${woId}`
-        return this.apiService.post(url, requestObj).pipe(map(res => res));
+        return this.apiService.put(url, requestObj).pipe(map(res => res));
     }
 }
