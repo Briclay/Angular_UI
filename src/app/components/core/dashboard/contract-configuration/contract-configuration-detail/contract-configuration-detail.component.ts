@@ -23,23 +23,24 @@ export class ContractConfigurationDetailComponent implements OnInit {
 
  constructor(private formBuilder:FormBuilder,private route: ActivatedRoute,
   private router: Router,
-  private workRequestService: WorkRequestService,) { 
+  private workRequestService: WorkRequestService) { 
    this.contractDetailForm = this.formBuilder.group({
 
 
     name: ['', Validators.required],
     noOfDays: ['', Validators.required],
     categoryReason: [''],
-
-    steps: this.formBuilder.array([])
+    steps: ['']
+    //steps: this.formBuilder.array([])
   });
 
    this.orgDetails =  JSON.parse(window.localStorage.authUserOrganisation);
    this.orgID = this.orgDetails._id;
    console.log('this.orgId' + JSON.stringify(this.orgDetails));
-   this.getWorkRequest();}
+ }
 
    ngOnInit() {
+       this.getWorkRequest();
    }
 
    categoryChanged(id){
@@ -58,7 +59,6 @@ export class ContractConfigurationDetailComponent implements OnInit {
   getWorkRequest(){
 
     this.workRequestService.getWorkConfig(this.orgID).pipe().subscribe(res => {
-      debugger;
       this.workCategory = res;
     }, (error: any) => {
       console.error('error', error);

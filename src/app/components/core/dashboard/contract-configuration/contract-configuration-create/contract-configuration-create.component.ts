@@ -51,7 +51,8 @@ export class ContractConfigurationCreateComponent implements OnInit {
         name: ['', Validators.required],
         noOfDays: ['', Validators.required],
         categoryReason: [''],
-        steps: this.formBuilder.array([])
+        steps:['']
+        //steps: this.formBuilder.array([])
       });
 
       this.assignValuesToForm();

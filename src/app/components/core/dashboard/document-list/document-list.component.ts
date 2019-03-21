@@ -52,7 +52,6 @@ orgID:any;
 		observableMerge(this.route.params, this.route.queryParams).pipe(
 			takeUntil(this.unsubscribe))
 		.subscribe((params) => this.loadRoute(params));
-		this.getDocumentListData()
 	         //moment(this.createdAt)
 	     }
 		     public ngOnDestroy(): void {
@@ -96,16 +95,16 @@ orgID:any;
 	     }
 
 	     projectChanged(proj) {
-				     	    this.selectedProjData = proj.value;
-				     	    this.router.navigate([], { queryParams: { projectId: proj.value ? proj.value._id : proj._id }, queryParamsHandling: 'merge' });
-				            //this.selectedProjData=proj.value moment(new Date()).local().format("YYYY-MM-DD");
-				            console.log(proj, 'proj');
-				            this.selectedProjId=proj.value._id
+     	    this.selectedProjData = proj.value;
+     	    this.router.navigate([], { queryParams: { projectId: proj.value ? proj.value._id : proj._id }, queryParamsHandling: 'merge' });
+            //this.selectedProjData=proj.value moment(new Date()).local().format("YYYY-MM-DD");
+            console.log(proj, 'proj');
+            this.selectedProjId=proj.value._id
 
-				        }
-				        tabSwitch(tabReq) {
-				        	this.tabGroup.selectedIndex = tabReq.index;
-				        	this.getDocumentListData()
-				        }
+        }
+        tabSwitch(tabReq) {
+        	this.tabGroup.selectedIndex = tabReq.index;
+        	this.getDocumentListData()
+        }
 
-				    }
+    }

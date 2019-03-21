@@ -4,8 +4,8 @@
       <mat-form-field appearance="outline"  >
         <mat-label>Select Config</mat-label>
         <mat-select placeholder=""  (selectionChange)="categoryChanged($event.value)">
-         <mat-option  [value]="workCategory[0]._id" >
-            {{workCategory[0].configKey}}
+         <mat-option  [value]="workCategory && workCategory.length > 0 && workCategory[0]._id" >
+            {{workCategory && workCategory.length > 0 && workCategory[0].configKey}}
           </mat-option>
         </mat-select>
       </mat-form-field>
