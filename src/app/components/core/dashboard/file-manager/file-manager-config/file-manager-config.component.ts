@@ -455,14 +455,12 @@ export class FileManagerConfigComponent implements OnInit {
       data: file
     }).afterClosed()
     .subscribe(res => {
-        /*this.selectedFileData.approval = res.approval;
-        this.selectedFileData.approval = res.approval;*/
-        // body.approval = res.approval;
-        // body.remarks = res.remarks;
-
+      if(res){
+        body.approval = res.approval;
+        body.remarks = res.remarks;
         console.log(body, 'body before file upload for RFA & WO')
         this.saveOnS3(response, file, body);
-        console.log(res, 'file upload data after submit')
+      }
     });
   }
 

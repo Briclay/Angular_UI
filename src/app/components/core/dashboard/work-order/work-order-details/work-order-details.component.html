@@ -4,16 +4,17 @@
       <form name="orderTrackerForm" [formGroup]="orderTrackerForm" novalidate>
         <div class="card-header">
           <div fxFlex="20" fxLayout="row" fxLayoutAlign="start center">
-            <mat-form-field appearance="outline" floatLabel="never" color="primary">
+            <mat-form-field *ngIf="formType === 'create'" appearance="outline" floatLabel="never" color="primary">
               <mat-label>Work Request</mat-label>
-              <mat-select placeholder="Work Request" formControlName="workRequestList" class="fo-p3-likhud" (selectionChange)="selectWorkRequest()">
+              <mat-select placeholder="Work Request" formControlName="workRequest" class="fo-p3-likhud" (selectionChange)="selectWorkRequest()">
                 <mat-option *ngFor="let requestList of workList" [value]="requestList">
                   {{ requestList.requestNumber }}
                 </mat-option>
               </mat-select>
-              <mat-error *ngIf="orderTrackerFormErrors._workRequest.required">
-                Work request is required!
-              </mat-error>
+            </mat-form-field>
+            <mat-form-field *ngIf="formType !== 'create'" appearance="outline" floatLabel="never" color="primary">
+              <mat-label>Work Request</mat-label>
+              <input matInput placeholder="" formControlName="workRequest" readonly>
             </mat-form-field>
           </div>
           <div  fxFlex="20" fxLayout="row" fxLayoutAlign="start center">
@@ -43,7 +44,7 @@
             <div  fxFlex="20">
               <mat-form-field appearance="outline" fxLayoutAlign="start center">
                 <mat-label>Work Order Id</mat-label>
-                <input matInput placeholder="Work Order Id" formControlName="_workOrderId" readonly>
+                <input matInput placeholder="Work Order Id" formControlName="orderNumber" readonly>
               </mat-form-field>
             </div>
             <div  fxFlex="20">

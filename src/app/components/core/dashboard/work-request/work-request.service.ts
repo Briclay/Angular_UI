@@ -20,6 +20,11 @@ export class WorkRequestService {
         return this.apiService.post(url, request).pipe(map(res => res));
     }
 
+    public getSingleWorkRequest(reqId): Observable<any> {
+        const url = `${environmentService.briclayApiBase}/work-request/${reqId}`;
+        return this.apiService.get(url).pipe(map(res => res));
+    }
+
     public getWorkConfig(orgID): Observable<any> {
         const url = `${environmentService.briclayApiBase}/work-config?${orgID}&configValues=WORK_CATEGORY`;
         return this.apiService.get(url).pipe(map(res => res));

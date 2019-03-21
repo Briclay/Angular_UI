@@ -1,5 +1,74 @@
 <app-top-menu></app-top-menu>
 <div class="work-request-container">
+  <div>
+     <mat-card style="margin-top: 5px;">
+      <div fxLayout=row style="place-content: space-around;">
+        <div class="table_header_text" >
+          <div fxLayout=row >
+            <span fxLayout=row  >Work Request ID</span>
+            <img  style="height: 12px;width: 12px;" src="/assets/images/icons/Filter.png" (click)="viewInputForFilterDataWR()" />
+          </div>
+          <span *ngIf="enableInputWR">            
+            <input #myInput type="text" (input)="filterItem(myInput.value)" style="color:#032A57; font-size: 11px;"/>
+          </span>
+        </div>
+        <div class="table_header_text" >
+          <div fxLayout=row >
+            <span fxLayout=row  >Need By date</span>
+            <img  style="height: 12px;width: 12px;" src="/assets/images/icons/Filter.png" (click)="viewInputForFilterDataNBD()" />
+          </div>
+          <span *ngIf="enableInputNBD">            
+            <input #myInput type="text" (input)="filterItem(myInput.value)" style="color:#032A57; font-size: 11px;"/>
+          </span>
+        </div>
+        <div class="table_header_text" >
+          <div fxLayout=row >
+            <span fxLayout=row  >Assignee</span>
+            <img  style="height: 12px;width: 12px;" src="/assets/images/icons/Filter.png" (click)="viewInputForFilterDataAssign()" />
+          </div>
+          <span *ngIf="enableInputAssign">            
+            <input #myInput type="text" (input)="filterItem(myInput.value)" style="color:#032A57; font-size: 11px;"/>
+          </span>
+        </div>
+        <div class="table_header_text" >
+          <div fxLayout=row >
+            <span fxLayout=row  >Type of work</span>
+            <img  style="height: 12px;width: 12px;" src="/assets/images/icons/Filter.png" (click)="viewInputForFilterDataTOW()" />
+          </div>
+          <span *ngIf="enableInputTOW">            
+            <input #myInput type="text" (input)="filterItem(myInput.value)" style="color:#032A57; font-size: 11px;"/>
+          </span>
+        </div>
+        <div class="table_header_text" >
+          <div fxLayout=row >
+            <span fxLayout=row  >Package/Description</span>
+            <img  style="height: 12px;width: 12px;" src="/assets/images/icons/Filter.png" (click)="viewInputForFilterDataDES()" />
+          </div>
+          <span *ngIf="enableInputDES">            
+            <input #myInput type="text" (input)="filterItem(myInput.value)" style="color:#032A57; font-size: 11px;"/>
+          </span>
+        </div>
+        <div class="table_header_text" >
+          <div fxLayout=row >
+            <span fxLayout=row  >Initiated Date</span>
+            <img  style="height: 12px;width: 12px;" src="/assets/images/icons/Filter.png" (click)="viewInputForFilterDataID()" />
+          </div>
+          <span *ngIf="enableInputID">            
+            <input #myInput type="text" (input)="filterItem(myInput.value)" style="color:#032A57; font-size: 11px;"/>
+          </span>
+        </div>
+        <div class="table_header_text" >
+          <div fxLayout=row >
+            <span fxLayout=row  >Work Category</span>
+            <img  style="height: 12px;width: 12px;" src="/assets/images/icons/Filter.png" (click)="viewInputForFilterDataWC()" />
+          </div>
+          <span *ngIf="enableInputWC">            
+            <input #myInput type="text" (input)="filterItem(myInput.value)" style="color:#032A57; font-size: 11px;"/>
+          </span>
+        </div>
+      </div>
+    </mat-card>
+  </div>
   <mat-tab-group #tabGroup>
       <mat-tab label="Overview">
          <app-panel-header-filter [data]="workRequests" (dataFilter)="dataPaginatorChange($event)"></app-panel-header-filter>
