@@ -1,17 +1,20 @@
+<app-top-menu></app-top-menu>
 <div class="work-order-container">
   <mat-tab-group>
       <mat-tab label="Overview">
-          <app-panel-header-filter (selectOrganizaion)="organizationChanged($event)"></app-panel-header-filter>
-          <div fxLayout="row">
+        <app-panel-header-filter [data]="workOrders" (dataFilter)="dataPaginatorChange($event)"></app-panel-header-filter>
             <div style ="place-content :center;">
-              <mat-spinner style="margin:0 auto;" *ngIf="isLoading; else dataLoaded" [diameter]="40"></mat-spinner>
+              <mat-spinner style="margin:0 auto;" *ngIf="isLoading; else content" [diameter]="40"></mat-spinner>
             </div>
-              <ng-template #dataLoaded>
+            <div fxLayout="row">
+              <ng-template #content>
                 <app-expansion-panel 
                     [expansionPanelOptions]="workOrderDataOption"
+                    [pageIndex]="pageIndex"
+                    [pageSize]="pageSize"
                     selectorComponent="app-work-order-details" 
-                    [data]="workOrder"
-                    [isHistory]="true"></app-expansion-panel>
+                    [data]="workOrders"
+                    [isHistory]="true" (updateRefresh)="getWorkRequest()"></app-expansion-panel>
               </ng-template>
           </div>
       </mat-tab>

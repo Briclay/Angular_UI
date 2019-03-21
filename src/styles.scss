@@ -210,3 +210,36 @@ app-expansion-panel {
 .mat-progress-spinner circle, .mat-spinner circle {
     stroke: #6B6B6B!important;
 }
+.display_none {
+    display:none;
+}
+.text_d_none{
+    text-decoration: none;
+}
+.content_space_arround{
+    place-content: space-around;
+}
+.content_space_between{
+    place-content: space-between;
+}
+.content_center{
+    place-content: center;
+}
+.padding_2{
+    padding: 2px;
+}
+.position_relative {
+    position:relative;
+}
+.align_center {
+    align-items: center;
+}
+.margin_left_5{
+    margin-left: 5px;
+}
+.height_55{
+    height : 55px;
+}
+.spiner_div{
+    margin:0 auto;
+}

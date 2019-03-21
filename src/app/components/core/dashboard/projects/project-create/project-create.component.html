@@ -56,8 +56,8 @@
                 <mat-form-field class="padding_1" appearance="outline" fxFlex="30">
                   <mat-label>Project Status</mat-label>                
                   <mat-select formControlName="status">
-                    <mat-option *ngFor="let status of projectStatus" [value]="status">
-                      {{status}}
+                    <mat-option *ngFor="let sta of projectStatus" [value]="sta">
+                      {{sta}}
                     </mat-option>
                   </mat-select>
                 </mat-form-field> 
@@ -115,7 +115,7 @@
             <!-- end third section -->
           </div>
           <div fxLayout="row">
-            <button mat-raised-button>
+            <button mat-raised-button (click)="onFormCancel()">
               <span>Cancel</span>
             </button>
             <button type="submit" mat-raised-button (click)="onSubmit()">

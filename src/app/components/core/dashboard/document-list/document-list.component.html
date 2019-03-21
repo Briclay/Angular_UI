@@ -1,65 +1,50 @@
 <app-top-menu class="mat-card2"></app-top-menu>
-  
-   
-
- <div style="padding-top: 2px">
+<div style="padding-top: 2px">
  <mat-card fxLayout=row style="height: 50px; place-justify-content: left;width: 100%;padding-top: 7px">
-    <div style="width:43%;">
-<app-project-drop-down (selectProjects)="projectChanged($event)" style="width: 71%"></app-project-drop-down>
- 
-</div>
- 
-
- <div class="text_color" *ngIf="selectedProjData" style="width: 30%;margin-right: 11em">{{selectedProjData.name}}</div>
- <div class="text_color" *ngIf="selectedProjData" style="width: 25%;margin-right: 58em">{{selectedProjData.createdAt}}</div>
- </mat-card>
- </div>
- <div class="user-container">
- 
-    <mat-tab-group #tabGroup>
-        <mat-tab label="Overview">
-            
-           <mat-card class="panel-header" >
-  <div class="pull-right" style="height: 30px">
-    <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]">
-    </mat-paginator>
-    <mat-form-field class="example-full-width" appearance="outline">
-      <mat-label>Search</mat-label>
-      <input matInput placeholder="Search">
-    </mat-form-field>
-  </div>
-  <div class="clearfix"></div>
+     <div style="width:43%;">
+      <app-project-drop-down (selectProjects)="projectChanged($event)" style="width: 71%"></app-project-drop-down>
+     </div>
+     <div class="text_color" *ngIf="selectedProjData" style="width: 30%;margin-right: 11em">{{selectedProjData.name}}</div>
+     <div class="text_color" *ngIf="selectedProjData" style="width: 25%;margin-right: 58em">{{selectedProjData.createdAt}}</div>
 </mat-card>
-           
-           	<div style ="place-content :center;">
-	          <mat-spinner style="margin:0 auto;" *ngIf="projectLoading; else content" [diameter]="40"></mat-spinner>
-	        </div>
-            <div fxLayout="row">
-                <ng-template #content>
-                		<mat-card fxLayout=row style="height: 50px;place-content:space-around;width: auto;">
-            				 
-            				<div ><span class="text_color">List Name</span></div>
-
-            				<div><span class="text_color">Created Date</span></div>
-
-            				<div><span class="text_color">Created By</span></div>
-            		</mat-card>  
-
-<!--             		 
-                    </app-expansion-panel> -->
-                    <app-expansion-panel 
-                         [expansionPanelOptions]="documentListDataOptions" 
-                        selectorComponent="app-document-list-details" 
-                        [data]="documentList"
-                        [isHistory]="false"
-                         >
-                    </app-expansion-panel>
-                </ng-template>    
-            </div>
-        </mat-tab>
-        <mat-tab label="New">
-            <app-document-list-create formType="create" (tabSwitch)="tabSwitch($event)" ></app-document-list-create>
-        </mat-tab>
-    </mat-tab-group>
 </div>
- 
+<div class="user-container">
+  <mat-tab-group #tabGroup>
+    <mat-tab label="Overview">
+     <mat-card class="panel-header" >
+      <div class="pull-right" style="height: 30px">
+        <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]">
+        </mat-paginator>
+        <mat-form-field class="example-full-width" appearance="outline">
+          <mat-label>Search</mat-label>
+          <input matInput placeholder="Search">
+        </mat-form-field>
+      </div>
+      <div class="clearfix"></div>
+    </mat-card>
+    <div style ="place-content :center;">
+     <mat-spinner style="margin:0 auto;" *ngIf="projectLoading; else content" [diameter]="40"></mat-spinner>
+   </div>
+   <div fxLayout="row">
+    <ng-template #content>
+      <mat-card fxLayout=row style="height: 50px;place-content:space-around;width: auto;">
+        <div ><span class="text_color">List Name</span></div>
+          <div><span class="text_color">Created Date</span></div>
+        <div><span class="text_color">Created By</span></div>
+      </mat-card>  
+<!--             		 
+</app-expansion-panel> -->
+<app-expansion-panel 
+  *ngIf="list && list.length > 0" [expansionPanelOptions]="documentListDataOptions" 
+    selectorComponent="app-document-list-details" 
+   [data]="list"
+ [isHistory]="false">
+</app-expansion-panel>
+</ng-template>    
+</div>
+</mat-tab>
+<mat-tab label="New">
+  <app-document-list-create formType="create" (tabSwitch)="tabSwitch($event)" ></app-document-list-create>
+</mat-tab>
+</mat-tab-group>
+</div>

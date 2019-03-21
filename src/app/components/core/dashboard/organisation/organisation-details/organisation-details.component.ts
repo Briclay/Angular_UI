@@ -22,7 +22,8 @@ export class OrganisationDetailsComponent implements OnInit {
   @Input() data: any;
   @Input() formType: string;
   @Output() public tabSwitch: EventEmitter<any> = new EventEmitter<any>();
-  
+  @Output() public updateRefresh: EventEmitter<any> = new EventEmitter<any>();
+
   organisationsList: any;
   userAuth: any;
   temp = [];
@@ -265,7 +266,9 @@ export class OrganisationDetailsComponent implements OnInit {
       this.organizationDetailsForm.controls['orgCode'].setValue(str);
     }
   }
-
+  onFormCancel(){
+    this.organizationDetailsForm.reset()
+  }
   onOrgFormSubmit() {
     this._features.map(f =>{
       delete (f.hidePermissions)
@@ -308,8 +311,8 @@ export class OrganisationDetailsComponent implements OnInit {
         duration: 2000,
       });
       this.organizationDetailsForm['_touched'] = false;
-      const path = '/dashboard/organisation'
-      this.router.navigate([path]);
+      let tabReq = {index: 0}
+      this.tabSwitch.emit(tabReq);
     }, (error: any) => {
       this.orgFormSubmitted = false;
       this.snackBar.open(error.message, 'Organisation', {
@@ -328,9 +331,7 @@ export class OrganisationDetailsComponent implements OnInit {
         duration: 2000,
       });
       this.organizationDetailsForm['_touched'] = false;
-      const path = '/dashboard/organisation'
-      this.router.navigate([path]);
-      this.tabSwitch.emit(0);
+      this.updateRefresh.emit()
     }, (error: any) => {
       this.orgFormSubmitted = false;
       this.snackBar.open(error.message, 'Organisation', {

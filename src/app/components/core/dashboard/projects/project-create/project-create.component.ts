@@ -25,7 +25,8 @@ export class ProjectCreateComponent implements OnInit {
   @Input() formType: string;
   @Input() orgID: string;
   @Output() public tabSwitch: EventEmitter<any> = new EventEmitter<any>();
-  
+  @Output() public updateRefresh: EventEmitter<any> = new EventEmitter<any>();
+
   form: FormGroup;
   formErrors: any;
   projectFormErrors: any;
@@ -103,13 +104,11 @@ export class ProjectCreateComponent implements OnInit {
     }
   }
 
-  loadRoute(params: any) {
+/*  loadRoute(params: any) {
     if('orgID' in params) {
       this.orgID = params['orgID'];
-
-     
     }
-  }
+  }*/
 
 
 /*  loadRoute(params: any) {
@@ -237,28 +236,58 @@ export class ProjectCreateComponent implements OnInit {
         console.log('error', error);
       })
   }
+
+  onFormCancel(){
+    this.projectForm.reset()
+  }
   onSubmit() {
-    this.projectForm.value.imageUrls = this.imageArray;
-    // this.projectForm.value.phases = [];
-     if( _.isUndefined(this.projectForm.value._teamMembers) || _.isEmpty(this.projectForm.value._teamMembers)){
-       this.projectForm.value._teamMembers = [];
+    if(this.formType !== 'create'){
+      this.projectForm.value.imageUrls = this.imageArray;
+        // this.projectForm.value.phases = [];
+        if( _.isUndefined(this.projectForm.value._teamMembers) || _.isEmpty(this.projectForm.value._teamMembers)){
+           this.projectForm.value._teamMembers = [];
+        }
+        if( _.isUndefined(this.projectForm.value.carParkingArea) || _.isEmpty(this.projectForm.value.carParkingArea)){
+          this.projectForm.value.carParkingArea = [];
+        }
+        console.log('this.projectForm ' + JSON.stringify(this.projectForm.value));
+        this.projectService.update(this.projectForm.value, this.data._id)
+          .pipe().subscribe(res => {
+            console.log('Project updated successfully', res);
+            this.snackBar.open("Project updated successfully", 'Project', {
+              duration: 3000,
+            });
+            this.updateRefresh.emit()
+          }, (error: any) => {
+          console.error('error', error);
+          this.snackBar.open(error.message, 'Project', {
+            duration: 3000,
+          });
+      })
     }
-    if( _.isUndefined(this.projectForm.value.carParkingArea) || _.isEmpty(this.projectForm.value.carParkingArea)){
-      this.projectForm.value.carParkingArea = [];
-   }
-    console.log('this.projectForm ' + JSON.stringify(this.projectForm.value));
-    this.projectService.save(this.projectForm.value)
-      .pipe().subscribe(res => {
-        console.log('Project created successfully', res);
-        this.snackBar.open("Project created successfully", 'Project', {
-          duration: 3000,
-        });
-      }, (error: any) => {
-        console.error('error', error);
-        this.snackBar.open(error.message, 'Project', {
-          duration: 3000,
-        });
-    })
+    else{
+      this.projectForm.value.imageUrls = this.imageArray;
+      // this.projectForm.value.phases = [];
+       if( _.isUndefined(this.projectForm.value._teamMembers) || _.isEmpty(this.projectForm.value._teamMembers)){
+         this.projectForm.value._teamMembers = [];
+      }
+      if( _.isUndefined(this.projectForm.value.carParkingArea) || _.isEmpty(this.projectForm.value.carParkingArea)){
+        this.projectForm.value.carParkingArea = [];
+      }
+      console.log('this.projectForm ' + JSON.stringify(this.projectForm.value));
+      this.projectService.save(this.projectForm.value)
+        .pipe().subscribe(res => {
+          console.log('Project created successfully', res);
+          this.snackBar.open("Project created successfully", 'Project', {
+            duration: 3000,
+          });
+        }, (error: any) => {
+          console.error('error', error);
+          this.snackBar.open(error.message, 'Project', {
+            duration: 3000,
+          });
+      })
+    }
   }
   onFileInput(event, fileList?) {
     let reader = new FileReader()

@@ -4,6 +4,10 @@ import {UserService} from '../../../../components/core/dashboard/user/user.servi
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { MatDialog,  MatSnackBar ,MAT_DIALOG_DATA } from '@angular/material';
+import { ProjectService } from '../../../../components/core/dashboard/projects/project.service';
+import {merge as observableMerge, Subject} from 'rxjs';
+import { Router, ActivatedRoute } from '@angular/router';
+import {takeUntil} from 'rxjs/operators';
 
 @Component({
   selector: 'app-design-dashboard',
@@ -14,12 +18,9 @@ export class DesignDashboardComponent implements OnInit {
   @Input() data: any;
   @Input() formType: string;
   
-  organizations: any[] = [
-    { value: 'organizations-1', viewValue: 'Organizations-1' },
-    { value: 'organizations-2', viewValue: 'Organizations-2' },
-    { value: 'organizations-3', viewValue: 'Organizations-3' }
-  ];
+  organizations: any;
   designDashForm: FormGroup;
+  projectForm: FormGroup;
   orgID: string;
   userAuth : any;
   profileImageUrl = "";
@@ -29,161 +30,28 @@ export class DesignDashboardComponent implements OnInit {
   roleName: any;
   isLoading : boolean;
   usrType : any;
-
-/*  projectConsultances : any[] = [
-    {
-      "_id": "1",
-      "name": "Architect",
-      "internaluser" : "Internal User 1",
-      "externaluser" : "External User 1"
-    },
-    {
-      "_id": "2",
-      "name": "Structural Engg",
-      "internaluser" : "Internal User 1",
-      "externaluser" : "External User 1"
-    },
-    {
-      "_id": "3",
-      "name": "Public Health Engg",
-      "internaluser" : "Internal User 1",
-      "externaluser" : "External User 1"
-    },
-    {
-      "_id": "4",
-      "name": "Fire & Emergency",
-      "internaluser" : "Internal User 1",
-      "externaluser" : "External User 1"
-    },
-    {
-      "_id": "5",
-      "name": "Electrical Engg",
-      "internaluser" : "Internal User 1",
-      "externaluser" : "External User 1"
-    },
-    {
-      "_id": "6",
-      "name": "HVAC Design",
-      "internaluser" : "Internal User 1",
-      "externaluser" : "External User 1"
-    },
-    {
-      "_id": "7",
-      "name": "Landsape",
-      "internaluser" : "Internal User 1",
-      "externaluser" : "External User 1"
-    }
-  ]
-
-  products : any[] = [
-    {
-      "_id": "1",
-      "bhk": "2 BHK",
-      "no" : "100",
-      "area" : "1250"
-    },
-    {
-      "_id": "2",
-      "bhk": "3 BHK",
-      "no" : "140",
-      "area" : "1265"
-    },
-    {
-      "_id": "3",
-      "bhk": "4 BHK",
-      "no" : "198",
-      "area" : "2045"
-    },
-    {
-      "_id": "4",
-      "bhk": "1 BHK",
-      "no" : "133",
-      "area" : "2036"
-    }
-  ]
-
-  projectTypes : any[] =[
-    {
-      "_id": "1",
-      "name": "Land Details",
-    },
-    {
-      "_id": "2",
-      "name": "Architecture",
-    },
-    {
-      "_id": "3",
-      "name": "Structural",
-    },
-    {
-      "_id": "4",
-      "name": "PHE",
-    },
-    {
-      "_id": "5",
-      "name": "Electrical",
-    },
-    {
-      "_id": "6",
-      "name": "Fire",
-    },
-    {
-      "_id": "7",
-      "name": "Interiors",
-    },
-    {
-      "_id": "8",
-      "name": "Landscape",
-    },
-    {
-      "_id": "9",
-      "name": "NOC",
-    },
-    {
-      "_id": "10",
-      "name": "RERA",
-    },
-    {
-      "_id": "11",
-      "name": "Area Statement",
-    },
-    {
-      "_id": "12",
-      "name": "Specifications",
-    },
-    {
-      "_id": "13",
-      "name": "Sales & Marketing",
-    }
-
-  ]
-  
-  projects : any[] = [
-    {
-      "_id": "1",
-      "name": "Sunworth ",
-      "address" : "Ulsoor Bangalore"
-    },
-    {
-      "_id": "2",
-      "name": "PURVA SKYDALE",
-      "address" : "Ulsoor Bangalore"
-    },
-    {
-      "_id": "3",
-      "name": "Purva Seasons",
-      "address" : "Ulsoor Bangalore"
-    },
-    {
-      "_id": "4",
-      "name": "Milestone",
-      "address" : "Ulsoor Bangalore"
-    },
-  ]*/
+  selectedOrgId : any;  
+  projects : any;
+  projectSelected = false;
+  selectedProjectData : any;
+  projectConsultants =[];
+  unitsArray =[];
+  userDeppartment : any;
+  clickedProjectName: any;
+  analyticResponseCheck = false;
+  projectTypes =[]
+  intiallTypes =  [ 'Architecture', 'Structural','PHE', 'Electrical','Fire',
+   'HVAC','Interiors'];
+  analyticsLoading  = false;
+  private unsubscribe: Subject<any> = new Subject();
 
   constructor(
     private fileManagerService: FileManagerService,
+    private projectService : ProjectService,
+    private formBuilder : FormBuilder,
     private http: HttpClient,
+    private router: Router,
+    private route: ActivatedRoute,
     private userService : UserService,
     private snackBar : MatSnackBar) {    
 
@@ -194,10 +62,73 @@ export class DesignDashboardComponent implements OnInit {
       this.roleName = this.user._roleId.name;
       this.profileImageUrl = this.user.profileImageUrl ? this.user.profileImageUrl : "./assets/images/avatars/profile.jpg";
     this.userAuth = JSON.parse(window.localStorage.getItem('authUserOrganisation'));
+    let dep = JSON.parse(window.localStorage.getItem('authUserDepartment'));
+    this.userDeppartment = dep._id;
     this.orgID = this.userAuth._id;
+    this.selectedOrgId = this.orgID
   }
 
   ngOnInit() {
+    this.projectForm = this.formBuilder.group({
+      units: this.formBuilder.array([]),
+      phases: this.formBuilder.array([]),
+      _teamMembers: this.formBuilder.array([]),
+      carParkingArea: this.formBuilder.array([]),
+      projectDetails: this.formBuilder.group({
+        location: [''],
+        blocks: [''],
+        landArea: [''],
+        carpetarea: [''],
+        saleArea: [''],
+        crmTeam: [''],
+        totalUnit: [''],
+        budget: ['']
+      })
+    });
+    this.getProjects();
+  }
+  getProjects() {
+    this.projectService.getProjects(this.selectedOrgId).pipe().subscribe(res => {
+      console.log('res', res);
+      this.projects = res;
+    }, (error: any) => {
+      console.error('error', error);
+    });
+  }
+
+  selectSingleProject(proj){
+    this.projectTypes = []
+    if(this.analyticsLoading === false){
+      console.log(proj, "selected poject data")
+      this.projectSelected = true;
+      this.selectedProjectData = proj;
+      this.clickedProjectName = proj.name;
+      this.projectConsultants = this.selectedProjectData._consultants;
+      this.unitsArray = this.selectedProjectData.units;
+      this.getAllAnalytics()
+    }
+  }
+
+  getAllAnalytics (){
+    this.analyticsLoading = true;
+    let filter = `filter[_projectId]=${this.selectedProjectData._id}&filter[_departmentId]=${this.userDeppartment}&filter[_organisationId]=${this.orgID}&filter[name]=${this.clickedProjectName}`
+    this.fileManagerService.getAnalytics(filter)
+    .pipe().subscribe(res => {
+      this.analyticsLoading = false;
+      this.intiallTypes.forEach(ty => {
+        res.length > 0 && res.forEach(v => {
+          if(ty === v.name){
+            this.projectTypes.push(v)
+          }
+        })
+      })
+      console.log(res, 'getAllAnalytics')
+    }, (error: any) => {
+       this.snackBar.open(error.message, 'error', {
+        duration: 5000,
+      });
+      console.log(error)
+    });
   }
 
   onFileInput(event, fileList?) {

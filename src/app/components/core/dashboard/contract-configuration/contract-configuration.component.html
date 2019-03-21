@@ -1,25 +1,14 @@
 <app-top-menu class="mat-card2"></app-top-menu>
-  
-   
-
-
- <div class="user-container">
- 
-    <mat-tab-group #tabGroup>
-        <mat-tab label="Overview">
-           
-          <app-contract-configuration-detail formType="update" (tabSwitch)="tabSwitch($event)" ></app-contract-configuration-detail>
-            
-         
-           
-           	<div style ="place-content :center;">
-	          <mat-spinner style="margin:0 auto;" *ngIf="projectLoading; else content" [diameter]="40"></mat-spinner>
-	        </div>
-            
-        </mat-tab>
-        <mat-tab label="New">
-            <app-contract-configuration-create formType="create" (tabSwitch)="tabSwitch($event)" ></app-contract-configuration-create>
-        </mat-tab>
-    </mat-tab-group>
+<div class="user-container">
+  <mat-tab-group #tabGroup>
+    <mat-tab label="Overview">     
+     <app-contract-configuration-detail formType="update" (tabSwitch)="tabSwitch($event)" ></app-contract-configuration-detail>       
+     <div style ="place-content :center;">
+       <mat-spinner style="margin:0 auto;" *ngIf="projectLoading; else content" [diameter]="40"></mat-spinner>
+     </div>     
+   </mat-tab>
+   <mat-tab label="New">
+    <app-contract-configuration-create formType="create" (tabSwitch)="tabSwitch($event)" ></app-contract-configuration-create>
+  </mat-tab>
+</mat-tab-group>
 </div>
- 

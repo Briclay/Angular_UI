@@ -3,48 +3,33 @@
 
   <div [formGroup]="opportunityDetailsForm">
     <div fxLayout="row" style="width: 200px;">
-     
+
       <mat-form-field appearance="outline" style="width: 200px;">
         <mat-label>Satement</mat-label>
         <input matInput placeholder="Statement" required
         formControlName="statement">
       </mat-form-field>
-
     </div>
-
-
-    
-
-
     <div fxLayout="row" style="width: 200px;">
       <mat-form-field appearance="outline" style="width: 200px;margin-right: 5px;">
         <mat-label>Resource</mat-label>
         <input matInput placeholder="resource" required
         formControlName="resource">
-      </mat-form-field>
-
-      
-      
+      </mat-form-field>     
     </div>
-    
-
-
-    <div fxLayout="row" style="width: 20px;">
-     
+    <div fxLayout="row" style="width: 20px;"> 
       <mat-form-field appearance="outline" style="width: 92px;margin-top: -11px">
-        <mat-label>Time</mat-label>
-        <input matInput [min]="myFilter" [matDatepicker]="picker1" placeholder="" formControlName="validTill">
-        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-        <mat-datepicker #picker1></mat-datepicker>
+          <mat-label>Time</mat-label>
+            <input matInput [min]="myFilter" [matDatepicker]="picker1" placeholder="" formControlName="validTill">
+            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
       </mat-form-field>
       <mat-form-field appearance="outline" style="width: 104px;margin-left: 5px; margin-top: -8px">
-        <mat-label>Budget</mat-label>
-        <input matInput placeholder="Budget" required
-        formControlName="budget">
+          <mat-label>Budget</mat-label>
+         <input matInput placeholder="Budget" required
+         formControlName="budget">
       </mat-form-field>
-
     </div>
-
     <div fxLayout=row class="pull-right">
       <div class="hand-cursor" style="align-items: center;margin-left: 20px;margin-top:-17px" (click) ="onCancel()">
         <img style="height: 30px;width: 30px;" src="assets/images/icons/close_red.png" />
@@ -55,7 +40,5 @@
         <span>Save</span>
       </div>
     </div>
-
   </div>
-
 </mat-card>

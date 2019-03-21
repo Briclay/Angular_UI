@@ -1,3 +1,29 @@
-<p>
-  file-upload-dialog works!
-</p>
+<div class="dialog-container">
+  <h1 mat-dialog-title>File Upload</h1>
+  <div mat-dialog-content>
+    <div >
+      <form [formGroup]="dailogForm" class="">
+        <div fxLayout=row>
+          <span class="p_name_color">Selected File Name</span>
+          <span class="p_filename_color">{{data.name}}</span>
+        </div>
+        <mat-form-field appearance="outline">
+          <mat-label>Status</mat-label>
+            <mat-select placeholder="status" formControlName="approval">
+              <mat-option *ngFor="let st of allStatus" [value]="st">
+                {{st}}
+              </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Remarks</mat-label>
+          <input matInput formControlName="remarks" required>
+        </mat-form-field>
+      </form>
+    </div>
+    <div class="">
+      <button  mat-button class="margin-10px-round" (click)="onSave()">Save</button>
+      <button mat-button class="btn" (click)="onCloseCancel()">Cancel</button>
+    </div>
+  </div>
+</div>

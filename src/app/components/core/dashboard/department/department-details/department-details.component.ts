@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormControl, FormGroup, FormBuilder, Validators,FormArray } from '@angular/forms';
 import { DepartmentService } from '../../../../../services/department/department.service';
 import { AuthenticationService } from '../../../../../services/authentication/authentication.service';
 import { Router , ActivatedRoute} from '@angular/router';
@@ -22,6 +22,7 @@ export class DepartmentDetailsComponent implements OnInit {
   @Input() data: any;
   @Input() formType: string;
   @Output() public tabSwitch: EventEmitter<any> = new EventEmitter<any>();
+  @Output() public updateRefresh: EventEmitter<any> = new EventEmitter<any>();
 
   userAuth: any;
   departmentDetailsForm: FormGroup;
@@ -199,6 +200,10 @@ export class DepartmentDetailsComponent implements OnInit {
     }
   }
 
+  onFormCancel(){
+    this.departmentDetailsForm.reset()
+  }
+
   onDeptFormSubmit() {
     console.log(this.departmentDetailsForm.value);
     this.deptFormSubmitted = true;
@@ -222,6 +227,7 @@ export class DepartmentDetailsComponent implements OnInit {
       this.snackBar.open("Department updated successfully", 'Department', {
         duration: 2000,
       });
+      this.updateRefresh.emit()
     }, (error: any) => {
       this.deptFormSubmitted = false;
       this.snackBar.open(error.message, 'Department', {

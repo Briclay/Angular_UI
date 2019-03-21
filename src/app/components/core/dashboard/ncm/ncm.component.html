@@ -1,15 +1,15 @@
   <!-- <app-organisation-drop-down (selectOrganizaion)="organizationChanged($event)"></app-organisation-drop-down> -->
-<div fxFlex=100 fxLayout=column>
-  <div fxLayout="row" >
-    <mat-card class="header-shadow" style="display: inline;flex :1;height: 3px;">
+  <div fxFlex=100 fxLayout=column>
+    <div fxLayout="row" >
+      <mat-card class="header-shadow" style="display: inline;flex :1;height: 3px;">
 
-     <div fxLayout=row style="place-content: space-around;    float: left;
-    margin-top: -14px;" class="hand-cursor">
-        <img style="height: 25px;width: 25px;" src="/assets/images/icons/Home.png">
-        <span style="font: bolder;font-size: 26px;">></span>
-        <span style="font: bolder;font-size: 14px;margin-top: 7px;">Risk</span>
-        <span style="font: bolder;font-size: 17px;margin-top: 7px;">/</span>
-        <span style="font: bolder;font-size: 14px;margin-top: 7px;">Opportunity</span>
+       <div fxLayout=row style="place-content: space-around;    float: left;
+       margin-top: -14px;" class="hand-cursor">
+       <img style="height: 25px;width: 25px;" src="/assets/images/icons/Home.png">
+       <span style="font: bolder;font-size: 26px;">></span>
+       <span style="font: bolder;font-size: 14px;margin-top: 7px;">Risk</span>
+       <span style="font: bolder;font-size: 17px;margin-top: 7px;">/</span>
+       <span style="font: bolder;font-size: 14px;margin-top: 7px;">Opportunity</span>
      </div>
 
      <div fxLayout=row style="place-content: space-around;margin-top: -11px;margin-right: 8em;
@@ -38,26 +38,26 @@
   <mat-tab-group #tabGroup>
     <mat-tab label="Overview" >
       <mat-card class="panel-header">
-          <div>
-    <mat-form-field appearance="outline" style="width: 215px;">
-      <mat-label>Select Process</mat-label>
-      <mat-select placeholder="Select Process"  (selectionChange)="projectChanged($event)" [(ngModel)]="selectedProj">
-        <mat-option *ngFor="let project of projectlist" [value]="project" >
-          {{project.name}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-  </div>
-  <div class="pull-right" style="margin-top: -64px;">
-    <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]">
-    </mat-paginator>
-    <mat-form-field class="example-full-width" appearance="outline">
-      <mat-label>Search</mat-label>
-      <input matInput placeholder="Search">
-    </mat-form-field>
-  </div>
-  <div class="clearfix"></div>
-</mat-card>
+        <div>
+          <mat-form-field appearance="outline" style="width: 215px;">
+            <mat-label>Select Process</mat-label>
+            <mat-select placeholder="Select Process"  (selectionChange)="projectChanged($event)" [(ngModel)]="selectedProj">
+              <mat-option *ngFor="let project of projectlist" [value]="project" >
+                {{project.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="pull-right" style="margin-top: -64px;">
+          <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]">
+          </mat-paginator>
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Search</mat-label>
+            <input matInput placeholder="Search">
+          </mat-form-field>
+        </div>
+        <div class="clearfix"></div>
+      </mat-card>
       <div style ="place-content :center;">
         <mat-spinner style="margin:0 auto;" *ngIf="ncmListSpinner; else content" [diameter]="40"></mat-spinner>
       </div>

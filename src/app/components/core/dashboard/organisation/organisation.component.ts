@@ -21,6 +21,8 @@ export class OrganisationComponent implements OnInit {
   historyData: any;
   selectedOrgId: string;
   orgListSpinner: boolean;
+  pageIndex : number = 0;
+  pageSize : number = 5;
   private unsubscribe: Subject<any> = new Subject();
 
   constructor(
@@ -31,9 +33,13 @@ export class OrganisationComponent implements OnInit {
 
   ngOnInit() {
     observableMerge(this.route.params, this.route.queryParams).pipe(
-        takeUntil(this.unsubscribe))
-        .subscribe((params) => this.loadRoute(params));
+    takeUntil(this.unsubscribe))
+    .subscribe((params) => this.loadRoute(params));
+  }
 
+  dataPaginatorChange(event){
+    this.pageIndex = event.pageIndex;
+    this.pageSize = event.pageSize;
   }
 
   public ngOnDestroy(): void {

@@ -5,54 +5,36 @@
  				<div class="user-details-name" fxLayout="column" >
           <div style="height: 20px" > 
           </div>
-
           <div  style="margin-left: 73px; border-right: 2px solid lightgrey;height: 237px"  fxLayout="column" >
-
            <mat-form-field  class="margin" style="width: 45px; margin: 2px;margin-bottom: -33px">
-
             <input matInput formControlName="revision" required   [(ngModel)]="v.revision">
           </mat-form-field>
-
-
           <mat-form-field   class="margin" style="width: 52px; margin: 2px;margin-bottom: -35px">
-
             <input matInput formControlName="bpd" required [(ngModel)]="v.bpd">
           </mat-form-field>
-
           <mat-form-field   class="margin" style="width: 71px; margin: 2px;margin-bottom: -20px;border-bottom: 1px solid gray;height: 37px;margin-left: -6px;">
-
             <input matInput formControlName="date" required [(ngModel)]="v.date">
           </mat-form-field>
-
           <mat-form-field   class="margin" style="width: 68px; margin: 2px;margin-bottom: -33px;    margin-top: 19px;margin-left: 0px;">
-
             <input matInput formControlName="purchase" required [(ngModel)]="v.purchase">
           </mat-form-field>
-
           <mat-form-field   class="margin" style="width: 78px; margin: 2px;margin-bottom: -18px;margin-left: -5px;">
-
             <input matInput formControlName="name" required [(ngModel)]="v.name" >
           </mat-form-field>
-
           <div class="approve" style="background-color: #63c363;
           width: 60px;
-
           padding: 7px;
           margin: 3px;
           border-radius: 34px;
           height: 15px;
           margin-left: -6px;"> 
-         <mat-form-field style="margin-top: -17px;">
-
+          <mat-form-field style="margin-top: -17px;">
             <input matInput formControlName="status" required style="color: white"  [(ngModel)]="v.status">
           </mat-form-field>
         </div>
-
-
       </div>
     </div>
     <div class="username-input" style="margin-left: 20px;" >
-
       <div class="user-details-content">
        <div class="user-details-content-title" >
         <strong> Risk Statement</strong>
@@ -78,9 +60,7 @@
    </mat-form-field>
  </div>
 </div>   
-
 </div>
-
 <div class="user-details-content" style="margin-left: 6px;">
   <div class="user-details-content-title" style="margin-left: 93px">
    <strong>Parameters</strong>
@@ -148,13 +128,13 @@
  <div fxLayout="row" style="margin-top: 5px" >
    <mat-form-field appearance="outline" style="width: 95px;margin-top: -8px">
      <mat-label>Time</mat-label>
-      
+     
      <input matInput   [min]="myFilter"  [matDatepicker]="picker1" placeholder="" formControlName="validTill">
      <mat-datepicker-toggle matSuffix [for]="picker1" ></mat-datepicker-toggle>
      <mat-datepicker #picker1></mat-datepicker>
    </mat-form-field>
    <div >
-     <button     (click)="openDetailsDialog()"  class="margin-left-4" mat-raised-button class="feature_btn"  
+     <button     (click)="openDetailsDialog()" [ngStyle]="{'background-color': buttonColor}" class="margin-left-4" mat-raised-button class="feature_btn"  
      >Opportunity</button>
    </div>
  </div>

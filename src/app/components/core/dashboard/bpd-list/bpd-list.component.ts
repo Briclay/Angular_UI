@@ -125,6 +125,7 @@ openDetailsDialog()
 
    this.bpdListForm.reset();
    this.addForm.reset();
+   
 
   }
 }

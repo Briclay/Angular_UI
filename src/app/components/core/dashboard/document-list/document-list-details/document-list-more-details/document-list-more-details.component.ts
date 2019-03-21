@@ -40,8 +40,6 @@ export class DocumentListMoreDetailsComponent implements OnInit {
 		this.getDocumentListData()
 
 	}
-
-	
 	
 	getDocumentListData() {
 		/*this.projectLoading = true;*/

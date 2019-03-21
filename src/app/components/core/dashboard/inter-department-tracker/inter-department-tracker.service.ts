@@ -30,5 +30,10 @@ export class IssueTrackerService {
         let url = `${environmentService.briclayApiBase}/issue-tracker/${id}`;
         return this.apiService.put(url, request).pipe(map(res => res));
     }
+
+    public getIssueTrackerAnalytics(filter): Observable<any> {
+        let url = `${environmentService.briclayApiBase}/issue-tracker/analytics?${filter}`;
+        return this.apiService.get(url).pipe(map(res => res));
+    }
 }
 

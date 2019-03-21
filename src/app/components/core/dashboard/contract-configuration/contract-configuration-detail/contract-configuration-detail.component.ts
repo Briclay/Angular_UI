@@ -21,14 +21,6 @@ export class ContractConfigurationDetailComponent implements OnInit {
   configValues:any;
 
 
- /* contractList = [
-  { 
-   name:"meghana",
-   days:"01",
-   categoryReason:"R1",
-   steps:"2"
- }
- ]*/
  constructor(private formBuilder:FormBuilder,private route: ActivatedRoute,
   private router: Router,
   private workRequestService: WorkRequestService,) { 
@@ -40,11 +32,7 @@ export class ContractConfigurationDetailComponent implements OnInit {
     categoryReason: [''],
 
     steps: this.formBuilder.array([])
-    
-
   });
-
-
 
    this.orgDetails =  JSON.parse(window.localStorage.authUserOrganisation);
    this.orgID = this.orgDetails._id;
@@ -52,24 +40,20 @@ export class ContractConfigurationDetailComponent implements OnInit {
    this.getWorkRequest();}
 
    ngOnInit() {
-  }
+   }
 
-  categoryChanged(id){
+   categoryChanged(id){
       this.contractSpinner = true;
       this.workRequestService.getSingleWork(id).pipe().subscribe(res => {
-      console.log(res, 'work-config')
-      this.workSelection = res.configValues;
-      console.log(this.configValues,'aaaaaaaaaaa')
-      this.contractSpinner = false;
-    },
-     (error: any) => {
-      console.error('error', error);
-    });
-
-  }
-
-
-
+        console.log(res, 'work-config')
+        this.workSelection = res.configValues;
+        console.log(this.configValues,'aaaaaaaaaaa')
+        this.contractSpinner = false;
+      },
+      (error: any) => {
+        console.error('error', error);
+      });
+    }
 
   getWorkRequest(){
 

@@ -33,15 +33,14 @@ width: 100%;
 
 
 .example-container {
-  display: flex;
-  flex-direction: column;
+display: flex;
+flex-direction: column;
 }
 
 .example-container > * {
-  width: 86%;
+width: 86%;
 }
 
 .mat-form-field-appearance-outline .mat-form-field-wrapper {
-    margin: -2.7px 0;
+margin: -2.7px 0;
 }
- 

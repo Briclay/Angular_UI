@@ -7,7 +7,7 @@
             display: flex;
             font: 400 14px Roboto,"Helvetica Neue",sans-serif;
             .user-details-name {
-                flex: 0.6;
+                flex: 0.5;
                 img {
                     width: 100px;
                     border-radius: 5px;
@@ -22,10 +22,16 @@
                     margin-left: 10px;
                 }
                 .user-details-form-list {
-                    border-left: 2px solid #999999;
-                    min-height: 200px;
+                    border-left: 2px solid lightgrey;
+                    min-height: 140px;
                     padding: 10px;
+
+                    .datePicker{
+                        height: 46px;
+                        width: 195px;
+                    }
                 }
+
             }
         }
     }

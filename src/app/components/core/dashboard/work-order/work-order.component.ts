@@ -12,10 +12,12 @@ import {takeUntil} from 'rxjs/operators';
 })
 export class WorkOrderComponent implements OnInit {
   isLoading: boolean;
-  workOrder = [];
+  workOrders :any;
   workOrderDataOption: any;
   orgID: string;
-
+  pageIndex : number = 0;
+  pageSize : number = 5;
+  orgDetails : any;
   private unsubscribe: Subject<any> = new Subject();
 
   constructor(
@@ -24,9 +26,9 @@ export class WorkOrderComponent implements OnInit {
     private route: ActivatedRoute) { }
 
   ngOnInit() {
-    observableMerge(this.route.params, this.route.queryParams).pipe(
-      	takeUntil(this.unsubscribe))
-      	.subscribe((params) => this.loadRoute(params));
+    this.orgDetails =  JSON.parse(window.localStorage.authUserOrganisation);
+    this.orgID = this.orgDetails._id;
+    this.getWorkOrder();
   }
 
    public ngOnDestroy(): void {
@@ -34,21 +36,15 @@ export class WorkOrderComponent implements OnInit {
 		this.unsubscribe.complete();
 	}
 
-  loadRoute(params: any) {
-		if('orgID' in params) {
-			this.orgID = params['orgID'];
-      this.getWorkOrder();
-		}
-	}
-
-  organizationChanged(org) {
-		this.router.navigate([], {queryParams: {orgID: org.value ? org.value._id : org._id} , queryParamsHandling: 'merge'});
-	}
+  dataPaginatorChange(event){
+    this.pageIndex = event.pageIndex;
+    this.pageSize = event.pageSize;
+  }
 
   getWorkOrder() {
     this.isLoading = true;
     this.workOrderService.getWorkOrder(`filter[_organisationId]=${this.orgID}`).pipe().subscribe(res => {
-      this.workOrder = res;
+      this.workOrders = res;
       this.isLoading = false;
       this.workOrderDataOption = [
         {

@@ -22,9 +22,9 @@ export class AuthenticationService {
         return this.apiService.post(url, request).pipe(map(res => res));
     }
 
-    public forgotPwd(request): Observable<any> {
-        let url = `${environmentService.briclayApiBase}/auth/forgot`;
-        return this.apiService.post(url, request).pipe(map(res => res));
+    public forgotPwd(query: string, request): Observable<any> {
+        let url = `${environmentService.briclayApiBase}/auth/forgot?email=${query}`;
+        return this.apiService.post(url,request).pipe(map(res => res));
     }
 
     public changePassword(id, request): Observable<any> {

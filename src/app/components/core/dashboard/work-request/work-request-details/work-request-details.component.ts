@@ -2,13 +2,14 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import * as _ from 'lodash';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatSnackBar, MAT_DIALOG_DATA } from '@angular/material';
 import { WorkRequestService } from '../work-request.service';
 import { UserService } from '../../../dashboard/user/user.service';
 import { ProjectService } from '../../../dashboard/projects/project.service';
 import { DateUtils } from '../../../../../utils/date-uitls';
 import { merge as observableMerge, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { WorkCategoryDialogComponent } from './work-category-dialog/work-category-dialog.component';
 
 @Component({
   selector: 'app-work-request-details',
@@ -19,6 +20,8 @@ export class WorkRequestDetailsComponent implements OnInit {
   @Input() formType: string;
   @Input() data: any;
   @Output() public tabSwitch: EventEmitter<any> = new EventEmitter<any>();
+  @Output() public updateRefresh: EventEmitter<any> = new EventEmitter<any>();
+
   private unsubscribe: Subject<any> = new Subject();
   form: FormGroup;
   formErrors: any;
@@ -26,27 +29,34 @@ export class WorkRequestDetailsComponent implements OnInit {
   userAuth: any;
   workTrackerForm: FormGroup;
   workCategory = [];
-  typeOfWork: any;
   requestTrcakerList: any;
   reuqestNumber: String;
   projectsList = [];
   userList = [];
   todayDate: String;
   status: any;
-
   leadDateTime = (new Date());
   needByDate = (new Date());
+  initiatedDate = (new Date());
   time = {
     timeToComplete: null,
     leadDaysToComplete: null,
     leadTimeRequire: null
   };
+  allWorkCtaegories = []
   orgId: string;
+  selectedTypeOFConsultantValue : any;
   orgDetails: any;
   isLoading: boolean;
   dept: any;
+  enableTypeOfConsultant = false;
+  enableOthersConsultant = false;
+  typeOfConsultants = [ 'Architecture', 'Structural', 'MEP', 'Plumbing and Fire','Electrical and HVAC', 'Architecture Liaison', 'Environment Clearance', 'Others' ];
+  typeOfWork = ['Appointment of contractor', 'Appointment of consultant','Variation order','Termination Order'];
+
   constructor(private formBuilder: FormBuilder,
     private router: Router,
+    private snackBar: MatSnackBar,
     private route: ActivatedRoute,
     public dialog: MatDialog,
     private projectService: ProjectService,
@@ -57,8 +67,6 @@ export class WorkRequestDetailsComponent implements OnInit {
     this.orgDetails = JSON.parse(window.localStorage.authUserOrganisation);
     this.dept = JSON.parse(window.localStorage.authUserDepartment);
     this.orgId = this.orgDetails._id;
-    // list of typ of work
-    this.typeOfWork = ['Contractor Appointement', 'Termination order'];
     this.workTrackerFormErrors = {
       requestNumber: {},
       date: {},
@@ -80,9 +88,9 @@ export class WorkRequestDetailsComponent implements OnInit {
       workOrderApprovalDate: {},
       supportRole: {},
       remark: {},
-      awardDate: {}
+      awardDate: {},
+      typeOfConsultant : {},
     };
-
 
     this.workTrackerForm = this.formBuilder.group({
       _organisationId: this.orgId,
@@ -97,7 +105,6 @@ export class WorkRequestDetailsComponent implements OnInit {
       leadTimeRequire: ['', Validators.required],
       needByDate: ['', Validators.required],
       leadDaysToComplete: ['', Validators.required],
-      workDummyCategory: [''],
       needByStatusReason: [''],
       supportRole: null,
       awardedDate: [''],
@@ -107,7 +114,8 @@ export class WorkRequestDetailsComponent implements OnInit {
       RFAapprovalDate: [''],
       remark: [''],
       workOrderPutDate: [''],
-      workOrderApprovalDate: ['']
+      workOrderApprovalDate: [''],
+      typeOfConsultant : ['', Validators.required]
     });
     this.getAllWorkRequestTracker();
     this.getUsers();
@@ -115,7 +123,7 @@ export class WorkRequestDetailsComponent implements OnInit {
     this.getWorkCategory();
   }
   noOfDays() {
-    console.log(' this.workTrackerForm no of days' + JSON.stringify(this.workTrackerForm.value));
+    console.log('this.workTrackerForm no of days' + JSON.stringify(this.workTrackerForm.value));
     const name = this.workTrackerForm.value.workCategory;
     const selectedWorkCat = _.filter(this.workCategory, function (data) {
       console.log('data ', data);
@@ -131,19 +139,19 @@ export class WorkRequestDetailsComponent implements OnInit {
   }
 
   loadRoute(params: any) {
-    if ('orgID' in params) {
-      this.orgId = params['orgID'];
-      this.assignValuesToForm();
-      this.getAllWorkRequestTracker();
-      this.getUsers();
-      this.getAllProjectsList();
-      this.getWorkCategory();
-      // this.getWorkRequest();
-    }
+    this.assignValuesToForm();
+    this.getAllWorkRequestTracker();
+    this.getUsers();
+    this.getAllProjectsList();
+    this.getWorkCategory();
+    // this.getWorkRequest();
   }
   assignValuesToForm() {
     if (this.formType !== 'create') {
       this.workTrackerForm.patchValue(this.data);
+      if(this.data.typeOfWork === 'Appointment of consultant'){
+        this.enableTypeOfConsultant = true;
+      }
     }
   }
 
@@ -157,6 +165,62 @@ export class WorkRequestDetailsComponent implements OnInit {
         // TODO add error component
         console.error('error', error);
       });
+  }
+
+  workCategoryDialog(){
+    const dialogRef = this.dialog.open(WorkCategoryDialogComponent, {
+          width: '800px',
+          data : this.allWorkCtaegories
+        });
+        dialogRef.afterClosed().subscribe(result => {
+          
+        });
+  }
+
+  selectTypeOfWork(event){
+    console.log(this.allWorkCtaegories, 'allWorkCtaegories')
+    this.enableTypeOfConsultant = false;
+    if('Appointment of consultant' === event){
+      this.workCategory = []
+      this.enableTypeOfConsultant = true;
+      this.allWorkCtaegories.forEach(v =>{
+        if( v.name.substr(0, 11) === 'Consultancy'){
+          this.workCategory.push(v)
+        }
+      })
+    }
+    else if('Appointment of contractor' === event){
+      this.workCategory = []
+      this.allWorkCtaegories.forEach(v =>{
+        if( v.name.substr(0, 4) === 'Work'){
+          this.workCategory.push(v)
+        }
+      })
+    }else if('Variation order' === event){
+      this.workCategory = []
+      this.allWorkCtaegories.forEach(v =>{
+        if( v.name.substr(0, 9) === 'Variation' || v.name === 'EOT'){
+          this.workCategory.push(v)
+        }
+      })
+    }
+    else if('Termination Order' === event){
+      this.workCategory = []
+      this.allWorkCtaegories.forEach(v =>{
+        if( v.name.substr(0, 11) === 'Termination' || v.name === 'Showcause notice'){
+          this.workCategory.push(v)
+        }
+      })
+    }
+  }
+
+  selectAofConsultant(event){
+    this.selectedTypeOFConsultantValue = event;
+    this.enableOthersConsultant = false;
+    if('Others' === event){
+      this.enableOthersConsultant = true;
+    }
+    
   }
 
   getAllWorkRequestTracker() {
@@ -175,20 +239,19 @@ export class WorkRequestDetailsComponent implements OnInit {
         console.error('error', error);
       });
   }
+
   workTrackerFormSubmit() {
     console.log('(this.workTrackerForm' + JSON.stringify(this.workTrackerForm.value));
-    if (this.workTrackerForm.valid) {
+    //if (this.workTrackerForm.valid) {
       this.workTrackerForm.value._organisationId = this.orgId;
-      if (this.workTrackerForm.value.initiatedDate && this.workTrackerForm.value.RFAapprovalDate) {
-        if (this.workTrackerForm.value.initiatedDate < this.workTrackerForm.value.RFAapprovalDate) {
+        if (this.workTrackerForm.value.needByDate ) {
           this.onSave();
-        } else {
         }
-      } else {
-        this.onSave();
-      }
-    } else {
-    }
+        else{
+          this.snackBar.open(" Please enter Need By Date ", 'Work-request', {
+            duration: 3000,
+          });
+        }
   }
 
   getUsers() {
@@ -209,6 +272,9 @@ export class WorkRequestDetailsComponent implements OnInit {
         this.isLoading = false;
         this.tabSwitch.emit(0);
         this.workTrackerForm.reset();
+        this.snackBar.open("Work-request Created Succesfully", 'Work-request', {
+          duration: 3000,
+        });
       }, (error: any) => {
         // TODO add error component
         console.error('error', error);
@@ -225,6 +291,10 @@ export class WorkRequestDetailsComponent implements OnInit {
       .pipe().subscribe(res => {
         console.log('updateWorkRequest saved', res);
         this.isLoading = false;
+        this.updateRefresh.emit()
+        this.snackBar.open("Work-request Updated Succesfully", 'Work-request', {
+          duration: 3000,
+        });
       }, (error: any) => {
         // TODO add error component
         console.error('error', error);
@@ -237,7 +307,6 @@ export class WorkRequestDetailsComponent implements OnInit {
     console.log('on save ', this.workTrackerForm.value);
     const requestData = {
       ...this.workTrackerForm.value,
-      workCategory: this.workTrackerForm.value.workDummyCategory.name,
       leadTimeRequire: this.workTrackerForm.value.leadTimeRequire
     };
     console.log('on save requestData', requestData);
@@ -340,8 +409,10 @@ export class WorkRequestDetailsComponent implements OnInit {
   getWorkCategory(orgId?) {
     this.workRequestService.getWorkConfig(`filter[_organisationId]=${this.orgId}`)
       .pipe().subscribe(res => {
+        console.log(res, 'getWorkCategory')
         if (res.length) {
-          this.workCategory = res[0].configValues;
+          this.allWorkCtaegories = res[0].configValues;
+          //this.workCategory = res[0].configValues;
         }
       }, (error: any) => {
         // TODO add error component

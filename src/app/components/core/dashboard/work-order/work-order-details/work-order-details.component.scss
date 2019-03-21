@@ -1,0 +1,68 @@
+.user-details-container {
+padding: 10px;
+.user-details-form {
+
+.user-details-card {
+flex: 1;
+display: flex;
+font: 400 13px/20px Roboto,"Helvetica Neue",sans-serif;
+.user-details-name {
+flex: 0.6;
+img {
+width: 100px;
+border-radius: 5px;
+}
+.username-input {
+margin-top: 10px;
+}
+}
+.user-details-content {
+flex: 1;
+.user-details-content-title {
+margin-left: 10px;
+}
+.user-details-form-list {
+border-left: 2px solid #999999;
+min-height: 200px;
+padding: 10px;
+}
+.feature_btn {
+border-radius: 17px;
+background-color: #2196F3; 
+color: white;
+}
+}
+}
+}
+
+}
+
+.feature_container{
+padding : 10%;
+.title {
+font: 400 13px/20px Roboto,"Helvetica Neue",sans-serif;
+color :#032a57cf;
+border-bottom: #4cacda 1px solid;
+padding : 2%;
+}
+.message {
+font: 400 12px Roboto,"Helvetica Neue",sans-serif;
+color :#032a57cf; 
+}
+}
+::ng-deep .mat-checkbox-checkmark-path {
+stroke: white !important;
+}
+
+::ng-deep  .mat-checkbox-checked.mat-accent .mat-checkbox-background,
+.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+background-color: #00aff0;
+}
+::ng-deep  .mat-form-field-infix {
+padding: 0.5em 0;
+margin-top: -10px;
+width: 20em;
+}
+::ng-deep .date{
+width:10px;
+}

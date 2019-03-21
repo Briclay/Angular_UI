@@ -1,71 +1,71 @@
  .text_color {
-  font: 600 12px Roboto,"Helvetica Neue",sans-serif ;
-  color: #032A57;
-  padding: 0 .75em 0 .75em;
-    margin-top: 0.75em;
-    position: relative;
-    align:center
+ font: 600 12px Roboto,"Helvetica Neue",sans-serif ;
+ color: #032A57;
+ padding: 0 .75em 0 .75em;
+ margin-top: 0.75em;
+ position: relative;
+ align:center
 
 
  
-}
+ }
  .text_color_2 {
-  font: 600 12px Roboto,"Helvetica Neue",sans-serif ;
-  color: #032A57;
-  padding: 0 .75em 0 .75em;
-    margin-top: 0.75em;
-    position: absolute;
-    align:right;
-    
+ font: 600 12px Roboto,"Helvetica Neue",sans-serif ;
+ color: #032A57;
+ padding: 0 .75em 0 .75em;
+ margin-top: 0.75em;
+ position: absolute;
+ align:right;
+ 
 
 
  
-}
-.selectProjects {
-    padding: 0 .75em 0 .75em;
-    margin-top: -2.25em;
-    position: relative;
-    align:left;
-    width: 71%;
-}
-.mat-form-field-flex {
-    display: inline-flex;
-    align-items: baseline;
-    box-sizing: border-box;
-    width: 71%;
-}
-element.style {
-    height: 57px;
-    flex-direction: row;
-    box-sizing: border-box;
-    display: flex;
-}
+ }
+ .selectProjects {
+ padding: 0 .75em 0 .75em;
+ margin-top: -2.25em;
+ position: relative;
+ align:left;
+ width: 71%;
+ }
+ .mat-form-field-flex {
+ display: inline-flex;
+ align-items: baseline;
+ box-sizing: border-box;
+ width: 71%;
+ }
+ element.style {
+ height: 57px;
+ flex-direction: row;
+ box-sizing: border-box;
+ display: flex;
+ }
 
-.mat-card:not([class*=mat-elevation-z]) {
-    box-shadow: 0 2px 1px -1px rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12);
-}
+ .mat-card:not([class*=mat-elevation-z]) {
+ box-shadow: 0 2px 1px -1px rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12);
+ }
  
-.mat-card {
-    transition: box-shadow 280ms cubic-bezier(.4,0,.2,1);
-    display: block;
-    position: relative;
-    padding: 16px;
-    border-radius: 8px;
-}
+ .mat-card {
+ transition: box-shadow 280ms cubic-bezier(.4,0,.2,1);
+ display: block;
+ position: relative;
+ padding: 16px;
+ border-radius: 8px;
+ }
  .panel-header {
-    &.mat-card {
-        padding: 0px 9px;
-        margin: 0px;
-        height: 60px;
-    }
-    .panel-left {
-        margin-top: 10px;
-    }
-    
-}
-mat-paginator {
-    display: inline-block;
-}
-mat-paginator.mat-paginator {
-    display: inline-block;
-}
+ &.mat-card {
+ padding: 0px 9px;
+ margin: 0px;
+ height: 60px;
+ }
+ .panel-left {
+ margin-top: 10px;
+ }
+ 
+ }
+ mat-paginator {
+ display: inline-block;
+ }
+ mat-paginator.mat-paginator {
+ display: inline-block;
+ }

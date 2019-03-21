@@ -66,7 +66,7 @@ export class DepartmentService {
         return this.apiService.get(url).pipe(map(res => res));
     }
 
-	public getAll(id): Observable<any> {
+	public getAll(id?): Observable<any> {
         let url = `${environmentService.briclayApiBase}/departments?select=*&filter[_organisationId]=${id}`;
         return this.apiService.get(url).pipe(map(res => res));
     }

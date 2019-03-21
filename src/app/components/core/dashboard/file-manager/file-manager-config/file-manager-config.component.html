@@ -22,25 +22,34 @@
  -->  <!-- end contract section -->
     <!-- project selection box nad project details -->
     <mat-card *ngIf="projectFlag">
-      <form name="fileForm" [formGroup]="fileForm" novalidate>
+      <form name="fileForm" [formGroup]="fileForm" novalidate fxLayout="row">
         <app-project-drop-down (selectProjects)="projectChanged($event)"></app-project-drop-down>
+        <div style="margin: 7px 0px 0px 13px;color: #032a57cf;font-weight: 600 !important;" >{{selectProjectStatus}}</div>
       </form>
       <!-- start project details -->
-      <div style="place-content :center;">
+      <!-- <div style="place-content :center;">
         <mat-spinner style="margin:0 auto;" *ngIf="isLoading" [diameter]="40"></mat-spinner>
-      </div>
-      <div fxLayout="row" *ngIf="selectedProjectData">
-        <!--  deisgn template -->
-        <app-file-config-design-template [folderDetailsDesignDataOption]="selectedProjectData">
-        </app-file-config-design-template>
-        <!-- end deisgn template -->
-      </div>
-
+      </div> -->
       <ng-template #selectProject>
         * Select Project
       </ng-template>
       <!-- end project details -->
     </mat-card>
+    <div fxLayout="row" >
+        <!--  deisgn template -->
+        <div *ngIf="selectedProjectData">
+          <div *ngIf="deptConfigData.deptName === 'Design'">
+            <app-file-config-design-template  [folderDetailsDesignDataOption]="selectedProjectData">
+            </app-file-config-design-template>
+          </div>
+        </div>
+        <div *ngIf="deptConfigData.deptName === 'Contracts'">
+          <app-file-config-contract-template *ngIf="workRequestFlag"  (workRequestData)="getWorkRequestata($event)">
+          </app-file-config-contract-template>
+        </div>
+        <!-- end contracts template -->
+        <!-- end deisgn template -->
+      </div>
   <!-- end project details -->
   <div fxLayout="row" class="file-details" style="margin-top: 5px;">
     <mat-card *ngIf="iconArray.length>0" style="margin-right: 7px;">
@@ -87,6 +96,9 @@
       </mat-card>
       <div>
         <div>
+          <div style="place-content :center;">
+            <mat-spinner style="margin:0 auto;" *ngIf="isLoading" [diameter]="40"></mat-spinner>
+          </div>
           <!-- table Implemenetion -->
           <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
             <!-- name type -->

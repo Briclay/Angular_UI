@@ -55,20 +55,20 @@ getNcmListData() {
 
 
 	this.ncmListDataOptions =[
-         
-        {
-          title: 'User Name', type: 'list', list: [
-            { title: 'UserName', key: 'username', hideTitle: true, type: 'label' }
-          ]
-        },
-        { title: 'Role', key: 'userType' },
-        { title: 'Department', key: 'department' },
-        { title: 'Email', key: 'email' }]
+	
+	{
+		title: 'User Name', type: 'list', list: [
+		{ title: 'UserName', key: 'username', hideTitle: true, type: 'label' }
+		]
+	},
+	{ title: 'Role', key: 'userType' },
+	{ title: 'Department', key: 'department' },
+	{ title: 'Email', key: 'email' }]
 }
 
 tabSwitch(tabReq) {
-    this.tabGroup.selectedIndex = tabReq.index;
-    this.getNcmListData()
-  }
+	this.tabGroup.selectedIndex = tabReq.index;
+	this.getNcmListData()
+}
 
 }

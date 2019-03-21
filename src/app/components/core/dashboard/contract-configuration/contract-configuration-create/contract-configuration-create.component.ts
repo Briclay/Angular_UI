@@ -2,7 +2,7 @@ import { Component, OnInit,Input,Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, FormControl, FormArray } from '@angular/forms';
 import { MatDialog,MatSnackBar } from '@angular/material';
-
+import * as _ from 'lodash';
 import { WorkRequestService } from '../../work-request/work-request.service';
 
 @Component({
@@ -19,16 +19,16 @@ export class ContractConfigurationCreateComponent implements OnInit {
   orgDetails: any;
   orgID: string;
   array = [];
-   
+  steps=[];
+   contractCreateFormErrors: any;
+
   workSelection:any;
 
-   contractSpinner = false;
-   isLoading = false;
+  contractSpinner = false;
+  isLoading = false;
   
-   
-
-
-  constructor(private formBuilder:FormBuilder,private route: ActivatedRoute,
+  constructor(private formBuilder:FormBuilder,private route: 
+    ActivatedRoute,
     private router: Router,private snackBar: MatSnackBar,
     private workRequestService: WorkRequestService,) {
 
@@ -36,7 +36,15 @@ export class ContractConfigurationCreateComponent implements OnInit {
     this.orgID = this.orgDetails._id;
 
     console.log('this.orgId' + JSON.stringify(this.orgDetails));
-    this.getWorkRequest(); }
+    this.getWorkRequest();
+
+    this.contractCreateFormErrors = {
+      name: {},
+      noOfDays: {},   
+      categoryReason: {},
+      steps: []
+    };
+     }
 
     ngOnInit() { 
       this.contractCreateForm = this.formBuilder.group({
@@ -68,13 +76,13 @@ export class ContractConfigurationCreateComponent implements OnInit {
     }
 
     categoryChanged(id){
-    this.contractSpinner = true;
+      this.contractSpinner = true;
 
-    this.workRequestService.getSingleWork(id).pipe().subscribe(res => {
-      console.log(res, 'work-config')
-      this.workSelection = res.configKey;
-      console.log(this.workSelection,'aaaaaaaaaaa')
-      this.contractSpinner = false;
+      this.workRequestService.getSingleWork(id).pipe().subscribe(res => {
+        console.log(res, 'work-config')
+        this.workSelection = res.configKey;
+        console.log(this.workSelection,'aaaaaaaaaaa')
+        this.contractSpinner = false;
 
 
       }, (error: any) => {
@@ -85,30 +93,27 @@ export class ContractConfigurationCreateComponent implements OnInit {
     onSubmit() {
       console.log(   this.contractCreateForm.value )
 
-     let obj ={
-          _organisationId: this.orgID, 
-          configKey:this.workSelection,
-          configValues : this.array
+      let obj ={
+        _organisationId: this.orgID, 
+        configKey:this.workSelection,
+        configValues : this.array
       }
       this.workRequestService.saveWorkConfig( obj)
       .pipe().subscribe(res => {
-          this.isLoading = false;
-          this.snackBar.open("Contract Config Updated Succesfully", 'Contract', {
-            duration: 5000,
-          });
-
-          //let tabReq = {index: 0}
-          //this.tabSwitch.emit(tabReq);
+        this.isLoading = false;
+        this.snackBar.open("Contract Config Updated Succesfully", 'Contract', {
+          duration: 5000,
+        });
+          let tabReq = {index: 0}
+          this.tabSwitch.emit(tabReq);
         }, (error: any) => {
           this.snackBar.open(error.message, 'Contract', {
             duration: 5000,
           });
         });
-  }
+    }
 
-  reset(){
-
-   this.contractCreateForm.reset();
-    
-  }
-}
+    reset(){
+     this.contractCreateForm.reset();
+   }
+ }

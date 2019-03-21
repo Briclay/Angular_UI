@@ -12,7 +12,7 @@ export class DocumentListService {
   constructor(private apiService: ApiService) { }
 
 
-    public getAll(projectId,orgId): Observable<any> {
+    public getAll(projectId?,orgId?): Observable<any> {
         let url = `${environmentService.briclayApiBase}/list?filter[_projectId]=${projectId}&filter[_organisationId]=${orgId}`;
         return this.apiService.get(url).pipe(map(res => res));
     }

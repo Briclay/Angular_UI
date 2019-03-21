@@ -17,6 +17,7 @@ export class NcmDetailsComponent implements OnInit {
 	controlsCheck : boolean;
   myFilter = new Date();
   controls : boolean;
+  buttonColor: string = '#B0B0B0';
 
 
 list = [
@@ -121,5 +122,6 @@ list = [
           //console.log(' this.projectForm.value' + JSON.stringify(this.projectForm.value));
         //}*/
       });
+      this.buttonColor = '#0099cc';
   }
 }

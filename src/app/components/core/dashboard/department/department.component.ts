@@ -21,6 +21,9 @@ export class DepartmentComponent implements OnInit {
 	selectedOrgId: string;
 	depListSpinner: boolean;
     featuresCount : any;
+    pageIndex : number = 0;
+  	pageSize : number = 5;
+
 	private unsubscribe: Subject<any> = new Subject();
 
 	constructor(private departmentService: DepartmentService,
@@ -34,6 +37,11 @@ export class DepartmentComponent implements OnInit {
       	.subscribe((params) => this.loadRoute(params));
 
 	}
+
+	dataPaginatorChange(event){
+	    this.pageIndex = event.pageIndex;
+	    this.pageSize = event.pageSize;
+  	}
 
 	public ngOnDestroy(): void {
 		this.unsubscribe.next();

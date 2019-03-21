@@ -1,0 +1,67 @@
+<div class="user-container">
+    <div fxLayout=row class="height_55">
+        <div class="pull-left user_div" fxFlex=15>
+            <div class="text_color">Inter Department Tracker</div>
+        </div>
+        <div fxLayout=row  class="content_space_arround" fxFlex=85>
+            <div fxLayout=row class="content_space_between">
+                <div fxLayout=column class="margin_right_10">
+                    <div class="text_color_sm ">{{getAnalytics && getAnalytics.openCount}}</div>
+                    <div class="text_color_sm ">Open issue </div>  
+                </div>
+                <div fxLayout=column>
+                    <div class="text_color_sm">{{getAnalytics && getAnalytics.closedCount}}</div>
+                    <div class="text_color_sm">Closed issue </div>  
+                </div>
+            </div>
+            <div fxLayout=row class="content_space_between">
+                <div fxLayout=column class="margin_right_10">
+                    <div class="text_color_sm">{{getAnalytics && getAnalytics.overDue}}</div>
+                    <div class="text_color_sm">Overdue </div>  
+                </div>
+                <div fxLayout=column>
+                    <div class="text_color_sm">{{getAnalytics && getAnalytics.dueToday}}</div>
+                    <div class="text_color_sm">Due today</div>  
+                </div>
+            </div>
+            <div fxLayout=row class="content_space_between">
+                <div fxLayout=column class="margin_right_10">
+                    <div class="text_color_sm">{{totalIssue && totalIssue}}</div>
+                    <div class="text_color_sm">Total issue </div>  
+                </div>
+                <div fxLayout=column>
+                    <div class="text_color_sm">{{totalEfficiency || 0}}%</div>
+                    <div class="text_color_sm">Efficiency </div>  
+                </div>
+            </div>
+        </div> 
+    </div>
+
+    <mat-tab-group #tabGroup>
+        <mat-tab label="Overview">
+            <app-panel-header-filter [data] = "issueTrackerList" (dataFilter)="dataPaginatorChange($event)"></app-panel-header-filter>                
+            <div class="content_center">
+                <mat-spinner class="spiner_div" *ngIf="listSpinner; else content" [diameter]="40"></mat-spinner>
+            </div>
+              <div fxLayout="row">
+                <ng-template #content>
+                    <div fxLayout="row">
+                        <app-expansion-panel 
+                            *ngIf="issueTrackerList.length>0"
+                            [pageIndex]="pageIndex"
+                            [pageSize]="pageSize"
+                            [expansionPanelOptions]="issueTrackerDataOptions"
+                            selectorComponent="app-issue-tracker-details" 
+                            [data]="issueTrackerList" >
+                        </app-expansion-panel>
+                    </div>        
+                </ng-template>
+            </div>
+        </mat-tab>
+        <mat-tab label="New">
+            <app-issue-tracker-create formType="create" (tabSwitch)="tabSwitch($event)" >
+            </app-issue-tracker-create>
+        </mat-tab>
+    </mat-tab-group>
+</div>
+

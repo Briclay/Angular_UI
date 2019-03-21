@@ -29,8 +29,6 @@ export class OpportunityDetailsComponent implements OnInit {
       validTill : ['', Validators.required],
     });
   }
-
-
   ngOnInit(){
     console.log(this.allFeatures, "opportunity-details")
     this.opportunityDetailsForm.patchValue(this.allFeatures)
@@ -48,7 +46,6 @@ export class OpportunityDetailsComponent implements OnInit {
      {
       this.dialogRef.close();
     }
-
     onSubmit()
     {
 // MatDialog useful stuff with the gathered data

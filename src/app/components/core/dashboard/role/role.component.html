@@ -3,16 +3,19 @@
 <div class="role-container">
     <mat-tab-group #tabGroup>
         <mat-tab label="Overview">
-            <app-panel-header-filter></app-panel-header-filter>
+            <app-panel-header-filter [data]="roles" (dataFilter)="dataPaginatorChange($event)"></app-panel-header-filter>
             <div style ="place-content :center;">
                 <mat-spinner style="margin:0 auto;" *ngIf="roleListSpinner; else panelContent" [diameter]="40"></mat-spinner>
               </div>
             <div fxLayout="row">
                 <ng-template #panelContent>
-                    <app-expansion-panel *ngIf="selectedOrgId" [expansionPanelOptions]="roleDataOptions"      
+                    <app-expansion-panel *ngIf="selectedOrgId"
+                        [pageIndex]="pageIndex"
+                        [pageSize]="pageSize"
+                        [expansionPanelOptions]="roleDataOptions"      
                         selectorComponent="app-role-details" 
                         [data]="roles" 
-                        [isHistory]="true"
+                        [isHistory]="true" (updateRefresh)="getRolesData()" 
                         (openHistort)="openDialog(data)">
                     </app-expansion-panel>
                 </ng-template>

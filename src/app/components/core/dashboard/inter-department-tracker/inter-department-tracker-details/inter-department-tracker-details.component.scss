@@ -1,0 +1,77 @@
+.issue-tracker-details-container {
+    padding: 10px;
+    .issue-tracker-details-form {
+        .issue-tracker-details-card {
+            flex: 1;
+            display: flex;
+            font: 400 13px/20px Roboto,"Helvetica Neue",sans-serif;
+            .issue-tracker-details-name {
+                margin-top : 15px;
+                flex: 0.2;
+                img {
+                    width: 100px;
+                    border-radius: 5px;
+                }
+                .issue-trackername-input {
+                    margin-top: 10px;
+                }
+            }
+            .issue-tracker-details-content {
+                flex: 1;
+                .issue-tracker-details-content-title {
+                    margin-left: 10px;
+                }
+                .issue-tracker-details-form-list {
+                    border-left: 1px solid #ccc;
+                    min-height: 200px;
+                    max-height: 200px;
+                    padding: 10px;
+                    overflow:auto; 
+
+                    .statusCheck{
+                        display: flex;
+                        font-size: 13px;
+                        border-radius: 6px;
+                        text-align: center;
+                        color: white;
+                    }
+                    .bg_color_open {
+                        background-color: #fbbc05;
+                    }
+                    .bg_color_close {
+                        background-color: #808080;
+                    }
+                    .USer {
+                        display: inline-flex;
+                        height: 14px;
+                        width: 120px;
+                        margin-right: 6px;
+                        position: relative;
+                        border: 1px solid #8080804a;
+                        border-radius: 3px;
+                        color: #808080;
+                        padding: 8px 6px 4px 9px;
+                    }
+                    .assign {
+                        display: inline-block;
+                        position: absolute;
+                        top: -15px;
+                        display: inline-table;
+                        background-color: white;
+                        font: 400 10px 'Montserrat', sans-serif !important;
+                        height: 16px;
+                    }
+                    .assignUser {
+                        color:#000000c9;
+                        font: 400 13px 'Montserrat', sans-serif !important;
+                    }
+                }
+            }
+        }
+    }
+    
+}
+
+::ng-deep .mat-form-field-appearance-legacy .mat-form-field-underline {
+     height: 0px!important;
+}

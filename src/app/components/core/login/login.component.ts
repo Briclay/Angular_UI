@@ -75,8 +75,8 @@ export class LoginComponent implements OnInit {
 
 	onLoginFormSubmit() {
 		this.onLoginFormValuesChanged()
-		this.isLoading = true;
 		if (this.loginForm.valid) {
+			this.isLoading = true;
 			this.authenticationService.login(this.loginForm.value)
 			.pipe().subscribe(response =>  {
 				console.log(response, "loginResponse")
@@ -103,6 +103,10 @@ export class LoginComponent implements OnInit {
 			    });
 				console.log(error , 'err')
 			});
+		}else {
+			this.snackBar.open('Invalid email address', 'login', {
+		      duration: 2000,
+		    });
 		}
   	}
 }

@@ -6,6 +6,7 @@ import { WorkOrderService } from '../work-order.service';
 import { WorkRequestService } from '../../work-request/work-request.service';
 import { OrganisationService } from '../../organisation/organisation.service';
 import { ProjectService } from '../../projects/project.service';
+import { UserService } from '../../user/user.service';
 import {merge as observableMerge, Subject} from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
 import {takeUntil} from 'rxjs/operators';
@@ -32,13 +33,14 @@ export class WorkOrderDetailsComponent implements OnInit {
   orderList: any;
   workList: any;
   orgId: string;
-
+  enableTypeOfConsultant = false;
   private unsubscribe: Subject<any> = new Subject();
   constructor(private formBuilder: FormBuilder,
     private workOrderService: WorkOrderService,
     private workRequestService: WorkRequestService,
     private organisationService: OrganisationService,
     private projectService: ProjectService,
+    private userService : UserService,
     private router: Router,
     private route: ActivatedRoute
   ) {
@@ -46,6 +48,7 @@ export class WorkOrderDetailsComponent implements OnInit {
     this.orderTrackerFormErrors = {
       _workOrderId: {},
       _organisationId: {},
+      orderDate : {},
       _projectId: {},
       _workRequest: {},
       typeOfWork: {},
@@ -59,13 +62,16 @@ export class WorkOrderDetailsComponent implements OnInit {
       workOrderApprovalDate: {},
       status: {},
       date: {},
-      totalValue: {}
+      totalValue: {},
+      remark:{},
+      typeOfConsultant : {}
     };
     this.orderTrackerForm = this.formBuilder.group({
       _organisationId: this.orgId,
       _projectId: [Validators.required],
       _workRequest: ['', Validators.required],
       _workOrderId: [''],
+      orderDate : new FormControl((new Date())),
       workOrderNumber: [''],
       projectName: [''],
       assignedUser: [''],
@@ -80,16 +86,20 @@ export class WorkOrderDetailsComponent implements OnInit {
       workOrderFullRefNumber: ['', Validators.required],
       workRequestList: [''],
       nameOfAgency: [''],
+      remark: [''],
       status: 'In Progress',
       totalValue: [''],
-      date: new FormControl((new Date()))
+      date: new FormControl((new Date())),
+      typeOfConsultant : ['']
     });
+
+    let orgDetails = JSON.parse(window.localStorage.authUserOrganisation);
+    this.orgId = orgDetails._id
   }
 
   ngOnInit() {
-    observableMerge(this.route.params, this.route.queryParams).pipe(
-      takeUntil(this.unsubscribe))
-      .subscribe((params) => this.loadRoute(params));
+    this.assignValuesToForm();
+    this.getAllWorkRequest();
   }
 
   public ngOnDestroy() {
@@ -97,32 +107,35 @@ export class WorkOrderDetailsComponent implements OnInit {
     this.unsubscribe.complete();
   }
 
-  loadRoute(params: any) {
-    if ('orgID' in params) {
-      this.orgId = params['orgID'];
-      this.assignValuesToForm();
-      this.getAllWorkRequest();
-    }
-  }
-
-
   selectWorkRequest() {
     this.genrateFullRefNumber();
     if (this.orderTrackerForm.value.workRequestList) {
-      /*this is for displya data*/
-      this.orderTrackerForm.controls['projectName'].setValue(this.orderTrackerForm.value.workRequestList._projectId.name);
-      this.orderTrackerForm.controls['assignedUser'].setValue(this.orderTrackerForm.value.workRequestList._assignedId.username);
-      this.orderTrackerForm.controls['typeOfWork'].setValue(this.orderTrackerForm.value.workRequestList.typeOfWork);
-      this.orderTrackerForm.controls['documentStatus'].setValue(this.orderTrackerForm.value.workRequestList.documentStatus);
-      this.orderTrackerForm.controls['workRequestStatus'].setValue(this.orderTrackerForm.value.workRequestList.status);
-      this.orderTrackerForm.controls['workDescription'].setValue(this.orderTrackerForm.value.workRequestList.workDescription);
-      this.orderTrackerForm.controls['workOrderPutDate'].setValue(this.orderTrackerForm.value.workRequestList.workOrderPutDate);
-      this.orderTrackerForm.controls['workOrderApprovalDate'].setValue(this.orderTrackerForm.value.workRequestList.workOrderApprovalDate);
-      this.orderTrackerForm.controls['awardedDate'].setValue(this.orderTrackerForm.value.workRequestList.awardedDate);
-      /*this for form data*/
-      this.orderTrackerForm.controls['_workRequest'].setValue(this.orderTrackerForm.value.workRequestList._id);
-      this.orderTrackerForm.controls['_projectId'].setValue(this.orderTrackerForm.value.workRequestList._projectId._id);
+      let projName = "";
+      let userName = "";
+      this.projectService.getSingleProjects(this.orderTrackerForm.value.workRequestList._projectId)
+      .pipe().subscribe(res => {
+        projName = res.name;
+        this.userService.getSingleUser(this.orderTrackerForm.value.workRequestList._assignedId)
+          .pipe().subscribe(res => {
+            userName = res.username;
+          if(projName !== "" || userName !== ""){
+            this.orderTrackerForm.controls['projectName'].setValue(projName);
+            this.orderTrackerForm.controls['assignedUser'].setValue(userName);
+            this.orderTrackerForm.controls['typeOfWork'].setValue(this.orderTrackerForm.value.workRequestList.typeOfWork);
+            this.orderTrackerForm.controls['documentStatus'].setValue(this.orderTrackerForm.value.workRequestList.documentStatus);
+            this.orderTrackerForm.controls['workRequestStatus'].setValue(this.orderTrackerForm.value.workRequestList.status);
+            this.orderTrackerForm.controls['workDescription'].setValue(this.orderTrackerForm.value.workRequestList.workDescription);
+            this.orderTrackerForm.controls['workOrderPutDate'].setValue(this.orderTrackerForm.value.workRequestList.workOrderPutDate);
+            this.orderTrackerForm.controls['workOrderApprovalDate'].setValue(this.orderTrackerForm.value.workRequestList.workOrderApprovalDate);
+            this.orderTrackerForm.controls['awardedDate'].setValue(this.orderTrackerForm.value.workRequestList.awardedDate);
+            /*this for form data*/
+            this.orderTrackerForm.controls['_workRequest'].setValue(this.orderTrackerForm.value.workRequestList._id);
+            this.orderTrackerForm.controls['_projectId'].setValue(this.orderTrackerForm.value.workRequestList._projectId);
+            }
+          })
+        })
     }
+      /*this is for displya data*/
   }
   createOrderId(number) {
     let str = '' + number;
@@ -183,7 +196,8 @@ export class WorkOrderDetailsComponent implements OnInit {
     this.organisationService.getOneOrg(this.orgId)
       .pipe().subscribe(res => {
         console.log('res' + JSON.stringify(res));
-        this.orgCode = res.orgCode;
+        let orgModifiedCode = res.orgCode.substr(0, res.orgCode.indexOf('-')); 
+        this.orgCode = orgModifiedCode;
         this.getDate(this.orgCode);
       }, (error: any) => {
         console.error('error', error);
@@ -199,7 +213,7 @@ export class WorkOrderDetailsComponent implements OnInit {
     console.log('reuquetNumber' + reuquetNumber);
     console.log('reuquetNumber' + reuquetNumber);
     let refNumber = orgCode + '/' + date + '/' + reuquetNumber + '/';
-    this.projectService.getSingleProjects(this.orderTrackerForm.value.workRequestList._projectId._id)
+    this.projectService.getSingleProjects(this.orderTrackerForm.value.workRequestList._projectId)
       .pipe().subscribe(res => {
         console.log('res.projectCode' + res.projectCode);
         // tslint:disable-next-line:max-line-length
@@ -231,6 +245,9 @@ export class WorkOrderDetailsComponent implements OnInit {
   assignValuesToForm() {
     if (this.formType !== 'create') {
       this.orderTrackerForm.patchValue(this.data);
+      if(this.data.typeOfWork = 'Appointment of Consultant'){
+        this.enableTypeOfConsultant = true;
+      }
     }
   }
   getAllWorkRequest() {

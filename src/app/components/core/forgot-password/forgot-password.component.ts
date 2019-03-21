@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog ,MAT_DIALOG_DATA,MatSnackBar } from '@angular/material';
+import { MatDialog ,MatDialogRef,MAT_DIALOG_DATA,MatSnackBar } from '@angular/material';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthenticationService } from './../../../services/authentication/authentication.service';
@@ -16,6 +16,7 @@ export class ForgotPasswordComponent implements OnInit {
     userToken : any;
   	constructor(private formBuilder: FormBuilder,
 	    private router: Router,
+       	private dialogRef : MatDialogRef<ForgotPasswordComponent>,
 	    private auth: AuthService,
 	    private authenticationService: AuthenticationService,
 	    private snackBar :MatSnackBar ) 
@@ -35,6 +36,10 @@ export class ForgotPasswordComponent implements OnInit {
 		});
 	}
 
+	closeForgotPwdPopup() {
+	    this.dialogRef.close(this.forgotPwdform);
+  	}
+
 	onforgotPwdformValuesChanged() {
 		for (const field in this.forgotPwdformErrors) {
 		if (!this.forgotPwdformErrors.hasOwnProperty(field)) {
@@ -52,21 +57,30 @@ export class ForgotPasswordComponent implements OnInit {
 
 	onforgotPwdformSubmit() {
 		this.onforgotPwdformValuesChanged()
-		if (this.forgotPwdform.valid) {
-			this.authenticationService.forgotPwd(this.forgotPwdform.value)
+		let emailRegx = '[^@]+@[^\.]+\..+'
+		if (this.forgotPwdform.valid && this.forgotPwdform.value.email.match(emailRegx)) {
+			let emailId = this.forgotPwdform.value.email;
+			this.authenticationService.forgotPwd(emailId, this.forgotPwdform.value)
 			.pipe().subscribe(response =>  {
+				let snackBar =  this.snackBar.open(response.message, 'Forgot', {
+			      	duration: 2000,
+			    });
                 //this.auth.set(response);
 				console.log(response, "forgotPwdform")
 				this.forgotPwdform.reset();
 				this.forgotPwdform['_touched'] = false;
-				//const path = '/dashboard';
-				//this.router.navigateByUrl(path);
+				this.dialogRef.close(snackBar);
 			}, (error: any) => {
-				this.snackBar.open("aa", 'Forgot', {
-			      duration: 2000,
-			    });
+					this.snackBar.open(error.message, 'Forgot', {
+				      duration: 2000,
+				    });
 				console.log(error , 'err')
 			});
+		}
+		else {
+			this.snackBar.open('Invalid email address', 'Forgot', {
+		      duration: 2000,
+		    });
 		}
   	}
 

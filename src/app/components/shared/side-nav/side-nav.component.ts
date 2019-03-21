@@ -13,6 +13,8 @@ export class SideNavComponent implements OnInit {
   coreViewOnly = false;
   access : any;
   superadminAccess = false;
+  dasbhaords = [ 'design', 'user','contracts','operations' ]
+  dasbhaordByDep : any;
   allAccess = [
       {
         "_id": "5c4c8684fa54e07be980eb7a",
@@ -50,9 +52,17 @@ export class SideNavComponent implements OnInit {
     this.userAuth = JSON.parse(window.localStorage.getItem('authUser'));
     this.currentUserType = this.userAuth.userType.toLowerCase().replace(/\s+/g, '-');
     this.currentDepartmentName = this.userAuth._departmentId.name.toLowerCase().replace(/\s+/g, '-');
-	}
+	
+    this.dasbhaords.forEach(v =>{
+      if(v === this.currentDepartmentName){
+        this.dasbhaordByDep = this.currentDepartmentName;
+        console.log(this.dasbhaordByDep,'this.dasbhaordByDep')
+      }
+    })
+  }
 
 	ngOnInit() {
+
     if (this.currentUserType === "admin" && this.currentDepartmentName === "design"){
       this.coreViewOnly = true;
     }

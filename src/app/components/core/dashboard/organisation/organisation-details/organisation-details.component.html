@@ -24,7 +24,7 @@
             <div formGroupName="subscription">
               <mat-form-field appearance="outline">
                 <mat-label>Plan</mat-label>
-                <mat-select placeholder="Plan" [(value)]="selected" >
+                <mat-select placeholder="Plan" [(value)]="selected" formControlName="plan">
                   <mat-option *ngFor="let plan of plans"  [value]="plan">
                     {{plan}}
                   </mat-option>
@@ -85,7 +85,7 @@
           </div>
         </div>
       </div>
-
+      <button mat-raised-button type="submit" *ngIf="formType === 'create'" (click)="onFormCancel()" class="pull-right">Cancel</button>
       <button mat-raised-button type="submit"  (click)="onOrgFormSubmit()" class="pull-right">Submit</button>
 
       <div class="clearfix"></div>

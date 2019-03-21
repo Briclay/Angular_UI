@@ -1,153 +1,163 @@
-<div id="order-tracker-create" fxLayout="column" class="page-layout simple fullwidth request-order-container">
-  <div class="request-order-content">
-    <mat-card>
-      <form name="orderTrackerForm" [formGroup]="orderTrackerForm" novalidate>
-        <div class="card-header">
-          <div fxFlex="20" fxLayout="row" fxLayoutAlign="start center">
-            <mat-form-field appearance="outline" floatLabel="never" color="primary">
-              <mat-label>Work Request</mat-label>
-              <mat-select placeholder="Work Request" formControlName="workRequestList" class="fo-p3-likhud" (selectionChange)="selectWorkRequest()">
-                <mat-option *ngFor="let requestList of workList" [value]="requestList">
-                  {{ requestList.requestNumber }}
-                </mat-option>
-              </mat-select>
-              <mat-error *ngIf="orderTrackerFormErrors._workRequest.required">
-                Work request is required!
-              </mat-error>
-            </mat-form-field>
-          </div>
-          <div class="hdr-assign-box" fxFlex="25" fxLayout="row" fxLayoutAlign="start center">
-            <mat-form-field appearance="outline">
-              <mat-label>Assigned User</mat-label>
-              <input class="likely" matInput placeholder="" formControlName="assignedUser" readonly>
-            </mat-form-field>
-          </div>
-          <div class="hdr-assign-box" fxFlex="30" fxLayout="row" fxLayoutAlign="start center">
-              <mat-form-field appearance="outline">
-              <mat-label>Work Order Full Ref Number</mat-label>
-              <input class="likely" matInput placeholder="" formControlName="workOrderFullRefNumber" readonly>
-            </mat-form-field>
-          </div>
-        </div>
-
-        <!-- card Content starts here-->
-        <div class="card-content">
-          <div fxLayout="row">
-            <div  fxFlex="20">
-              <mat-form-field appearance="outline" fxLayoutAlign="start center">
-                <mat-label>Work Order Id</mat-label>
-                <input matInput placeholder="Work Order Id" formControlName="_workOrderId" readonly>
-              </mat-form-field>
+  <div class="user-details-container">
+    <div [formGroup]="orderTrackerForm"   class="user-details-form">
+      <mat-card class="mat-card" style="height: 270px;">
+        <div fxLayout="row">
+          <div  style="margin-left: 10px; border-right: 2px solid lightgrey;height: 287px"  fxLayout="column" >
+            <div>
+              <div style="margin-top: 17px;margin-right: 20px;width: 200px;">
+               <mat-form-field appearance="outline" floatLabel="never" color="primary">
+                <mat-label>Work Request</mat-label>
+                <mat-select placeholder="Work Request" formControlName="workRequestList" class="fo-p3-likhud" (selectionChange)="selectWorkRequest()">
+                  <mat-option *ngFor="let requestList of workList" [value]="requestList">
+                    {{ requestList.requestNumber }}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="orderTrackerFormErrors._workRequest.required">
+                  Work request is required!
+                </mat-error>
+              </mat-form-field> 
             </div>
-            <div  fxFlex="20">
-              <mat-form-field appearance="outline" fxLayoutAlign="start center">
+            <br>
+            <div style="margin-top: -23px" fxLayout="column" >
+              <mat-form-field appearance="outline"  style="margin-right: 20px;width: 200px;" >
                 <mat-label>Project Name</mat-label>
                 <input matInput placeholder="Project Name" formControlName="projectName" readonly>
-              </mat-form-field>
-            </div>
-            <div  fxFlex="20">
-              <mat-form-field appearance="outline" fxLayoutAlign="start center">
-                <mat-label>Type Of Work</mat-label>
-                <input matInput placeholder="Type Of Work" formControlName="typeOfWork" readonly>
-              </mat-form-field>
-            </div>
-            <div  fxFlex="40">
-              <mat-form-field appearance="outline" fxLayoutAlign="start center">
-                <mat-label>Package/Description</mat-label>
-                <input matInput class="width-100" placeholder="Package/Description" formControlName="workDescription" readonly>
-              </mat-form-field>
-            </div>
-          </div>
-
-          <div fxLayout="row">
-            <div  fxFlex="20">
-              <mat-form-field appearance="outline" fxLayoutAlign="start center">
+              </mat-form-field> 
+              <mat-form-field appearance="outline"  style="margin-left: 0px;width: 200px">
                 <mat-label>Work Request Status</mat-label>
                 <input  matInput placeholder="Work Request Status" formControlName="workRequestStatus" readonly>
               </mat-form-field>
             </div>
-            <div  fxFlex="20">
-              <mat-form-field appearance="outline" fxLayoutAlign="start center">
-                <mat-label>Documents Status</mat-label>
-                <input  matInput placeholder="Documents Status" formControlName="documentStatus" readonly>
+            <br>
+            <div style="margin-top: -10px;" fxLayout="column" style="margin-right: 20px;width: 200px;">
+              <mat-form-field appearance="outline" style="margin-top: -10px;">
+                <mat-label>Assigned User</mat-label>
+                <input class="likely" matInput placeholder="" formControlName="assignedUser" readonly>
               </mat-form-field>
-            </div>
-            <div  fxFlex="20">
-              <mat-form-field appearance="outline" fxLayoutAlign="start center">
-                <mat-label>Ramco Work Order #</mat-label>
-                <input type="text"  matInput placeholder="Ramco Work Order #" formControlName="workOrderNumber">
-              </mat-form-field>
-            </div>
-            <div  fxFlex="20">
-              <mat-form-field appearance="outline" fxLayoutAlign="start center">
-                <mat-label>Name of Agency</mat-label>
-                <input type="text" matInput placeholder="Name of Agency" formControlName="nameOfAgency">
-              </mat-form-field>
-            </div>
-            <div  fxFlex="20">
-              <mat-form-field appearance="outline" fxLayoutAlign="start center">
-                <mat-label>Status</mat-label>
-                <input type="text" matInput placeholder="Status" value="In Progress">
+              <mat-form-field appearance="outline" style="margin-right: 20px;width: 200px;">
+                <mat-label>Work Order Id</mat-label>
+                <input matInput placeholder="Work Order Id" formControlName="_workOrderId" readonly>
               </mat-form-field>
             </div>
           </div>
-
-          <div fxLayout="row">
-            <div  fxFlex="20">
-              <mat-form-field appearance="outline" fxLayoutAlign="start center">
-                <mat-label>Work Order Put Date</mat-label>
-                <input matInput placeholder="Work Order Put Date" [matDatepicker]="workOrderPutDate" formControlName="workOrderPutDate">
-                <mat-datepicker-toggle matSuffix [for]="workOrderPutDate"></mat-datepicker-toggle>
-                <mat-datepicker #workOrderPutDate></mat-datepicker>
-              </mat-form-field>
-            </div>
-            <div  fxFlex="20">
-              <mat-form-field appearance="outline" fxLayoutAlign="start center">
-                <mat-label>Work Order Approval Date</mat-label>
-                <input matInput  placeholder="Work Order Approval Date" [matDatepicker]="workOrderApprovalDate"
-                       formControlName="workOrderApprovalDate">
-                <mat-datepicker-toggle matSuffix [for]="workOrderApprovalDate"></mat-datepicker-toggle>
-                <mat-datepicker #workOrderApprovalDate></mat-datepicker>
-              </mat-form-field>
-            </div>
-            <div  fxFlex="20">
-              <mat-form-field appearance="outline" fxLayoutAlign="start center">
-                <mat-label>Award Date</mat-label>
-                <input matInput  placeholder="Award Date" [matDatepicker]="awardDate"
-                       formControlName="awardedDate" readonly>
-                <mat-datepicker-toggle matSuffix [for]="awardDate"></mat-datepicker-toggle>
-                <mat-datepicker #awardDate></mat-datepicker>
-              </mat-form-field>
-            </div>
-            <div  fxFlex="20">
-              <mat-form-field appearance="outline" fxLayoutAlign="start center">
+        </div>
+        <div  style="margin-left: 10px; border-right: 2px solid lightgrey;height: 287px"  fxLayout="column" >
+          <div style="height: 0px;margin-top: 16px">
+           <div    style="margin-top: 3px;" fxLayout="row"  >
+            <mat-form-field  appearance="outline"   style="width: 153px;">
+              <mat-label>Type Of Work</mat-label>
+              <input matInput placeholder="Type Of Work" formControlName="typeOfWork" readonly>
+            </mat-form-field>
+            <mat-form-field appearance="outline" style="width: 150px;margin-left: 5px;" >
                 <mat-label>Total Value</mat-label>
                 <input type="number" matInput placeholder="Total Value" formControlName="totalValue">
               </mat-form-field>
-            </div>
-            <div  fxFlex="20">
-              <section class="check-status">
-                <span>Document Approval Status </span>
-                <mat-checkbox disabled="true">RFA</mat-checkbox>
-                <mat-checkbox disabled="true">Work Order</mat-checkbox>
-              </section>
-            </div>
+
           </div>
+          <br>
+           <div style="width: 30px; margin-top: -19px; margin-left: 0px" fxLayout="row" >
+
+           <mat-form-field appearance="outline" style="width: 153px;" >
+            <mat-label>Award Date</mat-label>
+            <input matInput  placeholder="Award Date" [matDatepicker]="awardDate"
+            formControlName="awardedDate" readonly>
+            <mat-datepicker-toggle matSuffix [for]="awardDate"></mat-datepicker-toggle>
+            <mat-datepicker #awardDate></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" style=" width: 150px;margin-left: 5px;" >
+            <mat-label>Work Order Put Date</mat-label>
+            <input matInput placeholder="Work Order Put Date" [matDatepicker]="workOrderPutDate" formControlName="workOrderPutDate">
+            <mat-datepicker-toggle matSuffix [for]="workOrderPutDate"></mat-datepicker-toggle>
+            <mat-datepicker #workOrderPutDate></mat-datepicker>
+          </mat-form-field>
         </div>
-        <!-- card Content ends here-->
-        <!-- card Footer starts here-->
-        <div fxLayout="row" fxLayoutAlign="start center" class="card-footer">
-          <div fxFlex="100">
-            <!-- button -->
-            <div class="button-row" fxLayoutAlign="end center">
-              <button mat-raised-button class="cancel-button" color="white-bg" (click)=cancel()>Cancel</button>
-              <div class="space"></div>
-              <button type="submit" mat-raised-button class="save-button" color="white-bg" (click)=onOrderFormSubmit()>Save</button>
-            </div>
+          <br>
+         
+        
+        <div style="width: 87px; margin-top: -20px;" fxLayout="row">
+          <mat-form-field appearance="outline"  style=" width: 153px;">
+           <mat-label>Work Order Approval Date</mat-label>
+           <input matInput  placeholder="Work Order Approval Date" [matDatepicker]="workOrderApprovalDate"
+           formControlName="workOrderApprovalDate">
+           <mat-datepicker-toggle matSuffix [for]="workOrderApprovalDate"></mat-datepicker-toggle>
+           <mat-datepicker #workOrderApprovalDate></mat-datepicker>
+         </mat-form-field>
+          <mat-form-field appearance="outline" style="width:150px;margin-left: 5px;">
+              <mat-label>Order Date</mat-label>
+              <input matInput [min]="initiatedDate" placeholder="" [matDatepicker]="orderDate" formControlName="orderDate">
+                <mat-datepicker-toggle matSuffix [for]="orderDate"></mat-datepicker-toggle>
+                <mat-datepicker #orderDate></mat-datepicker>
+            </mat-form-field>
+       </div>
+       <br>
+       <div style="width: 316px;margin-top: -18px" >
+            <mat-form-field appearance="outline"  style="width: 304px;" >
+              <mat-label>Package/Description</mat-label>
+              <!-- <input matInput   placeholder="Package/Description" formControlName="workDescription" readonly> -->
+              <textarea   rows=4 matInput formControlName="workDescription" readonly></textarea>
+            </mat-form-field>
           </div>
-        </div>
-        <!-- card footer ends here -->
-      </form>
-    </mat-card>
+     </div>
+   </div>
+   <div style="margin-left: 10px" fxLayout="column">
+    <div   style="margin-top: 16px;width: 10px" fxLayout="row">
+      <!-- <mat-form-field appearance="outline"  style=" width: 200px;">
+        <mat-label>Total Value</mat-label>
+        <input type="number" matInput placeholder="Total Value" formControlName="totalValue">
+      </mat-form-field> -->
+
+      <mat-form-field appearance="outline" style=" width: 130px;">
+        <mat-label>Name of Agency</mat-label>
+        <input type="text" matInput placeholder="Name of Agency" formControlName="nameOfAgency">
+      </mat-form-field>
+      <mat-form-field appearance="outline" style=" width: 130px;margin-left: 5px;">
+        <mat-label>Status</mat-label>
+        <input type="text" matInput placeholder="Status" value="In Progress">
+      </mat-form-field>
+    </div>
+
+     <div fxLayout="row">
+      <mat-form-field appearance="outline" style=" width: 130px;">
+        <mat-label>Documents Status</mat-label>
+        <input  matInput placeholder="Documents Status" formControlName="documentStatus" readonly>
+      </mat-form-field>
+      <mat-form-field appearance="outline" style=" width: 130px;margin-left: 5px;">
+              <mat-label>Work Order Full Ref Number</mat-label>
+              <input matInput placeholder="" formControlName="workOrderFullRefNumber" readonly>
+            </mat-form-field>
+     </div>
+     
+      <mat-form-field appearance="outline" style=" width: 267px;">
+        <mat-label>Ramco Work Order #</mat-label>
+        <input type="text"  matInput placeholder="Ramco Work Order #" formControlName="workOrderNumber">
+      </mat-form-field>
+      <mat-form-field appearance="outline" style="width: 267px;">
+        <mat-label>Remarks</mat-label>
+        <textarea  style="height:20px" matInput formControlName="remark" ></textarea>
+      </mat-form-field> 
+
+     
+    <div fxLayout="row" style="width: 0%;">
+      <section class="check-status" fxLayout="row">
+        <span>Document Approval Status </span>
+        <mat-checkbox disabled="true" style="    margin-left: 15px;" >RFA</mat-checkbox>
+        <br>
+        <mat-checkbox disabled="true">Work Order</mat-checkbox>
+      </section>
+    </div>
   </div>
+</div>
+<div fxLayout="row" style="margin-top: -55px;    margin-left: 81em;" >
+  <div fxLayout=column style="align-items: center;margin-left: 20px;margin-bottom:20px" (click)="reset()">
+    <img style="height: 30px;width: 30px;" src="assets/images/icons/close_red.png" />
+    <span>Cancel</span>
+  </div>
+  <div fxLayout=column class="hand-cursor" style="align-items: center;margin-left: 20px;" (click)="onFormSubmit()">
+    <img style="height: 30px;" src="assets/images/icons/submitIcon.png" />
+    <span>Save</span>
+  </div>
+</div>
+</mat-card>
+</div>
 </div>

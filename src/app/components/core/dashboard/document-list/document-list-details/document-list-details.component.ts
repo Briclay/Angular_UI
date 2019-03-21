@@ -20,7 +20,11 @@ export class DocumentListDetailsComponent implements OnInit {
  documentListDetailsOptions:any;
  listDetailsOptions:any;
  revesionData =['R1','R2' , 'R3'];
- 
+ projectSelection:any;
+ documents:any;
+  orgDetails: any;
+ orgID: string;
+ projectId: string;
 
  tableFlag = false;
  /*documentListDetails  = [
@@ -67,7 +71,10 @@ constructor(  private route: ActivatedRoute,
   private documentListService: DocumentListService,
 
   ) { 
-
+this.orgDetails =  JSON.parse(window.localStorage.authUserOrganisation);
+   this.orgID = this.orgDetails._id;
+   console.log('this.orgId' + JSON.stringify(this.orgDetails));
+   this.getAll();
 }
 
 ngOnInit() {
@@ -83,7 +90,36 @@ ngOnInit() {
     weightage: ['']
   });
   this.assignValuesToForm();
+
+
+
 } 
+
+/*projectChanged(id){
+      this.contractSpinner = true;
+      this.documentListService.getOne(id).pipe().subscribe(res => {
+        console.log(res, 'list')
+        this.projectSelection = res.configValues;
+        console.log(this.configValues,'aaaaaaaaaaa')
+        this.contractSpinner = false;
+      },
+      (error: any) => {
+        console.error('error', error);
+      });
+    }
+*/
+    getAll(){
+
+    this.documentListService.getAll(this.orgID,this.projectId).pipe().subscribe(res => {
+      debugger;
+      this.documents = res;
+    }, (error: any) => {
+      console.error('error', error);
+    });
+  }
+
+
+
 assignValuesToForm() {  
   //if(this.formType !== 'create') {                  
     this.overviewForm.patchValue(this.data)

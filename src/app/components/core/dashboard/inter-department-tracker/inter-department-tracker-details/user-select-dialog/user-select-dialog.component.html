@@ -1,0 +1,33 @@
+<div id="dep_user" fxLayoutAlign="center center">
+  <div id="dep_user-form-wrapper"  fxLayout="row" fxLayoutAlign="center center">
+    <div id="dep_user-form" >
+      <form  name="userForm"  [formGroup]="userForm" novalidate>
+        <div fxLayout="row" class="inputBoxShadow">
+          <div>
+           	<mat-form-field appearance="outline" >
+              <mat-label>Department</mat-label>
+              <mat-select placeholder="" (selectionChange)="selectDepartment($event.value)">
+                <mat-option *ngFor="let departmentName of depratmentLists" [value]="departmentName" >
+                  {{departmentName.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="outline" >
+	            <mat-label>Assigned To</mat-label>
+	            <mat-select  placeholder="Select user" (selectionChange)="selectedUser($event.value)">
+	              <mat-option *ngFor="let assignedName of usersList" [value]="assignedName">
+	                {{assignedName.name.first }} {{assignedName.name.last}}
+	              </mat-option>
+	            </mat-select>
+	        </mat-form-field>
+          </div>
+        </div>
+        <div style="margin-top:3%;">
+	        <button mat-raised-button style="background-color: #2196F3;margin-right: 15px; color: white;"  aria-label="cancel" (click)="closeUserPopup()">Cancel </button>
+	         <button mat-raised-button style="background-color: #2196F3; color: white;" aria-label="reset" (click)="onuserFormSubmit()" >Save 
+	        </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

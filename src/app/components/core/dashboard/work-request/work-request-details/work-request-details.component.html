@@ -9,16 +9,16 @@
             <mat-form-field appearance="outline">
               <mat-label>Projects</mat-label>
               <mat-select placeholder="Projects" formControlName="_projectId" required>
-                <mat-option [value]="null" *ngIf="projectsList.length<=0">No User</mat-option>
-                <mat-option *ngFor="let projects of projectsList" [value]="projects._id">
-                  {{ projects.name }}
+                <!-- <mat-option [value]="null" *ngIf="projectsList.length<=0">No User</mat-option> -->
+                <mat-option *ngFor="let proj of projectsList" [value]="proj._id">
+                  {{ proj.name }}
                 </mat-option>
               </mat-select>
             </mat-form-field>
             <mat-form-field appearance="outline" floatLabel="never" >
               <mat-label>Assingee</mat-label>
               <mat-select placeholder="Assingee" formControlName="_assignedId" >
-                <mat-option [value]="null" *ngIf="userList.length<=0">No User</mat-option>
+                <!-- <mat-option [value]="null" *ngIf="userList.length<=0">No User</mat-option> -->
                 <mat-option *ngFor="let users of userList" [value]="users._id">
                   {{ users.username }}
                 </mat-option>
@@ -35,23 +35,34 @@
             </mat-form-field>
             <mat-form-field appearance="outline">
               <mat-label>Type of Work</mat-label>
-                <mat-select class="wrk-catgry" placeholder="Type Of Work" formControlName="typeOfWork" required>
+                <mat-select class="wrk-catgry" placeholder="Type Of Work" formControlName="typeOfWork" required (selectionChange)="selectTypeOfWork($event.value)">
                 <mat-option *ngFor="let work of typeOfWork" [value]="work">
                   {{ work }}
                 </mat-option>
               </mat-select>
             </mat-form-field>
+            <mat-form-field appearance="outline" *ngIf="enableTypeOfConsultant">
+              <mat-label>Type of Consultant</mat-label>
+              <mat-select class="wrk-catgry" placeholder="Type Of Consultant" formControlName="typeOfConsultant" required (selectionChange)="selectAofConsultant($event.value)">
+                <mat-option *ngFor="let toc of typeOfConsultants" [value]="toc">
+                  {{ toc }}
+                </mat-option>
+              </mat-select>  
+            </mat-form-field>
+            <mat-form-field appearance="outline" *ngIf="enableOthersConsultant">
+              <mat-label>Type of Consultant</mat-label>
+              <input matInput placeholder="" formControlName="typeOfConsultant">
+            </mat-form-field>
             <div style="position: relative;">
               <mat-form-field appearance="outline">
                 <mat-label>Work Category</mat-label>
                 <mat-select class="wrk-catgry" placeholder="Work Category" formControlName="workCategory" (selectionChange)="noOfDays()"required>
-                  <mat-option [value]="null" *ngIf="workCategory.length<=0">No Work Category</mat-option>
                   <mat-option *ngFor="let workCat of workCategory" [value]="workCat.name">
                     {{ workCat.name }}
                   </mat-option>
                 </mat-select>
               </mat-form-field>
-              <mat-icon style="position: absolute;top: -12px;left: 187px;" class="icon-small-text curs-pointer">info</mat-icon>
+              <mat-icon (click)="workCategoryDialog()" style="position: absolute;top: -12px;left: 187px;" class="icon-small-text hand-cursur">info</mat-icon>
             </div>
           </div>
         </div>
@@ -142,7 +153,7 @@
             </div>
             <div>
               <section class="check-status">
-                <span style="margin-right: 5px;">Document Approval Status </span>
+                <span style="margin-right: 5px;">Document Upload Status </span>
                 <mat-checkbox style="margin-right: 5px;" disabled="true">RFA</mat-checkbox>
                 <mat-checkbox style="margin-right: 5px;" disabled="true">Work Order</mat-checkbox>
               </section>
@@ -162,14 +173,15 @@
           <span class="time-status green" [ngClass]="{'red': time.timeToComplete < 10}"></span>
         </div>
         <div>
-          <span class="time-label">Number Of Days</span>
+          <span class="time-label">Total number of Days</span>
           <span class="time-value">{{time.leadDaysToComplete}}</span>
           <span class="time-status green" [ngClass]="{'red': time.leadDaysToComplete < 10}"></span>
         </div>
       </div>
       <button mat-raised-button type="submit" class="pull-right" 
-      [disabled]="isLoading || !workTrackerForm.valid" (click)="workTrackerFormSubmit()">Submit</button>
-      <div class="clearfix"></div>
+       (click)="workTrackerFormSubmit()">Submit</button>
+<!--        [disabled]="isLoading || !workTrackerForm.valid"
+ -->      <div class="clearfix"></div>
     </mat-card>
   </form>
 </div>

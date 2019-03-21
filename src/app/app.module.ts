@@ -31,7 +31,7 @@ import { RoleComponent } from './components/core/dashboard/role/role.component';
 import { PanelHeaderFilterComponent } from './components/shared/panel-header-filter/panel-header-filter.component';
 import { WorkRequestComponent } from './components/core/dashboard/work-request/work-request.component';
 import { ProjectModule } from './components/core/dashboard/projects/projects.module';
-import { IssueTrackerComponent } from './components/core/dashboard/issue-tracker/issue-tracker.component';
+import { IssueTrackerComponent } from './components/core/dashboard/inter-department-tracker/inter-department-tracker.component';
 import { OrganisationCreateComponent } from './components/core/dashboard/organisation/organisation-create/organisation-create.component';
 import { RoleCreateComponent } from './components/core/dashboard/role/role-create/role-create.component';
 import { DepartmentComponent } from './components/core/dashboard/department/department.component';
@@ -44,6 +44,7 @@ import { FolderCreateDialogComponent } from './components/core/dashboard/file-ma
 import { WorkOrderComponent } from './components/core/dashboard/work-order/work-order.component';
 import { FileShareDialogComponent } from './components/core/dashboard/file-manager/file-share-dialog/file-share-dialog.component'
 import { FileMailDialogComponent } from './components/core/dashboard/file-manager/file-mail-dialog/file-mail-dialog.component'
+import { FileUploadDialogComponent } from './components/core/dashboard/file-manager/file-upload-dialog/file-upload-dialog.component'
 
 //  all Briclay project Modules imports below
 import { WorkOrderModule } from './components/core/dashboard/work-order/work-order.module';
@@ -70,7 +71,7 @@ import { OrganisationDropDownComponent } from './components/shared/organisation-
 import { ResetPasswordComponent } from './components/core/reset-password/reset-password.component';
 import { ChangePasswordComponent } from './components/core/change-password/change-password.component';
 import { ProjectDropDownComponent } from './components/shared/project-drop-down/project-drop-down.component';
-import { IssueTrackerCreateComponent } from './components/core/dashboard/issue-tracker/issue-tracker-create/issue-tracker-create.component';
+import { IssueTrackerCreateComponent } from './components/core/dashboard/inter-department-tracker/inter-department-tracker-create/inter-department-tracker-create.component';
 import { GroupedBarChartComponent } from './components/shared/grouped-bar-chart/grouped-bar-chart.component';
 import { NcmComponent } from './components/core/dashboard/ncm/ncm.component';
 import { DonutChartComponent } from './components/shared/donut-chart/donut-chart.component';
@@ -82,7 +83,10 @@ import { ContractConfigurationComponent } from './components/core/dashboard/cont
 //import { ContractConfigurationDetailComponent } from './components/core/dashboard/contract-configuration/contract-configuration-detail/contract-configuration-detail.component';
 //import { ContractConfigurationCreateComponent } from './components/core/dashboard/contract-configuration/contract-configuration-create/contract-configuration-create.component';
  //import { DocumentListCreateComponent } from './components/core/dashboard/document-list/document-list-create/document-list-create.component';
- @NgModule({
+import { UserSelectDialogComponent } from './components/core/dashboard/inter-department-tracker/inter-department-tracker-details/user-select-dialog/user-select-dialog.component';
+import { WorkCategoryDialogComponent } from './components/core/dashboard/work-request/work-request-details/work-category-dialog/work-category-dialog.component';
+
+@NgModule({
   declarations: [
     AppComponent,
     DynamicTableComponent,
@@ -141,6 +145,7 @@ import { ContractConfigurationComponent } from './components/core/dashboard/cont
     //ContractConfigurationCreateComponent,
    
     //DocumentListCreateComponent
+    UserSelectDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -168,7 +173,10 @@ import { ContractConfigurationComponent } from './components/core/dashboard/cont
     ProjectDetailsComponent,
     ProjectPhasesComponent,
     ProjectTeamsComponent,
-    UserSelectionDialogComponent
+    UserSelectionDialogComponent,
+    UserSelectDialogComponent,
+    WorkCategoryDialogComponent,
+    FileUploadDialogComponent
   ],
   providers: [D3Service, DashboardService, DepartmentService,
     OrganizationService, UserDashboardService,

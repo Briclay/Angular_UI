@@ -28,6 +28,7 @@ export class FileConfigContractTemplateComponent implements OnInit {
     workOrderApprovalDate: '',
     awardedDate: ''
   };
+  
   constructor(private workRequestService: WorkRequestService) {
     this.org = JSON.parse(window.localStorage.authUserOrganisation);
     this.orgId = this.org._id;

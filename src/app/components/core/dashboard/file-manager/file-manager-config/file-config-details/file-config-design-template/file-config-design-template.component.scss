@@ -9,6 +9,11 @@
     height: 130px;
     width: 215px;
 }
+
+.text-color{
+    font: 700 14px Roboto,"Helvetica Neue",sans-serif;
+    color: #032a57cf;
+}
 .project-content {
     .project-name {
         width: 206px;
@@ -16,7 +21,7 @@
         background-color: #ccc;
         text-align: center;
         color: #032a57cf;
-        font-weight: 600;
+        font: 800 14px Roboto,"Helvetica Neue",sans-serif;
         display: inline-block;
         padding: 5px;
         .project-addrs {

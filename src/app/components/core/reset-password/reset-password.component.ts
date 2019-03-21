@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from './../../../services/authentication/authentication.service';
-import { Router } from '@angular/router';
+import { Router,ActivatedRoute } from '@angular/router';
 import { ForgotPasswordComponent } from '../forgot-password/forgot-password.component'
 import { AuthService } from './../../../services/auth.service';
 import { MatDialog,  MatSnackBar ,MAT_DIALOG_DATA } from '@angular/material';
+import {merge as observableMerge, Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
 
 @Component({
   selector: 'app-reset-password',
@@ -16,28 +18,41 @@ export class ResetPasswordComponent implements OnInit {
   	resetPwdform: FormGroup;
 	resetPwdformErrors: any;
     userToken : any;
+  	private unsubscribe: Subject<any> = new Subject();
   	constructor(private formBuilder: FormBuilder,
 	    private router: Router,
+    	private route: ActivatedRoute,
 	    private auth: AuthService,
 	    private authenticationService: AuthenticationService,
 	    private snackBar :MatSnackBar ) 
 		{
 			this.resetPwdformErrors = {
 				password: {},
-				confirmPassword : {}
+				confirmPassword : {},
+				token :{}
 			}
-			this.userToken = JSON.parse(window.localStorage.getItem('authToken'));
 		}
 
   	ngOnInit() {
-		this.resetPwdform = this.formBuilder.group({
-			password: ['', Validators.required],
-			confirmPassword : ['', Validators.required]
+  		observableMerge(this.route.params, this.route.queryParams).pipe(
+      	takeUntil(this.unsubscribe))
+      	.subscribe((params) => this.loadRoute(params));
+	}
 
-		});
-		this.resetPwdform.valueChanges.subscribe(() => {
-			this.onresetPwdformValuesChanged();
-		});
+	loadRoute(params: any) {
+		if('token' in params) {
+			this.userToken = params['token'];
+			console.log(this.userToken, "this.userToken")
+				this.resetPwdform = this.formBuilder.group({
+				password: ['', Validators.required],
+				confirmPassword : ['', Validators.required],
+				token : [''],
+			});
+			this.resetPwdform.valueChanges.subscribe(() => {
+				this.onresetPwdformValuesChanged();
+			});
+		}
+
 	}
     
   	onresetPwdformValuesChanged() {
@@ -55,19 +70,27 @@ export class ResetPasswordComponent implements OnInit {
 	  }
 	}
 
+	cancel(){
+		const path = '/login';
+		this.router.navigateByUrl(path);
+	}
+
 	onresetPwdformSubmit() {
-		this.onresetPwdformValuesChanged()
 		if (this.resetPwdform.valid) {
+			delete this.resetPwdform.value.confirmPassword;
+			this.resetPwdform.value.token = this.userToken;
 			this.authenticationService.resetPwd(this.resetPwdform.value, this.userToken)
 			.pipe().subscribe(response =>  {
-                //this.auth.set(response);
+                this.snackBar.open(response.message, 'Reset password', {
+			      duration: 2000,
+			    });
 				console.log(response, "resetPwdformResponse")
 				this.resetPwdform.reset();
 				this.resetPwdform['_touched'] = false;
-				//const path = '/dashboard';
-				//this.router.navigateByUrl(path);
+				const path = '/login';
+				this.router.navigateByUrl(path);
 			}, (error: any) => {
-				this.snackBar.open("Invalid username or password", 'Reset Password', {
+				this.snackBar.open(error.message, 'Reset password', {
 			      duration: 2000,
 			    });
 				console.log(error , 'err')

@@ -4,6 +4,8 @@ import {
   ViewChild,
   ViewContainerRef,
   Input,
+  Output,
+  EventEmitter,
   ComponentRef,
   Compiler,
   OnDestroy,
@@ -20,10 +22,10 @@ import { WidgetService } from '../../../services/widget/widget.service';
 export class WidgetContainerComponent implements OnInit, OnDestroy {
   @ViewChild('content', { read: ViewContainerRef })
   content: ViewContainerRef;
-
   @Input() selector: string;
   @Input() settings: any;
   @Input() data: any; 
+  @Output() public updateRefresh: EventEmitter<any> = new EventEmitter<any>();
 
   private componentRef: ComponentRef<any>;
 
@@ -36,10 +38,10 @@ export class WidgetContainerComponent implements OnInit, OnDestroy {
     const type = this.widgetService.widgets[this.selector];
     if (type) {
       const factory = this.cfr.resolveComponentFactory(type);
-
       this.content.clear();
       this.componentRef = this.content.createComponent(factory, 0);
       this.componentRef.instance.data = this.data;
+      this.componentRef.instance.updateRefresh.subscribe(() => this.updateRefresh.emit());
     }
   }
 

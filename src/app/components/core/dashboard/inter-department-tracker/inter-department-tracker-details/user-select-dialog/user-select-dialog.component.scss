@@ -1,0 +1,45 @@
+ #dep_user {
+      flex-direction : row;
+      overflow: auto;
+      background-color : white!important;
+      width: 100%;
+      background-size: cover;
+
+      #dep_user-form-wrapper {
+        flex: 1 0 auto;
+        padding: 10px;
+        #dep_user-form {
+          padding: 10px;
+          background-color : white;
+          text-align: center;
+          .inputBoxShadow {
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.12),0 2px 4px 0 rgba(0,0,0,0.08);
+            border-radius: 10px;
+            place-content: space-around;
+          }
+          .nameAndPwd {
+            margin: 28px 20px 0px 10px;   
+          }
+          form {
+              padding : 1%;
+              width: 100%;
+              text-align: center;
+              mat-form-field {
+                height: 45px;
+                padding : 5px;
+              }
+              md-input-container label {
+                color: red;
+              }
+              md-input-container.md-input-focused label {
+                color: blue;
+              }
+              .submit-button {
+                width: 220px;
+                margin: 16px auto;
+                display: block;
+              }
+          }
+        }
+      }
+    }

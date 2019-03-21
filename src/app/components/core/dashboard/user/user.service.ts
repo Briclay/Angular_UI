@@ -18,6 +18,11 @@ export class UserService {
         return this.apiService.get(url).pipe(map(res => res));
     }
 
+    public getUserByDepId(depID): Observable<any> {
+        let url = `${environmentService.briclayApiBase}/users?select=all&filter[_departmentId]=${depID}`
+        return this.apiService.get(url).pipe(map(res => res));
+    }
+
     public getSingleUser(userID): Observable<any> {
         let url = `${environmentService.briclayApiBase}/users/${userID}`
         return this.apiService.get(url).pipe(map(res => res));

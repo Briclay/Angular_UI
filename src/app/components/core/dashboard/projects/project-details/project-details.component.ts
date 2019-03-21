@@ -17,10 +17,13 @@ export class ProjectDetailsComponent implements OnInit {
   formErrors: any;
   detailsFormErrors: any;
   userAuth: any;
-  detailsForm: FormGroup;
+  detailsForm: FormGroup; 
+  filledData : any;
   uniteArray = [];
   parkingArray =[]
   projectType = ['RESIDENTIAL', 'COMMERCIAL', 'MIXED DEVELOPMENT', 'VILLA PROJECTS'];
+  parkingArea = ['Basement', 'Covered', 'Surface', 'Stack','Puzzle'];
+
   constructor(
     public dialogRef: MatDialogRef<ProjectDetailsComponent>,
     private formBuilder: FormBuilder
@@ -30,6 +33,7 @@ export class ProjectDetailsComponent implements OnInit {
       landArea: {},
       units:{},
       carParkingArea:{},
+      area : {},
       dummyCarParkingArea:{},
       dummyUnits:{}
     };
@@ -39,6 +43,7 @@ export class ProjectDetailsComponent implements OnInit {
       landArea: ['', Validators.required],
       units: [''],
       carParkingArea: [''],
+      area : ['', Validators.required],
       dummyCarParkingArea: this.formBuilder.group({
         area: ['', Validators.required],
         count: ['', Validators.required]
@@ -49,17 +54,14 @@ export class ProjectDetailsComponent implements OnInit {
         area: ['', Validators.required]
       })
     });
-
   }
   onFormValuesChanged() {
     for (const field in this.formErrors) {
       if (!this.formErrors.hasOwnProperty(field)) {
         continue;
       }
-
       // Clear previous errors
       this.formErrors[field] = {};
-
       // Get the control
       const control = this.form.get(field);
 
@@ -69,16 +71,22 @@ export class ProjectDetailsComponent implements OnInit {
     }
   }
   ngOnInit() {
+    if(window.localStorage.getItem('detailsForm')){
+      this.detailsForm.patchValue(JSON.parse(window.localStorage.getItem('detailsForm')));
+    }
   }
   onSubmit(){
     console.log('this.detailsForm',this.detailsForm.value);
     this.detailsForm.value.carParkingArea =this.parkingArray;
     this.detailsForm.value.units = this.uniteArray;
     console.log(' finaly send to this.detailsForm',this.detailsForm.value);
+    this.filledData = this.detailsForm.value
     this.dialogRef.close(this.detailsForm.value);
+    window.localStorage.detailsForm = JSON.stringify(this.detailsForm.value);
   }
   onCancel (){
     this.dialogRef.close();
+    window.localStorage.removeItem('detailsForm');
   }
   addUnits(){
     this.uniteArray.push(this.detailsForm.value.dummyUnits);
