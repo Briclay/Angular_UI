@@ -62,15 +62,15 @@
             </div>
           </div>
         </div>
-        <div style="margin-left: 0px; border-left: 1px solid lightgrey;height: 237px"  fxLayout="row"  fxFlex="65" >
-         <!--  <div class="issue-tracker-details-form-list">
+        <div style="margin-left: 5px; border-left: 1px solid lightgrey;"  fxLayout="row"  fxFlex="65" >
+          <div class="issue-tracker-details-form-list" style="height: 183px;margin-top: 10px;overflow: auto">
              <form [formGroup]="commentformGroup">
               <div 
-                *ngFor="let comment of issueTrackerCreateForm.get('comments')[controls];let i=index;" >
+                *ngFor="let comment of issueTrackerCreateForm.value.comments;" >
                 <div  fxLayout="row"> 
-                  <mat-form-field  appearance="outline" style="width: 164px;margin-right: 10px;">
+                  <mat-form-field  appearance="outline" style="width: 164px;margin-right: 10px;margin-top: 6px;">
                     <mat-label>Completion Date</mat-label>
-                    <input  matInput [min]="myFilter" [matDatepicker]="comDate" placeholder="Completion Date" formControlName="completionDate">
+                    <input  matInput [min]="myFilter" [matDatepicker]="comDate" placeholder="Completion Date" formControlName="completionDate" [(value)]="comment.completionDate">
                       <mat-datepicker-toggle matSuffix [for]="comDate"></mat-datepicker-toggle>
                       <mat-datepicker  #comDate></mat-datepicker>
                   </mat-form-field>
@@ -82,6 +82,7 @@
                         position: relative;
                         border: 1px solid #8080804a;
                         border-radius: 3px;
+                        margin-top: 11px;
                         color: #808080;
                         padding: 8px 6px 4px 9px;">
                       <span (click)="userSelectDialog()" >
@@ -92,29 +93,29 @@
                         background-color: white;
                         font: 400 10px 'Montserrat', sans-serif !important;
                         height: 16px;">Assigned To</span>
-                        <div style="display:inline-flex;" *ngIf="selectedUserData ">
+                        <div style="display:inline-flex;" *ngIf="assignUserFlag ">
                           <span style=" color:#000000c9;
-                    font: 400 13px 'Montserrat', sans-serif !important;"> {{selectedUserData.userName.first}}</span>&nbsp;
-                           <span style=" color:#000000c9;
-                    font: 400 13px 'Montserrat', sans-serif !important;"> {{ selectedUserData.userName.last}}</span>
+                          font: 400 13px 'Montserrat', sans-serif !important;"> {{selectedUserData.userName.first}}</span>&nbsp;
+                                 <span style=" color:#000000c9;
+                          font: 400 13px 'Montserrat', sans-serif !important;"> {{ selectedUserData.userName.last}}</span>
                         </div>
                       </span>
                     </span>  
-                  <mat-form-field  appearance="outline" style="width:209px;margin-right:5px;">
+                  <mat-form-field  appearance="outline" style="width:209px;margin-right:5px;margin-top: 6px;">
                       <mat-label>Actual Completion Date</mat-label>
-                      <input  matInput [min]="myFilter" [matDatepicker]="actualCD" placeholder="Completion Date" formControlName="actualCompletionDate">
+                      <input  matInput [min]="myFilter" [(value)]="comment.comments" [matDatepicker]="actualCD" placeholder="Completion Date" formControlName="actualCompletionDate">
                         <mat-datepicker-toggle matSuffix [for]="actualCD"></mat-datepicker-toggle>
                         <mat-datepicker #actualCD></mat-datepicker>
                     </mat-form-field>
-                    <mat-form-field appearance="outline" style="width: 180px;margin-right: 5px;">
+                    <mat-form-field appearance="outline" style="width: 180px;margin-right: 5px;margin-top: 6px;">
                       <mat-label>Comments</mat-label>
-                      <textarea  matInput formControlName="comments" style="height: 20px"></textarea>
+                      <textarea  matInput [(value)]="comment.comments" formControlName="comments" style="height: 20px"></textarea>
                     </mat-form-field>
                 </div> 
               </div>
             </form>
-          </div> -->
-          <div class="issue-tracker-details-form-list" fxLayout="row">
+          </div>
+          <!-- <div class="issue-tracker-details-form-list" fxLayout="row">
            <div [formGroup]="createCommentformGroup">
               <div >
                 <div *ngFor="let comment of commentsArray;">
@@ -164,7 +165,7 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
        <br>
           

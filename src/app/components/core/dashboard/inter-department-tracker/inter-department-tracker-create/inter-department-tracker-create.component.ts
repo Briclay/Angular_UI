@@ -44,6 +44,7 @@ export class IssueTrackerCreateComponent implements OnInit {
 	isDepratmentLoading : boolean;
 	createdBy : any;
 	commentsArray  =[]
+	assignUserFlag = false;
 	user :any;
 	depratmentLists : any;
 	userDropdownEnable = false;
@@ -54,7 +55,7 @@ export class IssueTrackerCreateComponent implements OnInit {
 	commentformGroup: FormGroup;
 	addForm : FormGroup;
 	selectedSubType : any;
-    selectedUserData : any;
+    selectedUserData = {};
 	myFilter : any;
 	constructor(
     	private dialog: MatDialog,
@@ -138,12 +139,21 @@ export class IssueTrackerCreateComponent implements OnInit {
 	}
 	addComments(){
 		this.newCreateFlag = true;
-		/*const control = <FormArray>this.issueTrackerCreateForm.value.comments;
-        control.push(this.commentformGroup.value);
-        		console.log(control, "comments-allcontrolcontrol")
-*/
-		this.commentsArray.push(this.createCommentformGroup.value);
-		/*this.issueTrackerCreateForm.value.comments.push(this.commentformGroup.value);*/
+		this.commentsArray.push(this.commentformGroup.value);
+		console.log(this.commentsArray, "INITcommentsArray")
+
+		if(this.issueTrackerCreateForm.value.comments.length === 0){
+			this.issueTrackerCreateForm.value.comments.push(this.commentformGroup.value);
+			console.log(this.commentsArray, "firsttymcommentscomments")
+		}
+		else{
+			/*this.selectedUserData = {};
+			if(Object.keys(this.selectedUserData).length === 0;){
+			this.assignUserFlag = false
+			} */
+			this.issueTrackerCreateForm.value.comments.push(this.commentsArray[0]);
+			console.log(this.issueTrackerCreateForm.value.comments, "f2ndcommentscomments")
+		}
 		/*(this.issueTrackerCreateForm.get('comments') as FormArray).push(this.commentformGroup.value)*/
 		console.log(this.issueTrackerCreateForm.value.comments, "comments-all")
 	}
@@ -155,6 +165,7 @@ export class IssueTrackerCreateComponent implements OnInit {
         dialogRef.afterClosed().subscribe(result => {
            this.selectedUserData = result;
            console.log(this.selectedUserData)
+           this.assignUserFlag = true;
         });
 	}
 
