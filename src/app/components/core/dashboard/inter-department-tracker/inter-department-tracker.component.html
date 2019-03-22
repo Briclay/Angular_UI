@@ -39,7 +39,67 @@
 
     <mat-tab-group #tabGroup>
         <mat-tab label="Overview">
-            <app-panel-header-filter [data] = "issueTrackerList" (dataFilter)="dataPaginatorChange($event)"></app-panel-header-filter>                
+            <app-panel-header-filter [data] = "issueTrackerList" (dataFilter)="dataPaginatorChange($event)"></app-panel-header-filter>
+            <div>
+              <mat-card style="margin-top: 5px;">
+                <div fxLayout=row style="place-content: space-around;">
+                  <div class="table_header_text" >
+                    <div fxLayout=row >
+                      <span fxLayout=row  >Issue Code</span>
+                      <img  style="height: 12px;width: 12px;" src="/assets/images/icons/Filter.png" (click)="viewInputForFilterDataIC()" />
+                    </div>
+                    <span *ngIf="enableInputIC">            
+                      <input #myInput type="text" (input)="filterItem(myInput.value)" style="color:#032A57; font-size: 11px;"/>
+                    </span>
+                  </div>
+                  <div class="table_header_text" >
+                    <div fxLayout=row >
+                      <span fxLayout=row  >Status</span>
+                      <img  style="height: 12px;width: 12px;" src="/assets/images/icons/Filter.png" (click)="viewInputForFilterDataStatus()" />
+                    </div>
+                    <span *ngIf="enableInputStatus">            
+                      <input #myInput type="text" (input)="filterItem(myInput.value)" style="color:#032A57; font-size: 11px;"/>
+                    </span>
+                  </div>
+                  <div class="table_header_text" >
+                    <div fxLayout=row >
+                      <span fxLayout=row  >Issue Type</span>
+                      <img  style="height: 12px;width: 12px;" src="/assets/images/icons/Filter.png" (click)="viewInputForFilterDataIType()" />
+                    </div>
+                    <span *ngIf="enableInputIType">            
+                      <input #myInput type="text" (input)="filterItem(myInput.value)" style="color:#032A57; font-size: 11px;"/>
+                    </span>
+                  </div>
+                  <div class="table_header_text" >
+                    <div fxLayout=row >
+                      <span fxLayout=row  >Description</span>
+                      <img  style="height: 12px;width: 12px;" src="/assets/images/icons/Filter.png" (click)="viewInputForFilterDataDes()" />
+                    </div>
+                    <span *ngIf="enableInputDes">            
+                      <input #myInput type="text" (input)="filterItem(myInput.value)" style="color:#032A57; font-size: 11px;"/>
+                    </span>
+                  </div>
+                   <div class="table_header_text" >
+                    <div fxLayout=row >
+                      <span fxLayout=row  >Creation date</span>
+                      <img  style="height: 12px;width: 12px;" src="/assets/images/icons/Filter.png" (click)="viewInputForFilterDataCreD()" />
+                    </div>
+                    <span *ngIf="enableInputCreD">            
+                      <input #myInput type="text" (input)="filterItem(myInput.value)" style="color:#032A57; font-size: 11px;"/>
+                    </span>
+                  </div>
+                  <div class="table_header_text" >
+                    <div fxLayout=row >
+                      <span fxLayout=row  >Age</span>
+                      <img  style="height: 12px;width: 12px;" src="/assets/images/icons/Filter.png" (click)="viewInputForFilterDataAge()" />
+                    </div>
+                    <span *ngIf="enableInputAge">            
+                      <input #myInput type="text" (input)="filterItem(myInput.value)" style="color:#032A57; font-size: 11px;"/>
+                    </span>
+                  </div>
+                </div>
+              </mat-card>
+            </div>                
             <div class="content_center">
                 <mat-spinner class="spiner_div" *ngIf="listSpinner; else content" [diameter]="40"></mat-spinner>
             </div>
@@ -52,7 +112,7 @@
                             [pageSize]="pageSize"
                             [expansionPanelOptions]="issueTrackerDataOptions"
                             selectorComponent="app-issue-tracker-details" 
-                            [data]="issueTrackerList" >
+                            [data]="issueTrackerList" (updateRefresh)="getIssueTracker()" >
                         </app-expansion-panel>
                     </div>        
                 </ng-template>

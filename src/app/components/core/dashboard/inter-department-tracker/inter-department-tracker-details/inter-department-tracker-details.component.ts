@@ -40,6 +40,8 @@ export class IssueTrackerDetailsComponent implements OnInit {
 	todayDateFilter = new Date()
 	newCreateFlag = false;
 	selectedUserData : any;
+	myFilter : any;
+	dateOfCompletionFilter :any;
 	private unsubscribe: Subject<any> = new Subject();
 	constructor(
 		private formBuilder : FormBuilder,
@@ -54,10 +56,11 @@ export class IssueTrackerDetailsComponent implements OnInit {
 		let org = JSON.parse(window.localStorage.getItem('authUserOrganisation'));
 		this.orgID = org._id
 		this.user = JSON.parse(window.localStorage.getItem('authUser'));
-
-		let day = new Date();
-		this.dateFilter = new Date(day);
-		this.dateFilter.setDate(day.getDate()+1);
+		
+	    let day = new Date();
+	    this.dateOfCompletionFilter = new Date(day);
+	    this.dateOfCompletionFilter.setDate(day.getDate()+1);
+	    this.myFilter = day
 	}
 
 	ngOnInit() {

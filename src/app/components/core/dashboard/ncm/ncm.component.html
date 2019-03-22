@@ -41,11 +41,11 @@
         <div>
           <mat-form-field appearance="outline" style="width: 215px;">
             <mat-label>Select Process</mat-label>
-            <mat-select placeholder="Select Process"  (selectionChange)="projectChanged($event)" [(ngModel)]="selectedProj">
+           <!--  <mat-select placeholder="Select Process"  (selectionChange)="projectChanged($event)" >
               <mat-option *ngFor="let project of projectlist" [value]="project" >
                 {{project.name}}
               </mat-option>
-            </mat-select>
+            </mat-select> -->
           </mat-form-field>
         </div>
         <div class="pull-right" style="margin-top: -64px;">

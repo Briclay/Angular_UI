@@ -4,7 +4,7 @@
     <mat-tab label="Overview">  
      <app-panel-header-filter></app-panel-header-filter>
      <div style ="place-content :center;">
-      <mat-spinner style="margin:0 auto;" *ngIf="projectLoading; else content" [diameter]="40"></mat-spinner>
+     <!--  <mat-spinner style="margin:0 auto;" *ngIf="projectLoading; else content" [diameter]="40"></mat-spinner> -->
     </div> 
   </mat-tab>
   <mat-tab label="New">
@@ -83,7 +83,7 @@
   <img style="height: 30px;" src="assets/images/icons/Add.png" />
   <span style="margin-top: 31px;margin-left:-27px">Add</span>
 </div>
-<div fxLayout=column class="hand-cursor" style=" margin-left: 83em;margin-top: -45px" (click)="reste()">
+<div fxLayout=column class="hand-cursor" style=" margin-left: 83em;margin-top: -45px" >
   <img style="height: 30px;width: 30px;" src="assets/images/icons/close_red.png" />
   <span>Cancel</span>
 </div>

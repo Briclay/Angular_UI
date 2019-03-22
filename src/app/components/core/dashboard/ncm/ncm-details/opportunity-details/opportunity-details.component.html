@@ -20,7 +20,7 @@
     <div fxLayout="row" style="width: 20px;"> 
       <mat-form-field appearance="outline" style="width: 92px;margin-top: -11px">
           <mat-label>Time</mat-label>
-            <input matInput [min]="myFilter" [matDatepicker]="picker1" placeholder="" formControlName="validTill">
+            <input matInput [matDatepicker]="picker1" placeholder="" formControlName="validTill">
             <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
           <mat-datepicker #picker1></mat-datepicker>
       </mat-form-field>

@@ -35,7 +35,7 @@
             </mat-select>
           </mat-form-field> -->
         </div>
-        <div  style="margin-left: 0px; border-left: 1px solid lightgrey;height: 237px"  fxLayout="column"  fxFlex="17">
+        <div style="margin-left: 0px; border-left: 1px solid lightgrey;height: 237px"  fxLayout="column"  fxFlex="17">
           <div class="issue-tracker-details-form-list" style="width: 0%" >
             <div fxLayout=row style="width: 0%">
               <div fxLayout=column >
@@ -45,7 +45,7 @@
                 </mat-form-field>
                <mat-form-field  appearance="outline" style="width: 150px;margin-left: 22px;">
                   <mat-label>Date of Completion</mat-label>
-                  <input matInput [matDatepicker]="picker3" placeholder="" formControlName="dateOfCompletion">
+                  <input matInput [min]="dateOfCompletionFilter" [matDatepicker]="picker3" placeholder="" formControlName="dateOfCompletion">
                     <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
                     <mat-datepicker #picker3></mat-datepicker>
                 </mat-form-field>
@@ -63,77 +63,19 @@
           </div>
         </div>
         <div style="margin-left: 0px; border-left: 1px solid lightgrey;height: 237px"  fxLayout="row"  fxFlex="65" >
-          <div class="issue-tracker-details-form-list">
-           <!--  <form [formGroup]="commentformGroup">
-              <div  FormGroupName="comments">
-                <div fxLayout=row>
-                   <mat-form-field  appearance="outline" style="width: 164px;margin-left: 22px;">
-                      <mat-label>Completion Date</mat-label>
-                      <input  matInput [min]="dateFilter" [matDatepicker]="picker2" placeholder="Completion Date" formControlName="completionDate">
-                        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-                        <mat-datepicker #picker2></mat-datepicker>
-                    </mat-form-field>
-                    <mat-form-field appearance="outline" style="width: 164px;margin-left: 22px;">
-                      <mat-label>Comments</mat-label>
-                      <textarea  matInput formControlName="comments" style="height:20px"></textarea>
-                    </mat-form-field>
-                  <mat-form-field appearance="outline" *ngIf="userDropdownEnable" style="width: 164px;margin-left: 22px;">
-                    <mat-label>Assigned To</mat-label>
-                    <mat-select placeholder="" (selectionChange)="selectedUser($event.value)" formControlName="assignedName">
-                      <mat-option *ngFor="let assignedName of users" [value]="assignedName">
-                        {{assignedName.name.first }} {{assignedName.name.last}}
-                      </mat-option>
-                    </mat-select>
-                  </mat-form-field>
-                </div>
-              </div>
-            </form> -->
+         <!--  <div class="issue-tracker-details-form-list">
              <form [formGroup]="commentformGroup">
-              <div formArrayName="comments" 
-                *ngFor="let comment of issueTrackerCreateForm.get('comments')['controls'];let i=index;" >
-                <div [formGroup]="comment" fxLayout="row">
+              <div 
+                *ngFor="let comment of issueTrackerCreateForm.get('comments')[controls];let i=index;" >
+                <div  fxLayout="row"> 
                   <mat-form-field  appearance="outline" style="width: 164px;margin-right: 10px;">
                     <mat-label>Completion Date</mat-label>
-                    <input  matInput  [matDatepicker]="comDate" placeholder="Completion Date" formControlName="completionDate">
+                    <input  matInput [min]="myFilter" [matDatepicker]="comDate" placeholder="Completion Date" formControlName="completionDate">
                       <mat-datepicker-toggle matSuffix [for]="comDate"></mat-datepicker-toggle>
                       <mat-datepicker  #comDate></mat-datepicker>
                   </mat-form-field>
                  
-                  <mat-form-field  appearance="outline" style="width: 150px;margin-right: 5px;margin-top: -5px;">
-                    <mat-label>Assigned To</mat-label>
-                    <mat-select placeholder="Select user" formControlName="assignedTo"  (selectionChange)="selectedUser($event.value)">
-                      <mat-option *ngFor="let user of users" [value]="user._id" >
-                        {{user.name.first}} {{ user.name.last}}
-                      </mat-option>
-                    </mat-select>
-                  </mat-form-field>
-                  <mat-form-field  appearance="outline" style="width:209px;margin-right:5px;">
-                      <mat-label>Actual Completion Date</mat-label>
-                      <input  matInput [min]="todayDateFilter" [matDatepicker]="actualCD" placeholder="Completion Date" formControlName="actualCompletionDate">
-                        <mat-datepicker-toggle matSuffix [for]="actualCD"></mat-datepicker-toggle>
-                        <mat-datepicker #actualCD></mat-datepicker>
-                    </mat-form-field>
-                    <mat-form-field appearance="outline" style="width: 180px;margin-right: 5px;">
-                      <mat-label>Comments</mat-label>
-                      <textarea  matInput formControlName="comments" style="height: 20px"></textarea>
-                    </mat-form-field>
-                </div> 
-              </div>
-            </form>
-          </div>
-          <div class="issue-tracker-details-form-list" fxLayout="row">
-           <form [formGroup]="createCommentformGroup">
-              <div formArrayName="comments">
-                <div *ngFor="let comment of commentsArray; let i = index;">
-                  <div [formGroup]="createCommentformGroup" fxLayout="row">
-                    <mat-form-field  appearance="outline" style="width:164px;margin-right: 5px;">
-                      <mat-label>Completion Date</mat-label>
-                      <input  matInput  [matDatepicker]="picker1" placeholder="Completion Date" formControlName="completionDate">
-                        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                        <mat-datepicker #picker1></mat-datepicker>
-                    </mat-form-field>
-                   
-                    <span style="display: inline-flex;
+                  <span style="display: inline-flex;
                         height: 14px;
                         width: 120px;
                         margin-right: 6px;
@@ -158,22 +100,71 @@
                         </div>
                       </span>
                     </span>  
+                  <mat-form-field  appearance="outline" style="width:209px;margin-right:5px;">
+                      <mat-label>Actual Completion Date</mat-label>
+                      <input  matInput [min]="myFilter" [matDatepicker]="actualCD" placeholder="Completion Date" formControlName="actualCompletionDate">
+                        <mat-datepicker-toggle matSuffix [for]="actualCD"></mat-datepicker-toggle>
+                        <mat-datepicker #actualCD></mat-datepicker>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" style="width: 180px;margin-right: 5px;">
+                      <mat-label>Comments</mat-label>
+                      <textarea  matInput formControlName="comments" style="height: 20px"></textarea>
+                    </mat-form-field>
+                </div> 
+              </div>
+            </form>
+          </div> -->
+          <div class="issue-tracker-details-form-list" fxLayout="row">
+           <div [formGroup]="createCommentformGroup">
+              <div >
+                <div *ngFor="let comment of commentsArray;">
+                  <div  fxLayout="row">
+                    <mat-form-field  appearance="outline" style="width:164px;margin-right: 5px;">
+                      <mat-label>Completion Date</mat-label>
+                      <input  matInput  [min]="myFilter" [(value)]="comment.completionDate" [matDatepicker]="picker1" placeholder="Completion Date" formControlName="completionDate">
+                        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                        <mat-datepicker #picker1></mat-datepicker>
+                    </mat-form-field>
+                    <span style="display: inline-flex;
+                        height: 14px;
+                        width: 120px;
+                        margin-right: 6px;
+                        position: relative;
+                        border: 1px solid #8080804a;
+                        border-radius: 3px;
+                        color: #808080;
+                        padding: 8px 6px 4px 9px;">
+                      <span (click)="userSelectDialog()" >
+                        <span style="  display: inline-block;
+                        position: absolute;
+                        top: -15px;
+                        display: inline-table;
+                        background-color: white;
+                        font: 400 10px 'Montserrat', sans-serif !important;
+                        height: 16px;">Assigned To</span>
+                        <div style="display:inline-flex;" *ngIf="selectedUserData !== {} ">
+                          <span style=" color:#000000c9;
+                      font: 400 13px 'Montserrat', sans-serif !important;"> {{selectedUserData && selectedUserData.userName.first}}</span>&nbsp;
+                             <span style=" color:#000000c9;
+                      font: 400 13px 'Montserrat', sans-serif !important;"> {{ selectedUserData && selectedUserData.userName.last}}</span>
+                        </div>
+                      </span>
+                    </span>  
                     <mat-form-field  appearance="outline" style="width:209px;margin-right:5px;">
                       <mat-label>Actual Completion Date</mat-label>
-                      <input  matInput [matDatepicker]="picker4" placeholder="Completion Date" formControlName="actualCompletionDate">
+                      <input  matInput [min]="myFilter" [(value)]="comment.actualCompletionDate" [matDatepicker]="picker4" placeholder="Completion Date" formControlName="actualCompletionDate">
                         <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
                         <mat-datepicker #picker4></mat-datepicker>
                     </mat-form-field>
                     <mat-form-field appearance="outline" style="width:180px;margin-right: 5px;">
                       <mat-label>Comments</mat-label>
-                      <textarea  matInput formControlName="comments" style="height:20px"></textarea>
+                      <textarea  matInput [(value)]="comment.comments" formControlName="comments" style="height:20px"></textarea>
                     </mat-form-field>
                   </div>
                 </div>
               </div>
-            </form>
+            </div>
           </div>
-       
         </div>
        <br>
           

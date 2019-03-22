@@ -75,4 +75,8 @@ export class UserSelectionDialogComponent implements OnInit {
   onCancel() {
     this.dialogRef.close();
   }
+
+  onSubmit(){
+    console.log('user')
+  }
 }
