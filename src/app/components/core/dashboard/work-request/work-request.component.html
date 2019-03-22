@@ -1,6 +1,10 @@
 <app-top-menu></app-top-menu>
 <div class="work-request-container">
-  <div>
+  
+  <mat-tab-group #tabGroup>
+      <mat-tab label="Overview">
+         <app-panel-header-filter [data]="workRequests" (dataFilter)="dataPaginatorChange($event)"></app-panel-header-filter>
+         <div>
      <mat-card style="margin-top: 5px;">
       <div fxLayout=row style="place-content: space-around;">
         <div class="table_header_text" >
@@ -69,9 +73,6 @@
       </div>
     </mat-card>
   </div>
-  <mat-tab-group #tabGroup>
-      <mat-tab label="Overview">
-         <app-panel-header-filter [data]="workRequests" (dataFilter)="dataPaginatorChange($event)"></app-panel-header-filter>
             <div style ="place-content :center;">
               <mat-spinner style="margin:0 auto;" *ngIf="isLoading; else content" [diameter]="40"></mat-spinner>
             </div>

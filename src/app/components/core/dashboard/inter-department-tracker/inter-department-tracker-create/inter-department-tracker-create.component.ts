@@ -55,7 +55,7 @@ export class IssueTrackerCreateComponent implements OnInit {
 	commentformGroup: FormGroup;
 	addForm : FormGroup;
 	selectedSubType : any;
-    selectedUserData = {};
+    selectedUserData : any;
 	myFilter : any;
 	constructor(
     	private dialog: MatDialog,
