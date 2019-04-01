@@ -1,4 +1,4 @@
-import { Component, OnInit,Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl, FormArray } from '@angular/forms';
 import { MatDialog,MatSnackBar } from '@angular/material';
 import { OpportunityDetailsComponent } from '../ncm-details/opportunity-details/opportunity-details.component';
@@ -12,46 +12,24 @@ import { NcmService } from '../ncm.service';
 export class NcmDetailsComponent implements OnInit {
 
   @Input() data: any;
+  @Input() formType: string;
+  @Output() public tabSwitch: EventEmitter<any> = new EventEmitter<any>();
+  @Output() public updateRefresh: EventEmitter<any> = new EventEmitter<any>();
+
 	ncmListForm : FormGroup;
 	ncmListDataOptions :any;
 	controlsCheck : boolean;
   myFilter = new Date();
   controls : boolean;
   buttonColor: string = '#B0B0B0';
-
-
-list = [
-{
-
-  statement: "statement1",
-  revision : "R0001",
-  date : "02/03/2019",
-  
-
-  purchase : "Purchase",
-  name : "Vinay Kerur",
-  bpd : "BPD/01",
-
-  cause: "Cause1",
-  effect : "Efect1",
-  likelihood : "L1",
-  
-
-  impact : "Impact",
-  mentionCurrentControl : "Current Control",
-  controls : "Remarks",
-
-  consequence: "Cons",
-  mitigationPlan : "Mitigation Plan",
-  budget : "Budget 1",
-  
-
-  resource : "res",
-  validTill : "09/02/2019",
-  status : "Approved"
-
-} 
-]
+  userName : any;
+  user : any; 
+  opportunityValues = {}
+  isLaoding = false;
+  statusAll = ['Open', 'In Progress', 'Completed', 'Cancelled', 'Approved']
+  consequenceValue = ['Low','Moderate Risk','High Risk'];
+  impact = [{ value: 1, name: "unlikely" }, { value: 2, name: "likely" }, { value: 3, name: "Most Likely" }]
+  likelihoodValue = [{ value: 1, name: "Low" }, { value: 2, name: "Medium" }, { value: 3, name: "High" }];
   constructor( 
     private formBuilder:FormBuilder,
     private dialog: MatDialog,
@@ -63,64 +41,86 @@ list = [
   }
   
   ngOnInit() {
+    this.user = JSON.parse(window.localStorage.authUser);
+
     this.ncmListForm = this.formBuilder.group({
-      statement: ['', Validators.required],
-      revision: ['', Validators.required],
-      date: ['', Validators.required],
-      purchase: ['', Validators.required],
-      name: ['', Validators.required],
-      bpd: ['', Validators.required],
-      cause: ['', Validators.required],
-      effect: ['', Validators.required],
-      likelihood: ['', Validators.required],
-      impact: ['', Validators.required],
-      mentionCurrentControl: ['', Validators.required],
-      controls: ['', Validators.required],
-     consequence: ['', Validators.required],
-     mitigationPlan: ['', Validators.required],
-     budget: ['', Validators.required],
-     resource: ['', Validators.required],
-     validTill : ['', Validators.required],
-     status : ['', Validators.required]
+      _organisationId: ['', Validators.required],
+      _roleId: ['', Validators.required],
+      _departmentId: ['', Validators.required],
+      user: ['', Validators.required],
+      requestNumber: ['', Validators.required],
+      bpdNumber: ['', Validators.required],
+      depName: ['', Validators.required],
+      todayDate: [new Date(), Validators.required],
+      riskStatement: this.formBuilder.group({ 
+        statement: ['', Validators.required],
+        cause: ['', Validators.required],
+        effect: ['', Validators.required],
+      }),
+      opportunity: this.formBuilder.group({ 
+        statement: ['', Validators.required],
+        resource: ['', Validators.required],
+        date: ['', Validators.required],
+        budget: ['', Validators.required]
+      }),
+      parameters : this.formBuilder.group({ 
+        likelihood : ['', Validators.required],
+        impact : ['', Validators.required],
+        mention_current_control : ['', Validators.required],
+        consequence : ['', Validators.required],
+        control_RPA_BPD : false
+      }),
+      mitigation: this.formBuilder.group({ 
+        mitigationPlan: ['', Validators.required],
+        budget: ['', Validators.required],
+        resource:['', Validators.required],
+        currentTime: [ new Date(), Validators.required],
+      }),
+      status : ['', Validators.required]
     });
     this.assignValuesToForm()
   }
   assignValuesToForm() {
+    if(this.formType !== 'create') {
       this.ncmListForm.patchValue(this.data)
+    }
   }
-  /* getAllFeatures(){
-    this.featureService.getFeatures()
-      .pipe().subscribe(response => {
-        this._features = response;
-    }, (error: any) => {
-      this.snackBar.open(error.message, 'Features', {
-        duration: 3000,
+
+  reset(){
+    this.ncmListForm.reset();
+  }
+  onFormSubmit() {
+    this.isLaoding = true;
+    this.ncmListForm.value._organisationId = this.user._organisationId._id;
+    this.ncmListForm.value._departmentId = this.user._departmentId._id;
+    this.ncmListForm.value._roleId = this.user._roleId._id;
+    this.ncmListForm.value.opportunity = this.opportunityValues;
+    console.log(this.ncmListForm.value, "ncmupddatedSubmittedValue");
+    this.ncmService.updateNcm(this.ncmListForm.value, this.data._id).pipe().subscribe(res => { 
+      console.log(res,'ncm-update-res')
+      this.snackBar.open("Ncm upddated successfully", 'Ncm', {
+        duration: 2000,
       });
+      this.ncmListForm['_touched'] = false;
+      this.updateRefresh.emit()   
+      this.isLaoding = false;
+    }, (error: any) => {
+      console.error('error', error);
+      this.isLaoding = false;
     });
-  }*/
-  /* getDetails() {
-    this.openDetailsDialog();
-  }*/
+
+  }
 
   openDetailsDialog() {
     let dialogRef = this.dialog.open(OpportunityDetailsComponent, {
       width: '500px',
-      data: this.ncmListForm.value
+      data: this.ncmListForm.value.opportunity
     }).afterClosed()
       .subscribe(response => {
-       /* if (response) {
-          console.log('res', response);
-          this.projectForm.controls['units'].setValue(response.units);
-          this.projectForm.controls['carParkingArea'].setValue(response.carParkingArea);
-          this.projectForm.controls['type'].setValue(response.type);
-          //this.projectForm.controls['units'].setValue(response.landArea);
-
-          /* this.projectForm.value.units = response.units;
-           this.projectForm.value.carParkingArea = response.carParkingArea
-           this.projectForm.value.type = response.type
-           this.projectForm.value.projectDetails.landArea = response.landArea*/
-          //console.log(' this.projectForm.value' + JSON.stringify(this.projectForm.value));
-        //}*/
+        if (response) {
+          console.log('opportunity-res', response);
+          this.opportunityValues = response;
+        }
       });
       this.buttonColor = '#0099cc';
   }

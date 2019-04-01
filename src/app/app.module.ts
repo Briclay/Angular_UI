@@ -48,6 +48,7 @@ import { FileUploadDialogComponent } from './components/core/dashboard/file-mana
 
 //  all Briclay project Modules imports below
 import { WorkOrderModule } from './components/core/dashboard/work-order/work-order.module';
+import { NcmModule } from './components/core/dashboard/ncm/ncm.module';
 import { RoleModule } from './components/core/dashboard/role/role.module';
 import { SpinnerModule } from './components/shared/spinner/spinner.module';
 import { MaterialModule } from "./modules/material.module";
@@ -160,7 +161,8 @@ import { WorkCategoryDialogComponent } from './components/core/dashboard/work-re
     WorkRequestModule,
     WorkOrderModule,
     SpinnerModule,
-    FileManagerModule
+    FileManagerModule,
+    NcmModule
   ],
   entryComponents: [
     FolderCreateDialogComponent,

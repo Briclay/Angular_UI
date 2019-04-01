@@ -37,15 +37,17 @@
 <div class="user-container">
   <mat-tab-group #tabGroup>
     <mat-tab label="Overview" >
-      <mat-card class="panel-header">
+
+       <app-panel-header-filter [data] = "ncmList" (dataFilter)="dataPaginatorChange($event)"></app-panel-header-filter>
+     <!--  <mat-card class="panel-header">
         <div>
           <mat-form-field appearance="outline" style="width: 215px;">
             <mat-label>Select Process</mat-label>
-           <!--  <mat-select placeholder="Select Process"  (selectionChange)="projectChanged($event)" >
+            <mat-select placeholder="Select Process"  (selectionChange)="projectChanged($event)" >
               <mat-option *ngFor="let project of projectlist" [value]="project" >
                 {{project.name}}
               </mat-option>
-            </mat-select> -->
+            </mat-select>
           </mat-form-field>
         </div>
         <div class="pull-right" style="margin-top: -64px;">
@@ -57,18 +59,18 @@
           </mat-form-field>
         </div>
         <div class="clearfix"></div>
-      </mat-card>
+      </mat-card> -->
       <div style ="place-content :center;">
         <mat-spinner style="margin:0 auto;" *ngIf="ncmListSpinner; else content" [diameter]="40"></mat-spinner>
       </div>
       <div fxLayout="row">
         <ng-template #content>
           <app-expansion-panel 
+          [pageIndex]="pageIndex"
+          [pageSize]="pageSize"
           [expansionPanelOptions]="ncmListDataOptions" 
           selectorComponent="app-ncm-details" 
-          [data]="ncmList"
-          [isHistory]="true"
-          (openHistort)="openDialog(data)">
+          [data]="ncmList" (updateRefresh)="getNcmListData()">
         </app-expansion-panel>
       </ng-template>
     </div>

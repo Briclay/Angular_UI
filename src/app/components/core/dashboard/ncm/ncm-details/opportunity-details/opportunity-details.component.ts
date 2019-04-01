@@ -12,13 +12,11 @@ import { takeUntil } from 'rxjs/operators';
   styleUrls: ['./opportunity-details.component.scss']
 })
 export class OpportunityDetailsComponent implements OnInit {
-  @Input() data: any;
   form: FormGroup;
   formErrors: any;
   opportunityDetailsForm: FormGroup;
-  //detailsFormErrors: any;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public allFeatures: any,
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<OpportunityDetailsComponent>,
     private formBuilder : FormBuilder
     ) {
@@ -26,29 +24,22 @@ export class OpportunityDetailsComponent implements OnInit {
       statement: ['', Validators.required],
       resource: ['', Validators.required],
       budget: ['', Validators.required],
-      validTill : ['', Validators.required],
+      date : ['', Validators.required],
     });
   }
   ngOnInit(){
-    console.log(this.allFeatures, "opportunity-details")
-    this.opportunityDetailsForm.patchValue(this.allFeatures)
+    console.log(this.data, "opportunity-details")
+    this.opportunityDetailsForm.patchValue(this.data)
   }
 
-     /* ngOnInit( ) {
-        this.opportunityDetailsForm = this.formBuilder.group({
-        statement: ['', Validators.required],
-        resource: ['', Validators.required],
-        budget: ['', Validators.required],
-        validTill : ['', Validators.required],
-       });
-     }*/
-     onCancel()
-     {
-      this.dialogRef.close();
-    }
-    onSubmit()
-    {
-// MatDialog useful stuff with the gathered data
-console.log(this.opportunityDetailsForm.value )
-}
+  onCancel()
+  {
+    this.dialogRef.close();
+  }
+
+  onSubmit()
+  {
+    this.dialogRef.close(this.opportunityDetailsForm.value);
+    console.log(this.opportunityDetailsForm.value )
+  }
 }

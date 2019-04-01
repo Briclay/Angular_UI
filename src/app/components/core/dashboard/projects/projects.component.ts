@@ -10,6 +10,7 @@ import { takeUntil } from 'rxjs/operators';
   templateUrl: './projects.component.html',
   styleUrls: ['./projects.component.scss']
 })
+
 export class ProjectsComponent implements OnInit {
   @ViewChild('tabGroup') tabGroup;
   @ViewChild(MatPaginator) paginator: MatPaginator;    
@@ -50,6 +51,7 @@ export class ProjectsComponent implements OnInit {
     this.pageIndex = event.pageIndex;
     this.pageSize = event.pageSize;
   }
+  
   // loadRoute(params: any) {
   //   if ('orgID' in params) {
   //     this.selectedOrgId = params['orgID'];

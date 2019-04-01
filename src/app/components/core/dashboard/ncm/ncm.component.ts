@@ -1,74 +1,81 @@
-import { Component, OnInit ,ViewChild} from '@angular/core';
+import { Component, OnInit,Output, Input, ViewChild,EventEmitter } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import {merge as observableMerge, Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
+import { NcmService } from './ncm.service';
 
 @Component({
 	selector: 'app-ncm',
 	templateUrl: './ncm.component.html',
 	styleUrls: ['./ncm.component.scss']
 })
+
 export class NcmComponent implements OnInit {
 	@ViewChild('tabGroup') tabGroup;
-	ncmListDataOptions :any;
+	ncmListDataOptions : any;
 	ncmListSpinner : boolean;
-	ncmList  = [
-	{
-
-		username : "Vinay Kerur",
-		userType : "Admin",
-		department : "Operation",
-		email:"xyz@weer.com"
-	},
-	{
-
-		username : "Raj",
-		userType : "Admin",
-		department : "Design",
-		email:"xyz@weer.com"
-	}
-	]
-
-
+	orgID : string;
+	ncmList : any;
+	user : any;
+	pageIndex : number = 0;
+	pageSize : number = 5;
 	private unsubscribe: Subject<any> = new Subject();
-	constructor( private route: ActivatedRoute,
-		private router: Router,) { }
 
-	ngOnInit() {observableMerge(this.route.params, this.route.queryParams).pipe(
-		takeUntil(this.unsubscribe))
-	.subscribe((params) => this.loadRoute(params));
-	this.getNcmListData()
-}
-public ngOnDestroy(): void {
-	this.unsubscribe.next();
-	this.unsubscribe.complete();
-}
-loadRoute(params: any) {
-	if('projID' in params) {
-		//this.selectedProjId = params['projID'];
-		this.getNcmListData();
+	constructor(
+		private ncmService: NcmService,
+		private route: ActivatedRoute,
+		private router: Router) { }
+
+	ngOnInit() {
+    	this.user = JSON.parse(window.localStorage.authUser);
+		// observableMerge(this.route.params, this.route.queryParams).pipe(
+		// 	takeUntil(this.unsubscribe))
+		// .subscribe((params) => this.loadRoute(params));
+		this.getNcmListData()
 	}
-} 
+	public ngOnDestroy(): void {
+		this.unsubscribe.next();
+		this.unsubscribe.complete();
+	}
+	// loadRoute(params: any) {
+	// 	if('projID' in params) {
+	// 	this.selectedProjId = params['projID'];
+	// 	this.getNcmListData();
+	// 	}
+	// 	this.getNcmListData();
+	// } 
 
-getNcmListData() {
-	/*this.projectLoading = true;*/
+	dataPaginatorChange(event){
+		this.pageIndex = event.pageIndex;
+		this.pageSize = event.pageSize;
+	}
 
+	getNcmListData() {
+		this.ncmListSpinner = true;
+		this.ncmService.getNcm().pipe().subscribe(res => {
+			this.ncmListSpinner = false;
+			res.length > 0 && res.forEach((list) => {
+				list.roleName = this.user._roleId.name;
+				list.depName = this.user._departmentId.name;
+			})
+			this.ncmList = res;
+		})
+		console.log(this.ncmList, 'ncmList')
+		this.ncmListDataOptions = [
+		{
+			title: 'User Name', type: 'list', list: [
+				{ title: 'UserName', key: 'user', hideTitle: true, type: 'label' },
+				{ title: 'Status', key: 'status', hideTitle: true, type: 'label' }
+			]
+		},
+		{ title: 'Role', key: 'roleName' },
+		{ title: 'Department', key: 'depName' },
+		{ title: 'Email', key: 'email' }]
+	}
 
-	this.ncmListDataOptions =[
-	
-	{
-		title: 'User Name', type: 'list', list: [
-		{ title: 'UserName', key: 'username', hideTitle: true, type: 'label' }
-		]
-	},
-	{ title: 'Role', key: 'userType' },
-	{ title: 'Department', key: 'department' },
-	{ title: 'Email', key: 'email' }]
-}
-
-tabSwitch(tabReq) {
-	this.tabGroup.selectedIndex = tabReq.index;
-	this.getNcmListData()
-}
+	tabSwitch(tabReq) {
+		this.tabGroup.selectedIndex = tabReq.index;
+		this.getNcmListData()
+	}
 
 }
