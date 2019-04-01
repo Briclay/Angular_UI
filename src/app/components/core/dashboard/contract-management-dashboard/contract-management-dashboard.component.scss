@@ -1,0 +1,143 @@
+::ng-deep .project-container {
+        .img-logo {
+            min-width: 70px;
+            border-radius: 10px;
+        }
+        mat-expansion-panel-header {
+            min-height: 71px!important;
+        }
+}
+
+.main-content {
+    flex : 1;
+}
+.main-head {
+    display : flex;
+}
+.header-shadow {
+    box-shadow: 0px 25px 33px -7px #00000038!important;
+}
+.content-head {
+    margin-top : 4%;
+}
+.dottedBorder{
+    border-style: dashed;
+    border-radius: 50%;
+    height: 155px;
+    width: 155px;
+    border-width: 1px;
+    position: relative;
+}
+.userImage {
+    height: 150px;
+    width: 150px;
+    position: absolute;
+    border-radius: 50%;
+    top: 2px;
+    left: 2px;
+}
+.greenDot{
+    position: absolute;
+    right: 9px;
+    bottom: 5px;
+    height: 7px;
+    width: 7px;
+    background: #00FF7F;
+    border-radius: 50%;
+}
+.text-color {
+    font: 400 13px/20px Roboto,"Helvetica Neue",sans-serif;
+    color :#032A57;
+}
+.text-color-light {
+    font: 13px Roboto,"Helvetica Neue",sans-serif;
+    color : #032a57a1;
+}
+.tab-btn {
+    font: 500 13px Roboto,"Helvetica Neue",sans-serif;
+    color :#032A57;
+}
+.report-text {
+    font: 400 18px Roboto,"Helvetica Neue",sans-serif;
+    color :#032A57;
+    margin-left: 37px;
+}
+.first-card {
+    flex : 1;
+}
+.report-card{
+   display: flex;
+   margin : 3px 0px 0px 6px;
+ box-shadow: 0 2px 1px -1px rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12);
+ 
+}
+.card-title {
+    display: block;
+    font: 400 13px Roboto,"Helvetica Neue",sans-serif;
+    color :grey;
+    margin-bottom : 25px;
+}
+.details-head {
+    font: 600 10px Roboto,"Helvetica Neue",sans-serif;
+    color :#9e9e9e;
+}
+.count {
+    font: 300 10px Roboto,"Helvetica Neue",sans-serif;
+    color :#696969;
+    padding: 5px;
+}
+.font_12{
+    font: 700 12px Roboto,"Helvetica Neue",sans-serif;
+    color :#696969;
+}
+
+.user-details-container {
+    padding: 10px;
+    .user-details-form {
+        
+        .user-details-card {
+            flex: 1;
+            display: flex;
+            font: 400 13px/20px Roboto,"Helvetica Neue",sans-serif;
+            .user-details-name {
+                flex: 0.6;
+                img {
+                    width: 100px;
+                    border-radius: 5px;
+                }
+                .username-input {
+                    margin-top: 10px;
+                }
+            }
+            .user-details-content {
+                flex: 1;
+                .user-details-content-title {
+                    margin-left: 10px;
+                }
+                .user-details-form-list {
+                    border-left: 2px solid #999999;
+                    min-height: 200px;
+                    padding: 10px;
+                }
+                .feature_btn {
+                    border-radius: 17px;
+                    background-color: #2196F3; 
+                    color: white;
+                }
+            }
+        }
+    }
+    
+}
+
+.bg_color {
+    background-color :#fff;
+    font-size : 12px;
+     box-shadow: 0 2px 1px -1px rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12);
+}
+
+.bg_color_active {
+    background-color : #66ACF7;
+    font-size : 12px;
+    font-color:white;
+}

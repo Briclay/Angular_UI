@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { MatDialog,  MatSnackBar ,MAT_DIALOG_DATA } from '@angular/material';
 import { AuthService } from './../../../services/auth.service';
 import { ForgotPasswordComponent } from '../forgot-password/forgot-password.component';
+import { NewComponent } from './new/new.component';
 
 @Component({
 	selector: 'app-login',
@@ -16,6 +17,7 @@ export class LoginComponent implements OnInit {
 	loginFormErrors: any;
 	loginFormSubmitted = false;
 	isLoading: boolean;
+	popUpFlag = 1;
 
 	constructor(
 	    private formBuilder: FormBuilder,
@@ -51,6 +53,20 @@ export class LoginComponent implements OnInit {
 	    dialogRef.afterClosed().subscribe(result => {
 	      // TODO closed event
 	    });
+  	}
+
+
+
+  		openNewPopup() {
+  		if (this.popUpFlag == 1) {
+	    const dialogRef = this.dialog.open(NewComponent, {
+	      width: '500px',
+	      height : 'auto'
+	    });
+	    dialogRef.afterClosed().subscribe(result => {
+	      // TODO closed event
+	    });
+	}
   	}
 
 	onLoginFormValuesChanged() {

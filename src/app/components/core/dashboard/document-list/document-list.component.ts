@@ -5,23 +5,23 @@ import {takeUntil} from 'rxjs/operators';
 import { DocumentListService } from './document-list.service';
 
 declare var moment: any;
- 
+
 @Component({
 	selector: 'app-document-list',
 	templateUrl: './document-list.component.html',
 	styleUrls: ['./document-list.component.scss']
 })
- 
+
 export class DocumentListComponent implements OnInit {
 	@ViewChild('tabGroup') tabGroup;
-orgID:any;
+	orgID:any;
 	projectLoading  = false;
 	projID:any;
 	selectedProjData:any;
 	documentListDataOptions =[];
 	selectedProjId:any;
- 
-	 
+	
+	
 	list:any;
 	depListSpinner: boolean;
 	documentList  = [
@@ -45,7 +45,7 @@ orgID:any;
 		private documentListService: DocumentListService,) { 
 
 		let orgDetails =  JSON.parse(window.localStorage.authUserOrganisation);
-   this.orgID = orgDetails._id;
+		this.orgID = orgDetails._id;
 
 	}
 	ngOnInit() {
@@ -54,17 +54,17 @@ orgID:any;
 		.subscribe((params) => this.loadRoute(params));
 	         //moment(this.createdAt)
 	     }
-		     public ngOnDestroy(): void {
-		     	this.unsubscribe.next();
-		     	this.unsubscribe.complete();
-		     }
+	     public ngOnDestroy(): void {
+	     	this.unsubscribe.next();
+	     	this.unsubscribe.complete();
+	     }
 
 	     loadRoute(params: any) {
 	     	if('projectId' in params) {
 	     		this.selectedProjId = params['projectId'];
 	     		this.getDocumentListData( );
 	     	}
-	      }  		 
+	     }  		 
 
 
 	     getDocumentListData() {
@@ -95,8 +95,8 @@ orgID:any;
 	     }
 
 	     projectChanged(proj) {
-     	    this.selectedProjData = proj.value;
-     	    this.router.navigate([], { queryParams: { projectId: proj.value ? proj.value._id : proj._id }, queryParamsHandling: 'merge' });
+	     	this.selectedProjData = proj.value;
+	     	this.router.navigate([], { queryParams: { projectId: proj.value ? proj.value._id : proj._id }, queryParamsHandling: 'merge' });
             //this.selectedProjData=proj.value moment(new Date()).local().format("YYYY-MM-DD");
             console.log(proj, 'proj');
             this.selectedProjId=proj.value._id

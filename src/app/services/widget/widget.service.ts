@@ -17,6 +17,8 @@ import { ContractConfigurationDetailComponent } from '../../components/core/dash
 import { ContractConfigurationCreateComponent } from '../../components/core/dashboard/contract-configuration/contract-configuration-create/contract-configuration-create.component';
 import { BpdListCreateComponent } from '../../components/core/dashboard/bpd-list/bpd-list-create/bpd-list-create.component';
 import { ProjectCreateComponent } from '../../components/core/dashboard/projects/project-create/project-create.component';
+import { NewComponent } from '../../components/core/login/new/new.component';
+import { ContractManagementDetailsComponent } from '../../components/core/dashboard/contract-management-dashboard/contract-management-details/contract-management-details.component';
 
 @Injectable()
 export class WidgetService {
@@ -38,6 +40,8 @@ export class WidgetService {
         'app-contract-configuration-detail':ContractConfigurationDetailComponent,
         'app-contract-configuration-create':ContractConfigurationCreateComponent,
         'app-bpd-list-create':BpdListCreateComponent,
-		'app-project-create' : ProjectCreateComponent
+		'app-project-create' : ProjectCreateComponent,
+		'app-new':NewComponent,
+		'app-contract-management-details':ContractManagementDetailsComponent
 	};
 }

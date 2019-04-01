@@ -46,7 +46,7 @@
           </div>
         </div>
         <button mat-raised-button style="background-color: #2196F3; color: white;" type="submit" 
-            class="submit-button"  [disabled]="isLoading || !loginForm.valid" aria-label="LOG IN" (click)="onLoginFormSubmit()">LOGIN
+            class="submit-button"  [disabled]="isLoading || !loginForm.valid" aria-label="LOG IN" (click)="onLoginFormSubmit(); openNewPopup();">LOGIN
         </button>
         <div style ="place-content :center;">
           <mat-spinner style="margin:0 auto;" *ngIf="isLoading" [diameter]="40"></mat-spinner>

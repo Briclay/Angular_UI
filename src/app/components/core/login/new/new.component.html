@@ -1,0 +1,29 @@
+ <div fxLayout=row [formGroup]="newForm">
+   <mat-form-field appearance="outline">
+              <mat-label>Departments</mat-label>
+              <mat-select placeholder="Departments" formControlName="_departmentId">
+                <mat-option *ngFor="let department of departments" [value]="department._id">
+                  {{department.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="outline" style="margin-left: 5px">
+              <mat-label>Role</mat-label>
+              <mat-select  placeholder="Role" formControlName="_roleId">
+                <mat-option *ngFor="let role of roles" [value]="role._id">
+                  {{role.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+  </div>
+  <div fxLayout=row style="margin-left: 0em">
+          <div class="hand-cursor"  fxLayout=column style="align-items:right;margin-left:274px;" (click)="onCancel()">
+          <img style="height: 30px;width: 30px;" src="assets/images/icons/close_red.png" />
+          <span>Cancel</span>
+        </div>
+        <div fxLayout=column class="hand-cursor" style="align-items: center;margin-left:25px; " (click)="onSubmit()" >
+          <img style="height: 30px;" src="assets/images/icons/submitIcon.png" />
+          <span>Save</span>
+        </div>
+  </div>
+  

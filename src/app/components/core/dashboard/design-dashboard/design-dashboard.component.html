@@ -19,7 +19,7 @@
       <app-top-menu></app-top-menu>
       <div fxLayout=row>
         <div class="content-head" fxLayout=column style="min-width: -webkit-fill-available;">
-          <div class="first-card" style="width: 100%;overflow: auto;padding: 5px;">
+          <div class="first-card" >
             <mat-card class="matCard" fxFlex=25 fxLayout=column *ngFor="let project of projects">
               <div (click)="selectSingleProject(project)"  fxLayout=row style="place-content: space-between;border-radius: 5px;padding: 4px;" class="{{project.name === clickedProjectName ? 'bg_color_active' : 'bg_color'}}">
                 <div fxLayout=row class="padding_2">

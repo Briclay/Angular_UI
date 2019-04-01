@@ -22,6 +22,9 @@ import { ContractConfigurationDetailComponent } from '../components/core/dashboa
 import { ContractConfigurationCreateComponent } from '../components/core/dashboard/contract-configuration/contract-configuration-create/contract-configuration-create.component';
 import { BpdListCreateComponent } from '../components/core/dashboard/bpd-list/bpd-list-create/bpd-list-create.component';
 import { ProjectCreateComponent } from '../components/core/dashboard/projects/project-create/project-create.component';
+import { NewComponent } from '../components/core/login/new/new.component';
+import { ContractManagementDetailsComponent } from '../components/core/dashboard/contract-management-dashboard/contract-management-details/contract-management-details.component';
+
 
 @NgModule({
   imports: [
@@ -49,7 +52,9 @@ import { ProjectCreateComponent } from '../components/core/dashboard/projects/pr
     ContractConfigurationDetailComponent,
     ContractConfigurationCreateComponent,
     BpdListCreateComponent,
-    ProjectCreateComponent
+    ProjectCreateComponent,
+    NewComponent,
+    ContractManagementDetailsComponent
   ],
   exports: [
     UserDetailsComponent, 
@@ -69,7 +74,9 @@ import { ProjectCreateComponent } from '../components/core/dashboard/projects/pr
     ContractConfigurationDetailComponent,
     ContractConfigurationCreateComponent,
     BpdListCreateComponent,
-    ProjectCreateComponent
+    ProjectCreateComponent,
+    NewComponent,
+    ContractManagementDetailsComponent
   ],
   entryComponents: [
     UserDetailsComponent,
@@ -89,7 +96,9 @@ import { ProjectCreateComponent } from '../components/core/dashboard/projects/pr
     ContractConfigurationDetailComponent,
     ContractConfigurationCreateComponent,
     BpdListCreateComponent,
-    ProjectCreateComponent
+    ProjectCreateComponent,
+    NewComponent,
+    ContractManagementDetailsComponent
   ],
   providers: [WidgetService]
 })

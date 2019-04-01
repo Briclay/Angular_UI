@@ -16,13 +16,13 @@
 <mat-card >
  <div  fxLayout="row" *ngFor="let v of bpdList" [formGroup]="bpdListForm" >
   <div >
-    <mat-form-field appearance="outline" style="width: 150px; margin: 2px;">
+    <mat-form-field appearance="outline" class="processs">
       <mat-label>Process  Areas</mat-label>
       <input matInput formControlName="management" required [(value)]="v.management">
     </mat-form-field>
   </div>
   <div>
-    <mat-form-field appearance="outline" style="width: 182px;margin: 2px;">
+    <mat-form-field appearance="outline" class="bpd" >
       <mat-label>BPD/ID</mat-label>
       <input matInput formControlName="bpd" required [(value)]="v.bpd">
     </mat-form-field>  
@@ -37,11 +37,11 @@
       <input matInput formControlName="email" required [(value)]="v.email" readonly>
     </mat-form-field>
 
-    <mat-form-field appearance="outline" style="width: 169px; margin: 2px;margin-right: 13px">
+    <mat-form-field appearance="outline" class="owner">
       <mat-label>Process Owner</mat-label>
       <input matInput formControlName="nameOfOwner"  [(value)]="v.nameOfOwner" required readonly >
     </mat-form-field>
-    <mat-form-field appearance="outline" style="width: 169px; margin: 2px;margin-right: 13px">
+    <mat-form-field appearance="outline" class="owner_email" >
       <mat-label>Process Owner</mat-label>
       <input matInput formControlName="emailOfOwner"  [(value)]="v.emailOfOwner" required readonly>
     </mat-form-field>
