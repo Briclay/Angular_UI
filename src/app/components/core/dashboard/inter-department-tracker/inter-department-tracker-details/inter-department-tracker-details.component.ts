@@ -40,6 +40,8 @@ export class IssueTrackerDetailsComponent implements OnInit {
 	todayDateFilter = new Date()
 	newCreateFlag = false;
 	selectedUserData : any;
+	myFilter : any;
+	dateOfCompletionFilter :any;
 	private unsubscribe: Subject<any> = new Subject();
 	constructor(
 		private formBuilder : FormBuilder,
@@ -54,10 +56,11 @@ export class IssueTrackerDetailsComponent implements OnInit {
 		let org = JSON.parse(window.localStorage.getItem('authUserOrganisation'));
 		this.orgID = org._id
 		this.user = JSON.parse(window.localStorage.getItem('authUser'));
-
-		let day = new Date();
-		this.dateFilter = new Date(day);
-		this.dateFilter.setDate(day.getDate()+1);
+		
+	    let day = new Date();
+	    this.dateOfCompletionFilter = new Date(day);
+	    this.dateOfCompletionFilter.setDate(day.getDate()+1);
+	    this.myFilter = day
 	}
 
 	ngOnInit() {
@@ -180,7 +183,7 @@ export class IssueTrackerDetailsComponent implements OnInit {
 		console.log(this.commentsArray, "comments-all")*/
 			//this.issueTrackerDetailsForm.value.comments.forEach(v => {
 			//if(v.comments !== "" && v.assignedName  !=="" && v.completionDate  !== null && v.subType  !== "" ){
-				this.newCreateFlag = true;
+				
 				this.commentsArray.push(this.createCommentformGroup.value);
 				console.log(this.commentsArray, "comments-all")
 			//}
@@ -228,7 +231,11 @@ export class IssueTrackerDetailsComponent implements OnInit {
 			}
 			console.log(allDates, 'allDates')
 		}) 
-
+        this.issueTrackerDetailsForm.value.comments.forEach(v => {
+			v.actualCompletionDate = moment(v.actualCompletionDate).local().format("YYYY-MM-DD")
+		}) 
+		this.issueTrackerDetailsForm.value.dateOfCompletion = moment(this.issueTrackerDetailsForm.value.dateOfCompletion).local().format("YYYY-MM-DD")
+		
 		maxDate = allDates && allDates.reduce(function (a, b) { return a > b ? a : b; });
 		console.log(maxDate, 'maxDate')
 		let dateOfCompletion = moment(this.issueTrackerDetailsForm.value.dateOfCompletion).local().format("MM-DD-YYYY")
@@ -250,6 +257,7 @@ export class IssueTrackerDetailsComponent implements OnInit {
 			this.router.navigateByUrl(path);*/
 			this.issueTrackerDetailsForm['_touched'] = false;
 		}, (error: any) => {
+			this.updateLoading = false;
 			this.snackBar.open(error.message, 'Issue-tracker', {
 				duration: 2000,
 			});

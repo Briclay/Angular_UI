@@ -27,6 +27,13 @@ export class IssueTrackerComponent implements OnInit {
   selectedUser : any;
   totalIssue : any;
   totalEfficiency : any;
+  allItems : any;
+  enableInputIC = false;
+  enableInputStatus = false;
+  enableInputIType = false;
+  enableInputDes = false;
+  enableInputCreD = false;
+  enableInputAge = false;
   private unsubscribe: Subject<any> = new Subject();
 
   constructor(
@@ -41,6 +48,7 @@ export class IssueTrackerComponent implements OnInit {
     this.depId  = department._id;
     let user= JSON.parse(window.localStorage.authUser);
     this.userId  = user._id;
+
    }
 
   ngOnInit() {
@@ -56,6 +64,45 @@ export class IssueTrackerComponent implements OnInit {
   dataPaginatorChange(event){
     this.pageIndex = event.pageIndex;
     this.pageSize = event.pageSize;
+  }
+
+
+  viewInputForFilterDataIC(){
+    this.enableInputIC = true;
+  }
+  viewInputForFilterDataStatus(){
+    this.enableInputStatus = true;
+  }
+  viewInputForFilterDataIType(){
+    this.enableInputIType = true;
+  }
+  viewInputForFilterDataDes(){
+    this.enableInputDes = true;
+  }
+  viewInputForFilterDataCreD(){
+    this.enableInputCreD = true;
+  }
+  viewInputForFilterDataAge(){
+    this.enableInputAge = true;
+  }
+  
+  assignCopy(){
+    this.issueTrackerList = Object.assign([], this.allItems);
+  }
+
+  filterItem(value){
+    if(!value){
+      this.assignCopy();
+    } 
+    this.issueTrackerList = Object.assign([], this.allItems).filter(
+      item => (item.issueCode  && item.issueCode.toLowerCase().indexOf(value.toLowerCase()) > -1)
+      || (item.status  && item.status.toLowerCase().indexOf(value.toLowerCase()) > -1)
+      || (item.type  && item.type.toLowerCase().indexOf(value.toLowerCase()) > -1)
+      || (item.description  && item.description.toLowerCase().indexOf(value.toLowerCase()) > -1)
+      || (item.createdAtDummy  && item.createdAtDummy.toLowerCase().indexOf(value.toLowerCase()) > -1)
+      || (item.age  && item.age.toLowerCase().indexOf(value.toLowerCase()) > -1)
+    )  
+    console.log(this.issueTrackerList, 'this.issueTrackerList')
   }
 
   getAllAnalytics(){
@@ -85,7 +132,11 @@ export class IssueTrackerComponent implements OnInit {
   getIssueTracker() {
    this.listSpinner = true;
     this.issueTrackerService.getAllIssueTracker().pipe().subscribe(res => {
+        res.length > 0 && res.forEach((list) => {
+          list.createdAtDummy = moment(list.createdAt).local().format("MM-DD-YYYY")
+        })
       this.issueTrackerList = res;
+      this.allItems = res;
       console.log(this.issueTrackerList, "issueTrackerList")
       this.listSpinner = false;
       this.issueTrackerDataOptions = [
@@ -96,8 +147,8 @@ export class IssueTrackerComponent implements OnInit {
         ]
       },
       { title: 'Issue Type', key: 'type'},
-      { title: 'Description', key: 'description', hideTitle: true, type: 'label' },
-      { title: 'Creation date', key: '' },
+      { title: 'Description', key: 'description' },
+      { title: 'Creation date', key: 'createdAtDummy' },
       { title: 'Age', key: 'age' }
       ]
     }, (error: any) => {

@@ -17,7 +17,7 @@
             </mat-select>
           </mat-form-field>
           <mat-form-field class="example-full-width" appearance="outline"  style="width: 103px;margin: 2px;margin-left: 48px;">
-            <input matInput [min]="myFilter" [max]="maxDate" [matDatepicker]="picker" placeholder="Date">
+            <input matInput [min]="myFilter" [matDatepicker]="picker" placeholder="Date">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
@@ -83,7 +83,7 @@
   Process Areas(BPDs)</mat-label>
 </div>
 <div style="width: 87px; margin-top: 11px" >
- <mat-checkbox  matInput formControlName="controls" (change)="controlsValue($event)"></mat-checkbox>
+ <mat-checkbox  matInput formControlName="controls"></mat-checkbox>
 </div>
 <div style="width: 87px; margin-top: -27px;">
  <mat-form-field appearance="outline" class="margin_right_27" >
