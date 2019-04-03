@@ -63,19 +63,18 @@
           </div>
         </div>
         <div style="margin-left: 5px; border-left: 1px solid lightgrey;"  fxLayout="row"  fxFlex="65" >
-          <div class="issue-tracker-details-form-list" style="height: 183px;margin-top: 10px;overflow: auto">
+          <div class="issue-tracker-details-form-list" style="height: 140px;margin-top: 10px;overflow: auto">
              <form [formGroup]="commentformGroup">
               <div 
                 *ngFor="let comment of issueTrackerCreateForm.value.comments;" >
                 <div  fxLayout="row"> 
-                  <mat-form-field  appearance="outline" style="width: 164px;margin-right: 10px;margin-top: 6px;">
+                  <mat-form-field  appearance="outline" style="width: 140px;margin-right: 10px;margin-top: 6px;">
                     <mat-label>Completion Date</mat-label>
                     <input  matInput [min]="myFilter" [matDatepicker]="comDate" placeholder="Completion Date" formControlName="completionDate" [(value)]="comment.completionDate">
                       <mat-datepicker-toggle matSuffix [for]="comDate"></mat-datepicker-toggle>
                       <mat-datepicker  #comDate></mat-datepicker>
                   </mat-form-field>
-                 
-                  <span style="display: inline-flex;
+                <!--   <span style="display: inline-flex;
                         height: 14px;
                         width: 120px;
                         margin-right: 6px;
@@ -95,19 +94,41 @@
                         height: 16px;">Assigned To</span>
                         <div style="display:inline-flex;" *ngIf="assignUserFlag ">
                           <span style=" color:#000000c9;
-                          font: 400 13px 'Montserrat', sans-serif !important;"> {{selectedUserData.userName.first}}</span>&nbsp;
+                          font: 400 13px 'Montserrat', sans-serif !important;"> {{ selectedUserData && selectedUserData.userName
+                          && selectedUserData.userName.first}}</span>&nbsp;
                                  <span style=" color:#000000c9;
-                          font: 400 13px 'Montserrat', sans-serif !important;"> {{ selectedUserData.userName.last}}</span>
+                          font: 400 13px 'Montserrat', sans-serif !important;"> {{ selectedUserData && selectedUserData.userName
+                          && selectedUserData.userName.last}}</span>
                         </div>
                       </span>
-                    </span>  
-                  <mat-form-field  appearance="outline" style="width:209px;margin-right:5px;margin-top: 6px;">
+                    </span>  --> 
+                   <!--  <mat-form-field (click)="userSelectDialog()" appearance="outline" style="width: 150px;margin-left: 22px;">
+                      <mat-label>Assigned To</mat-label>
+                      <input style="height:20px" readonly matInput formControlName="assignedName"  >
+                    </mat-form-field> -->
+                    <mat-form-field appearance="outline" style="width:140px;margin-right:5px;margin-top: 8px;">
+                      <mat-label>Department</mat-label>
+                      <mat-select placeholder="" (selectionChange)="selectDepartment($event.value)" formControlName="departmentName">
+                        <mat-option *ngFor="let depN of depratmentLists" [(value)]="depN" >
+                          {{depN.name}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" (click)="checkDep($event.value)" style="width:140px;margin-right:5px;margin-top: 8px;">
+                      <mat-label>Assigned To</mat-label>
+                      <mat-select  placeholder="Select user" (selectionChange)="selectedUser($event.value)" formControlName="assignedTo" >
+                        <mat-option *ngFor="let user of users" [(value)]="user._id" >
+                          {{user.name.first }} {{user.name.last}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                    <mat-form-field  appearance="outline" style="width:140px;margin-right:5px;margin-top: 6px;">
                       <mat-label>Actual Completion Date</mat-label>
                       <input  matInput [min]="myFilter" [(value)]="comment.comments" [matDatepicker]="actualCD" placeholder="Completion Date" formControlName="actualCompletionDate">
                         <mat-datepicker-toggle matSuffix [for]="actualCD"></mat-datepicker-toggle>
                         <mat-datepicker #actualCD></mat-datepicker>
                     </mat-form-field>
-                    <mat-form-field appearance="outline" style="width: 180px;margin-right: 5px;margin-top: 6px;">
+                    <mat-form-field appearance="outline" style="width: 140px;margin-right: 5px;margin-top: 6px;">
                       <mat-label>Comments</mat-label>
                       <textarea  matInput [(value)]="comment.comments" formControlName="comments" style="height: 20px"></textarea>
                     </mat-form-field>

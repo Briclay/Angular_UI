@@ -5,6 +5,7 @@ import {catchError, map} from 'rxjs/operators';
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders, HttpResponse, HttpErrorResponse, HttpParams } from "@angular/common/http";
 import { jspAppGlobal } from '../app.globlal';
+import { Router } from '@angular/router';
 
 export let API_BASE = "";
 
@@ -16,7 +17,8 @@ export class ApiService {
   
   token : any;
 
-  constructor(private http: HttpClient) { 
+  constructor(private http: HttpClient,
+    private router: Router) { 
   }
 
   public get(url: string, query?: {[id: string]: string}, responseType?): Observable<any> {
@@ -41,12 +43,18 @@ export class ApiService {
     }).pipe(
         map(response => response),
         catchError((error) => {
+          console.log(error, 'error - getcall')
           if (retries > 0) {
             console.error("Request error! Retry... " + reqUrl);
             retries -= 1;
             return runRequest(retries);
           }
-            return this.handleError(error);
+
+          if(error.message  === "Invalid/Expired token"){
+            const path = '/login'
+            this.router.navigate([path]);
+          }
+          return this.handleError(error);
         }),);
     };
     return runRequest(2);
@@ -67,6 +75,11 @@ export class ApiService {
       .post(reqUrl, body, headersOptions).pipe(
       map(res => res),
       catchError((errorResp) => {
+        console.log(errorResp, 'error - postcall')
+        if(errorResp.message  === "Invalid/Expired token"){
+          const path = '/login'
+          this.router.navigate([path]);
+        }
         return this.handleError(errorResp);
       }),);
   }
@@ -86,6 +99,10 @@ export class ApiService {
       .put(reqUrl, body, headersOptions).pipe(
       map(res => res),
       catchError((errorResp) => {
+        if(errorResp.message  === "Invalid/Expired token"){
+          const path = '/login'
+          this.router.navigate([path]);
+        }
         return this.handleError(errorResp);
       }));
   }
@@ -97,6 +114,10 @@ export class ApiService {
       .put(reqUrl, bodyObj, fileHeader).pipe(
       map(res => res),
       catchError((errorResp) => {
+        if("Invalid/Expired token"  === "Invalid/Expired token"){
+          const path = '/login'
+          this.router.navigate([path]);
+        }
         return this.handleError(errorResp);
       }));
   }

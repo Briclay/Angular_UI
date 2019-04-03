@@ -95,6 +95,7 @@ export class NcmDetailsComponent implements OnInit {
     this.ncmListForm.value._departmentId = this.user._departmentId._id;
     this.ncmListForm.value._roleId = this.user._roleId._id;
     this.ncmListForm.value.opportunity = this.opportunityValues;
+    this.ncmListForm.value._createdBy = this.user._id;
     console.log(this.ncmListForm.value, "ncmupddatedSubmittedValue");
     this.ncmService.updateNcm(this.ncmListForm.value, this.data._id).pipe().subscribe(res => { 
       console.log(res,'ncm-update-res')

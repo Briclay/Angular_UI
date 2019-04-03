@@ -88,6 +88,7 @@ export class NcmCreateComponent implements OnInit {
     this.ncmCreateForm.value._roleId = this.user._roleId._id;
     this.ncmCreateForm.value.user = this.user.username;
     this.ncmCreateForm.value.email = this.user.email;
+    this.ncmCreateForm.value._createdBy = this.user._id;
     this.ncmCreateForm.value.opportunity = this.opportunityValues;
     console.log(this.ncmCreateForm.value, "ncmCreateSubmittedValue");
     this.ncmService.saveNcm(this.ncmCreateForm.value).pipe().subscribe(res => { 

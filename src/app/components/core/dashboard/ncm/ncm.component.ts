@@ -62,12 +62,7 @@ export class NcmComponent implements OnInit {
 		})
 		console.log(this.ncmList, 'ncmList')
 		this.ncmListDataOptions = [
-		{
-			title: 'User Name', type: 'list', list: [
-				{ title: 'UserName', key: 'user', hideTitle: true, type: 'label' },
-				{ title: 'Status', key: 'status', hideTitle: true, type: 'label' }
-			]
-		},
+		{ title: 'UserName', key: 'user', hideTitle: true, type: 'label' },
 		{ title: 'Role', key: 'roleName' },
 		{ title: 'Department', key: 'depName' },
 		{ title: 'Email', key: 'email' }]
