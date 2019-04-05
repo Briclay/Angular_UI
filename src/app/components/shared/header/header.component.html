@@ -29,24 +29,25 @@
     <mat-menu #notificationMenu="matMenu"  class="panel">
       <div class="notification_container " >
         <div class="title">Notifications</div>
-        <div fxLayout=row style="place-content: flex-end;">
-          <img class="close" src="assets/images/icons/Cancel.png" >
-          <div class="content_text">Clear All</div>
-        </div>
-        <div style="margin-top: 6%;" >
-          <mat-card class="card" style="background-color: #8080801c;position: relative;" 
-          *ngFor="let notification of notifications">
-            <div fxLayout=row style="place-content: space-around;">
-              <div >
-                <img style="height: 15px; width: 15px;margin: 0px 0px -14px 0px;" src="assets/images/icons/Warning_Red.png" >
-                <p class="message">{{notification.time}}</p>
+        <div style="margin-top: 6%;">
+          <div style ="place-content :center;">
+            <mat-spinner style="margin:0 auto;" *ngIf="isLoading" [diameter]="40"></mat-spinner>
+          </div>  
+          <mat-card class="card" *ngFor="let notification of notificationsAll">
+            <div class="{{notification.readFlag === true ? 'p_name_color' : 'p_name_active_color'}}" 
+              style="position: relative;" >
+              <div fxLayout=row style="place-content: space-around;">
+                <div>
+                  <p class="message">{{notification.userName}}</p>
+                  <p class="message">{{notification.time}}</p>
+                </div>
+                <p class="message">{{notification.message}}</p>
               </div>
-              <p class="message">{{notification.message}}</p>
-            </div>
-            <div style="position: absolute;top: -3px;right: 0px;">
-              <img class="close" src="assets/images/icons/close_red.png" >
             </div>
           </mat-card>
+          <div *ngIf="notificationsAll && notificationsAll.length==0">
+            <p class="message">No notifications</p>
+          </div>
         </div>
       </div>
     </mat-menu>

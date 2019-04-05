@@ -107,6 +107,30 @@ export class ApiService {
       }));
   }
 
+  public delete(url: string, bodyObj: any = {}, responseType?): Observable<any> {
+    let reqUrl = `${API_BASE}${url}`;
+    let body = JSON.stringify(bodyObj);
+
+    const headersOptions = {
+      headers: new HttpHeaders({ 
+        "Content-Type": "application/json" ,
+        "Authorization" : JSON.parse(window.localStorage.getItem('authToken'))
+      })
+    };
+
+    return this.http
+      .put(reqUrl, headersOptions).pipe(
+      map(res => res),
+      catchError((errorResp) => {
+        if(errorResp.message  === "Invalid/Expired token"){
+          const path = '/login'
+          this.router.navigate([path]);
+        }
+        return this.handleError(errorResp);
+      }));
+  }
+
+
    public putFile(url: string, bodyObj: any = {}, fileHeader?): Observable<any> {
     let reqUrl = `${API_BASE}${url}`;
     let body = JSON.stringify(bodyObj);

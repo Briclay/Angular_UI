@@ -51,7 +51,7 @@ mat-icon {
 }
 
 ::ng-deep .mat-menu-panel.panel {
-  max-width:300px!important;
+  max-width:450px!important;
   min-width: 400px!important;
   width: 100vw; 
   margin-left: -150px;
@@ -70,6 +70,15 @@ mat-icon {
     color :#032a57cf;
     border-bottom: black 1px solid;
     padding : 2%;
+  }
+  .p_name_color{
+    background-color :white;
+    font: 700 12px Roboto,"Helvetica Neue",sans-serif;
+  }
+
+  .p_name_active_color{
+    background-color :#80808069;
+    font: 700 12px Roboto,"Helvetica Neue",sans-serif;
   }
   .content_text {
     font: 400 13px/20px Roboto,"Helvetica Neue",sans-serif;

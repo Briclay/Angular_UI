@@ -23,6 +23,7 @@ import { DashboardService } from './services/dashboard/dashboard.service';
 import { OrganizationService } from './services/organization/organization.service';
 import { UserDashboardService } from './services/user-dashboard/user-dashboard.service';
 import { DepartmentService } from './services/department/department.service';
+import { NotificationService } from './services/notification/notification.service';
 import { ExpansionPanelComponent } from './components/shared/expansion-panel/expansion-panel.component';
 import { UserCreateComponent } from './components/core/dashboard/user/user-create/user-create.component';
 import { WidgetContainerComponent } from './components/shared/widget-container/widget-container.component';
@@ -181,7 +182,7 @@ import { WorkCategoryDialogComponent } from './components/core/dashboard/work-re
     FileUploadDialogComponent
   ],
   providers: [D3Service, DashboardService, DepartmentService,
-    OrganizationService, UserDashboardService,
+    OrganizationService, UserDashboardService,NotificationService,
     LocalStorageSchema],
   bootstrap: [AppComponent]
 })

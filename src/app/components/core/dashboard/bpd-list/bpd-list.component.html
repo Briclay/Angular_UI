@@ -2,81 +2,88 @@
 <div class="user-container">
   <mat-tab-group #tabGroup>
     <mat-tab label="Overview">  
-     <app-panel-header-filter></app-panel-header-filter>
-     <div style ="place-content :center;">
+<!--      <app-panel-header-filter></app-panel-header-filter>
+ -->     <div style ="place-content :center;">
      <!--  <mat-spinner style="margin:0 auto;" *ngIf="projectLoading; else content" [diameter]="40"></mat-spinner> -->
     </div> 
   </mat-tab>
   <mat-tab label="New">
-   <!--  <app-bpd-list-create formType="create" (tabSwitch)="tabSwitch($event)" ></app-bpd-list-create> -->
+    <app-bpd-list-create (tabSwitch)="tabSwitch($event)" ></app-bpd-list-create>
  </mat-tab>
 </mat-tab-group>
 </div>
 
 <mat-card >
- <div  fxLayout="row" *ngFor="let v of bpdList" [formGroup]="bpdListForm" >
+ <div  fxLayout="row" *ngFor="let v of bpdLists" [formGroup]="bpdListForm" >
   <div >
     <mat-form-field appearance="outline" style="width: 150px; margin: 2px;">
       <mat-label>Process  Areas</mat-label>
-      <input matInput formControlName="management" required [(value)]="v.management">
+      <input matInput formControlName="process" required [(value)]="v.process">
     </mat-form-field>
   </div>
   <div>
     <mat-form-field appearance="outline" style="width: 182px;margin: 2px;">
       <mat-label>BPD/ID</mat-label>
-      <input matInput formControlName="bpd" required [(value)]="v.bpd">
+      <input matInput formControlName="bpdNumber" required [(value)]="v.bpdNumber">
     </mat-form-field>  
   </div>
   <div class="user-details-form-list" (click)="openDetailsDialog()" fxLayout="row">
-    <mat-form-field class="margin_right_25" appearance="outline" >
-      <mat-label>Point Of Contact</mat-label>
-      <input matInput formControlName="name" required [(value)]="v.name " readonly>
-    </mat-form-field>
-    <mat-form-field class="margin_right_25" appearance="outline">
-      <mat-label>Point Of Contact</mat-label>
-      <input matInput formControlName="email" required [(value)]="v.email" readonly>
-    </mat-form-field>
-
-    <mat-form-field appearance="outline" style="width: 169px; margin: 2px;margin-right: 13px">
-      <mat-label>Process Owner</mat-label>
-      <input matInput formControlName="nameOfOwner"  [(value)]="v.nameOfOwner" required readonly >
-    </mat-form-field>
-    <mat-form-field appearance="outline" style="width: 169px; margin: 2px;margin-right: 13px">
-      <mat-label>Process Owner</mat-label>
-      <input matInput formControlName="emailOfOwner"  [(value)]="v.emailOfOwner" required readonly>
-    </mat-form-field>
+    <div formGroupName="pointOfContact">
+      <mat-form-field class="margin_right_25" appearance="outline" >
+        <mat-label>Point Of Contact</mat-label>
+        <input matInput formControlName="name" required [(value)]="v.pointOfContact.name " readonly>
+      </mat-form-field>
+      <mat-form-field class="margin_right_25" appearance="outline">
+        <mat-label>Point Of Contact</mat-label>
+        <input matInput formControlName="email" required [(value)]="v.pointOfContact.email" readonly>
+      </mat-form-field>
+    </div>    
+    <div formGroupName="processOwner">
+      <mat-form-field appearance="outline" style="width: 169px; margin: 2px;margin-right: 13px">
+        <mat-label>Process Owner</mat-label>
+        <input matInput formControlName="name"  [(value)]="v.processOwner.name" required readonly >
+      </mat-form-field>
+      <mat-form-field appearance="outline" style="width: 169px; margin: 2px;margin-right: 13px">
+        <mat-label>Process Owner</mat-label>
+        <input matInput formControlName="email"  [(value)]="v.processOwner.email" required readonly>
+      </mat-form-field>
+    </div>  
   </div>
 </div>
 <div  fxLayout="row" *ngFor="let v of bpdListArray" [formGroup]="addForm" >
   <div >
     <mat-form-field appearance="outline" style="width: 150px; margin: 2px;">
       <mat-label>Process  Areas</mat-label>
-      <input matInput formControlName="management" required [(value)]="v.management">
+      <input matInput formControlName="process" required [(value)]="v.process">
     </mat-form-field>
   </div>
   <div>
     <mat-form-field appearance="outline" style="width: 182px;margin: 2px;">
       <mat-label>BPD/ID</mat-label>
-      <input matInput formControlName="bpd" required [(value)]="v.bpd">
+      <input matInput formControlName="bpdNumber" required [(value)]="v.bpdNumber">
     </mat-form-field>  
   </div>
   <div class="user-details-form-list" (click)="openDetailsDialog()" fxLayout="row">
-    <mat-form-field class="margin_right_25" appearance="outline" >
-      <mat-label>Point Of Contact</mat-label>
-      <input matInput formControlName="name" required [(value)]="v.name " readonly>
-    </mat-form-field>
-    <mat-form-field class="margin_right_25" appearance="outline">
-      <mat-label>Point Of Contact</mat-label>
-      <input matInput formControlName="email" required [(value)]="v.email" readonly>
-    </mat-form-field>
-    <mat-form-field appearance="outline" style="width: 169px; margin: 2px;margin-right: 13px">
-      <mat-label>Process Owner</mat-label>
-      <input matInput formControlName="nameOfOwner"  [(value)]="v.nameOfOwner" required readonly >
-    </mat-form-field>
-    <mat-form-field appearance="outline" style="width: 169px; margin: 2px;margin-right: 13px">
-      <mat-label>Process Owner</mat-label>
-      <input matInput formControlName="emailOfOwner"  [(value)]="v.emailOfOwner" required readonly>
-    </mat-form-field>
+    <div formGroupName="pointOfContact">
+      <mat-form-field class="margin_right_25" appearance="outline" >
+        <mat-label>Point Of Contact</mat-label>
+        <input matInput formControlName="name" required [(value)]="v.name " readonly>
+      </mat-form-field>
+      <mat-form-field class="margin_right_25" appearance="outline">
+        <mat-label>Point Of Contact</mat-label>
+        <input matInput formControlName="email" required [(value)]="v.email" readonly>
+      </mat-form-field>
+    </div>
+    <div formGroupName="processOwner">
+      <mat-form-field appearance="outline" style="width: 169px; margin: 2px;margin-right: 13px">
+        <mat-label>Process Owner</mat-label>
+        <input matInput formControlName="name"  [(value)]="v.name" required readonly >
+      </mat-form-field>
+      <mat-form-field appearance="outline" style="width: 169px; margin: 2px;margin-right: 13px">
+        <mat-label>Process Owner</mat-label>
+        <input matInput formControlName="email"  [(value)]="v.email" required readonly>
+      </mat-form-field>
+    </div>  
   </div>
 </div>
 <div fxLayout=row class="hand-cursor" style="margin-left: 87em;display: inline-block; " (click)="onAdd()" >
