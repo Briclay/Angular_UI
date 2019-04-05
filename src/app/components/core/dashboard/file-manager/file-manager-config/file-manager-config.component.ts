@@ -131,11 +131,6 @@ export class FileManagerConfigComponent implements OnInit {
 
     this.folderConfigData();
     this.getSingleFolder(this.fileId);
-    //  this.projectlist && this.projectlist.forEach((v) => {
-    //    if(v._id ===this.projId){
-    //     this.selectedProjectByParams=v;   
-    //   }
-    // })
     /*this.deptConfigData = JSON.parse(window.localStorage.getItem('FOLDER_CONFIG_DETAILS'));
     this.populateConfigData(this.deptConfigData);*/
   }
@@ -152,6 +147,7 @@ export class FileManagerConfigComponent implements OnInit {
   }
 
   projectChanged(proj) {
+    debugger;
     this.selectProjectStatus = "";
     this.router.navigate([], { queryParams: { projId: proj.value ? proj.value._id : proj._id }, queryParamsHandling: 'merge' });
     console.log(proj);
@@ -308,9 +304,8 @@ export class FileManagerConfigComponent implements OnInit {
 
          this.projectlist && this.projectlist.forEach((v) => {
            if(v._id ===this.projId){
-            this.selectedProjectDataByParams = v
-            this.selectedProjectByParams=v.name;   
-            //this.getSingleProject(v);
+            this.selectedProjectByParams = v
+            this.projectChanged(v);
           }
         })
 
@@ -338,38 +333,38 @@ export class FileManagerConfigComponent implements OnInit {
     getSingleProject(list) {
       this.isLoading = true;
 /*    this.selectProjectStatus = list.status;
-*/    this.selectedProjectData = list.value;
-this.selectProjectStatus = list.value.status
+*/    this.selectedProjectData = list ? list : list.value;
+      this.selectProjectStatus = list ? list.status : list.value.status
 
-console.log('this.selectedProjectData', this.selectedProjectData);
-window.localStorage.files_project = JSON.stringify(this.selectedProjectData);
-const body = {
-  name: this.selectedProjectData.name,
-  _organisationId: this.orgId,
-  _departmentId: this.deptId,
-  _parentId: this.fileId,
-  owner: '',
-  _projectId: this.selectedProjectData._id,
-  shared: [],
-  details: 'This folder is created by ',
-  accessFlag: 'Private'
-};
-console.log('this.deptConfigData', this.deptConfigData);
-    // logic for only contrcat departemt to add fodler name with id
-    if (this.deptConfigData.deptName === 'Contracts') {
-      this.fileManagerService.getSingleFile(this.fileId)
-      .pipe().subscribe(res => {
+      console.log('this.selectedProjectData', this.selectedProjectData);
+      window.localStorage.files_project = JSON.stringify(this.selectedProjectData);
+      const body = {
+        name: this.selectedProjectData.name,
+        _organisationId: this.orgId,
+        _departmentId: this.deptId,
+        _parentId: this.fileId,
+        owner: '',
+        _projectId: this.selectedProjectData._id,
+        shared: [],
+        details: 'This folder is created by ',
+        accessFlag: 'Private'
+      };
+      console.log('this.deptConfigData', this.deptConfigData);
+      // logic for only contrcat departemt to add fodler name with id
+      if (this.deptConfigData.deptName === 'Contracts') {
+        this.fileManagerService.getSingleFile(this.fileId)
+        .pipe().subscribe(res => {
+          this.isLoading = false;
+          body.name = this.createProjectNumber(res.length + 1) + '-' + this.selectedProjectData.name;
+          this.createProjectFolder(body, this.selectedProjectData);
+        });
+      } else {
+        console.log('Design');
         this.isLoading = false;
-        body.name = this.createProjectNumber(res.length + 1) + '-' + this.selectedProjectData.name;
+        // else normal folder creation
         this.createProjectFolder(body, this.selectedProjectData);
-      });
-    } else {
-      console.log('Design');
-      this.isLoading = false;
-      // else normal folder creation
-      this.createProjectFolder(body, this.selectedProjectData);
+      }
     }
-  }
 
   createProjectFolder(body, row) {
     this.isLoading = true;
