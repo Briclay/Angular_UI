@@ -19,7 +19,7 @@
       <app-top-menu></app-top-menu>
       <div fxLayout=row>
         <div class="content-head" fxLayout=column style="min-width: -webkit-fill-available;">
-          <div class="first-card" style="width: 100%;overflow: auto;padding: 5px;">
+          <div class="first-card" >
             <mat-card class="matCard" fxFlex=25 fxLayout=column *ngFor="let project of projects">
               <div (click)="selectSingleProject(project)"  fxLayout=row style="place-content: space-between;border-radius: 5px;padding: 4px;" class="{{project.name === clickedProjectName ? 'bg_color_active' : 'bg_color'}}">
                 <div fxLayout=row class="padding_2">
@@ -71,6 +71,10 @@
             </div>
             <div class="p_status_text">{{selectedProjectData.status}}</div>
           </div>
+          <div  class="hand-cursor" style="display: block;margin-left: -12px;width: 61px" (click)="goToFileManager()">
+  <img style="height: 30px;width: 30px;" src="assets/images/icons/File Manager.png" />
+  
+</div>
           <div fxFlex=75 fxLayout=row class="donut_image align_center" >
               <mat-spinner style="margin-left: 450px;margin:0 auto;" *ngIf="analyticsLoading;" [diameter]="40"></mat-spinner>
             <div *ngFor="let ptype of projectTypes" fxLayout=column>

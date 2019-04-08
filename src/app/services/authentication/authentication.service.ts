@@ -12,6 +12,13 @@ export class AuthenticationService {
     constructor(private apiService: ApiService) { }
     // pass params data
 
+   /* flag = 0;
+
+     public getFlag(request): Observable<any> {
+        let url = `${environmentService.briclayApiBase}/auth/signin`;
+        return this.apiService.post(url, request).pipe(map(res => res));
+    }*/
+
     public login(request): Observable<any> {
         let url = `${environmentService.briclayApiBase}/auth/signin`;
         return this.apiService.post(url, request).pipe(map(res => res));

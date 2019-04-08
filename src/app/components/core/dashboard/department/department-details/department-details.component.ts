@@ -25,6 +25,7 @@ export class DepartmentDetailsComponent implements OnInit {
   @Output() public updateRefresh: EventEmitter<any> = new EventEmitter<any>();
 
   userAuth: any;
+  approver : boolean;
   departmentDetailsForm: FormGroup;
   departments: string[] = ['Finance', 'Construction'];
   _organisationId :any;
@@ -46,6 +47,7 @@ export class DepartmentDetailsComponent implements OnInit {
   allFeatureCount : any;
   getInitFeature = [];
   specialFolderCheck : boolean;
+  approverCheck:boolean;
   private unsubscribe: Subject<any> = new Subject();
   constructor(
     private DeptService: DepartmentService,
@@ -71,6 +73,9 @@ export class DepartmentDetailsComponent implements OnInit {
     };
     
   }
+   approverValue (event){
+    this.approverCheck = event.checked;
+  }
 
   ngOnInit() {
     observableMerge(this.route.params, this.route.queryParams).pipe(
@@ -90,6 +95,7 @@ export class DepartmentDetailsComponent implements OnInit {
         _organisationId: [this._organisationId, Validators.required],
         sharedResource: this.formBuilder.array([]),
         specialFolder: ['', Validators.required],
+         approver: ['', Validators.required],
       });
       this.departmentDetailsForm.valueChanges.subscribe(() => {
         this.onOrgFormValuesChanged();

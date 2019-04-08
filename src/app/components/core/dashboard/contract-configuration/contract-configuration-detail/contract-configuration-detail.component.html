@@ -1,6 +1,6 @@
- <div style="padding-top: 2px" fxLayout="row">
+ <div class="pull-right1"  fxLayout="row">
    <mat-card fxLayout=row style="height: 50px; place-justify-content: left;width: 100%;padding-top: 7px" class="panel-header">
-    <div style="width:43%;">
+    <div  class="pull-right2">
       <mat-form-field appearance="outline"  >
         <mat-label>Select Config</mat-label>
         <mat-select placeholder="" (selectionChange)="categoryChanged($event.value)" >
@@ -10,10 +10,10 @@
         </mat-select>
       </mat-form-field>
     </div>
-    <div style ="place-content :center;">
+    <div class="pull-right3" >
       <mat-spinner style="margin:0 auto;" *ngIf="contractSpinner" [diameter]="40"></mat-spinner>
     </div>
-    <div class="pull-right" style="height: 30px">
+    <div class="pull-right4" >
       <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]" style="    margin-left: 277px;
       margin-top: -9px;">
     </mat-paginator>
@@ -60,7 +60,7 @@
       </div>
     </form>
     <br>
-    <div fxLayout=column class="hand-cursor" style=" margin-left: 86em;margin-top: -25px">
+    <div fxLayout=column  class="pull-right5">
       <img style="height: 30px;width: 30px;" src="assets/images/icons/close_red.png" />
       <span>Cancel</span>
     </div>

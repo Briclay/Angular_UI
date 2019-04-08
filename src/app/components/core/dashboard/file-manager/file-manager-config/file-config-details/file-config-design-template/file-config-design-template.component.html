@@ -1,4 +1,4 @@
-<div fxLayout="row" >
+<div fxLayout="row" style="display: block;">
   <div class="flex-grow text-center">
     <strong class="text-color"></strong>
   </div>
@@ -12,7 +12,7 @@
     <strong class="text-color">Car Parking</strong>
   </div>
 </div>
-<div fxLayout="row" >
+<div fxLayout="row" style="width: 75em;">
   <div class="flex-grow">
     <div class="project-content">
       <div class="project-details-header" *ngIf="logsData.imageUrls.length>0">
@@ -25,16 +25,13 @@
   </div>
   <div class="flex-grow" >
     <mat-form-field appearance="outline">
-      <mat-label>Land Area</mat-label>
-      <input matInput readonly placeholder="Land area" [value]="logsData.projectDetails.landArea">
+      <mat-label>Built Up Area</mat-label>
+      <input matInput readonly placeholder="Built Up Area" [value]="logsData.projectDetails.landArea">
     </mat-form-field>
+     
     <mat-form-field appearance="outline">
-      <mat-label>Carpet Area</mat-label>
-      <input matInput placeholder="Carpet area" readonly [value]="logsData.projectDetails.carpetarea">
-    </mat-form-field>
-    <mat-form-field appearance="outline">
-      <mat-label>Sale Area</mat-label>
-      <input matInput placeholder="Sale Area" readonly [value]="logsData.projectDetails.saleArea">
+      <mat-label>Saleable Area</mat-label>
+      <input matInput placeholder="Saleable Area" readonly [value]="logsData.projectDetails.saleArea">
     </mat-form-field>
   </div>
   <div class="flex-grow ">

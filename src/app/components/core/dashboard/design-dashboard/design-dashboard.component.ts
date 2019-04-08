@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import {FileManagerService} from '../../../../components/core/dashboard/file-manager/file-manager.service';
 import {UserService} from '../../../../components/core/dashboard/user/user.service';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -102,6 +102,7 @@ export class DesignDashboardComponent implements OnInit {
       console.log(proj, "selected poject data")
       this.projectSelected = true;
       this.selectedProjectData = proj;
+      console.log(proj,"dddddddddddddd")
       this.clickedProjectName = proj.name;
       this.projectConsultants = this.selectedProjectData._consultants;
       this.unitsArray = this.selectedProjectData.units;
@@ -189,6 +190,11 @@ export class DesignDashboardComponent implements OnInit {
     //     this.designDashForm.controls['profileImageUrl'].setValue(res.url)
     //   }, (error: any) => {
     // });
+  }
+  goToFileManager(){
+    console.log("dddddddddddddddd")
+    this.router.navigate(['dashboard/file-manager/5c548f8bf231a5447de94eee/5c54900e44f38b4498f8d9fd/5c5496a70923fa3e45bd9b5b'], { queryParams: { projId: this.selectedProjectData._id}, queryParamsHandling: 'merge' });
+   // this.router.navigateByUrl('dashboard/file-manager/5c548f8bf231a5447de94eee/5c54900e44f38b4498f8d9fd/5c5496a70923fa3e45bd9b5b?projId=/'+this.selectedProjectData._id);
   }
 
   onSubmit() {

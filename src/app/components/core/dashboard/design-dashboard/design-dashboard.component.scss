@@ -1,3 +1,4 @@
+
 .main-content {
     flex : 1;
 }
@@ -10,6 +11,7 @@
 .content-head {
     margin-top : 2%;
 }
+
 .dottedBorder{
     border-style: dashed;
     border-radius: 50%;
@@ -93,6 +95,7 @@
 }
 .first-card {
     flex : 1;
+    width: 100%;overflow: auto;padding: 5px;
 }
 .report-card {
    display: flex;
