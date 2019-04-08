@@ -3,6 +3,9 @@ import { FormBuilder, FormGroup, Validators, FormControl, FormArray } from '@ang
 import { MatDialog,MatSnackBar } from '@angular/material';
 import { NcmService } from '.././ncm.service';
 import { OpportunityDetailsComponent } from '.././ncm-details/opportunity-details/opportunity-details.component';
+import { BpdListService} from '../../../dashboard/bpd-list/bpd-list.service';
+
+
 @Component({
   selector: 'app-ncm-create',
   templateUrl: './ncm-create.component.html',
@@ -23,14 +26,15 @@ export class NcmCreateComponent implements OnInit {
   controlsCheck : any;
   orgId : any;
   opportunityValues : any;
-
+  bpdsList : any;
   consequenceValue = ['Low','Moderate Risk','High Risk'];
   impact = [{ value: 1, name: "unlikely" }, { value: 2, name: "likely" }, { value: 3, name: "Most Likely" }]
   likelihoodValue = [{ value: 1, name: "Low" }, { value: 2, name: "Medium" }, { value: 3, name: "High" }];
   constructor ( private formBuilder:FormBuilder,
     private dialog: MatDialog,
     private snackBar : MatSnackBar,
-    private ncmService: NcmService,) {
+    private ncmService: NcmService,
+    private bpdService : BpdListService) {
   }
 
   ngOnInit() {
@@ -72,10 +76,18 @@ export class NcmCreateComponent implements OnInit {
       }),
       status : ['Open', Validators.required]
     });
+
+    this.getAllBpds()
   }
 
   controlsValue (event){
     this.controlsCheck = event.checked;
+  }
+
+  getAllBpds (){
+    this.bpdService.getAll().pipe().subscribe(res => {
+      this.bpdsList = res;
+    })
   }
 
   reset(){

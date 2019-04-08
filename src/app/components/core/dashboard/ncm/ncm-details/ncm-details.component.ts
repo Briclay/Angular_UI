@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators, FormControl, FormArray } from '@ang
 import { MatDialog,MatSnackBar } from '@angular/material';
 import { OpportunityDetailsComponent } from '../ncm-details/opportunity-details/opportunity-details.component';
 import { NcmService } from '../ncm.service';
+// import { BPDService} from '../../../dashboard/bpd-list/bpd-list.service';
 
 @Component({
   selector: 'app-ncm-details',
@@ -25,6 +26,7 @@ export class NcmDetailsComponent implements OnInit {
   userName : any;
   user : any; 
   opportunityValues = {}
+  bpdsList : any;
   isLaoding = false;
   statusAll = ['Open', 'In Progress', 'Completed', 'Cancelled', 'Approved']
   consequenceValue = ['Low','Moderate Risk','High Risk'];
@@ -34,7 +36,7 @@ export class NcmDetailsComponent implements OnInit {
     private formBuilder:FormBuilder,
     private dialog: MatDialog,
     private snackBar : MatSnackBar,
-     private ncmService: NcmService,
+     private ncmService: NcmService
   	) { }
   controlsValue (event){
     this.controlsCheck = event.checked;
@@ -85,6 +87,12 @@ export class NcmDetailsComponent implements OnInit {
       this.ncmListForm.patchValue(this.data)
     }
   }
+
+  // getAllBpds (){
+  //   this.bpdService.getAll().pipe().subscribe(res => {
+  //     this.bpdsList = res;
+  //   })
+  // }
 
   reset(){
     this.ncmListForm.reset();

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component,Inject, OnInit } from '@angular/core';
 import { MatDialog ,MatDialogRef,MAT_DIALOG_DATA,MatSnackBar } from '@angular/material';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -20,13 +20,17 @@ export class UserSelectionDialogComponent implements OnInit {
   userDropdownEnable  = false
   orgID : any;
   selectedAssignedUserData : any;
-  constructor(private formBuilder: FormBuilder,
-    private router: Router,
+
+  constructor(@Inject(MAT_DIALOG_DATA) private data: any, 
     private dialogRef : MatDialogRef<UserSelectionDialogComponent>,
+    private formBuilder: FormBuilder,
+    private router: Router,
     private userService: UserService,
     private departService: DepartmentService,
     private snackBar :MatSnackBar ) 
   {
+
+    console.log(this.data,'dataaaaaa')
     this.userFormErrors = {
       departmentName: {},
       assignedName : {}
@@ -45,10 +49,6 @@ export class UserSelectionDialogComponent implements OnInit {
       });
     this.getAllDepartment()
   }
-
-  closeUserPopup() {
-    this.dialogRef.close();
-  }
   
   selectedUser (event){
     this.selectedAssignedUserData = event;
@@ -65,7 +65,7 @@ export class UserSelectionDialogComponent implements OnInit {
   selectDepartment(event){
     this.selectedDepartmentData = event;
     if(event && event._id){
-      this.userService.getUser(event._id).pipe().subscribe(res => {
+      this.userService.getUserByDepId(event._id).pipe().subscribe(res => {
         this.usersList = res;
       }, (error: any) => {
         console.error('error', error);
@@ -77,6 +77,28 @@ export class UserSelectionDialogComponent implements OnInit {
   }
 
   onSubmit(){
-    console.log('user')
+    let obj = {};
+    if(this.data === 'pointOfContact'){
+      obj = {
+        "depName" : this.selectedDepartmentData.name,
+        "pointOfContact" : {
+          "_id" :this.selectedAssignedUserData._id,
+          "name" : this.selectedAssignedUserData.username,
+          "email" : this.selectedAssignedUserData.email,
+        }
+      }
+    }
+    if(this.data === 'processOwner'){
+      obj = {
+        "depName" : this.selectedDepartmentData.name,
+        "processOwner" : {
+          "_id" :this.selectedAssignedUserData._id,
+          "name" : this.selectedAssignedUserData.username,
+          "email" : this.selectedAssignedUserData.email,
+        }
+      }
+    }
+    this.data = ""
+    this.dialogRef.close(obj);
   }
 }

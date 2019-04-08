@@ -1,3 +1,66 @@
-<p>
-  bpd-list-create works!
-</p>
+<div class="user-details-container">
+  <form [formGroup]="bpdCreateForm" class="user-details-form">
+    <mat-card>
+      <div class="user-details-card">
+        <div class="user-details-name">
+          <div class="username-input">
+             <mat-form-field appearance="outline" style="width: 150px; margin: 2px;">
+                <mat-label>Process</mat-label>
+                <input matInput formControlName="process" required >
+              </mat-form-field>
+              <mat-form-field appearance="outline" style="width: 182px;margin: 2px;">
+                <mat-label>BPD/ID</mat-label>
+                <input matInput formControlName="bpdNumber" required >
+              </mat-form-field>
+          </div>
+        </div>
+        <div class="user-details-content">
+          <div class="user-details-content-title">
+            <strong> Point Of Contact</strong>
+          </div>
+          <div class="user-details-form-list" >
+            <div formGroupName="pointOfContact" (click)="openDetailsDialogPointOfContact()" >
+              <mat-form-field class="margin_right_25" appearance="outline">
+                <mat-label>Point Of Contact(Name)</mat-label>
+                <input matInput formControlName="name" required  readonly>
+              </mat-form-field>
+              <mat-form-field class="margin_right_25" appearance="outline">
+                <mat-label>Point Of Contact(Email)</mat-label>
+                <input matInput formControlName="email" required  readonly>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div class="user-details-content">
+          <div class="user-details-content-title">
+            <strong>Process Owner</strong>
+          </div>
+          <div class="user-details-form-list" >
+            <div formGroupName="processOwner" (click)="openDetailsDialogProcessOwner()">
+              <mat-form-field appearance="outline" style="margin-right: 30px;">
+                <mat-label>Process Owner (Name)</mat-label>
+                <input matInput formControlName="name" required readonly>
+              </mat-form-field>
+              <mat-form-field appearance="outline" >
+                <mat-label>Process Owner (Email)</mat-label>
+                <input matInput formControlName="email" required readonly>
+              </mat-form-field>
+            </div>
+          </div>  
+        </div>
+      </div>
+      <div fxLayout=row class="pull-right">
+        <div fxLayout=column class="hand-cursor" style="
+        margin-right: 10px;">
+          <img style="height: 30px;width: 30px;" src="assets/images/icons/close_red.png" />
+          <span>Cancel</span>
+        </div>
+        <div fxLayout=column class="hand-cursor"  (click)="onSubmit()">
+          <img style="height: 30px;" src="assets/images/icons/submitIcon.png" />
+          <span >Save</span>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+    </mat-card>
+  </form>
+</div>
