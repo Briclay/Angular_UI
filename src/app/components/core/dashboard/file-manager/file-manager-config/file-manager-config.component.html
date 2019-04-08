@@ -23,7 +23,7 @@
     <!-- project selection box nad project details -->
     <mat-card *ngIf="projectFlag">
       <form name="fileForm" [formGroup]="fileForm" novalidate fxLayout="row">
-          <app-project-drop-down [value] = "selectedProjectByParams" (selectProjects)="projectChanged($event)"></app-project-drop-down>
+          <app-project-drop-down (selectProjects)="projectChanged($event)"></app-project-drop-down>
           <div style="margin: 7px 0px 0px 13px;color: #032a57cf;font-weight: 600 !important;" >       {{selectProjectStatus && selectProjectStatus}}
           </div>
       </form>

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter ,OnChanges} from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ProjectService } from '../../core/dashboard/projects/project.service';
 import { MatSnackBar } from '@angular/material';
 
@@ -7,19 +7,16 @@ import { MatSnackBar } from '@angular/material';
 	templateUrl: './project-drop-down.component.html',
 	styleUrls: ['./project-drop-down.component.scss']
 })
-export class ProjectDropDownComponent implements OnInit,OnChanges {
-	@Input() public value: any;
+export class ProjectDropDownComponent implements OnInit {
 
 	projectlist: any;
 	orgId: string;
-	selectedProj: any;
+	selectedProj = {};
 	authUserOrganisation : any;
-
 	constructor(private projectService : ProjectService,
 		private snackBar : MatSnackBar) { }
 	@Output() selectProjects = new EventEmitter();
 	ngOnInit() {
-		console.log(this.value, 'data')
 		this.authUserOrganisation = JSON.parse(window.localStorage.getItem('authUserOrganisation'));
        	this.orgId = this.authUserOrganisation._id;
        	this.getProjectListinIt();
@@ -28,16 +25,19 @@ export class ProjectDropDownComponent implements OnInit,OnChanges {
 	getProjectListinIt() {
 		this.projectService.getProjects(this.orgId)
 	      .pipe().subscribe(res => {
-  	        this.selectedProj = res[0];
           	this.projectlist = res;
           	console.log(this.projectlist, "projects")
-  	        this.selectProjects.emit(this.selectedProj)
-	      }, (error: any) => {
+          	//this.selectedProj = res[3]
+  			this.selectedProj = JSON.parse(window.localStorage.getItem('selectProjectParams'));
+          	if(this.selectedProj){
+  	        	this.selectProjects.emit(this.selectedProj)
+          	}
+	    }, (error: any) => {
 	        console.error('error', error);
 	        this.snackBar.open(error.message, 'project', {
 	          duration: 2000,
 	        });
-	      })
+	    })
 	}
 
 	projectChanged(proj) {

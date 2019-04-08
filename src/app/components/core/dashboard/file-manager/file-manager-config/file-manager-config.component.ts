@@ -123,7 +123,7 @@ export class FileManagerConfigComponent implements OnInit {
     observableMerge(this.route.queryParams).pipe(
     takeUntil(this.unsubscribe))
     .subscribe((queryParams) => this.loadRoute(queryParams));
-
+    //window.localStorage.setItem('selectProjectParams', JSON.stringify({}));
     this.currentUrl = this.router.url;
     this.localStack = JSON.parse(window.localStorage.getItem('stack'));
     this.fullPathDisplay = JSON.parse(window.localStorage.getItem('stack'));
@@ -139,6 +139,9 @@ export class FileManagerConfigComponent implements OnInit {
     if('projId' in queryParams) {
       this.projId = queryParams['projId'];
     }
+    else{
+      window.localStorage.setItem('selectProjectParams', JSON.stringify({}));
+    }
   }
 
   public ngOnDestroy(): void {
@@ -147,11 +150,28 @@ export class FileManagerConfigComponent implements OnInit {
   }
 
   projectChanged(proj) {
-    debugger;
     this.selectProjectStatus = "";
     this.router.navigate([], { queryParams: { projId: proj.value ? proj.value._id : proj._id }, queryParamsHandling: 'merge' });
     console.log(proj);
-    this.getSingleProject(proj);
+     if(this.projId){
+        this.projectService.getSingleProjects(this.projId).pipe().subscribe(res => {
+          this.selectedProjectData = res
+          this.selectProjectStatus = this.selectedProjectData.status
+          this.getSingleProject(this.selectedProjectData);
+        })
+      }
+      else if(proj.value){
+        this.projectService.getSingleProjects(proj.value).pipe().subscribe(res => {
+          this.selectedProjectData = res
+          this.selectProjectStatus = this.selectedProjectData.status
+          this.getSingleProject(this.selectedProjectData);
+        })
+      }
+      else {   
+        this.selectedProjectData = proj.value || proj
+        this.selectProjectStatus = proj.value.status || proj.status
+        this.getSingleProject(proj);
+      }
   }
 
   folderConfigData() {
@@ -301,10 +321,10 @@ export class FileManagerConfigComponent implements OnInit {
       }
       if (res.length > 0) {
         this.projectlist = res;
-
          this.projectlist && this.projectlist.forEach((v) => {
-           if(v._id ===this.projId){
+          if(v._id === this.projId){
             this.selectedProjectByParams = v
+            window.localStorage.setItem('selectProjectParams', JSON.stringify(this.selectedProjectByParams));
             this.projectChanged(v);
           }
         })
@@ -332,38 +352,36 @@ export class FileManagerConfigComponent implements OnInit {
     */
     getSingleProject(list) {
       this.isLoading = true;
-/*    this.selectProjectStatus = list.status;
-*/    this.selectedProjectData = list ? list : list.value;
-      this.selectProjectStatus = list ? list.status : list.value.status
-
-      console.log('this.selectedProjectData', this.selectedProjectData);
-      window.localStorage.files_project = JSON.stringify(this.selectedProjectData);
-      const body = {
-        name: this.selectedProjectData.name,
-        _organisationId: this.orgId,
-        _departmentId: this.deptId,
-        _parentId: this.fileId,
-        owner: '',
-        _projectId: this.selectedProjectData._id,
-        shared: [],
-        details: 'This folder is created by ',
-        accessFlag: 'Private'
-      };
-      console.log('this.deptConfigData', this.deptConfigData);
-      // logic for only contrcat departemt to add fodler name with id
-      if (this.deptConfigData.deptName === 'Contracts') {
-        this.fileManagerService.getSingleFile(this.fileId)
-        .pipe().subscribe(res => {
+      /*    this.selectProjectStatus = list.status;*/ 
+        console.log(this.selectProjectStatus, 'this.selectProjectStatus')
+        console.log('this.selectedProjectData', this.selectedProjectData);
+        window.localStorage.files_project = JSON.stringify(this.selectedProjectData);
+        const body = {
+          name: this.selectedProjectData.name,
+          _organisationId: this.orgId,
+          _departmentId: this.deptId,
+          _parentId: this.fileId,
+          owner: '',
+          _projectId: this.selectedProjectData._id,
+          shared: [],
+          details: 'This folder is created by ',
+          accessFlag: 'Private'
+        };
+        console.log('this.deptConfigData', this.deptConfigData);
+        // logic for only contrcat departemt to add fodler name with id
+        if (this.deptConfigData.deptName === 'Contracts') {
+          this.fileManagerService.getSingleFile(this.fileId)
+          .pipe().subscribe(res => {
+            this.isLoading = false;
+            body.name = this.createProjectNumber(res.length + 1) + '-' + this.selectedProjectData.name;
+            this.createProjectFolder(body, this.selectedProjectData);
+          });
+        } else {
+          console.log('Design');
           this.isLoading = false;
-          body.name = this.createProjectNumber(res.length + 1) + '-' + this.selectedProjectData.name;
+          // else normal folder creation
           this.createProjectFolder(body, this.selectedProjectData);
-        });
-      } else {
-        console.log('Design');
-        this.isLoading = false;
-        // else normal folder creation
-        this.createProjectFolder(body, this.selectedProjectData);
-      }
+        }
     }
 
   createProjectFolder(body, row) {
