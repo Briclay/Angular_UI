@@ -4,13 +4,13 @@
       <div class="user-details-card">
         <div class="user-details-name">
           <div class="username-input">
-             <mat-form-field appearance="outline" ">
+             <mat-form-field appearance="outline" >
                 <mat-label>Process</mat-label>
-                <input matInput formControlName="process" required >
+                <input matInput formControlName="process"  >
               </mat-form-field>
               <mat-form-field appearance="outline" >
                 <mat-label>BPD/ID</mat-label>
-                <input matInput formControlName="bpdNumber" required >
+                <input matInput formControlName="bpdNumber"  >
               </mat-form-field>
           </div>
         </div>
@@ -22,11 +22,11 @@
             <div formGroupName="pointOfContact" (click)="openDetailsDialogPointOfContact()" >
               <mat-form-field class="margin_right_25" appearance="outline">
                 <mat-label>Point Of Contact(Name)</mat-label>
-                <input matInput formControlName="name" required  readonly>
+                <input matInput formControlName="name"   readonly>
               </mat-form-field>
               <mat-form-field class="margin_right_25" appearance="outline">
                 <mat-label>Point Of Contact(Email)</mat-label>
-                <input matInput formControlName="email" required  readonly>
+                <input matInput formControlName="email"   readonly>
               </mat-form-field>
             </div>
           </div>
@@ -39,11 +39,11 @@
             <div formGroupName="processOwner" (click)="openDetailsDialogProcessOwner()">
               <mat-form-field appearance="outline" style="margin-right: 30px;">
                 <mat-label>Process Owner (Name)</mat-label>
-                <input matInput formControlName="name" required readonly>
+                <input matInput formControlName="name"  readonly>
               </mat-form-field>
               <mat-form-field appearance="outline" >
                 <mat-label>Process Owner (Email)</mat-label>
-                <input matInput formControlName="email" required readonly>
+                <input matInput formControlName="email"  readonly>
               </mat-form-field>
             </div>
           </div>  
