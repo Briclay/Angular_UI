@@ -15,6 +15,7 @@ export class FileConfigDesignTemplateComponent implements OnInit {
   }
 
   ngOnChanges(changes: any) {
+    console.log(this.folderDetailsDesignDataOption,'this.folderDetailsDesignDataOption')
     this.logsData = this.folderDetailsDesignDataOption;
   }
 

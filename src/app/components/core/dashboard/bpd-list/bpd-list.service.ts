@@ -12,27 +12,27 @@ export class BpdListService {
   constructor(private apiService: ApiService) { }
 
     public getAll(): Observable<any> {
-        let url = `http://localhost:9999/bpd`;
+        let url = `${environmentService.briclayApiBase}/bpd`;
         return this.apiService.get(url).pipe(map(res => res));
     }
 
 	// public getBpdList(Id): Observable<any> {
-    //        let url = `${environmentService.briclayApiBase}/bpdLists?select=*&${Id}`;
+    //        let url = `${environmentService.briclayApiBase}/bpd/${Id}`;
     //        return this.apiService.get(url).pipe(map(res => res));
     //    }
 
     // public getOne(id): Observable<any> {
-    //     let url = `${environmentService.briclayApiBase}/bpdLists/${id}`;
+    //     let url = `${environmentService.briclayApiBase}/bpd/${id}`;
     //     return this.apiService.get(url, id).pipe(map(res => res));
     // }
 
     public update(id , request): Observable<any> {
-        let url = `http://localhost:9999/bpd/${id}`;
+        let url = `${environmentService.briclayApiBase}/bpd/${id}`;
         return this.apiService.put(url, request).pipe(map(res => res));
     }
 
     public save(request): Observable<any> {
-        let url = `http://localhost:9999/bpd`;
+        let url = `${environmentService.briclayApiBase}/bpd`;
         return this.apiService.post(url, request).pipe(map(res => res));
     }
 }

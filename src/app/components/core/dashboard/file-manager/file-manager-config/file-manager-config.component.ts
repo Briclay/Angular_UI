@@ -160,18 +160,18 @@ export class FileManagerConfigComponent implements OnInit {
           this.getSingleProject(this.selectedProjectData);
         })
       }
-      else if(proj.value){
+       if(proj.value){
         this.projectService.getSingleProjects(proj.value).pipe().subscribe(res => {
           this.selectedProjectData = res
           this.selectProjectStatus = this.selectedProjectData.status
           this.getSingleProject(this.selectedProjectData);
         })
       }
-      else {   
-        this.selectedProjectData = proj.value || proj
-        this.selectProjectStatus = proj.value.status || proj.status
-        this.getSingleProject(proj);
-      }
+      // else {   
+      //   this.selectedProjectData = proj.value || proj
+      //   this.selectProjectStatus = proj.value.status || proj.status
+      //   this.getSingleProject(proj);
+      // }
   }
 
   folderConfigData() {

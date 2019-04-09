@@ -41,6 +41,7 @@ export class IssueTrackerDetailsComponent implements OnInit {
 	newCreateFlag = false;
 	selectedUserData : any;
 	myFilter : any;
+	userID : any;
 	dateOfCompletionFilter :any;
 	private unsubscribe: Subject<any> = new Subject();
 	constructor(
@@ -56,7 +57,7 @@ export class IssueTrackerDetailsComponent implements OnInit {
 		let org = JSON.parse(window.localStorage.getItem('authUserOrganisation'));
 		this.orgID = org._id
 		this.user = JSON.parse(window.localStorage.getItem('authUser'));
-		
+		this.userID = this.user._id
 	    let day = new Date();
 	    this.dateOfCompletionFilter = new Date(day);
 	    this.dateOfCompletionFilter.setDate(day.getDate()+1);
@@ -179,20 +180,8 @@ export class IssueTrackerDetailsComponent implements OnInit {
 	}
 
 	addComments(){
-		/*this.commentsArray.push(this.createCommentformGroup.value);
-		console.log(this.commentsArray, "comments-all")*/
-			//this.issueTrackerDetailsForm.value.comments.forEach(v => {
-			//if(v.comments !== "" && v.assignedName  !=="" && v.completionDate  !== null && v.subType  !== "" ){
-				
-				this.commentsArray.push(this.createCommentformGroup.value);
-				console.log(this.commentsArray, "comments-all")
-			//}
-			// else {
-			// 	this.snackBar.open('Please first fill the all required fields', 'Issue-tracker', {
-			// 		duration: 2000,
-			// 	});
-			// }
-		//})	
+		this.commentsArray.push(this.createCommentformGroup.value);
+		console.log(this.commentsArray, "comments-all")
 	}
 
 	getUsers() {

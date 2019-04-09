@@ -64,6 +64,7 @@ export class IssueTrackerComponent implements OnInit {
   dataPaginatorChange(event){
     this.pageIndex = event.pageIndex;
     this.pageSize = event.pageSize;
+    this.getIssueTracker();
   }
 
 

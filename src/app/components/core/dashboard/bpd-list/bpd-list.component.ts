@@ -23,6 +23,8 @@ export class BpdListComponent implements OnInit {
   bpdLists = []
   userId : any;
   bpdAllLists : any;
+  loggedUser : any;
+  bpdNo : any;
   constructor( private formBuilder:FormBuilder,
  	private dialog: MatDialog,
   private bpdListService: BpdListService,
@@ -33,8 +35,8 @@ export class BpdListComponent implements OnInit {
    
     let orgData = JSON.parse(window.localStorage.getItem('authUserOrganisation'));
     this.orgId = orgData._id;
-    let loggedUser  = JSON.parse(window.localStorage.getItem('authUser'));
-    this.userId = loggedUser._id
+    this.loggedUser  = JSON.parse(window.localStorage.getItem('authUser'));
+    this.userId = this.loggedUser._id
    	this.bpdListForm = this.formBuilder.group({
       initiatedDate: [new Date(), Validators.required],
       _organisationId: [this.orgId, Validators.required],
