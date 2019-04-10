@@ -3,13 +3,13 @@
     <mat-card class="mat-card">
       <div class="user-details-card" >
         <div class="user-details-name" fxLayout="column" >
-          <div style="height: 20px" > 
+          <div style="height: 30px" > 
           </div>
-          <div style=" border-right: 2px solid lightgrey;"  fxLayout=" column">
+          <div  fxLayout=" column">
             <mat-form-field appearance="outline" style="width: 150px;margin: 2px;margin-left: 48px;">
               <mat-label>Bpd/ID</mat-label>
               <mat-select placeholder="Bpd/ID" formControlName="bpdNumber">
-                <mat-option *ngFor="let bpd of bpdsList" [value]="bpd">
+                <mat-option *ngFor="let bpd of bpdsList" [value]="bpd.bpdNumber">
                   {{bpd.bpdNumber}}
                 </mat-option>
               </mat-select>
@@ -26,28 +26,30 @@
             <div class="user-details-content-title" >
               <strong> Risk Statement</strong>
             </div>
-            <div formGroupName="riskStatement">
-              <div style="margin-top: 17px">
-                <mat-form-field appearance="outline" class="margin_right_25">
-                  <mat-label>Statement</mat-label>
-                  <input matInput formControlName="statement">
-                </mat-form-field>
+            <div class="user-details-form-list width_200">
+              <div formGroupName="riskStatement">
+                <div style="margin-top: 17px">
+                  <mat-form-field appearance="outline" class="margin_right_25">
+                    <mat-label>Statement</mat-label>
+                    <input matInput formControlName="statement">
+                  </mat-form-field>
+                </div>
+                <br>
+                <div style="margin-top: -27px" >
+                  <mat-form-field appearance="outline" class="margin_right_25">
+                    <mat-label>Cause</mat-label>
+                    <input matInput formControlName="cause">
+                 </mat-form-field>
+                </div>
+                <br>
+                <div style="margin-top: -26px;">
+                  <mat-form-field appearance="outline" class="margin_right_25">
+                    <mat-label>Effect</mat-label>
+                    <input matInput formControlName="effect">
+                  </mat-form-field>
+                </div>
               </div>
-              <br>
-              <div style="margin-top: -27px" >
-                <mat-form-field appearance="outline" class="margin_right_25">
-                  <mat-label>Cause</mat-label>
-                  <input matInput formControlName="cause">
-               </mat-form-field>
-              </div>
-              <br>
-              <div style="margin-top: -26px;">
-                <mat-form-field appearance="outline" class="margin_right_25">
-                  <mat-label>Effect</mat-label>
-                  <input matInput formControlName="effect">
-                </mat-form-field>
-              </div>
-            </div>  
+            </div>    
           </div>   
         </div>
         <div class="user-details-content" style="margin-left: 6px;">
@@ -75,7 +77,9 @@
                 </mat-form-field> 
               </div>
               <br>
-              <div style="width: 316px;margin-top: -27px">
+              <div style="width: 316px;
+                  margin-top: -31px;
+                  margin-left: -27px;">
                 <mat-form-field appearance="outline" class="margin_right_28">
                   <mat-label>Mention Current Control</mat-label>
                   <input matInput formControlName="mention_current_control" >
@@ -83,7 +87,7 @@
               </div>
               <br>
               <div fxLayout="row">
-                <div style="width: 87px; margin-top: -27px; margin-left: 0px">
+                <div style="margin-top: -47px;margin-left: 3px;">
                   <mat-label style="margin-right: 10px;">Controls Mentioned In <br> Respective
                     <br> Process Areas(BPDs)
                   </mat-label>

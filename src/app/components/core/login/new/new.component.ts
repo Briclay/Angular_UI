@@ -89,4 +89,8 @@ export class NewComponent implements OnInit {
         	this.dialogRef.close();
         }
 
+        onSubmit(){
+        	console.log('submit')
+        }
+
     }

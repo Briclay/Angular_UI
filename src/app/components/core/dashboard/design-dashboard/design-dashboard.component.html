@@ -71,10 +71,10 @@
             </div>
             <div class="p_status_text">{{selectedProjectData.status}}</div>
           </div>
-          <div  class="hand-cursor" style="display: block;margin-left: -12px;width: 61px" (click)="goToFileManager()">
-  <img style="height: 30px;width: 30px;" src="assets/images/icons/File Manager.png" />
-  
-</div>
+          <div  class="hand-cursor" style="display: block;margin-left: -12px;width: 61px"
+            (click)="goToFileManager()">
+            <img matTooltip="file-manager" style="height: 30px;width: 30px;" src="assets/images/icons/File Manager.png" />
+          </div>
           <div fxFlex=75 fxLayout=row class="donut_image align_center" >
               <mat-spinner style="margin-left: 450px;margin:0 auto;" *ngIf="analyticsLoading;" [diameter]="40"></mat-spinner>
             <div *ngFor="let ptype of projectTypes" fxLayout=column>

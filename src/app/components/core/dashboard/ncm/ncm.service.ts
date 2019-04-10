@@ -13,21 +13,23 @@ export class NcmService {
     constructor(private apiService: ApiService) { }
 
     public getNcm(): Observable<any> {
-        const url = "http://localhost:9999/ncm"
+        const url = `${environmentService.briclayApiBase}/ncm`
         return this.apiService.get(url).pipe(map(res => res));
     }
-    // public getSingleNcm(id): Observable<any> {
-    //     const url = `http://localhost:9999/ncm/${id}`
-    //     return this.apiService.get(url).pipe(map(res => res));
-    // }
+
+    public getSingleNcm(id): Observable<any> {
+        const url = `${environmentService.briclayApiBase}/ncm/${id}`
+        return this.apiService.get(url).pipe(map(res => res));
+    }
 
     public saveNcm(request): Observable<any> {
-        const url = "http://localhost:9999/ncm"
+        const url = `${environmentService.briclayApiBase}/ncm`
         return this.apiService.post(url, request).pipe(map(res => res));
     }
 
     public updateNcm(request ,id): Observable<any> {
-        const url = `http://localhost:9999/ncm/${id}`
+        const url = `${environmentService.briclayApiBase}/ncm/${id}`
         return this.apiService.put(url, request).pipe(map(res => res));
     }
 }
+

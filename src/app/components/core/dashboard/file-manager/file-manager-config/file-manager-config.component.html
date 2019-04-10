@@ -38,12 +38,12 @@
     </mat-card>
     <div fxLayout="row" style="display: block;" >
         <!--  deisgn template -->
-        <!-- <div *ngIf="selectedProjectData|| selectedProjectByParams">
+        <div *ngIf="selectedProjectData">
           <div *ngIf="deptConfigData.deptName === 'Design'">
-            <app-file-config-design-template  [folderDetailsDesignDataOption]="selectedProjectData || selectedProjectByParams">
+            <app-file-config-design-template  [folderDetailsDesignDataOption]="selectedProjectData">
             </app-file-config-design-template>
           </div>
-        </div> -->
+        </div>
         <div *ngIf="deptConfigData.deptName === 'Contracts'">
           <app-file-config-contract-template *ngIf="workRequestFlag"  (workRequestData)="getWorkRequestata($event)">
           </app-file-config-contract-template>

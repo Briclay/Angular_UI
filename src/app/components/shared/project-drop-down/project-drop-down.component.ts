@@ -11,7 +11,7 @@ export class ProjectDropDownComponent implements OnInit {
 
 	projectlist: any;
 	orgId: string;
-	selectedProj = {};
+	selectedProj : any;
 	authUserOrganisation : any;
 	constructor(private projectService : ProjectService,
 		private snackBar : MatSnackBar) { }

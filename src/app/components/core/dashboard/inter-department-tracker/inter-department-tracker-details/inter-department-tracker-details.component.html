@@ -56,9 +56,11 @@
                       <mat-label>Comments</mat-label>
                       <textarea  matInput formControlName="comments" style="height: 20px"></textarea>
                     </mat-form-field>
-                  <span class="hand-cursor" style="align-items: center;" (click)="closeTheIssueComment(comment)">
-                     <button style="height: 28px;" mat-raised-button type="submit" class="pull-right">Close</button>
-                  </span>
+                    <span *ngIf="comment.value.assignedTo === userID">
+                      <span *ngIf="comment.value.status !== 'CLOSED' " class="hand-cursor" style="align-items: center;" (click)="closeTheIssueComment(comment)">
+                        <button style="height: 28px;" mat-raised-button type="submit" class="pull-right">Close</button>
+                      </span>
+                    </span>
                 </div> 
               </div>
             </form>
