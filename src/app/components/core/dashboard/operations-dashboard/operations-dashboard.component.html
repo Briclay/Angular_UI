@@ -1,0 +1,29 @@
+ <div class="main-content" style="overflow: -webkit-paged-x;">
+  <div  class="main-head">
+    <div fxLayout=column >
+      <div>
+        <div>
+          <div class="dottedBorder" >
+            <img src="{{profileImageUrl}}" class="userImage" (click)="fileInput.click()"/>
+            <input #fileInput type="file" (change)="onFileInput($event)"  class="display_none" />
+          </div>
+          <div fxLayout="column" class="text-center" style="margin-top: 20px;">
+            <span class="text-color">{{userName}}</span>
+          </div>
+           <div fxLayout="column" class="text-center">
+            <span class="text-color">{{roleName}}</span>
+          </div> 
+        </div>
+      </div>
+      
+      
+    </div>
+    <div  style="width: 90%;" fxLayout="row" style="display: inline;flex :1;">
+      <mat-card class="header-shadow" style="display: inline;flex :1;width: 90%;height: 15px;">
+        <app-top-menu></app-top-menu>
+        
+       
+      </mat-card>
+    </div>
+  </div>
+</div>
