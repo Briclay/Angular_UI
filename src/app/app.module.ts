@@ -88,6 +88,7 @@ import { ContractConfigurationComponent } from './components/core/dashboard/cont
 import { UserSelectDialogComponent } from './components/core/dashboard/inter-department-tracker/inter-department-tracker-details/user-select-dialog/user-select-dialog.component';
 import { WorkCategoryDialogComponent } from './components/core/dashboard/work-request/work-request-details/work-category-dialog/work-category-dialog.component';
 import { ContractManagementDashboardComponent } from './components/core/dashboard/contract-management-dashboard/contract-management-dashboard.component';
+import { OperationsDashboardComponent } from './components/core/dashboard/operations-dashboard/operations-dashboard.component';
 //import { ContractManagementDetailsComponent } from './components/core/dashboard/contract-management-dashboard/contract-management-details/contract-management-details.component';
 //import { NewComponent } from './components/core/login/new/new.component';
 
@@ -142,6 +143,7 @@ import { ContractManagementDashboardComponent } from './components/core/dashboar
     ContractConfigurationComponent,
     UserSelectDialogComponent,
     ContractManagementDashboardComponent,
+    OperationsDashboardComponent,
    //NewComponent
   ],
   imports: [

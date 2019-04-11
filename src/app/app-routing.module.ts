@@ -26,6 +26,7 @@ import { NcmComponent } from './components/core/dashboard/ncm/ncm.component';
 import { BpdListComponent } from './components/core/dashboard/bpd-list/bpd-list.component';
 import { ContractConfigurationComponent } from './components/core/dashboard/contract-configuration/contract-configuration.component';
 import { ContractManagementDashboardComponent } from './components/core/dashboard/contract-management-dashboard/contract-management-dashboard.component';
+import { OperationsDashboardComponent } from './components/core/dashboard/operations-dashboard/operations-dashboard.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -114,6 +115,11 @@ const routes: Routes = [
       },
       {
         path: 'design-dashboard', component: DesignDashboardComponent, data: {
+          breadcrumb: 'Users'
+        }
+      },
+      {
+        path: 'operations-dashboard', component: OperationsDashboardComponent, data: {
           breadcrumb: 'Users'
         }
       },

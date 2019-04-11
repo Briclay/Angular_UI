@@ -1,80 +1,142 @@
-#register {
-	flex-direction : row;
-	overflow: auto;
-	background-color : white!important;
-	width: 100%;
-	background-size: cover;
-	height:100vh;
- 
-	#register-form-wrapper {
-		flex: 1 0 auto;
-		padding: 32px;
-       
-		#register-form {
-			padding: 32px;
-			background-color : white;
-			text-align: center;
-			.logo {
-	            margin: 22px 15px 0px 5px;
-	            width: 210px;
-	            height: 56px;   
-          	}    
-            .logo-row {
-		      	text-align: center;
-		    }      
-			.inputBoxShadow {
-				box-shadow: 0 4px 8px 0 rgba(0,0,0,0.12),0 2px 4px 0 rgba(0,0,0,0.08);
-				border-radius: 10px;
-				place-content: space-between;
-			}
-			
-			.title {
-				position: relative;
-				width: 500px;
-				text-align: center;
-			}   
-			.text_color {
-		        font: 600 18px Roboto,"Helvetica Neue",sans-serif;
-		        color :#032A57;
-		        text-align: center;
-		        margin : 20px;
-		    }   
-			.nameAndPwd {
-				margin: 20px 20px 0px 20px;   
-			}
-			form {
-				padding : 1%;
-				width: 100%;
-				text-align: center;
-				mat-form-field {
-					width: 384px;
-					height: 40px;
-					padding : 2px;
-				}
-				md-input-container label {
-					color: red;
-				}
-				md-input-container.md-input-focused label {
-					color: blue;
-				}
-				.sign-in-instead {
-					font-size: 13px;
-					margin-top: 8px;
-					text-align: right;
-					.sign-in {
-						font-size: 13px;
-						font-weight: 500;
-						margin-bottom: 16px;
-						color: gray;
-						cursor: pointer;
-					}
-				}
-				.submit-button {
-					width: 220px;
-					margin: 16px auto;
-					display: block;
-				}
-			}
-		}
-	}
-}
+  #register {
+  width: 100%;
+  overflow: hidden;
+  background: url('/assets/images/backgrounds/dark-material-bg.jpg') no-repeat;
+  background-size: cover;
+
+  #register-intro {
+  padding: 128px;
+
+  .logo {
+  width: 128px;
+  margin-bottom: 32px;
+  }
+
+  .title {
+  font-size: 42px;
+  font-weight: 300;
+  line-height: 1;
+  }
+
+  .description {
+  padding-top: 16px;
+  font-size: 14px;
+  max-width: 600px;
+  }
+  }
+
+  #register-form-wrapper {
+  width: 400px;
+  min-width: 400px;
+  max-width: 400px;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+
+  #register-form {
+  padding: 128px 48px 48px 48px;
+
+  .logo {
+  width: 128px;
+  margin: 32px auto;
+  }
+
+  .title {
+  font-size: 21px;
+  }
+
+  .description {
+  padding-top: 8px;
+  }
+
+  form {
+  width: 100%;
+  padding-top: 32px;
+
+  mat-form-field {
+  width: 100%;
+  }
+
+  mat-checkbox {
+  margin: 0;
+  }
+
+  .terms {
+  margin: 16px 0 32px 0;
+
+  a {
+  font-size: 16px;
+  margin-left: 4px;
+  }
+  }
+
+  .submit-button {
+  width: 100%;
+  margin: 16px auto;
+  display: block;
+
+  }
+  }
+
+  .separator {
+  font-size: 15px;
+  font-weight: 600;
+  margin: 24px auto;
+  position: relative;
+  overflow: hidden;
+  width: 100px;
+  text-align: center;
+
+  .text {
+  display: inline-flex;
+  position: relative;
+  padding: 0 8px;
+  z-index: 9999;
+
+  &:before,
+  &:after {
+  content: '';
+  display: block;
+  width: 30px;
+  position: absolute;
+  top: 10px;
+  border-top: 1px solid;
+  }
+
+  &:before {
+  right: 100%;
+  }
+
+  &:after {
+  left: 100%;
+  }
+  }
+  }
+
+  button {
+
+  &.google,
+  &.facebook {
+  width: 70%;
+  text-transform: none;
+  color: #FFFFFF;
+  font-size: 13px;
+
+  mat-icon {
+  color: #FFFFFF;
+  margin: 0 8px 0 0;
+  }
+  }
+
+  &.google {
+  background-color: #D73D32;
+  margin-bottom: 8px;
+  }
+
+  &.facebook {
+  background-color: rgb(63, 92, 154);
+  }
+
+  }
+  }
+  }
+  }
