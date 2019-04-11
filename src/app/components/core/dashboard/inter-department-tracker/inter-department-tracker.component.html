@@ -112,7 +112,7 @@
                             [pageSize]="pageSize"
                             [expansionPanelOptions]="issueTrackerDataOptions"
                             selectorComponent="app-issue-tracker-details" 
-                            [data]="issueTrackerList" (updateRefresh)="getIssueTracker()" >
+                            [data]="issueTrackerList" (updateRefresh)="getIssueTracker();getAllAnalytics()" >
                         </app-expansion-panel>
                     </div>        
                 </ng-template>
