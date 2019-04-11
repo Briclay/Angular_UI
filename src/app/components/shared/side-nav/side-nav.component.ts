@@ -50,8 +50,8 @@ export class SideNavComponent implements OnInit {
     this.access = JSON.parse(window.localStorage.getItem('access'));
     console.log(this.access,"this.access")
     this.userAuth = JSON.parse(window.localStorage.getItem('authUser'));
-    this.currentUserType = this.userAuth.userType.toLowerCase().replace(/\s+/g, '-');
-    this.currentDepartmentName = this.userAuth._departmentId.name.toLowerCase().replace(/\s+/g, '-');
+    this.currentUserType = this.userAuth && this.userAuth.userType.toLowerCase().replace(/\s+/g, '-');
+    this.currentDepartmentName =  this.userAuth && this.userAuth._departmentId.name.toLowerCase().replace(/\s+/g, '-');
 	
     this.dasbhaords.forEach(v =>{
       if(v === this.currentDepartmentName){

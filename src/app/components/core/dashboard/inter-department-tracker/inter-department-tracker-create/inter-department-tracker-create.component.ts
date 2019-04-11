@@ -315,7 +315,6 @@ export class IssueTrackerCreateComponent implements OnInit {
 			if(v.assignedTo !== ""){
 				this.userService.getSingleUser(v.assignedTo).pipe().subscribe(res => {
 	       			if(res){
-	       				debugger;
 						v.assignedName = res.name.first + " "+ res.name.last;
 	       			}
 				}, (error: any) => {
