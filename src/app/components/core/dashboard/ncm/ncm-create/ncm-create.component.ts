@@ -45,9 +45,10 @@ export class NcmCreateComponent implements OnInit {
       _organisationId: ['', Validators.required],
       _roleId: ['', Validators.required],
       _departmentId: ['', Validators.required],
-      user: ['', Validators.required],
       requestNumber: ['', Validators.required],
+      bpdId : ['', Validators.required],
       bpdNumber: ['', Validators.required],
+      process : [''],
       depName: ['', Validators.required],
       todayDate: ['', Validators.required],
       riskStatement: this.formBuilder.group({ 
@@ -74,6 +75,11 @@ export class NcmCreateComponent implements OnInit {
         resource:['', Validators.required],
         currentTime: [ '', Validators.required],
       }),
+      user : this.formBuilder.group({ 
+        _id : [ '', Validators.required],
+        name : [ '', Validators.required],
+        email : [ ''],
+      }),
       status : ['Open', Validators.required]
     });
 
@@ -97,11 +103,17 @@ export class NcmCreateComponent implements OnInit {
     this.isLaoding = true;
     this.ncmCreateForm.value._organisationId = this.user._organisationId._id;
     this.ncmCreateForm.value._departmentId = this.user._departmentId._id;
+    this.ncmCreateForm.value.depName = this.user._departmentId.name;
     this.ncmCreateForm.value._roleId = this.user._roleId._id;
-    this.ncmCreateForm.value.user = this.user.username;
-    this.ncmCreateForm.value.email = this.user.email;
-    this.ncmCreateForm.value._createdBy = this.user._id;
+    this.ncmCreateForm.value.user.name = this.user.username;
+    this.ncmCreateForm.value.user.email = this.user.email;
+    this.ncmCreateForm.value.user._id = this.user._id;
     this.ncmCreateForm.value.opportunity = this.opportunityValues;
+
+    let bpd = this.ncmCreateForm.value.bpdNumber;
+    this.ncmCreateForm.value.bpdNumber = bpd.bpdNumber;
+    this.ncmCreateForm.value.process = bpd.process;
+    this.ncmCreateForm.value.bpdId = bpd._id;
     console.log(this.ncmCreateForm.value, "ncmCreateSubmittedValue");
     this.ncmService.saveNcm(this.ncmCreateForm.value).pipe().subscribe(res => { 
       console.log(res,'ncm-create-res')

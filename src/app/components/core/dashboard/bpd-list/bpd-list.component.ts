@@ -30,9 +30,8 @@ export class BpdListComponent implements OnInit {
   private bpdListService: BpdListService,
   private snackBar : MatSnackBar
   ) { }
-
+  
   ngOnInit() {
-   
     let orgData = JSON.parse(window.localStorage.getItem('authUserOrganisation'));
     this.orgId = orgData._id;
     this.loggedUser  = JSON.parse(window.localStorage.getItem('authUser'));
@@ -116,22 +115,26 @@ export class BpdListComponent implements OnInit {
   onSubmit(v) {
     delete this.bpdListForm.value.depNamePOContact;
     delete this.bpdListForm.value.depNameProcessOwner;
-    console.log(this.bpdListForm.value,v )
-    if (this.bpdListForm.value.process !== v.process && v.process !== " "){
-      this.bpdListForm.value.process = v.process
+    console.log(this.bpdListForm.value, v)
+    if(this.bpdListForm.value.process !== v.process && v.process !== ""){
+      if(this.bpdListForm.value.process === v.process){
+        this.bpdListForm.value.process = v.process
+      }
+      else{
+        this.bpdListForm.value.process = this.bpdListForm.value.process
+      }
     }
-     if (this.bpdListForm.value.bpdNumber !== v.bpdNumber && v.bpdNumber !== " "){
+    if(this.bpdListForm.value.bpdNumber !== v.bpdNumber && v.bpdNumber !== ""){
       this.bpdListForm.value.bpdNumber = v.bpdNumber
     }
-    if (this.bpdListForm.value.processOwner !== v.processOwner && 
+    if(this.bpdListForm.value.processOwner !== v.processOwner && 
      !(_.isEmpty(v.processOwner))){
       this.bpdListForm.value.processOwner = v.processOwner
     }
-    if (this.bpdListForm.value.pointOfContact !== v.pointOfContact && 
+    if(this.bpdListForm.value.pointOfContact !== v.pointOfContact && 
       !(_.isEmpty(v.pointOfContact))) {
       this.bpdListForm.value.pointOfContact = v.pointOfContact
     }
-
     this.bpdListService.update(v._id, this.bpdListForm.value).pipe().subscribe(response => {
       console.log(response, 'response');
       this.snackBar.open("BPD updated successfully", 'BPD', {

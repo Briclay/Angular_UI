@@ -32,34 +32,34 @@
           <div [formGroup]="bpdListForm">
             <div fxLayout="row" *ngFor="let v of bpdLists; let i=index;" >
               <div>
-                <mat-form-field appearance="outline" style="width: 180px; margin: 2px;">
+                <mat-form-field appearance="outline" style="width: 280px; margin: 2px;">
                   <mat-label>Process Areas</mat-label>
                   <input matInput formControlName="process"  [value]="v.process">
                 </mat-form-field>
               </div>
               <div>
-                <mat-form-field appearance="outline" style="width: 180px;margin: 2px;">
+                <mat-form-field appearance="outline" style="width: 100px;margin: 2px;">
                   <mat-label>BPD/ID</mat-label>
                   <input matInput formControlName="bpdNumber"  [value]="v.bpdNumber">
                 </mat-form-field>
               </div>
               <div class="user-details-form-list"  fxLayout="row">
                 <div formGroupName="pointOfContact" (click)="openDetailsDialogPointOfContact(v,i)">
-                  <mat-form-field class="margin_right_25" appearance="outline" style="width: 170px;margin: 2px;">
+                  <mat-form-field class="margin_right_25" appearance="outline" style="width: 100px;margin: 2px;">
                     <mat-label>Point Of Contact(Name)</mat-label>
                     <input matInput formControlName="name"  [value]="v.pointOfContact.name " readonly>
                   </mat-form-field>
-                  <mat-form-field class="margin_right_25" appearance="outline" style="width: 170px;margin: 2px;">
+                  <mat-form-field class="margin_right_25" appearance="outline" style="width: 240px;margin: 2px;">
                     <mat-label>Point Of Contact(Email)</mat-label>
                     <input matInput formControlName="email"  [value]="v.pointOfContact.email" readonly>
                   </mat-form-field>
                 </div>
                 <div formGroupName="processOwner" (click)="openDetailsDialogProcessOwner(v,i)">
-                  <mat-form-field appearance="outline" style="width: 170px; margin: 2px;margin-right: 13px">
+                  <mat-form-field appearance="outline" style="width: 100px; margin: 2px;">
                     <mat-label>Process Owner(Name)</mat-label>
                     <input matInput formControlName="name" [value]="v.processOwner.name"  readonly>
                   </mat-form-field>
-                  <mat-form-field appearance="outline" style="width: 170px; margin: 2px;margin-right: 13px">
+                  <mat-form-field appearance="outline" style="width: 240px; margin: 2px;margin-right: 13px">
                     <mat-label>Process Owner(Email)</mat-label>
                     <input matInput formControlName="email" [value]="v.processOwner.email"  readonly>
                   </mat-form-field>
@@ -82,8 +82,8 @@
                 </div>
               </div>
             </div>
-            <div *ngIf="bpdLists.length == 0">
-              <div style="font-size: 14px;"></div>
+            <div *ngIf="bpdLists.length === 0">
+              <div style="font-size: 14px;text-align: center;font-weight: 600;">No Data Found</div>
             </div>
           </div>
       </mat-card>

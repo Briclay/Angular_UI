@@ -56,19 +56,19 @@ export class BpdListCreateComponent implements OnInit {
       depNamePOContact: [''],
       depNameProcessOwner: [''],
     });
-    this.getNcmListData()
+    //this.getNcmListData()
   }
 
-  getNcmListData() {
-    this.bpdListService.getAll().pipe().subscribe(res => {
-      this.bpdAllLists = res;
-      if(res){
-        this.bpdID = 'BPD/' + (this.bpdAllLists.length + 1)
-        this.bpdCreateForm.controls['bpdNumber'].setValue(this.bpdID);
-        console.log(this.bpdID,'this.bpdID')
-      }
-    })
-  }
+  // getNcmListData() {
+  //   this.bpdListService.getAll().pipe().subscribe(res => {
+  //     this.bpdAllLists = res;
+  //     // if(res){
+  //     //   this.bpdID = 'BPD/' + (this.bpdAllLists.length + 1)
+  //     //   this.bpdCreateForm.controls['bpdNumber'].setValue(this.bpdID);
+  //     //   console.log(this.bpdID,'this.bpdID')
+  //     // }
+  //   })
+  // }
 
   openDetailsDialogPointOfContact() {
     let dialogRef = this.dialog.open(UserSelectionDialogComponent, {
@@ -111,6 +111,7 @@ export class BpdListCreateComponent implements OnInit {
         index: 0
       }
       this.tabSwitch.emit(tabReq);
+      this.bpdCreateForm['_touched'] = false;
     }, (error: any) => {
       this.snackBar.open(error.message, 'BPD', {
         duration: 2000,

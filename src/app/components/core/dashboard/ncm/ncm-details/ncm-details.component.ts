@@ -49,10 +49,11 @@ export class NcmDetailsComponent implements OnInit {
       _organisationId: ['', Validators.required],
       _roleId: ['', Validators.required],
       _departmentId: ['', Validators.required],
-      user: ['', Validators.required],
       requestNumber: ['', Validators.required],
+      bpdId : ['', Validators.required],
       bpdNumber: ['', Validators.required],
-      depName: ['', Validators.required],
+      process : [''],
+      depName: [''],
       todayDate: [new Date(), Validators.required],
       riskStatement: this.formBuilder.group({ 
         statement: ['', Validators.required],
@@ -77,6 +78,11 @@ export class NcmDetailsComponent implements OnInit {
         budget: ['', Validators.required],
         resource:['', Validators.required],
         currentTime: [ new Date(), Validators.required],
+      }),
+      user : this.formBuilder.group({ 
+        _id : [ '', Validators.required],
+        name : [ '', Validators.required],
+        email : [ ''],
       }),
       status : ['', Validators.required]
     });

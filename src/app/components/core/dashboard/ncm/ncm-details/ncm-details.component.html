@@ -18,9 +18,11 @@
             <mat-form-field   class="margin" style="margin-bottom: -25px;">
               <input matInput readonly formControlName="depName" required >
             </mat-form-field>
-            <mat-form-field   class="margin" style=";margin-bottom: -20px;">
-              <input matInput readonly formControlName="user" required  >
-            </mat-form-field>
+            <div formGroupName="user">
+              <mat-form-field   class="margin" style=";margin-bottom: -20px;">
+                <input matInput readonly formControlName="name" required  >
+              </mat-form-field>
+            </div>  
             <div class="approve" style="background-color: #63c363;
               width: 60px;
               padding: 7px;

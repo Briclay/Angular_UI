@@ -11,7 +11,11 @@
 .content-head {
     margin-top : 2%;
 }
-
+report_card_top {
+   display: flex;
+   margin : 3px 0px 0px 6px;
+   align-items : center;
+}
 .dottedBorder{
     border-style: dashed;
     border-radius: 50%;

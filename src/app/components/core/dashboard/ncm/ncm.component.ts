@@ -54,18 +54,16 @@ export class NcmComponent implements OnInit {
 		this.ncmListSpinner = true;
 		this.ncmService.getNcm().pipe().subscribe(res => {
 			this.ncmListSpinner = false;
-			res.length > 0 && res.forEach((list) => {
-				list.roleName = this.user._roleId.name;
-				list.depName = this.user._departmentId.name;
-			})
+			// res.length > 0 && res.forEach((list) => {
+			// 	list.roleName = this.user._roleId.name;
+			// })
 			this.ncmList = res;
 		})
 		console.log(this.ncmList, 'ncmList')
 		this.ncmListDataOptions = [
-		{ title: 'UserName', key: 'user', hideTitle: true, type: 'label' },
-		{ title: 'Role', key: 'roleName' },
+		{ title: 'UserName', key: 'user.name', hideTitle: true, type: 'label' },
 		{ title: 'Department', key: 'depName' },
-		{ title: 'Email', key: 'email' }]
+		{ title: 'Email', key: 'user.email' }]
 	}
 
 	tabSwitch(tabReq) {
