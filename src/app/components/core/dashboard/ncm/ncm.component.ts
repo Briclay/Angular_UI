@@ -58,12 +58,13 @@ export class NcmComponent implements OnInit {
 			// 	list.roleName = this.user._roleId.name;
 			// })
 			this.ncmList = res;
+			console.log(this.ncmList, 'ncmList')
 		})
-		console.log(this.ncmList, 'ncmList')
 		this.ncmListDataOptions = [
-		{ title: 'UserName', key: 'user.name', hideTitle: true, type: 'label' },
-		{ title: 'Department', key: 'depName' },
-		{ title: 'Email', key: 'user.email' }]
+			{ title: 'UserName', key: 'user.name', hideTitle: true, type: 'label' },
+			{ title: 'Department', key: 'depName' },
+			{ title: 'Email', key: 'user.email' }
+		]
 	}
 
 	tabSwitch(tabReq) {

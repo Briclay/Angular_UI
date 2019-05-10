@@ -60,16 +60,18 @@ export class BpdListComponent implements OnInit {
   getNcmListData() {
     this.bpdListService.getAll().pipe().subscribe(res => {
       this.bpdAllLists = res;
-      if(res.length > 0){
-        res.forEach(list => {
+      if(this.bpdAllLists.length > 0){
+        this.bpdAllLists.forEach(list => {
           if(list.processOwner._id === this.userId || list.pointOfContact._id === this.userId){
             this.bpdLists.push(list)
+            console.log(this.bpdLists)
           }
         })
       }
     })
   }
   
+  //5cd4eb4625480a7eeaf07561
   tabSwitch(tabReq) {
     this.tabGroup.selectedIndex = tabReq.index;
     this.getNcmListData()

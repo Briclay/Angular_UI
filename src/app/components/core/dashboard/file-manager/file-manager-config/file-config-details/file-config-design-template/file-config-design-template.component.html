@@ -26,12 +26,12 @@
   <div class="flex-grow" >
     <mat-form-field appearance="outline">
       <mat-label>Built Up Area</mat-label>
-      <input matInput readonly placeholder="Built Up Area" [value]="logsData.projectDetails.landArea">
+      <input matInput readonly placeholder="Built Up Area" [value]="logsData.projectDetails && logsData.projectDetails.landArea && logsData.projectDetails.landArea">
     </mat-form-field>
      
     <mat-form-field appearance="outline">
       <mat-label>Saleable Area</mat-label>
-      <input matInput placeholder="Saleable Area" readonly [value]="logsData.projectDetails.saleArea">
+      <input matInput placeholder="Saleable Area" readonly [value]="logsData.projectDetails && logsData.projectDetails.saleArea && logsData.projectDetails.saleArea">
     </mat-form-field>
   </div>
   <div class="flex-grow ">

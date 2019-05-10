@@ -68,13 +68,16 @@ export class ProjectsComponent implements OnInit {
     this.projectService.getProjects(this.orgID).pipe().subscribe(res => {
       console.log('res', res);
       this.projectLoading = false;
-      res.forEach((list) => {
-        list.displayLogo = list.imageUrls[0];
-        list.unitNumber = list.units.reduce((accumulator, currentValue) => {
+      res && res.length > 0 && res.forEach((list) => {
+        list.displayLogo =  list.imageUrls && list.imageUrls.length > 0 && list.imageUrls[0];
+        list.unitNumber = list.units && list.units.length >0 && list.units.reduce((accumulator, currentValue) => {
           return accumulator + currentValue.count;
         }, 0);
+        list.loc = list.projectDetails && list.projectDetails.location && list.projectDetails.location
+        list.block = list.projectDetails && list.projectDetails.blocks && list.projectDetails.blocks
       })
       this.projects = res;
+      console.log(res,"allProjects")
       this.projectDataOptions = [
         {
           title: 'Image', key: 'displayLogo', hideTitle: true, type: 'image'
@@ -82,8 +85,8 @@ export class ProjectsComponent implements OnInit {
         {
           title: 'User Name', type: 'list', list: [
             { title: 'UserName', key: 'name', hideTitle: true, type: 'label' },
-            { title: 'Address', key: 'projectDetails.location', hideTitle: true, type: 'label' },
-            { title: 'Address', key: 'projectDetails.blocks', hideTitle: true, type: 'label' },
+            { title: 'Address', key: 'loc', hideTitle: true, type: 'label' },
+            { title: 'Address', key: 'block', hideTitle: true, type: 'label' },
             { title: 'Status', key: 'status', hideTitle: true, type: 'label', isStatus: true }
           ]
         },

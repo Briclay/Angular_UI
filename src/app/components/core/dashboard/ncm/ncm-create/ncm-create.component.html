@@ -8,7 +8,7 @@
           <div  fxLayout=" column">
             <mat-form-field appearance="outline" style="width: 150px;margin: 2px;margin-left: 48px;">
               <mat-label>Bpd/ID</mat-label>
-              <mat-select placeholder="Bpd/ID" formControlName="bpdNumber">
+              <mat-select placeholder="Bpd/ID" formControlName="bpdNumber" (selectionChange)="selectedBpd($event.value)">
                 <mat-option *ngFor="let bpd of bpdsList" [value]="bpd">
                   {{bpd.bpdNumber}}
                 </mat-option>

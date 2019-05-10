@@ -12,8 +12,9 @@ export class BpdListService {
   constructor(private apiService: ApiService) { }
 
     public getAll(): Observable<any> {
-        // let url = `${environmentService.briclayApiBase}/bpd`;
-        let url = `http://localhost:9999/bpd`;
+        let url = `${environmentService.briclayApiBase}/bpd`;
+        //const url = `http://localhost:9999/bpd`
+
         return this.apiService.get(url).pipe(map(res => res));
     }
 
@@ -28,14 +29,12 @@ export class BpdListService {
     // }
 
     public update(id , request): Observable<any> {
-        //let url = `${environmentService.briclayApiBase}/bpd/${id}`;
-        let url = `http://localhost:9999/bpd/${id}`;
+        let url = `${environmentService.briclayApiBase}/bpd/${id}`;
         return this.apiService.put(url, request).pipe(map(res => res));
     }
 
     public save(request): Observable<any> {
-        // let url = `${environmentService.briclayApiBase}/bpd`;
-        let url = `http://localhost:9999/bpd`;
+        let url = `${environmentService.briclayApiBase}/bpd`;
         return this.apiService.post(url, request).pipe(map(res => res));
     }
 }

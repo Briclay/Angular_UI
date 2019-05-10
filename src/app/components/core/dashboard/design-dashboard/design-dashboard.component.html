@@ -27,8 +27,10 @@
                 </div>
                 <div fxLayout=column>
                   <div class="{{project.name === clickedProjectName ? 'p_name_active_color' : 'p_name_color'}}" >{{project.name}}</div>
-                  <div class="{{project.name === clickedProjectName ? 'p_address_active_color' : 'p_address_color'}}" >{{project.projectDetails.location}}</div>
-                  <div class="{{project.name === clickedProjectName ? 'p_address_active_color' : 'p_address_color'}}">{{project.projectDetails.blocks}}</div>
+                  <div class="{{project.name === clickedProjectName ? 'p_address_active_color' : 'p_address_color'}}" >{{project.projectDetails && project.projectDetails.location 
+                  && project.projectDetails.location}}</div>
+                  <div class="{{project.name === clickedProjectName ? 'p_address_active_color' : 'p_address_color'}}">{{project.projectDetails && project.projectDetails.blocks
+                   && project.projectDetails.blocks}}</div>
                 </div>
               </div>
             </mat-card>

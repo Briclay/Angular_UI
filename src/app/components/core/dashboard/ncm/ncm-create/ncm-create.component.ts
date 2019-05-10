@@ -23,9 +23,10 @@ export class NcmCreateComponent implements OnInit {
   buttonColor: string = '#B0B0B0';
   isLaoding = false;
   user : any;
+  selectBpd : any;
   controlsCheck : any;
   orgId : any;
-  opportunityValues : any;
+  opportunityValues = {};
   bpdsList : any;
   consequenceValue = ['Low','Moderate Risk','High Risk'];
   impact = [{ value: 1, name: "unlikely" }, { value: 2, name: "likely" }, { value: 3, name: "Most Likely" }]
@@ -96,6 +97,14 @@ export class NcmCreateComponent implements OnInit {
     })
   }
 
+  selectedBpd(event){
+    this.bpdsList.forEach(v => {
+      if(event._id === v._id){
+        this.selectBpd = v
+      }
+    })
+  }
+
   reset(){
     this.ncmCreateForm.reset();
   }
@@ -105,15 +114,20 @@ export class NcmCreateComponent implements OnInit {
     this.ncmCreateForm.value._departmentId = this.user._departmentId._id;
     this.ncmCreateForm.value.depName = this.user._departmentId.name;
     this.ncmCreateForm.value._roleId = this.user._roleId._id;
-    this.ncmCreateForm.value.user.name = this.user.username;
-    this.ncmCreateForm.value.user.email = this.user.email;
-    this.ncmCreateForm.value.user._id = this.user._id;
-    this.ncmCreateForm.value.opportunity = this.opportunityValues;
 
-    let bpd = this.ncmCreateForm.value.bpdNumber;
-    this.ncmCreateForm.value.bpdNumber = bpd.bpdNumber;
-    this.ncmCreateForm.value.process = bpd.process;
-    this.ncmCreateForm.value.bpdId = bpd._id;
+    let userData = {
+      "_id" : this.user._id,
+      "name" : this.user.username,
+      "email" : this.user.email
+    }
+    this.ncmCreateForm.value.user = userData;
+    this.ncmCreateForm.value.opportunity = this.opportunityValues || {};
+    
+    if(this.selectBpd ){
+      this.ncmCreateForm.value.bpdNumber = this.selectBpd.bpdNumber || "";
+      this.ncmCreateForm.value.process = this.selectBpd.process || "";
+      this.ncmCreateForm.value.bpdId = this.selectBpd._id || "";
+    }
     console.log(this.ncmCreateForm.value, "ncmCreateSubmittedValue");
     this.ncmService.saveNcm(this.ncmCreateForm.value).pipe().subscribe(res => { 
       console.log(res,'ncm-create-res')
