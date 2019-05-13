@@ -1,6 +1,8 @@
-<div class="side-nav">
-  <ul class="side-nav-list">
-    <li>
+<div class="side-nav" fxLayout="column" style="height: 90vh;
+    overflow-y: scroll;
+    overflow-x: hidden;">
+  <ul class="side-nav-list" >
+    <!-- <li>
       <a routerLink="/dashboard/{{dasbhaordByDep}}-dashboard" routerLinkActive="active">
         <img class="side-nav-icon-size" src="assets/images/icons/Dashboard.png" >
         Dashboard
@@ -11,8 +13,8 @@
         <img class="side-nav-icon-size" src="assets/images/icons/ID_Tracker_Icon.png" style="margin-right: 9px;" >
         Inter Dep Tracker
       </a>
-    </li>
-    <div *ngIf="coreViewOnly" >
+    </li> -->
+    <div >
       <div *ngFor="let feature of access">
         <li class="side-nav-div">
           <a routerLink="/dashboard{{feature.rules[0].resources}}" routerLinkActive="active">
@@ -34,14 +36,7 @@
     </div>
 
   </ul>
-  <!-- <li class="side-nav-div">
-      <a routerLink="/dashboard/home" routerLinkActive="active">
-        <img class="side-nav-icon-size" src="assets/images/icons/Dashboard.png" >  
-      </a>
-    </li> -->
-
-  <div class="logo_div">
+  <div class="logo_div" style="margin-top: 20px;">
     <img class="logo" src="assets/images/logos/Briclay.png" >
   </div>
-
 </div>

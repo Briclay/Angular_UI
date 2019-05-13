@@ -11,7 +11,8 @@ export class SideNavComponent implements OnInit {
   currentUserType : any;
   currentDepartmentName : any;
   coreViewOnly = false;
-  access : any;
+  access =[];
+  otherModuleView =false;
   superadminAccess = false;
   dasbhaords = [ 'design', 'user','contracts','operations' ]
   dasbhaordByDep : any;
@@ -47,7 +48,15 @@ export class SideNavComponent implements OnInit {
   ]
 
 	constructor() { 
-    this.access = JSON.parse(window.localStorage.getItem('access'));
+    let permission = JSON.parse(window.localStorage.getItem('access'));
+    permission && permission.length > 0 && permission.forEach(v => {
+     if(v._featureId.name === "Folder" || v._featureId.name === "File"){
+       console.log('v')
+     }
+     else{
+      this.access.push(v)
+     }
+    })
     console.log(this.access,"this.access")
     this.userAuth = JSON.parse(window.localStorage.getItem('authUser'));
     this.currentUserType = this.userAuth && this.userAuth.userType.toLowerCase().replace(/\s+/g, '-');

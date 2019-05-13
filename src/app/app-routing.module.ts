@@ -31,7 +31,7 @@ import { OperationsDashboardComponent } from './components/core/dashboard/operat
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'reset-password', component: ResetPasswordComponent },
+  { path: 'reset', component: ResetPasswordComponent },
   { path: 'change-password/:id', component: ChangePasswordComponent },
   {
     path: 'dashboard', component: DashboardComponent,
