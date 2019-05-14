@@ -148,7 +148,7 @@ const routes: Routes = [
         }
       },
       {
-        path: 'bpd-list', component: BpdListComponent, data: {
+        path: 'bpd', component: BpdListComponent, data: {
           breadcrumb: 'Users'
         }
       },

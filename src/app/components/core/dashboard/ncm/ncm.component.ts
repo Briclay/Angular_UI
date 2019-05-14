@@ -17,6 +17,7 @@ export class NcmComponent implements OnInit {
 	orgID : string;
 	ncmList : any;
 	user : any;
+	permission : any;
 	pageIndex : number = 0;
 	pageSize : number = 5;
 	private unsubscribe: Subject<any> = new Subject();
@@ -28,6 +29,8 @@ export class NcmComponent implements OnInit {
 
 	ngOnInit() {
     	this.user = JSON.parse(window.localStorage.authUser);
+	    this.permission = JSON.parse(window.localStorage.getItem('access'));
+
 		// observableMerge(this.route.params, this.route.queryParams).pipe(
 		// 	takeUntil(this.unsubscribe))
 		// .subscribe((params) => this.loadRoute(params));

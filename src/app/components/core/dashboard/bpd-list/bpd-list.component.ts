@@ -25,6 +25,7 @@ export class BpdListComponent implements OnInit {
   bpdAllLists : any;
   loggedUser : any;
   bpdNo : any;
+  userType : any;
   constructor( private formBuilder:FormBuilder,
  	private dialog: MatDialog,
   private bpdListService: BpdListService,
@@ -35,7 +36,8 @@ export class BpdListComponent implements OnInit {
     let orgData = JSON.parse(window.localStorage.getItem('authUserOrganisation'));
     this.orgId = orgData._id;
     this.loggedUser  = JSON.parse(window.localStorage.getItem('authUser'));
-    this.userId = this.loggedUser._id
+    this.userId = this.loggedUser._id;
+    this.userType = this.loggedUser.userType.toLowerCase().replace(/\s+/g, '-');;
    	this.bpdListForm = this.formBuilder.group({
       initiatedDate: [new Date(), Validators.required],
       _organisationId: [this.orgId, Validators.required],
@@ -60,13 +62,18 @@ export class BpdListComponent implements OnInit {
   getNcmListData() {
     this.bpdListService.getAll().pipe().subscribe(res => {
       this.bpdAllLists = res;
-      if(this.bpdAllLists.length > 0){
-        this.bpdAllLists.forEach(list => {
-          if(list.processOwner._id === this.userId || list.pointOfContact._id === this.userId){
-            this.bpdLists.push(list)
-            console.log(this.bpdLists)
-          }
-        })
+      if(this.userType === 'user'){
+        if(this.bpdAllLists.length > 0){
+          this.bpdAllLists.forEach(list => {
+            if(list.processOwner._id === this.userId || list.pointOfContact._id === this.userId){
+              this.bpdLists.push(list)
+              console.log(this.bpdLists)
+            }
+          })
+        }
+      }
+      else{
+        this.bpdLists = this.bpdAllLists;
       }
     })
   }
