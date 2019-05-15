@@ -431,14 +431,21 @@ export class FileManagerConfigComponent implements OnInit {
         });
       }
     }, (error: any) => {
+      console.log(error, 'error')
     });
   }
   getIconsFolder(id) {
     this.fileManagerService.getSingleFile(id)
     .pipe().subscribe(res => {
       this.iconArray = res;
+      let resp = res;
       this.doDesignSort();
-      window.localStorage.files_iconArray = JSON.stringify(this.iconArray);
+      if(this.iconArray.length > 0){
+        window.localStorage.files_iconArray = JSON.stringify(this.iconArray);
+      }
+      else {
+        this.iconArray = JSON.parse(window.localStorage.getItem('files_iconArray'));
+      }
     }, (error: any) => {
       console.error('error', error);
     });
