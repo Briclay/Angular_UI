@@ -29,7 +29,7 @@ export class NcmComponent implements OnInit {
 
 	ngOnInit() {
     	this.user = JSON.parse(window.localStorage.authUser);
-	    this.permission = JSON.parse(window.localStorage.getItem('access'));
+	    this.permission = JSON.parse(window.localStorage.getItem('permission'));
 
 		// observableMerge(this.route.params, this.route.queryParams).pipe(
 		// 	takeUntil(this.unsubscribe))
