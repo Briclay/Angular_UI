@@ -14,7 +14,7 @@
         Inter Dep Tracker
       </a>
     </li>
-    <div>
+    <div *ngIf="hideAccess">
       <div *ngFor="let feature of access" >
         <li class="side-nav-div">
           <a routerLink="/dashboard{{feature.rules[0].resources}}" routerLinkActive="active">

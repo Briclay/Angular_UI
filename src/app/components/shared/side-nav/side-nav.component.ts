@@ -72,6 +72,9 @@ export class SideNavComponent implements OnInit {
 	ngOnInit() {
     if (this.currentUserType === "admin" && this.currentDepartmentName === "design"){
       this.coreViewOnly = true;
+      if(this.coreViewOnly){
+        this.hideAccess = false
+      }
     }
     if(this.currentUserType === "user" ){
       let array = []
@@ -84,7 +87,6 @@ export class SideNavComponent implements OnInit {
         })
       })
       this.coreViewOnly = false;
-      //this.hideAccess = false;
     }
     else{
       this.permission && this.permission.length > 0 && this.permission.forEach(v => {
