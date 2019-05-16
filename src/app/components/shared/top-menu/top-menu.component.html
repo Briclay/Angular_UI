@@ -2,16 +2,32 @@
   <div fxLayout="row" >
     <mat-card class="header-shadow" style="display: inline;flex :1;height: 15px;">
       <div fxLayout=row style="place-content: space-around;" >
-        <div fxLayout=row style="place-content: space-around;" class="hand-cursor">
+        <div  *ngIf="permission && permission.Project && permission.Project.ALL && permission.Project.ALL.GET"
+        fxLayout=row style="place-content: space-around;" class="hand-cursor">
           <img style="height: 25px;width: 25px;" src="/assets/images/icons/projects_Active.png">
           <a routerLink="/dashboard/projects" style="text-decoration: none;">
             <div class="tab-btn" style="margin-left:10px;" > Projects</div>
           </a>
         </div>
-        <div fxLayout=row style="place-content: space-around;" class="hand-cursor">
+        <div *ngIf="permission && permission.Folder && permission.Folder.ALL && permission.Folder.ALL.GET"
+        fxLayout=row style="place-content: space-around;" class="hand-cursor">
          <img style="height: 35px;width: 35px;margin-top: -5px;" src="/assets/images/icons/File_Manager_Active.png">
           <a routerLink="/dashboard/file-manager" style="text-decoration: none;">
             <div class="tab-btn" >File Manager</div>
+          </a>
+        </div>
+        <div  *ngIf="permission && permission.Ncm && permission.Ncm.ALL && permission.Ncm.ALL.GET"
+        fxLayout=row style="place-content: space-around;" class="hand-cursor">
+          <img style="height: 25px;width: 25px;" src="/assets/images/icons/ncm.png">
+          <a routerLink="/dashboard/projects" style="text-decoration: none;">
+            <div class="tab-btn" style="margin-left:10px;" > Ncm</div>
+          </a>
+        </div>
+        <div  *ngIf="permission && permission.Bpd && permission.Bpd.ALL && permission.Bpd.ALL.GET"
+        fxLayout=row style="place-content: space-around;" class="hand-cursor">
+          <img style="height: 25px;width: 25px;" src="/assets/images/icons/bpd.png">
+          <a routerLink="/dashboard/projects" style="text-decoration: none;">
+            <div class="tab-btn" style="margin-left:10px;" > Bpd</div>
           </a>
         </div>
         <div fxLayout=row style="place-content: space-around;" class="hand-cursor" *ngIf="userDep === 'Design'">

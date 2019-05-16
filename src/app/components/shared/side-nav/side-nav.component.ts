@@ -17,6 +17,8 @@ export class SideNavComponent implements OnInit {
   superadminAccess = false;
   dasbhaords = [ 'design', 'user','contracts','operations', 'ncm' ]
   dasbhaordByDep : any;
+  hideAccess = false;
+  userAccess : any;
   allAccess = [
     {
       "_id": "5c4c8684fa54e07be980eb7a",
@@ -46,6 +48,8 @@ export class SideNavComponent implements OnInit {
   ]
 
 	constructor() { 
+
+    this.access = JSON.parse(window.localStorage.getItem('access'));
     this.permission = JSON.parse(window.localStorage.getItem('access'));
     let allPermission = this.generatePermissions();
     console.log(allPermission, 'allPermission')
@@ -69,9 +73,18 @@ export class SideNavComponent implements OnInit {
     if (this.currentUserType === "admin" && this.currentDepartmentName === "design"){
       this.coreViewOnly = true;
     }
-    if(this.currentUserType === "superadmin"){
-      this.superadminAccess = true;
-      console.log( this.superadminAccess)
+    if(this.currentUserType === "user" ){
+      let array = []
+      // this.permission.forEach((p,i) => {
+      //   this.allAccess.forEach(ac => {
+      //     if(p._featureId.name === ac.name){
+      //       array.pop(p)
+      //       this.access = array;
+      //     }
+      //   })
+      // })
+      this.coreViewOnly = false;
+      //this.hideAccess = false;
     }
     else{
       this.permission && this.permission.length > 0 && this.permission.forEach(v => {

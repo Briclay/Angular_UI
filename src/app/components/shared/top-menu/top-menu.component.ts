@@ -8,7 +8,10 @@ import { Component, OnInit } from '@angular/core';
 export class TopMenuComponent implements OnInit {
   
   userDep : any;
-  constructor() { }
+  permission : any;
+  constructor() {
+      this.permission = JSON.parse(window.localStorage.getItem('permission'));
+ }
 
   ngOnInit() {
     let authUserDepartment = JSON.parse(window.localStorage.authUserDepartment)
