@@ -75,14 +75,14 @@ export class SideNavComponent implements OnInit {
     }
     if(this.currentUserType === "user" ){
       let array = []
-      // this.permission.forEach((p,i) => {
-      //   this.allAccess.forEach(ac => {
-      //     if(p._featureId.name === ac.name){
-      //       array.pop(p)
-      //       this.access = array;
-      //     }
-      //   })
-      // })
+      this.permission.forEach(p => {
+        this.allAccess.forEach(ac => {
+          if(p._featureId.name === ac.name){
+            array.push(p)
+            this.access = array;
+          }
+        })
+      })
       this.coreViewOnly = false;
       //this.hideAccess = false;
     }
