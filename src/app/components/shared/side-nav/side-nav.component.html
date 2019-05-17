@@ -2,15 +2,21 @@
     overflow-y: scroll;
     overflow-x: hidden;">
   <ul class="side-nav-list" >
-    <li>
+    <li *ngIf="!disableDashbaord">
       <a routerLink="/dashboard/{{dasbhaordByDep}}-dashboard" routerLinkActive="active">
+        <img class="side-nav-icon-size" src="assets/images/icons/Dashboard.png" >
+        Dashboard
+      </a>
+    </li>
+    <li *ngIf="disableDashbaord">
+      <a  routerLinkActive="active">
         <img class="side-nav-icon-size" src="assets/images/icons/Dashboard.png" >
         Dashboard
       </a>
     </li>
     <li >
       <a routerLink="/dashboard/inter-department-tracker" routerLinkActive="active">
-        <img class="side-nav-icon-size" src="assets/images/icons/ID_Tracker_Icon.png" style="margin-right: 9px;" >
+        <img class="side-nav-icon-size" src="assets/images/icons/inter-department-tracker.png" style="margin-right: 9px;" >
         Inter Dep Tracker
       </a>
     </li>

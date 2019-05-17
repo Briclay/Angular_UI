@@ -19,6 +19,7 @@ export class SideNavComponent implements OnInit {
   dasbhaordByDep : any;
   hideAccess = false;
   userAccess : any;
+  disableDashbaord = false;
   allAccess = [
     {
       "_id": "5c4c8684fa54e07be980eb7a",
@@ -66,15 +67,23 @@ export class SideNavComponent implements OnInit {
       else if(this.currentDepartmentName === 'test-depratment'){
         this.dasbhaordByDep = 'ncm';
       }
+      else if(this.currentDepartmentName === 'super admin'){
+        this.dasbhaordByDep = 'admin';
+      }
     })
   }
 
 	ngOnInit() {
-    if (this.currentUserType === "admin" && this.currentDepartmentName === "design"){
+    if (this.currentUserType === "superadmin" || this.currentUserType === "admin"){
       this.coreViewOnly = true;
+      this.disableDashbaord = true;
       if(this.coreViewOnly){
         this.hideAccess = false
       }
+    }
+    if(this.currentDepartmentName === "design"){
+      this.coreViewOnly = false;
+      this.hideAccess = false
     }
     if(this.currentUserType === "user" ){
       let array = []
