@@ -16,7 +16,7 @@ import { MAT_DIALOG_DATA } from '@angular/material';
 	styleUrls: ['./upload-popup.component.scss']
 })
 export class UploadPopupComponent implements OnInit {
-	percentDone: number;
+	percentDone  = 0;
 	uploadSuccess= false;
 	files=[];
 	allFiles = [];
@@ -29,7 +29,8 @@ export class UploadPopupComponent implements OnInit {
 		private location: PlatformLocation,
 		private http: HttpClient,
 		private formBuilder: FormBuilder,
-		private snackBar: MatSnackBar) { }
+		private snackBar: MatSnackBar
+		) { }
 
 	ngOnInit() {
 		console.log(this.data[0].name,"dddddddd");
@@ -49,12 +50,24 @@ export class UploadPopupComponent implements OnInit {
 			} else if (event instanceof HttpResponse) {
 				this.uploadSuccess = true;
 			}
+			// console.log(event, HttpEventType)
+			// if (HttpEventType && event.type > 0) {
+			// 	if(event.loaded && event.total){
+			// 		this.percentDone = Math.round(100 * event.loaded / event.total);
+			// 		if(this.percentDone === 100){
+			// 			this.uploadSuccess = true;
+			// 		}
+			// 	}
+			// }
 		});
 	}
-	reset(){
-  this.dialogRef.close();
-  
-}
+	close(){
+  		this.dialogRef.close('close');
+	}
+
+	save(){
+  		this.dialogRef.close();
+	}
 
 
 }

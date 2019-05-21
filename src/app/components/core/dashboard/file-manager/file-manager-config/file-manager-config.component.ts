@@ -747,7 +747,7 @@ fileChangeEvent(fileInput: any) {
           this.fileJson = json;
           // this.getAssingedUser(json);
           if(!(i == fileLength - 1)){
-             this.onSaveFile(json)
+             this.onSaveFile()
           }
          
           }, (error: any) => {
@@ -785,7 +785,7 @@ fileChangeEvent(fileInput: any) {
     });
   }
 
-  onSaveFile(this.fileJson) {
+  onSaveFile() {
     let body = this.fileJson;
     console.log(body, 'body');
     this.isLoading = true;
@@ -809,7 +809,9 @@ fileChangeEvent(fileInput: any) {
       data: vvv
     }).afterClosed()
       .subscribe(response => {
-        this.onSaveFile(this.fileJson)
+        if(response !== 'close' || response === undefined){
+          this.onSaveFile()
+        }
       });
       //this.buttonColor = '#0099cc';
   }
