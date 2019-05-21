@@ -1,0 +1,31 @@
+<div style="height: 350px;">
+	<mat-card fxLayout="row" style="place-content: space-between;color: #032a57cf !important;font-weight: 600 !important;opacity: 0.7;" >
+		<div>File Name</div>
+		<div style="margin-left: 81px;">Upload Percent</div>
+		<div>Status</div>
+	</mat-card>
+	<!-- <div *ngFor="let x of fileUploaded">{{x}}</div> -->
+	<div *ngFor="let v of data" fxLayout="row"  style="place-content: space-between;border: solid 1px #bdbcbc;    border-radius: 4px;">
+		<div style="width: 219px;overflow: -webkit-paged-y;">{{v.name}}</div>
+		<div style="margin-left: 41px;">
+			<span style="font-weight: 600;">Upload Percent: {{percentDone}}% </span>
+		</div>
+		<div *ngIf="uploadSuccess">
+			<ng-container >
+				Upload Successful
+			</ng-container> 
+		</div>
+		<br />
+	</div>
+	<div fxLayout=row style="margin-top: 7px;">
+		<div fxLayout=column style="align-items: center;margin-left: 492px; " class="hand-cursor" (click)="reset()">
+			<img style="height: 30px;width: 30px;" src="assets/images/icons/close_red.png" />
+			<span>Cancel</span>
+		</div>
+		<div fxLayout=column class="hand-cursor" style="align-items: center;margin-left: 36px;" (click)="reset()">
+			<img style="height: 30px;" src="assets/images/icons/submitIcon.png" />
+			<span>Submit</span>
+		</div>
+	</div>
+</div>
+

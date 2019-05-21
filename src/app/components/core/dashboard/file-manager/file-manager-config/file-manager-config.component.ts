@@ -15,6 +15,8 @@ import * as _ from 'lodash';
 import { FileUploadDialogComponent } from '../file-upload-dialog/file-upload-dialog.component';
 import { merge as observableMerge, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { UploadPopupComponent } from '../../file-manager/file-manager-config/upload-popup/upload-popup.component';
+import { forkJoin } from 'rxjs';  // RxJS 6 syntax
 
 @Component({
   selector: 'app-file-manager-config',
@@ -22,6 +24,7 @@ import { takeUntil } from 'rxjs/operators';
   styleUrls: ['./file-manager-config.component.scss']
 })
 export class FileManagerConfigComponent implements OnInit {
+  //filesToUpload: Array<File> = [];
   organizations: any[];
   projectlist: any;
   selectedProjectStatus = {
@@ -33,6 +36,7 @@ export class FileManagerConfigComponent implements OnInit {
   public dataSource: any;
   folderData: any;
   subFolderData: any;
+  fileJson : any;
   selectedProjectData: any;
   filesData: any;
   filesDetailsData: any;
@@ -684,13 +688,33 @@ export class FileManagerConfigComponent implements OnInit {
     this.folderDetailsDataOption = fileList;
 
   }
+/*
+fileChangeEvent(fileInput: any) {
+    let upload = <Array<File>>fileInput.target.files;
+    if(upload ){
+      this.filesToUpload = upload
+    }
+    else{
+      this.snackBar.open("Please Upload max 10 File", 'File Upload', {
+        duration: 2000,
+      });
+      this.filesToUpload['_touched'] = false;
+      //alert('upload max 10')
+    }
+    //this.product.photo = fileInput.target.files[0]['name'];
+}
+*/
 
 
-
-  onFileInput(event, fileList?) {
-    let reader = new FileReader()
-    if (event.target.files && event.target.files.length > 0) {
-      let file = event.target.files[0];
+    upload(files){
+    console.log('fileUploaded',files[0].name);
+    //pick from one of the 4 styles of file uploads below
+    let fileLength = files.length;
+    if (files && files.length > 0) {
+      for (let i = 0; i < files.length; i++){
+      console.log('files[i]',files[i]);
+      let file = files[i];
+      let reader = new FileReader()
       reader.readAsDataURL(file);
       let fileExt = file.name.split(".");
       let fileName = (new Date().getTime()) + "." + fileExt[fileExt.length - 1];
@@ -715,27 +739,55 @@ export class FileManagerConfigComponent implements OnInit {
           this.openfileUploadDialogForRfaWo(res, file, json)
         }
         else{
-          this.saveOnS3(res, file, json);
+          this.http.put(res.signedRequest, file, {
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+          }).subscribe((awsRes: any) => {
+          json.path = 'https://s3.ap-south-1.amazonaws.com/' + this.orgId + '/' + json.savedFileName;
+
+          this.fileJson = json;
+          // this.getAssingedUser(json);
+          if(!(i == fileLength - 1)){
+             this.onSaveFile(json)
+          }
+         
+          }, (error: any) => {
+          console.log('erro' + JSON.stringify(error));
+         });
         }
       }, (error: any) => {
       });
-    } else {
+    }
+
+
+    }
+    else {
       console.log('false');
     }
-  }
+    let l = files.length-1;
+    console.log('final file', files[l]);
+     this.openDetailsDialog(files);
+    //this.uploadAndProgress(files);
+  } 
+
+
   saveOnS3(response: any, file, body: any) {
     this.http.put(response.signedRequest, file, {
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
     }).subscribe((awsRes: any) => {
       body.path = 'https://s3.ap-south-1.amazonaws.com/' + this.orgId + '/' + body.savedFileName;
+
+      this.fileJson = body;
+      return;
       // this.getAssingedUser(json);
-      this.onSaveFile(body)
+      //this.onSaveFile(body)
     }, (error: any) => {
       console.log('erro' + JSON.stringify(error));
     });
   }
-  onSaveFile(body: any) {
-    console.log(body, 'body')
+
+  onSaveFile(this.fileJson) {
+    let body = this.fileJson;
+    console.log(body, 'body');
     this.isLoading = true;
     this.fileManagerService.saveFile(body)
     .pipe().subscribe(res => {
@@ -744,11 +796,24 @@ export class FileManagerConfigComponent implements OnInit {
     }, (error: any) => {
       if ('Folder exist' === error.message) {
         this.onFileReplcaeDailog(body);
-      } else {
+      } 
+      else {
         console.log('error', error);
       }
     });
   }
+
+  openDetailsDialog(vvv) {
+    let dialogRef = this.dialog.open(UploadPopupComponent, {
+      width: '700px',
+      data: vvv
+    }).afterClosed()
+      .subscribe(response => {
+        this.onSaveFile(this.fileJson)
+      });
+      //this.buttonColor = '#0099cc';
+  }
+
   onFileReplcaeDailog(body) {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '600px',

@@ -1,20 +1,20 @@
  import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import {FileManagerService} from '../../../../components/core/dashboard/file-manager/file-manager.service';
-import {UserService} from '../../../../components/core/dashboard/user/user.service';
-import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { MatDialog,  MatSnackBar ,MAT_DIALOG_DATA } from '@angular/material';
-import { ProjectService } from '../../../../components/core/dashboard/projects/project.service';
-import {merge as observableMerge, Subject} from 'rxjs';
-import { Router, ActivatedRoute } from '@angular/router';
-import {takeUntil} from 'rxjs/operators';
+ import {FileManagerService} from '../../../../components/core/dashboard/file-manager/file-manager.service';
+ import {UserService} from '../../../../components/core/dashboard/user/user.service';
+ import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
+ import { HttpClient, HttpHeaders } from '@angular/common/http';
+ import { MatDialog,  MatSnackBar ,MAT_DIALOG_DATA } from '@angular/material';
+ import { ProjectService } from '../../../../components/core/dashboard/projects/project.service';
+ import {merge as observableMerge, Subject} from 'rxjs';
+ import { Router, ActivatedRoute } from '@angular/router';
+ import {takeUntil} from 'rxjs/operators';
 
-@Component({
+ @Component({
   selector: 'app-design-dashboard',
   templateUrl: './design-dashboard.component.html',
   styleUrls: ['./design-dashboard.component.scss']
 })
-export class DesignDashboardComponent implements OnInit {
+ export class DesignDashboardComponent implements OnInit {
   @Input() data: any;
   @Input() formType: string;
   
@@ -41,7 +41,7 @@ export class DesignDashboardComponent implements OnInit {
   analyticResponseCheck = false;
   projectTypes =[]
   intiallTypes =  [ 'Architecture', 'Structural','PHE', 'Electrical','Fire',
-   'HVAC','Interiors'];
+  'HVAC','Interiors'];
   analyticsLoading  = false;
   private unsubscribe: Subject<any> = new Subject();
 
@@ -55,12 +55,12 @@ export class DesignDashboardComponent implements OnInit {
     private userService : UserService,
     private snackBar : MatSnackBar) {    
 
-      this.user = JSON.parse(window.localStorage.getItem('authUser')); 
-      this.userId = this.user._id;
-      this.usrType = this.user.userType;
-      this.userName = this.user.displayName;
-      this.roleName = this.user._roleId.name;
-      this.profileImageUrl = this.user.profileImageUrl ? this.user.profileImageUrl : "./assets/images/avatars/profile.jpg";
+    this.user = JSON.parse(window.localStorage.getItem('authUser')); 
+    this.userId = this.user._id;
+    this.usrType = this.user.userType;
+    this.userName = this.user.displayName;
+    this.roleName = this.user._roleId.name;
+    this.profileImageUrl = this.user.profileImageUrl ? this.user.profileImageUrl : "./assets/images/avatars/profile.jpg";
     this.userAuth = JSON.parse(window.localStorage.getItem('authUserOrganisation'));
     let dep = JSON.parse(window.localStorage.getItem('authUserDepartment'));
     this.userDeppartment = dep._id;
@@ -125,11 +125,11 @@ export class DesignDashboardComponent implements OnInit {
       })
       console.log(res, 'getAllAnalytics')
     }, (error: any) => {
-       this.snackBar.open(error.message, 'error', {
-        duration: 5000,
-      });
-      console.log(error)
+     this.snackBar.open(error.message, 'error', {
+      duration: 5000,
     });
+     console.log(error)
+   });
   }
 
   onFileInput(event, fileList?) {
@@ -141,25 +141,25 @@ export class DesignDashboardComponent implements OnInit {
       let fileName = (new Date().getTime()) + "." + fileExt[fileExt.length - 1];
 
       this.fileManagerService.getS3Url(`file-name=${fileName}&file-type=${file.type}&_organisationId=${this.orgID}`)
-        .pipe().subscribe(res => {
-          let json = {
-            savedFileName: fileName,
-            _organisationId: this.orgID,
-            name: file.name,
-            type: 'file',
-            fileExt: fileExt[fileExt.length - 1],
-            path: res.url,
-            size: file.size,
-            message: "File uploaded by ",
-            details: "file original name is " + file.name
-          };
-          this.saveOnS3(res, file, json)
-        }, (error: any) => {
-           this.snackBar.open(error.message, 'error', {
-            duration: 5000,
-          });
-          console.log(error)
-        });
+      .pipe().subscribe(res => {
+        let json = {
+          savedFileName: fileName,
+          _organisationId: this.orgID,
+          name: file.name,
+          type: 'file',
+          fileExt: fileExt[fileExt.length - 1],
+          path: res.url,
+          size: file.size,
+          message: "File uploaded by ",
+          details: "file original name is " + file.name
+        };
+        this.saveOnS3(res, file, json)
+      }, (error: any) => {
+       this.snackBar.open(error.message, 'error', {
+        duration: 5000,
+      });
+       console.log(error)
+     });
     } else {
       console.log('false');
     }
@@ -195,26 +195,26 @@ export class DesignDashboardComponent implements OnInit {
     console.log("dddddddddddddddd")
     this.router.navigate(['dashboard/file-manager/5c548f8bf231a5447de94eee/5c54900e44f38b4498f8d9fd/5c5496a70923fa3e45bd9b5b'], { queryParams: { projId: this.selectedProjectData._id}, queryParamsHandling: 'merge' });
    // this.router.navigateByUrl('dashboard/file-manager/5c548f8bf231a5447de94eee/5c54900e44f38b4498f8d9fd/5c5496a70923fa3e45bd9b5b?projId=/'+this.selectedProjectData._id);
-  }
+ }
 
-  onSubmit() {
-    let userData = {
-      _organisationId : this.orgID,
-      profileImageUrl : this.profileImageUrl,
-      userType : this.usrType
-    }
-    this.userService.updateUser(this.userId, userData )
-    .pipe().subscribe(res => {
-        this.isLoading = false;
-        this.snackBar.open("Profile image updated Succesfully", 'User', {
-          duration: 5000,
-        });
-      }, (error: any) => {
-        this.isLoading = false;
-        this.snackBar.open(error.message, 'User', {
-          duration: 5000,
-        });
-      });
+ onSubmit() {
+  let userData = {
+    _organisationId : this.orgID,
+    profileImageUrl : this.profileImageUrl,
+    userType : this.usrType
   }
+  this.userService.updateUser(this.userId, userData )
+  .pipe().subscribe(res => {
+    this.isLoading = false;
+    this.snackBar.open("Profile image updated Succesfully", 'User', {
+      duration: 5000,
+    });
+  }, (error: any) => {
+    this.isLoading = false;
+    this.snackBar.open(error.message, 'User', {
+      duration: 5000,
+    });
+  });
+}
 
 }
