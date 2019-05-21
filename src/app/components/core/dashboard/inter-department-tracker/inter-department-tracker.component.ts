@@ -29,6 +29,7 @@ export class IssueTrackerComponent implements OnInit {
   totalEfficiency : any;
   allItems : any;
   enableInputIC = false;
+  length : any;
   enableInputStatus = false;
   enableInputIType = false;
   enableInputDes = false;
@@ -64,6 +65,7 @@ export class IssueTrackerComponent implements OnInit {
   dataPaginatorChange(event){
     this.pageIndex = event.pageIndex;
     this.pageSize = event.pageSize;
+    this.length = this.issueTrackerList.length
     this.getIssueTracker();
   }
 

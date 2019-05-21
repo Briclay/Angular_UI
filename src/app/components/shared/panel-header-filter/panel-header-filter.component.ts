@@ -16,19 +16,26 @@ export class PanelHeaderFilterComponent implements OnInit,OnChanges{
     pageIndex : number;
     pageSize : number;
     length : any
+    totalLength : any
 	constructor() { }
 
     ngOnChanges(){
     	if(this.data && this.data.length > 0){
-			this.length = this.data
+			this.totalLength = this.data.length;
     	}
 		//this.length = this.data && this.data.length;
 		this.pageSize = this.pageSize;
-		this.pageSizeOptions = [5, 10, 25, 100];
+		this.length = this.totalLength;
+		if(this.totalLength && this.totalLength > 100){
+			this.pageSizeOptions = [5, 10, 25, 100, this.totalLength ];
+		}
+		else {
+			this.pageSizeOptions = [5, 10, 25, 100 ];
+		}
     }
 
     filterdData(event){
-	    this.dataFilter.emit(event)
+    	this.dataFilter.emit(event)
 	}
     
 	ngOnInit() {
