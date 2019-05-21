@@ -81,16 +81,10 @@ import { DocumentListComponent } from './components/core/dashboard/document-list
 import { BpdListComponent } from './components/core/dashboard/bpd-list/bpd-list.component';
 import { UserSelectionDialogComponent } from './components/core/dashboard/bpd-list/user-selection-dialog/user-selection-dialog.component';
 import { ContractConfigurationComponent } from './components/core/dashboard/contract-configuration/contract-configuration.component';
-//import { BpdListCreateComponent } from './components/core/dashboard/bpd-list/bpd-list-create/bpd-list-create.component';
-//import { ContractConfigurationDetailComponent } from './components/core/dashboard/contract-configuration/contract-configuration-detail/contract-configuration-detail.component';
-//import { ContractConfigurationCreateComponent } from './components/core/dashboard/contract-configuration/contract-configuration-create/contract-configuration-create.component';
- //import { DocumentListCreateComponent } from './components/core/dashboard/document-list/document-list-create/document-list-create.component';
 import { UserSelectDialogComponent } from './components/core/dashboard/inter-department-tracker/inter-department-tracker-details/user-select-dialog/user-select-dialog.component';
 import { WorkCategoryDialogComponent } from './components/core/dashboard/work-request/work-request-details/work-category-dialog/work-category-dialog.component';
 import { ContractManagementDashboardComponent } from './components/core/dashboard/contract-management-dashboard/contract-management-dashboard.component';
 import { OperationsDashboardComponent } from './components/core/dashboard/operations-dashboard/operations-dashboard.component';
-//import { ContractManagementDetailsComponent } from './components/core/dashboard/contract-management-dashboard/contract-management-details/contract-management-details.component';
-//import { NewComponent } from './components/core/login/new/new.component';
 
 @NgModule({
   declarations: [
@@ -144,8 +138,7 @@ import { OperationsDashboardComponent } from './components/core/dashboard/operat
     UserSelectDialogComponent,
     ContractManagementDashboardComponent,
     OperationsDashboardComponent,
-   //NewComponent
-  ],
+   ],
   imports: [
     BrowserModule,
     HttpClientModule,

@@ -88,8 +88,10 @@
                 <span (click)="fileInput.click()">
                   <img matTooltip="File Upload" width="25px" src="assets/images/icons/File_Upload.png" title="Upload"
                     height="25px" class="hand-cursor margin-left-4">
-                  <input #fileInput type="file" (change)="onFileInput($event)" style="display:none;" />
+                 <!--  <input #fileInput type="file" (change)="onFileInput($event)" style="display:none;" multiple/> -->
+                  <input #fileInput type="file" name="files" (change)="upload($event.target.files)"  style="display:none;" multiple/>
                 </span>
+
               </span>
             </div>
           </div>
@@ -100,6 +102,7 @@
           <div style="place-content :center;">
             <mat-spinner style="margin:0 auto;" *ngIf="isLoading" [diameter]="40"></mat-spinner>
           </div>
+          <mat-card style="height: 457px;overflow: auto;">
           <!-- table Implemenetion -->
           <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
             <!-- name type -->
@@ -157,6 +160,7 @@
             <tr class="hand-cursor" mat-row *matRowDef="let row; columns: displayedColumns;" (click)="recursiveCall(row)"></tr>
           </table>
           <!-- end tbale impletaion-->
+        </mat-card>
         </div>
       </div>
     </div>

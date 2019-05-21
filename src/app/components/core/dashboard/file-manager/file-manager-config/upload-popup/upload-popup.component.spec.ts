@@ -1,19 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { HistoryPopupComponent } from './history-popup.component';
 
-describe('HistoryPopupComponent', () => {
-  let component: HistoryPopupComponent;
-  let fixture: ComponentFixture<HistoryPopupComponent>;
+import { UploadPopupComponent } from './upload-popup.component';
+
+describe('UploadPopupComponent', () => {
+  let component: UploadPopupComponent;
+  let fixture: ComponentFixture<UploadPopupComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HistoryPopupComponent ]
+      declarations: [ UploadPopupComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(HistoryPopupComponent);
+    fixture = TestBed.createComponent(UploadPopupComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

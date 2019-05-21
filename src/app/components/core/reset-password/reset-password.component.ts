@@ -23,6 +23,7 @@ export class ResetPasswordComponent implements OnInit {
 	    private router: Router,
     	private route: ActivatedRoute,
 	    private auth: AuthService,
+	    private dialog : MatDialog,
 	    private authenticationService: AuthenticationService,
 	    private snackBar :MatSnackBar ) 
 		{
