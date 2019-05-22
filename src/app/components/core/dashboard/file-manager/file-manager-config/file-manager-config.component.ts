@@ -672,6 +672,7 @@ export class FileManagerConfigComponent implements OnInit {
       this.ngOnInit();
     });*/
   }
+
   // this method for route navigation
   onSelectPath(path, top) {
     let tempArray = [];
@@ -705,8 +706,6 @@ fileChangeEvent(fileInput: any) {
     //this.product.photo = fileInput.target.files[0]['name'];
 }
 */
-
-
 upload(files){
   console.log('fileUploaded',files[0].name);
     //pick from one of the 4 styles of file uploads below
@@ -734,7 +733,6 @@ upload(files){
             message: "File uploaded by ",
             details: "file original name is " + file.name
           };
-
           if(this.selectedName === 'RFA' ||this.selectedName === 'Order/Agreement'){
             console.log('RFA & WO/Agreement')
             this.openfileUploadDialogForRfaWo(res, file, json)
@@ -747,7 +745,6 @@ upload(files){
 
               this.fileJson = json;
               this.saveOnS3(res, file, json);
-              
             }, (error: any) => {
               console.log('error' + JSON.stringify(error));
             });
@@ -755,8 +752,6 @@ upload(files){
         }, (error: any) => {
         });
       }
-
-
     }
     else {
       console.log('false');
@@ -766,7 +761,6 @@ upload(files){
     this.openDetailsDialog(files);
     //this.uploadAndProgress(files);
   } 
-
 
   saveOnS3(response: any, file, body: any) {
     this.http.put(response.signedRequest, file, {
@@ -803,7 +797,6 @@ upload(files){
       }
     });
    })
-    
   }
 
   openDetailsDialog(vvv) {

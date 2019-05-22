@@ -16,7 +16,7 @@
     }
 
     .text_color {
-        font: 600 18px Roboto,"Helvetica Neue",sans-serif;
+        font: 600 16px Roboto,"Helvetica Neue",sans-serif;
         color :#032A57;
         text-align: center;
         margin-top: 10px;
@@ -53,4 +53,14 @@ mat-form-field {
         }
         
     }
+
+}
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-flex {
+    padding: 0 .75em 0 .75em;
+    margin-top: 0.75em;
+    position: relative;
+    height: 38px;
+}
+ ::ng-deep input.mat-input-element {
+    margin-top: 6px;
 }
