@@ -6,6 +6,7 @@ import { MatDialog,  MatSnackBar ,MAT_DIALOG_DATA } from '@angular/material';
 import { AuthService } from './../../../services/auth.service';
 import { ForgotPasswordComponent } from '../forgot-password/forgot-password.component';
 import { NewComponent } from './new/new.component';
+ import { HttpClient } from '@angular/common/http';
 
 @Component({
 	selector: 'app-login',
@@ -18,6 +19,7 @@ export class LoginComponent implements OnInit {
 	loginFormSubmitted = false;
 	isLoading: boolean;
 	popUpFlag = 1;
+	ipAddress : any;
 
 	constructor(
 	    private formBuilder: FormBuilder,
@@ -25,12 +27,19 @@ export class LoginComponent implements OnInit {
 	    private authenticationService: AuthenticationService,
 	    private snackBar: MatSnackBar, 
        	private dialog : MatDialog,
-       	private auth: AuthService) 
+       	private auth: AuthService,
+       	private http: HttpClient ) 
 		{
+
+			this.http.get<{ip:string}>('https://jsonip.com').subscribe( data => {
+		      console.log('th data', data);
+		      this.ipAddress = data.ip
+		    })
+            console.log( this.ipAddress , 'my device ip address')
 			this.loginFormErrors = {
 				email: {},
 				password: {},
-			    ipAddress: "203.192.251.76"
+			    ipAddress: {}
 			}
 		}
 
@@ -38,7 +47,7 @@ export class LoginComponent implements OnInit {
 		this.loginForm = this.formBuilder.group({
 			email: ['', Validators.required],
 			password: ['', Validators.required],
-			ipAddress: ['203.192.251.76', Validators.required]
+			ipAddress: ['']
 		});
 		this.loginForm.valueChanges.subscribe(() => {
 			this.onLoginFormValuesChanged();
@@ -91,6 +100,7 @@ export class LoginComponent implements OnInit {
 
 	onLoginFormSubmit() {
 		this.onLoginFormValuesChanged()
+		this.loginForm.value.ipAddress = this.ipAddress
 		if (this.loginForm.valid) {
 			this.isLoading = true;
 			this.authenticationService.login(this.loginForm.value)
