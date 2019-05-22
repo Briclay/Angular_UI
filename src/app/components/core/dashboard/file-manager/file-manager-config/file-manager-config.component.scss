@@ -168,3 +168,8 @@ mat-expansion-panel-header {
     font-size: 11px;
     display: block;
 }
+
+.mat-expansion-panel-header, .mat-tab-group, .mat-card, .mat-form-field, .mat-select {
+    font-family: 'Montserrat', sans-serif !important;
+    font-size: 13px;
+}

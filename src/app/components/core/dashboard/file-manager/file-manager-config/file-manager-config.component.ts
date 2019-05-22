@@ -31,6 +31,7 @@ export class FileManagerConfigComponent implements OnInit {
     logoImageUrl: 'assets/images/building-2.jpg',
     name: 'list'
   };
+  filesArray = [];
   form: FormGroup;
   fileForm: FormGroup;
   public dataSource: any;
@@ -745,14 +746,11 @@ upload(files){
               json.path = 'https://s3.ap-south-1.amazonaws.com/' + this.orgId + '/' + json.savedFileName;
 
               this.fileJson = json;
-          // this.getAssingedUser(json);
-          // if(!(i == fileLength - 1)){
-           this.onSaveFile()
-         // }
-         
-       }, (error: any) => {
-        console.log('error' + JSON.stringify(error));
-      });
+              this.saveOnS3(res, file, json);
+              
+            }, (error: any) => {
+              console.log('error' + JSON.stringify(error));
+            });
           }
         }, (error: any) => {
         });
@@ -775,8 +773,8 @@ upload(files){
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
     }).subscribe((awsRes: any) => {
       body.path = 'https://s3.ap-south-1.amazonaws.com/' + this.orgId + '/' + body.savedFileName;
-
       this.fileJson = body;
+      this.filesArray.push(this.fileJson)
       return;
       // this.getAssingedUser(json);
       //this.onSaveFile(body)
@@ -786,21 +784,26 @@ upload(files){
   }
 
   onSaveFile() {
-    let body = this.fileJson;
-    console.log(body, 'body');
+    let array = this.filesArray;
+    console.log(array, 'body');
     this.isLoading = true;
-    this.fileManagerService.saveFile(body)
-    .pipe().subscribe(res => {
+
+    array && array.length > 0 &&
+    array.forEach(v => {
+     this.fileManagerService.saveFile(v)
+     .pipe().subscribe(res => {
       this.isLoading = false;
       this.getSingleFolder(this.fileId);
     }, (error: any) => {
       if ('Folder exist' === error.message) {
-        this.onFileReplcaeDailog(body);
+        this.onFileReplcaeDailog(v);
       } 
       else {
         console.log('error', error);
       }
     });
+   })
+    
   }
 
   openDetailsDialog(vvv) {
@@ -809,8 +812,11 @@ upload(files){
       data: vvv
     }).afterClosed()
     .subscribe(response => {
-      if(response !== 'close' || response === undefined){
-        // this.onSaveFile()
+      if(response === 'close'){
+        console.log('uploading stopped')
+      }
+      if(response === 'save'){
+        this.onSaveFile()
       }
     });
   }
