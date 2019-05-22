@@ -91,7 +91,7 @@ export class UserSelectDialogComponent implements OnInit {
 		this.onuserFormValuesChanged()
 		let obj = {
 			'userId' : this.selectedAssignedUserData._id,
-			'userName' : this.selectedAssignedUserData.name,
+			'name' : this.selectedAssignedUserData.name,
 			'depId' : this.selectedDepartmentData._id,
 			'depName' : this.selectedDepartmentData.name,
 		}

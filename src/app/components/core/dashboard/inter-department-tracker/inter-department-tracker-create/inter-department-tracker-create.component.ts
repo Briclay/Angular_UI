@@ -34,7 +34,7 @@ export class IssueTrackerCreateComponent implements OnInit {
 	allIssuesCodes =[];
 	allIssuesType = [];
 	newCreateFlag = false;
-	loading : boolean;
+	loading = false;
 	private unsubscribe: Subject<any> = new Subject();
 	orgID : any;
 	selectedUserDepartment : any;
@@ -55,6 +55,7 @@ export class IssueTrackerCreateComponent implements OnInit {
 	commentformGroup: FormGroup;
 	addForm : FormGroup;
 	selectedSubType : any;
+	assignUserCheck = false
     selectedUserData : any;
 	myFilter : any;
 	selectedName : any;
@@ -315,19 +316,20 @@ export class IssueTrackerCreateComponent implements OnInit {
 			v.completionDate = moment(v.completionDate).local().format("YYYY-MM-DD")
 			v.actualCompletionDate = moment(v.actualCompletionDate).local().format("YYYY-MM-DD")
 			if(v.assignedTo !== ""){
-				this.userService.getSingleUser(v.assignedTo).pipe().subscribe(res => {
-	       			if(res){
-						v.assignedName = res.name.first + " "+ res.name.last;
-	       			}
-				}, (error: any) => {
-					console.error('error', error);
-					this.loading = false;
-				});
+            	this.loading = true;
+                _.forEach(this.users, function(user) {
+					if(user._id === v.assignedTo){
+						v.assignedName = user.name.first + " "+ user.name.last;
+					}
+				})
 			}
+			console.log(v.assignedName,'assignedName')
 		}) 
+
+
 		this.issueTrackerService.createIssueTracker(this.issueTrackerCreateForm.value)
 		.pipe(delay(10000)).subscribe(response => {
-			debugger;
+			this.loading = false;
 			console.log(response, 'response.message')
 			this.snackBar.open('inter-department-tracker created successfully', 'inter-department-tracker', {
 				duration: 2000,

@@ -37,15 +37,18 @@
                       <mat-datepicker-toggle matSuffix [for]="comDate"></mat-datepicker-toggle>
                       <mat-datepicker  #comDate></mat-datepicker>
                   </mat-form-field>
-                 
-                  <mat-form-field  appearance="outline" style="width: 150px;margin-right: 5px;margin-top: -5px;">
-                    <mat-label>Assigned To</mat-label>
-                    <mat-select placeholder="Select user" formControlName="assignedTo"  (selectionChange)="selectedUser($event.value)">
-                      <mat-option *ngFor="let user of users" [value]="user._id" >
-                        {{user.name.first}} {{ user.name.last}}
-                      </mat-option>
-                    </mat-select>
-                  </mat-form-field>
+                  <mat-form-field (click)="userSelectDialog(comment)" *ngIf="!assignUserCheck" appearance="outline" style="width:150px;margin-right:5px;margin-top:-5px;" >
+                      <mat-label>Assigned To</mat-label>
+                      <input  readonly matInput formControlName="assignedName">
+                  </mat-form-field>  
+<!--                   {{issueTrackerDetailsForm.controls.comments.controls[i].controls.assignedName.value}}
+-->               <span class="USer" *ngIf="assignUserCheck" (click)="userSelectDialog(comment)" >
+                    <span class="assign">Assigned To</span>
+                    <div style="display:inline-flex;" *ngIf="selectedUserData ">
+                      <span class="assignUser"> {{selectedUserData.name.first}}</span>&nbsp;
+                       <span class="assignUser"> {{ selectedUserData.name.last}}</span>
+                    </div>
+                  </span>
                   <mat-form-field  appearance="outline" style="width:209px;margin-right:5px;">
                       <mat-label>Actual Completion Date</mat-label>
                       <input  matInput [min]="myFilter" [matDatepicker]="actualCD" placeholder="Completion Date" formControlName="actualCompletionDate">
