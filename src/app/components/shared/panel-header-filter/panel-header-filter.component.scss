@@ -5,12 +5,15 @@
     }
     .panel-left {
         margin-top: 10px;
-    }
-    
+    }   
 }
 mat-paginator {
     display: inline-block;
 }
 mat-paginator.mat-paginator {
     display: inline-block;
+}
+
+::ng-deep .mat-paginator-range-actions {
+	display : none!important;
 }

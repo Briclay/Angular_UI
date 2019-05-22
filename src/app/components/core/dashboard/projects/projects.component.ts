@@ -92,7 +92,7 @@ export class ProjectsComponent implements OnInit {
         },
         { title: 'Project Code', key: 'projectCode' },
         { title: 'Total Units', key: 'unitNumber' },
-        { title: 'Budget', key: 'projectDetails.unitNumber' }]
+        { title: 'Budget', key: '' }]
 
     }, (error: any) => {
       console.error('error', error);

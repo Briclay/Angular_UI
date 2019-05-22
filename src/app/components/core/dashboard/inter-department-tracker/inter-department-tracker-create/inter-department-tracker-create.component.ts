@@ -300,8 +300,10 @@ export class IssueTrackerCreateComponent implements OnInit {
 		this.issueTrackerCreateForm.value.dateOfCompletion = moment(this.issueTrackerCreateForm.value.dateOfCompletion).local().format("YYYY-MM-DD")
 		this.issueTrackerCreateForm.value._projectId = this.selecetedProjectData && this.selecetedProjectData._id;
 		this.issueTrackerCreateForm.value.projectName = this.selecetedProjectData && this.selecetedProjectData.name;
-		this.issueTrackerCreateForm.value._departmentId = this.selectedDepartmentData._id;
-		this.issueTrackerCreateForm.value.departmentName = this.selectedDepartmentData.name;
+		if(this.selectedDepartmentData){
+			this.issueTrackerCreateForm.value._departmentId = this.selectedDepartmentData._id;
+			this.issueTrackerCreateForm.value.departmentName = this.selectedDepartmentData.name;
+		} 
 		this.commentformGroup.value.status = 'OPEN'
 		//this.issueTrackerCreateForm.value.comments = this.array;
        	//this.issueTrackerCreateForm.value.comments = [this.commentformGroup.value];
