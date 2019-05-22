@@ -37,6 +37,11 @@
             }
         }
     }
+    ::ng-deep.user-details-container[_ngcontent-c32] .user-details-form[_ngcontent-c32] .user-details-card[_ngcontent-c32] .user-details-name[_ngcontent-c32] .username-input[_ngcontent-c32] {
+    margin-top: 10px;
+    /* width: 119px; */
+    margin-right: 8px;
+}
     
 }
 
@@ -52,4 +57,16 @@
         font: 400 12px Roboto,"Helvetica Neue",sans-serif;
         color :#032a57cf; 
     }
+}
+::ng-deep.user-details-container[_ngcontent-c15] .user-details-form[_ngcontent-c15] .user-details-card[_ngcontent-c15] .user-details-content[_ngcontent-c15] {
+    flex: 1;
+    margin-left: 9px;
+}
+::ng-deep.mat-form-field-infix {
+    display: block;
+    position: relative;
+    flex: auto;
+    min-width: 0;
+    width: 180px;
+    height: 23px;
 }

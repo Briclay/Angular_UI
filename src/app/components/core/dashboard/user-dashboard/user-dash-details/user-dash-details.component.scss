@@ -11,6 +11,7 @@
                 img {
                     width: 100px;
                     border-radius: 5px;
+                    
                 }
                 .username-input {
                     margin-top: 10px;
@@ -24,7 +25,7 @@
                 .user-details-form-list {
                     border-left: 2px solid lightgrey;
                     min-height: 140px;
-                    padding: 10px;
+                    padding: 6px;
 
                     .datePicker{
                         height: 46px;
@@ -35,4 +36,5 @@
             }
         }
     }
+
 }
