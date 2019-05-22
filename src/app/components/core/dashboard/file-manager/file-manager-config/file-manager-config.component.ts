@@ -31,6 +31,7 @@ export class FileManagerConfigComponent implements OnInit {
     logoImageUrl: 'assets/images/building-2.jpg',
     name: 'list'
   };
+  filesArray = [];
   form: FormGroup;
   fileForm: FormGroup;
   public dataSource: any;
@@ -125,7 +126,7 @@ export class FileManagerConfigComponent implements OnInit {
   }
   ngOnInit() {
     observableMerge(this.route.queryParams).pipe(
-    takeUntil(this.unsubscribe))
+      takeUntil(this.unsubscribe))
     .subscribe((queryParams) => this.loadRoute(queryParams));
     //window.localStorage.setItem('selectProjectParams', JSON.stringify({}));
     this.currentUrl = this.router.url;
@@ -157,55 +158,55 @@ export class FileManagerConfigComponent implements OnInit {
     this.selectProjectStatus = "";
     this.router.navigate([], { queryParams: { projId: proj.value ? proj.value._id : proj._id }, queryParamsHandling: 'merge' });
     console.log(proj);
-     if(this.projId){
-        this.projectService.getSingleProjects(this.projId).pipe().subscribe(res => {
-          this.selectedProjectData = res
-          this.selectProjectStatus = this.selectedProjectData.status
-          this.getSingleProject(this.selectedProjectData);
-        })
-      }
-       if(proj.value){
-        this.projectService.getSingleProjects(proj.value).pipe().subscribe(res => {
-          this.selectedProjectData = res
-          this.selectProjectStatus = this.selectedProjectData.status
-          this.getSingleProject(this.selectedProjectData);
-        })
-      }
+    if(this.projId){
+      this.projectService.getSingleProjects(this.projId).pipe().subscribe(res => {
+        this.selectedProjectData = res
+        this.selectProjectStatus = this.selectedProjectData.status
+        this.getSingleProject(this.selectedProjectData);
+      })
+    }
+    if(proj.value){
+      this.projectService.getSingleProjects(proj.value).pipe().subscribe(res => {
+        this.selectedProjectData = res
+        this.selectProjectStatus = this.selectedProjectData.status
+        this.getSingleProject(this.selectedProjectData);
+      })
+    }
       // else {   
       //   this.selectedProjectData = proj.value || proj
       //   this.selectProjectStatus = proj.value.status || proj.status
       //   this.getSingleProject(proj);
       // }
-  }
+    }
 
-  folderConfigData() {
-    this.localStack = JSON.parse(window.localStorage.getItem('stack'));
-    const tempValue = this.localStack.pop();
-    if (tempValue) {
-      this.currentLevel = tempValue.top;
-      this.previousFolderName = tempValue.name;
-      if (window.localStorage.getItem('FOLDER_PROCESS_FLOW') !== '{}') {
-        const tempData = JSON.parse(window.localStorage.getItem('FOLDER_PROCESS_FLOW')).configValues;
-        if (tempData.length > 0) {
-          this.deptConfigData = JSON.parse(window.localStorage.getItem('FOLDER_CONFIG_DETAILS'));
-          if (this.deptConfigData) {
-            this.populateConfigData(this.deptConfigData);
-            this.checkFlag = true;
-          } else {
-            const name = this.previousFolderName;
-            const pos = _.findIndex(tempData, function (o) { return o.deptName === name; });
-            if (pos !== -1) {
-              window.localStorage.FOLDER_CONFIG_DETAILS = JSON.stringify(tempData[pos]);
-              this.deptConfigData = tempData[pos];
-              this.populateConfigData(tempData[pos]);
+    folderConfigData() {
+      this.localStack = JSON.parse(window.localStorage.getItem('stack'));
+      const tempValue = this.localStack.pop();
+      if (tempValue) {
+        this.currentLevel = tempValue.top;
+        this.previousFolderName = tempValue.name;
+        if (window.localStorage.getItem('FOLDER_PROCESS_FLOW') !== '{}') {
+          const tempData = JSON.parse(window.localStorage.getItem('FOLDER_PROCESS_FLOW')).configValues;
+          if (tempData.length > 0) {
+            this.deptConfigData = JSON.parse(window.localStorage.getItem('FOLDER_CONFIG_DETAILS'));
+            if (this.deptConfigData) {
+              this.populateConfigData(this.deptConfigData);
               this.checkFlag = true;
             } else {
-              this.tableFlag = true;
-            }
+              const name = this.previousFolderName;
+              const pos = _.findIndex(tempData, function (o) { return o.deptName === name; });
+              if (pos !== -1) {
+                window.localStorage.FOLDER_CONFIG_DETAILS = JSON.stringify(tempData[pos]);
+                this.deptConfigData = tempData[pos];
+                this.populateConfigData(tempData[pos]);
+                this.checkFlag = true;
+              } else {
+                this.tableFlag = true;
+              }
 
+            }
           }
-        }
-      } else {
+        } else {
           // this.snackBar.open('No config data found', 'Folder Config', {
           //   duration: 2000,
           // });
@@ -325,7 +326,7 @@ export class FileManagerConfigComponent implements OnInit {
       }
       if (res.length > 0) {
         this.projectlist = res;
-         this.projectlist && this.projectlist.forEach((v) => {
+        this.projectlist && this.projectlist.forEach((v) => {
           if(v._id === this.projId){
             this.selectedProjectByParams = v
             window.localStorage.setItem('selectProjectParams', JSON.stringify(this.selectedProjectByParams));
@@ -357,21 +358,21 @@ export class FileManagerConfigComponent implements OnInit {
     getSingleProject(list) {
       this.isLoading = true;
       /*    this.selectProjectStatus = list.status;*/ 
-        console.log(this.selectProjectStatus, 'this.selectProjectStatus')
-        console.log('this.selectedProjectData', this.selectedProjectData);
-        window.localStorage.files_project = JSON.stringify(this.selectedProjectData);
-        const body = {
-          name: this.selectedProjectData.name,
-          _organisationId: this.orgId,
-          _departmentId: this.deptId,
-          _parentId: this.fileId,
-          owner: '',
-          _projectId: this.selectedProjectData._id,
-          shared: [],
-          details: 'This folder is created by ',
-          accessFlag: 'Private'
-        };
-        console.log('this.deptConfigData', this.deptConfigData);
+      console.log(this.selectProjectStatus, 'this.selectProjectStatus')
+      console.log('this.selectedProjectData', this.selectedProjectData);
+      window.localStorage.files_project = JSON.stringify(this.selectedProjectData);
+      const body = {
+        name: this.selectedProjectData.name,
+        _organisationId: this.orgId,
+        _departmentId: this.deptId,
+        _parentId: this.fileId,
+        owner: '',
+        _projectId: this.selectedProjectData._id,
+        shared: [],
+        details: 'This folder is created by ',
+        accessFlag: 'Private'
+      };
+      console.log('this.deptConfigData', this.deptConfigData);
         // logic for only contrcat departemt to add fodler name with id
         if (this.deptConfigData.deptName === 'Contracts') {
           this.fileManagerService.getSingleFile(this.fileId)
@@ -386,26 +387,26 @@ export class FileManagerConfigComponent implements OnInit {
           // else normal folder creation
           this.createProjectFolder(body, this.selectedProjectData);
         }
-    }
-
-  createProjectFolder(body, row) {
-    this.isLoading = true;
-    if (this.deptConfigData.iconFlag) {
-      this.designDeptFlag = true;
-    } else {
-      this.designDeptFlag = false;
-    }
-    this.fileManagerService.saveFolder(body)
-    .pipe().subscribe(res => {
-      this.isLoading = false;
-      if (this.designDeptFlag) {
-        this.getIconFoldersByApi(row);
-      } else {
-        this.tableFlag = true;
-        this.getSingleFolder(this.fileId);
       }
-    }, (error: any) => {
-      console.log('error', error);
+
+      createProjectFolder(body, row) {
+        this.isLoading = true;
+        if (this.deptConfigData.iconFlag) {
+          this.designDeptFlag = true;
+        } else {
+          this.designDeptFlag = false;
+        }
+        this.fileManagerService.saveFolder(body)
+        .pipe().subscribe(res => {
+          this.isLoading = false;
+          if (this.designDeptFlag) {
+            this.getIconFoldersByApi(row);
+          } else {
+            this.tableFlag = true;
+            this.getSingleFolder(this.fileId);
+          }
+        }, (error: any) => {
+          console.log('error', error);
         // if exist then show tbales otherwise show erro
         if ('Folder exist' === error.message) {
           /*this.snackBar.open(error.message, 'Folder', {
@@ -419,10 +420,10 @@ export class FileManagerConfigComponent implements OnInit {
           }
         }
       });
-  }
-  getIconFoldersByApi(row) {
-    this.isLoading = true;
-    console.log('row', row);
+      }
+      getIconFoldersByApi(row) {
+        this.isLoading = true;
+        console.log('row', row);
     // tslint:disable-next-line:max-line-length
     this.fileManagerService.getAllFolders('filter[_projectId]=' + row._id + '&filter[name]=' + row.name + '&filter[_departmentId]=' + this.deptId)
     .pipe().subscribe(res => {
@@ -706,57 +707,54 @@ fileChangeEvent(fileInput: any) {
 */
 
 
-    upload(files){
-    console.log('fileUploaded',files[0].name);
+upload(files){
+  console.log('fileUploaded',files[0].name);
     //pick from one of the 4 styles of file uploads below
     let fileLength = files.length;
     if (files && files.length > 0) {
       for (let i = 0; i < files.length; i++){
-      console.log('files[i]',files[i]);
-      let file = files[i];
-      let reader = new FileReader()
-      reader.readAsDataURL(file);
-      let fileExt = file.name.split(".");
-      let fileName = (new Date().getTime()) + "." + fileExt[fileExt.length - 1];
-      this.fileManagerService.getS3Url('file-name=' + fileName + '&file-type=' + file.type + '&_organisationId=' + this.orgId)
-      .pipe().subscribe(res => {
-        let json = {
-          savedFileName: fileName,
-          _organisationId: this.orgId,
-          _departmentId: this.deptId,
-          _folderId: this.fileId,
-          name: file.name,
-          type: 'file',
-          fileExt: fileExt[fileExt.length - 1],
-          path: res.url,
-          size: file.size,
-          message: "File uploaded by ",
-          details: "file original name is " + file.name
-        };
+        console.log('files[i]',files[i]);
+        let file = files[i];
+        let reader = new FileReader()
+        reader.readAsDataURL(file);
+        let fileExt = file.name.split(".");
+        let fileName = (new Date().getTime()) + "." + fileExt[fileExt.length - 1];
+        this.fileManagerService.getS3Url('file-name=' + fileName + '&file-type=' + file.type + '&_organisationId=' + this.orgId)
+        .pipe().subscribe(res => {
+          let json = {
+            savedFileName: fileName,
+            _organisationId: this.orgId,
+            _departmentId: this.deptId,
+            _folderId: this.fileId,
+            name: file.name,
+            type: 'file',
+            fileExt: fileExt[fileExt.length - 1],
+            path: res.url,
+            size: file.size,
+            message: "File uploaded by ",
+            details: "file original name is " + file.name
+          };
 
-        if(this.selectedName === 'RFA' ||this.selectedName === 'Order/Agreement'){
-          console.log('RFA & WO/Agreement')
-          this.openfileUploadDialogForRfaWo(res, file, json)
-        }
-        else{
-          this.http.put(res.signedRequest, file, {
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-          }).subscribe((awsRes: any) => {
-          json.path = 'https://s3.ap-south-1.amazonaws.com/' + this.orgId + '/' + json.savedFileName;
-
-          this.fileJson = json;
-          // this.getAssingedUser(json);
-          if(!(i == fileLength - 1)){
-             this.onSaveFile()
+          if(this.selectedName === 'RFA' ||this.selectedName === 'Order/Agreement'){
+            console.log('RFA & WO/Agreement')
+            this.openfileUploadDialogForRfaWo(res, file, json)
           }
-         
-          }, (error: any) => {
-          console.log('erro' + JSON.stringify(error));
-         });
-        }
-      }, (error: any) => {
-      });
-    }
+          else{
+            this.http.put(res.signedRequest, file, {
+              headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+            }).subscribe((awsRes: any) => {
+              json.path = 'https://s3.ap-south-1.amazonaws.com/' + this.orgId + '/' + json.savedFileName;
+
+              this.fileJson = json;
+              this.saveOnS3(res, file, json);
+              
+            }, (error: any) => {
+              console.log('error' + JSON.stringify(error));
+            });
+          }
+        }, (error: any) => {
+        });
+      }
 
 
     }
@@ -765,7 +763,7 @@ fileChangeEvent(fileInput: any) {
     }
     let l = files.length-1;
     console.log('final file', files[l]);
-     this.openDetailsDialog(files);
+    this.openDetailsDialog(files);
     //this.uploadAndProgress(files);
   } 
 
@@ -775,8 +773,8 @@ fileChangeEvent(fileInput: any) {
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
     }).subscribe((awsRes: any) => {
       body.path = 'https://s3.ap-south-1.amazonaws.com/' + this.orgId + '/' + body.savedFileName;
-
       this.fileJson = body;
+      this.filesArray.push(this.fileJson)
       return;
       // this.getAssingedUser(json);
       //this.onSaveFile(body)
@@ -786,21 +784,26 @@ fileChangeEvent(fileInput: any) {
   }
 
   onSaveFile() {
-    let body = this.fileJson;
-    console.log(body, 'body');
+    let array = this.filesArray;
+    console.log(array, 'body');
     this.isLoading = true;
-    this.fileManagerService.saveFile(body)
-    .pipe().subscribe(res => {
+
+    array && array.length > 0 &&
+    array.forEach(v => {
+     this.fileManagerService.saveFile(v)
+     .pipe().subscribe(res => {
       this.isLoading = false;
       this.getSingleFolder(this.fileId);
     }, (error: any) => {
       if ('Folder exist' === error.message) {
-        this.onFileReplcaeDailog(body);
+        this.onFileReplcaeDailog(v);
       } 
       else {
         console.log('error', error);
       }
     });
+   })
+    
   }
 
   openDetailsDialog(vvv) {
@@ -808,12 +811,14 @@ fileChangeEvent(fileInput: any) {
       width: '700px',
       data: vvv
     }).afterClosed()
-      .subscribe(response => {
-        if(response !== 'close' || response === undefined){
-          this.onSaveFile()
-        }
-      });
-      //this.buttonColor = '#0099cc';
+    .subscribe(response => {
+      if(response === 'close'){
+        console.log('uploading stopped')
+      }
+      if(response === 'save'){
+        this.onSaveFile()
+      }
+    });
   }
 
   onFileReplcaeDailog(body) {

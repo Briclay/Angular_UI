@@ -66,7 +66,7 @@ export class UploadPopupComponent implements OnInit {
 	}
 
 	save(){
-  		this.dialogRef.close();
+  		this.dialogRef.close('save');
 	}
 
 
