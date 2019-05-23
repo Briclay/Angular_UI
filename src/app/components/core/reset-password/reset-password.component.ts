@@ -78,24 +78,35 @@ export class ResetPasswordComponent implements OnInit {
 
 	onresetPwdformSubmit() {
 		if (this.resetPwdform.valid) {
-			delete this.resetPwdform.value.confirmPassword;
-			this.resetPwdform.value.token = this.userToken;
-			this.authenticationService.resetPwd(this.resetPwdform.value, this.userToken)
-			.pipe().subscribe(response =>  {
-                this.snackBar.open(response.message, 'Reset password', {
+
+			let regx = /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{6,})/;
+
+			if(regx.test(this.resetPwdform.value.password)){
+				delete this.resetPwdform.value.confirmPassword;
+				this.resetPwdform.value.token = this.userToken;
+				this.authenticationService.resetPwd(this.resetPwdform.value, this.userToken)
+				.pipe().subscribe(response =>  {
+	                this.snackBar.open(response.message, 'Reset password', {
+				      duration: 2000,
+				    });
+					console.log(response, "resetPwdformResponse")
+					this.resetPwdform.reset();
+					this.resetPwdform['_touched'] = false;
+					const path = '/login';
+					this.router.navigateByUrl(path);
+				}, (error: any) => {
+					this.snackBar.open(error.message, 'Reset password', {
+				      duration: 2000,
+				    });
+					console.log(error , 'err')
+				});
+			}
+			else{
+				this.snackBar.open('Password should have minimum 6 characters, at least one uppercase letter, one lowercase letter, one number and one special character', 'Reset password', {
 			      duration: 2000,
 			    });
-				console.log(response, "resetPwdformResponse")
-				this.resetPwdform.reset();
-				this.resetPwdform['_touched'] = false;
-				const path = '/login';
-				this.router.navigateByUrl(path);
-			}, (error: any) => {
-				this.snackBar.open(error.message, 'Reset password', {
-			      duration: 2000,
-			    });
-				console.log(error , 'err')
-			});
+			}
+			
 		}
   	}
 

@@ -173,3 +173,12 @@ mat-expansion-panel-header {
     font-family: 'Montserrat', sans-serif !important;
     font-size: 13px;
 }
+::ng-deep.mat-form-field-appearance-outline .mat-form-field-outline {
+    display: flex;
+    position: absolute;
+    top: 0.25em;
+    left: 0;
+    right: 0;
+    bottom: 14px;
+    pointer-events: none;
+}

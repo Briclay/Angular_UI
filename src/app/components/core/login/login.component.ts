@@ -6,7 +6,8 @@ import { MatDialog,  MatSnackBar ,MAT_DIALOG_DATA } from '@angular/material';
 import { AuthService } from './../../../services/auth.service';
 import { ForgotPasswordComponent } from '../forgot-password/forgot-password.component';
 import { NewComponent } from './new/new.component';
- import { HttpClient } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
+//import { FeedbackComponent } from '.././feedback/feedback.component';
 
 @Component({
 	selector: 'app-login',
@@ -57,7 +58,7 @@ export class LoginComponent implements OnInit {
 	openForgotPwdPopup() {
 	    const dialogRef = this.dialog.open(ForgotPasswordComponent, {
 	      width: '700px',
-	      height : 'auto'
+	       height:'540px',
 	    });
 	    dialogRef.afterClosed().subscribe(result => {
 	      // TODO closed event
@@ -98,6 +99,15 @@ export class LoginComponent implements OnInit {
 	    this.router.navigate([path]);
 	}
 
+	/*openFeedbackDialog() {
+	    let dialogRef = this.dialog.open(FeedbackComponent, {
+	      width: '700px',
+	    }).afterClosed()
+	      .subscribe(response => {
+	        //this.onSaveFile(this.fileJson)
+	      });
+	 }*/
+
 	onLoginFormSubmit() {
 		this.onLoginFormValuesChanged()
 		this.loginForm.value.ipAddress = this.ipAddress
@@ -117,7 +127,10 @@ export class LoginComponent implements OnInit {
 					this.loginForm['_touched'] = false;
 					const path = '/dashboard';
 					this.router.navigateByUrl(path);
+					//this.openFeedbackDialog()
                 }
+
+
                /* this.loginForm.reset();
 					this.loginForm['_touched'] = false;
 					const path = '/dashboard';

@@ -1,0 +1,60 @@
+.example-form {
+min-width: 150px;
+max-width: 500px;
+width: 100%;
+}
+
+.example-full-width {
+width: 100%;
+}
+.mat-radio-button ~ .mat-radio-button {
+margin-left: 16px;
+}
+::ng-deep.mat-form-field-appearance-outline .mat-form-field-infix {
+padding: 0.5em 0;
+margin-top: -10px;
+height: 41px;
+}
+.example-button-row button,
+.example-button-row a {
+margin-right: 8px;
+}
+input.mat-input-element {
+margin-top: 12px;
+}
+textarea.mat-input-element {
+padding: 2px 0;
+/* margin: -2px 0; */
+margin-top: 10px;
+font-weight: 600;
+}
+
+.mat-input-element {
+font: inherit;
+background: 0 0;
+color: currentColor;
+border: none;
+outline: 0;
+padding: 0;
+margin: 0;
+width: 100%;
+max-width: 100%;
+vertical-align: bottom;
+text-align: inherit;
+font-weight: 600;
+}
+::ng-deep.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+border-color: #33bff3;
+}
+::ng-deep.mat-radio-button.mat-accent .mat-radio-inner-circle, .mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element:not(.mat-radio-persistent-ripple), .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-persistent-ripple, .mat-radio-button.mat-accent:active .mat-radio-persistent-ripple {
+background-color: #33bff3;
+}
+.example-radio-group {
+  display: flex;
+  flex-direction: column;
+  margin: 15px 0;
+}
+
+.example-radio-button {
+  margin: 5px;
+}

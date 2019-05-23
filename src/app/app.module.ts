@@ -46,6 +46,7 @@ import { WorkOrderComponent } from './components/core/dashboard/work-order/work-
 import { FileShareDialogComponent } from './components/core/dashboard/file-manager/file-share-dialog/file-share-dialog.component'
 import { FileMailDialogComponent } from './components/core/dashboard/file-manager/file-mail-dialog/file-mail-dialog.component'
 import { FileUploadDialogComponent } from './components/core/dashboard/file-manager/file-upload-dialog/file-upload-dialog.component'
+import { NgxPasswordToggleModule } from 'ngx-password-toggle';
 
 //  all Briclay project Modules imports below
 import { WorkOrderModule } from './components/core/dashboard/work-order/work-order.module';
@@ -85,6 +86,7 @@ import { UserSelectDialogComponent } from './components/core/dashboard/inter-dep
 import { WorkCategoryDialogComponent } from './components/core/dashboard/work-request/work-request-details/work-category-dialog/work-category-dialog.component';
 import { ContractManagementDashboardComponent } from './components/core/dashboard/contract-management-dashboard/contract-management-dashboard.component';
 import { OperationsDashboardComponent } from './components/core/dashboard/operations-dashboard/operations-dashboard.component';
+import { FeedbackComponent } from './components/core/dashboard/feedback/feedback.component';
 
 @NgModule({
   declarations: [
@@ -138,6 +140,7 @@ import { OperationsDashboardComponent } from './components/core/dashboard/operat
     UserSelectDialogComponent,
     ContractManagementDashboardComponent,
     OperationsDashboardComponent,
+    FeedbackComponent,
    ],
   imports: [
     BrowserModule,
@@ -153,7 +156,8 @@ import { OperationsDashboardComponent } from './components/core/dashboard/operat
     WorkOrderModule,
     SpinnerModule,
     FileManagerModule,
-    NcmModule
+    NcmModule,
+    NgxPasswordToggleModule
   ],
   entryComponents: [
     FolderCreateDialogComponent,
@@ -169,7 +173,8 @@ import { OperationsDashboardComponent } from './components/core/dashboard/operat
     UserSelectionDialogComponent,
     UserSelectDialogComponent,
     WorkCategoryDialogComponent,
-    FileUploadDialogComponent
+    FileUploadDialogComponent,
+    FeedbackComponent
   ],
   providers: [D3Service, DashboardService, DepartmentService,
     OrganizationService, UserDashboardService,NotificationService,

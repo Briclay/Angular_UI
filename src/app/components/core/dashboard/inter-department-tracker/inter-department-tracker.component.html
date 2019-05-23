@@ -1,44 +1,48 @@
 <div class="user-container">
-    <div fxLayout=row class="height_55">
-        <div class="pull-left user_div" fxFlex=15>
+  <div fxLayout=row class="height_55" >
+        <!-- <div class="pull-left user_div" fxFlex=15>
             <div class="text_color">Inter Department Tracker</div>
-        </div>
-        <div fxLayout=row  class="content_space_arround" fxFlex=85>
-            <div fxLayout=row class="content_space_between">
-                <div fxLayout=column class="margin_right_10">
-                    <div class="text_color_sm ">{{getAnalytics && getAnalytics.openCount}}</div>
-                    <div class="text_color_sm ">Open issue </div>  
-                </div>
-                <div fxLayout=column>
-                    <div class="text_color_sm">{{getAnalytics && getAnalytics.closedCount}}</div>
-                    <div class="text_color_sm">Closed issue </div>  
-                </div>
-            </div>
-            <div fxLayout=row class="content_space_between">
-                <div fxLayout=column class="margin_right_10">
-                    <div class="text_color_sm">{{getAnalytics && getAnalytics.overDue}}</div>
-                    <div class="text_color_sm">Overdue </div>  
-                </div>
-                <div fxLayout=column>
-                    <div class="text_color_sm">{{getAnalytics && getAnalytics.dueToday}}</div>
-                    <div class="text_color_sm">Due today</div>  
-                </div>
-            </div>
-            <div fxLayout=row class="content_space_between">
-                <div fxLayout=column class="margin_right_10">
-                    <div class="text_color_sm">{{totalIssue && totalIssue}}</div>
-                    <div class="text_color_sm">Total issue </div>  
-                </div>
-                <div fxLayout=column>
-                    <div class="text_color_sm">{{totalEfficiency || 0}}%</div>
-                    <div class="text_color_sm">Efficiency </div>  
-                </div>
-            </div>
-        </div> 
-    </div>
+          </div> -->
 
-    <mat-tab-group #tabGroup>
-        <mat-tab label="Overview">
+          <div fxLayout=row  class="content_space_arround" fxFlex=85 style="margin-left: -71px;">
+            <div fxLayout=row class="content_space_between">
+              <div fxLayout=column class="margin_right_10">
+                <div class="text_color_sm ">{{getAnalytics && getAnalytics.openCount}}</div>
+                <div class="text_color_sm ">Open issue </div>  
+              </div>
+              <div fxLayout=column>
+                <div class="text_color_sm">{{getAnalytics && getAnalytics.closedCount}}</div>
+                <div class="text_color_sm">Closed issue </div>  
+              </div>
+            </div>
+            <div fxLayout=row class="content_space_between" style="margin-left: -169px;">
+              <div fxLayout=column class="margin_right_10">
+                <div class="text_color_sm">{{getAnalytics && getAnalytics.overDue}}</div>
+                <div class="text_color_sm">Overdue </div>  
+              </div>
+              <div fxLayout=column>
+                <div class="text_color_sm">{{getAnalytics && getAnalytics.dueToday}}</div>
+                <div class="text_color_sm">Due today</div>  
+              </div>
+            </div>
+            <div fxLayout=row class="content_space_between" style="margin-left: -169px;">
+              <div fxLayout=column class="margin_right_10">
+                <div class="text_color_sm">{{totalIssue && totalIssue}}</div>
+                <div class="text_color_sm">Total issue </div>  
+              </div>
+              <div fxLayout=column>
+                <div class="text_color_sm">{{totalEfficiency || 0}}%</div>
+                <div class="text_color_sm">Efficiency </div>  
+              </div>
+            </div>
+          </div> 
+           <div class="pull-right" style="margin-left: -3em;width: 266px;margin-top: 9px;margin-bottom: 10px;border-bottom: 4px solid;border-color: #33bff3; -webkit-box-shadow: 0 8px 6px -6px black;">
+            <span style="font-weight: 600;font-size: 20px;">Inter Department Tracker</span>
+          </div>
+        </div>
+
+        <mat-tab-group #tabGroup>
+          <mat-tab label="Overview">
             <app-panel-header-filter [data] = "issueTrackerList" (dataFilter)="dataPaginatorChange($event)"></app-panel-header-filter>
             <div>
               <mat-card style="margin-top: 5px;">
@@ -79,7 +83,7 @@
                       <input #myInput type="text" (input)="filterItem(myInput.value)" style="color:#032A57; font-size: 11px;"/>
                     </span>
                   </div>
-                   <div class="table_header_text" >
+                  <div class="table_header_text" >
                     <div fxLayout=row >
                       <span fxLayout=row  >Creation date</span>
                       <img  style="height: 12px;width: 12px;" src="/assets/images/icons/Filter.png" (click)="viewInputForFilterDataCreD()" />
@@ -101,27 +105,27 @@
               </mat-card>
             </div>                
             <div class="content_center">
-                <mat-spinner class="spiner_div" *ngIf="listSpinner; else content" [diameter]="40"></mat-spinner>
+              <mat-spinner class="spiner_div" *ngIf="listSpinner; else content" [diameter]="40"></mat-spinner>
             </div>
-              <div fxLayout="row">
-                <ng-template #content>
-                    <div fxLayout="row">
-                        <app-expansion-panel 
-                            *ngIf="issueTrackerList && issueTrackerList.length>0"
-                            [pageIndex]="pageIndex"
-                            [pageSize]="pageSize"
-                            [expansionPanelOptions]="issueTrackerDataOptions"
-                            selectorComponent="app-issue-tracker-details" 
-                            [data]="issueTrackerList" (updateRefresh)="getIssueTracker();getAllAnalytics()" >
-                        </app-expansion-panel>
-                    </div>        
-                </ng-template>
-            </div>
+            <div fxLayout="row">
+              <ng-template #content>
+                <div fxLayout="row">
+                  <app-expansion-panel 
+                  *ngIf="issueTrackerList && issueTrackerList.length>0"
+                  [pageIndex]="pageIndex"
+                  [pageSize]="pageSize"
+                  [expansionPanelOptions]="issueTrackerDataOptions"
+                  selectorComponent="app-issue-tracker-details" 
+                  [data]="issueTrackerList" (updateRefresh)="getIssueTracker();getAllAnalytics()" >
+                </app-expansion-panel>
+              </div>        
+            </ng-template>
+          </div>
         </mat-tab>
         <mat-tab label="New">
-            <app-issue-tracker-create formType="create" (tabSwitch)="tabSwitch($event)" >
-            </app-issue-tracker-create>
+          <app-issue-tracker-create formType="create" (tabSwitch)="tabSwitch($event)" >
+          </app-issue-tracker-create>
         </mat-tab>
-    </mat-tab-group>
-</div>
+      </mat-tab-group>
+    </div>
 

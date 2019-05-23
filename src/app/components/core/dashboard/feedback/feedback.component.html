@@ -1,0 +1,56 @@
+	<div fxLayout=column style="height: 340px;" class="file-manager-config-container">
+		<div class="pull-right" style="margin-left: 0em;width: 180px;margin-top: -18px;border-bottom: 4px solid;border-color: #33bff3; -webkit-box-shadow: 0 8px 6px -6px black;">
+			<span style="font-weight: 600;font-size: 20px;">Feed Back Form</span>
+		</div>
+		<form class="example-form" style="margin-top: 30px;" [formGroup]="feedbackForm">
+			<div fxLayout=column >
+				<div fxLayout=column style="height:75px;">
+					<label id="example-radio-group-label" style="height: 28px;font-weight: 600;font-family: 'Montserrat', sans-serif !important;font-size: 15px;">Overall Experience
+					</label>
+					<mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group"
+					 fxLayout=row formControlName="overAllExperince">
+					<mat-radio-button class="example-radio-button" *ngFor="let season of seasons" [value]="season.value">
+						{{season.viewValue}}
+					</mat-radio-button>
+				</mat-radio-group>
+			</div>
+			<div fxLayout=column style="height:75px;" >
+				<label id="example-radio-group-label" style="height: 28px;font-weight: 600;font-family: 'Montserrat', sans-serif !important;font-size: 15px;">Timely Response
+				</label>
+				<mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group"
+					 fxLayout=row formControlName="timelyResponse">
+					<mat-radio-button class="example-radio-button" *ngFor="let season of seasons" [value]="season.value">
+						{{season.viewValue}}
+					</mat-radio-button>
+				</mat-radio-group>
+			</div>
+			<div fxLayout=column style="height:75px;">
+				<label id="example-radio-group-label" style="height: 28px;font-weight: 600;font-family: 'Montserrat', sans-serif !important;font-size: 15px;">Our Support
+				</label>
+				<mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group"
+					 fxLayout=row  formControlName="ourSupport">
+					<mat-radio-button class="example-radio-button" *ngFor="let season of seasons" [value]="season.value">
+						{{season.viewValue}}
+					</mat-radio-button>
+				</mat-radio-group>
+			</div>
+			<div fxLayout=column style="height:75px;">
+				<label id="example-radio-group-label" style="height: 28px;font-weight: 600;font-family: 'Montserrat', sans-serif !important;font-size: 15px;">Overall Satisfaction
+				</label>
+				<mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group"
+					 fxLayout=row  formControlName="overAllSatisfaction">
+					<mat-radio-button class="example-radio-button" *ngFor="let season of seasons" [value]="season.value">
+						{{season.viewValue}}
+					</mat-radio-button>
+				</mat-radio-group>
+			</div>
+		</div>
+		<mat-form-field appearance="outline" class="example-full-width">
+			<mat-label>Is there anything you would like to tell us?</mat-label>
+			<textarea matInput placeholder="Suggetion"  formControlName="comments"></textarea>
+		</mat-form-field>
+	</form>
+	<div class="example-button-row" style="margin-left: 34em;margin-bottom: 13px;">
+		<button mat-raised-button  (click)="submitForm(v)">Submit</button>
+	</div>
+</div>

@@ -64,9 +64,11 @@ export class UploadPopupComponent implements OnInit {
 	close(){
   		this.dialogRef.close('close');
 	}
-
 	save(){
   		this.dialogRef.close('save');
+  		this.snackBar.open("Upload Successfully", 'File Upload', {
+      	duration: 2000,
+      });
 	}
 
 

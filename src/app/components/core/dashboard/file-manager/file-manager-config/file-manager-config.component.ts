@@ -750,6 +750,9 @@ upload(files){
             });
           }
         }, (error: any) => {
+          this.snackBar.open("Upload Failed", 'File Upload', {
+        duration: 2000,
+      });
         });
       }
     }
@@ -774,6 +777,9 @@ upload(files){
       //this.onSaveFile(body)
     }, (error: any) => {
       console.log('erro' + JSON.stringify(error));
+      this.snackBar.open("Upload Failed", 'File Upload', {
+        duration: 2000,
+      });
     });
   }
 
@@ -794,6 +800,9 @@ upload(files){
       } 
       else {
         console.log('error', error);
+        this.snackBar.open("Upload Failed", 'File Upload', {
+        duration: 2000,
+      });
       }
     });
    })
