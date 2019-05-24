@@ -30,8 +30,6 @@ export class DocumentListCreateComponent implements OnInit {
   projID: string;
   array = [];
   isLoading = false;
-
-
   myFilter = new Date();
 
   constructor(
@@ -46,8 +44,6 @@ export class DocumentListCreateComponent implements OnInit {
     }
     this.orgDetails =  JSON.parse(window.localStorage.authUserOrganisation);
     this.orgID = this.orgDetails._id;
-
-
     console.log('this.orgId' + JSON.stringify(this.orgDetails));
     //this.getDocumentList();
   }
@@ -55,33 +51,24 @@ export class DocumentListCreateComponent implements OnInit {
   ngOnInit() {
     this.documentListForm = this.formBuilder.group({
      documentType: ['', Validators.required],
-
      list: ['', Validators.required],
-     
-     
      validTill : ['', Validators.required],
    });
     this.documentCreateForm = this.formBuilder.group({
-
       drawingNo: ['', Validators.required],
       drawingName: ['', Validators.required],
       revision: [''],
-
       purpose: [''],
       remarks: [''],
       weightage: [''],
-      
     });
     this.addForm = this.formBuilder.group({
-
-
       drawingNo: ['', Validators.required],
       drawingName: ['', Validators.required],
       revision: [''],
       purpose: [''],
       remarks: [''],
       weightage: [''],
-      
     });
     this.getAllDocumentType() 
     //this.getDocumentList()     
@@ -104,18 +91,15 @@ export class DocumentListCreateComponent implements OnInit {
  }
 onSubmit() {
     // Do useful stuff with the gathered data
-    
     console.log(   this.documentListForm.value )
     console.log(   this.documentCreateForm.value )
     console.log(   this.addForm.value )
-
     let obj ={
       _organisationId: this.orgID, 
       _projectId: this.projID,
       //listName:this.list,
       documents : this.array  
     }
-
     this.documentListService.save( obj)
     .pipe().subscribe(res => {
       this.isLoading = false;
@@ -133,13 +117,11 @@ onSubmit() {
   }
 
   onAdd(){
-
     this.array.push(this.addForm.value);
     console.log(this.array)
 
   }
   reset(){
-
    this.documentCreateForm.reset();
    this.addForm.reset();
 
