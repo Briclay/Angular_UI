@@ -11,6 +11,7 @@ import { IssueTrackerService } from '../inter-department-tracker.service';
 declare var moment: any;
 import { UserSelectDialogComponent } from './user-select-dialog/user-select-dialog.component';
 
+
 @Component({
 	selector: 'app-issue-tracker-details',
 	templateUrl: './inter-department-tracker-details.component.html',
@@ -45,12 +46,17 @@ export class IssueTrackerDetailsComponent implements OnInit {
 	userID : any;
 	assignUserCheck = false;
 	dateOfCompletionFilter :any;
+	depratmentLists : any;
+	usersList : any;
+	selectedDepartmentData : any;
+	userDropdownEnable  = false
+	viewComment= false;
 	private unsubscribe: Subject<any> = new Subject();
 	constructor(
 		private formBuilder : FormBuilder,
 		private route: ActivatedRoute, 
 		private router: Router,
-   		private dialog : MatDialog,
+		private dialog : MatDialog,
 		private snackBar : MatSnackBar,
 		private userService : UserService,
 		private departService : DepartmentService,
@@ -60,10 +66,10 @@ export class IssueTrackerDetailsComponent implements OnInit {
 		this.orgID = org._id
 		this.user = JSON.parse(window.localStorage.getItem('authUser'));
 		this.userID = this.user._id
-	    let day = new Date();
-	    this.dateOfCompletionFilter = new Date(day);
-	    this.dateOfCompletionFilter.setDate(day.getDate()+1);
-	    this.myFilter = day
+		let day = new Date();
+		this.dateOfCompletionFilter = new Date(day);
+		this.dateOfCompletionFilter.setDate(day.getDate()+1);
+		this.myFilter = day
 	}
 
 	ngOnInit() {
@@ -92,6 +98,8 @@ export class IssueTrackerDetailsComponent implements OnInit {
 			updatedBy:[this.user.username],
 			assignedTo: ['', Validators.required],
 			assignedName: ['' , Validators.required],
+			departmentName: ['' , Validators.required],
+
 			updatedAt: [new Date()],
 			subType: ['', Validators.required],
 			status: ['' , Validators.required ],
@@ -108,6 +116,7 @@ export class IssueTrackerDetailsComponent implements OnInit {
 			subType: [''],
 			status: ['OPEN' , Validators.required ],
 			actualCompletionDate : ['' , Validators.required ],
+			departmentName: ['', Validators.required]
 		})
 		this.issueTrackerDetailsForm.valueChanges.subscribe(() => {
 			this.onIssueTrackerFormValuesChanges();
@@ -115,145 +124,173 @@ export class IssueTrackerDetailsComponent implements OnInit {
 		this.assignValuesToForm();
 		this.getUsers();
 		this.getAllIssues();
+		this.getAllDepartment();
 	}
 
-	assignValuesToForm() {										
-		this.issueTrackerDetailsForm.patchValue(this.data)
-		this.commentformGroup.patchValue(this.data.comments)
-		console.log(this.commentformGroup, 'this.commentformGroup')
-		console.log(this.issueTrackerDetailsForm, 'aftrpatchvalue')
-		this.setCommentsCategories();
+	selectedUser (event){
+		this.selectedAssignedUserData = event;
 	}
-
-	getAllIssues(){
-		this.issueTrackerService.getAllIssueTracker().pipe().subscribe(res => {
-			this.allIssuesForReferences = res;
-			this.allIssuesForReferences.forEach(issue => {
-				this.allIssuesType.push({'id':issue.id ,'name': issue.type })
-			})
+	getAllDepartment(){
+		this.departService.getAll(this.orgID).pipe().subscribe(res => {
+			this.depratmentLists = res;
 		}, (error: any) => {
 			console.error('error', error);
 		});
 	}
 
-	
-
-	setCommentsCategories(){
-		let control = []
-		this.data.comments.forEach(x => {
-			control.push(this.formBuilder.group(x))
-		})
-		this.issueTrackerDetailsForm.setControl('comments', this.formBuilder.array(control));
+	selectDepartment(event){
+		this.selectedDepartmentData = event;
+		if(event && event._id){
+			this.userService.getUserByDepId(event._id).pipe().subscribe(res => {
+				this.usersList = res;
+			}, (error: any) => {
+				console.error('error', error);
+			});
+		}
 	}
-	onIssueTrackerFormValuesChanges() {
-		for (const field in this.formErrors) {
-			if (!this.formErrors.hasOwnProperty(field)) {
-				continue;
-			}
+
+	reset(){
+		this.createCommentformGroup.reset();
+         }
+
+assignValuesToForm() {										
+	this.issueTrackerDetailsForm.patchValue(this.data)
+	this.commentformGroup.patchValue(this.data.comments)
+	console.log(this.commentformGroup, 'this.commentformGroup')
+	console.log(this.issueTrackerDetailsForm, 'aftrpatchvalue')
+	this.setCommentsCategories();
+}
+
+getAllIssues(){
+	this.issueTrackerService.getAllIssueTracker().pipe().subscribe(res => {
+		this.allIssuesForReferences = res;
+		this.allIssuesForReferences.forEach(issue => {
+			this.allIssuesType.push({'id':issue.id ,'name': issue.type })
+		})
+	}, (error: any) => {
+		console.error('error', error);
+	});
+}
+
+setCommentsCategories(){
+	let control = []
+	this.data.comments.forEach(x => {
+		control.push(this.formBuilder.group(x))
+	})
+	this.issueTrackerDetailsForm.setControl('comments', this.formBuilder.array(control));
+}
+onIssueTrackerFormValuesChanges() {
+	for (const field in this.formErrors) {
+		if (!this.formErrors.hasOwnProperty(field)) {
+			continue;
+		}
 			// Clear previous errors
 			this.formErrors[field] = {};
 			// Get the control
 			let control;
 			if(this.issueTrackerDetailsForm.value){
-			  control = this.issueTrackerDetailsForm.get(field);
+				control = this.issueTrackerDetailsForm.get(field);
 			}
-			 if (this.commentformGroup.value) {
-			  control = this.commentformGroup.get(field);
+			if (this.commentformGroup.value) {
+				control = this.commentformGroup.get(field);
 			}
-			 if (this.createCommentformGroup.value) {
-			  control = this.createCommentformGroup.get(field);
+			if (this.createCommentformGroup.value) {
+				control = this.createCommentformGroup.get(field);
 			}
-
 			if (control && control.dirty && !control.valid) {
 				this.formErrors[field] = control.errors;
 			}
-	  	}
+		}
 	}
 
 	addComments(){
-        this.enableAddComment = true;
+		this.enableAddComment = true;
 		this.commentsArray.push(this.createCommentformGroup.value);
 		console.log(this.commentsArray, "comments-all")
 	}
+	deleteMsg(msg:string) {
+		this.commentsArray.splice(this.commentsArray.indexOf(msg), 1);  
+		this.createCommentformGroup.reset();
+    }
 
-	getUsers() {
-		this.userService.getUser(this.orgID).pipe().subscribe(res => {
-			this.users = res;
-		}, (error: any) => {
-			console.error('error', error);
-		});
-	}
+getUsers() {
+	this.userService.getUser(this.orgID).pipe().subscribe(res => {
+		this.users = res;
+	}, (error: any) => {
+		console.error('error', error);
+	});
+}
 
-	userSelectDialog(comment){
-		const dialogRef = this.dialog.open(UserSelectDialogComponent, {
-          width: '550px',
-        });
-        dialogRef.afterClosed().subscribe(result => {
-        	if(result){
-				this.selectedUserData = result;
-				this.assignUserCheck = true;
-				this.issueTrackerDetailsForm.value.comments.forEach(v => {
-					if(v.id === comment.value.id){
-						if(this.enableAddComment){
-				        	this.createCommentformGroup.controls['assignedTo'].setValue(this.selectedUserData.userId);
-				        	this.createCommentformGroup.controls['assignedName'].setValue(this.selectedUserData.name.first + " " + this.selectedUserData.name.last);
-						}
-						else{
-				        	this.commentformGroup.controls['assignedTo'].setValue(this.selectedUserData.userId);
-				        	this.commentformGroup.controls['assignedName'].setValue(this.selectedUserData.name.first + " " + this.selectedUserData.name.last);
-						}
+userSelectDialog(comment){
+	const dialogRef = this.dialog.open(UserSelectDialogComponent, {
+		width: '550px',
+	});
+	dialogRef.afterClosed().subscribe(result => {
+		if(result){
+			this.selectedUserData = result;
+			this.assignUserCheck = true;
+			this.issueTrackerDetailsForm.value.comments.forEach(v => {
+				if(v.id === comment.value.id){
+					if(this.enableAddComment){
+						this.createCommentformGroup.controls['assignedTo'].setValue(this.selectedUserData.userId);
+						this.createCommentformGroup.controls['assignedName'].setValue(this.selectedUserData.name.first + " " + this.selectedUserData.name.last);
+					}
+					else{
+						this.commentformGroup.controls['assignedTo'].setValue(this.selectedUserData.userId);
+						this.commentformGroup.controls['assignedName'].setValue(this.selectedUserData.name.first + " " + this.selectedUserData.name.last);
+					}
 						//v.setControl('assignedName' ,this.selectedUserData.name.first + " " + this.selectedUserData.name.last )
 						v.assignedName = this.selectedUserData.name.first + " " + this.selectedUserData.name.last
 						v.assignedTo = this.selectedUserData.userId;
 					}
 				})
-    	}
-       
-    });
-	}
+		}
 
-	closeTheIssueComment(comment){
-		this.issueTrackerDetailsForm.value.comments.forEach(v => {
-			if(v.id === comment.value.id){
-				v.status = 'CLOSED'
-				v.actualCompletionDate = new Date()
-			}
-		})
-		this.onFormSubmit()
-	}
+	});
+}
 
-	closeTheIssue(){
-		this.issueTrackerDetailsForm.value.status = 'CLOSED';
-		this.onFormSubmit()
-	}
+closeTheIssueComment(comment){
+	this.issueTrackerDetailsForm.value.comments.forEach(v => {
+		if(v.id === comment.value.id){
+			v.status = 'CLOSED'
+			v.actualCompletionDate = new Date()
+		}
+	})
+	this.onFormSubmit()
+}
 
-	onFormSubmit() {
-		this.updateLoading = true;
-		let allDates= [];
-		let maxDate;
-        if(this.newCreateFlag){
-	    	this.issueTrackerDetailsForm.value.comments.push(this.createCommentformGroup.value)
-        }
-		this.issueTrackerDetailsForm.value.comments.forEach(v => {
-			if(v.completionDate !== ""){
-				allDates.push(moment(v.completionDate).local().format("MM-DD-YYYY"))
-			}
-			v.assignedName = this.selectedUserData.name.first + " " + this.selectedUserData.name.last
-			v.assignedTo = this.selectedUserData.userId;
-			console.log(allDates, 'allDates')
-		}) 
-        this.issueTrackerDetailsForm.value.comments.forEach(v => {
-			v.actualCompletionDate = moment(v.actualCompletionDate).local().format("YYYY-MM-DD")
-		}) 
-		this.issueTrackerDetailsForm.value.dateOfCompletion = moment(this.issueTrackerDetailsForm.value.dateOfCompletion).local().format("YYYY-MM-DD")
-		maxDate = allDates && allDates.reduce(function (a, b) { return a > b ? a : b; });
-		console.log(maxDate, 'maxDate')
-		let dateOfCompletion = moment(this.issueTrackerDetailsForm.value.dateOfCompletion).local().format("MM-DD-YYYY")
+closeTheIssue(){
+	this.issueTrackerDetailsForm.value.status = 'CLOSED';
+	this.onFormSubmit()
+}
+
+onFormSubmit() {
+	this.updateLoading = true;
+	let allDates= [];
+	let maxDate;
+	if(this.newCreateFlag){
+		this.issueTrackerDetailsForm.value.comments.push(this.createCommentformGroup.value)
+	}
+	this.issueTrackerDetailsForm.value.comments.forEach(v => {
+		if(v.completionDate !== ""){
+			allDates.push(moment(v.completionDate).local().format("MM-DD-YYYY"))
+		}
+		/*v.assignedName = this.selectedUserData.name.first + " " + this.selectedUserData.name.last
+		v.assignedTo = this.selectedUserData.userId;*/
+		console.log(allDates, 'allDates')
+	}) 
+	this.issueTrackerDetailsForm.value.comments.forEach(v => {
+		v.actualCompletionDate = moment(v.actualCompletionDate).local().format("YYYY-MM-DD")
+	}) 
+	this.issueTrackerDetailsForm.value.dateOfCompletion = moment(this.issueTrackerDetailsForm.value.dateOfCompletion).local().format("YYYY-MM-DD")
+	maxDate = allDates && allDates.reduce(function (a, b) { return a > b ? a : b; });
+	console.log(maxDate, 'maxDate')
+	let dateOfCompletion = moment(this.issueTrackerDetailsForm.value.dateOfCompletion).local().format("MM-DD-YYYY")
 		let oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
 		let firstDate = new Date(dateOfCompletion);
 		let secondDate = new Date(maxDate);
 		let diffDays = Math.round(Math.abs((firstDate.getTime() - secondDate.getTime())/(oneDay)));
-        this.issueTrackerDetailsForm.value.age = diffDays || 0;
+		this.issueTrackerDetailsForm.value.age = diffDays || 0;
 		console.log(this.issueTrackerDetailsForm.value, "issuesCraetedSubmittedValue");
 		this.issueTrackerService.updateIssueTracker( this.issueTrackerDetailsForm.value.id, this.issueTrackerDetailsForm.value)
 		.pipe().subscribe(response => {

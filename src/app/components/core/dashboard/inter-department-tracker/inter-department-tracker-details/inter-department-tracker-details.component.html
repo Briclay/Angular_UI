@@ -1,6 +1,6 @@
 <div class="issue-tracker-details-container">
   <form [formGroup]="issueTrackerDetailsForm" class="issue-tracker-details-form">
-    <mat-card>
+    <mat-card style="width: 86em;">
       <div class="issue-tracker-details-card">
         <div class="issue-tracker-details-name">
           <mat-form-field appearance="outline" style="width: 148px;">
@@ -10,8 +10,8 @@
           <mat-form-field appearance="outline" style="width: 148px;">
             <mat-label>Date of Completion</mat-label>
             <input readonly matInput [min]="dateOfCompletionFilter" [matDatepicker]="picker3" placeholder="" formControlName="dateOfCompletion">
-              <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
-              <mat-datepicker disabled #picker3></mat-datepicker>
+            <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+            <mat-datepicker disabled #picker3></mat-datepicker>
           </mat-form-field>
           <mat-form-field appearance="outline" style="width: 148px;">
             <mat-label>Reference ID#</mat-label>
@@ -22,9 +22,11 @@
             <textarea readonly matInput formControlName="remark"></textarea>
           </mat-form-field>
         </div>
+        
         <div class="issue-tracker-details-content">
+
           <div class="issue-tracker-details-form-list">
-            <form [formGroup]="commentformGroup">
+            <!-- <form [formGroup]="commentformGroup">
               <div formArrayName="comments" 
                 *ngFor="let comment of issueTrackerDetailsForm.get('comments')['controls'];let i=index;" >
                 <div [formGroup]="comment">
@@ -42,13 +44,7 @@
                       <input  readonly matInput formControlName="assignedName">
                   </mat-form-field>  
                {{issueTrackerDetailsForm.controls.comments.controls[i].controls.assignedName.value}}
-              <!--  <span class="USer" *ngIf="assignUserCheck" (click)="userSelectDialog(comment)" >
-                    <span class="assign">Assigned To</span>
-                    <div style="display:inline-flex;" *ngIf="selectedUserData ">
-                      <span class="assignUser"> {{selectedUserData.name.first}}</span>&nbsp;
-                       <span class="assignUser"> {{ selectedUserData.name.last}}</span>
-                    </div>
-                  </span> -->
+         
                   <mat-form-field  appearance="outline" style="width:209px;margin-right:5px;">
                       <mat-label>Actual Completion Date</mat-label>
                       <input  matInput [min]="myFilter" [matDatepicker]="actualCD" placeholder="Completion Date" formControlName="actualCompletionDate">
@@ -66,8 +62,72 @@
                     </span>
                 </div> 
               </div>
-            </form>
-            <form [formGroup]="createCommentformGroup">
+            </form> -->
+
+            <mat-card>
+              <form [formGroup]="commentformGroup">
+                <div  fxLayout="column" formArrayName="comments" 
+                *ngFor="let comment of issueTrackerDetailsForm.get('comments')['controls'];let i=index;">
+                <div fxLayout="row" style="margin-top: 7px;" [formGroup]="comment">
+                  <div style="margin-left:-13px;">
+                    <mat-form-field  appearance="outline" style="width: 164px;margin-left: 13px;">
+                      <mat-label>Completion Date</mat-label>
+                      <input  matInput  [min]="myFilter" [matDatepicker]="comDate" placeholder="Completion Date" formControlName="completionDate">
+                      <mat-datepicker-toggle matSuffix [for]="comDate"></mat-datepicker-toggle>
+                      <mat-datepicker  #comDate></mat-datepicker>
+                    </mat-form-field>
+                  </div>
+                  <div fxLayout=row style="margin-left: 13px;">
+                    <mat-form-field appearance="outline" style="width: 137px;">
+                      <mat-label>Department</mat-label>
+                      <mat-select placeholder="" (selectionChange)="selectDepartment($event.value)">
+                        <mat-option *ngFor="let departmentName of depratmentLists" [value]="departmentName" >
+                          {{departmentName.name }}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" style="width: 137px;">
+                      <mat-label>Assigned To</mat-label>
+                      <mat-select  placeholder="Select user" (selectionChange)="selectedUser($event.value)" formControlName="assignedName">
+                        <mat-option *ngFor="let assignedName of usersList" [value]="assignedName._id">
+                          {{assignedName.name.first }} {{assignedName.name.last}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  <div style="width: 142px;">
+                    <mat-form-field  appearance="outline" style="width:192px;margin-left: 13px;">
+                      <mat-label>Actual Completion Date</mat-label>
+                      <input  matInput [min]="myFilter" [matDatepicker]="actualCD" placeholder="Completion Date" formControlName="actualCompletionDate">
+                      <mat-datepicker-toggle matSuffix [for]="actualCD"></mat-datepicker-toggle>
+                      <mat-datepicker #actualCD></mat-datepicker>
+                    </mat-form-field>
+                  </div>
+                  <div >
+                   <mat-form-field appearance="outline" style="width: 180px;margin-left: 77px;">
+                    <mat-label>Comments</mat-label>
+                    <textarea  matInput formControlName="comments" style="height: 20px"></textarea>
+                  </mat-form-field>
+                </div>
+                <div style="margin-top: -12px;margin-left: 12px;" class="hand-cursor">
+                  <mat-form-field  class="line" style="width: 0px;"  matTooltip="Open">
+                    <input  readonly matInput formControlName="status" class="statusCheck bg_color_open">
+                  </mat-form-field>
+                </div>
+
+                <div  fxLayout=row class="pull-right" style="margin-top: -26px;margin-left: 10px;" >
+                  <div fxLayout=column style="align-items: center;margin-left: 13px; " (click)="reset()" class="hand-cursor">
+                   <span *ngIf="comment.value.assignedTo === userID">
+                    <span *ngIf="comment.value.status !== 'CLOSED' " class="hand-cursor" style="align-items: center;" (click)="closeTheIssueComment(comment)">
+                      <button style="height: 28px;" mat-raised-button type="submit" class="pull-right">Close</button>
+                    </span>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+       <!--      <form [formGroup]="createCommentformGroup">
               <div formArrayName="comments">
                 <div *ngFor="let comment of commentsArray; let i = index;">
                   <div [formGroup]="createCommentformGroup">
@@ -99,30 +159,85 @@
                   </div>
                 </div>
               </div>
-            </form>
+            </form> -->
+            <form [formGroup]="createCommentformGroup" >
+              <div  fxLayout="column"  formArrayName="comments">
+                <div [formGroup]="createCommentformGroup">
+                  <div fxLayout="row" style="margin-top: 7px;" *ngFor="let comment of commentsArray; let i = index;">
+                    <div>
+                     <mat-form-field  appearance="outline" style="width:164px;margin-right: 5px;">
+                      <mat-label>Completion Date</mat-label>
+                      <input  matInput [min]="myFilter" [matDatepicker]="picker1" placeholder="Completion Date" formControlName="completionDate">
+                      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                      <mat-datepicker #picker1></mat-datepicker>
+                    </mat-form-field>
+                  </div>
+                  <div fxLayout=row style="margin-left: 10px;">
+                    <mat-form-field appearance="outline" style="width: 137px;" >
+                      <mat-label>Department</mat-label>
+                      <mat-select placeholder="" (selectionChange)="selectDepartment($event.value)">
+                        <mat-option *ngFor="let departmentName of depratmentLists" [value]="departmentName" >
+                          {{departmentName.name }}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" style="width: 137px;">
+                      <mat-label>Assigned To</mat-label>
+                      <mat-select  placeholder="Select user" (selectionChange)="selectedUser($event.value)"  formControlName="assignedName">
+                        <mat-option *ngFor="let assignedName of usersList" [value]="assignedName._id">
+                          {{assignedName.name.first }} {{assignedName.name.last}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  <div style="width: 142px;margin-left: -10px;">
+                   <mat-form-field  appearance="outline" style="width:192px;margin-left: 22px;">
+                    <mat-label>Actual Completion Date</mat-label>
+                    <input  matInput [min]="myFilter"  [matDatepicker]="picker4" placeholder="Completion Date" formControlName="actualCompletionDate">
+                    <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
+                    <mat-datepicker #picker4></mat-datepicker>
+                  </mat-form-field>
+                </div>
+                <div >
+                  <mat-form-field appearance="outline" style="width:180px;margin-left: 77px;">
+                    <mat-label>Comments</mat-label>
+                    <textarea  matInput formControlName="comments" style="height:20px"></textarea>
+                  </mat-form-field>
+                </div>
+
+                <div  fxLayout=row class="pull-right" >
+                  <div fxLayout=column style="align-items: center;margin-left: 20px; " (click)="deleteMsg()" class="hand-cursor">
+                    <img style="height: 25px;width: 25px;"  src="assets/images/icons/Close.png" />
+                    <span style="font-size: 10px;">Close</span>
+                  </div>
+
+                </div>
+              </div>
+            </div>
           </div>
-        </div>  
-      </div>  
-      <mat-spinner style="margin-left: 450px;margin:0 auto;" *ngIf="updateLoading;" [diameter]="40"></mat-spinner>
-      <div fxLayout=row class="pull-right" style="margin-top: 20px;"> 
-        <div fxLayout=column class="hand-cursor" style="align-items: center;" (click)="addComments()">
-          <img style="height: 30px;width: 30px;" src="assets/images/icons/Add.png" />
-          <span>Add</span>
-        </div>
-        <div fxLayout=column class="hand-cursor" style="align-items: center;margin-left: 20px;" (click)="closeTheIssue()">
-          <img style="height: 30px;width: 30px;" src="assets/images/icons/Close.png" />
-          <span>Close</span>
-        </div>
-        <div fxLayout=column style="align-items: center;margin-left: 20px;">
-          <img style="height: 30px;width: 30px;" src="assets/images/icons/close_red.png" />
-          <span>Cancel</span>
-        </div>
-        <div fxLayout=column class="hand-cursor" style="align-items: center;margin-left: 20px;"  (click)="onFormSubmit()">
-          <img style="height: 30px;" src="assets/images/icons/submitIcon.png" />
-          <span>Save</span>
-        </div>
-      </div>
-      <div class="clearfix"></div>
-    </mat-card>
-  </form>
+        </form>
+      </mat-card>  
+    </div>
+
+  </div>
+
+</div>  
+<mat-spinner style="margin-left: 450px;margin:0 auto;" *ngIf="updateLoading;" [diameter]="40"></mat-spinner>
+<div fxLayout=row class="pull-right" style="margin-top: 20px;"> 
+  <div fxLayout=column class="hand-cursor" style="align-items: center;" (click)="addComments()">
+    <img style="height: 30px;width: 30px;" src="assets/images/icons/Add.png" />
+    <span>Add</span>
+  </div>
+  <div fxLayout=column class="hand-cursor" style="align-items: center;margin-left: 20px;" (click)="closeTheIssue()">
+    <img style="height: 30px;width: 30px;" src="assets/images/icons/Close.png" />
+    <span>Close</span>
+  </div>
+  <div fxLayout=column class="hand-cursor" style="align-items: center;margin-left: 20px;"  (click)="onFormSubmit()">
+    <img style="height: 30px;" src="assets/images/icons/submitIcon.png" />
+    <span>Save</span>
+  </div>
+</div>
+<div class="clearfix"></div>
+</mat-card>
+</form>
 </div>
