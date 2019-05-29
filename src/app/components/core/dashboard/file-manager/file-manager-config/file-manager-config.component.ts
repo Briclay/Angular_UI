@@ -647,6 +647,7 @@ export class FileManagerConfigComponent implements OnInit {
     }
     else {
       this.path = JSON.parse(window.localStorage.getItem('stack'));
+      console.log('this.path',this.path);
       if (!_.isEmpty(this.path)) {
         this.path.pop();
         const temp = this.path[this.path.length - 1];

@@ -199,8 +199,8 @@ export class IssueTrackerDetailsComponent implements OnInit {
 				        	this.createCommentformGroup.controls['assignedName'].setValue(this.selectedUserData.name.first + " " + this.selectedUserData.name.last);
 						}
 						else{
-			        	this.commentformGroup.controls['assignedTo'].setValue(this.selectedUserData.userId);
-			        	this.commentformGroup.controls['assignedName'].setValue(this.selectedUserData.name.first + " " + this.selectedUserData.name.last);
+				        	this.commentformGroup.controls['assignedTo'].setValue(this.selectedUserData.userId);
+				        	this.commentformGroup.controls['assignedName'].setValue(this.selectedUserData.name.first + " " + this.selectedUserData.name.last);
 						}
 						//v.setControl('assignedName' ,this.selectedUserData.name.first + " " + this.selectedUserData.name.last )
 						v.assignedName = this.selectedUserData.name.first + " " + this.selectedUserData.name.last
