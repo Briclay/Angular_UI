@@ -13,7 +13,6 @@ import {WorkRequestDetailsComponent} from '../components/core/dashboard/work-req
 import {WorkOrderDetailsComponent} from '../components/core/dashboard/work-order/work-order-details/work-order-details.component';
 import {IssueTrackerDetailsComponent} from '../components/core/dashboard/inter-department-tracker/inter-department-tracker-details/inter-department-tracker-details.component';
 import { DocumentListDetailsComponent } from '../components/core/dashboard/document-list/document-list-details/document-list-details.component';
-import { DocumentListMoreDetailsComponent } from '../components/core/dashboard/document-list/document-list-details/document-list-more-details/document-list-more-details.component';
 import { DocumentListCreateComponent } from '../components/core/dashboard/document-list/document-list-create/document-list-create.component';
 import { NcmDetailsComponent } from '../components/core/dashboard/ncm/ncm-details/ncm-details.component';
 import { NcmCreateComponent } from '../components/core/dashboard/ncm/ncm-create/ncm-create.component';
@@ -44,7 +43,6 @@ import { ContractManagementDetailsComponent } from '../components/core/dashboard
     UserDashDetailsComponent,
     IssueTrackerDetailsComponent,
     DocumentListDetailsComponent,
-    DocumentListMoreDetailsComponent,
     DocumentListCreateComponent,
     NcmDetailsComponent,
     NcmCreateComponent,
@@ -66,7 +64,6 @@ import { ContractManagementDetailsComponent } from '../components/core/dashboard
     UserDashDetailsComponent,
     IssueTrackerDetailsComponent,
     DocumentListDetailsComponent,
-    DocumentListMoreDetailsComponent,
     DocumentListCreateComponent,
     NcmDetailsComponent,
     NcmCreateComponent,
@@ -88,7 +85,6 @@ import { ContractManagementDetailsComponent } from '../components/core/dashboard
     UserDashDetailsComponent,
     IssueTrackerDetailsComponent,
     DocumentListDetailsComponent,
-    DocumentListMoreDetailsComponent,
     DocumentListCreateComponent,
     NcmDetailsComponent,
     NcmCreateComponent,

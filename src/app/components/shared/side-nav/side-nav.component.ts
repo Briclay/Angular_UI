@@ -49,7 +49,6 @@ export class SideNavComponent implements OnInit {
   ]
 
 	constructor() { 
-
     this.access = JSON.parse(window.localStorage.getItem('access'));
     this.permission = JSON.parse(window.localStorage.getItem('access'));
     let allPermission = this.generatePermissions();

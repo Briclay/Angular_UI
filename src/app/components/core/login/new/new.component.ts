@@ -62,6 +62,7 @@ export class NewComponent implements OnInit {
                 this.assignValuesToForm();
             }
         }
+        /*method to get department*/
         getDepartments() {
         	this.departmentService.getAll(this.orgID).pipe().subscribe(res => {
         		this.departments = res;
@@ -70,7 +71,7 @@ export class NewComponent implements OnInit {
         		console.error('error', error);
         	});
         }
-
+         /*method to get Role*/
         getRoles() {
         	this.roleService.getData(this.orgID).pipe().subscribe(res => {
         		this.roles = res;
@@ -79,6 +80,7 @@ export class NewComponent implements OnInit {
         		console.error('error', error);
         	});
         }
+        //assigning values of form to data
         assignValuesToForm() {
         	if(this.formType !== 'create') {
         		this.newForm.patchValue(this.data)

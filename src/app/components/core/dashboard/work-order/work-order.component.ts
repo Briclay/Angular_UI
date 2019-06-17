@@ -15,7 +15,6 @@ import {WorkRequestService} from '../../../../components/core/dashboard/work-req
 })
 export class WorkOrderComponent implements OnInit {
   @ViewChild('tabGroup') tabGroup;
-
   isLoading: boolean;
   workOrders :any;
   workOrderDataOption: any;
@@ -97,7 +96,6 @@ export class WorkOrderComponent implements OnInit {
       || (item.workRequestNumber  && item.workRequestNumber.toLowerCase().indexOf(value.toLowerCase()) > -1)
       || (item.assignedName  && item.assignedName.toLowerCase().indexOf(value.toLowerCase()) > -1)
     )  
-    console.log(this.workOrders, 'this.workRequests')
   }
 
   getWorkOrder() {
@@ -119,7 +117,6 @@ export class WorkOrderComponent implements OnInit {
           })
         })
       })
-      console.log(this.workOrders, 'workOrdersworkOrders')
       this.isLoading = false;
       this.workOrderDataOption = [
         {

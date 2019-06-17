@@ -76,8 +76,6 @@ export class OrganisationDetailsComponent implements OnInit {
 
     this.organisationsList = this.organizationService.organisations;
     this.userAuth = JSON.parse(window.localStorage.getItem('authUser'));
-    // this.onGetFeature();
-    //this.getparentOrganisations();
     this.orgFormErrors = {
       name: {},
       orgCode: {},
@@ -153,7 +151,7 @@ export class OrganisationDetailsComponent implements OnInit {
     this.assignValuesToForm();
     this.getAllFeatures();
   }
-
+  //assigning values of form to data
   assignValuesToForm() {
     if(this.formType !== 'create') {
       this.organizationDetailsForm.patchValue(this.data)
@@ -175,7 +173,7 @@ export class OrganisationDetailsComponent implements OnInit {
       }
     }
   }
-
+/*method to get all Feature*/
   getAllFeatures(){
     this.featureService.getFeatures()
       .pipe().subscribe(response => {
@@ -190,7 +188,7 @@ export class OrganisationDetailsComponent implements OnInit {
   getFeatures() {
     this.openDialogFeature();
   }
-
+/*dialog of feature*/
   openDialogFeature() {
     var featuresList = [] ; 
     if(this.formType !== 'create'){
@@ -306,7 +304,7 @@ export class OrganisationDetailsComponent implements OnInit {
     this.organizationService.organisations(formData)
     .pipe().subscribe(response => {
       this.orgFormSubmitted = false;
-      console.log(response, 'response.message')
+      //console.log(response, 'response.message')
       this.snackBar.open("Organisation created successfully", 'Organisation', {
         duration: 2000,
       });
@@ -326,7 +324,7 @@ export class OrganisationDetailsComponent implements OnInit {
     this.organizationService.update(id, formData)
     .pipe().subscribe(response => {
       this.orgFormSubmitted = false;
-      console.log(response,'response.message')
+      //console.log(response,'response.message')
       this.snackBar.open("Organisation updated successfully", 'Organisation', {
         duration: 2000,
       });
@@ -340,7 +338,7 @@ export class OrganisationDetailsComponent implements OnInit {
       console.log(error.message)
     });
   }
-
+/*upload File*/
   onFileInput(event, fileList?) {
     let reader = new FileReader()
     if (event.target.files && event.target.files.length > 0) {
@@ -361,14 +359,14 @@ export class OrganisationDetailsComponent implements OnInit {
             message: "File uploaded by ",
             details: "file original name is " + file.name
           };
-          console.log('res', res)
+          //console.log('res', res)
         }, (error: any) => {
         });
     } else {
       console.log('false');
     }
   }
-
+/*method to save input file on S3*/
   saveOnS3(response: any, file, body: any) {
     this.http.put(response.signedRequest, file, {
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' }

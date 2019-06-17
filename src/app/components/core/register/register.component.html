@@ -1,100 +1,71 @@
- 
-
-
-<div id="register" class="inner-scroll" fxLayout="row" fxLayoutAlign="start" style="position: fixed;width: -webkit-fill-available;
-    height: -webkit-fill-available;">
-
-  <div id="register-intro" fxFlex fxHide fxShow.gt-xs style="position: initial;">
-
-    <div class="logo" style="margin-top: 75px;">
-      <img src="assets/images/logos/Puravankara.png" style="width: 436px;">
+  <div id="register" class="inner-scroll" fxLayout="row" fxLayoutAlign="start" style="position: fixed;width: -webkit-fill-available;
+      height: -webkit-fill-available;">
+    <div id="register-intro" fxFlex fxHide fxShow.gt-xs style="position: initial;">
+      <div class="logo" style="margin-top: 75px;">
+        <img src="assets/images/logos/Puravankara.png" style="width: 436px;">
+      </div>
+      <div class="title" style="color: white;">
+        Welcome!
+      </div>
+      <div class="logo_div" style="position: relative;bottom: -15em;left: -79px; color: white">
+        <span style="font-size: 10px;">Powered by</span>
+        <img src="assets/images/logos/Briclay.png" alt="logo_bri" class="logo_bri" style="width: 53px;margin-left: 6px;">
+      </div>
     </div>
-
-    <div class="title" style="color: white;">
-      Welcome!
-    </div>
-    <div class="logo_div" style="position: relative;bottom: -15em;left: -79px; color: white">
-      <span style="font-size: 10px;">Powered by</span>
-      <img src="assets/images/logos/Briclay.png" alt="logo_bri" class="logo_bri" style="width: 53px;margin-left: 6px;">
-    </div>
-  </div>
-  <mat-card style="height: auto;width: auto;overflow: auto;">
-    <div id="register-form-wrapper" fusePerfectScrollbar>
-     <div id="register-form" style="margin-top: -114px;">
-        <div class="logo" fxHide.gt-xs>
-          <img src="assets/images/logos/Puravankara.png">
-        </div>
-      <div class="title">CREATE AN ACCOUNT</div>
-      <form name="registerForm"  [formGroup]="registerForm" novalidate>
-
-               <!--  <mat-form-field appearance="outline">
-                    <mat-label>Name</mat-label>
-                    <input matInput formControlName="name">
-                    <mat-icon matSuffix class="secondary-text">account_circle</mat-icon>
-                    <mat-error>
-                        Name is required
-                    </mat-error>
-                  </mat-form-field> -->
-                  <div formGroupName="name">
-                    <div fxLayout="row" class="inputBoxShadow">
-
-                      <mat-form-field appearance="outline" style="margin-top: -12px;">
-
-                        <input matInput formControlName="first" type="text"  style="padding: 10px;width: 264px;margin-top: 3px;">
-                        <mat-label >First Name</mat-label>
-                        <!--  <mat-icon matSuffix class="secondary-text" style="margin-top: 5px;">account_circle</mat-icon> -->
-                      </mat-form-field>
-                    </div>
-                    <div fxLayout="row" class="inputBoxShadow" >
-
-                      <mat-form-field appearance="outline">
-                        <mat-label>Last Name</mat-label>
-                        <input matInput formControlName="last" type="text"  style="padding: 10px;width: 264px;margin-top: 3px;">
-                        <!-- <mat-icon matSuffix class="secondary-text" style="margin-top: 5px;">account_circle</mat-icon> -->
-                      </mat-form-field>
-                    </div>
-                  </div> 
-
-                  <mat-form-field appearance="outline">
-                    <mat-label>Email</mat-label>
-                    
-                    <input matInput formControlName="email"  style="padding: 10px;width: 264px;margin-top: 3px;">
-                    <!--  <mat-icon matSuffix class="secondary-text" style="margin-top: 5px;">mail</mat-icon> -->                   
-                  </mat-form-field>
-                  <mat-form-field appearance="outline">
-                    <mat-label>Phone</mat-label>
-                    <input matInput formControlName="phone" type="number"  style="padding: 10px;width: 264px;margin-top: 3px;">
-
-                  </mat-form-field>
-
-                  <mat-form-field appearance="outline">
-                    <mat-label>Password</mat-label>
-                    <input matInput type="password" formControlName="password" style="padding: 10px;width: 264px;margin-top: 3px;" ngModel passwordToggle required>
-                    <!--  <mat-icon matSuffix class="secondary-text" style="margin-top: 5px;">vpn_key</mat-icon> -->
-
-                  </mat-form-field>
-                  <mat-label>User Name</mat-label>
-                  <mat-form-field appearance="outline">
-                    <input matInput formControlName="username" type="text" style="padding: 10px;width: 264px;margin-top: 3px;">
-                    <!--  <mat-icon matSuffix class="secondary-text" style="margin-top: 5px;">account_circle</mat-icon> -->
-                  </mat-form-field>
-                 <div class="terms" fxLayout="row" fxLayoutAlign="center center">
-                    <mat-checkbox name="terms" aria-label="Accept" required>
-                        <span>Accept</span>
-                    </mat-checkbox>
-                    <a href="#">terms and conditions</a>
-                 </div>
-                  <button mat-raised-button  class="submit-button" aria-label="CREATE AN ACCOUNT"
-                  [disabled]="registerForm.invalid" style="background-color: #2196F3; color: white;">
-                  CREATE AN ACCOUNT
-                </button>
-
-              </form>
-              <div class="register" fxLayout="column" fxLayoutAlign="center center">
-                <span class="text">Already have an account?</span>
-                <a class="link"  (click)="openLoginForm()" style="cursor: pointer;">Login</a>
+    <mat-card style="height: auto;width: auto;overflow: auto;">
+      <div id="register-form-wrapper" fusePerfectScrollbar>
+      <div id="register-form" style="margin-top: -114px;">
+          <div class="logo" fxHide.gt-xs>
+            <img src="assets/images/logos/Puravankara.png">
+          </div>
+        <div class="title">CREATE AN ACCOUNT</div>
+        <form name="registerForm"  [formGroup]="registerForm" novalidate>
+                    <div formGroupName="name">
+                      <div fxLayout="row" class="inputBoxShadow">
+                        <mat-form-field appearance="outline" style="margin-top: -12px;">
+                          <input matInput formControlName="first" type="text"  style="padding: 10px;width: 264px;margin-top: 3px;">
+                          <mat-label >First Name</mat-label>
+                        </mat-form-field>
+                      </div>
+                      <div fxLayout="row" class="inputBoxShadow" >
+                        <mat-form-field appearance="outline">
+                          <mat-label>Last Name</mat-label>
+                          <input matInput formControlName="last" type="text"  style="padding: 10px;width: 264px;margin-top: 3px;">
+                        </mat-form-field>
+                      </div>
+                    </div> 
+                    <mat-form-field appearance="outline">
+                      <mat-label>Email</mat-label>
+                      <input matInput formControlName="email"  style="padding: 10px;width: 264px;margin-top: 3px;">
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                      <mat-label>Phone</mat-label>
+                      <input matInput formControlName="phone" type="number"  style="padding: 10px;width: 264px;margin-top: 3px;">
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                      <mat-label>Password</mat-label>
+                      <input matInput type="password" formControlName="password" style="padding: 10px;width: 264px;margin-top: 3px;" ngModel passwordToggle required>
+                    </mat-form-field>
+                    <mat-label>User Name</mat-label>
+                    <mat-form-field appearance="outline">
+                      <input matInput formControlName="username" type="text" style="padding: 10px;width: 264px;margin-top: 3px;">
+                    </mat-form-field>
+                  <div class="terms" fxLayout="row" fxLayoutAlign="center center">
+                      <mat-checkbox name="terms" aria-label="Accept" required>
+                          <span>Accept</span>
+                      </mat-checkbox>
+                      <a href="#">terms and conditions</a>
+                  </div>
+                    <button mat-raised-button  class="submit-button" aria-label="CREATE AN ACCOUNT"
+                    [disabled]="registerForm.invalid" style="background-color: #2196F3; color: white;">
+                    CREATE AN ACCOUNT
+                  </button>
+                </form>
+                <div class="register" fxLayout="column" fxLayoutAlign="center center">
+                  <span class="text">Already have an account?</span>
+                  <a class="link"  (click)="openLoginForm()" style="cursor: pointer;">Login</a>
+                </div>
               </div>
             </div>
-          </div>
-        </mat-card>
-      </div>
+          </mat-card>
+        </div>

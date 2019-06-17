@@ -16,7 +16,6 @@ import {takeUntil} from 'rxjs/operators';
 
 export class RoleComponent implements OnInit {
 	@ViewChild('tabGroup') tabGroup;
-
 	roles: any;
 	roleDataOptions = [];
 	roleListSpinner: boolean;
@@ -24,7 +23,6 @@ export class RoleComponent implements OnInit {
 	selectedOrgId: string;
 	pageIndex : number = 0;
   	pageSize : number = 5;
-
 	private unsubscribe: Subject<any> = new Subject();
 	constructor(
 		private router: Router,
@@ -60,7 +58,7 @@ export class RoleComponent implements OnInit {
 	organizationChanged(org) {
 		this.router.navigate([], {queryParams: {orgID: org.value ? org.value._id : org._id} , queryParamsHandling: 'merge'});
 	}
-
+    /*method to get Role*/
 	getRolesData() {
 		this.roleListSpinner = true;
 		this.roleService.getData(this.selectedOrgId).pipe().subscribe(res => {
@@ -83,7 +81,7 @@ export class RoleComponent implements OnInit {
 			this.roleListSpinner = false;
 		});
 	}
-
+//dialog of history
 	openDialog(data) {
 		this.roleService.getHistory().pipe().subscribe(res => {
 			this.historyData = {
@@ -94,18 +92,16 @@ export class RoleComponent implements OnInit {
 				keys: ['username', 'changedBy', 'changedDate'],
 				content: res.data
 			};
-
 			const dialogRef = this.dialog.open(HistoryPopupComponent, {
 				width: '450px',
 				data: this.historyData
 			});
-
 			dialogRef.afterClosed().subscribe(result => {
 				// TODO closed event
 			});
 		});
 	}
-
+   /*method to get department*/
 	getDepartments() {
 		this.departmentService.getDepartmentByOrg(`filter[_organisationId]=${this.selectedOrgId}` )
 		.pipe().subscribe(res => {

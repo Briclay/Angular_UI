@@ -21,15 +21,11 @@ export class FileUploadDialogComponent implements OnInit {
 	      approval: ['', Validators.required],
 	      remarks: ['', Validators.required],
 	    });
-
-	    console.log(this.data, 'data-FileUploadDialogComponent')
   	}
-
   	onCloseCancel() {
     	this.dialogRef.close('cancel');
  	}
   	onSave() {
-    	console.log(this.dailogForm.value, 'onSave-FileUploadDialogComponent')
   	 	this.dialogRef.close(this.dailogForm.value);
   	}
 }

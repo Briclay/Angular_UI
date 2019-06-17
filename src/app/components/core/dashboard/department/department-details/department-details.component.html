@@ -1,73 +1,58 @@
-<div class="user-details-container">
-  <form [formGroup]="departmentDetailsForm" class="user-details-form">
-    <mat-card>
-      <div class="user-details-card">
-        <div class="user-details-name">
-          <div class="username-input">
-            <!-- <mat-form-field appearance="outline" class="margin_right_25">
-              <mat-label>Department Name</mat-label>
-              <mat-select placeholder="Departments" formControlName="name">
-                <mat-option *ngFor="let name of departments" [value]="name">
-                  {{name}}
-                </mat-option>
-              </mat-select>
-            </mat-form-field> -->
-            <mat-form-field class="margin_right_25" appearance="outline">
-              <mat-label>Department Name</mat-label>
-              <input matInput formControlName="name">
-            </mat-form-field>
+  <div class="user-details-container">
+    <form [formGroup]="departmentDetailsForm" class="user-details-form">
+      <mat-card>
+        <div class="user-details-card">
+          <div class="user-details-name">
+            <div class="username-input">
+              <mat-form-field class="margin_right_25" appearance="outline">
+                <mat-label>Department Name</mat-label>
+                <input matInput formControlName="name">
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="user-details-content">
+            <div class="user-details-content-title">
+              <strong> Details</strong>
+            </div>
+            <div class="user-details-form-list" >
+              <div>
+                <mat-form-field class="margin_right_25" appearance="outline">
+                  <mat-label>Description</mat-label>
+                  <textarea matInput formControlName="description"></textarea>
+                </mat-form-field>
+              </div>
+              <div  class="margin_right_26" >
+                <span>Approver</span>
+              <mat-checkbox  matInput formControlName="approver" (change)="approverValue($event)" style="    margin-left: 9px;"></mat-checkbox>
+            </div>
           </div>
         </div>
         <div class="user-details-content">
           <div class="user-details-content-title">
-            <strong> Details</strong>
+            <strong>Features</strong>
           </div>
-          <div class="user-details-form-list" >
-            <div>
-              <mat-form-field class="margin_right_25" appearance="outline">
-                <mat-label>Description</mat-label>
-                <textarea matInput formControlName="description"></textarea>
-              </mat-form-field>
-            </div>
-            <div  class="margin_right_26" >
-              <span>Approver</span>
-             <mat-checkbox  matInput formControlName="approver" (change)="approverValue($event)" style="    margin-left: 9px;"></mat-checkbox>
-           </div>
-         </div>
-       </div>
-       <div class="user-details-content">
-        <div class="user-details-content-title">
-          <strong>Features</strong>
-        </div>
-        <div class="user-details-form-list">
-          <div fxLayout=row>
-            <div class="margin_right_27" >Total Features</div>
-            <div class="margin_right_27">{{allFeatureCount}}</div>
-                <!-- <div>
-                <mat-form-field class="margin_right_25" appearance="outline">
-                  <mat-label>Total Features</mat-label>
-                  <input matInput formControlName="_features" readonly>
-                </mat-form-field>
-              </div>   -->          
-            </div>
-
-            <div class="margin_right_28">
-              <mat-label  style="margin-right: 10px;">Shared Folder</mat-label>
-              <mat-checkbox  matInput formControlName="specialFolder" (change)="specialFolderValue($event)"></mat-checkbox>
-            </div>
+          <div class="user-details-form-list">
             <div fxLayout=row>
-              <div class="margin_right_29" >
-                <button (click)="getFeatures()" class="margin-left-4" mat-raised-button class="feature_btn" 
-                >Features
-              </button>
+              <div class="margin_right_27" >Total Features</div>
+              <div class="margin_right_27">{{allFeatureCount}}</div>
+              </div>
+              <div class="margin_right_28">
+                <mat-label  style="margin-right: 10px;">Shared Folder</mat-label>
+                <mat-checkbox  matInput formControlName="specialFolder" (change)="specialFolderValue($event)"></mat-checkbox>
+              </div>
+              <div fxLayout=row>
+                <div class="margin_right_29" >
+                  <button (click)="getFeatures()" class="margin-left-4" mat-raised-button class="feature_btn" 
+                  >Features
+                </button>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <button mat-raised-button type="submit" *ngIf="formType === 'create'" (click)="onFormCancel()" class="pull-right">Cancel</button>
-    <button mat-raised-button type="submit" (click)="onDeptFormSubmit()" class="pull-right">Submit</button>
-    <div class="clearfix"></div>
-  </mat-card>
-</form>
-</div>
+      <button mat-raised-button type="submit" *ngIf="formType === 'create'" (click)="onFormCancel()" class="pull-right">Cancel</button>
+      <button mat-raised-button type="submit" (click)="onDeptFormSubmit()" class="pull-right">Submit</button>
+      <div class="clearfix"></div>
+    </mat-card>
+  </form>
+  </div>

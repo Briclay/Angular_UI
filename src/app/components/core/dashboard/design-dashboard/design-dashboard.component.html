@@ -1,206 +1,174 @@
-<div class="main-content" >
-  <div  class="main-head">
-    <div fxLayout=row >
-      <div fxLayout="row" >
-        <div>
-          <div class="dottedBorder" >
-            <img src="{{profileImageUrl}}" class="userImage" (click)="fileInput.click()"/>
-            <input #fileInput type="file" (change)="onFileInput($event)"  class="display_none" />
+  <div class="main-content" >
+    <div  class="main-head">
+      <div fxLayout=row >
+        <div fxLayout="row" >
+          <div>
+            <div class="dottedBorder" >
+              <img src="{{profileImageUrl}}" class="userImage" (click)="fileInput.click()"/>
+              <input #fileInput type="file" (change)="onFileInput($event)"  class="display_none" />
+            </div>
+            <div fxLayout="column" class="text-center">
+              <span class="text-color">{{userName}}</span>
+            </div>
+            <div fxLayout="column" class="text-center">
+              <span class="text-color">{{roleName}}</span>
+            </div>          
           </div>
-          <div fxLayout="column" class="text-center">
-            <span class="text-color">{{userName}}</span>
+        </div>
+        <div fxFlex=88 fxLayout=column>
+        <app-top-menu></app-top-menu>
+        <div fxLayout=row>
+          <div class="content-head" fxLayout=column style="min-width: -webkit-fill-available;">
+            <div class="first-card" >
+              <mat-card class="matCard" fxFlex=25 fxLayout=column *ngFor="let project of projects">
+                <div (click)="selectSingleProject(project)"  fxLayout=row style="place-content: space-between;border-radius: 5px;padding: 4px;" class="{{project.name === clickedProjectName ? 'bg_color_active' : 'bg_color'}}">
+                  <div fxLayout=row class="padding_2">
+                    <img style="height: 85px;width: 115px;border-radius: 10%;" src={{project.imageUrls[0]}}>
+                  </div>
+                  <div fxLayout=column>
+                    <div class="{{project.name === clickedProjectName ? 'p_name_active_color' : 'p_name_color'}}" >{{project.name}}</div>
+                    <div class="{{project.name === clickedProjectName ? 'p_address_active_color' : 'p_address_color'}}" >{{project.projectDetails && project.projectDetails.location 
+                    && project.projectDetails.location}}</div>
+                    <div class="{{project.name === clickedProjectName ? 'p_address_active_color' : 'p_address_color'}}">{{project.projectDetails && project.projectDetails.blocks
+                    && project.projectDetails.blocks}}</div>
+                  </div>
+                </div>
+              </mat-card>
+            </div> 
           </div>
-           <div fxLayout="column" class="text-center">
-            <span class="text-color">{{roleName}}</span>
-          </div>          
         </div>
       </div>
-      <div fxFlex=88 fxLayout=column>
-      <app-top-menu></app-top-menu>
-      <div fxLayout=row>
-        <div class="content-head" fxLayout=column style="min-width: -webkit-fill-available;">
-          <div class="first-card" >
-            <mat-card class="matCard" fxFlex=25 fxLayout=column *ngFor="let project of projects">
-              <div (click)="selectSingleProject(project)"  fxLayout=row style="place-content: space-between;border-radius: 5px;padding: 4px;" class="{{project.name === clickedProjectName ? 'bg_color_active' : 'bg_color'}}">
-                <div fxLayout=row class="padding_2">
-                  <img style="height: 85px;width: 115px;border-radius: 10%;" src={{project.imageUrls[0]}}>
-                </div>
-                <div fxLayout=column>
-                  <div class="{{project.name === clickedProjectName ? 'p_name_active_color' : 'p_name_color'}}" >{{project.name}}</div>
-                  <div class="{{project.name === clickedProjectName ? 'p_address_active_color' : 'p_address_color'}}" >{{project.projectDetails && project.projectDetails.location 
-                  && project.projectDetails.location}}</div>
-                  <div class="{{project.name === clickedProjectName ? 'p_address_active_color' : 'p_address_color'}}">{{project.projectDetails && project.projectDetails.blocks
-                   && project.projectDetails.blocks}}</div>
+    </div>
+    <div *ngIf="projectSelected">
+      <div fxLayout=row *ngIf="selectedProjectData">
+        <mat-card fxFlex=100>
+          <div fxLayout=row >
+            <div fxFlex=25 class="position_relative">
+              <img class="p_icon" src={{selectedProjectData.imageUrls[0]}}>
+              <div class="p_caption">
+                <div class="proj_caption">{{selectedProjectData.name}}</div>
+                <div >
+                  <div class="proj_add_caption">
+                    {{selectedProjectData.projectDetails.location}} &nbsp; {{selectedProjectData.projectDetails.blocks}}
+                  </div>
                 </div>
               </div>
-            </mat-card>
-          </div> 
-        </div>
+              <div class="p_status_text">{{selectedProjectData.status}}</div>
+            </div>
+            <div  class="hand-cursor" style="display: block;margin-left: -12px;width: 61px"
+              (click)="goToFileManager()">
+              <img matTooltip="file-manager" style="height: 30px;width: 30px;" src="assets/images/icons/File Manager.png" />
+            </div>
+            <div fxFlex=75 fxLayout=row class="donut_image align_center" >
+                <mat-spinner style="margin-left: 450px;margin:0 auto;" *ngIf="analyticsLoading;" [diameter]="40"></mat-spinner>
+              <div *ngFor="let ptype of projectTypes" fxLayout=column>
+                <div fxLayout=row  class="position_relative">
+                  <img style="height: 115px;width: 115px;margin-right: 10px;" src="/assets/images/icons/donut.png">
+                  <div style="position: absolute;top: 53px;right: 62px;" class="font_10_PT">{{ptype.totalFile}}</div>
+                </div>
+                <div class="font_10_PT">{{ptype.name}}</div>
+              </div>
+            </div>
+          </div>
+        </mat-card>
       </div>
-     <!--  <div fxLayout=row>
-        <div class="content-head" fxLayout=column style="min-width: -webkit-fill-available;">
-          <div class="font_12_light" style="text-align: center;">
-            <div class="flex-box">
-              <mat-card class="flex-1">
-                <app-grouped-bar-chart></app-grouped-bar-chart>
-              </mat-card>
-              <mat-card class="flex-1 margin-left-4">
-                <app-donut-chart></app-donut-chart>
-              </mat-card>
-            </div>
-          </div>
-          
-          <div style ="place-content :center;">
-            <mat-spinner style="margin:0 auto;" *ngIf="isLoading" [diameter]="40"></mat-spinner>
-          </div>
-        </div>
-      </div>  -->
-    </div>
-  </div>
-  <div *ngIf="projectSelected">
-    <div fxLayout=row *ngIf="selectedProjectData">
-      <mat-card fxFlex=100>
-        <div fxLayout=row >
-          <div fxFlex=25 class="position_relative">
-            <img class="p_icon" src={{selectedProjectData.imageUrls[0]}}>
-            <div class="p_caption">
-              <div class="proj_caption">{{selectedProjectData.name}}</div>
-              <div >
-                <div class="proj_add_caption">
-                  {{selectedProjectData.projectDetails.location}} &nbsp; {{selectedProjectData.projectDetails.blocks}}
-                </div>
-              </div>
-            </div>
-            <div class="p_status_text">{{selectedProjectData.status}}</div>
-          </div>
-          <div  class="hand-cursor" style="display: block;margin-left: -12px;width: 61px"
-            (click)="goToFileManager()">
-            <img matTooltip="file-manager" style="height: 30px;width: 30px;" src="assets/images/icons/File Manager.png" />
-          </div>
-          <div fxFlex=75 fxLayout=row class="donut_image align_center" >
-              <mat-spinner style="margin-left: 450px;margin:0 auto;" *ngIf="analyticsLoading;" [diameter]="40"></mat-spinner>
-            <div *ngFor="let ptype of projectTypes" fxLayout=column>
-              <div fxLayout=row  class="position_relative">
-                <img style="height: 115px;width: 115px;margin-right: 10px;" src="/assets/images/icons/donut.png">
-                <div style="position: absolute;top: 53px;right: 62px;" class="font_10_PT">{{ptype.totalFile}}</div>
-              </div>
-              <div class="font_10_PT">{{ptype.name}}</div>
-            </div>
-          </div>
-        </div>
-      </mat-card>
-    </div>
-    <div *ngIf="selectedProjectData" >
-      <form fxLayout=row  [formGroup]="projectForm">
-        <mat-card fxFlex=60 class="matCardPI">
-          <div class="font_17 text-center">Project Details</div>
-          <div fxLayout=row style="margin-top: 7%;">
-            <div fxLayout=column >
-              <div fxLayout=row >
-                <mat-form-field appearance="outline" class="fisrtFrom">
-                  <mat-label>Built Up Area </mat-label>
-                  <input readonly matInput placeholder="" >
-                </mat-form-field>
-                <mat-form-field appearance="outline" class="fisrtFrom">
-                  <mat-label>No Of Towers</mat-label>
-                  <input readonly matInput placeholder="">
-                </mat-form-field>
-              </div>
-              <div fxLayout=row >
-                <mat-form-field appearance="outline" class="fisrtFrom">
-                  <mat-label>Saleable Area</mat-label>
-                  <input readonly matInput placeholder="">
-                </mat-form-field>
-                <mat-form-field appearance="outline" class="fisrtFrom">
-                    <mat-label>No Of Units</mat-label>
-                    <input readonly matInput placeholder="">
-                  </mat-form-field>
-              </div>
-              <div fxLayout=row style="margin-top: 6%;">
-                <mat-form-field appearance="outline" class="fisrtFrom fisrtFromMaxWidth">
-                  <mat-label>Configuration</mat-label>
-                  <input readonly matInput placeholder="">
-                </mat-form-field>
-              </div>
-              <div fxLayout=row >
-                <mat-form-field appearance="outline" class="fisrtFrom fisrtFromMaxWidth">
-                  <mat-label>Planning Authority</mat-label>
-                  <input readonly matInput placeholder="">
-                </mat-form-field>
-              </div>
-            </div>
-            <div class="clearFix"></div>
-            <div fxLayout=column style="margin-top: -4%;">
-              <div class="font_12 text-center" >Car Parking</div>
+      <div *ngIf="selectedProjectData" >
+        <form fxLayout=row  [formGroup]="projectForm">
+          <mat-card fxFlex=60 class="matCardPI">
+            <div class="font_17 text-center">Project Details</div>
+            <div fxLayout=row style="margin-top: 7%;">
+              <div fxLayout=column >
                 <div fxLayout=row >
                   <mat-form-field appearance="outline" class="fisrtFrom">
-                    <mat-label>Total</mat-label>
+                    <mat-label>Built Up Area </mat-label>
+                    <input readonly matInput placeholder="" >
+                  </mat-form-field>
+                  <mat-form-field appearance="outline" class="fisrtFrom">
+                    <mat-label>No Of Towers</mat-label>
+                    <input readonly matInput placeholder="">
+                  </mat-form-field>
+                </div>
+                <div fxLayout=row >
+                  <mat-form-field appearance="outline" class="fisrtFrom">
+                    <mat-label>Saleable Area</mat-label>
                     <input readonly matInput placeholder="">
                   </mat-form-field>
                   <mat-form-field appearance="outline" class="fisrtFrom">
-                    <mat-label>Basement</mat-label>
+                      <mat-label>No Of Units</mat-label>
+                      <input readonly matInput placeholder="">
+                    </mat-form-field>
+                </div>
+                <div fxLayout=row style="margin-top: 6%;">
+                  <mat-form-field appearance="outline" class="fisrtFrom fisrtFromMaxWidth">
+                    <mat-label>Configuration</mat-label>
                     <input readonly matInput placeholder="">
                   </mat-form-field>
                 </div>
-              <div fxLayout=row >
-                <mat-form-field appearance="outline" class="fisrtFrom">
-                  <mat-label>Covered</mat-label>
-                  <input readonly matInput placeholder="">
-                </mat-form-field>
-                <mat-form-field appearance="outline" class="fisrtFrom">
-                    <mat-label>Surface</mat-label>
+                <div fxLayout=row >
+                  <mat-form-field appearance="outline" class="fisrtFrom fisrtFromMaxWidth">
+                    <mat-label>Planning Authority</mat-label>
                     <input readonly matInput placeholder="">
                   </mat-form-field>
+                </div>
               </div>
-              <div fxLayout=row >
-                <mat-form-field appearance="outline" class="fisrtFrom">
-                  <mat-label>Stack</mat-label>
-                  <input readonly matInput placeholder="">
-                </mat-form-field>
-                <mat-form-field appearance="outline" class="fisrtFrom">
-                  <mat-label>Puzzle</mat-label>
-                  <input readonly matInput placeholder="">
-                </mat-form-field>
-              </div>
-              <div fxLayout=column >
-                <div class="font_12 text-center" >Product</div>
-                  <div fxLayout=row class="content_space_arround"> 
-                    <div class="font_12" >BHK</div>
-                    <div class="font_12 margin_left_5" >No</div>
-                    <div class="font_12" >Area (SFT)</div>
+              <div class="clearFix"></div>
+              <div fxLayout=column style="margin-top: -4%;">
+                <div class="font_12 text-center" >Car Parking</div>
+                  <div fxLayout=row >
+                    <mat-form-field appearance="outline" class="fisrtFrom">
+                      <mat-label>Total</mat-label>
+                      <input readonly matInput placeholder="">
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" class="fisrtFrom">
+                      <mat-label>Basement</mat-label>
+                      <input readonly matInput placeholder="">
+                    </mat-form-field>
                   </div>
-                 <!--  <div *ngIf="unitsArray.length > 0" *ngFor="let p of unitsArray">
-                    <mat-card fxLayout=row class="matCard1 content_space_arround" style="height: 41px;overflow:auto;">
-                      <div class="font_12_light" >{{p.bhk}}</div>
-                      <div class="font_12_light" >{{p.no}}</div>
-                      <div class="font_12_light" >{{p.area}}</div>
-                    </mat-card>
-                  </div> -->
+                <div fxLayout=row >
+                  <mat-form-field appearance="outline" class="fisrtFrom">
+                    <mat-label>Covered</mat-label>
+                    <input readonly matInput placeholder="">
+                  </mat-form-field>
+                  <mat-form-field appearance="outline" class="fisrtFrom">
+                      <mat-label>Surface</mat-label>
+                      <input readonly matInput placeholder="">
+                    </mat-form-field>
+                </div>
+                <div fxLayout=row >
+                  <mat-form-field appearance="outline" class="fisrtFrom">
+                    <mat-label>Stack</mat-label>
+                    <input readonly matInput placeholder="">
+                  </mat-form-field>
+                  <mat-form-field appearance="outline" class="fisrtFrom">
+                    <mat-label>Puzzle</mat-label>
+                    <input readonly matInput placeholder="">
+                  </mat-form-field>
+                </div>
+                <div fxLayout=column >
+                  <div class="font_12 text-center" >Product</div>
+                    <div fxLayout=row class="content_space_arround"> 
+                      <div class="font_12" >BHK</div>
+                      <div class="font_12 margin_left_5" >No</div>
+                      <div class="font_12" >Area (SFT)</div>
+                    </div>
+                </div>
               </div>
             </div>
-          </div>
-        </mat-card>
-        <mat-card fxFlex=40 class="matCardPI">
-          <div class="font_17 text-center" >Project Consultants</div>
-          <div fxLayout=row >
-            <div fxLayout=column class="flex-1">
-                <div fxLayout=row class="content_space_arround"> 
-                  <div class="font_12" >Name</div>
-                  <div class="font_12 margin_left_5" >Internal</div>
-                  <div class="font_12" >External</div>
-                </div>
-               <!--  <div *ngIf="projectConsultants.length > 0" *ngFor="let pc of projectConsultants">
-                  <mat-card fxLayout=row class="matCard1" class="content_space_arround">
-                    <div class="font_12_light" >{{pc.name}}</div>
-                    <div class="font_12_light" >{{pc.internaluser}}</div>
-                    <div class="font_12_light" >{{pc.externaluser}}</div>
-                  </mat-card>
-                </div> -->
+          </mat-card>
+          <mat-card fxFlex=40 class="matCardPI">
+            <div class="font_17 text-center" >Project Consultants</div>
+            <div fxLayout=row >
+              <div fxLayout=column class="flex-1">
+                  <div fxLayout=row class="content_space_arround"> 
+                    <div class="font_12" >Name</div>
+                    <div class="font_12 margin_left_5" >Internal</div>
+                    <div class="font_12" >External</div>
+                  </div>
+              </div>
             </div>
-          </div>
-        </mat-card>
-      </form>  
+          </mat-card>
+        </form>  
+      </div>
     </div>
   </div>
-</div>
-</div>
+  </div>

@@ -4,12 +4,9 @@
       <div class="work-request-details-card">
         <div class="work-request-details-name">
           <div class="work-requestname-input">
-            <!-- <input style="margin-bottom: 20px;border-style: none;font-weight: bold;color: #032A57; text-align: center;"  matInput placeholder="" formControlName="requestNumber"
-              readonly> -->
             <mat-form-field appearance="outline">
               <mat-label>Projects</mat-label>
               <mat-select placeholder="Projects" formControlName="_projectId" required>
-                <!-- <mat-option [value]="null" *ngIf="projectsList.length<=0">No User</mat-option> -->
                 <mat-option *ngFor="let proj of projectsList" [value]="proj._id">
                   {{ proj.name }}
                 </mat-option>
@@ -18,7 +15,6 @@
             <mat-form-field appearance="outline" floatLabel="never" >
               <mat-label>Assingee</mat-label>
               <mat-select placeholder="Assingee" formControlName="_assignedId" >
-                <!-- <mat-option [value]="null" *ngIf="userList.length<=0">No User</mat-option> -->
                 <mat-option *ngFor="let users of userList" [value]="users._id">
                   {{ users.username }}
                 </mat-option>
@@ -180,8 +176,7 @@
       </div>
       <button mat-raised-button type="submit" class="pull-right" 
        (click)="workTrackerFormSubmit()">Submit</button>
-<!--        [disabled]="isLoading || !workTrackerForm.valid"
- -->      <div class="clearfix"></div>
+     <div class="clearfix"></div>
     </mat-card>
   </form>
 </div>

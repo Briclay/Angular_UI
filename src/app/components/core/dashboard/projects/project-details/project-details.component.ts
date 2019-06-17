@@ -64,7 +64,6 @@ export class ProjectDetailsComponent implements OnInit {
       this.formErrors[field] = {};
       // Get the control
       const control = this.form.get(field);
-
       if (control && control.dirty && !control.valid) {
         this.formErrors[field] = control.errors;
       }
@@ -76,10 +75,8 @@ export class ProjectDetailsComponent implements OnInit {
     }
   }
   onSubmit(){
-    console.log('this.detailsForm',this.detailsForm.value);
     this.detailsForm.value.carParkingArea =this.parkingArray;
     this.detailsForm.value.units = this.uniteArray;
-    console.log(' finaly send to this.detailsForm',this.detailsForm.value);
     this.filledData = this.detailsForm.value
     this.dialogRef.close(this.detailsForm.value);
     window.localStorage.detailsForm = JSON.stringify(this.detailsForm.value);

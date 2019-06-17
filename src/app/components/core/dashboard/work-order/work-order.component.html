@@ -1,6 +1,5 @@
 <app-top-menu></app-top-menu>
 <div class="work-order-container">
- 
   <mat-tab-group>
       <mat-tab label="Overview">
         <app-panel-header-filter [data]="workOrders" (dataFilter)="dataPaginatorChange($event)"></app-panel-header-filter>

@@ -105,7 +105,7 @@ export class IssueTrackerComponent implements OnInit {
       || (item.createdAtDummy  && item.createdAtDummy.toLowerCase().indexOf(value.toLowerCase()) > -1)
       || (item.age  && item.age.toLowerCase().indexOf(value.toLowerCase()) > -1)
     )  
-    console.log(this.issueTrackerList, 'this.issueTrackerList')
+    //console.log(this.issueTrackerList, 'this.issueTrackerList')
   }
 
   getAllAnalytics(){
@@ -124,7 +124,7 @@ export class IssueTrackerComponent implements OnInit {
       if(eff !== NaN){
         this.totalEfficiency = eff
       }
-      console.log(this.getAnalytics, "getAnalytics")
+      //console.log(this.getAnalytics, "getAnalytics")
       this.listSpinner = false;
     }, (error: any) => {
       console.error('error', error);
@@ -140,7 +140,7 @@ export class IssueTrackerComponent implements OnInit {
         })
       this.issueTrackerList = res;
       this.allItems = res;
-      console.log(this.issueTrackerList, "issueTrackerList")
+      //console.log(this.issueTrackerList, "issueTrackerList")
       this.listSpinner = false;
       this.issueTrackerDataOptions = [
       {

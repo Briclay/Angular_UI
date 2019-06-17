@@ -9,7 +9,6 @@ import {takeUntil} from 'rxjs/operators';
   styleUrls: ['./contract-configuration.component.scss']
 })
 export class ContractConfigurationComponent implements OnInit {
-	
 
   constructor(private route: ActivatedRoute,
     private router: Router) { }

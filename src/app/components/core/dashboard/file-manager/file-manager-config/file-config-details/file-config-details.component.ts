@@ -13,17 +13,13 @@ export class FileConfigDetailsComponent implements OnInit {
   uploadedBy : any;
   constructor(
     private userService: UserService) { }
-
   ngOnInit() {
   }
-
   ngOnChanges(changes: any) {
     this.logsData = this.folderDetailsDataOption;
     let id = this.logsData._createdBy;
-
     this.userService.getSingleUser(id).pipe().subscribe(res => {
-      this.uploadedBy = res.displayName;
-      console.log(res)
+    this.uploadedBy = res.displayName;
     }, (error: any) => {
       console.error('error', error);
     });

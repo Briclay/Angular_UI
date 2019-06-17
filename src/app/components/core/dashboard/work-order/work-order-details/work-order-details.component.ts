@@ -21,7 +21,6 @@ export class WorkOrderDetailsComponent implements OnInit {
   @Input() data: any;
   @Output() public tabSwitch: EventEmitter<any> = new EventEmitter<any>();
   @Output() public updateRefresh: EventEmitter<any> = new EventEmitter<any>();
-
   form: FormGroup;
   formErrors: any;
   userAuth: any;
@@ -112,11 +111,9 @@ export class WorkOrderDetailsComponent implements OnInit {
       if(this.data.typeOfWork = 'Appointment of Consultant'){
         this.enableTypeOfConsultant = true;
       } 
-      console.log(this.data , 'this.datathis.data')
       let projName = "";
       let userName = "";
       this.workRequestService.getSingleWorkRequest(this.data._workRequestId).pipe().subscribe(res => {
-        console.log(res,'response')
         this.projectService.getSingleProjects(res._projectId)
           .pipe().subscribe(resp => {
             projName = resp.name;
@@ -256,7 +253,6 @@ export class WorkOrderDetailsComponent implements OnInit {
     this.projectService.getSingleProjects(this.orderTrackerForm.value.workRequest._projectId)
       .pipe().subscribe(res => {
         console.log('res.projectCode' + res.projectCode);
-        // tslint:disable-next-line:max-line-length
         this.orderTrackerForm.controls['workOrderFullRefNumber'].setValue(refNumber = refNumber + res.projectCode + '-' + this.createOrderId(this.orderList.length) + '/' + this.orderTrackerForm.value.orderNumber);
       }, (error: any) => {
         console.log('error', error);
@@ -301,7 +297,6 @@ export class WorkOrderDetailsComponent implements OnInit {
       if (this.orderTrackerForm.valid) {
         this.workOrderService.save(this.orderTrackerForm.value)
           .pipe().subscribe(res => {
-            console.log('res', res);
             this.snackBar.open("Work-order Created Succesfully", 'Work-order', {
               duration: 3000,
             });
@@ -314,10 +309,8 @@ export class WorkOrderDetailsComponent implements OnInit {
       }
     }
     else{
-      console.log(this.orderTrackerForm, 'wwwwwwwwww')
     this.workOrderService.update(this.orderTrackerForm.value, this.data._id)
       .pipe().subscribe(res => {
-          console.log('res', res);
           this.snackBar.open("Work-order updated Succesfully", 'Work-order', {
             duration: 3000,
           });

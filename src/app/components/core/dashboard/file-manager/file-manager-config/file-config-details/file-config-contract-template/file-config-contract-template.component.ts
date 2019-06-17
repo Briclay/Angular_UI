@@ -10,23 +10,22 @@ export class FileConfigContractTemplateComponent implements OnInit {
   @Input()
   public folderDetailsContractDataOption: any;
   @Output() public workRequestData: EventEmitter<any> = new EventEmitter<any>();
-
   logsData: any;
   orgId: string;
   org: any;
   workRequest = [];
   selectedRequestNumber = {
-    requestNumber: '',
-    workDescription: '',
-    typeOfWork: '',
-    needByDate: '',
-    initiatedDate: '',
-    RFAPutUpDate: '',
-    RFAapprovalDate: '',
-    status: '',
-    workOrderPutDate: '',
-    workOrderApprovalDate: '',
-    awardedDate: ''
+  requestNumber: '',
+  workDescription: '',
+  typeOfWork: '',
+  needByDate: '',
+  initiatedDate: '',
+  RFAPutUpDate: '',
+  RFAapprovalDate: '',
+  status: '',
+  workOrderPutDate: '',
+  workOrderApprovalDate: '',
+  awardedDate: ''
   };
   
   constructor(private workRequestService: WorkRequestService) {

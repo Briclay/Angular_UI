@@ -1,4 +1,5 @@
   <div fxLayout=row [formGroup]="userForm">
+    <!-- Drop down for Department selection -->
    <mat-form-field appearance="outline" >
         <mat-label>Department</mat-label>
         <mat-select placeholder="" (selectionChange)="selectDepartment($event.value)">
@@ -7,6 +8,7 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
+      <!-- Drop Down Of whom to assign Department -->
       <mat-form-field appearance="outline" >
         <mat-label>Assigned To</mat-label>
         <mat-select  placeholder="Select user" (selectionChange)="selectedUser($event.value)">

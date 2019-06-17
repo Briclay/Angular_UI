@@ -27,7 +27,6 @@ export class ProjectDropDownComponent implements OnInit {
 	      .pipe().subscribe(res => {
           	this.projectlist = res;
           	console.log(this.projectlist, "projects")
-          	//this.selectedProj = res[3]
   			this.selectedProj = JSON.parse(window.localStorage.getItem('selectProjectParams'));
           	if(this.selectedProj){
   	        	this.selectProjects.emit(this.selectedProj)

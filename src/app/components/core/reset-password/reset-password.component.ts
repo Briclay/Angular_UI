@@ -53,9 +53,7 @@ export class ResetPasswordComponent implements OnInit {
 				this.onresetPwdformValuesChanged();
 			});
 		}
-
 	}
-    
   	onresetPwdformValuesChanged() {
 		for (const field in this.resetPwdformErrors) {
 		if (!this.resetPwdformErrors.hasOwnProperty(field)) {
@@ -78,9 +76,7 @@ export class ResetPasswordComponent implements OnInit {
 
 	onresetPwdformSubmit() {
 		if (this.resetPwdform.valid) {
-
 			let regx = /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{6,})/;
-
 			if(regx.test(this.resetPwdform.value.password)){
 				delete this.resetPwdform.value.confirmPassword;
 				this.resetPwdform.value.token = this.userToken;
@@ -106,8 +102,6 @@ export class ResetPasswordComponent implements OnInit {
 			      duration: 2000,
 			    });
 			}
-			
 		}
   	}
-
 }

@@ -25,15 +25,13 @@ export class FileShareDialogComponent implements OnInit {
     this.org = JSON.parse(window.localStorage.authUserOrganisation);
     this.getUsers();
   }
-
   onCloseCancel() {
     this.dialogRef.close('cancel');
   }
-
   userChanged(user) {
     this.selectedUser = user.value;
   }
-
+  /*this method is for get all user*/
   getUsers() {
     this.userLoading = true;
     this.userService.getUser(this.org._id).pipe().subscribe(res => {
@@ -44,7 +42,7 @@ export class FileShareDialogComponent implements OnInit {
       this.userLoading = false;
     });
   }
-
+  /*share file*/
   shareFile() {
     this.sharedFileError = '';
     const body = {

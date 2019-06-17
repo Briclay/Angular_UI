@@ -9,11 +9,11 @@ export class OperationsDashboardComponent implements OnInit {
 	 user: any;
 	 userId : any;
 	 usrType : any;
-  orgData : any;
+   orgData : any;
    orgID : any;
-  userName : any;
-    roleName : any;
-     profileImageUrl = "";
+   userName : any;
+   roleName : any;
+   profileImageUrl = "";
 
   constructor() {
   this.user = JSON.parse(window.localStorage.getItem('authUser')); 

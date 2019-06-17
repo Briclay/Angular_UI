@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -25,7 +26,6 @@ import { UserDashboardService } from './services/user-dashboard/user-dashboard.s
 import { DepartmentService } from './services/department/department.service';
 import { NotificationService } from './services/notification/notification.service';
 import { ExpansionPanelComponent } from './components/shared/expansion-panel/expansion-panel.component';
-import { UserCreateComponent } from './components/core/dashboard/user/user-create/user-create.component';
 import { WidgetContainerComponent } from './components/shared/widget-container/widget-container.component';
 import { OrganisationComponent } from './components/core/dashboard/organisation/organisation.component';
 import { RoleComponent } from './components/core/dashboard/role/role.component';
@@ -34,7 +34,6 @@ import { WorkRequestComponent } from './components/core/dashboard/work-request/w
 import { ProjectModule } from './components/core/dashboard/projects/projects.module';
 import { IssueTrackerComponent } from './components/core/dashboard/inter-department-tracker/inter-department-tracker.component';
 import { OrganisationCreateComponent } from './components/core/dashboard/organisation/organisation-create/organisation-create.component';
-import { RoleCreateComponent } from './components/core/dashboard/role/role-create/role-create.component';
 import { DepartmentComponent } from './components/core/dashboard/department/department.component';
 import { UserDashboardComponent } from './components/core/dashboard/user-dashboard/user-dashboard.component';
 import { NcmDashboardComponent } from './components/core/dashboard/ncm-dashboard/ncm-dashboard.component';
@@ -80,9 +79,7 @@ import { NcmComponent } from './components/core/dashboard/ncm/ncm.component';
 import { DonutChartComponent } from './components/shared/donut-chart/donut-chart.component';
 import { DocumentListComponent } from './components/core/dashboard/document-list/document-list.component';
 import { BpdListComponent } from './components/core/dashboard/bpd-list/bpd-list.component';
-import { UserSelectionDialogComponent } from './components/core/dashboard/bpd-list/user-selection-dialog/user-selection-dialog.component';
 import { ContractConfigurationComponent } from './components/core/dashboard/contract-configuration/contract-configuration.component';
-import { UserSelectDialogComponent } from './components/core/dashboard/inter-department-tracker/inter-department-tracker-details/user-select-dialog/user-select-dialog.component';
 import { WorkCategoryDialogComponent } from './components/core/dashboard/work-request/work-request-details/work-category-dialog/work-category-dialog.component';
 import { ContractManagementDashboardComponent } from './components/core/dashboard/contract-management-dashboard/contract-management-dashboard.component';
 import { OperationsDashboardComponent } from './components/core/dashboard/operations-dashboard/operations-dashboard.component';
@@ -106,12 +103,10 @@ import { FeedbackComponent } from './components/core/dashboard/feedback/feedback
     OrganisationComponent,
     RoleComponent,
     ExpansionPanelComponent,
-    UserCreateComponent,
     WidgetContainerComponent,
     WorkRequestComponent,
     PanelHeaderFilterComponent,
     OrganisationCreateComponent,
-    RoleCreateComponent,
     DepartmentComponent,
     UserDashboardComponent,
     NcmDashboardComponent,
@@ -135,9 +130,7 @@ import { FeedbackComponent } from './components/core/dashboard/feedback/feedback
     DonutChartComponent,
     DocumentListComponent,
     BpdListComponent,
-    UserSelectionDialogComponent,
     ContractConfigurationComponent,
-    UserSelectDialogComponent,
     ContractManagementDashboardComponent,
     OperationsDashboardComponent,
     FeedbackComponent,
@@ -157,7 +150,8 @@ import { FeedbackComponent } from './components/core/dashboard/feedback/feedback
     SpinnerModule,
     FileManagerModule,
     NcmModule,
-    NgxPasswordToggleModule
+    NgxPasswordToggleModule,
+     MatAutocompleteModule
   ],
   entryComponents: [
     FolderCreateDialogComponent,
@@ -170,8 +164,6 @@ import { FeedbackComponent } from './components/core/dashboard/feedback/feedback
     ProjectDetailsComponent,
     ProjectPhasesComponent,
     ProjectTeamsComponent,
-    UserSelectionDialogComponent,
-    UserSelectDialogComponent,
     WorkCategoryDialogComponent,
     FileUploadDialogComponent,
     FeedbackComponent

@@ -14,7 +14,6 @@ export class UserDashDetailsComponent implements OnInit {
   @Input() formType: string;
   @Output() public updateRefresh: EventEmitter<any> = new EventEmitter<any>();
   private unsubscribe: Subject<any> = new Subject();
-
 	userDashboardForm: FormGroup;
 	constructor() { }
 
@@ -22,12 +21,9 @@ export class UserDashDetailsComponent implements OnInit {
     this.userDashboardForm = this.createFormGroup();
     this.assignValuesToForm()
 	}
-  
   assignValuesToForm() {
-    console.log(this.data, 'userDashboardForm')
     this.userDashboardForm.patchValue(this.data);
   }
-
 	createFormGroup() {
     return new FormGroup({
     documentStatus: new FormControl('', [Validators.required]),

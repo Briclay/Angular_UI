@@ -43,19 +43,16 @@ export class RoleDetailsComponent implements OnInit {
     this.roleDetailsForm = this.createFormGroup();
     this.assignValuesToForm();
   }
-
   public ngOnDestroy(): void {
 		this.unsubscribe.next();
 		this.unsubscribe.complete();
 	}
-
   loadRoute(params: any) {
 		if('orgID' in params) {
 			this.orgID = params['orgID'];
       this.getDepartments();    
 		}
 	}
-
   createFormGroup() {
     return new FormGroup({
       name: new FormControl('', [Validators.required]),
@@ -69,13 +66,13 @@ export class RoleDetailsComponent implements OnInit {
       access: new FormControl([])
     });
   }
-
+//assigning values of form to data
   assignValuesToForm() {
     if(this.formType !== 'create') {
       this.roleDetailsForm.patchValue(this.data)
     }
   }
-
+/*method to get department*/
   getDepartments() {
     if(this.orgID) {
       this.departmentService.getDepartmentByOrg(`filter[_organisationId]=${this.orgID}` )
@@ -86,7 +83,7 @@ export class RoleDetailsComponent implements OnInit {
         });
     }
 	}
-
+/*method to get feature*/
   getFeatures() {
     if(this.formType !== 'create') {
       this.openDialogFeature(this.data.access)
@@ -96,14 +93,13 @@ export class RoleDetailsComponent implements OnInit {
       this.roleService.getFeatures(userType, departmentId )
       .pipe().subscribe(res => {
         res.forEach((d) => d.check = false)
-        console.log(res, "res")
         this.openDialogFeature(res)
       }, (error: any) => {
         console.error('error', error);
       });
     }
 	}
-
+  //dialog of feature
   openDialogFeature(featureData) {
     const dialogRef = this.dialog.open(FeaturePopupComponent, {
       width: '500px',
@@ -162,5 +158,4 @@ export class RoleDetailsComponent implements OnInit {
         });
     }
   }
-
 }

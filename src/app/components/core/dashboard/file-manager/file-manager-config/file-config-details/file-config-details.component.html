@@ -1,10 +1,5 @@
 <div class="file-config-detail-container">
   <div class="detail-header">
-   <!--  <span>N</span>
-    <span>G</span>
-    <span>P</span>
-    <span>D</span> -->
-    <!-- <img matTooltip="Share" (click)="openShareDialog(fileList)" width="25" height="25" class="margin-left-4" src="assets/images/icons/File_Share.png"/> -->
     <img matTooltip="Share" width="25" height="25" class="margin-left-4" src="assets/images/icons/File_Share.png"/>
   </div>
   <!-- File Iocn -->
@@ -25,18 +20,10 @@
           <div fxFlex="50">Modified Date</div>
           <div fxFlex="50">{{logs.updatedAt | date:'MM/dd/yyyy'}}</div>
         </div>
-        <!-- <div fxLayout="row" class="space-in-row">
-            <div fxFlex="50">Modified By</div>
-            <div fxFlex="50">{{logs.owner.username}}</div>
-          </div> -->
         <div fxLayout="row" class="space-in-row">
           <div fxFlex="50">version</div>
           <div fxFlex="50">V {{logs.version}}</div>
         </div>
-        <!-- <div fxLayout="row" class="space-in-row">
-            <div fxFlex="50">Status</div>
-            <div fxFlex="50">{{logs.approvalStatus}}</div>
-          </div> -->
         <div fxLayout="row" class="space-in-row">
           <div fxFlex="50">Comments</div>
           <div fxFlex="50">File uploaded by {{uploadedBy}}</div>

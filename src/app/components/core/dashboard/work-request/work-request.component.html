@@ -1,96 +1,95 @@
-<app-top-menu></app-top-menu>
-<div class="work-request-container">
-  
-  <mat-tab-group #tabGroup>
-      <mat-tab label="Overview">
-         <app-panel-header-filter [data]="workRequests" (dataFilter)="dataPaginatorChange($event)"></app-panel-header-filter>
-         <div>
-     <mat-card style="margin-top: 5px;">
-      <div fxLayout=row style="place-content: space-around;">
-        <div class="table_header_text" >
-          <div fxLayout=row >
-            <span fxLayout=row  >Work Request ID</span>
-            <img  style="height: 12px;width: 12px;" src="/assets/images/icons/Filter.png" (click)="viewInputForFilterDataWR()" />
+    <app-top-menu></app-top-menu>
+    <div class="work-request-container">
+      <mat-tab-group #tabGroup>
+          <mat-tab label="Overview">
+            <app-panel-header-filter [data]="workRequests" (dataFilter)="dataPaginatorChange($event)"></app-panel-header-filter>
+            <div>
+        <mat-card style="margin-top: 5px;">
+          <div fxLayout=row style="place-content: space-around;">
+            <div class="table_header_text" >
+              <div fxLayout=row >
+                <span fxLayout=row  >Work Request ID</span>
+                <img  style="height: 12px;width: 12px;" src="/assets/images/icons/Filter.png" (click)="viewInputForFilterDataWR()" />
+              </div>
+              <span *ngIf="enableInputWR">            
+                <input #myInput type="text" (input)="filterItem(myInput.value)" style="color:#032A57; font-size: 11px;"/>
+              </span>
+            </div>
+            <div class="table_header_text" >
+              <div fxLayout=row >
+                <span fxLayout=row  >Need By date</span>
+                <img  style="height: 12px;width: 12px;" src="/assets/images/icons/Filter.png" (click)="viewInputForFilterDataNBD()" />
+              </div>
+              <span *ngIf="enableInputNBD">            
+                <input #myInput type="text" (input)="filterItem(myInput.value)" style="color:#032A57; font-size: 11px;"/>
+              </span>
+            </div>
+            <div class="table_header_text" >
+              <div fxLayout=row >
+                <span fxLayout=row  >Assignee</span>
+                <img  style="height: 12px;width: 12px;" src="/assets/images/icons/Filter.png" (click)="viewInputForFilterDataAssign()" />
+              </div>
+              <span *ngIf="enableInputAssign">            
+                <input #myInput type="text" (input)="filterItem(myInput.value)" style="color:#032A57; font-size: 11px;"/>
+              </span>
+            </div>
+            <div class="table_header_text" >
+              <div fxLayout=row >
+                <span fxLayout=row  >Type of work</span>
+                <img  style="height: 12px;width: 12px;" src="/assets/images/icons/Filter.png" (click)="viewInputForFilterDataTOW()" />
+              </div>
+              <span *ngIf="enableInputTOW">            
+                <input #myInput type="text" (input)="filterItem(myInput.value)" style="color:#032A57; font-size: 11px;"/>
+              </span>
+            </div>
+            <div class="table_header_text" >
+              <div fxLayout=row >
+                <span fxLayout=row  >Package/Description</span>
+                <img  style="height: 12px;width: 12px;" src="/assets/images/icons/Filter.png" (click)="viewInputForFilterDataDES()" />
+              </div>
+              <span *ngIf="enableInputDES">            
+                <input #myInput type="text" (input)="filterItem(myInput.value)" style="color:#032A57; font-size: 11px;"/>
+              </span>
+            </div>
+            <div class="table_header_text" >
+              <div fxLayout=row >
+                <span fxLayout=row  >Initiated Date</span>
+                <img  style="height: 12px;width: 12px;" src="/assets/images/icons/Filter.png" (click)="viewInputForFilterDataID()" />
+              </div>
+              <span *ngIf="enableInputID">            
+                <input #myInput type="text" (input)="filterItem(myInput.value)" style="color:#032A57; font-size: 11px;"/>
+              </span>
+            </div>
+            <div class="table_header_text" >
+              <div fxLayout=row >
+                <span fxLayout=row  >Work Category</span>
+                <img  style="height: 12px;width: 12px;" src="/assets/images/icons/Filter.png" (click)="viewInputForFilterDataWC()" />
+              </div>
+              <span *ngIf="enableInputWC">            
+                <input #myInput type="text" (input)="filterItem(myInput.value)" style="color:#032A57; font-size: 11px;"/>
+              </span>
+            </div>
           </div>
-          <span *ngIf="enableInputWR">            
-            <input #myInput type="text" (input)="filterItem(myInput.value)" style="color:#032A57; font-size: 11px;"/>
-          </span>
-        </div>
-        <div class="table_header_text" >
-          <div fxLayout=row >
-            <span fxLayout=row  >Need By date</span>
-            <img  style="height: 12px;width: 12px;" src="/assets/images/icons/Filter.png" (click)="viewInputForFilterDataNBD()" />
-          </div>
-          <span *ngIf="enableInputNBD">            
-            <input #myInput type="text" (input)="filterItem(myInput.value)" style="color:#032A57; font-size: 11px;"/>
-          </span>
-        </div>
-        <div class="table_header_text" >
-          <div fxLayout=row >
-            <span fxLayout=row  >Assignee</span>
-            <img  style="height: 12px;width: 12px;" src="/assets/images/icons/Filter.png" (click)="viewInputForFilterDataAssign()" />
-          </div>
-          <span *ngIf="enableInputAssign">            
-            <input #myInput type="text" (input)="filterItem(myInput.value)" style="color:#032A57; font-size: 11px;"/>
-          </span>
-        </div>
-        <div class="table_header_text" >
-          <div fxLayout=row >
-            <span fxLayout=row  >Type of work</span>
-            <img  style="height: 12px;width: 12px;" src="/assets/images/icons/Filter.png" (click)="viewInputForFilterDataTOW()" />
-          </div>
-          <span *ngIf="enableInputTOW">            
-            <input #myInput type="text" (input)="filterItem(myInput.value)" style="color:#032A57; font-size: 11px;"/>
-          </span>
-        </div>
-        <div class="table_header_text" >
-          <div fxLayout=row >
-            <span fxLayout=row  >Package/Description</span>
-            <img  style="height: 12px;width: 12px;" src="/assets/images/icons/Filter.png" (click)="viewInputForFilterDataDES()" />
-          </div>
-          <span *ngIf="enableInputDES">            
-            <input #myInput type="text" (input)="filterItem(myInput.value)" style="color:#032A57; font-size: 11px;"/>
-          </span>
-        </div>
-        <div class="table_header_text" >
-          <div fxLayout=row >
-            <span fxLayout=row  >Initiated Date</span>
-            <img  style="height: 12px;width: 12px;" src="/assets/images/icons/Filter.png" (click)="viewInputForFilterDataID()" />
-          </div>
-          <span *ngIf="enableInputID">            
-            <input #myInput type="text" (input)="filterItem(myInput.value)" style="color:#032A57; font-size: 11px;"/>
-          </span>
-        </div>
-        <div class="table_header_text" >
-          <div fxLayout=row >
-            <span fxLayout=row  >Work Category</span>
-            <img  style="height: 12px;width: 12px;" src="/assets/images/icons/Filter.png" (click)="viewInputForFilterDataWC()" />
-          </div>
-          <span *ngIf="enableInputWC">            
-            <input #myInput type="text" (input)="filterItem(myInput.value)" style="color:#032A57; font-size: 11px;"/>
-          </span>
-        </div>
+        </mat-card>
       </div>
-    </mat-card>
-  </div>
-            <div style ="place-content :center;">
-              <mat-spinner style="margin:0 auto;" *ngIf="isLoading; else content" [diameter]="40"></mat-spinner>
-            </div>
-            <div fxLayout="row">
-              <ng-template #content>
-                <app-expansion-panel 
-                  *ngIf="workRequests"
-                  [expansionPanelOptions]="workRequestDataOption"
-                  [pageIndex]="pageIndex"
-                  [pageSize]="pageSize"
-                  selectorComponent="app-work-request-details" 
-                  [data]="workRequests"
-                  [isHistory]="true" (updateRefresh)="getWorkRequest()"></app-expansion-panel>
-              </ng-template>
-            </div>
-      </mat-tab>
-      <mat-tab label="New">
-        <app-work-request-details  formType="create" (tabSwitch)="tabSwitch($event)" ></app-work-request-details>
-      </mat-tab>
-  </mat-tab-group>
-</div>
+                <div style ="place-content :center;">
+                  <mat-spinner style="margin:0 auto;" *ngIf="isLoading; else content" [diameter]="40"></mat-spinner>
+                </div>
+                <div fxLayout="row">
+                  <ng-template #content>
+                    <app-expansion-panel 
+                      *ngIf="workRequests"
+                      [expansionPanelOptions]="workRequestDataOption"
+                      [pageIndex]="pageIndex"
+                      [pageSize]="pageSize"
+                      selectorComponent="app-work-request-details" 
+                      [data]="workRequests"
+                      [isHistory]="true" (updateRefresh)="getWorkRequest()"></app-expansion-panel>
+                  </ng-template>
+                </div>
+          </mat-tab>
+          <mat-tab label="New">
+            <app-work-request-details  formType="create" (tabSwitch)="tabSwitch($event)" ></app-work-request-details>
+          </mat-tab>
+      </mat-tab-group>
+    </div>

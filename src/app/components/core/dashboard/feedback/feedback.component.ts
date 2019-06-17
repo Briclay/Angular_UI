@@ -71,7 +71,7 @@ export class FeedbackComponent implements OnInit {
 	}
 	submitForm(v){
 		if (this.feedbackForm.valid ) {
-			console.log("Form Submitted!",this.feedbackForm);
+			//console.log("Form Submitted!",this.feedbackForm);
 			this.snackBar.open("Form Submitted", 'Feedback Form', {
 				duration: 2000,
 			});

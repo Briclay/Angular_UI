@@ -14,7 +14,6 @@ import { takeUntil } from 'rxjs/operators';
 export class ProjectsComponent implements OnInit {
   @ViewChild('tabGroup') tabGroup;
   @ViewChild(MatPaginator) paginator: MatPaginator;    
-
   pageIndex : number = 0;
   pageSize : number = 5;
   projectDataOptions = [];
@@ -37,9 +36,6 @@ export class ProjectsComponent implements OnInit {
 
   ngOnInit() {
     this.getProjects();
-    // observableMerge(this.route.params, this.route.queryParams).pipe(
-    //   takeUntil(this.unsubscribe))
-    //   .subscribe((params) => this.loadRoute(params));
   }
 
   public ngOnDestroy(): void {
@@ -51,22 +47,10 @@ export class ProjectsComponent implements OnInit {
     this.pageIndex = event.pageIndex;
     this.pageSize = event.pageSize;
   }
-  
-  // loadRoute(params: any) {
-  //   if ('orgID' in params) {
-  //     this.selectedOrgId = params['orgID'];
-  //     this.getProjects();
-  //   }
-  // }
-
-  // organizationChanged(org: any) {
-  //   this.router.navigate([], { queryParams: { orgID: org.value ? org.value._id : org._id }, queryParamsHandling: 'merge' });
-  // }
-
+/*method to get project*/
   getProjects() {
     this.projectLoading = true;
     this.projectService.getProjects(this.orgID).pipe().subscribe(res => {
-      console.log('res', res);
       this.projectLoading = false;
       res && res.length > 0 && res.forEach((list) => {
         list.displayLogo =  list.imageUrls && list.imageUrls.length > 0 && list.imageUrls[0];
@@ -77,7 +61,6 @@ export class ProjectsComponent implements OnInit {
         list.block = list.projectDetails && list.projectDetails.blocks && list.projectDetails.blocks
       })
       this.projects = res;
-      console.log(res,"allProjects")
       this.projectDataOptions = [
         {
           title: 'Image', key: 'displayLogo', hideTitle: true, type: 'image'
@@ -99,10 +82,8 @@ export class ProjectsComponent implements OnInit {
       this.projectLoading = false;
     });
   }
-
   tabSwitch(tabReq) {
     this.tabGroup.selectedIndex = tabReq.index;
     this.getProjects();
   }
-
 }

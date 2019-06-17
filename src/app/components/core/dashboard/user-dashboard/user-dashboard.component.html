@@ -66,10 +66,6 @@
                 <div class="card-title">Awating RFA approval</div>
                 <div class="font_12">{{getAnalytics && getAnalytics.toatlRfaApproval}}</div>
               </mat-card> 
-             <!--  <mat-card class="report_card_top" fxFlex=19 fxLayout=row                 style="place-content:space-between;">
-                <div class="card-title">Awating WO approval</div>
-                <div class="font_12">{{getAnalytics.totatRequest}}</div>
-              </mat-card> -->
               <mat-card class="report_card_top" fxFlex=33 fxLayout=row style="place-content: space-between;height: 85%;align-items: center;">
                 <div class="card-title">Awating WO approval</div>
                 <div class="font_12">{{getAnalytics && getAnalytics.onHold}}</div>
@@ -133,7 +129,6 @@
                     <input #myInput type="text" (input)="filterItem(myInput.value)" style="color:#032A57; font-size: 11px;"/>
                   </span>
                 </div>
-                <!-- <div class="table_header_text" style="width:6%">History</div> -->
               </div>
             </mat-card>
             <div fxLayout="row">

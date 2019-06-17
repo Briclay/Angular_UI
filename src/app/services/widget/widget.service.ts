@@ -9,7 +9,6 @@ import { UserDashDetailsComponent } from '../../components/core/dashboard/user-d
 import { IssueTrackerDetailsComponent } from '../../components/core/dashboard/inter-department-tracker/inter-department-tracker-details/inter-department-tracker-details.component';
 import { IssueTrackerCreateComponent } from '../../components/core/dashboard/inter-department-tracker/inter-department-tracker-create/inter-department-tracker-create.component';
 import { DocumentListDetailsComponent } from '../../components/core/dashboard/document-list/document-list-details/document-list-details.component';
-import { DocumentListMoreDetailsComponent } from '../../components/core/dashboard/document-list/document-list-details/document-list-more-details/document-list-more-details.component';
 import { DocumentListCreateComponent } from '../../components/core/dashboard/document-list/document-list-create/document-list-create.component';
 import { NcmDetailsComponent } from '../../components/core/dashboard/ncm/ncm-details/ncm-details.component';
 import { OpportunityDetailsComponent } from '../../components/core/dashboard/ncm/ncm-details/opportunity-details/opportunity-details.component';
@@ -32,7 +31,6 @@ export class WidgetService {
 		'app-user-dash-details': UserDashDetailsComponent,
 		'app-issue-tracker-details':IssueTrackerDetailsComponent,
 		'app-issue-tracker-create' : IssueTrackerCreateComponent,
-        'app-document-list-more-details':DocumentListMoreDetailsComponent,
         'app-document-list-details':DocumentListDetailsComponent,
         'app-document-list-create':DocumentListCreateComponent,
         'app-ncm-details':NcmDetailsComponent,

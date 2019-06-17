@@ -6,7 +6,6 @@
     <div fxFlex="25">
       <mat-card fxFlex="100" class="card-form">
         <!-- commented for build -->
-<!-- <form [formGroup]="phaseForm" novalidate>-->          
         <form novalidate>
          <div class="display-phs-block1">
             <div fxLayout="column">
@@ -17,18 +16,7 @@
                       <input matInput placeholder="Phase" formControlName="name">
                     </mat-form-field>
                   </div>
-                  <!-- <div formArrayName="blocks" class="phs-n-twr-btn">
-                    <div class="phs-blc1" fxLayout="row" *ngFor="let block of blocks.controls;let i = index">
-                      <mat-form-field [formGroupName]="i">
-                        <input matInput placeholder="Block/tower" formControlName="name">
-                      </mat-form-field>
-                      <mat-icon class="mt-icn mt-icn-delete" (click)="deleteBlocks(i)" *ngIf="phaseForm.controls.blocks.controls.length > 1">delete</mat-icon>
-                    </div>
-                  </div> -->
                 </div>
-               <!--  <div fxLayout="column" id="add-btn-div">
-                  <div mat-icon class="mt-icn-plus mat-icon material-icons" title="Create Block" (click)="addBlocks()">add</div>
-                </div> -->
               </div>
               <div id="ok-btn-div">
                 <button id="btn-show-data-in-right"> Add </button>
@@ -49,95 +37,11 @@
               </div>
             </div>
             <div>
-              <!-- commented for build -->
-             <!--  <div fxLayout="row" *ngFor="let phase of PhaseList;let i = index; let lastList = last"
-                class="display-phs-content" [ngClass]="{ 'border-btm' : !lastList }">
-                <div class="project-team-form-feilds" fxLayout="row" fxLayoutAlign="space-between center" fxFlex="100">
-                  <div fxFlex="50">
-                    <mat-form-field class="tblphs">
-                      <input matInput readonly value="{{phase.name}}">
-                    </mat-form-field>
-                  </div>
-                  <div fxFlex="50">
-                    <div class="tblphs" fxLayout="row" fxLayoutAlign="space-between center" *ngFor="let block of phase.blocks;let j = index">
-                      <mat-form-field>
-                        <input matInput readonly value={{block.name}}>
-                      </mat-form-field>
-                      <mat-icon class="mt-icn" (click)="deleteCreatedBlocks(i,j)">delete_outline</mat-icon>
-                    </div>
-                  </div>
-                </div>
-              </div> -->
             </div>
           </div>
         </div>
       </mat-card>
     </div>
-    <!--     <div fxFlex="25">
-      <form [formGroup]="createPhaseForm" novalidate>
-        <div formArrayName="phases" class="display-phs-block1">
-          <div fxLayout="column" *ngFor="let phase of getPhasesArray(createPhaseForm);let i = index">
-            <div class="project-team-form-feilds" [formGroupName]="i" fxLayout="row">
-              <div fxLayout="column" id="phase-and-tower-box">
-                <div class="phs-n-twr-btn">
-                  <mat-form-field class="phs-blc">
-                    <input matInput placeholder="Phase" formControlName="name" (keyup)="onNextClick()">
-                  </mat-form-field>
-                </div>
-                <div formArrayName="blocks" class="phs-n-twr-btn">
-                  <div class="phs-blc1" fxLayout="row" *ngFor="let block of getblocks(phase);let j = index">
-                    <mat-form-field [formGroupName]="j">
-                      <input matInput placeholder="Block/tower" formControlName="name" (keyup)="onNextClick()">
-                    </mat-form-field>
-                  </div>
-                </div>
-              </div>
-              <div fxLayout="column" id="add-btn-div">
-                <div mat-icon class="mt-icn-plus mat-icon material-icons" title="Create Block" (click)="addBlock(i)">add</div>
-              </div>
-            </div>
-            <div id="ok-btn-div">
-              <button id="btn-show-data-in-right" (click)="addPhases(i)" *ngIf="i===0"> Add </button>
-            </div>
-          </div>
-        </div>
-      </form>
-    </div> -->
-    <!-- end header -->
-    <!--     <div fxFlex="55">
-      <form [formGroup]="phaseForm">
-        <div class="display-phs-block">
-          <div>
-            <div fxLayout="row">
-              <div fxFlex="95" fxLayoutAlign="space-between center">
-                <div fxFlex="45" class="labal-name">Phases</div>
-                <div fxFlex="45" class="labal-name">Block/Tower</div>
-                <div fxFlex="5"></div>
-              </div>
-              <div fxFlex="5"></div>
-            </div>
-            <div formArrayName="phases">
-              <div fxLayout="row" *ngFor="let phase of getPhasesArray(phaseForm);let i = index">
-                <div class="project-team-form-feilds" [formGroupName]="i" fxLayout="row" fxLayoutAlign="space-between center" fxFlex="95">
-                  <div fxFlex="45">
-                    <mat-form-field class="tblphs">
-                      <input matInput formControlName="name" readonly (keyup)="onNextClick()">
-                    </mat-form-field>
-                  </div>
-                  <div fxFlex="45" formArrayName="blocks">
-                    <div class="tblphs" fxLayout="row"  fxLayoutAlign="space-between center" *ngFor="let block of getblocks(phase);let j = index">
-                      <mat-form-field [formGroupName]="j">
-                        <input matInput formControlName="name"  readonly (keyup)="onNextClick()">
-                      </mat-form-field>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </form>
-    </div> -->
     <div fxFlex="15"></div>
   </div>
 </div>

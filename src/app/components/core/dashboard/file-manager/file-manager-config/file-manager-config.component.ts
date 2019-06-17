@@ -24,12 +24,11 @@ import { forkJoin } from 'rxjs';  // RxJS 6 syntax
   styleUrls: ['./file-manager-config.component.scss']
 })
 export class FileManagerConfigComponent implements OnInit {
-  //filesToUpload: Array<File> = [];
   organizations: any[];
   projectlist: any;
   selectedProjectStatus = {
-    logoImageUrl: 'assets/images/building-2.jpg',
-    name: 'list'
+  logoImageUrl: 'assets/images/building-2.jpg',
+  name: 'list'
   };
   filesArray = [];
   form: FormGroup;
@@ -81,7 +80,7 @@ export class FileManagerConfigComponent implements OnInit {
   selectedProjectByParams:any;
   selectedProjectDataByParams:any;
   selectedFileData : any;
-  displayedColumns: string[] = ['type', 'name', 'createdAt', 'version', 'logs', 'email', 'share', 'download'];
+  displayedColumns: string[] = ['type', 'name', 'createdAt', 'folderCount','fileCount', 'logs', 'email', 'share', 'download'];
   private unsubscribe: Subject<any> = new Subject();
 
   constructor(
@@ -96,8 +95,6 @@ export class FileManagerConfigComponent implements OnInit {
     private formBuilder: FormBuilder,
     private snackBar: MatSnackBar
     ) {
-
-
     this.route.params.subscribe(params => {
       this.orgId  = params['orgId'];
       this.deptId = params['deptId'];
@@ -117,7 +114,6 @@ export class FileManagerConfigComponent implements OnInit {
     if (window.localStorage.files_iconArray) {
       this.iconArray = JSON.parse(window.localStorage.files_iconArray);
     }
-    console.log('this.iconArray ', this.iconArray);
     // restric browser back button
     location.onPopState(() => {
       window.history.forward();
@@ -128,16 +124,14 @@ export class FileManagerConfigComponent implements OnInit {
     observableMerge(this.route.queryParams).pipe(
       takeUntil(this.unsubscribe))
     .subscribe((queryParams) => this.loadRoute(queryParams));
-    //window.localStorage.setItem('selectProjectParams', JSON.stringify({}));
     this.currentUrl = this.router.url;
     this.localStack = JSON.parse(window.localStorage.getItem('stack'));
     this.fullPathDisplay = JSON.parse(window.localStorage.getItem('stack'));
     this.path = JSON.parse(window.localStorage.getItem('stack'));
-
     this.folderConfigData();
-    this.getSingleFolder(this.fileId);
-    /*this.deptConfigData = JSON.parse(window.localStorage.getItem('FOLDER_CONFIG_DETAILS'));
-    this.populateConfigData(this.deptConfigData);*/
+    if(this.fileId){
+      this.getSingleFolder(this.fileId);
+    }
   }
 
   loadRoute(queryParams: any) {
@@ -148,16 +142,13 @@ export class FileManagerConfigComponent implements OnInit {
       window.localStorage.setItem('selectProjectParams', JSON.stringify({}));
     }
   }
-
   public ngOnDestroy(): void {
     this.unsubscribe.next();
     this.unsubscribe.complete();
   }
-
   projectChanged(proj) {
     this.selectProjectStatus = "";
     this.router.navigate([], { queryParams: { projId: proj.value ? proj.value._id : proj._id }, queryParamsHandling: 'merge' });
-    console.log(proj);
     if(this.projId){
       this.projectService.getSingleProjects(this.projId).pipe().subscribe(res => {
         this.selectedProjectData = res
@@ -172,11 +163,6 @@ export class FileManagerConfigComponent implements OnInit {
         this.getSingleProject(this.selectedProjectData);
       })
     }
-      // else {   
-      //   this.selectedProjectData = proj.value || proj
-      //   this.selectProjectStatus = proj.value.status || proj.status
-      //   this.getSingleProject(proj);
-      // }
     }
 
     folderConfigData() {
@@ -203,13 +189,9 @@ export class FileManagerConfigComponent implements OnInit {
               } else {
                 this.tableFlag = true;
               }
-
             }
           }
         } else {
-          // this.snackBar.open('No config data found', 'Folder Config', {
-          //   duration: 2000,
-          // });
           this.tableFlag = true;
         }
       }
@@ -223,7 +205,6 @@ export class FileManagerConfigComponent implements OnInit {
       this.workRequestFlag = false;
       if (pPos !== -1) {
         const details = tempData.details[pPos];
-        console.log(' details.name', details.name);
         if ('project' === details.name) {
           this.getProjectListinIt();
           window.localStorage.projectLevel = details.level;
@@ -249,7 +230,6 @@ export class FileManagerConfigComponent implements OnInit {
               if (tempData.deptName === 'Contracts') {
                 this.projectFlag = true;
               }
-
             }
           } else {
             this.tableFlag = false;
@@ -306,10 +286,10 @@ export class FileManagerConfigComponent implements OnInit {
       }
     }
   }
+  //To Get All Organizations
   getOrganiztions() {
     this.organisationService.getOrganization()
     .pipe().subscribe(res => {
-
     }, (error: any) => {
       console.error('error', error);
     });
@@ -317,6 +297,8 @@ export class FileManagerConfigComponent implements OnInit {
   compareObjects(o1: any, o2: any): boolean {
     return o1.name === o2.name && o1.id === o2.id;
   }
+
+  //To Get All Project List
   getProjectListinIt() {
     this.projectService.getProjects(this.orgId)
     .pipe().subscribe(res => {
@@ -335,9 +317,6 @@ export class FileManagerConfigComponent implements OnInit {
         })
 
       } else {
-          // this.snackBar.open('No data found', 'project', {
-          //   duration: 2000,
-          // });
         }
       }, (error: any) => {
         console.error('error', error);
@@ -345,21 +324,9 @@ export class FileManagerConfigComponent implements OnInit {
           duration: 2000,
         });
       });
-
-
   }
-
-  /*
-    * on Select project
-    * check for deparment config
-    * after select project create folder with project id
-    * if exist show table or shoe icons
-    */
     getSingleProject(list) {
       this.isLoading = true;
-      /*    this.selectProjectStatus = list.status;*/ 
-      console.log(this.selectProjectStatus, 'this.selectProjectStatus')
-      console.log('this.selectedProjectData', this.selectedProjectData);
       window.localStorage.files_project = JSON.stringify(this.selectedProjectData);
       const body = {
         name: this.selectedProjectData.name,
@@ -372,7 +339,6 @@ export class FileManagerConfigComponent implements OnInit {
         details: 'This folder is created by ',
         accessFlag: 'Private'
       };
-      console.log('this.deptConfigData', this.deptConfigData);
         // logic for only contrcat departemt to add fodler name with id
         if (this.deptConfigData.deptName === 'Contracts') {
           this.fileManagerService.getSingleFile(this.fileId)
@@ -388,7 +354,6 @@ export class FileManagerConfigComponent implements OnInit {
           this.createProjectFolder(body, this.selectedProjectData);
         }
       }
-
       createProjectFolder(body, row) {
         this.isLoading = true;
         if (this.deptConfigData.iconFlag) {
@@ -406,12 +371,9 @@ export class FileManagerConfigComponent implements OnInit {
             this.getSingleFolder(this.fileId);
           }
         }, (error: any) => {
-          console.log('error', error);
-        // if exist then show tbales otherwise show erro
+          //console.log('error', error);
+        // if exist then show tbales otherwise show error
         if ('Folder exist' === error.message) {
-          /*this.snackBar.open(error.message, 'Folder', {
-            duration: 3000,
-          });*/
           if (this.designDeptFlag) {
             this.getIconFoldersByApi(row);
           } else {
@@ -423,7 +385,6 @@ export class FileManagerConfigComponent implements OnInit {
       }
       getIconFoldersByApi(row) {
         this.isLoading = true;
-        console.log('row', row);
     // tslint:disable-next-line:max-line-length
     this.fileManagerService.getAllFolders('filter[_projectId]=' + row._id + '&filter[name]=' + row.name + '&filter[_departmentId]=' + this.deptId)
     .pipe().subscribe(res => {
@@ -497,9 +458,7 @@ export class FileManagerConfigComponent implements OnInit {
   }
 
   openfileUploadDialogForRfaWo(response: any, file, body: any) {
-
     this.selectedFileData = body; 
-    console.log(response, 'file upload data')
     const dialogRef = this.dialog.open(FileUploadDialogComponent, {
       width: '600px',
       data: file
@@ -508,13 +467,10 @@ export class FileManagerConfigComponent implements OnInit {
       if(res){
         body.approval = res.approval;
         body.remarks = res.remarks;
-        console.log(body, 'body before file upload for RFA & WO')
         this.saveOnS3(response, file, body);
       }
     });
   }
-
-
   getSingleFolder(id) {
     this.isLoading = true;
     this.fileManagerService.getSingleFile(id)
@@ -522,9 +478,6 @@ export class FileManagerConfigComponent implements OnInit {
       this.isLoading = false;
       this.dataSource = new MatTableDataSource(res);
     }, (error: any) => {
-        // this.snackBar.open(error.message, 'Folder', {
-        //   duration: 3000,
-        // });
         console.error('error', error);
       });
   }
@@ -599,16 +552,13 @@ export class FileManagerConfigComponent implements OnInit {
       });
     }
   }
-
   // click on icon
-
   getClickedByIcon(value) {
     this.fileId = value._id
     this.clickedIconName = value.name;
     this.folderDetailsDataOption = value;
     if (this.orgId && this.deptId && value) {
       if (value.type === 'folder') {
-        //this.projectFlag = false;
         const path = '/dashboard/file-manager/' + this.orgId + '/' + this.deptId + '/' + value._id;
         let top = 0;
         let stack;
@@ -642,7 +592,7 @@ export class FileManagerConfigComponent implements OnInit {
 
   goBackButton() {
     if(!this.fileId){
-      const path = '/dashboard/file-manager'
+      const path = '/dashboard/file-manager/'
       this.router.navigate([path]);/**/
     }
     else {
@@ -667,11 +617,6 @@ export class FileManagerConfigComponent implements OnInit {
   backHomePage() {
     const path = '/dashboard/file-manager'
     this.router.navigate([path]);/**/
-    /*const homeBack = JSON.parse(window.localStorage.getItem('stack'));
-    const path = homeBack[0].path;
-    this.router.navigate([path]).then(() => {
-      this.ngOnInit();
-    });*/
   }
 
   // this method for route navigation
@@ -689,24 +634,7 @@ export class FileManagerConfigComponent implements OnInit {
   getFileDetails(fileList) {
     this.fileDetialsLoading = true;
     this.folderDetailsDataOption = fileList;
-
   }
-/*
-fileChangeEvent(fileInput: any) {
-    let upload = <Array<File>>fileInput.target.files;
-    if(upload ){
-      this.filesToUpload = upload
-    }
-    else{
-      this.snackBar.open("Please Upload max 10 File", 'File Upload', {
-        duration: 2000,
-      });
-      this.filesToUpload['_touched'] = false;
-      //alert('upload max 10')
-    }
-    //this.product.photo = fileInput.target.files[0]['name'];
-}
-*/
 upload(files){
   console.log('fileUploaded',files[0].name);
     //pick from one of the 4 styles of file uploads below
@@ -735,7 +663,6 @@ upload(files){
             details: "file original name is " + file.name
           };
           if(this.selectedName === 'RFA' ||this.selectedName === 'Order/Agreement'){
-            console.log('RFA & WO/Agreement')
             this.openfileUploadDialogForRfaWo(res, file, json)
           }
           else{
@@ -763,9 +690,9 @@ upload(files){
     let l = files.length-1;
     console.log('final file', files[l]);
     this.openDetailsDialog(files);
-    //this.uploadAndProgress(files);
   } 
-
+  
+  //this method for save the input file on S3
   saveOnS3(response: any, file, body: any) {
     this.http.put(response.signedRequest, file, {
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
@@ -774,8 +701,6 @@ upload(files){
       this.fileJson = body;
       this.filesArray.push(this.fileJson)
       return;
-      // this.getAssingedUser(json);
-      //this.onSaveFile(body)
     }, (error: any) => {
       console.log('erro' + JSON.stringify(error));
       this.snackBar.open("Upload Failed", 'File Upload', {
@@ -783,12 +708,10 @@ upload(files){
       });
     });
   }
-
+  //this method for upload the file in database
   onSaveFile() {
     let array = this.filesArray;
-    console.log(array, 'body');
     this.isLoading = true;
-
     array && array.length > 0 &&
     array.forEach(v => {
      this.fileManagerService.saveFile(v)
@@ -808,7 +731,7 @@ upload(files){
     });
    })
   }
-
+  //this method for pop-up of file uploading percentage
   openDetailsDialog(vvv) {
     let dialogRef = this.dialog.open(UploadPopupComponent, {
       width: '700px',
@@ -847,10 +770,10 @@ upload(files){
       });
     }
   }
+  /*to get logs of uploaded files*/
   getLogs(data: any) {
     if (data.type === 'file') {
       this.fileDetails = data;
-      console.log(this.fileDetails, 'this.fileDetails');
     }
   }
   /*downlaod file */
@@ -929,5 +852,4 @@ upload(files){
       this.getSingleFolder(this.fileId);
     });
   }
-
 }

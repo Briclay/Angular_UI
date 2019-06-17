@@ -57,7 +57,7 @@ export class OrganisationComponent implements OnInit {
   organizationChanged(org) {
     this.router.navigate([], {queryParams: {orgID: org.value ? org.value._id : org._id} , queryParamsHandling: 'merge'});
   }
-
+    /*method to get Organization*/
   getOrganisationData() {
     this.orgListSpinner = true;
     this.organisationService.getAll(this.selectedOrgId).pipe().subscribe(res => {
@@ -81,7 +81,7 @@ export class OrganisationComponent implements OnInit {
       this.orgListSpinner = false;
     });
   }
-
+/*dialog of History*/
   openDialog(data) {
     this.organisationService.getHistory().pipe().subscribe(res => {
       this.historyData = {

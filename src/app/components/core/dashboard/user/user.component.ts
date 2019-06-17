@@ -19,7 +19,6 @@ export class UserComponent implements OnInit {
   loading: boolean;
   pageIndex : number = 0;
   pageSize : number = 5;
-
   private unsubscribe: Subject<any> = new Subject();
 
   constructor(
@@ -49,7 +48,7 @@ export class UserComponent implements OnInit {
   organizationChanged(org) {
     this.router.navigate([], { queryParams: { orgID: org.value ? org.value._id : org._id }, queryParamsHandling: 'merge' });
   }
-
+/*method to get user*/
   getUsers() {
     this.loading = true;
     this.userService.getUser(this.orgID).pipe().subscribe(res => {
@@ -72,10 +71,8 @@ export class UserComponent implements OnInit {
 			this.loading = false;
 		});
   }
-
   tabSwitch(tabReq) {
 		this.tabGroup.selectedIndex = tabReq.index;
 		this.getUsers()
 	}
-
 }

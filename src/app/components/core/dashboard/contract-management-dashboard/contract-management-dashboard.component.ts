@@ -26,10 +26,7 @@ export class ContractManagementDashboardComponent implements OnInit {
   projectLoading = false;
   displayedColumns: string[] = ['name', 'status', 'budget', 'unitNumber'];
   private unsubscribe: Subject<any> = new Subject();
-  
   list = []
-
-
   dummyArray=[ 
   {
     "name" : "Contract Order",
@@ -105,41 +102,28 @@ dataPaginatorChange(event){
 }
 
 orderView (v){
-
   this.list=v.table
-  console.log(v,"zdcfsfcdsfsffsfds")
 this.clickedProjectName = v.name;
   this.enableOrders = true;
-
 }
+
+//Drop Down of select a Project
 selectProject(event){
   this.projectService.getSingleProjects(event._id).pipe().subscribe(res => {
     this.selecetedProjectData = res;
     this.clickedProjectName = res.name;
-
   }, (error: any) => {
     console.error('error', error);
   });
 }
 
  selectSingleProject(proj){
-    // this.projectTypes = []
-    // if(this.analyticsLoading === false){
-      console.log(proj, "selected poject data")
-      // this.projectSelected = true;
-      // this.selectedProjectData = proj;s
-      
-      // this.projectConsultants = this.selectedProjectData._consultants;
-      // this.unitsArray = this.selectedProjectData.units;
-      // this.getAllAnalytics()
-    // }
   }
 
-
+ //To get all project
 getProjects() {
   this.projectLoading = true;
   this.projectService.getProjects(this.orgID).pipe().subscribe(res => {
-    console.log('res', res);
     this.projectLoading = false;
     res.forEach((list) => {
       list.displayLogo = list.imageUrls[0];

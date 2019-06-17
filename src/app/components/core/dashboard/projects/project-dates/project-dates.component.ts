@@ -23,15 +23,11 @@ export class ProjectDatesComponent implements OnInit {
     this.dateFormErrors = {
       beginDate: {},
       completionDate: {},
-
     };
-
-
     this.dateForm = this.formBuilder.group({
       beginDate: ['', Validators.required],
       completionDate: ['', Validators.required],
     });
-
   }
   onFormValuesChanged() {
     for (const field in this.formErrors) {
@@ -53,11 +49,11 @@ export class ProjectDatesComponent implements OnInit {
   ngOnInit() {
   }
   onSubmit() {
-    console.log('this.dateForm', this.dateForm.value);
+    //console.log('this.dateForm', this.dateForm.value);
     this.dialogRef.close(this.dateForm.value);
   }
   beginDateSelected() {
-    console.log('beginDateSelected', this.dateForm.value.beginDate);
+    //console.log('beginDateSelected', this.dateForm.value.beginDate);
     this.beginDateFlag = false;
     this.beginDate = this.dateForm.value.beginDate
   }
