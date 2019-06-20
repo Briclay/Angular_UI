@@ -24,6 +24,7 @@
                 <div (click)="selectSingleProject(project)"  fxLayout=row style="place-content: space-between;border-radius: 5px;padding: 4px;" class="{{project.name === clickedProjectName ? 'bg_color_active' : 'bg_color'}}">
                   <div fxLayout=row class="padding_2">
                     <img style="height: 85px;width: 115px;border-radius: 10%;" src={{project.imageUrls[0]}}>
+
                   </div>
                   <div fxLayout=column>
                     <div class="{{project.name === clickedProjectName ? 'p_name_active_color' : 'p_name_color'}}" >{{project.name}}</div>
@@ -63,7 +64,14 @@
                 <mat-spinner style="margin-left: 450px;margin:0 auto;" *ngIf="analyticsLoading;" [diameter]="40"></mat-spinner>
               <div *ngFor="let ptype of projectTypes" fxLayout=column>
                 <div fxLayout=row  class="position_relative">
-                  <img style="height: 115px;width: 115px;margin-right: 10px;" src="/assets/images/icons/donut.png">
+                 <!--  <img style="height: 115px;width: 115px;margin-right: 10px;" src="/assets/images/icons/donut.png"> -->
+                  <app-donut-chart></app-donut-chart>
+                 <!--  <div class="row">
+                      <div class="col-lg-12" id="DoughnutChart">
+                          <p-chart type="doughnut" [data]="data"></p-chart>
+                      </div>
+                  </div> -->
+                  <app-donut-chart></app-donut-chart>
                   <div style="position: absolute;top: 53px;right: 62px;" class="font_10_PT">{{ptype.totalFile}}</div>
                 </div>
                 <div class="font_10_PT">{{ptype.name}}</div>

@@ -45,8 +45,7 @@ import { WorkOrderComponent } from './components/core/dashboard/work-order/work-
 import { FileShareDialogComponent } from './components/core/dashboard/file-manager/file-share-dialog/file-share-dialog.component'
 import { FileMailDialogComponent } from './components/core/dashboard/file-manager/file-mail-dialog/file-mail-dialog.component'
 import { FileUploadDialogComponent } from './components/core/dashboard/file-manager/file-upload-dialog/file-upload-dialog.component'
-import { NgxPasswordToggleModule } from 'ngx-password-toggle';
-
+import { DoughnutChartComponent, PieChartComponent } from 'angular-d3-charts'; // this is needed!
 //  all Briclay project Modules imports below
 import { WorkOrderModule } from './components/core/dashboard/work-order/work-order.module';
 import { NcmModule } from './components/core/dashboard/ncm/ncm.module';
@@ -99,6 +98,8 @@ import { FeedbackComponent } from './components/core/dashboard/feedback/feedback
     ProjectsComponent,
     SettingsComponent,
     HomeComponent,
+    DoughnutChartComponent, 
+    PieChartComponent, 
     BarChartComponent,
     OrganisationComponent,
     RoleComponent,
@@ -150,7 +151,6 @@ import { FeedbackComponent } from './components/core/dashboard/feedback/feedback
     SpinnerModule,
     FileManagerModule,
     NcmModule,
-    NgxPasswordToggleModule,
      MatAutocompleteModule
   ],
   entryComponents: [

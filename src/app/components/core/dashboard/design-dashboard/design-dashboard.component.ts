@@ -37,10 +37,12 @@
     unitsArray =[];
     userDeppartment : any;
     clickedProjectName: any;
+    datas: any;
     analyticResponseCheck = false;
     projectTypes =[]
     intiallTypes =  [ 'Architecture', 'Structural','PHE', 'Electrical','Fire',
     'HVAC','Interiors'];
+     
     analyticsLoading  = false;
     private unsubscribe: Subject<any> = new Subject();
 
@@ -63,7 +65,24 @@
       let dep = JSON.parse(window.localStorage.getItem('authUserDepartment'));
       this.userDeppartment = dep._id;
       this.orgID = this.userAuth._id;
-      this.selectedOrgId = this.orgID
+      this.selectedOrgId = this.orgID;
+      this.datas = {
+            labels: ['A', 'B', 'C'],
+            datasets: [
+                {
+                    datas: [300, 51, 101],                   
+                    hoverBackgroundColor: [
+                        "#FF6373",
+                        "#36A2EB",
+                        "#FFCE56"
+                    ],
+                    backgroundColor: [
+                        "#FF6373",
+                        "#36A2EB",
+                        "#FFCE56"
+                    ]
+                }]             
+        };
     }
 
     ngOnInit() {

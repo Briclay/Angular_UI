@@ -20,6 +20,7 @@
 		isLoading: boolean;
 		popUpFlag = 1;
 		ipAddress : any;
+		temp="password";
 
 		constructor(
 			private formBuilder: FormBuilder,
@@ -62,6 +63,15 @@
 			// TODO closed event
 			});
 		}
+		//method to show password
+		 toggle() { 
+                   if (this.temp === "password") { 
+               this.temp = "text"; 
+            } 
+            else { 
+                this.temp = "password"; 
+            } 
+        }
 
 
 	//dialog of new user 

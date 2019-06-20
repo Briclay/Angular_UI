@@ -58,6 +58,7 @@ export class FileManagerConfigComponent implements OnInit {
   localStack: any;
   designDeptFlag = false;
   projectFlag = false;
+  logDetails=false;
   currentLevel: number;
   previousFolderName: any;
   fullPathDisplay: any;
@@ -773,6 +774,7 @@ upload(files){
   /*to get logs of uploaded files*/
   getLogs(data: any) {
     if (data.type === 'file') {
+      this.logDetails=true;
       this.fileDetails = data;
     }
   }
