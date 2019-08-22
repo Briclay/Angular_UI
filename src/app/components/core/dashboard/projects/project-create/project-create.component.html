@@ -1,6 +1,6 @@
   <div class="project-details-container">
     <!-- start card section  -->
-    <mat-card>
+    <mat-card style="height: 362px;">
       <!-- main div -->
       <div class="project-content">
         <form [formGroup]="projectForm" novalidate>
@@ -111,8 +111,8 @@
               </div>
               <!-- end third section -->
             </div>
-            <div fxLayout="row">
-              <button mat-raised-button (click)="onFormCancel()">
+            <div fxLayout="row" class="pull-right">
+              <button mat-raised-button (click)="onFormCancel()" style="margin-right: 13px;">
                 <span>Cancel</span>
               </button>
               <button type="submit" mat-raised-button (click)="onSubmit()">
