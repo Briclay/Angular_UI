@@ -4,7 +4,8 @@
   position: relative;
   padding: 0px;
   border-radius: 12px;
-  height: 258px;
+  height: 27em;
+  overflow: auto;
 }
 
 .user-details-container {
@@ -37,7 +38,7 @@
         }
         .user-details-form-list {
           border-left: 2px solid lightgrey;
-          min-height: 219px;
+          min-height: 269px;
           padding: 10px;
           width: 110px;
         }
@@ -56,11 +57,11 @@
           width: 0px;
         }
         .margin_right_30 {
-          width: 95px;
+          width: 141px;
           margin-top: -9px;
         }
         .margin_right_31 {
-          width: 101px;
+          width: 155px;
           margin-left: 7px;
           margin-top: -9px;
         }
@@ -68,7 +69,7 @@
           width: 139px;
         }
         .margin_right_36 {
-          width: -1px;
+          width: 318px;
           margin-top: -9px;
         }
         .feature_btn {
@@ -83,9 +84,12 @@
         .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
           background-color: #00aff0;
         }
+        
       }
+      
     }
   }
+ 
 }
 
 .feature_container {

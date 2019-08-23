@@ -1,6 +1,6 @@
 	<div class="issue-tracker-details-container">
 		<form [formGroup]="issueTrackerDetailsForm" class="issue-tracker-details-form">
-			<mat-card style="width: 86em;">
+			<mat-card style="width: 100%;">
 				<div class="issue-tracker-details-card">
 					<div class="issue-tracker-details-name">
 						<mat-form-field appearance="outline" style="width: 148px;">
@@ -69,10 +69,11 @@
 												<textarea  matInput formControlName="comments" style="height: 20px"></textarea>
 											</mat-form-field>
 										</div>
-										<div style="margin-top: -12px;margin-left: 12px;" class="hand-cursor">
+										<div fxLayout="row" style="margin-top: -12px;margin-left: 12px;" class="hand-cursor">
 											<mat-form-field  class="line" style="width: 0px;"  matTooltip="Open">
 												<input  readonly matInput formControlName="status" class="statusCheck bg_color_open">
 											</mat-form-field>
+											<div style="margin-top: 46px;font-size: 10px;margin-left: -6px;">{{data.status}}</div>
 										</div>
 
 										<div  fxLayout=row class="pull-right" style="margin-top: -26px;margin-left: 10px;" >

@@ -124,6 +124,7 @@
 			this.getUsers();
 			this.getAllIssues();
 			this.getAllDepartment();
+			console.log(this.data,'dsfsssssssssss')
 		}
 		
 		selectedUser (event){

@@ -1,39 +1,39 @@
  
 <mat-card  class="mat-card">
   <div [formGroup]="opportunityDetailsForm">
-    <div fxLayout="row" style="width: 200px;">
-      <mat-form-field appearance="outline" style="width: 200px;">
+    <div fxLayout="row" style="width: 100%;">
+      <mat-form-field appearance="outline" style="width: 75%;">
         <mat-label>Satement</mat-label>
-        <input matInput placeholder="Statement" required
-        formControlName="statement">
+        <textarea matInput placeholder="Statement" required
+        formControlName="statement"></textarea>
       </mat-form-field>
     </div>
-    <div fxLayout="row" style="width: 200px;">
-      <mat-form-field appearance="outline" style="width: 200px;margin-right: 5px;">
+    <div fxLayout="row" style="width: 100;">
+      <mat-form-field appearance="outline" style="width: 75%;margin-right: 5px;">
         <mat-label>Resource</mat-label>
-        <input matInput placeholder="resource" required
-        formControlName="resource">
+        <textarea matInput placeholder="resource" required
+        formControlName="resource"></textarea>
       </mat-form-field>     
     </div>
-    <div fxLayout="row" style="width: 20px;"> 
-      <mat-form-field appearance="outline" style="width: 119px;margin-top: -11px">
+    <div fxLayout="row" style="width: 100%;"> 
+      <mat-form-field appearance="outline" style="width: 155px;margin-top: -11px">
           <mat-label>Date</mat-label>
             <input matInput [matDatepicker]="picker1" placeholder="" formControlName="date">
             <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
           <mat-datepicker #picker1></mat-datepicker>
       </mat-form-field>
-      <mat-form-field appearance="outline" style="width: 104px;margin-left: 5px; margin-top: -8px">
+      <mat-form-field appearance="outline" style="width: 155px;margin-left: 5px; margin-top: -8px">
           <mat-label>Budget</mat-label>
          <input matInput placeholder="Budget" type="number" required
          formControlName="budget">
       </mat-form-field>
     </div>
-    <div fxLayout=row class="pull-right">
-      <div class="hand-cursor" style="align-items: center;margin-left: 20px;margin-top:-17px" (click) ="onCancel()">
+    <div fxLayout=row class="pull-right" style="margin-top: 11px;">
+      <div class="hand-cursor" fxLayout=column style="align-items: center;margin-left: 20px;margin-top:-17px" (click) ="onCancel()">
         <img style="height: 30px;width: 30px;" src="assets/images/icons/close_red.png" />
         <span>Cancel</span>
       </div>
-      <div  class="hand-cursor" style="align-items: center;margin-top: -17px;" (click) ="onSubmit()" >
+      <div  class="hand-cursor" fxLayout=column style="align-items: center;margin-top: -17px;margin-left: 23px;" (click) ="onSubmit()" >
         <img style="height: 30px;" src="assets/images/icons/submitIcon.png" />
         <span>Save</span>
       </div>

@@ -6,7 +6,7 @@
           <div style="height: 30px" > 
           </div>
           <div  fxLayout=" column">
-            <mat-form-field appearance="outline" style="width: 150px;margin: 2px;margin-left: 48px;">
+            <mat-form-field appearance="outline" style="width: 150px;margin: 2px;margin-left: 48px;top: 16px;">
               <mat-label>Bpd/ID</mat-label>
               <mat-select placeholder="Bpd/ID" formControlName="bpdNumber" (selectionChange)="selectedBpd($event.value)">
                 <mat-option *ngFor="let bpd of bpdsList" [value]="bpd">
@@ -31,21 +31,21 @@
                 <div style="margin-top: 17px">
                   <mat-form-field appearance="outline" class="margin_right_25">
                     <mat-label>Statement</mat-label>
-                    <input matInput formControlName="statement">
+                    <textarea matInput placeholder="statement" formControlName="statement"></textarea>
                   </mat-form-field>
                 </div>
                 <br>
                 <div style="margin-top: -27px" >
                   <mat-form-field appearance="outline" class="margin_right_25">
                     <mat-label>Cause</mat-label>
-                    <input matInput formControlName="cause">
+                    <textarea matInput placeholder="cause" formControlName="cause"></textarea>
                  </mat-form-field>
                 </div>
                 <br>
                 <div style="margin-top: -26px;">
                   <mat-form-field appearance="outline" class="margin_right_25">
                     <mat-label>Effect</mat-label>
-                    <input matInput formControlName="effect">
+                    <textarea matInput placeholder="effect" formControlName="effect"></textarea>
                   </mat-form-field>
                 </div>
               </div>
@@ -82,7 +82,7 @@
                   margin-left: -27px;">
                 <mat-form-field appearance="outline" class="margin_right_28">
                   <mat-label>Mention Current Control</mat-label>
-                  <input matInput formControlName="mention_current_control" >
+                  <textarea matInput placeholder="Current Control" formControlName="mention_current_control"></textarea>
                 </mat-form-field>
               </div>
               <br>
@@ -93,7 +93,7 @@
                   </mat-label>
                 </div>
                 <div style="width: 87px; margin-top: 11px">
-                  <mat-checkbox matInput formControlName="control_RPA_BPD" (change)="controlsValue($event)" ></mat-checkbox>
+                  <mat-checkbox matInput matTooltip="click me" formControlName="control_RPA_BPD" (change)="controlsValue($event)" ></mat-checkbox>
                 </div>
                 <div style="width: 87px; margin-top: -27px;">
                   <mat-form-field appearance="outline" class="margin_right_27">
@@ -115,10 +115,10 @@
           </div>
           <div formGroupName="mitigation">
             <div class="user-details-form-list" style="margin-top: 0px">
-              <div fxLayout="row" style="margin-top: 16px;width: 10px">
+              <div fxLayout="row" style="margin-top: 16px;width: 302px">
                 <mat-form-field appearance="outline" class="margin_right_36">
                   <mat-label>Mitigation Plan</mat-label>
-                  <input matInput formControlName="mitigationPlan" >
+                  <textarea matInput placeholder="mitigation Plan" formControlName="mitigationPlan"></textarea>
                 </mat-form-field>
               </div>
               <div fxLayout="row" style="width: 0%;margin-top: 0px">
@@ -132,7 +132,7 @@
                 </mat-form-field>
              </div>
              <div fxLayout="row" style="margin-top: 5px" >
-               <mat-form-field appearance="outline" style="width: 119px;margin-top: -8px">
+               <mat-form-field appearance="outline" style="width: 144px;margin-top: -8px">
                   <mat-label>Date</mat-label>
                   <input matInput   [min]="myFilter"  [matDatepicker]="picker1" placeholder="" formControlName="currentTime">
                   <mat-datepicker-toggle matSuffix [for]="picker1" ></mat-datepicker-toggle>
@@ -140,15 +140,17 @@
                </mat-form-field>
                <div>
                   <button (click)="openDetailsDialog()" [ngStyle]="{'background-color': buttonColor}" class="margin-left-4" mat-raised-button class="feature_btn"  
-                  >Opportunity</button>
+                 style="width: 148px;" >Opportunity</button>
                </div>
               </div>
             </div>
           </div>  
         </div>
       </div> 
+      <div fxLayout="row" class="pull-right" style="margin-top: 77px;margin-right: 35px;">
       <button mat-raised-button type="submit"  (click)="reset()" class="pull-right">Cancel</button>
-      <button mat-raised-button type="submit"  (click)="onFormSubmit()" class="pull-right">Submit</button>
+      <button mat-raised-button type="submit"  (click)="onFormSubmit()" class="pull-right" style="margin-left: 14px;">Submit</button>
+    </div>
       <div class="clearfix"></div>
     </mat-card>
   </div>
